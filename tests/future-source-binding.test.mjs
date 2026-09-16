@@ -67,7 +67,10 @@ async function execute({mode='captured',noSkill=false,upstreamFails=false}={}){
   if(opts?.tracePhase==='understand')return reply(candidate);
   if(payload.methods?.some(m=>m.slug==='direction-designer-zh-v1'))return reply(upstreamFails?{structure:{directions:[]}}:{structure:{directions:source().structure.directions,recommendation:'推荐第二方向',sections:source().structure.sections}});
   assert.ok(payload.sources?.[0]?.selectedDirection);assert.equal(payload.sources[0].selectedDirection.index,2);assert.ok(!JSON.stringify(payload).includes('不应传给下游的红色快切方向'));assert.ok(JSON.stringify(payload).includes('容量未知'));
-  return reply(noSkill?{content:'蓝色静物，四镜各2秒。'}:{content:'蓝色静物：镜1 0–2秒；镜2 2–4秒；镜3 4–6秒；镜4 6–8秒。',structure:{hook:'蓝色静物',body:'四镜各2秒',cta:'收尾'}});
+  // Selection integration needs an actual script; the former summary-only
+  // outputs remain negative acceptance fixtures in contract-boundary-stage2.
+  const shots=['蓝色静物全景','蓝色杯沿特写','蓝色桌面光影','蓝色静物收束'].map(content=>({content,durationSeconds:2}));
+  return reply({structure:{...(!noSkill?{hook:'蓝色静物',body:'四镜各2秒',cta:'收尾'}:{}),shots}});
  }};
  const runtime=new ToolRuntime({catalog,brain,media:{config:{},image:async()=>{throw Error('No media');}}}),verifier=new Verifier(brain,{policy:'delivery_only'}),agent=new Agent({catalog,brain,runtime,verifier,actionMode:'core'});
  await agent.run(state,fixture.query,()=>{},signal());return {state,inputs};

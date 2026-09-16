@@ -2,6 +2,15 @@
 // Mixed clauses, negations and multiple ratios must be resolved by the model.
 import {validationTrace} from './trace-context.mjs';
 export function reconcileFixedSpec(deliverable){
+ // Standalone literal clauses are numeric normalization, never query routing.
+ const lengths=(deliverable.constraints||[]).flatMap(c=>{
+  const m=c.trim().match(/^正文\s*(\d+)\s*(?:到|至|—|–|-)\s*(\d+)\s*字[。\s]*$/u);
+  return m?[{min:Number(m[1]),max:Number(m[2]),unit:'non_punctuation_characters'}]:[];
+ });
+ const declared=deliverable.spec?.bodyLength;
+ if(lengths.some(l=>l.min>l.max)||declared&&declared.min>declared.max)throw new Error('正文字数范围冲突');
+ if(lengths.some(l=>JSON.stringify(l)!==JSON.stringify(lengths[0]))||declared&&lengths.some(l=>l.min!==declared.min||l.max!==declared.max))throw new Error('spec.bodyLength与明确字数约束不一致');
+ if(lengths.length&&!declared)deliverable.spec={...deliverable.spec,bodyLength:lengths[0]};
  const ratios=[...new Set((deliverable.constraints||[]).flatMap(c=>{
   const match=c.trim().match(/^(?:输出\s*)?(?:画幅|画面比例|图片比例|比例|目标比例|宽高比)?[：:\s]*(\d{1,2}:\d{1,2})\s*(?:比例|图片|画幅|横屏|竖屏|正方形|方形)?[。\s]*$/);
   return match?[match[1]]:[];

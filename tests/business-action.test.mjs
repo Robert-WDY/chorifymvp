@@ -30,7 +30,7 @@ function runtimeFixture({mode='core',failEdit=false,approvalDecision='approve'}=
   if(options?.tracePhase==='media_plan')return reply({concept:'当前画面',preservedConstraints:[],safety:{passed:true,reason:'普通产品图'},items:Array.from({length:payload.goal.count},()=>({prompt:'product picture',size:'2048x2048',...(payload.goal.references.length?{referenceImages:payload.goal.references}:{})}))});
   throw Error('unexpected model phase '+options?.tracePhase);
  }};
- const media={config:{imageModel:'local-fixture'},image:async args=>{submissions.push(structuredClone(args));if(editFailure&&args.referenceImages?.length)return {isError:true,status:'failed',text:'known fixture failure'};return {status:'succeeded',images:[{url:'https://example.com/action-'+submissions.length+'.png'}]};}};
+ const media={config:{imageModel:'local-fixture'},image:async args=>{submissions.push(structuredClone(args));if(editFailure&&args.referenceImages?.length)return {isError:true,status:'failed',text:'known fixture failure'};return {status:'succeeded',images:[{url:'https://example.com/action-'+submissions.length+'.png',size:'2048x2048'}]};}};
  const runtime=new ToolRuntime({catalog,brain,media}),agent=new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,actionMode:mode,verifier:new Verifier(brain,{policy:'delivery_only'})});
  return {state,agent,calls,submissions,run:async(raw,query='当前用户要求',control={})=>{command=raw;await agent.run(state,query,()=>{},signal(),control);},allowEdit:()=>{editFailure=false;}};
 }
@@ -181,7 +181,7 @@ test('core: asynchronous video produces a real-shaped receipt and artifact with 
   if(options.tracePhase==='final_response')return reply('视频结果已返回。');
   assert.equal(options.tracePhase,'media_plan');return reply({concept:'产品视频',preservedConstraints:[],safety:{passed:true,reason:'普通产品'},items:[{prompt:'product movie',duration:5,ratio:'16:9'}]});
  }};
- const media={config:{videoModel:'offline'},video:async args=>{submissions.push(args);return {taskId:'offline-job',status:'queued'};},getVideo:async id=>{polls.push(id);return {taskId:id,status:'succeeded',videoUrl:'https://example.com/offline-video.mp4'};}};
+ const media={config:{videoModel:'offline'},video:async args=>{submissions.push(args);return {taskId:'offline-job',status:'queued'};},getVideo:async id=>{polls.push(id);return {taskId:id,status:'succeeded',videoUrl:'https://example.com/offline-video.mp4',metadata:{duration:5,ratio:'16:9'}};}};
  const runtime=new ToolRuntime({brain,catalog,media});
  await new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,actionMode:'core',verifier:new Verifier(brain,{policy:'delivery_only'})}).run(state,'产品宣传视频',()=>{},signal());
  assert.equal(submissions.length,1);assert.ok(polls.length>=1);assert.equal(currentTask(state).status,'COMPLETED');

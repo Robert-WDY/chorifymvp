@@ -37,6 +37,8 @@ export function acceptDecision(turn,goal,task){
 }
 export function assertContract(task){assertExecutionProjection(task);if(task.contract?.effectPolicy==='explicit_approval'&&(!task.approval.required||task.effectPolicy!=='explicit_approval')&&task.items.some(i=>['image','video','audio'].includes(i.output)&&!i.runtimeQuery))throw new Error('独立媒体授权策略被修改');assertIntentSnapshot(task.intentSnapshot);if(task.requirements&&task.requirementsHash!==hash(requirementDefinitions(task)))throw new Error('Requirement定义已改变，必须重新接受用户修订');if(task.contract&&task.contract.hash!==hash(task.goal))throw new Error('已接受的任务合同被修改，必须创建修订版本');if(task.supersededBy)throw new Error('旧执行义务已被修订取代，不能继续提交');if(task.cancelledByUser)throw new Error('用户已取消该任务，不能继续提交');}
 export function methodSatisfied(item,artifact){
+ const hard=artifact.acceptance?.hardRequirements;
+ if(hard&&(hard.checks.some(c=>c.status!=='passed')||hard.inputHash&&hard.inputHash!==digest(artifact.type==='text'?artifact.content:artifact.url||'')))return false;
  if(artifact.acceptance?.checks?.completionAllowed===false||artifact.acceptance?.checks?.topicMatched===false)return false;
  if(artifact.metadata?.conversion?.outputHash&&artifact.metadata.conversion.outputHash!==digest(artifact.content))return false;
  if(artifact.acceptance?.inputHash&&artifact.type==='text'&&artifact.acceptance.inputHash!==digest(artifact.content))return false;
@@ -63,4 +65,4 @@ export function methodExecution(item,artifacts=[]){
   return {skillId,validationScope:m?.validationScope||'schema_and_lineage',scriptChecks:m?.scriptChecks||{status:'not_recorded'},inputArtifactIds:m?.inputArtifactIds||m?.inputArtifacts?.map(a=>a.id)||m?.input?.sources?.map(a=>a.id)||[],outputArtifactIds:outputs,callId:m?.modelCallIds?.at(-1)||null,callIds:m?.modelCallIds||[],contentHash:m?.contentHash||null,status:m?.status==='failed'?'failed':verified?'verified':outputs.length?'produced_artifact':m?.modelCallIds?.length?'executed':m?.contentHash?'loaded':'selected'};
  });
 }
-export function isAccepted(a){return a?.purpose==='deliverable'&&a.verification?.technical==='passed'&&['passed','simulated_passed'].includes(a.verification?.semantic)&&!['superseded','audit'].includes(a.publication);}
+export function isAccepted(a){if(a?.acceptance?.hardRequirements?.checks.some(c=>c.status!=='passed'))return false;return a?.purpose==='deliverable'&&a.verification?.technical==='passed'&&['passed','simulated_passed'].includes(a.verification?.semantic)&&!['superseded','audit'].includes(a.publication);}

@@ -160,6 +160,7 @@ export function normalizeTurnOperation(semantic,query){
 
 export function scopedSpecification(spec,d,peers,catalog){
  const fields=Object.fromEntries(Object.entries(spec||{}).filter(([key])=>{
+  if(key==='bodyLength'&&d.kind!=='text')return false;
   if(d.kind==='image'&&['shotCount','secondsPerShot','durationSeconds'].includes(key))return false;
   if(key!=='directionCount')return true;
   const ownsDirection=x=>x.form==='directions'||(x.requiredMethods||[]).some(slug=>catalog.skills.find(s=>s.slug===slug)?.contract.outputSchema?.properties?.structure?.properties?.directions);

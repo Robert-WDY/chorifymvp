@@ -1,4 +1,5 @@
 import {selectIntakeDocuments,assertIntakePointers} from './intake-context.mjs';
+import {bodyLengthSchema} from './hard-requirements.mjs';
 import {renderStage} from './text-stage.mjs';
 import {repairInput,skillDirectoryEntry} from './model-context.mjs';
 import {intakeCore,fieldRepairPrompt,referenceRepairPrompt,formatRepairPrompt} from './prompt-text.mjs';
@@ -56,6 +57,7 @@ Object.assign(semanticSchema.properties.deliverables.items.properties,{businessO
 Object.assign(semanticSchema.properties.deliverables.items.properties,{query:querySchema,runtimeQuery:{type:'object'},preservedSpec:{type:'object'},selectorBinding:{type:'object'}});
 const specification=object({directionCount:{type:'integer',minimum:1},shotCount:{type:'integer',minimum:1},secondsPerShot:{type:'number',minimum:0},selectedDirectionIndex:{type:'integer',minimum:1},durationSeconds:{type:'number',minimum:1},ratio:{type:'string'},exactTexts:strings},[]);
 semanticSchema.properties.deliverables.items.properties.spec=specification;
+specification.properties.bodyLength=bodyLengthSchema;
 semanticSchema.properties.deliverables.items.properties.form={enum:['answer','copy','title','prompt','script','directions','analysis','review','composite']};
 semanticSchema.properties.deliverables.items.properties.executionShape={enum:['direct','workflow']};
 semanticSchema.properties.deliverables.items.properties.observationEvidence=text;

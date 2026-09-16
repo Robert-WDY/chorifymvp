@@ -1,4 +1,5 @@
 import {textInstructions} from './prompt-text.mjs';
+import {textUnitsSchema,renderTextUnits,hardTextChecks} from './hard-requirements.mjs';
 import {constraintChecks,aggregateConstraintChecks} from './constraint-checks.mjs';
 import {imageObservationInputs} from './observation-contract.mjs';
 import {sourceUnits,resolveDeferredSelection} from './source-coverage.mjs';
@@ -18,14 +19,18 @@ import {resolveSources,resolveSupportingSources} from './sources.mjs';
 import {itemContext,evidenceContext,projectModelInput,renderMethod,viewHash,modelViewVersion} from './model-context.mjs';
 export function stageSchema(item,catalog,{checkContentConstraints=true}={}){
  const selected=(item.requiredMethods||[]).map(slug=>findSkill(catalog,slug));
- if(!selected.length)return textSchema;
+ const numericScript=!['producer','upstream'].includes(item.selectionRole)&&(item.form==='script'||item.operation==='storyboard')&&item.spec?.shotCount;
+ if(!selected.length&&!item.spec?.bodyLength&&!numericScript)return textSchema;
  if(selected.length>1)throw new Error('多个方法必须编译为独立阶段，禁止合并Schema冒充顺序执行');
  // Each required method contributes its own schema; incompatible writes fail validation.
  const structure={type:'object',additionalProperties:false,required:[],properties:{}};
  for(const s of selected){const schema=s.contract.outputSchema.properties.structure;structure.required=[...new Set([...structure.required,...schema.required])];Object.assign(structure.properties,schema.properties);}
+ if(numericScript&&!structure.properties.shots){structure.properties.shots={type:'array'};structure.required.push('shots');}
  if(structure.properties.directions){const n=item.spec.directionCount||item.contentCardinality||item.count;structure.properties.directions={type:'array',minItems:n,maxItems:n,items:{type:'object',additionalProperties:false,required:['title','content'],properties:{title:{type:'string'},content:{type:'string',minLength:1}}}};}
  if(structure.properties.shots&&item.spec.shotCount)structure.properties.shots={type:'array',minItems:item.spec.shotCount,maxItems:item.spec.shotCount,items:{type:'object',additionalProperties:false,required:['content','durationSeconds'],properties:{content:{type:'string',minLength:1},durationSeconds:{type:'number',...(checkContentConstraints&&item.spec.secondsPerShot?{const:item.spec.secondsPerShot}:{minimum:0})}}}};
- const representation=representationFor(Object.keys(structure.properties));
+ if(item.spec?.bodyLength)structure.properties.textUnits={...textUnitsSchema,minItems:item.contentCardinality||item.count||1,maxItems:item.contentCardinality||item.count||1};
+ if(item.spec?.bodyLength)structure.required.push('textUnits');
+ const representation=item.spec?.bodyLength?'structured':representationFor(Object.keys(structure.properties));
  if(representation==='structured')structure.properties.sections={type:'array',items:{type:'object',additionalProperties:false,required:['content'],properties:{title:{type:'string'},content:{type:'string',minLength:1}}}};
  return {type:'object',additionalProperties:false,required:representation==='structured'?['structure']:['content','structure'],properties:{...(representation==='content'?{content:{type:'string',minLength:1}}:{}),structure}};
 }
@@ -54,6 +59,7 @@ export function validateStageResult(item,result){
  const report=constraintChecks(item,result);if(report.status==='failed')throw new Error('镜头时长或数量与阶段合同不一致：'+JSON.stringify(report.checks.filter(c=>c.status==='failed')));
 }
 export function renderStage(structure){
+ if(structure.textUnits)return renderTextUnits(structure.textUnits);
  const labels={facts:'商品事实',assumptions:'未知项与假设',sellingPoints:'卖点',audience:'目标受众',hook:'开场',brief:'营销 Brief',directions:'创意方向',recommendation:'推荐依据',shots:'镜头',durationSeconds:'总时长（秒）',body:'正文',cta:'收尾',prompt:'提示词',preservedConstraints:'保留约束'};
  const nestedLabels={content:'画面',durationSeconds:'时长（秒）',title:'标题',description:'说明',camera:'镜头',lighting:'光线'};
  const value=v=>typeof v==='string'?v:typeof v==='number'?String(v):Array.isArray(v)?v.map((a,n)=>(n+1)+'. '+value(a)).join('\n'):Object.entries(v).filter(([k])=>!['id','version'].includes(k)).map(([k,x])=>(nestedLabels[k]||k)+'：'+value(x)).join('\n');
@@ -83,7 +89,7 @@ async function executeSingleStage(executor,item,signal,feedback,boundSources){
    projectModelInput({...input,changeContract:delta,sourceDocument:source,previousCandidate:feedback?.content||null},renderStage),revisionSchema(source),signal,r=>applyRevision(source,delta,r,renderStage)));
   result=applyRevision(source,delta,proposal,renderStage);
  }else result=await withNode(item.stageId||item.id,methods.map(m=>m.slug).join(','),()=>structuredOutput(brain,textInstructions(schema),projectModelInput(input,renderStage),schema,signal,r=>executor.verifier?.policy==='delivery_only'?undefined:validateStageResult(item,r)));
- const deltaMetadata={deltaEvidence:result.deltaEvidence,noChange:result.noChange};const structuredDelta=!!result.deltaEvidence&&!!result.structure;if(structuredDelta)delete result.content;result=canonicalDocument(result,structuredDelta?'structured':representationFor(fields),renderStage);Object.assign(result,deltaMetadata);
+ const deltaMetadata={deltaEvidence:result.deltaEvidence,noChange:result.noChange};const structuredDelta=!!result.deltaEvidence&&!!result.structure;if(structuredDelta)delete result.content;result=canonicalDocument(result,structuredDelta||!schema.properties.content?'structured':'content',renderStage);Object.assign(result,deltaMetadata);
  for(const record of methodRecords)Object.assign(record,{modelCallIds:(state.modelCalls||[]).slice(before).filter(c=>c.status==='returned').map(c=>c.id),contractValidated:true,status:'validated'});
  return {result,methodRecords,sources};
  }catch(error){for(const record of methodRecords)Object.assign(record,{status:'failed',error:error.message,modelCallIds:(state.modelCalls||[]).slice(before).map(c=>c.id)});await executor.save?.(state);throw error;}
@@ -114,6 +120,7 @@ export async function executeTextStage(executor,item,signal,feedback){
   const fields=contract.outputSchema.properties.structure.properties;
   if(fields.directions&&!item.spec.directionCount)throw new Error('合并文档缺少独立方向数量合同');
   const spec={...item.spec};if(!fields.directions)delete spec.directionCount;
+  if(!Object.keys(fields).some(f=>['body','prompt'].includes(f)))delete spec.bodyLength;
   // Selection is consumed after the direction producer, never by that producer.
   const selectionRole=fields.directions?'producer':Object.keys(fields).some(f=>['body','shots','prompt'].includes(f))?'consumer':'upstream';
   const stageItem={...item,stageId:stage.id,deliveryDescription:item.description,description:contract.role+'；本阶段只交付字段：'+Object.keys(fields).join('、'),requiredMethods:[stage.skillId],selectionRole,spec,count:fields.directions?spec.directionCount:1,contentCardinality:fields.directions?spec.directionCount:1,artifactCount:1};
@@ -131,5 +138,13 @@ export async function executeTextStage(executor,item,signal,feedback){
  }
  // Assembly is deterministic: one file, ordered stage sections, no new model call.
  const result=canonicalDocument({content:outputs.map((a,n)=>'## '+(n+1)+'. '+findSkill(catalog,stages[n].skillId).contract.role+'\n\n'+a.content).join('\n\n'),stages:outputs.map((a,n)=>({stageId:stages[n].id,skillId:stages[n].skillId,artifactId:a.id,version:a.version}))},'content',renderStage);
+ result.stageChecks=outputs.flatMap(a=>{
+  const structure=a.metadata.structure,spec={...item.spec};
+  if(!structure?.shots)for(const k of ['shotCount','secondsPerShot','durationSeconds'])delete spec[k];
+  if(!structure?.directions)delete spec.directionCount;
+  if(!structure?.textUnits)delete spec.bodyLength;
+  delete spec.exactTexts; // Exact strings are checked against the assembled delivery.
+  return hardTextChecks({...item,spec},{content:a.content,structure}).checks.map(c=>({...c,stageArtifactId:a.id,stageVersion:a.version}));
+ });
  return {result,methodRecords,sources:external};
 }

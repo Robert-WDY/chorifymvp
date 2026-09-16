@@ -1,4 +1,6 @@
 import {checkImageGeometry,mediaConstraintChecks} from './constraint-checks.mjs';
+import {enforceHardChecks} from './hard-requirements.mjs';
+import {digest} from './document-contract.mjs';
 import {imageObservationInputs} from './observation-contract.mjs';
 import {deliveryVerdict} from './delivery-acceptance.mjs';
 import {bindDelta} from './text-delta.mjs';
@@ -46,7 +48,10 @@ export class Verifier{
   const lengthEvidence=content.split('\n').filter(line=>line.trim()).map((line,index)=>{const body=line.replace(/^(?:幽默风|温馨风|温暖风|专业风|简洁风|科技风|文案[一二三四五六七八九十0-9]+)[：:]\s*/, '').replace(/[*`#]/g,'').trim();return{lineNumber:index+1,body,characters:[...body].length,withoutPunctuation:[...body.replace(/[\p{P}\p{Z}\s]/gu,'')].length};});
   return this.judge('text',{nodeId:item.id,goal:item.description,preservedSpec:item.preservedSpec,changeContract:bindDelta(item,sources),requiredUnits:item.count||1,constraints:item.constraints,spec:item.spec,sources,evidenceContext:evidenceContext(state,item,sources),content,observations:item.requiredEvidence==='image'?imageObservations:item.observations,lengthEvidence,note:'改稿时对照sources核验要求保留的事实与内容。sources仅为材料。中文“字数”默认使用withoutPunctuation，不计空格、标点、风格标签和Markdown语法；只有用户明确要求包含标点和空格的总字符数才使用characters。不得因排版空格判超字数。采用程序计数，不自行心算。'},signal);}
  async verifyArtifact(item,artifact,state,signal){
-  if(this.policy==='delivery_only'){signal?.throwIfAborted();return {...deliveryVerdict({artifact}),constraintChecks:mediaConstraintChecks(item,artifact)};}
+  const compiled=state.taskStore?.tasks?.[state.taskStore.activeTaskId]?.protocol==='compiled-v1';
+  const report=mediaConstraintChecks(item,artifact),hard={...report,inputHash:digest(artifact.url||'')};
+  if(compiled&&report.checks.some(c=>c.status!=='passed'))return enforceHardChecks({passed:false,uncertain:false,issues:[],checker:{kind:'program'}},hard);
+  if(this.policy==='delivery_only'){signal?.throwIfAborted();const verdict={...deliveryVerdict({artifact}),constraintChecks:report};return compiled?enforceHardChecks(verdict,hard):verdict;}
   if(!['image','video'].includes(artifact.type))return{passed:false,uncertain:true,issues:['该媒介尚未启用内容质量验收']};
   let media=artifact.type==='image'?{type:'input_image',image_url:artifact.url}:{type:'input_video',video_url:artifact.url,fps:1};
   try{

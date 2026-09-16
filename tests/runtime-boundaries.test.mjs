@@ -242,7 +242,7 @@ test('compiled creation then modification retains both deliveries and exact pare
   const refs=JSON.parse(input[1].content).goal.references||[];
   return reply({concept:'当前图片',preservedConstraints:[],safety:{passed:true,reason:'ordinary'},items:[{prompt:'product picture',size:'2048x2048',...(refs.length?{referenceImages:refs}:{})}]});
  }};
- const media={config:{imageModel:'fixture'},image:async args=>{submissions.push(args);return {status:'succeeded',images:[{url:'https://example.com/edit-'+submissions.length+'.png'}]};}};
+ const media={config:{imageModel:'fixture'},image:async args=>{submissions.push(args);return {status:'succeeded',images:[{url:'https://example.com/edit-'+submissions.length+'.png',size:'2048x2048'}]};}};
  const runtime=new ToolRuntime({catalog,brain,media});
  await new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,verifier:new Verifier(brain,{policy:'delivery_only'})}).run(s,'先创建一张，再改背景，交付两张',()=>{},signal());
  const task=s.taskStore.tasks[s.taskStore.activeTaskId],images=Object.values(s.taskStore.artifacts).filter(a=>a.type==='image');
