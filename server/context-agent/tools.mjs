@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import { readSkill } from '../catalog.mjs';
+import { readAgentSkill } from './skills.mjs';
 import { countBody } from '../hard-requirements.mjs';
 import { publicMediaUrl } from '../media.mjs';
 import { searchHistory, readHistory } from './history.mjs';
@@ -25,13 +25,14 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
   if (!['simulation', 'live'].includes(mode)) throw new Error('Unknown media mode');
   const definitions = [
     tool('read_asset', '读取本会话准确素材原文或文件元数据。图片URL不是视觉观察；长文用nextOffset继续读取。', { id, offset, limit }, ['id']),
-    tool('search_history', '在本会话原始记录中检索，返回真实片段及可回读的消息ID。', { query: string(2000), limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }, ['query']),
-    tool('read_history', '读取原始消息及前后文；按offset/limit分页，不使用摘要代替原稿。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit }, ['messageId']),
+    tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: string(2000), limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }, ['query']),
+    tool('read_history', '按ID读取原记录及去除检索回声、调试Trace的前后文；按offset/limit分页，原文不变。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit }, ['messageId']),
     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
-    tool('save_document', '保存准确交付正文为不可变文字文件。修改时指定原稿parentId，保留来源和新版本。', { content: string(500000), title: string(500), parentId: id, sourceIds: ids }, ['content']),
+    tool('save_document', '保存交付正文为不可变文稿。新稿传content；修改传content和原稿parentId。原稿只在聊天时先传sourceMessageId原样存档（无需重抄正文），取得asset.id后再保存带parentId的修订。普通答疑无需保存。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, sourceIds: ids }),
     tool('measure_text', '按现有统一口径测量传入正文，不含未传入的标题或说明；不替代内容判断。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] } }, ['text', 'unit']),
   ];
-  if (typeof observeImages === 'function') definitions.push(tool('analyze_image', '真实观察所指定图片；必要时同时读取产品原文和未知项。只对确实看到的内容下结论。', {
+  definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
+  if (typeof observeImages === 'function') definitions.push(tool('analyze_image', '真实观察图片。保持验收须传原图和成品imageIds；已绑定父版本的成品自动补入原图。自动读取明确关联的文字资料；额外资料用materials.sourceId（仅文字ID）。不确定结构、实际大小或功能不可当事实。', {
     imageIds: { ...ids, minItems: 1 }, question: string(12000), materials: { type: 'array', maxItems: 30, items: schema({ content: string(100000), sourceId: { ...id, description: '文字资料ID；工具会读取该真实原文，content/status仅作为模型附注。' },
       status: { enum: ['user_provided', 'verified', 'unknown', 'assumption', 'creative_hypothesis'] } }, ['content']) },
   }, ['imageIds', 'question']));
@@ -48,6 +49,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     resolution: { enum: ['480p', '720p', '1080p'] }, firstFrameId: id, sourceIds: ids, ...approvalFields,
   }, ['prompt', 'duration', 'ratio', 'resolution']));
   definitions.push(tool('read_media_result', '查询本会话已提交调用的receiptId；不会再次生成。没有供应商查询能力时如实返回unknown。', { receiptId: id }, ['receiptId']));
+  if (mode === 'simulation') for (const definition of definitions.filter(def => mediaNames.has(def.name))) definition.description = '当前仅模拟，不会生成真实媒体。' + definition.description;
   const ajv = new Ajv({ allErrors: true, strict: false });
   const validators = new Map(definitions.map(def => [def.name, ajv.compile(def.parameters)]));
 
@@ -203,7 +205,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       if (name === 'search_history') return { ok: true, ...searchHistory(state, args) };
       if (name === 'read_history') return { ok: true, ...readHistory(state, { limit: 12000, ...args }) };
       if (name === 'read_skill') {
-        const result = await readSkill(catalog, args.slug, args.reference, args.offset || 0);
+        const result = await readAgentSkill(catalog, args.slug, args.reference, args.offset || 0);
         const { slug, reference, content, nextOffset, references, resources } = result;
         return { ok: true, slug, reference, content, nextOffset, references, resources,
           note: '这是专业方法原文，不是业务任务或事实证据。用户数量与保留要求优先；读取本身不是交付。' };
@@ -211,23 +213,51 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       if (name === 'measure_text') return { ok: true, count: countBody(args.text, args.unit), unit: args.unit,
         scope: 'exact_supplied_body', convention: '去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。' };
       if (name === 'analyze_image') {
-        const images = args.imageIds.map(id => {
+        const imageIds = new Set(args.imageIds), comparisons = [];
+        for (const id of args.imageIds) {
+          const result = assetFor(state, id, 'image');
+          if (result.parentId) {
+            assetFor(state, result.parentId, 'image');
+            imageIds.add(result.parentId);
+            comparisons.push({ sourceId: result.parentId, resultId: id });
+          }
+        }
+        const images = [...imageIds].map(id => {
           const asset = assetFor(state, id, 'image');
           if (asset.simulated || !asset.url) throw new GuardError('real_image_required', `图片 ${id} 是模拟产物或缺少实际文件，不能声称观察。`);
           return { id, url: publicMediaUrl(asset.url), version: asset.version };
         });
-        const materials = (args.materials || []).map(material => {
+        const requestedMaterials = [...(args.materials || [])];
+        const related = new Set(), coUploaded = new Set(), visited = new Set();
+        const collect = id => {
+          if (visited.has(id)) return;
+          visited.add(id);
+          const asset = assetFor(state, id);
+          if (asset.type === 'text') related.add(id);
+          else {
+            for (const sourceId of asset.sourceIds || []) collect(sourceId);
+            if (asset.parentId) collect(asset.parentId);
+          }
+        };
+        for (const id of imageIds) collect(id);
+        for (const record of state.records) if (record.kind === 'message' && record.role === 'user' && record.attachments?.some(a => visited.has(a.id))) {
+          for (const attachment of record.attachments) if (state.assets[attachment.id]?.type === 'text' && !related.has(attachment.id)) coUploaded.add(attachment.id);
+        }
+        for (const sourceId of new Set([...related, ...coUploaded])) if (!requestedMaterials.some(m => m.sourceId === sourceId)) requestedMaterials.push({ sourceId, content: related.has(sourceId) ? '图片来源链中的文字原文；身份不升级为已核验事实。' : '同次上传的候选资料，可能描述其他商品；先核对对应对象，不能自动套用到当前图片。' });
+        const materials = requestedMaterials.map(material => {
           if (!material.sourceId) return { content: material.content, origin: 'agent_supplied',
             ...(material.status ? { agentAnnotation: { status: material.status } } : {}) };
-          const source = assetFor(state, material.sourceId, 'text');
+          const source = assetFor(state, material.sourceId);
+          if (source.type !== 'text') throw new GuardError('asset_type_mismatch', 'materials.sourceId仅接受文字资料。图片请放入imageIds；保持验收须同时保留原图和成品，不要用文字描述替换原图后重试。');
           if (typeof source.content !== 'string') throw new GuardError('source_content_missing', `资料 ${source.id} 没有可读取原文。`);
           return { sourceId: source.id, content: source.content, version: source.version, origin: source.origin || 'stored_asset', provenance: 'stored_original',
+            association: related.has(source.id) ? 'source_lineage' : coUploaded.has(source.id) ? 'co_upload_candidate' : 'agent_selected',
             agentAnnotation: { content: material.content, ...(material.status ? { status: material.status } : {}) } };
         });
-        const observation = await observeImages({ images, question: args.question, materials }, ctx.signal, ctx);
+        const observation = await observeImages({ images, question: args.question, materials, comparisons }, ctx.signal, ctx);
         if (!observation) throw new GuardError('empty_observation', '观察工具未返回内容；不能声称已经确认图片。');
-        return { ok: true, imageIds: [...args.imageIds], question: args.question, materials: clone(materials), observation,
-          note: '观察只覆盖上述图片和问题；资料身份与未知项保持原样，不能将创作假设提升为事实。' };
+        return { ok: true, imageIds: [...imageIds], question: args.question, materials: clone(materials), comparisons, observation,
+          note: '已传入证据不代表验收通过。Agent须根据观察判断差异与用户保持要求；未知、推断和资料身份不可升级为事实。' };
       }
       if (name === 'save_document') return await withSessionLock(state, async () => {
         if (!ctx.callId || !ctx.turnId) throw new GuardError('call_identity_required', '保存正文需要调用和轮次身份。');
@@ -236,10 +266,28 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
           if (state.invocations[key].digest !== digest) throw new GuardError('call_identity_conflict', '同一次保存调用不能更换正文。');
           return { ok: true, asset: clone(state.assets[state.invocations[key].assetId]) };
         }
+        let content = args.content;
+        if (args.sourceMessageId) {
+          if (args.parentId) throw new GuardError('invalid_arguments', '聊天原稿存档不同时指定parentId；先取得原稿asset.id，再另存修订。');
+          const original = state.records.find(record => record.id === args.sourceMessageId && record.kind === 'message');
+          if (!original) throw new GuardError('HISTORY_NOT_FOUND', '当前会话不存在这条原始消息。');
+          if (typeof original.content === 'string') content = original.content;
+          else if (Array.isArray(original.content) && original.content.every(part => ['text', 'input_text', 'output_text'].includes(part.type) && typeof part.text === 'string')) content = original.content.map(part => part.text).join('\n');
+          else throw new GuardError('text_original_required', '原消息不是完整文字，请读取并选择实际文字原稿。');
+          if (!content.trim()) throw new GuardError('text_original_required', '不能保存空白原稿。');
+          if (args.content !== undefined && args.content !== content) throw new GuardError('original_content_mismatch', 'sourceMessageId存档必须与原文一致；修改请另存带parentId的修订。');
+        }
         const parent = args.parentId ? assetFor(state, args.parentId, 'text') : null;
         const sourceIds = [...new Set([...(args.sourceIds || []), ...(parent ? [parent.id] : [])])];
         for (const id of sourceIds) assetFor(state, id);
-        const asset = immutableAsset({ id: newId('doc'), type: 'text', content: args.content, title: args.title || '', ownerId: state.ownerId, origin: 'agent_output',
+        const existing = args.sourceMessageId && Object.values(state.assets).find(asset => asset.sourceMessageId === args.sourceMessageId && asset.origin === 'history_original');
+        if (existing) {
+          state.invocations[key] = { kind: 'document', assetId: existing.id, digest, turnId: ctx.turnId, callId: ctx.callId, createdAt: now() };
+          try { await persist(state, ctx.save); } catch (error) { delete state.invocations[key]; throw error; }
+          return { ok: true, asset: clone(existing), reused: true };
+        }
+        const asset = immutableAsset({ id: newId('doc'), type: 'text', content, title: args.title || '', ownerId: state.ownerId, origin: args.sourceMessageId ? 'history_original' : 'agent_output',
+          ...(args.sourceMessageId ? { sourceMessageId: args.sourceMessageId } : {}),
           version: parent ? parent.version + 1 : 1, ...(parent ? { parentId: parent.id } : {}), sourceIds, createdAt: now() });
         state.assets[asset.id] = asset; state.invocations[key] = { kind: 'document', assetId: asset.id, digest, turnId: ctx.turnId, callId: ctx.callId, createdAt: now() };
         try { await persist(state, ctx.save); } catch (error) { delete state.assets[asset.id]; delete state.invocations[key]; throw error; }

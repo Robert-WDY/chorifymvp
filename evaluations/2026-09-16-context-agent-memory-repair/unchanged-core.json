@@ -1,0 +1,35 @@
+{
+  "baseline": "35547a22c2a0e0b9bb83dfbaac50476bae000b49",
+  "files": [
+    {
+      "path": "server/context-agent/loop.mjs",
+      "unchangedFromBaseline": true,
+      "sha256": "829bd6d77d1f2a53f3fdb7ba7686d69bcb94d5b9a4624f0a29198e8ae0bb8ce6"
+    },
+    {
+      "path": "server/context-agent/io-guard.mjs",
+      "unchangedFromBaseline": true,
+      "sha256": "dbdec03ac9d672ff01708d281105da19d6673480e22995c08a31b9fd6836fb16"
+    },
+    {
+      "path": "server/context-agent/http.mjs",
+      "unchangedFromBaseline": true,
+      "sha256": "b8b23240e813c83418f1ba15c22ab89a1ffb53dd1a558a519f834fc4eb6e7c2e"
+    },
+    {
+      "path": "server/context-agent/index.mjs",
+      "unchangedFromBaseline": true,
+      "sha256": "4ef090ade9eacb55ad8560db5bc94d98905d6368b4ec55ae39f49dc7313cb751"
+    },
+    {
+      "path": "server/catalog.mjs",
+      "unchangedFromBaseline": true,
+      "sha256": "079f8c66b67ed16e5c58f4a9fa3507968a60eddbce8fa45254a25f3d3300d0a0"
+    },
+    {
+      "path": "skills/index.json",
+      "unchangedFromBaseline": true,
+      "sha256": "0648e8c57893cf9e48f9df743459cecfeec4e637538d1c5d2df02bb1a8d76826"
+    }
+  ]
+}

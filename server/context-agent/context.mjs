@@ -1,3 +1,5 @@
+import { projectSkills } from './skills.mjs';
+
 /** Conservative UTF-8 estimate; this is a budget bound, not provider token accounting. */
 export function estimateTokens(value) {
   const text = typeof value === 'string' ? value : JSON.stringify(value);
@@ -87,7 +89,10 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
   if (latestFeedback) mandatory.add(latestFeedback.id);
   if (latestUser && !usable.some(group => group.records.some(record => record.id === latestUser.id))) contextError('The latest user message shares an incomplete tool group; repair the protocol history before building context.', { incompleteGroups: [...incomplete] });
 
-  const assetDirectory = includeAssetDirectory ? Object.entries(state.assets ?? {}).map(([id, asset]) => ({ id, kind: asset.kind ?? asset.type, title: asset.title ?? asset.name, ...(asset.parentId ? { parentId: asset.parentId } : {}) })) : [];
+  const assetDirectory = includeAssetDirectory ? Object.entries(state.assets ?? {}).map(([id, asset]) => ({ id, kind: asset.kind ?? asset.type, title: asset.title ?? asset.name, version: asset.version, sourceIds: asset.sourceIds, sourceMessageId: asset.sourceMessageId, ...(asset.parentId ? { parentId: asset.parentId } : {}) })) : [];
+  const registeredTools = toolDefinitions.map(tool => tool.name);
+  const capabilities = registeredTools.length ? { registeredTools, imageObservation: registeredTools.includes('analyze_image'), videoObservation: registeredTools.includes('analyze_video'),
+    note: 'Capabilities describe the current registry, not the Skill catalog. Text scripts and prompts do not require media execution. A registered media tool may be simulation-only; follow its description and actual result.' } : null;
   // Expose exact server-issued authorization receipts, never inferred chat approval.
   // The tool guard independently checks the durable receipt and parameter digest.
   const toolApprovals = Object.values(state.approvals ?? {}).filter(receipt => receipt.kind === 'approval' && receipt.ownerId === state.ownerId && receipt.sessionId === state.id).map(receipt => {
@@ -95,7 +100,7 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     return { source: 'server_receipt', approvalId: receipt.approvalId, approvedAt: receipt.approvedAt, proposals };
   }).filter(receipt => receipt.proposals.length);
   const prefix = [{ role: 'system', content: systemPrompt }];
-  if (skillDirectory.length || assetDirectory.length || toolApprovals.length) prefix.push(dataMessage({ skillDirectory, assetDirectory, ...(toolApprovals.length ? { toolApprovals } : {}) }));
+  if (skillDirectory.length || assetDirectory.length || toolApprovals.length || capabilities) prefix.push(dataMessage({ skillDirectory: projectSkills(skillDirectory), assetDirectory, ...(capabilities ? { capabilities } : {}), ...(toolApprovals.length ? { toolApprovals } : {}) }));
   const available = tokenBudget - reservedTokens - estimateTokens(toolDefinitions);
   const projections = new Map(usable.map(group => [group.id, projectGroup(group)]));
   const groupForRecord = new Map(usable.flatMap(group => group.records.map(record => [record.id, group.id])));
@@ -110,7 +115,10 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     }));
     const notice = omitted.length ? [dataMessage({ historyWindow: { omittedGroups: omitted.length, incompleteGroups: incomplete.size, notice: 'Earlier records remain stored. Use search_history to locate original wording and read_history to recover it. Incomplete tool records do not prove execution succeeded.', firstRetainedRecordId: usable.find(group => selected.has(group.id))?.records[0]?.id ?? null, omittedSkillReads: omittedSkills } })] : [];
     const history = state.records.filter(record => selected.has(groupForRecord.get(record.id))).map(record => projectRecord(record, projections.get(groupForRecord.get(record.id)).toolResultChars)).filter(Boolean);
-    return [...prefix, ...notice, ...history];
+    // Short identities for retained originals; content is already present in history.
+    // Only expose when the real tool can materialize an original message.
+    const originals = registeredTools.includes('save_document') ? state.records.filter(record => record.kind === 'message' && record.role === 'assistant' && selected.has(groupForRecord.get(record.id))).map(record => ({ messageId: record.id, turnId: record.turnId, excerpt: (typeof record.content === 'string' ? record.content : JSON.stringify(record.content)).slice(0, 80) })) : [];
+    return [...prefix, ...(originals.length ? [dataMessage({ originalMessages: originals, note: 'Original chat messages, not saved documents. Read by messageId when needed; save_document can preserve an exact original with sourceMessageId.' })] : []), ...notice, ...history];
   };
   let input = compose();
   // Only raw tool result bodies may be excerpted. User text, assistant text and

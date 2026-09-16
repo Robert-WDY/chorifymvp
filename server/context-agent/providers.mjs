@@ -13,11 +13,11 @@ export function createMediaProvider(config, transport) {
 // an observation channel with no tools or planning authority, not a second agent.
 export function createImageObserver(brain) {
   if (typeof brain?.respond !== 'function') throw new Error('Image observation requires a model adapter');
-  return async ({ images, question, materials = [] }, signal = new AbortController().signal, ctx = {}) => {
+  return async ({ images, question, materials = [], comparisons = [] }, signal = new AbortController().signal, ctx = {}) => {
     const messages = [
-      { role: 'system', content: '只观察实际收到的图片并回答给定问题。区分可见内容、用户提供资料、未知项和创作假设；不要把文字资料当作视觉发现，不推测不可见容量、功效、价格或活动承诺。stored_original是已保存资料原文，保留其未知项；agentAnnotation是模型附注，不可覆盖原文或作为核验凭据。agent_supplied表示模型传入的资料，可能来自用户原话但未绑定文件；不要自动升级为已核验事实。说明看不清或不能确认的部分。' },
+      { role: 'system', content: '只观察实际收到的图片并回答问题。分别写可见特征、推断和无法确认项；结论就地标明依据和不确定性，不能只在末尾免责声明。外观像旋盖不证明螺纹或开合机制；透光不证明余量可读；无尺度参照不证明实际大小、容量或便携；外观不证明材质、密封、防滑或功效。用户资料不是视觉发现，未知项不可补全。stored_original是保存的资料原文，不等于独立核验；association仅表示资料关系，co_upload_candidate可能是同次上传的另一商品，未确认对应关系时不套用事实。agentAnnotation与agent_supplied不能作为核验凭据。comparisons标识原图与成品，对实际双图逐项写保持、变化和无法判断的部分；不把变化合理化为创意，不凭文字描述确认视觉保持。' },
       { role: 'user', content: [
-        { type: 'input_text', text: JSON.stringify({ question, images: images.map(({ id, version }) => ({ id, version })), materials }) },
+        { type: 'input_text', text: JSON.stringify({ question, images: images.map(({ id, version }) => ({ id, version })), materials, comparisons }) },
         ...images.flatMap(image => [{ type: 'input_text', text: `图片ID：${image.id}` }, { type: 'input_image', image_url: image.url }]),
       ] },
     ];

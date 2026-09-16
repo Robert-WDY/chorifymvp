@@ -1,0 +1,5058 @@
+TAP version 13
+# Subtest: all 15 skills can be loaded and used in the ReAct observation-answer loop
+    # Subtest: actor-realism-v2
+    ok 1 - actor-realism-v2
+      ---
+      duration_ms: 103.6175
+      type: 'test'
+      ...
+    # Subtest: asset-lock-generator-lite-v2
+    ok 2 - asset-lock-generator-lite-v2
+      ---
+      duration_ms: 120.5608
+      type: 'test'
+      ...
+    # Subtest: creative-cover-copy-v2
+    ok 3 - creative-cover-copy-v2
+      ---
+      duration_ms: 28.3864
+      type: 'test'
+      ...
+    # Subtest: creative-prompt-rewrite
+    ok 4 - creative-prompt-rewrite
+      ---
+      duration_ms: 64.5658
+      type: 'test'
+      ...
+    # Subtest: cinematic-shot-designer-zh-v5
+    ok 5 - cinematic-shot-designer-zh-v5
+      ---
+      duration_ms: 18.8024
+      type: 'test'
+      ...
+    # Subtest: cinematic-style-optimizer-v2
+    ok 6 - cinematic-style-optimizer-v2
+      ---
+      duration_ms: 52.7903
+      type: 'test'
+      ...
+    # Subtest: direction-designer-zh-v1
+    ok 7 - direction-designer-zh-v1
+      ---
+      duration_ms: 21.798
+      type: 'test'
+      ...
+    # Subtest: image-prompt-gallery-director-v2
+    ok 8 - image-prompt-gallery-director-v2
+      ---
+      duration_ms: 38.3721
+      type: 'test'
+      ...
+    # Subtest: marketing-brief-zh-v1
+    ok 9 - marketing-brief-zh-v1
+      ---
+      duration_ms: 40.7037
+      type: 'test'
+      ...
+    # Subtest: product-understanding-zh-v1
+    ok 10 - product-understanding-zh-v1
+      ---
+      duration_ms: 22.7709
+      type: 'test'
+      ...
+    # Subtest: storyboard-one-shot-zh
+    ok 11 - storyboard-one-shot-zh
+      ---
+      duration_ms: 14.8898
+      type: 'test'
+      ...
+    # Subtest: storyboard-one-shot-zh-v2
+    ok 12 - storyboard-one-shot-zh-v2
+      ---
+      duration_ms: 19.2306
+      type: 'test'
+      ...
+    # Subtest: video-decomposition-zh-v1
+    ok 13 - video-decomposition-zh-v1
+      ---
+      duration_ms: 20.9194
+      type: 'test'
+      ...
+    # Subtest: video-prompt-safety-zh-v1
+    ok 14 - video-prompt-safety-zh-v1
+      ---
+      duration_ms: 84.466
+      type: 'test'
+      ...
+    # Subtest: video-script-zh-v1
+    ok 15 - video-script-zh-v1
+      ---
+      duration_ms: 21.1237
+      type: 'test'
+      ...
+    1..15
+ok 1 - all 15 skills can be loaded and used in the ReAct observation-answer loop
+  ---
+  duration_ms: 680.6077
+  type: 'test'
+  ...
+# Subtest: skill references are readable and paths cannot escape the registered catalog
+ok 2 - skill references are readable and paths cannot escape the registered catalog
+  ---
+  duration_ms: 4.6544
+  type: 'test'
+  ...
+# Subtest: discovery, reference tools, schema discovery, history and multimodal dispatch work independently
+ok 3 - discovery, reference tools, schema discovery, history and multimodal dispatch work independently
+  ---
+  duration_ms: 70.5381
+  type: 'test'
+  ...
+# Subtest: all 12 installed scripts actually execute and validate output schemas
+    # Subtest: actor-realism-v2/validate_prompt_preservation
+    ok 1 - actor-realism-v2/validate_prompt_preservation
+      ---
+      duration_ms: 612.5601
+      type: 'test'
+      ...
+    # Subtest: actor-realism-v2/validate_segment_timeline
+    ok 2 - actor-realism-v2/validate_segment_timeline
+      ---
+      duration_ms: 487.0801
+      type: 'test'
+      ...
+    # Subtest: asset-lock-generator-lite-v2/plan_asset_lock_budget
+    ok 3 - asset-lock-generator-lite-v2/plan_asset_lock_budget
+      ---
+      duration_ms: 333.2999
+      type: 'test'
+      ...
+    # Subtest: asset-lock-generator-lite-v2/validate_asset_lock_prompt
+    ok 4 - asset-lock-generator-lite-v2/validate_asset_lock_prompt
+      ---
+      duration_ms: 431.1169
+      type: 'test'
+      ...
+    # Subtest: creative-cover-copy-v2/validate_copy_evidence
+    ok 5 - creative-cover-copy-v2/validate_copy_evidence
+      ---
+      duration_ms: 333.4943
+      type: 'test'
+      ...
+    # Subtest: creative-cover-copy-v2/validate_cover_prompt_contract
+    ok 6 - creative-cover-copy-v2/validate_cover_prompt_contract
+      ---
+      duration_ms: 289.8483
+      type: 'test'
+      ...
+    # Subtest: cinematic-shot-designer-zh-v5/validate_storyboard
+    ok 7 - cinematic-shot-designer-zh-v5/validate_storyboard
+      ---
+      duration_ms: 288.5713
+      type: 'test'
+      ...
+    # Subtest: cinematic-style-optimizer-v2/validate_style_preservation
+    ok 8 - cinematic-style-optimizer-v2/validate_style_preservation
+      ---
+      duration_ms: 251.3692
+      type: 'test'
+      ...
+    # Subtest: image-prompt-gallery-director-v2/validate_image_prompt_contract
+    ok 9 - image-prompt-gallery-director-v2/validate_image_prompt_contract
+      ---
+      duration_ms: 215.7322
+      type: 'test'
+      ...
+    # Subtest: storyboard-one-shot-zh/validate_storyboard
+    ok 10 - storyboard-one-shot-zh/validate_storyboard
+      ---
+      duration_ms: 240.6773
+      type: 'test'
+      ...
+    # Subtest: storyboard-one-shot-zh-v2/validate_storyboard_timeline
+    ok 11 - storyboard-one-shot-zh-v2/validate_storyboard_timeline
+      ---
+      duration_ms: 237.878
+      type: 'test'
+      ...
+    # Subtest: storyboard-one-shot-zh-v2/validate_storyboard_prompt_contract
+    ok 12 - storyboard-one-shot-zh-v2/validate_storyboard_prompt_contract
+      ---
+      duration_ms: 203.5079
+      type: 'test'
+      ...
+    1..12
+ok 4 - all 12 installed scripts actually execute and validate output schemas
+  ---
+  duration_ms: 3929.1369
+  type: 'test'
+  ...
+# Subtest: script detects lost content and rejects malformed arguments / unregistered names
+ok 5 - script detects lost content and rejects malformed arguments / unregistered names
+  ---
+  duration_ms: 173.5811
+  type: 'test'
+  ...
+# Subtest: invalid tool and parameters feed errors back without executing side effects
+ok 6 - invalid tool and parameters feed errors back without executing side effects
+  ---
+  duration_ms: 5.2374
+  type: 'test'
+  ...
+# Subtest: an explicitly new task can generate a new artifact even with identical parameters
+ok 7 - an explicitly new task can generate a new artifact even with identical parameters
+  ---
+  duration_ms: 8.5492
+  type: 'test'
+  ...
+# Subtest: unknown submission blocks writes but does not block video status reads
+ok 8 - unknown submission blocks writes but does not block video status reads
+  ---
+  duration_ms: 3.4413
+  type: 'test'
+  ...
+# Subtest: known rejection does not permanently lock the session
+ok 9 - known rejection does not permanently lock the session
+  ---
+  duration_ms: 5.9066
+  type: 'test'
+  ...
+# Subtest: queued video cannot mark the run completed; status calls remain fresh
+ok 10 - queued video cannot mark the run completed; status calls remain fresh
+  ---
+  duration_ms: 5.6635
+  type: 'test'
+  ...
+# Subtest: cancel closes all function calls and preserves uncertain media intent
+ok 11 - cancel closes all function calls and preserves uncertain media intent
+  ---
+  duration_ms: 3.3742
+  type: 'test'
+  ...
+# Subtest: bounded loop returns limited, not success
+ok 12 - bounded loop returns limited, not success
+  ---
+  duration_ms: 2.3579
+  type: 'test'
+  ...
+# Subtest: restart repairs unfinished function calls before model replay
+ok 13 - restart repairs unfinished function calls before model replay
+  ---
+  duration_ms: 3.3572
+  type: 'test'
+  ...
+# Subtest: Ark image and video call official API paths, serialize references and query actual output
+ok 14 - Ark image and video call official API paths, serialize references and query actual output
+  ---
+  duration_ms: 14.1098
+  type: 'test'
+  ...
+# Subtest: media error semantics distinguish rejected and ambiguous submissions
+ok 15 - media error semantics distinguish rejected and ambiguous submissions
+  ---
+  duration_ms: 0.5567
+  type: 'test'
+  ...
+# Subtest: native function calling payload replays observations and never exposes reasoning
+ok 16 - native function calling payload replays observations and never exposes reasoning
+  ---
+  duration_ms: 0.6212
+  type: 'test'
+  ...
+# Subtest: brain exposes all tools with automatic selection to avoid forced-tool empty responses
+ok 17 - brain exposes all tools with automatic selection to avoid forced-tool empty responses
+  ---
+  duration_ms: 0.3249
+  type: 'test'
+  ...
+# Subtest: ordinary answer is delivered even when no tools are needed
+ok 18 - ordinary answer is delivered even when no tools are needed
+  ---
+  duration_ms: 2.2112
+  type: 'test'
+  ...
+# Subtest: goal recognition and clarification are allowed before paid-action planning
+ok 19 - goal recognition and clarification are allowed before paid-action planning
+  ---
+  duration_ms: 5.5529
+  type: 'test'
+  ...
+# Subtest: assistant history is normalized to compatible input text for follow-up queries
+ok 20 - assistant history is normalized to compatible input text for follow-up queries
+  ---
+  duration_ms: 0.3977
+  type: 'test'
+  ...
+# Subtest: failed video task is not labeled completed
+ok 21 - failed video task is not labeled completed
+  ---
+  duration_ms: 6.2769
+  type: 'test'
+  ...
+# Subtest: provider account error gives actionable feedback without raw payload
+ok 22 - provider account error gives actionable feedback without raw payload
+  ---
+  duration_ms: 0.6884
+  type: 'test'
+  ...
+# Subtest: new goals survive irrelevant blocked, failed, completed and confirmation history
+ok 23 - new goals survive irrelevant blocked, failed, completed and confirmation history
+  ---
+  duration_ms: 87.1074
+  type: 'test'
+  ...
+# Subtest: an empty resume proposal for a new request is independently rejected and replanned
+ok 24 - an empty resume proposal for a new request is independently rejected and replanned
+  ---
+  duration_ms: 141.3258
+  type: 'test'
+  ...
+# Subtest: revision retires unfinished obligations and stale approval cannot authorize changed contract
+ok 25 - revision retires unfinished obligations and stale approval cannot authorize changed contract
+  ---
+  duration_ms: 2.7681
+  type: 'test'
+  ...
+# Subtest: graph and accepted contract detect lost node methods or changed requirements
+ok 26 - graph and accepted contract detect lost node methods or changed requirements
+  ---
+  duration_ms: 1.8848
+  type: 'test'
+  ...
+# Subtest: a permissive quality judge cannot complete a required method with no runtime evidence
+ok 27 - a permissive quality judge cannot complete a required method with no runtime evidence
+  ---
+  duration_ms: 1.0031
+  type: 'test'
+  ...
+# Subtest: stage schema rejects other stage writes and fixes internal cardinality independently of files
+ok 28 - stage schema rejects other stage writes and fixes internal cardinality independently of files
+  ---
+  duration_ms: 19.6117
+  type: 'test'
+  ...
+# Subtest: selected direction binds stable artifact and version regardless of candidate ordering
+ok 29 - selected direction binds stable artifact and version regardless of candidate ordering
+  ---
+  duration_ms: 2.465
+  type: 'test'
+  ...
+# Subtest: failed and superseded candidates cannot become downstream default or explicit sources
+ok 30 - failed and superseded candidates cannot become downstream default or explicit sources
+  ---
+  duration_ms: 1.5552
+  type: 'test'
+  ...
+# Subtest: event payload and snapshot retain time-of-record values; failed turn has no old task result
+ok 31 - event payload and snapshot retain time-of-record values; failed turn has no old task result
+  ---
+  duration_ms: 1.0307
+  type: 'test'
+  ...
+# Subtest: runtime inquiries produce authoritative facts without creative model calls or submissions
+ok 32 - runtime inquiries produce authoritative facts without creative model calls or submissions
+  ---
+  duration_ms: 27.0344
+  type: 'test'
+  ...
+# Subtest: required Skill uses actual loaded content, hashes, model links and stage-scoped input
+ok 33 - required Skill uses actual loaded content, hashes, model links and stage-scoped input
+  ---
+  duration_ms: 48.0645
+  type: 'test'
+  ...
+# Subtest: model traces retain normalized transport and raw response with credentials redacted
+ok 34 - model traces retain normalized transport and raw response with credentials redacted
+  ---
+  duration_ms: 33.1969
+  type: 'test'
+  ...
+# Subtest: concurrent model trace scopes do not cross session boundaries
+ok 35 - concurrent model trace scopes do not cross session boundaries
+  ---
+  duration_ms: 18.5253
+  type: 'test'
+  ...
+# Subtest: one answer can consume capability and quote sources without duplicating its output slot
+ok 36 - one answer can consume capability and quote sources without duplicating its output slot
+  ---
+  duration_ms: 2.5668
+  type: 'test'
+  ...
+# Subtest: same request replays its outcome, an explicit new request with identical content creates new work
+ok 37 - same request replays its outcome, an explicit new request with identical content creates new work
+  ---
+  duration_ms: 20.7885
+  type: 'test'
+  ...
+# Subtest: submission guard checks read-only permissions, frozen scope, unknown receipts and parameter identity
+ok 38 - submission guard checks read-only permissions, frozen scope, unknown receipts and parameter identity
+  ---
+  duration_ms: 2.0238
+  type: 'test'
+  ...
+# Subtest: missing quote cannot be bypassed by continuing a partially delivered plan
+ok 39 - missing quote cannot be bypassed by continuing a partially delivered plan
+  ---
+  duration_ms: 12.8951
+  type: 'test'
+  ...
+# Subtest: multiple text files satisfy independent artifact slots even with identical bodies
+ok 40 - multiple text files satisfy independent artifact slots even with identical bodies
+  ---
+  duration_ms: 17.771
+  type: 'test'
+  ...
+# Subtest: old graph migration preserves frozen batches and refuses a tampered graph
+ok 41 - old graph migration preserves frozen batches and refuses a tampered graph
+  ---
+  duration_ms: 1.3055
+  type: 'test'
+  ...
+# Subtest: explicit resume target is independent of the current focus
+ok 42 - explicit resume target is independent of the current focus
+  ---
+  duration_ms: 12.9963
+  type: 'test'
+  ...
+# Subtest: explicit cancellation retires the task without invoking a model or a media adapter
+ok 43 - explicit cancellation retires the task without invoking a model or a media adapter
+  ---
+  duration_ms: 2.9597
+  type: 'test'
+  ...
+# Subtest: schema repair identifies the exact forbidden field instead of repeating an opaque root error
+ok 44 - schema repair identifies the exact forbidden field instead of repeating an opaque root error
+  ---
+  duration_ms: 187.2281
+  type: 'test'
+  ...
+# Subtest: schema codec recovers key whitespace without changing semantic values or overwriting collisions
+ok 45 - schema codec recovers key whitespace without changing semantic values or overwriting collisions
+  ---
+  duration_ms: 0.3758
+  type: 'test'
+  ...
+# Subtest: one final document executes four isolated stages and binds actual second direction
+ok 46 - one final document executes four isolated stages and binds actual second direction
+  ---
+  duration_ms: 235.0064
+  type: 'test'
+  ...
+# Subtest: collapsed skill labels cannot pass a permissive judge without stage lineage
+ok 47 - collapsed skill labels cannot pass a permissive judge without stage lineage
+  ---
+  duration_ms: 0.8384
+  type: 'test'
+  ...
+# Subtest: deferred promised media cannot become a completed text-only contract even with zero scope audit
+ok 48 - deferred promised media cannot become a completed text-only contract even with zero scope audit
+  ---
+  duration_ms: 0.646
+  type: 'test'
+  ...
+# Subtest: control decisions without a known target are rejected before acceptance
+ok 49 - control decisions without a known target are rejected before acceptance
+  ---
+  duration_ms: 29.3433
+  type: 'test'
+  ...
+# Subtest: a selected direction with no actual source cannot reach the quality judge
+ok 50 - a selected direction with no actual source cannot reach the quality judge
+  ---
+  duration_ms: 3.5291
+  type: 'test'
+  ...
+# Subtest: global selected-direction spec applies to consumers, not product and direction producers
+ok 51 - global selected-direction spec applies to consumers, not product and direction producers
+  ---
+  duration_ms: 264.5843
+  type: 'test'
+  ...
+# Subtest: pre-workflow version-two graphs migrate without changing frozen media batches
+ok 52 - pre-workflow version-two graphs migrate without changing frozen media batches
+  ---
+  duration_ms: 1.5806
+  type: 'test'
+  ...
+# Subtest: independent scope audit cannot interpret pending approval as zero future media
+ok 53 - independent scope audit cannot interpret pending approval as zero future media
+  ---
+  duration_ms: 90.7539
+  type: 'test'
+  ...
+# Subtest: typed document counts compile without asking the model to recopy a legacy counter
+ok 54 - typed document counts compile without asking the model to recopy a legacy counter
+  ---
+  duration_ms: 77.1193
+  type: 'test'
+  ...
+# Subtest: fact revision removes a cancelled quote while preserving unrelated obligations
+ok 55 - fact revision removes a cancelled quote while preserving unrelated obligations
+  ---
+  duration_ms: 0.5707
+  type: 'test'
+  ...
+# Subtest: typed task source resolves one accepted artifact and rejects ambiguous versions
+ok 56 - typed task source resolves one accepted artifact and rejects ambiguous versions
+  ---
+  duration_ms: 0.829
+  type: 'test'
+  ...
+# Subtest: runtime fact requests use registry evidence without giving deployment failures to intake
+ok 57 - runtime fact requests use registry evidence without giving deployment failures to intake
+  ---
+  duration_ms: 84.755
+  type: 'test'
+  ...
+# Subtest: an image edit sends contract-owned reference URLs even when model omits or changes them
+ok 58 - an image edit sends contract-owned reference URLs even when model omits or changes them
+  ---
+  duration_ms: 0.5505
+  type: 'test'
+  ...
+# Subtest: global explicit methods receive concrete route ownership before contract acceptance
+ok 59 - global explicit methods receive concrete route ownership before contract acceptance
+  ---
+  duration_ms: 69.219
+  type: 'test'
+  ...
+# Subtest: two text revisions consume their exact source body and retain the parent chain
+ok 60 - two text revisions consume their exact source body and retain the parent chain
+  ---
+  duration_ms: 281.484
+  type: 'test'
+  ...
+# Subtest: a missing source blocks text generation and references cannot select another session
+ok 61 - a missing source blocks text generation and references cannot select another session
+  ---
+  duration_ms: 11.1699
+  type: 'test'
+  ...
+# Subtest: explicit dependency references resolve only validated deliverables
+ok 62 - explicit dependency references resolve only validated deliverables
+  ---
+  duration_ms: 43.386
+  type: 'test'
+  ...
+# Subtest: unknown media blocks its own retry but allows independent new text and media tasks
+ok 63 - unknown media blocks its own retry but allows independent new text and media tasks
+  ---
+  duration_ms: 460.191
+  type: 'test'
+  ...
+# Subtest: an unknown media result does not suppress an independent text node in the same task
+ok 64 - an unknown media result does not suppress an independent text node in the same task
+  ---
+  duration_ms: 62.143
+  type: 'test'
+  ...
+# Subtest: edit verification sends both labeled images and requires complete comparison evidence
+ok 65 - edit verification sends both labeled images and requires complete comparison evidence
+  ---
+  duration_ms: 3.2089
+  type: 'test'
+  ...
+# Subtest: preservation failure and uncertain source evidence cannot be overruled by passed=true
+ok 66 - preservation failure and uncertain source evidence cannot be overruled by passed=true
+  ---
+  duration_ms: 1.6141
+  type: 'test'
+  ...
+# Subtest: missing original and missing comparison output leave the image unverified
+ok 67 - missing original and missing comparison output leave the image unverified
+  ---
+  duration_ms: 0.8853
+  type: 'test'
+  ...
+# Subtest: real edit verifier persists comparison evidence; continuation rechecks images without regenerating
+ok 68 - real edit verifier persists comparison evidence; continuation rechecks images without regenerating
+  ---
+  duration_ms: 70.5991
+  type: 'test'
+  ...
+# Subtest: exact source strings are checked deterministically and full text contract reaches the judge
+ok 69 - exact source strings are checked deterministically and full text contract reaches the judge
+  ---
+  duration_ms: 2.246
+  type: 'test'
+  ...
+# Subtest: wrong or missing image dimensions cannot be accepted by a permissive vision model
+ok 70 - wrong or missing image dimensions cannot be accepted by a permissive vision model
+  ---
+  duration_ms: 0.4677
+  type: 'test'
+  ...
+# Subtest: restart between receipt and verification resumes validation without another paid submission
+ok 71 - restart between receipt and verification resumes validation without another paid submission
+  ---
+  duration_ms: 294.5575
+  type: 'test'
+  ...
+# Subtest: background verification recovery respects paused states and a persisted retry budget
+ok 72 - background verification recovery respects paused states and a persisted retry budget
+  ---
+  duration_ms: 547.3755
+  type: 'test'
+  ...
+# Subtest: recovering an older task preserves the foreground task identity
+ok 73 - recovering an older task preserves the foreground task identity
+  ---
+  duration_ms: 78.7461
+  type: 'test'
+  ...
+# Subtest: interrupted planning exposes a deterministic resume action and pending submission is never repeated
+ok 74 - interrupted planning exposes a deterministic resume action and pending submission is never repeated
+  ---
+  duration_ms: 166.3789
+  type: 'test'
+  ...
+# Subtest: confirmation actions still require the frozen plan hash and cannot authorize themselves
+ok 75 - confirmation actions still require the frozen plan hash and cannot authorize themselves
+  ---
+  duration_ms: 110.631
+  type: 'test'
+  ...
+# Subtest: benchmark preserves original label mismatch and reports mapping separately
+ok 76 - benchmark preserves original label mismatch and reports mapping separately
+  ---
+  duration_ms: 1.7282
+  type: 'test'
+  ...
+# Subtest: material retrieval is not credited without actual successful tool observation
+ok 77 - material retrieval is not credited without actual successful tool observation
+  ---
+  duration_ms: 0.2088
+  type: 'test'
+  ...
+# Subtest: a completed flag is not used as benchmark task correctness
+ok 78 - a completed flag is not used as benchmark task correctness
+  ---
+  duration_ms: 1.0756
+  type: 'test'
+  ...
+# Subtest: audit detects repeated inputs with contradictory operation labels
+ok 79 - audit detects repeated inputs with contradictory operation labels
+  ---
+  duration_ms: 0.4971
+  type: 'test'
+  ...
+# Subtest: projection rejects count drift before_acceptance
+ok 80 - projection rejects count drift before_acceptance
+  ---
+  duration_ms: 10.017
+  type: 'test'
+  ...
+# Subtest: projection rejects count drift before_compile
+ok 81 - projection rejects count drift before_compile
+  ---
+  duration_ms: 4.3782
+  type: 'test'
+  ...
+# Subtest: projection rejects count drift after_compile
+ok 82 - projection rejects count drift after_compile
+  ---
+  duration_ms: 1.7338
+  type: 'test'
+  ...
+# Subtest: projection rejects count drift after_reload
+ok 83 - projection rejects count drift after_reload
+  ---
+  duration_ms: 0.8627
+  type: 'test'
+  ...
+# Subtest: projection rejects operation drift before_acceptance
+ok 84 - projection rejects operation drift before_acceptance
+  ---
+  duration_ms: 0.4867
+  type: 'test'
+  ...
+# Subtest: projection rejects operation drift before_compile
+ok 85 - projection rejects operation drift before_compile
+  ---
+  duration_ms: 2.5081
+  type: 'test'
+  ...
+# Subtest: projection rejects operation drift after_compile
+ok 86 - projection rejects operation drift after_compile
+  ---
+  duration_ms: 0.9679
+  type: 'test'
+  ...
+# Subtest: projection rejects operation drift after_reload
+ok 87 - projection rejects operation drift after_reload
+  ---
+  duration_ms: 6.1208
+  type: 'test'
+  ...
+# Subtest: projection rejects output drift before_acceptance
+ok 88 - projection rejects output drift before_acceptance
+  ---
+  duration_ms: 0.693
+  type: 'test'
+  ...
+# Subtest: projection rejects output drift before_compile
+ok 89 - projection rejects output drift before_compile
+  ---
+  duration_ms: 1.3896
+  type: 'test'
+  ...
+# Subtest: projection rejects output drift after_compile
+ok 90 - projection rejects output drift after_compile
+  ---
+  duration_ms: 1.4331
+  type: 'test'
+  ...
+# Subtest: projection rejects output drift after_reload
+ok 91 - projection rejects output drift after_reload
+  ---
+  duration_ms: 0.8232
+  type: 'test'
+  ...
+# Subtest: projection rejects spec drift before_acceptance
+ok 92 - projection rejects spec drift before_acceptance
+  ---
+  duration_ms: 0.305
+  type: 'test'
+  ...
+# Subtest: projection rejects spec drift before_compile
+ok 93 - projection rejects spec drift before_compile
+  ---
+  duration_ms: 0.5558
+  type: 'test'
+  ...
+# Subtest: projection rejects spec drift after_compile
+ok 94 - projection rejects spec drift after_compile
+  ---
+  duration_ms: 0.6165
+  type: 'test'
+  ...
+# Subtest: projection rejects spec drift after_reload
+ok 95 - projection rejects spec drift after_reload
+  ---
+  duration_ms: 0.5538
+  type: 'test'
+  ...
+# Subtest: projection rejects dependency drift before_acceptance
+ok 96 - projection rejects dependency drift before_acceptance
+  ---
+  duration_ms: 0.2896
+  type: 'test'
+  ...
+# Subtest: projection rejects dependency drift before_compile
+ok 97 - projection rejects dependency drift before_compile
+  ---
+  duration_ms: 0.5418
+  type: 'test'
+  ...
+# Subtest: projection rejects dependency drift after_compile
+ok 98 - projection rejects dependency drift after_compile
+  ---
+  duration_ms: 0.6064
+  type: 'test'
+  ...
+# Subtest: projection rejects dependency drift after_reload
+ok 99 - projection rejects dependency drift after_reload
+  ---
+  duration_ms: 0.5897
+  type: 'test'
+  ...
+# Subtest: projection rejects reference drift before_acceptance
+ok 100 - projection rejects reference drift before_acceptance
+  ---
+  duration_ms: 0.3574
+  type: 'test'
+  ...
+# Subtest: projection rejects reference drift before_compile
+ok 101 - projection rejects reference drift before_compile
+  ---
+  duration_ms: 0.4493
+  type: 'test'
+  ...
+# Subtest: projection rejects reference drift after_compile
+ok 102 - projection rejects reference drift after_compile
+  ---
+  duration_ms: 0.6026
+  type: 'test'
+  ...
+# Subtest: projection rejects reference drift after_reload
+ok 103 - projection rejects reference drift after_reload
+  ---
+  duration_ms: 0.4956
+  type: 'test'
+  ...
+# Subtest: projection rejects constraint drift before_acceptance
+ok 104 - projection rejects constraint drift before_acceptance
+  ---
+  duration_ms: 0.3863
+  type: 'test'
+  ...
+# Subtest: projection rejects constraint drift before_compile
+ok 105 - projection rejects constraint drift before_compile
+  ---
+  duration_ms: 0.3791
+  type: 'test'
+  ...
+# Subtest: projection rejects constraint drift after_compile
+ok 106 - projection rejects constraint drift after_compile
+  ---
+  duration_ms: 0.8098
+  type: 'test'
+  ...
+# Subtest: projection rejects constraint drift after_reload
+ok 107 - projection rejects constraint drift after_reload
+  ---
+  duration_ms: 1.1384
+  type: 'test'
+  ...
+# Subtest: projection rejects method drift before_acceptance
+ok 108 - projection rejects method drift before_acceptance
+  ---
+  duration_ms: 13.8465
+  type: 'test'
+  ...
+# Subtest: projection rejects method drift before_compile
+ok 109 - projection rejects method drift before_compile
+  ---
+  duration_ms: 14.2123
+  type: 'test'
+  ...
+# Subtest: projection rejects method drift after_compile
+ok 110 - projection rejects method drift after_compile
+  ---
+  duration_ms: 0.7857
+  type: 'test'
+  ...
+# Subtest: projection rejects method drift after_reload
+ok 111 - projection rejects method drift after_reload
+  ---
+  duration_ms: 0.6873
+  type: 'test'
+  ...
+# Subtest: projection rejects activation drift before_acceptance
+ok 112 - projection rejects activation drift before_acceptance
+  ---
+  duration_ms: 0.561
+  type: 'test'
+  ...
+# Subtest: projection rejects activation drift before_compile
+ok 113 - projection rejects activation drift before_compile
+  ---
+  duration_ms: 0.8468
+  type: 'test'
+  ...
+# Subtest: projection rejects activation drift after_compile
+ok 114 - projection rejects activation drift after_compile
+  ---
+  duration_ms: 0.9127
+  type: 'test'
+  ...
+# Subtest: projection rejects activation drift after_reload
+ok 115 - projection rejects activation drift after_reload
+  ---
+  duration_ms: 0.7868
+  type: 'test'
+  ...
+# Subtest: projection rejects coverage drift before_acceptance
+ok 116 - projection rejects coverage drift before_acceptance
+  ---
+  duration_ms: 0.4312
+  type: 'test'
+  ...
+# Subtest: projection rejects coverage drift before_compile
+ok 117 - projection rejects coverage drift before_compile
+  ---
+  duration_ms: 0.5776
+  type: 'test'
+  ...
+# Subtest: projection rejects coverage drift after_compile
+ok 118 - projection rejects coverage drift after_compile
+  ---
+  duration_ms: 0.8371
+  type: 'test'
+  ...
+# Subtest: projection rejects coverage drift after_reload
+ok 119 - projection rejects coverage drift after_reload
+  ---
+  duration_ms: 0.6786
+  type: 'test'
+  ...
+# Subtest: projection rejects evidence drift before_acceptance
+ok 120 - projection rejects evidence drift before_acceptance
+  ---
+  duration_ms: 0.3747
+  type: 'test'
+  ...
+# Subtest: projection rejects evidence drift before_compile
+ok 121 - projection rejects evidence drift before_compile
+  ---
+  duration_ms: 0.4876
+  type: 'test'
+  ...
+# Subtest: projection rejects evidence drift after_compile
+ok 122 - projection rejects evidence drift after_compile
+  ---
+  duration_ms: 0.723
+  type: 'test'
+  ...
+# Subtest: projection rejects evidence drift after_reload
+ok 123 - projection rejects evidence drift after_reload
+  ---
+  duration_ms: 0.6121
+  type: 'test'
+  ...
+# Subtest: projection rejects description drift before_acceptance
+ok 124 - projection rejects description drift before_acceptance
+  ---
+  duration_ms: 0.3912
+  type: 'test'
+  ...
+# Subtest: projection rejects description drift before_compile
+ok 125 - projection rejects description drift before_compile
+  ---
+  duration_ms: 0.5316
+  type: 'test'
+  ...
+# Subtest: projection rejects description drift after_compile
+ok 126 - projection rejects description drift after_compile
+  ---
+  duration_ms: 0.6297
+  type: 'test'
+  ...
+# Subtest: projection rejects description drift after_reload
+ok 127 - projection rejects description drift after_reload
+  ---
+  duration_ms: 0.5682
+  type: 'test'
+  ...
+# Subtest: projection rejects selector drift before_acceptance
+ok 128 - projection rejects selector drift before_acceptance
+  ---
+  duration_ms: 0.3041
+  type: 'test'
+  ...
+# Subtest: projection rejects selector drift before_compile
+ok 129 - projection rejects selector drift before_compile
+  ---
+  duration_ms: 0.4346
+  type: 'test'
+  ...
+# Subtest: projection rejects selector drift after_compile
+ok 130 - projection rejects selector drift after_compile
+  ---
+  duration_ms: 0.614
+  type: 'test'
+  ...
+# Subtest: projection rejects selector drift after_reload
+ok 131 - projection rejects selector drift after_reload
+  ---
+  duration_ms: 0.6521
+  type: 'test'
+  ...
+# Subtest: projection rejects binding drift before_acceptance
+ok 132 - projection rejects binding drift before_acceptance
+  ---
+  duration_ms: 0.4097
+  type: 'test'
+  ...
+# Subtest: projection rejects binding drift before_compile
+ok 133 - projection rejects binding drift before_compile
+  ---
+  duration_ms: 0.5578
+  type: 'test'
+  ...
+# Subtest: projection rejects binding drift after_compile
+ok 134 - projection rejects binding drift after_compile
+  ---
+  duration_ms: 0.6739
+  type: 'test'
+  ...
+# Subtest: projection rejects binding drift after_reload
+ok 135 - projection rejects binding drift after_reload
+  ---
+  duration_ms: 0.7721
+  type: 'test'
+  ...
+# Subtest: projection rejects delta drift before_acceptance
+ok 136 - projection rejects delta drift before_acceptance
+  ---
+  duration_ms: 0.3493
+  type: 'test'
+  ...
+# Subtest: projection rejects delta drift before_compile
+ok 137 - projection rejects delta drift before_compile
+  ---
+  duration_ms: 0.524
+  type: 'test'
+  ...
+# Subtest: projection rejects delta drift after_compile
+ok 138 - projection rejects delta drift after_compile
+  ---
+  duration_ms: 0.8013
+  type: 'test'
+  ...
+# Subtest: projection rejects delta drift after_reload
+ok 139 - projection rejects delta drift after_reload
+  ---
+  duration_ms: 0.6176
+  type: 'test'
+  ...
+# Subtest: projection rejects remove drift before_acceptance
+ok 140 - projection rejects remove drift before_acceptance
+  ---
+  duration_ms: 0.3951
+  type: 'test'
+  ...
+# Subtest: projection rejects remove drift before_compile
+ok 141 - projection rejects remove drift before_compile
+  ---
+  duration_ms: 0.5052
+  type: 'test'
+  ...
+# Subtest: projection rejects remove drift after_compile
+ok 142 - projection rejects remove drift after_compile
+  ---
+  duration_ms: 0.8241
+  type: 'test'
+  ...
+# Subtest: projection rejects remove drift after_reload
+ok 143 - projection rejects remove drift after_reload
+  ---
+  duration_ms: 0.6034
+  type: 'test'
+  ...
+# Subtest: projection rejects unknownDefinition drift before_acceptance
+ok 144 - projection rejects unknownDefinition drift before_acceptance
+  ---
+  duration_ms: 0.3646
+  type: 'test'
+  ...
+# Subtest: projection rejects unknownDefinition drift before_compile
+ok 145 - projection rejects unknownDefinition drift before_compile
+  ---
+  duration_ms: 0.5279
+  type: 'test'
+  ...
+# Subtest: projection rejects unknownDefinition drift after_compile
+ok 146 - projection rejects unknownDefinition drift after_compile
+  ---
+  duration_ms: 0.782
+  type: 'test'
+  ...
+# Subtest: projection rejects unknownDefinition drift after_reload
+ok 147 - projection rejects unknownDefinition drift after_reload
+  ---
+  duration_ms: 0.672
+  type: 'test'
+  ...
+# Subtest: projection rejects index drift before_acceptance
+ok 148 - projection rejects index drift before_acceptance
+  ---
+  duration_ms: 0.3709
+  type: 'test'
+  ...
+# Subtest: projection rejects index drift before_compile
+ok 149 - projection rejects index drift before_compile
+  ---
+  duration_ms: 0.4841
+  type: 'test'
+  ...
+# Subtest: projection rejects index drift after_compile
+ok 150 - projection rejects index drift after_compile
+  ---
+  duration_ms: 0.5977
+  type: 'test'
+  ...
+# Subtest: projection rejects index drift after_reload
+ok 151 - projection rejects index drift after_reload
+  ---
+  duration_ms: 0.5932
+  type: 'test'
+  ...
+# Subtest: definition projection preserves runtime writes and breaks input aliases
+ok 152 - definition projection preserves runtime writes and breaks input aliases
+  ---
+  duration_ms: 1.2207
+  type: 'test'
+  ...
+# Subtest: changing both Goal and Item cannot redefine the accepted compiler source
+ok 153 - changing both Goal and Item cannot redefine the accepted compiler source
+  ---
+  duration_ms: 1.2736
+  type: 'test'
+  ...
+# Subtest: model-selected media cannot self-authorize: 只写方案，不要生图。
+ok 154 - model-selected media cannot self-authorize: 只写方案，不要生图。
+  ---
+  duration_ms: 509.5285
+  type: 'test'
+  ...
+# Subtest: model-selected media cannot self-authorize: Please provide text only.
+ok 155 - model-selected media cannot self-authorize: Please provide text only.
+  ---
+  duration_ms: 337.4615
+  type: 'test'
+  ...
+# Subtest: model-selected media cannot self-authorize: 説明文だけをください。
+ok 156 - model-selected media cannot self-authorize: 説明文だけをください。
+  ---
+  duration_ms: 326.9769
+  type: 'test'
+  ...
+# Subtest: model-selected media cannot self-authorize: طلبات نصية فقط
+ok 157 - model-selected media cannot self-authorize: طلبات نصية فقط
+  ---
+  duration_ms: 424.3468
+  type: 'test'
+  ...
+# Subtest: approval drift, stale hashes and adapter bypass cannot submit
+ok 158 - approval drift, stale hashes and adapter bypass cannot submit
+  ---
+  duration_ms: 271.8596
+  type: 'test'
+  ...
+# Subtest: unknown receipt removes resume and restart does not resubmit
+ok 159 - unknown receipt removes resume and restart does not resubmit
+  ---
+  duration_ms: 343.0293
+  type: 'test'
+  ...
+# Subtest: stage gaps have explicit scope and native action projections preserve it after ordering
+ok 160 - stage gaps have explicit scope and native action projections preserve it after ordering
+  ---
+  duration_ms: 1.2277
+  type: 'test'
+  ...
+# Subtest: native explicit authorization conflicts fail before execution
+ok 161 - native explicit authorization conflicts fail before execution
+  ---
+  duration_ms: 443.6941
+  type: 'test'
+  ...
+# Subtest: source coverage uses typed binding across languages, rejects unknown units and overlapping partitions
+ok 162 - source coverage uses typed binding across languages, rejects unknown units and overlapping partitions
+  ---
+  duration_ms: 2.9178
+  type: 'test'
+  ...
+# Subtest: delivery-only publishes numeric mismatch with nonblocking diagnostics; strict rejects same evidence
+ok 163 - delivery-only publishes numeric mismatch with nonblocking diagnostics; strict rejects same evidence
+  ---
+  duration_ms: 1.5789
+  type: 'test'
+  ...
+# Subtest: delivery-only reports actual media metadata mismatch without invoking quality models
+ok 164 - delivery-only reports actual media metadata mismatch without invoking quality models
+  ---
+  duration_ms: 0.915
+  type: 'test'
+  ...
+# Subtest: assembled documents retain all stage constraint diagnostics
+ok 165 - assembled documents retain all stage constraint diagnostics
+  ---
+  duration_ms: 0.329
+  type: 'test'
+  ...
+# Subtest: all method guidance declares actual compiled permissions and optional script evidence
+ok 166 - all method guidance declares actual compiled permissions and optional script evidence
+  ---
+  duration_ms: 63.5408
+  type: 'test'
+  ...
+# Subtest: supersession remains historical while current session completion excludes replaced obligations
+ok 167 - supersession remains historical while current session completion excludes replaced obligations
+  ---
+  duration_ms: 1.4626
+  type: 'test'
+  ...
+# Subtest: production rendering is a pure saved-artifact projection without a model
+ok 168 - production rendering is a pure saved-artifact projection without a model
+  ---
+  duration_ms: 0.7354
+  type: 'test'
+  ...
+# Subtest: native Action HTTP creation, revision, observation and Debug context preserve one execution per request
+ok 169 - native Action HTTP creation, revision, observation and Debug context preserve one execution per request
+  ---
+  duration_ms: 5064.26
+  type: 'test'
+  ...
+# Subtest: pilot: EDIT_IMAGE compiles target, modification, revision and existing executor fields
+ok 170 - pilot: EDIT_IMAGE compiles target, modification, revision and existing executor fields
+  ---
+  duration_ms: 393.2638
+  type: 'test'
+  ...
+# Subtest: pilot: sequential native create and edit execute one revision with the exact parent image
+ok 171 - pilot: sequential native create and edit execute one revision with the exact parent image
+  ---
+  duration_ms: 680.737
+  type: 'test'
+  ...
+# Subtest: core: ANALYZE_IMAGE derives observation with no evidence flag, task creation or media submission
+ok 172 - core: ANALYZE_IMAGE derives observation with no evidence flag, task creation or media submission
+  ---
+  duration_ms: 337.9322
+  type: 'test'
+  ...
+# Subtest: core: CREATE_VIDEO maps declared count and duration without invoking video production
+ok 173 - core: CREATE_VIDEO maps declared count and duration without invoking video production
+  ---
+  duration_ms: 355.1493
+  type: 'test'
+  ...
+# Subtest: core: input bindings produce stable DAG edges without a model-generated execution graph
+ok 174 - core: input bindings produce stable DAG edges without a model-generated execution graph
+  ---
+  duration_ms: 226.3467
+  type: 'test'
+  ...
+# Subtest: core: dependent outputs both execute and preserve the two original requirements
+ok 175 - core: dependent outputs both execute and preserve the two original requirements
+  ---
+  duration_ms: 391.6583
+  type: 'test'
+  ...
+# Subtest: core: partial failure remains pending and explicit resume does not resubmit the first output
+ok 176 - core: partial failure remains pending and explicit resume does not resubmit the first output
+  ---
+  duration_ms: 410.4125
+  type: 'test'
+  ...
+# Subtest: core: confirmation binds the saved proposal and resumes without replanning
+ok 177 - core: confirmation binds the saved proposal and resumes without replanning
+  ---
+  duration_ms: 504.4892
+  type: 'test'
+  ...
+# Subtest: core: a valid saved proposal does not bypass the existing natural-language approval guard
+ok 178 - core: a valid saved proposal does not bypass the existing natural-language approval guard
+  ---
+  duration_ms: 398.5697
+  type: 'test'
+  ...
+# Subtest: core: expired confirmation, confirmation with modifications and wrong target versions are refused
+ok 179 - core: expired confirmation, confirmation with modifications and wrong target versions are refused
+  ---
+  duration_ms: 338.6229
+  type: 'test'
+  ...
+# Subtest: core: action field repair preserves both deliveries, target and dependency
+ok 180 - core: action field repair preserves both deliveries, target and dependency
+  ---
+  duration_ms: 162.0412
+  type: 'test'
+  ...
+# Subtest: core: repair refuses whole-plan replacement and preserves undeclared-tool boundary
+ok 181 - core: repair refuses whole-plan replacement and preserves undeclared-tool boundary
+  ---
+  duration_ms: 218.7322
+  type: 'test'
+  ...
+# Subtest: core: invalid cycles and invented broad workflows cannot silently drop obligations
+ok 182 - core: invalid cycles and invented broad workflows cannot silently drop obligations
+  ---
+  duration_ms: 36.2306
+  type: 'test'
+  ...
+# Subtest: core: selected image version and session scope are still hard boundaries
+ok 183 - core: selected image version and session scope are still hard boundaries
+  ---
+  duration_ms: 105.4792
+  type: 'test'
+  ...
+# Subtest: shadow: legacy draft executes unchanged and records registry comparison without a second model call
+ok 184 - shadow: legacy draft executes unchanged and records registry comparison without a second model call
+  ---
+  duration_ms: 104.1391
+  type: 'test'
+  ...
+# Subtest: core: text and media mixed requests keep the compatibility route and every obligation
+ok 185 - core: text and media mixed requests keep the compatibility route and every obligation
+  ---
+  duration_ms: 89.8879
+  type: 'test'
+  ...
+# Subtest: context: three layers preserve source IDs and exact history without whole task/artifact duplication
+ok 186 - context: three layers preserve source IDs and exact history without whole task/artifact duplication
+  ---
+  duration_ms: 95.8173
+  type: 'test'
+  ...
+# Subtest: context: only explicitly confirmed session memory is passed; inferred account facts are excluded
+ok 187 - context: only explicitly confirmed session memory is passed; inferred account facts are excluded
+  ---
+  duration_ms: 0.3516
+  type: 'test'
+  ...
+# Subtest: core: missing target version is field-repaired without reselecting its image
+ok 188 - core: missing target version is field-repaired without reselecting its image
+  ---
+  duration_ms: 94.5434
+  type: 'test'
+  ...
+# Subtest: core: a multi-output predecessor cannot silently become its first image
+ok 189 - core: a multi-output predecessor cannot silently become its first image
+  ---
+  duration_ms: 46.5777
+  type: 'test'
+  ...
+# Subtest: core: confirmation survives JSON reload and duplicate requests reuse recorded results
+ok 190 - core: confirmation survives JSON reload and duplicate requests reuse recorded results
+  ---
+  duration_ms: 197.0656
+  type: 'test'
+  ...
+# Subtest: core: asynchronous video produces a real-shaped receipt and artifact with an offline provider
+ok 191 - core: asynchronous video produces a real-shaped receipt and artifact with an offline provider
+  ---
+  duration_ms: 100.4445
+  type: 'test'
+  ...
+# Subtest: debug: history comes from the actual nested context rather than being reconstructed
+ok 192 - debug: history comes from the actual nested context rather than being reconstructed
+  ---
+  duration_ms: 0.3221
+  type: 'test'
+  ...
+# Subtest: compiler runs a mandatory contracted skill and a persisted batch with zero model tool permissions
+ok 193 - compiler runs a mandatory contracted skill and a persisted batch with zero model tool permissions
+  ---
+  duration_ms: 84.4809
+  type: 'test'
+  ...
+# Subtest: confirmation executes frozen parameters after reload without rerunning skill
+ok 194 - confirmation executes frozen parameters after reload without rerunning skill
+  ---
+  duration_ms: 35.5958
+  type: 'test'
+  ...
+# Subtest: tampering with approved batch is blocked before submission
+ok 195 - tampering with approved batch is blocked before submission
+  ---
+  duration_ms: 20.9752
+  type: 'test'
+  ...
+# Subtest: unobservable artifact cannot complete; continuation retries validation without regenerating
+ok 196 - unobservable artifact cannot complete; continuation retries validation without regenerating
+  ---
+  duration_ms: 26.436
+  type: 'test'
+  ...
+# Subtest: quality rejection runs skill with feedback and preserves parent revision
+ok 197 - quality rejection runs skill with feedback and preserves parent revision
+  ---
+  duration_ms: 35.0911
+  type: 'test'
+  ...
+# Subtest: simulation has a separate terminal result and never production completion
+ok 198 - simulation has a separate terminal result and never production completion
+  ---
+  duration_ms: 76.5716
+  type: 'test'
+  ...
+# Subtest: unknown submission survives disk restart and never retries generation
+ok 199 - unknown submission survives disk restart and never retries generation
+  ---
+  duration_ms: 1466.2915
+  type: 'test'
+  ...
+# Subtest: unsupported video editing preserves goal and never replaces it with video generation
+ok 200 - unsupported video editing preserves goal and never replaces it with video generation
+  ---
+  duration_ms: 6.1524
+  type: 'test'
+  ...
+# Subtest: dependent media waits for a validated text artifact
+ok 201 - dependent media waits for a validated text artifact
+  ---
+  duration_ms: 25.304
+  type: 'test'
+  ...
+# Subtest: clarification keeps task identity and confirmation obligation even if next model drops it
+ok 202 - clarification keeps task identity and confirmation obligation even if next model drops it
+  ---
+  duration_ms: 12.6189
+  type: 'test'
+  ...
+# Subtest: image editing uses source and emits only generate_image from the public tool surface
+ok 203 - image editing uses source and emits only generate_image from the public tool surface
+  ---
+  duration_ms: 15.4232
+  type: 'test'
+  ...
+# Subtest: model cannot set completed state directly
+ok 204 - model cannot set completed state directly
+  ---
+  duration_ms: 13.7791
+  type: 'test'
+  ...
+# Subtest: verified multi-unit text completes as one document without repeated creation
+ok 205 - verified multi-unit text completes as one document without repeated creation
+  ---
+  duration_ms: 5.809
+  type: 'test'
+  ...
+# Subtest: twenty media outputs use one contract while an oversized goal is retained and blocked
+ok 206 - twenty media outputs use one contract while an oversized goal is retained and blocked
+  ---
+  duration_ms: 136.6432
+  type: 'test'
+  ...
+# Subtest: per-task schema rejects shot arrays and incorrect total duration before submission
+ok 207 - per-task schema rejects shot arrays and incorrect total duration before submission
+  ---
+  duration_ms: 5.2608
+  type: 'test'
+  ...
+# Subtest: validator repairs malformed JSON without defaulting a failed content verdict to success
+ok 208 - validator repairs malformed JSON without defaulting a failed content verdict to success
+  ---
+  duration_ms: 1.8912
+  type: 'test'
+  ...
+# Subtest: legacy skill instructions are reference data, while exact task schema is system authority
+ok 209 - legacy skill instructions are reference data, while exact task schema is system authority
+  ---
+  duration_ms: 39.0994
+  type: 'test'
+  ...
+# Subtest: Chinese title count evidence excludes a layout space at the exact twelve-character boundary
+ok 210 - Chinese title count evidence excludes a layout space at the exact twelve-character boundary
+  ---
+  duration_ms: 1.9889
+  type: 'test'
+  ...
+# Subtest: a truncated continuation ID is repaired instead of silently becoming a new task
+ok 211 - a truncated continuation ID is repaired instead of silently becoming a new task
+  ---
+  duration_ms: 184.1928
+  type: 'test'
+  ...
+# Subtest: NEEDS_INPUT cannot skip recompilation through a model-selected continue
+ok 212 - NEEDS_INPUT cannot skip recompilation through a model-selected continue
+  ---
+  duration_ms: 142.8884
+  type: 'test'
+  ...
+# Subtest: context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+ok 213 - context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+  ---
+  duration_ms: 1.4012
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual finished feedback
+ok 214 - context behavior scripted: identical query branches on actual finished feedback
+  ---
+  duration_ms: 6.5084
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual processing feedback
+ok 215 - context behavior scripted: identical query branches on actual processing feedback
+  ---
+  duration_ms: 2.0965
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual parameter_error feedback
+ok 216 - context behavior scripted: identical query branches on actual parameter_error feedback
+  ---
+  duration_ms: 1.5395
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: one direction and known facts can be delivered as text without creating media
+ok 217 - context behavior scripted: one direction and known facts can be delivered as text without creating media
+  ---
+  duration_ms: 73.5375
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+ok 218 - context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+  ---
+  duration_ms: 43.3126
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+ok 219 - context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+  ---
+  duration_ms: 27.3411
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: observation receives actual image identity plus material and unknown status
+ok 220 - context behavior scripted: observation receives actual image identity plus material and unknown status
+  ---
+  duration_ms: 31.1991
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+ok 221 - context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+  ---
+  duration_ms: 38.7528
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order a,b
+ok 222 - context behavior scripted: grouped independent reads return both call IDs for order a,b
+  ---
+  duration_ms: 25.7241
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order b,a
+ok 223 - context behavior scripted: grouped independent reads return both call IDs for order b,a
+  ---
+  duration_ms: 17.012
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+ok 224 - context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+  ---
+  duration_ms: 18.6961
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+ok 225 - context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+  ---
+  duration_ms: 39.1146
+  type: 'test'
+  ...
+# Subtest: context history stores original roles, text and detached record values without business state
+ok 226 - context history stores original roles, text and detached record values without business state
+  ---
+  duration_ms: 5.4589
+  type: 'test'
+  ...
+# Subtest: history persistence is owner scoped, append only, atomic and traversal resistant
+ok 227 - history persistence is owner scoped, append only, atomic and traversal resistant
+  ---
+  duration_ms: 38.0473
+  type: 'test'
+  ...
+# Subtest: queued saves preserve the complete append order
+ok 228 - queued saves preserve the complete append order
+  ---
+  duration_ms: 15.0234
+  type: 'test'
+  ...
+# Subtest: history search returns attributable raw snippets with time filters and no cross-session lookup
+ok 229 - history search returns attributable raw snippets with time filters and no cross-session lookup
+  ---
+  duration_ms: 1.5164
+  type: 'test'
+  ...
+# Subtest: history reading preserves source text and supports explicit character pagination
+ok 230 - history reading preserves source text and supports explicit character pagination
+  ---
+  duration_ms: 0.7625
+  type: 'test'
+  ...
+# Subtest: context preserves roles and native function call/result identities in original order
+ok 231 - context preserves roles and native function call/result identities in original order
+  ---
+  duration_ms: 1.6939
+  type: 'test'
+  ...
+# Subtest: context keeps tool groups whole across declared group boundaries and keeps chronological order
+ok 232 - context keeps tool groups whole across declared group boundaries and keeps chronological order
+  ---
+  duration_ms: 0.7879
+  type: 'test'
+  ...
+# Subtest: context trimming preserves latest user and complete latest tool feedback without rewriting history
+ok 233 - context trimming preserves latest user and complete latest tool feedback without rewriting history
+  ---
+  duration_ms: 1.1062
+  type: 'test'
+  ...
+# Subtest: oversized tool feedback has an explicit source pointer and can be recovered with read_history
+ok 234 - oversized tool feedback has an explicit source pointer and can be recovered with read_history
+  ---
+  duration_ms: 2.944
+  type: 'test'
+  ...
+# Subtest: latest user and tool arguments cannot be silently truncated to fit a budget
+ok 235 - latest user and tool arguments cannot be silently truncated to fit a budget
+  ---
+  duration_ms: 1.8604
+  type: 'test'
+  ...
+# Subtest: incomplete historical tool groups are explicit omissions, never unmatched model protocol
+ok 236 - incomplete historical tool groups are explicit omissions, never unmatched model protocol
+  ---
+  duration_ms: 0.7411
+  type: 'test'
+  ...
+# Subtest: skill and asset metadata never become system instructions or replace original asset bodies
+ok 237 - skill and asset metadata never become system instructions or replace original asset bodies
+  ---
+  duration_ms: 0.6186
+  type: 'test'
+  ...
+# Subtest: budget includes tool definitions and reserved headroom with a conservative multilingual estimate
+ok 238 - budget includes tool definitions and reserved headroom with a conservative multilingual estimate
+  ---
+  duration_ms: 0.4972
+  type: 'test'
+  ...
+# Subtest: uploaded attachment identities remain in the same user message projection and resolve actual assets
+ok 239 - uploaded attachment identities remain in the same user message projection and resolve actual assets
+  ---
+  duration_ms: 0.6335
+  type: 'test'
+  ...
+# Subtest: trimmed Skill reads retain a precise pointer to their original method text
+ok 240 - trimmed Skill reads retain a precise pointer to their original method text
+  ---
+  duration_ms: 2.1192
+  type: 'test'
+  ...
+# Subtest: runtime request traces stay available without duplicating original conversation search or crop notices
+ok 241 - runtime request traces stay available without duplicating original conversation search or crop notices
+  ---
+  duration_ms: 0.6935
+  type: 'test'
+  ...
+# Subtest: only actual server approvals expose exact unsubmitted media parameters to the model
+ok 242 - only actual server approvals expose exact unsubmitted media parameters to the model
+  ---
+  duration_ms: 2.0247
+  type: 'test'
+  ...
+# Subtest: context loop: normal answer is one call with no understanding, planner or final composer
+ok 243 - context loop: normal answer is one call with no understanding, planner or final composer
+  ---
+  duration_ms: 7.744
+  type: 'test'
+  ...
+# Subtest: context loop: independent calls return paired results before dependent next call
+ok 244 - context loop: independent calls return paired results before dependent next call
+  ---
+  duration_ms: 4.0108
+  type: 'test'
+  ...
+# Subtest: context loop: malformed arguments and actionable tool errors return to same model
+ok 245 - context loop: malformed arguments and actionable tool errors return to same model
+  ---
+  duration_ms: 1.8517
+  type: 'test'
+  ...
+# Subtest: context loop: truncated message never becomes successful delivery
+ok 246 - context loop: truncated message never becomes successful delivery
+  ---
+  duration_ms: 2.1102
+  type: 'test'
+  ...
+# Subtest: context loop: total step and tool budgets cannot be bypassed by endless calls
+ok 247 - context loop: total step and tool budgets cannot be bypassed by endless calls
+  ---
+  duration_ms: 2.0104
+  type: 'test'
+  ...
+# Subtest: context loop: cancellation closes tool protocol without starting further side effects
+ok 248 - context loop: cancellation closes tool protocol without starting further side effects
+  ---
+  duration_ms: 1.4987
+  type: 'test'
+  ...
+# Subtest: context loop: durable request replay after restart does not call model or tools again
+ok 249 - context loop: durable request replay after restart does not call model or tools again
+  ---
+  duration_ms: 67.6011
+  type: 'test'
+  ...
+# Subtest: context loop: interrupted calls remain inspectable and are never automatically executed
+ok 250 - context loop: interrupted calls remain inspectable and are never automatically executed
+  ---
+  duration_ms: 2.1525
+  type: 'test'
+  ...
+# Subtest: context recovery: provider receipt survives crash between submission and tool-result recording
+ok 251 - context recovery: provider receipt survives crash between submission and tool-result recording
+  ---
+  duration_ms: 0.9285
+  type: 'test'
+  ...
+# Subtest: context model budget: visual observation shares the same total model budget and exact trace
+ok 252 - context model budget: visual observation shares the same total model budget and exact trace
+  ---
+  duration_ms: 81.3641
+  type: 'test'
+  ...
+# Subtest: context loop: actual provider adapter wire preserves native call/result feedback (mock HTTP)
+ok 253 - context loop: actual provider adapter wire preserves native call/result feedback (mock HTTP)
+  ---
+  duration_ms: 7.5363
+  type: 'test'
+  ...
+# Subtest: context entry: separate HTTP serves UI and uses only context sessions; CSRF and model opt-in enforced
+ok 254 - context entry: separate HTTP serves UI and uses only context sessions; CSRF and model opt-in enforced
+  ---
+  duration_ms: 372.3024
+  type: 'test'
+  ...
+# Subtest: context entry: actual HTTP roundtrip streams model response into durable new history
+ok 255 - context entry: actual HTTP roundtrip streams model response into durable new history
+  ---
+  duration_ms: 359.6706
+  type: 'test'
+  ...
+# Subtest: context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions
+ok 256 - context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions
+  ---
+  duration_ms: 1367.3692
+  type: 'test'
+  ...
+# Subtest: context architecture: new execution modules never import old business engine
+ok 257 - context architecture: new execution modules never import old business engine
+  ---
+  duration_ms: 50.2159
+  type: 'test'
+  ...
+# Subtest: repair: memory search excludes its own calls/results; exact identities remain readable
+ok 258 - repair: memory search excludes its own calls/results; exact identities remain readable
+  ---
+  duration_ms: 78.4249
+  type: 'test'
+  ...
+# Subtest: repair: surrounding memory cannot reintroduce nested model requests or retrieval echoes
+ok 259 - repair: surrounding memory cannot reintroduce nested model requests or retrieval echoes
+  ---
+  duration_ms: 30.4931
+  type: 'test'
+  ...
+# Subtest: repair: actual catalog projection removes fixed direction count without changing legacy catalog
+ok 260 - repair: actual catalog projection removes fixed direction count without changing legacy catalog
+  ---
+  duration_ms: 55.3075
+  type: 'test'
+  ...
+# Subtest: repair: long adapted methods page without losing original professional content
+ok 261 - repair: long adapted methods page without losing original professional content
+  ---
+  duration_ms: 40.8646
+  type: 'test'
+  ...
+# Subtest: repair: runtime capabilities come from tools, not video Skill names
+ok 262 - repair: runtime capabilities come from tools, not video Skill names
+  ---
+  duration_ms: 74.5353
+  type: 'test'
+  ...
+# Subtest: repair: model receives addressable original messages and saved version identity
+ok 263 - repair: model receives addressable original messages and saved version identity
+  ---
+  duration_ms: 38.388
+  type: 'test'
+  ...
+# Subtest: repair: save original chat exactly, then create a real child revision; repeat original archival reuses asset
+ok 264 - repair: save original chat exactly, then create a real child revision; repeat original archival reuses asset
+  ---
+  duration_ms: 30.0736
+  type: 'test'
+  ...
+# Subtest: repair: original archival rejects invented messages, changed originals, invalid parent and empty input
+ok 265 - repair: original archival rejects invented messages, changed originals, invalid parent and empty input
+  ---
+  duration_ms: 69.2658
+  type: 'test'
+  ...
+# Subtest: repair: archival and revision keep existing persistence rollback and call idempotency
+ok 266 - repair: archival and revision keep existing persistence rollback and call idempotency
+  ---
+  duration_ms: 21.8601
+  type: 'test'
+  ...
+# Subtest: repair: observation fills exact linked material and co-uploaded unknowns, excludes unrelated documents
+ok 267 - repair: observation fills exact linked material and co-uploaded unknowns, excludes unrelated documents
+  ---
+  duration_ms: 31.9564
+  type: 'test'
+  ...
+# Subtest: repair: image type error recovery retains automatic source/result comparison
+ok 268 - repair: image type error recovery retains automatic source/result comparison
+  ---
+  duration_ms: 25.6908
+  type: 'test'
+  ...
+# Subtest: repair: explicit dual images are deduplicated and impossible source cannot pass visual checking
+ok 269 - repair: explicit dual images are deduplicated and impossible source cannot pass visual checking
+  ---
+  duration_ms: 33.9506
+  type: 'test'
+  ...
+# Subtest: repair: model-supplied verified annotation cannot replace stored unknown or certify output
+ok 270 - repair: model-supplied verified annotation cannot replace stored unknown or certify output
+  ---
+  duration_ms: 27.0657
+  type: 'test'
+  ...
+# Subtest: repair: observer actual wire contains both images, identity pairs, original facts and uncertainty instructions
+ok 271 - repair: observer actual wire contains both images, identity pairs, original facts and uncertainty instructions
+  ---
+  duration_ms: 1.0302
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: model selects memory, archives original, saves revision and judges the returned version
+ok 272 - repair scripted integration: model selects memory, archives original, saves revision and judges the returned version
+  ---
+  duration_ms: 23.5589
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: free creation can propose independent pictures without photos; no approval means no submission
+ok 273 - repair scripted integration: free creation can propose independent pictures without photos; no approval means no submission
+  ---
+  duration_ms: 36.5571
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: ordinary answer still ends immediately without a planner, save or second audit
+ok 274 - repair scripted integration: ordinary answer still ends immediately without a planner, save or second audit
+  ---
+  duration_ms: 19.5235
+  type: 'test'
+  ...
+# Subtest: context tools register real capabilities only; simulation is explicit
+ok 275 - context tools register real capabilities only; simulation is explicit
+  ---
+  duration_ms: 117.3676
+  type: 'test'
+  ...
+# Subtest: media always prepares exact proposal before any provider call
+ok 276 - media always prepares exact proposal before any provider call
+  ---
+  duration_ms: 23.329
+  type: 'test'
+  ...
+# Subtest: simulation also needs approval and never fabricates a real URL or observation
+ok 277 - simulation also needs approval and never fabricates a real URL or observation
+  ---
+  duration_ms: 25.2758
+  type: 'test'
+  ...
+# Subtest: changed parameters, changed tool and mode cannot reuse approval
+ok 278 - changed parameters, changed tool and mode cannot reuse approval
+  ---
+  duration_ms: 44.59
+  type: 'test'
+  ...
+# Subtest: owner and session isolation prevents approval, source, and receipt reuse
+ok 279 - owner and session isolation prevents approval, source, and receipt reuse
+  ---
+  duration_ms: 23.4842
+  type: 'test'
+  ...
+# Subtest: chat assertions cannot create authorization and unknown fields are rejected
+ok 280 - chat assertions cannot create authorization and unknown fields are rejected
+  ---
+  duration_ms: 20.2241
+  type: 'test'
+  ...
+# Subtest: same proposal is submitted once across new callIds, approvalIds and concurrent retries
+ok 281 - same proposal is submitted once across new callIds, approvalIds and concurrent retries
+  ---
+  duration_ms: 26.5144
+  type: 'test'
+  ...
+# Subtest: identical prompt with new call identity can legitimately create another image
+ok 282 - identical prompt with new call identity can legitimately create another image
+  ---
+  duration_ms: 59.0332
+  type: 'test'
+  ...
+# Subtest: all proposals in a tool batch can be approved as one concrete group
+ok 283 - all proposals in a tool batch can be approved as one concrete group
+  ---
+  duration_ms: 25.8347
+  type: 'test'
+  ...
+# Subtest: durable inflight receipt precedes provider I/O; unknown response cannot resubmit
+ok 284 - durable inflight receipt precedes provider I/O; unknown response cannot resubmit
+  ---
+  duration_ms: 32.0979
+  type: 'test'
+  ...
+# Subtest: restart with inflight receipt does not resubmit and surfaces unknown
+ok 285 - restart with inflight receipt does not resubmit and surfaces unknown
+  ---
+  duration_ms: 21.4228
+  type: 'test'
+  ...
+# Subtest: known provider rejection reports unsubmitted but does not loop same call
+ok 286 - known provider rejection reports unsubmitted but does not loop same call
+  ---
+  duration_ms: 21.9707
+  type: 'test'
+  ...
+# Subtest: media budget and cancellation are checked immediately before submission
+ok 287 - media budget and cancellation are checked immediately before submission
+  ---
+  duration_ms: 24.2889
+  type: 'test'
+  ...
+# Subtest: cancellation during save prevents provider I/O
+ok 288 - cancellation during save prevents provider I/O
+  ---
+  duration_ms: 22.0369
+  type: 'test'
+  ...
+# Subtest: save failure before submission prevents I/O and after I/O reports uncertainty
+ok 289 - save failure before submission prevents I/O and after I/O reports uncertainty
+  ---
+  duration_ms: 18.5467
+  type: 'test'
+  ...
+# Subtest: video receipt polling queries exact existing receipt and stores final file once
+ok 290 - video receipt polling queries exact existing receipt and stores final file once
+  ---
+  duration_ms: 19.8349
+  type: 'test'
+  ...
+# Subtest: query unavailable or failed is not a successful media delivery
+ok 291 - query unavailable or failed is not a successful media delivery
+  ---
+  duration_ms: 18.7885
+  type: 'test'
+  ...
+# Subtest: edit preserves exact image parent and source lineage; image generation has no fake parent
+ok 292 - edit preserves exact image parent and source lineage; image generation has no fake parent
+  ---
+  duration_ms: 27.8504
+  type: 'test'
+  ...
+# Subtest: wrong object type and foreign source IDs are blocked before proposal
+ok 293 - wrong object type and foreign source IDs are blocked before proposal
+  ---
+  duration_ms: 20.7744
+  type: 'test'
+  ...
+# Subtest: observation receives real images, original materials and explicit unknown identity
+ok 294 - observation receives real images, original materials and explicit unknown identity
+  ---
+  duration_ms: 32.5892
+  type: 'test'
+  ...
+# Subtest: observation source original overrides model annotations without inventing verification
+ok 295 - observation source original overrides model annotations without inventing verification
+  ---
+  duration_ms: 24.7882
+  type: 'test'
+  ...
+# Subtest: image observer sends real image inputs and no tools to its adapter
+ok 296 - image observer sends real image inputs and no tools to its adapter
+  ---
+  duration_ms: 0.7388
+  type: 'test'
+  ...
+# Subtest: observation uses runtime model budget and trace wrapper when supplied
+ok 297 - observation uses runtime model budget and trace wrapper when supplied
+  ---
+  duration_ms: 21.2386
+  type: 'test'
+  ...
+# Subtest: document saves are immutable, versioned, source bound and retry safe
+ok 298 - document saves are immutable, versioned, source bound and retry safe
+  ---
+  duration_ms: 27.6744
+  type: 'test'
+  ...
+# Subtest: measurement uses exact supplied body and read_skill does not leak old task contract
+ok 299 - measurement uses exact supplied body and read_skill does not leak old task contract
+  ---
+  duration_ms: 115.1463
+  type: 'test'
+  ...
+# Subtest: history search and pagination recover actual original text and runtime trace
+ok 300 - history search and pagination recover actual original text and runtime trace
+  ---
+  duration_ms: 52.2826
+  type: 'test'
+  ...
+# Subtest: unexpected extra provider images preserve receipt evidence without false one-image success
+ok 301 - unexpected extra provider images preserve receipt evidence without false one-image success
+  ---
+  duration_ms: 19.9292
+  type: 'test'
+  ...
+# Subtest: uncertain submission with a provider receipt can be queried without resubmission
+ok 302 - uncertain submission with a provider receipt can be queried without resubmission
+  ---
+  duration_ms: 23.2871
+  type: 'test'
+  ...
+# Subtest: recorded malformed JSON is not fed back as a draft during schema recovery
+ok 303 - recorded malformed JSON is not fed back as a draft during schema recovery
+  ---
+  duration_ms: 66.7107
+  type: 'test'
+  ...
+# Subtest: repair carries the rejected output so unaffected fields can be preserved
+ok 304 - repair carries the rejected output so unaffected fields can be preserved
+  ---
+  duration_ms: 2.3771
+  type: 'test'
+  ...
+# Subtest: routing cannot silently turn modification into creation
+ok 305 - routing cannot silently turn modification into creation
+  ---
+  duration_ms: 1.9535
+  type: 'test'
+  ...
+# Subtest: text verifier receives original query and assumptions with source provenance
+ok 306 - text verifier receives original query and assumptions with source provenance
+  ---
+  duration_ms: 6.9988
+  type: 'test'
+  ...
+# Subtest: word count keeps text before an internal colon
+ok 307 - word count keeps text before an internal colon
+  ---
+  duration_ms: 0.9521
+  type: 'test'
+  ...
+# Subtest: intake projection removes execution prompts but preserves facts, IDs and confirmation
+ok 308 - intake projection removes execution prompts but preserves facts, IDs and confirmation
+  ---
+  duration_ms: 0.8594
+  type: 'test'
+  ...
+# Subtest: media method context uses explicit workflows and excludes legacy fixture assumptions
+ok 309 - media method context uses explicit workflows and excludes legacy fixture assumptions
+  ---
+  duration_ms: 139.2194
+  type: 'test'
+  ...
+# Subtest: text item context preserves exact constraints and excludes recursive execution metadata
+ok 310 - text item context preserves exact constraints and excludes recursive execution metadata
+  ---
+  duration_ms: 1.6947
+  type: 'test'
+  ...
+# Subtest: compiler owns fixed media parameters while missing creative content still fails
+ok 311 - compiler owns fixed media parameters while missing creative content still fails
+  ---
+  duration_ms: 11.215
+  type: 'test'
+  ...
+# Subtest: four recorded DeepSeek omissions fail raw schema and survive compiler restoration without changing prose
+ok 312 - four recorded DeepSeek omissions fail raw schema and survive compiler restoration without changing prose
+  ---
+  duration_ms: 82.7217
+  type: 'test'
+  ...
+# Subtest: upstream script sees the same video defaults as compiler, excluding unrelated media
+ok 313 - upstream script sees the same video defaults as compiler, excluding unrelated media
+  ---
+  duration_ms: 0.7967
+  type: 'test'
+  ...
+# Subtest: media references cannot create an unfulfillable text-observation obligation
+ok 314 - media references cannot create an unfulfillable text-observation obligation
+  ---
+  duration_ms: 225.9625
+  type: 'test'
+  ...
+# Subtest: 1 image ordinal never becomes direction selection before planning
+ok 315 - 1 image ordinal never becomes direction selection before planning
+  ---
+  duration_ms: 350.6946
+  type: 'test'
+  ...
+# Subtest: 1 wrong typed image ordinal/version is rejected, not rebound by focus
+ok 316 - 1 wrong typed image ordinal/version is rejected, not rebound by focus
+  ---
+  duration_ms: 1018.0055
+  type: 'test'
+  ...
+# Subtest: 2 present preserves image output, uses three references and creates zero artifacts
+ok 317 - 2 present preserves image output, uses three references and creates zero artifacts
+  ---
+  duration_ms: 462.9544
+  type: 'test'
+  ...
+# Subtest: 2 retain is read only and present cannot authorize create
+ok 318 - 2 retain is read only and present cannot authorize create
+  ---
+  duration_ms: 630.1037
+  type: 'test'
+  ...
+# Subtest: catalog distinguishes missing, superseded, nonproduction and usable across consumers
+ok 319 - catalog distinguishes missing, superseded, nonproduction and usable across consumers
+  ---
+  duration_ms: 1.2509
+  type: 'test'
+  ...
+# Subtest: catalog isolates explicit foreign sessions and unknown URLs
+ok 320 - catalog isolates explicit foreign sessions and unknown URLs
+  ---
+  duration_ms: 0.4134
+  type: 'test'
+  ...
+# Subtest: A2 invalid shot selection on an image cannot reach planner
+ok 321 - A2 invalid shot selection on an image cannot reach planner
+  ---
+  duration_ms: 134.1491
+  type: 'test'
+  ...
+# Subtest: A4 second direction is bound and input contains only it, embedded=false
+ok 322 - A4 second direction is bound and input contains only it, embedded=false
+  ---
+  duration_ms: 218.3976
+  type: 'test'
+  ...
+# Subtest: A4 second direction is bound and input contains only it, embedded=true
+ok 323 - A4 second direction is bound and input contains only it, embedded=true
+  ---
+  duration_ms: 183.7216
+  type: 'test'
+  ...
+# Subtest: 3 revise delta binds saved artifact; planner reuses video obligations and zero direction skills
+ok 324 - 3 revise delta binds saved artifact; planner reuses video obligations and zero direction skills
+  ---
+  duration_ms: 165.376
+  type: 'test'
+  ...
+# Subtest: 3 ratio delta goes through real compiler with no model call, persists 9:16 and invalidates old approval
+ok 325 - 3 ratio delta goes through real compiler with no model call, persists 9:16 and invalidates old approval
+  ---
+  duration_ms: 175.2034
+  type: 'test'
+  ...
+# Subtest: 3 stale version/from and mixed creative delta cannot pass
+ok 326 - 3 stale version/from and mixed creative delta cannot pass
+  ---
+  duration_ms: 662.0858
+  type: 'test'
+  ...
+# Subtest: 3 model-facing schema rejects text modify/empty delta for revise_plan
+ok 327 - 3 model-facing schema rejects text modify/empty delta for revise_plan
+  ---
+  duration_ms: 82.9769
+  type: 'test'
+  ...
+# Subtest: 4 three-shot requirement survives misleading count=1; completion requires 3/3 verified units
+ok 328 - 4 three-shot requirement survives misleading count=1; completion requires 3/3 verified units
+  ---
+  duration_ms: 3.467
+  type: 'test'
+  ...
+# Subtest: 4 duplicate first-shot artifacts and unbound coverage never complete
+ok 329 - 4 duplicate first-shot artifacts and unbound coverage never complete
+  ---
+  duration_ms: 0.6517
+  type: 'test'
+  ...
+# Subtest: 5 selected skill has actual traced execution and verified output linkage
+ok 330 - 5 selected skill has actual traced execution and verified output linkage
+  ---
+  duration_ms: 161.9282
+  type: 'test'
+  ...
+# Subtest: 5 selected/loaded skill or fabricated validated flag cannot complete an artifact
+ok 331 - 5 selected/loaded skill or fabricated validated flag cannot complete an artifact
+  ---
+  duration_ms: 1.1976
+  type: 'test'
+  ...
+# Subtest: URL aliases must check the same frozen version/hash as artifact IDs
+ok 332 - URL aliases must check the same frozen version/hash as artifact IDs
+  ---
+  duration_ms: 0.4051
+  type: 'test'
+  ...
+# Subtest: mixed present and create compiles distinct effects without a presentation artifact
+ok 333 - mixed present and create compiles distinct effects without a presentation artifact
+  ---
+  duration_ms: 125.8609
+  type: 'test'
+  ...
+# Subtest: failed required Skill preserves loaded content and failed call evidence
+ok 334 - failed required Skill preserves loaded content and failed call evidence
+  ---
+  duration_ms: 15.6881
+  type: 'test'
+  ...
+# Subtest: stage1 archived discontinuous quotation repairs only evidence and preserves selected dependency
+ok 335 - stage1 archived discontinuous quotation repairs only evidence and preserves selected dependency
+  ---
+  duration_ms: 636.1857
+  type: 'test'
+  ...
+# Subtest: stage1 evidence candidates are exact Unicode spans; separate excerpts remain separate
+ok 336 - stage1 evidence candidates are exact Unicode spans; separate excerpts remain separate
+  ---
+  duration_ms: 1.7677
+  type: 'test'
+  ...
+# Subtest: stage1 repeated unsupported evidence patch stops without changing the correct selection
+ok 337 - stage1 repeated unsupported evidence patch stops without changing the correct selection
+  ---
+  duration_ms: 265.1953
+  type: 'test'
+  ...
+# Subtest: stage1 archived missing original is valid but not executable and produces no artifact
+ok 338 - stage1 archived missing original is valid but not executable and produces no artifact
+  ---
+  duration_ms: 324.356
+  type: 'test'
+  ...
+# Subtest: stage1 deferred readiness does not hide invalid topology, methods or specifications
+ok 339 - stage1 deferred readiness does not hide invalid topology, methods or specifications
+  ---
+  duration_ms: 0.9981
+  type: 'test'
+  ...
+# Subtest: stage1 media obligations cannot silently become plain prompt review
+ok 340 - stage1 media obligations cannot silently become plain prompt review
+  ---
+  duration_ms: 26.2613
+  type: 'test'
+  ...
+# Subtest: stage1 image executable plan is saved and waits for exact-plan approval with zero submissions
+ok 341 - stage1 image executable plan is saved and waits for exact-plan approval with zero submissions
+  ---
+  duration_ms: 374.8276
+  type: 'test'
+  ...
+# Subtest: stage1 video executable plan is saved and waits for exact-plan approval with zero submissions
+ok 342 - stage1 video executable plan is saved and waits for exact-plan approval with zero submissions
+  ---
+  duration_ms: 503.2999
+  type: 'test'
+  ...
+# Subtest: stage1 prompt-only completes without introducing media obligations
+ok 343 - stage1 prompt-only completes without introducing media obligations
+  ---
+  duration_ms: 265.8056
+  type: 'test'
+  ...
+# Subtest: stage2 body count excludes title, punctuation, whitespace and Markdown with exact inclusive boundaries
+ok 344 - stage2 body count excludes title, punctuation, whitespace and Markdown with exact inclusive boundaries
+  ---
+  duration_ms: 3.7186
+  type: 'test'
+  ...
+# Subtest: stage2 actual rendered content must match measured body; missing evidence is uncertain, not false success
+ok 345 - stage2 actual rendered content must match measured body; missing evidence is uncertain, not false success
+  ---
+  duration_ms: 0.6644
+  type: 'test'
+  ...
+# Subtest: stage2 body-only rendering cannot conceal undelivered structured shots behind a passing numeric count
+ok 346 - stage2 body-only rendering cannot conceal undelivered structured shots behind a passing numeric count
+  ---
+  duration_ms: 0.4895
+  type: 'test'
+  ...
+# Subtest: stage2 historical short bodies fail under the new typed requirement; archive remains unchanged
+ok 347 - stage2 historical short bodies fail under the new typed requirement; archive remains unchanged
+  ---
+  duration_ms: 14.7713
+  type: 'test'
+  ...
+# Subtest: stage2 literal constraint normalization and wire schema use one length contract
+ok 348 - stage2 literal constraint normalization and wire schema use one length contract
+  ---
+  duration_ms: 495.2676
+  type: 'test'
+  ...
+# Subtest: stage2 known shot mismatch fails; the two former summary-only fixture outputs remain unverified
+ok 349 - stage2 known shot mismatch fails; the two former summary-only fixture outputs remain unverified
+  ---
+  duration_ms: 0.5224
+  type: 'test'
+  ...
+# Subtest: stage2 delivery-only retries the failed candidate, records exact accepted body hash and preserves its sibling
+ok 350 - stage2 delivery-only retries the failed candidate, records exact accepted body hash and preserves its sibling
+  ---
+  duration_ms: 383.1535
+  type: 'test'
+  ...
+# Subtest: stage2 repeated underlength output is retained for audit and never completes
+ok 351 - stage2 repeated underlength output is retained for audit and never completes
+  ---
+  duration_ms: 320.9315
+  type: 'test'
+  ...
+# Subtest: stage2 compiled media cannot complete on mismatched or absent metadata; no vision or regeneration is faked
+ok 352 - stage2 compiled media cannot complete on mismatched or absent metadata; no vision or regeneration is faked
+  ---
+  duration_ms: 2.2175
+  type: 'test'
+  ...
+# Subtest: stage3 fact identities survive projection, inheritance, deduplication and source version changes
+ok 353 - stage3 fact identities survive projection, inheritance, deduplication and source version changes
+  ---
+  duration_ms: 5.0159
+  type: 'test'
+  ...
+# Subtest: stage3 archived 05-ordered-formal actual downstream assertions reach the scoped checker and cannot pass a rejection
+ok 354 - stage3 archived 05-ordered-formal actual downstream assertions reach the scoped checker and cannot pass a rejection
+  ---
+  duration_ms: 20.8725
+  type: 'test'
+  ...
+# Subtest: stage3 archived 06-ordered-casual actual downstream assertions reach the scoped checker and cannot pass a rejection
+ok 355 - stage3 archived 06-ordered-casual actual downstream assertions reach the scoped checker and cannot pass a rejection
+  ---
+  duration_ms: 16.6583
+  type: 'test'
+  ...
+# Subtest: stage3 unknown may be omitted or explicitly pending, but a disclaimer cannot cancel a promise (mock semantic judge)
+ok 356 - stage3 unknown may be omitted or explicitly pending, but a disclaimer cannot cancel a promise (mock semantic judge)
+  ---
+  duration_ms: 1.9967
+  type: 'test'
+  ...
+# Subtest: stage3 no evidence check is reported as uncertain and never as content confirmed wrong
+ok 357 - stage3 no evidence check is reported as uncertain and never as content confirmed wrong
+  ---
+  duration_ms: 0.8191
+  type: 'test'
+  ...
+# Subtest: stage3 scoped factual failure repairs only the copy; Brief, identity and bound version survive
+ok 358 - stage3 scoped factual failure repairs only the copy; Brief, identity and bound version survive
+  ---
+  duration_ms: 551.4646
+  type: 'test'
+  ...
+# Subtest: stage3 ordinary text with no factual material does not introduce a review call
+ok 359 - stage3 ordinary text with no factual material does not introduce a review call
+  ---
+  duration_ms: 290.787
+  type: 'test'
+  ...
+# Subtest: P0 semantic correction can replace an unaccepted EDIT_IMAGE with a text revision
+ok 360 - P0 semantic correction can replace an unaccepted EDIT_IMAGE with a text revision
+  ---
+  duration_ms: 377.0161
+  type: 'test'
+  ...
+# Subtest: P0 invalid source selection recovers using a real typed candidate, never a filename alias
+ok 361 - P0 invalid source selection recovers using a real typed candidate, never a filename alias
+  ---
+  duration_ms: 375.1009
+  type: 'test'
+  ...
+# Subtest: P0 unchanged unsupported semantics stop after feedback and execute nothing
+ok 362 - P0 unchanged unsupported semantics stop after feedback and execute nothing
+  ---
+  duration_ms: 132.9984
+  type: 'test'
+  ...
+# Subtest: P0 a structurally invalid version can be field-repaired without locking the bad value
+ok 363 - P0 a structurally invalid version can be field-repaired without locking the bad value
+  ---
+  duration_ms: 377.9066
+  type: 'test'
+  ...
+# Subtest: P0 typed inline inputs keep content, filename, version, hash and source message; same ingestion is idempotent
+ok 364 - P0 typed inline inputs keep content, filename, version, hash and source message; same ingestion is idempotent
+  ---
+  duration_ms: 4.1425
+  type: 'test'
+  ...
+# Subtest: P0 exact evidence spans preserve multiple excerpts and reject hallucinated offsets or ellipses
+ok 365 - P0 exact evidence spans preserve multiple excerpts and reject hallucinated offsets or ellipses
+  ---
+  duration_ms: 0.9516
+  type: 'test'
+  ...
+# Subtest: SKILL_001: inline prompt executes the actual registered Skill and saves a reusable text artifact
+ok 366 - SKILL_001: inline prompt executes the actual registered Skill and saves a reusable text artifact
+  ---
+  duration_ms: 329.7015
+  type: 'test'
+  ...
+# Subtest: USER_STYLE_01: one direction remains one; speaker identity never sets audience automatically
+ok 367 - USER_STYLE_01: one direction remains one; speaker identity never sets audience automatically
+  ---
+  duration_ms: 309.8674
+  type: 'test'
+  ...
+# Subtest: USER_STYLE_03: textual proposal completes without inventing future media or a submission
+ok 368 - USER_STYLE_03: textual proposal completes without inventing future media or a submission
+  ---
+  duration_ms: 289.3099
+  type: 'test'
+  ...
+# Subtest: USER_STYLE_06: unresolved revision asks for the missing target and change without selecting image or approval
+ok 369 - USER_STYLE_06: unresolved revision asks for the missing target and change without selecting image or approval
+  ---
+  duration_ms: 190.1645
+  type: 'test'
+  ...
+# Subtest: USER_STYLE_07: local missing selection only gates the script and directions remain saved and referencable
+ok 370 - USER_STYLE_07: local missing selection only gates the script and directions remain saved and referencable
+  ---
+  duration_ms: 223.9745
+  type: 'test'
+  ...
+# Subtest: P1 selecting a saved direction binds artifact version plus unit ID; stale versions never silently reselect
+ok 371 - P1 selecting a saved direction binds artifact version plus unit ID; stale versions never silently reselect
+  ---
+  duration_ms: 1.2816
+  type: 'test'
+  ...
+# Subtest: MT_TASK_001: choosing direction after the first stage consumes its saved version without regenerating directions
+ok 372 - MT_TASK_001: choosing direction after the first stage consumes its saved version without regenerating directions
+  ---
+  duration_ms: 633.6332
+  type: 'test'
+  ...
+# Subtest: MT_SWITCH_001: a waiting media task resumes with its exact saved plan and original evidence, without submission or repeat
+ok 373 - MT_SWITCH_001: a waiting media task resumes with its exact saved plan and original evidence, without submission or repeat
+  ---
+  duration_ms: 401.5149
+  type: 'test'
+  ...
+# Subtest: P1 final composition cannot hide rejected intake with newly invented creative content
+ok 374 - P1 final composition cannot hide rejected intake with newly invented creative content
+  ---
+  duration_ms: 56.5023
+  type: 'test'
+  ...
+# Subtest: P1 final rendering refuses unsaved event artifacts even if the model repeats their IDs
+ok 375 - P1 final rendering refuses unsaved event artifacts even if the model repeats their IDs
+  ---
+  duration_ms: 0.2147
+  type: 'test'
+  ...
+# Subtest: captured image analysis requires observation despite text output and evidence=none
+ok 376 - captured image analysis requires observation despite text output and evidence=none
+  ---
+  duration_ms: 307.5767
+  type: 'test'
+  ...
+# Subtest: captured message query uses its exact message identity without a redundant position
+ok 377 - captured message query uses its exact message identity without a redundant position
+  ---
+  duration_ms: 240.1205
+  type: 'test'
+  ...
+# Subtest: captured script preference without kind is accepted and keeps its skill obligation
+ok 378 - captured script preference without kind is accepted and keeps its skill obligation
+  ---
+  duration_ms: 283.2992
+  type: 'test'
+  ...
+# Subtest: explicit optional preference cannot block execution; essential missing input still does
+ok 379 - explicit optional preference cannot block execution; essential missing input still does
+  ---
+  duration_ms: 478.4896
+  type: 'test'
+  ...
+# Subtest: message resolution does not guess missing selectors, mismatch roles or cross sessions
+ok 380 - message resolution does not guess missing selectors, mismatch roles or cross sessions
+  ---
+  duration_ms: 1.1219
+  type: 'test'
+  ...
+# Subtest: readonly analysis executes typed image input, records receipt and creates no task/artifact
+ok 381 - readonly analysis executes typed image input, records receipt and creates no task/artifact
+  ---
+  duration_ms: 187.2617
+  type: 'test'
+  ...
+# Subtest: observation provider failure yields a readable answer and failed receipt without resubmission
+ok 382 - observation provider failure yields a readable answer and failed receipt without resubmission
+  ---
+  duration_ms: 259.3862
+  type: 'test'
+  ...
+# Subtest: presentation and history do not acquire visual observation just because images exist
+ok 383 - presentation and history do not acquire visual observation just because images exist
+  ---
+  duration_ms: 486.1051
+  type: 'test'
+  ...
+# Subtest: failure composer gets exact failed contract and optional gaps, without appending technical error
+ok 384 - failure composer gets exact failed contract and optional gaps, without appending technical error
+  ---
+  duration_ms: 0.8066
+  type: 'test'
+  ...
+# Subtest: delivery acceptance is exposed separately from quality and missing content still fails
+ok 385 - delivery acceptance is exposed separately from quality and missing content still fails
+  ---
+  duration_ms: 2.2251
+  type: 'test'
+  ...
+# Subtest: final answer rendering stays a normal bubble for failed, blocked and completed histories
+ok 386 - final answer rendering stays a normal bubble for failed, blocked and completed histories
+  ---
+  duration_ms: 0.7806
+  type: 'test'
+  ...
+# Subtest: redacts nested credentials, string JSON, headers and signed URL without losing business authorization
+ok 387 - redacts nested credentials, string JSON, headers and signed URL without losing business authorization
+  ---
+  duration_ms: 5.0879
+  type: 'test'
+  ...
+# Subtest: Case 1: image selector origin shown in raw draft before normalization
+ok 388 - Case 1: image selector origin shown in raw draft before normalization
+  ---
+  duration_ms: 6.1929
+  type: 'test'
+  ...
+# Subtest: Case 2: Skill selection without actual execution is missing evidence
+ok 389 - Case 2: Skill selection without actual execution is missing evidence
+  ---
+  duration_ms: 1.3232
+  type: 'test'
+  ...
+# Subtest: Case 3: completed run with 1/3 coverage stays visibly incomplete
+ok 390 - Case 3: completed run with 1/3 coverage stays visibly incomplete
+  ---
+  duration_ms: 0.9596
+  type: 'test'
+  ...
+# Subtest: Case 4: present retains existing image references and zero new artifacts
+ok 391 - Case 4: present retains existing image references and zero new artifacts
+  ---
+  duration_ms: 0.9933
+  type: 'test'
+  ...
+# Subtest: Case 5: previous/current state comparison uses recorded snapshots, not latest task
+ok 392 - Case 5: previous/current state comparison uses recorded snapshots, not latest task
+  ---
+  duration_ms: 2.0334
+  type: 'test'
+  ...
+# Subtest: diff provenance unknown must not imply unauthorized; explicit origins preserve categories
+ok 393 - diff provenance unknown must not imply unauthorized; explicit origins preserve categories
+  ---
+  duration_ms: 0.3209
+  type: 'test'
+  ...
+# Subtest: actual model input stays exact; no full history reconstruction or fabricated semantic loss
+ok 394 - actual model input stays exact; no full history reconstruction or fabricated semantic loss
+  ---
+  duration_ms: 1.1914
+  type: 'test'
+  ...
+# Subtest: no task snapshot and no final event do not get replaced with latest ledger/history
+ok 395 - no task snapshot and no final event do not get replaced with latest ledger/history
+  ---
+  duration_ms: 0.6007
+  type: 'test'
+  ...
+# Subtest: tool success does not fabricate four validator PASS results
+ok 396 - tool success does not fabricate four validator PASS results
+  ---
+  duration_ms: 1.1764
+  type: 'test'
+  ...
+# Subtest: run association excludes other turns model/tool calls and unrelated artifacts
+ok 397 - run association excludes other turns model/tool calls and unrelated artifacts
+  ---
+  duration_ms: 0.5612
+  type: 'test'
+  ...
+# Subtest: lineage retains typed references and execution edges without conflating parent with revision
+ok 398 - lineage retains typed references and execution edges without conflating parent with revision
+  ---
+  duration_ms: 0.9064
+  type: 'test'
+  ...
+# Subtest: Stage A acceptance sentinel is evaluation cutoff, not business failure
+ok 399 - Stage A acceptance sentinel is evaluation cutoff, not business failure
+  ---
+  duration_ms: 0.5677
+  type: 'test'
+  ...
+# Subtest: pure aggregator never mutates stored business state
+ok 400 - pure aggregator never mutates stored business state
+  ---
+  duration_ms: 0.3973
+  type: 'test'
+  ...
+# Subtest: required coverage source units without verdict are unknown, never auto passed from count
+ok 401 - required coverage source units without verdict are unknown, never auto passed from count
+  ---
+  duration_ms: 0.6433
+  type: 'test'
+  ...
+# Subtest: execution from previous run does not prove this run Skill executed
+ok 402 - execution from previous run does not prove this run Skill executed
+  ---
+  duration_ms: 0.6296
+  type: 'test'
+  ...
+# Subtest: Skill completion needs both actual call and run-time artifact verification evidence
+ok 403 - Skill completion needs both actual call and run-time artifact verification evidence
+  ---
+  duration_ms: 9.3896
+  type: 'test'
+  ...
+# Subtest: cutoff with no error string remains explicit in dashboard diagnostics
+ok 404 - cutoff with no error string remains explicit in dashboard diagnostics
+  ---
+  duration_ms: 0.5165
+  type: 'test'
+  ...
+# Subtest: required Skill present only in recorded execution plan remains visible
+ok 405 - required Skill present only in recorded execution plan remains visible
+  ---
+  duration_ms: 0.8141
+  type: 'test'
+  ...
+# Subtest: artifact verification uses run snapshot over later ledger state
+ok 406 - artifact verification uses run snapshot over later ledger state
+  ---
+  duration_ms: 0.6759
+  type: 'test'
+  ...
+# Subtest: read receipt references appear in lineage without new artifacts
+ok 407 - read receipt references appear in lineage without new artifacts
+  ---
+  duration_ms: 0.8485
+  type: 'test'
+  ...
+# Subtest: real presentation contract targets and version bindings feed artifact graph
+ok 408 - real presentation contract targets and version bindings feed artifact graph
+  ---
+  duration_ms: 0.738
+  type: 'test'
+  ...
+# Subtest: snapshot arrays preserve null vs missing and safely compare changed object types
+ok 409 - snapshot arrays preserve null vs missing and safely compare changed object types
+  ---
+  duration_ms: 0.1933
+  type: 'test'
+  ...
+# Subtest: API supports pagination, isolation, strict redaction, read-only and localhost access
+ok 410 - API supports pagination, isolation, strict redaction, read-only and localhost access
+  ---
+  duration_ms: 456.3812
+  type: 'test'
+  ...
+# Subtest: actual history text is extracted, rather than hidden as unavailable context
+ok 411 - actual history text is extracted, rather than hidden as unavailable context
+  ---
+  duration_ms: 2.0339
+  type: 'test'
+  ...
+# Subtest: repair payload preserves nested original conversation and ordered feedback
+ok 412 - repair payload preserves nested original conversation and ordered feedback
+  ---
+  duration_ms: 0.3386
+  type: 'test'
+  ...
+# Subtest: history includes earlier recorded answers only and never later replies
+ok 413 - history includes earlier recorded answers only and never later replies
+  ---
+  duration_ms: 1.4962
+  type: 'test'
+  ...
+# Subtest: absent final message is not replaced with latest session messages
+ok 414 - absent final message is not replaced with latest session messages
+  ---
+  duration_ms: 0.2384
+  type: 'test'
+  ...
+# Subtest: missing global State is unknown, not reconstructed from current ledger
+ok 415 - missing global State is unknown, not reconstructed from current ledger
+  ---
+  duration_ms: 0.2612
+  type: 'test'
+  ...
+# Subtest: global before/after comparisons use only explicitly recorded snapshots
+ok 416 - global before/after comparisons use only explicitly recorded snapshots
+  ---
+  duration_ms: 0.7883
+  type: 'test'
+  ...
+# Subtest: message query rejection still exposes history carried in all attempts
+ok 417 - message query rejection still exposes history carried in all attempts
+  ---
+  duration_ms: 7.1646
+  type: 'test'
+  ...
+# Subtest: different subintents keep their own model and tool calls
+ok 418 - different subintents keep their own model and tool calls
+  ---
+  duration_ms: 1.323
+  type: 'test'
+  ...
+# Subtest: unbound calls stay shared rather than being guessed from active task
+ok 419 - unbound calls stay shared rather than being guessed from active task
+  ---
+  duration_ms: 0.3845
+  type: 'test'
+  ...
+# Subtest: saved item input can bind a model call when explicit node metadata is absent
+ok 420 - saved item input can bind a model call when explicit node metadata is absent
+  ---
+  duration_ms: 0.4425
+  type: 'test'
+  ...
+# Subtest: live config exposes model/source and debug token, not backend token
+ok 421 - live config exposes model/source and debug token, not backend token
+  ---
+  duration_ms: 124.0924
+  type: 'test'
+  ...
+# Subtest: streamed start and saved running model call visible before final completion
+ok 422 - streamed start and saved running model call visible before final completion
+  ---
+  duration_ms: 218.4319
+  type: 'test'
+  ...
+# Subtest: follow-up preserves session ID while assigning a distinct request/run ID
+ok 423 - follow-up preserves session ID while assigning a distinct request/run ID
+  ---
+  duration_ms: 372.871
+  type: 'test'
+  ...
+# Subtest: cancel delegates to the existing backend and waits for final state
+ok 424 - cancel delegates to the existing backend and waits for final state
+  ---
+  duration_ms: 178.9516
+  type: 'test'
+  ...
+# Subtest: mismatched data directory blocks execution before any backend POST
+ok 425 - mismatched data directory blocks execution before any backend POST
+  ---
+  duration_ms: 64.0379
+  type: 'test'
+  ...
+# Subtest: CSRF and cross-site submissions are rejected
+ok 426 - CSRF and cross-site submissions are rejected
+  ---
+  duration_ms: 62.8531
+  type: 'test'
+  ...
+# Subtest: bridge rejects arbitrary payload fields and invalid request IDs
+ok 427 - bridge rejects arbitrary payload fields and invalid request IDs
+  ---
+  duration_ms: 105.8078
+  type: 'test'
+  ...
+# Subtest: only fixed localhost backend URLs are accepted
+ok 428 - only fixed localhost backend URLs are accepted
+  ---
+  duration_ms: 5.2525
+  type: 'test'
+  ...
+# Subtest: concurrent session conflict is forwarded without automatic retry
+ok 429 - concurrent session conflict is forwarded without automatic retry
+  ---
+  duration_ms: 164.7279
+  type: 'test'
+  ...
+# Subtest: JSON fallback handles nested trailing commas without modifying string content
+ok 430 - JSON fallback handles nested trailing commas without modifying string content
+  ---
+  duration_ms: 18.5116
+  type: 'test'
+  ...
+# Subtest: JSON fallback never invents truncated data or merges outputs
+ok 431 - JSON fallback never invents truncated data or merges outputs
+  ---
+  duration_ms: 0.6148
+  type: 'test'
+  ...
+# Subtest: image schema errors report image branch, not a false requirement for text output
+ok 432 - image schema errors report image branch, not a false requirement for text output
+  ---
+  duration_ms: 0.7596
+  type: 'test'
+  ...
+# Subtest: display parses structured content and hides irrelevant token metadata
+ok 433 - display parses structured content and hides irrelevant token metadata
+  ---
+  duration_ms: 2.3386
+  type: 'test'
+  ...
+# Subtest: display preserves malformed model output rather than dropping it
+ok 434 - display preserves malformed model output rather than dropping it
+  ---
+  duration_ms: 0.2907
+  type: 'test'
+  ...
+# Subtest: historic verification has a phase even without explicit method metadata
+ok 435 - historic verification has a phase even without explicit method metadata
+  ---
+  duration_ms: 0.3566
+  type: 'test'
+  ...
+# Subtest: runtime stage distinguishes plan generation and repair attempt
+ok 436 - runtime stage distinguishes plan generation and repair attempt
+  ---
+  duration_ms: 0.1861
+  type: 'test'
+  ...
+# Subtest: intake deduplicates only identical evidence and preserves its source
+ok 437 - intake deduplicates only identical evidence and preserves its source
+  ---
+  duration_ms: 0.5978
+  type: 'test'
+  ...
+# Subtest: catalog views refer to canonical entries without duplicating source metadata
+ok 438 - catalog views refer to canonical entries without duplicating source metadata
+  ---
+  duration_ms: 0.431
+  type: 'test'
+  ...
+# Subtest: downstream evidence uses accepted item quote not entire conversation
+ok 439 - downstream evidence uses accepted item quote not entire conversation
+  ---
+  duration_ms: 1.8923
+  type: 'test'
+  ...
+# Subtest: media verification receives the real dependent selling point and stable item binding
+ok 440 - media verification receives the real dependent selling point and stable item binding
+  ---
+  duration_ms: 8.686
+  type: 'test'
+  ...
+# Subtest: identity query describes fact reading, never invents creative planning
+ok 441 - identity query describes fact reading, never invents creative planning
+  ---
+  duration_ms: 1.8662
+  type: 'test'
+  ...
+# Subtest: rejected candidate remains a draft even if summary sounds complete
+ok 442 - rejected candidate remains a draft even if summary sounds complete
+  ---
+  duration_ms: 0.327
+  type: 'test'
+  ...
+# Subtest: compiled node dependencies and tool contract are preserved without inventing parallel execution
+ok 443 - compiled node dependencies and tool contract are preserved without inventing parallel execution
+  ---
+  duration_ms: 0.681
+  type: 'test'
+  ...
+# Subtest: subgoal progress follows saved snapshots and does not equate artifacts with coverage
+ok 444 - subgoal progress follows saved snapshots and does not equate artifacts with coverage
+  ---
+  duration_ms: 0.4693
+  type: 'test'
+  ...
+# Subtest: button approval uses explicit target and decision evidence, not query keywords
+ok 445 - button approval uses explicit target and decision evidence, not query keywords
+  ---
+  duration_ms: 0.3283
+  type: 'test'
+  ...
+# Subtest: text confirmation requires recorded operation and can include a new understanding call
+ok 446 - text confirmation requires recorded operation and can include a new understanding call
+  ---
+  duration_ms: 0.2464
+  type: 'test'
+  ...
+# Subtest: actual request messages take precedence and remain complete and ordered
+ok 447 - actual request messages take precedence and remain complete and ordered
+  ---
+  duration_ms: 0.4989
+  type: 'test'
+  ...
+# Subtest: missing transport request is explicitly labeled without constructing historical context
+ok 448 - missing transport request is explicitly labeled without constructing historical context
+  ---
+  duration_ms: 0.185
+  type: 'test'
+  ...
+# Subtest: tool choices require actual function-call output, not only a tools catalog
+ok 449 - tool choices require actual function-call output, not only a tools catalog
+  ---
+  duration_ms: 0.7107
+  type: 'test'
+  ...
+# Subtest: object names replace IDs for reading while original records are untouched
+ok 450 - object names replace IDs for reading while original records are untouched
+  ---
+  duration_ms: 0.5343
+  type: 'test'
+  ...
+# Subtest: missing final event and missing coverage never acquire success assertions
+ok 451 - missing final event and missing coverage never acquire success assertions
+  ---
+  duration_ms: 0.2403
+  type: 'test'
+  ...
+# Subtest: real aggregate scopes the human explanation to this run, not later task ledger
+ok 452 - real aggregate scopes the human explanation to this run, not later task ledger
+  ---
+  duration_ms: 3.5427
+  type: 'test'
+  ...
+# Subtest: later task snapshot wins over an earlier prepared-plan event
+ok 453 - later task snapshot wins over an earlier prepared-plan event
+  ---
+  duration_ms: 0.3124
+  type: 'test'
+  ...
+# Subtest: DeepSeek uses its Responses endpoint, explicit non-thinking JSON mode, and normalized history
+ok 454 - DeepSeek uses its Responses endpoint, explicit non-thinking JSON mode, and normalized history
+  ---
+  duration_ms: 44.3425
+  type: 'test'
+  ...
+# Subtest: DeepSeek preserves both image inputs and refuses unsupported video before transport
+ok 455 - DeepSeek preserves both image inputs and refuses unsupported video before transport
+  ---
+  duration_ms: 1.7535
+  type: 'test'
+  ...
+# Subtest: provider selection never falls back to the other provider key
+ok 456 - provider selection never falls back to the other provider key
+  ---
+  duration_ms: 0.513
+  type: 'test'
+  ...
+# Subtest: DeepSeek errors omit response payloads and incomplete output cannot pass
+ok 457 - DeepSeek errors omit response payloads and incomplete output cannot pass
+  ---
+  duration_ms: 2.8199
+  type: 'test'
+  ...
+# Subtest: video verification uses the configured video model; text and images remain on the primary model
+ok 458 - video verification uses the configured video model; text and images remain on the primary model
+  ---
+  duration_ms: 15.6136
+  type: 'test'
+  ...
+# Subtest: delivery policy accepts returned text despite unmet exact wording
+ok 459 - delivery policy accepts returned text despite unmet exact wording
+  ---
+  duration_ms: 3.9845
+  type: 'test'
+  ...
+# Subtest: empty text cannot satisfy delivery
+ok 460 - empty text cannot satisfy delivery
+  ---
+  duration_ms: 0.5682
+  type: 'test'
+  ...
+# Subtest: returned image does not need visual model or exact ratio acceptance
+ok 461 - returned image does not need visual model or exact ratio acceptance
+  ---
+  duration_ms: 1.4623
+  type: 'test'
+  ...
+# Subtest: missing result, incomplete receipt and simulation cannot count as production delivery
+ok 462 - missing result, incomplete receipt and simulation cannot count as production delivery
+  ---
+  duration_ms: 0.3409
+  type: 'test'
+  ...
+# Subtest: three source units still require three corresponding output receipts
+ok 463 - three source units still require three corresponding output receipts
+  ---
+  duration_ms: 0.9664
+  type: 'test'
+  ...
+# Subtest: policy switch invalidates cached quality rejection and never calls model
+ok 464 - policy switch invalidates cached quality rejection and never calls model
+  ---
+  duration_ms: 3.4502
+  type: 'test'
+  ...
+# Subtest: error routing preserves unknown submissions and distinguishes contract fixes
+ok 465 - error routing preserves unknown submissions and distinguishes contract fixes
+  ---
+  duration_ms: 0.4442
+  type: 'test'
+  ...
+# Subtest: strict acceptance remains available explicitly
+ok 466 - strict acceptance remains available explicitly
+  ---
+  duration_ms: 0.4011
+  type: 'test'
+  ...
+# Subtest: independent provider protocols submit, authenticate and query actual normalized results
+ok 467 - independent provider protocols submit, authenticate and query actual normalized results
+  ---
+  duration_ms: 51.2863
+  type: 'test'
+  ...
+# Subtest: audio streaming combines chunks, stores playable files, rejects partial failure and non-WAV clone
+ok 468 - audio streaming combines chunks, stores playable files, rejects partial failure and non-WAV clone
+  ---
+  duration_ms: 33.9067
+  type: 'test'
+  ...
+# Subtest: configuration failures are known non-submissions; ambiguous transport is not retried
+ok 469 - configuration failures are known non-submissions; ambiguous transport is not retried
+  ---
+  duration_ms: 1.655
+  type: 'test'
+  ...
+# Subtest: background polling returns results and restores native tool history without new user messages or resubmission
+ok 470 - background polling returns results and restores native tool history without new user messages or resubmission
+  ---
+  duration_ms: 3.226
+  type: 'test'
+  ...
+# Subtest: follow-up asset references retain real URLs, distinguish types and deduplicate results
+ok 471 - follow-up asset references retain real URLs, distinguish types and deduplicate results
+  ---
+  duration_ms: 1.2361
+  type: 'test'
+  ...
+# Subtest: future selection: captured converges without fabricated identity or extra model call
+ok 472 - future selection: captured converges without fabricated identity or extra model call
+  ---
+  duration_ms: 514.0029
+  type: 'test'
+  ...
+# Subtest: future selection: selection converges without fabricated identity or extra model call
+ok 473 - future selection: selection converges without fabricated identity or extra model call
+  ---
+  duration_ms: 462.8496
+  type: 'test'
+  ...
+# Subtest: future selection: selector converges without fabricated identity or extra model call
+ok 474 - future selection: selector converges without fabricated identity or extra model call
+  ---
+  duration_ms: 268.9242
+  type: 'test'
+  ...
+# Subtest: future selection: index converges without fabricated identity or extra model call
+ok 475 - future selection: index converges without fabricated identity or extra model call
+  ---
+  duration_ms: 339.8914
+  type: 'test'
+  ...
+# Subtest: future selection: ordinal intent validates dependency, producer type, bounds and conflicts
+ok 476 - future selection: ordinal intent validates dependency, producer type, bounds and conflicts
+  ---
+  duration_ms: 1.6931
+  type: 'test'
+  ...
+# Subtest: future selection: wrong ordinal receives a field repair path rather than a missing history error
+ok 477 - future selection: wrong ordinal receives a field repair path rather than a missing history error
+  ---
+  duration_ms: 0.7014
+  type: 'test'
+  ...
+# Subtest: future selection: actual producing slot disambiguates multiple matching upstream documents
+ok 478 - future selection: actual producing slot disambiguates multiple matching upstream documents
+  ---
+  duration_ms: 0.5851
+  type: 'test'
+  ...
+# Subtest: future selection: runtime projection records the exact dependency index
+ok 479 - future selection: runtime projection records the exact dependency index
+  ---
+  duration_ms: 1.4524
+  type: 'test'
+  ...
+# Subtest: future selection: missing, reordered, changed and forged bindings fail closed
+ok 480 - future selection: missing, reordered, changed and forged bindings fail closed
+  ---
+  duration_ms: 1.2796
+  type: 'test'
+  ...
+# Subtest: future selection: directions, shots and products share ordinal binding and actual input filtering
+ok 481 - future selection: directions, shots and products share ordinal binding and actual input filtering
+  ---
+  duration_ms: 1.3245
+  type: 'test'
+  ...
+# Subtest: future selection: existing source still requires real identity and correct version
+ok 482 - future selection: existing source still requires real identity and correct version
+  ---
+  duration_ms: 0.5365
+  type: 'test'
+  ...
+# Subtest: future selection: original query completes both artifacts with selected-only actual input, skill=true
+ok 483 - future selection: original query completes both artifacts with selected-only actual input, skill=true
+  ---
+  duration_ms: 472.4358
+  type: 'test'
+  ...
+# Subtest: future selection: original query completes both artifacts with selected-only actual input, skill=false
+ok 484 - future selection: original query completes both artifacts with selected-only actual input, skill=false
+  ---
+  duration_ms: 269.2035
+  type: 'test'
+  ...
+# Subtest: future selection: failed upstream never runs downstream with an imagined direction
+ok 485 - future selection: failed upstream never runs downstream with an imagined direction
+  ---
+  duration_ms: 255.9169
+  type: 'test'
+  ...
+# Subtest: future selection: media selected units keep count and reapproval gates
+ok 486 - future selection: media selected units keep count and reapproval gates
+  ---
+  duration_ms: 167.5161
+  type: 'test'
+  ...
+# Subtest: future selection: prepared media pins the binding and cannot submit after receipt removal
+ok 487 - future selection: prepared media pins the binding and cannot submit after receipt removal
+  ---
+  duration_ms: 228.9747
+  type: 'test'
+  ...
+# Subtest: future selection: image target and a future supporting direction bind in separate namespaces
+ok 488 - future selection: image target and a future supporting direction bind in separate namespaces
+  ---
+  duration_ms: 113.8233
+  type: 'test'
+  ...
+# Subtest: future selection: invalid joined quotation repairs only evidence and preserves dependency selection
+ok 489 - future selection: invalid joined quotation repairs only evidence and preserves dependency selection
+  ---
+  duration_ms: 247.8018
+  type: 'test'
+  ...
+# Subtest: metadata lookup cannot silently discard an image observation obligation in any language
+ok 490 - metadata lookup cannot silently discard an image observation obligation in any language
+  ---
+  duration_ms: 5.7271
+  type: 'test'
+  ...
+# Subtest: a contradictory semantic operation is repaired by a field patch without mutating the rejected draft
+ok 491 - a contradictory semantic operation is repaired by a field patch without mutating the rejected draft
+  ---
+  duration_ms: 239.9631
+  type: 'test'
+  ...
+# Subtest: message resolution follows stored roles, IDs and reply links without paraphrasing
+ok 492 - message resolution follows stored roles, IDs and reply links without paraphrasing
+  ---
+  duration_ms: 1.0268
+  type: 'test'
+  ...
+# Subtest: pending system failure retains raw request separately from task focus and model-generated decisions
+ok 493 - pending system failure retains raw request separately from task focus and model-generated decisions
+  ---
+  duration_ms: 0.2914
+  type: 'test'
+  ...
+# Subtest: all images need current source-specific observation receipts; partial success is reused on retry
+ok 494 - all images need current source-specific observation receipts; partial success is reused on retry
+  ---
+  duration_ms: 2.9559
+  type: 'test'
+  ...
+# Subtest: revision executor can rewrite a whole document while binding its original version
+ok 495 - revision executor can rewrite a whole document while binding its original version
+  ---
+  duration_ms: 14.2529
+  type: 'test'
+  ...
+# Subtest: local edits preserve outside spans and structured rewrites preserve one authoritative representation
+ok 496 - local edits preserve outside spans and structured rewrites preserve one authoritative representation
+  ---
+  duration_ms: 14.4485
+  type: 'test'
+  ...
+# Subtest: identity budget updates require no new authority, real changes still require raw evidence
+ok 497 - identity budget updates require no new authority, real changes still require raw evidence
+  ---
+  duration_ms: 0.5428
+  type: 'test'
+  ...
+# Subtest: HTTP history presentation persists exact state and transport context; duplicate submission is replayed
+ok 498 - HTTP history presentation persists exact state and transport context; duplicate submission is replayed
+  ---
+  duration_ms: 2881.2455
+  type: 'test'
+  ...
+# Subtest: real rejected draft replays through Agent with one intake and exact prior answer
+ok 499 - real rejected draft replays through Agent with one intake and exact prior answer
+  ---
+  duration_ms: 288.348
+  type: 'test'
+  ...
+# Subtest: typed message selection works without keywords or msg prefix and keeps media permission denied
+ok 500 - typed message selection works without keywords or msg prefix and keeps media permission denied
+  ---
+  duration_ms: 264.1901
+  type: 'test'
+  ...
+# Subtest: mixed message and artifact presentation preserves listed order without new objects
+ok 501 - mixed message and artifact presentation preserves listed order without new objects
+  ---
+  duration_ms: 319.9955
+  type: 'test'
+  ...
+# Subtest: message target cannot be silently coerced into an artifact
+ok 502 - message target cannot be silently coerced into an artifact
+  ---
+  duration_ms: 0.8311
+  type: 'test'
+  ...
+# Subtest: legacy target collision requires explicit type
+ok 503 - legacy target collision requires explicit type
+  ---
+  duration_ms: 0.4749
+  type: 'test'
+  ...
+# Subtest: deleted or foreign message bindings fail closed at execution
+ok 504 - deleted or foreign message bindings fail closed at execution
+  ---
+  duration_ms: 0.453
+  type: 'test'
+  ...
+# Subtest: message content hash is rechecked after persistence and cannot drift
+ok 505 - message content hash is rechecked after persistence and cannot drift
+  ---
+  duration_ms: 0.5323
+  type: 'test'
+  ...
+# Subtest: artifact version and content validation remain mandatory for presentation
+ok 506 - artifact version and content validation remain mandatory for presentation
+  ---
+  duration_ms: 0.7339
+  type: 'test'
+  ...
+# Subtest: message references never enter the production artifact catalog
+ok 507 - message references never enter the production artifact catalog
+  ---
+  duration_ms: 0.6282
+  type: 'test'
+  ...
+# Subtest: unknown message remains failed and does not receive a fabricated answer
+ok 508 - unknown message remains failed and does not receive a fabricated answer
+  ---
+  duration_ms: 455.401
+  type: 'test'
+  ...
+# Subtest: new turns persist independent before and after State, failed intake included
+ok 509 - new turns persist independent before and after State, failed intake included
+  ---
+  duration_ms: 658.7413
+  type: 'test'
+  ...
+# Subtest: global snapshot excludes recursive traces and is not injected into model context
+ok 510 - global snapshot excludes recursive traces and is not injected into model context
+  ---
+  duration_ms: 0.3701
+  type: 'test'
+  ...
+# Subtest: doubao compiled HTTP loop: contracted skills, image/video artifacts and request isolation
+ok 511 - doubao compiled HTTP loop: contracted skills, image/video artifacts and request isolation
+  ---
+  duration_ms: 4879.7757
+  type: 'test'
+  ...
+# Subtest: deepseek compiled HTTP loop: contracted skills, image/video artifacts and request isolation
+ok 512 - deepseek compiled HTTP loop: contracted skills, image/video artifacts and request isolation
+  ---
+  duration_ms: 2279.8336
+  type: 'test'
+  ...
+# Subtest: source dimensions and edit schema preserve canvas
+ok 513 - source dimensions and edit schema preserve canvas
+  ---
+  duration_ms: 3.68
+  type: 'test'
+  ...
+# Subtest: omitted image size is materialized before persistence so later edits inherit it
+ok 514 - omitted image size is materialized before persistence so later edits inherit it
+  ---
+  duration_ms: 0.5319
+  type: 'test'
+  ...
+# Subtest: stage 1: actual core model request exposes one complete operation schema and no protocol election
+ok 515 - stage 1: actual core model request exposes one complete operation schema and no protocol election
+  ---
+  duration_ms: 285.8495
+  type: 'test'
+  ...
+# Subtest: stage 1: all contrast examples satisfy the same existing operation wire schema
+ok 516 - stage 1: all contrast examples satisfy the same existing operation wire schema
+  ---
+  duration_ms: 169.5757
+  type: 'test'
+  ...
+# Subtest: stage 2: ratio-only request binds persisted version and from value without model copying old fields
+ok 517 - stage 2: ratio-only request binds persisted version and from value without model copying old fields
+  ---
+  duration_ms: 715.9213
+  type: 'test'
+  ...
+# Subtest: stage 2: one bound direction reaches actual script model input without other directions
+ok 518 - stage 2: one bound direction reaches actual script model input without other directions
+  ---
+  duration_ms: 263.2988
+  type: 'test'
+  ...
+# Subtest: stage 2: image edit keeps image target and separately consumes an actual selected text direction
+ok 519 - stage 2: image edit keeps image target and separately consumes an actual selected text direction
+  ---
+  duration_ms: 299.8641
+  type: 'test'
+  ...
+# Subtest: stage 3: field repair includes dereferenceable source bodies and keeps repair permission narrow
+ok 520 - stage 3: field repair includes dereferenceable source bodies and keeps repair permission narrow
+  ---
+  duration_ms: 279.1227
+  type: 'test'
+  ...
+# Subtest: stage 3: reference repair reads candidate tails instead of indistinguishable excerpts
+ok 521 - stage 3: reference repair reads candidate tails instead of indistinguishable excerpts
+  ---
+  duration_ms: 183.9876
+  type: 'test'
+  ...
+# Subtest: stage 3: explicit old filename and reply anchor survive recency windows and summary repair
+ok 522 - stage 3: explicit old filename and reply anchor survive recency windows and summary repair
+  ---
+  duration_ms: 169.8259
+  type: 'test'
+  ...
+# Subtest: stage 3: old pending plan is a versioned candidate even when another task is active
+ok 523 - stage 3: old pending plan is a versioned candidate even when another task is active
+  ---
+  duration_ms: 200.1446
+  type: 'test'
+  ...
+# Subtest: stage 3: canonical document and indexed units share one full body in actual intake
+ok 524 - stage 3: canonical document and indexed units share one full body in actual intake
+  ---
+  duration_ms: 6.4488
+  type: 'test'
+  ...
+# Subtest: stage 4: readonly source errors receive a local repair before candidate acceptance
+ok 525 - stage 4: readonly source errors receive a local repair before candidate acceptance
+  ---
+  duration_ms: 292.2626
+  type: 'test'
+  ...
+# Subtest: stage 4: compilation prerequisite failure repairs the source before accepting a text change
+ok 526 - stage 4: compilation prerequisite failure repairs the source before accepting a text change
+  ---
+  duration_ms: 258.8714
+  type: 'test'
+  ...
+# Subtest: stage 4: patch feedback contains only latest rejected patch and still locks unrelated fields
+ok 527 - stage 4: patch feedback contains only latest rejected patch and still locks unrelated fields
+  ---
+  duration_ms: 223.441
+  type: 'test'
+  ...
+# Subtest: stage 4: identical unsupported source with identical next request stops without a third model call
+ok 528 - stage 4: identical unsupported source with identical next request stops without a third model call
+  ---
+  duration_ms: 250.873
+  type: 'test'
+  ...
+# Subtest: stage 4: ambiguous repeated quote is repaired to a unique continuous excerpt by the program binder
+ok 529 - stage 4: ambiguous repeated quote is repaired to a unique continuous excerpt by the program binder
+  ---
+  duration_ms: 219.8615
+  type: 'test'
+  ...
+# Subtest: cross-stage: selected direction is the actual primary media input as well as the coverage assignment
+ok 530 - cross-stage: selected direction is the actual primary media input as well as the coverage assignment
+  ---
+  duration_ms: 113.2477
+  type: 'test'
+  ...
+# Subtest: partial script intake only fills missing fields and preserves original source and text scope
+ok 531 - partial script intake only fills missing fields and preserves original source and text scope
+  ---
+  duration_ms: 237.6534
+  type: 'test'
+  ...
+# Subtest: missing-field patches cannot replace locked deliverables or introduce unlisted fields
+ok 532 - missing-field patches cannot replace locked deliverables or introduce unlisted fields
+  ---
+  duration_ms: 101.0293
+  type: 'test'
+  ...
+# Subtest: an incorrect scope auditor rechecks itself before rewriting the understood script or source
+ok 533 - an incorrect scope auditor rechecks itself before rewriting the understood script or source
+  ---
+  duration_ms: 93.2184
+  type: 'test'
+  ...
+# Subtest: nested fields repair in place and unexpected fields use explicit removal patches
+ok 534 - nested fields repair in place and unexpected fields use explicit removal patches
+  ---
+  duration_ms: 202.7633
+  type: 'test'
+  ...
+# Subtest: planned text methods reach the workflow in order instead of truncating the final script method
+ok 535 - planned text methods reach the workflow in order instead of truncating the final script method
+  ---
+  duration_ms: 80.3021
+  type: 'test'
+  ...
+# Subtest: new task sources reject unaccepted optional artifacts before execution, retaining accepted originals
+ok 536 - new task sources reject unaccepted optional artifacts before execution, retaining accepted originals
+  ---
+  duration_ms: 1.5805
+  type: 'test'
+  ...
+# Subtest: failed patch preserves the locked draft without accepting a replacement goal
+ok 537 - failed patch preserves the locked draft without accepting a replacement goal
+  ---
+  duration_ms: 96.3667
+  type: 'test'
+  ...
+# Subtest: legacy contradictory verdict becomes uncertain in one call and is traced with the artifact node
+ok 538 - legacy contradictory verdict becomes uncertain in one call and is traced with the artifact node
+  ---
+  duration_ms: 6.1872
+  type: 'test'
+  ...
+# Subtest: reference generation compares actual submitted images, excluding unrelated dependency products
+ok 539 - reference generation compares actual submitted images, excluding unrelated dependency products
+  ---
+  duration_ms: 1.6112
+  type: 'test'
+  ...
+# Subtest: a passed outcome without comparison evidence cannot accept referenced generation
+ok 540 - a passed outcome without comparison evidence cannot accept referenced generation
+  ---
+  duration_ms: 2.0272
+  type: 'test'
+  ...
+# Subtest: verification shares concurrent work and survives same-run reload, but new runs and changed evidence retry
+ok 541 - verification shares concurrent work and survives same-run reload, but new runs and changed evidence retry
+  ---
+  duration_ms: 2.3944
+  type: 'test'
+  ...
+# Subtest: transport errors do not cause a second model request within one verification attempt
+ok 542 - transport errors do not cause a second model request within one verification attempt
+  ---
+  duration_ms: 1.1929
+  type: 'test'
+  ...
+# Subtest: intake has no execution tools, parses structured JSON and retries invalid schema once
+ok 543 - intake has no execution tools, parses structured JSON and retries invalid schema once
+  ---
+  duration_ms: 184.5229
+  type: 'test'
+  ...
+# Subtest: preference and factual gaps permit a labelled draft; only blocking gaps require input
+ok 544 - preference and factual gaps permit a labelled draft; only blocking gaps require input
+  ---
+  duration_ms: 238.9849
+  type: 'test'
+  ...
+# Subtest: capability selection preserves medium and observation, with no query-word routing
+ok 545 - capability selection preserves medium and observation, with no query-word routing
+  ---
+  duration_ms: 1.5971
+  type: 'test'
+  ...
+# Subtest: native JSON output is requested for intake without changing ordinary tool calling
+ok 546 - native JSON output is requested for intake without changing ordinary tool calling
+  ---
+  duration_ms: 59.1045
+  type: 'test'
+  ...
+# Subtest: media processing does not require a separate visual-analysis operation
+ok 547 - media processing does not require a separate visual-analysis operation
+  ---
+  duration_ms: 0.43
+  type: 'test'
+  ...
+# Subtest: professional review may require web or visual evidence as a prerequisite
+ok 548 - professional review may require web or visual evidence as a prerequisite
+  ---
+  duration_ms: 0.6152
+  type: 'test'
+  ...
+# Subtest: risk-related rewriting is allowed; a review purpose does not force every operation to be review_content
+ok 549 - risk-related rewriting is allowed; a review purpose does not force every operation to be review_content
+  ---
+  duration_ms: 0.5974
+  type: 'test'
+  ...
+# Subtest: capability retry preserves understood deliverables and original query
+ok 550 - capability retry preserves understood deliverables and original query
+  ---
+  duration_ms: 107.3642
+  type: 'test'
+  ...
+# Subtest: goal rejects nonexistent skills and forward/self dependencies
+ok 551 - goal rejects nonexistent skills and forward/self dependencies
+  ---
+  duration_ms: 0.722
+  type: 'test'
+  ...
+# Subtest: omitted safety explanation defaults to empty, but missing disposition cannot execute
+ok 552 - omitted safety explanation defaults to empty, but missing disposition cannot execute
+  ---
+  duration_ms: 0.76
+  type: 'test'
+  ...
+# Subtest: professional text loads a real skill before the model can skip straight to final answer
+ok 553 - professional text loads a real skill before the model can skip straight to final answer
+  ---
+  duration_ms: 52.1107
+  type: 'test'
+  ...
+# Subtest: refusal and essential missing input end before execution
+ok 554 - refusal and essential missing input end before execution
+  ---
+  duration_ms: 12.7143
+  type: 'test'
+  ...
+# Subtest: text-only request cannot be silently expanded into paid image generation
+ok 555 - text-only request cannot be silently expanded into paid image generation
+  ---
+  duration_ms: 57.273
+  type: 'test'
+  ...
+# Subtest: unsupported video editing cannot be replaced by a new generated video
+ok 556 - unsupported video editing cannot be replaced by a new generated video
+  ---
+  duration_ms: 10.4366
+  type: 'test'
+  ...
+# Subtest: no media evidence cannot produce completed even when model claims success
+ok 557 - no media evidence cannot produce completed even when model claims success
+  ---
+  duration_ms: 6.6518
+  type: 'test'
+  ...
+# Subtest: image analysis cannot complete without an actual successful observation
+ok 558 - image analysis cannot complete without an actual successful observation
+  ---
+  duration_ms: 7.0369
+  type: 'test'
+  ...
+# Subtest: image analysis can finish after a successful observation
+ok 559 - image analysis can finish after a successful observation
+  ---
+  duration_ms: 7.1702
+  type: 'test'
+  ...
+# Subtest: observing one image cannot satisfy a request to compare two specified images
+ok 560 - observing one image cannot satisfy a request to compare two specified images
+  ---
+  duration_ms: 9.4783
+  type: 'test'
+  ...
+# Subtest: current goal is immutable and text deliverables carry the run ID
+ok 561 - current goal is immutable and text deliverables carry the run ID
+  ---
+  duration_ms: 0.3195
+  type: 'test'
+  ...
+# Subtest: one catalog resolves historical artifacts beyond active focus and excludes another session
+ok 562 - one catalog resolves historical artifacts beyond active focus and excludes another session
+  ---
+  duration_ms: 4.259
+  type: 'test'
+  ...
+# Subtest: handles expire on next run and revoked assets cannot be selected
+ok 563 - handles expire on next run and revoked assets cannot be selected
+  ---
+  duration_ms: 1.1547
+  type: 'test'
+  ...
+# Subtest: historical reads allow superseded versions, production sources do not
+ok 564 - historical reads allow superseded versions, production sources do not
+  ---
+  duration_ms: 0.5366
+  type: 'test'
+  ...
+# Subtest: source binding detects changed version, reordered content and revoked permission
+ok 565 - source binding detects changed version, reordered content and revoked permission
+  ---
+  duration_ms: 0.6379
+  type: 'test'
+  ...
+# Subtest: captured real ID from turn 6 resolves when focus changed
+ok 566 - captured real ID from turn 6 resolves when focus changed
+  ---
+  duration_ms: 219.3122
+  type: 'test'
+  ...
+# Subtest: bad UUID repair changes only reference selection and rejects whole-goal replacement
+ok 567 - bad UUID repair changes only reference selection and rejects whole-goal replacement
+  ---
+  duration_ms: 197.8541
+  type: 'test'
+  ...
+# Subtest: ambiguous storyboard layout blocks before scope guessing or media planning
+ok 568 - ambiguous storyboard layout blocks before scope guessing or media planning
+  ---
+  duration_ms: 82.2746
+  type: 'test'
+  ...
+# Subtest: three separate images and one storyboard sheet both cover all three units
+ok 569 - three separate images and one storyboard sheet both cover all three units
+  ---
+  duration_ms: 1.6746
+  type: 'test'
+  ...
+# Subtest: selecting only second shot is bound to an actual source unit and user evidence
+ok 570 - selecting only second shot is bound to an actual source unit and user evidence
+  ---
+  duration_ms: 1.9033
+  type: 'test'
+  ...
+# Subtest: three copies of first shot never satisfy all-unit coverage; unsupported claims do not count
+ok 571 - three copies of first shot never satisfy all-unit coverage; unsupported claims do not count
+  ---
+  duration_ms: 0.8874
+  type: 'test'
+  ...
+# Subtest: reordered or deleted source units invalidate a prepared coverage plan
+ok 572 - reordered or deleted source units invalidate a prepared coverage plan
+  ---
+  duration_ms: 0.7175
+  type: 'test'
+  ...
+# Subtest: multi-panel method is excluded from separate images; explicit incompatible method fails
+ok 573 - multi-panel method is excluded from separate images; explicit incompatible method fails
+  ---
+  duration_ms: 0.6647
+  type: 'test'
+  ...
+# Subtest: history retrieval uses message anchors and preserves original pronouns
+ok 574 - history retrieval uses message anchors and preserves original pronouns
+  ---
+  duration_ms: 0.6202
+  type: 'test'
+  ...
+# Subtest: typed model tools and skill selections do not use natural-language shortcuts
+ok 575 - typed model tools and skill selections do not use natural-language shortcuts
+  ---
+  duration_ms: 0.8098
+  type: 'test'
+  ...
+# Subtest: query responses use one semantic model request and read the exact ledger
+ok 576 - query responses use one semantic model request and read the exact ledger
+  ---
+  duration_ms: 1048.6984
+  type: 'test'
+  ...
+# Subtest: new reference and derived documents do not become versions; actual modification does
+ok 577 - new reference and derived documents do not become versions; actual modification does
+  ---
+  duration_ms: 4.0465
+  type: 'test'
+  ...
+# Subtest: shot rendering translates internal keys without dropping sections
+ok 578 - shot rendering translates internal keys without dropping sections
+  ---
+  duration_ms: 0.3267
+  type: 'test'
+  ...
+# Subtest: failed intake has terminal timestamp and context only, never old task ownership
+ok 579 - failed intake has terminal timestamp and context only, never old task ownership
+  ---
+  duration_ms: 16.2995
+  type: 'test'
+  ...
+# Subtest: compiled media records bounded coverage per output and only marks complete after all units
+ok 580 - compiled media records bounded coverage per output and only marks complete after all units
+  ---
+  duration_ms: 74.8305
+  type: 'test'
+  ...
+# Subtest: bound shots validate typed source IDs without claiming to verify ordinal semantics
+ok 581 - bound shots validate typed source IDs without claiming to verify ordinal semantics
+  ---
+  duration_ms: 0.7663
+  type: 'test'
+  ...
+# Subtest: media source scope cannot create an unrelated direction workflow
+ok 582 - media source scope cannot create an unrelated direction workflow
+  ---
+  duration_ms: 0.6265
+  type: 'test'
+  ...
+# Subtest: real verifier interface rejects missing and mismatched coverage even when outcome says passed
+ok 583 - real verifier interface rejects missing and mismatched coverage even when outcome says passed
+  ---
+  duration_ms: 22.6163
+  type: 'test'
+  ...
+# Subtest: one accepted image leaves the three-unit task incomplete
+ok 584 - one accepted image leaves the three-unit task incomplete
+  ---
+  duration_ms: 1.3425
+  type: 'test'
+  ...
+# Subtest: tool exception persists start end and no ownership of old focus
+ok 585 - tool exception persists start end and no ownership of old focus
+  ---
+  duration_ms: 0.4417
+  type: 'test'
+  ...
+# Subtest: session recovery closes interrupted spans while active reads preserve running state
+ok 586 - session recovery closes interrupted spans while active reads preserve running state
+  ---
+  duration_ms: 21.4535
+  type: 'test'
+  ...
+# Subtest: missing facts and ambiguous names never claim answer coverage
+ok 587 - missing facts and ambiguous names never claim answer coverage
+  ---
+  duration_ms: 0.4384
+  type: 'test'
+  ...
+# Subtest: partitioned deliverables cover each source once and reject three first-shot copies
+ok 588 - partitioned deliverables cover each source once and reject three first-shot copies
+  ---
+  duration_ms: 1.2864
+  type: 'test'
+  ...
+# Subtest: explicit source scope missing in model output is repaired locally rather than asked again
+ok 589 - explicit source scope missing in model output is repaired locally rather than asked again
+  ---
+  duration_ms: 117.8311
+  type: 'test'
+  ...
+# Subtest: model supplied coverage without a real source never becomes a binding
+ok 590 - model supplied coverage without a real source never becomes a binding
+  ---
+  duration_ms: 0.605
+  type: 'test'
+  ...
+# Subtest: prepared batch detects coverage and source tampering; changed coverage invalidates approval
+ok 591 - prepared batch detects coverage and source tampering; changed coverage invalidates approval
+  ---
+  duration_ms: 28.4895
+  type: 'test'
+  ...
+# Subtest: real Skill-as-material failure requests scoped field repair with original context
+ok 592 - real Skill-as-material failure requests scoped field repair with original context
+  ---
+  duration_ms: 640.6829
+  type: 'test'
+  ...
+# Subtest: registry namespace check lists every invalid subintent and never moves Skill selection itself
+ok 593 - registry namespace check lists every invalid subintent and never moves Skill selection itself
+  ---
+  duration_ms: 1.2296
+  type: 'test'
+  ...
+# Subtest: material identity equal to a Skill name is resolved as a registered material
+ok 594 - material identity equal to a Skill name is resolved as a registered material
+  ---
+  duration_ms: 1.0136
+  type: 'test'
+  ...
+# Subtest: empty sourceSelection is a contract error, not a missing artifact lookup
+ok 595 - empty sourceSelection is a contract error, not a missing artifact lookup
+  ---
+  duration_ms: 0.3709
+  type: 'test'
+  ...
+# Subtest: support repair candidates use the same readable pool as actual binding and preserve original context
+ok 596 - support repair candidates use the same readable pool as actual binding and preserve original context
+  ---
+  duration_ms: 446.5634
+  type: 'test'
+  ...
+# Subtest: support source identity version and hash survive task creation and focus changes
+ok 597 - support source identity version and hash survive task creation and focus changes
+  ---
+  duration_ms: 258.1185
+  type: 'test'
+  ...
+# Subtest: support inputs do not acquire unrelated dependency artifacts
+ok 598 - support inputs do not acquire unrelated dependency artifacts
+  ---
+  duration_ms: 0.9798
+  type: 'test'
+  ...
+# Subtest: changed helper is rejected before text model call
+ok 599 - changed helper is rejected before text model call
+  ---
+  duration_ms: 189.1246
+  type: 'test'
+  ...
+# Subtest: changed helper is rejected before media planning, with no media submission
+ok 600 - changed helper is rejected before media planning, with no media submission
+  ---
+  duration_ms: 174.5387
+  type: 'test'
+  ...
+# Subtest: revoked and deleted helpers remain unavailable even for history purpose
+ok 601 - revoked and deleted helpers remain unavailable even for history purpose
+  ---
+  duration_ms: 223.3559
+  type: 'test'
+  ...
+# Subtest: normal text stage gets exactly the frozen helper content and binding
+ok 602 - normal text stage gets exactly the frozen helper content and binding
+  ---
+  duration_ms: 188.6472
+  type: 'test'
+  ...
+# Subtest: prepared media plan cannot submit after its supporting source changes while waiting
+ok 603 - prepared media plan cannot submit after its supporting source changes while waiting
+  ---
+  duration_ms: 154.8377
+  type: 'test'
+  ...
+# Subtest: query validation uses typed anchors rather than a Chinese keyword allowlist
+ok 604 - query validation uses typed anchors rather than a Chinese keyword allowlist
+  ---
+  duration_ms: 8.168
+  type: 'test'
+  ...
+# Subtest: genuine missing historical message may finish honestly without claiming data coverage
+ok 605 - genuine missing historical message may finish honestly without claiming data coverage
+  ---
+  duration_ms: 0.6493
+  type: 'test'
+  ...
+# Subtest: G02 empty consume is not accepted; present binds arrival notice without new production
+ok 606 - G02 empty consume is not accepted; present binds arrival notice without new production
+  ---
+  duration_ms: 201.0668
+  type: 'test'
+  ...
+# Subtest: C02 captured media respond presents the three exact versions in declared order
+ok 607 - C02 captured media respond presents the three exact versions in declared order
+  ---
+  duration_ms: 191.476
+  type: 'test'
+  ...
+# Subtest: presentation rejects new media side effects and requires targets
+ok 608 - presentation rejects new media side effects and requires targets
+  ---
+  duration_ms: 5.4118
+  type: 'test'
+  ...
+# Subtest: C01 captured image ordinal is removed after target resolution without direction producer
+ok 609 - C01 captured image ordinal is removed after target resolution without direction producer
+  ---
+  duration_ms: 118.9701
+  type: 'test'
+  ...
+# Subtest: image creation may consume a real direction selector
+ok 610 - image creation may consume a real direction selector
+  ---
+  duration_ms: 0.4951
+  type: 'test'
+  ...
+# Subtest: C04 captured revision preserves direction cardinality but only routes rewrite and video
+ok 611 - C04 captured revision preserves direction cardinality but only routes rewrite and video
+  ---
+  duration_ms: 106.5876
+  type: 'test'
+  ...
+# Subtest: new directions still require direction production
+ok 612 - new directions still require direction production
+  ---
+  duration_ms: 0.3734
+  type: 'test'
+  ...
+# Subtest: empty model changeContract on an image never compiles into text rewrite
+ok 613 - empty model changeContract on an image never compiles into text rewrite
+  ---
+  duration_ms: 0.3351
+  type: 'test'
+  ...
+# Subtest: presentation redundant counts normalize only when identical to target cardinality
+ok 614 - presentation redundant counts normalize only when identical to target cardinality
+  ---
+  duration_ms: 0.2504
+  type: 'test'
+  ...
+# Subtest: instance in schema envelope unwraps losslessly, real schema definitions do not
+ok 615 - instance in schema envelope unwraps losslessly, real schema definitions do not
+  ---
+  duration_ms: 0.5388
+  type: 'test'
+  ...
+# Subtest: redundant operation alias is removed only if identical to authoritative operation
+ok 616 - redundant operation alias is removed only if identical to authoritative operation
+  ---
+  duration_ms: 0.2109
+  type: 'test'
+  ...
+# Subtest: supporting source repair edits its own field and keeps all modification targets
+ok 617 - supporting source repair edits its own field and keeps all modification targets
+  ---
+  duration_ms: 145.0093
+  type: 'test'
+  ...
+# Subtest: impact candidates follow document lineage without including unrelated task or superseded versions
+ok 618 - impact candidates follow document lineage without including unrelated task or superseded versions
+  ---
+  duration_ms: 0.4016
+  type: 'test'
+  ...
+# Subtest: overlapping change target sets do not publish multiple competing revisions of one source
+ok 619 - overlapping change target sets do not publish multiple competing revisions of one source
+  ---
+  duration_ms: 0.6847
+  type: 'test'
+  ...
+# Subtest: comma joined references expand only when every component is a registered identity
+ok 620 - comma joined references expand only when every component is a registered identity
+  ---
+  duration_ms: 0.7942
+  type: 'test'
+  ...
+# Subtest: overlapping impact expansion reuses completed logical modifications without artificial cycle
+ok 621 - overlapping impact expansion reuses completed logical modifications without artificial cycle
+  ---
+  duration_ms: 0.5038
+  type: 'test'
+  ...
+# Subtest: C03 captured multi-target revision compiles five single-source changes with fact provenance
+ok 622 - C03 captured multi-target revision compiles five single-source changes with fact provenance
+  ---
+  duration_ms: 148.0216
+  type: 'test'
+  ...
+# Subtest: change-set dependency fan-in includes all expanded targets and no truncation
+ok 623 - change-set dependency fan-in includes all expanded targets and no truncation
+  ---
+  duration_ms: 0.866
+  type: 'test'
+  ...
+# Subtest: no-change is verified without creating a duplicate artifact; per-target status is durable
+ok 624 - no-change is verified without creating a duplicate artifact; per-target status is durable
+  ---
+  duration_ms: 27.1714
+  type: 'test'
+  ...
+# Subtest: successful delta preserves unrelated text and source version relation; conflict blocks publication
+ok 625 - successful delta preserves unrelated text and source version relation; conflict blocks publication
+  ---
+  duration_ms: 9.6877
+  type: 'test'
+  ...
+# Subtest: failed delta keeps source published and successful siblings are not removed
+ok 626 - failed delta keeps source published and successful siblings are not removed
+  ---
+  duration_ms: 3.4068
+  type: 'test'
+  ...
+# Subtest: structured delta retains direction IDs and unedited structure without divergent body
+ok 627 - structured delta retains direction IDs and unedited structure without divergent body
+  ---
+  duration_ms: 0.5329
+  type: 'test'
+  ...
+# Subtest: mixed presentation and creation compile separate nodes; only one new image obligation
+ok 628 - mixed presentation and creation compile separate nodes; only one new image obligation
+  ---
+  duration_ms: 134.3716
+  type: 'test'
+  ...
+# Subtest: presentation executes and renders without model generation or modifying media versions
+ok 629 - presentation executes and renders without model generation or modifying media versions
+  ---
+  duration_ms: 159.3101
+  type: 'test'
+  ...
+# Subtest: no-change final reply is nonempty and explains preserved source version
+ok 630 - no-change final reply is nonempty and explains preserved source version
+  ---
+  duration_ms: 27.4742
+  type: 'test'
+  ...
+# Subtest: new media supersedes old image only after semantic acceptance
+ok 631 - new media supersedes old image only after semantic acceptance
+  ---
+  duration_ms: 3.0394
+  type: 'test'
+  ...
+# Subtest: 9:16 revision reaches actual prepared batch and stays awaiting approval with zero submissions
+ok 632 - 9:16 revision reaches actual prepared batch and stays awaiting approval with zero submissions
+  ---
+  duration_ms: 104.9345
+  type: 'test'
+  ...
+# Subtest: production suite preserves 24 source cases and adds four explicit variants
+ok 633 - production suite preserves 24 source cases and adds four explicit variants
+  ---
+  duration_ms: 1.8346
+  type: 'test'
+  ...
+# Subtest: scorer rejects invented artifact URL despite completed status
+ok 634 - scorer rejects invented artifact URL despite completed status
+  ---
+  duration_ms: 1.3441
+  type: 'test'
+  ...
+# Subtest: scorer rejects completed status without artifact
+ok 635 - scorer rejects completed status without artifact
+  ---
+  duration_ms: 0.3745
+  type: 'test'
+  ...
+# Subtest: scorer separates simulated and production completion
+ok 636 - scorer separates simulated and production completion
+  ---
+  duration_ms: 0.2017
+  type: 'test'
+  ...
+# Subtest: scorer recognizes multiline text dependency without losing JSON escaping
+ok 637 - scorer recognizes multiline text dependency without losing JSON escaping
+  ---
+  duration_ms: 0.463
+  type: 'test'
+  ...
+# Subtest: scorer rejects approval followed by changed parameters
+ok 638 - scorer rejects approval followed by changed parameters
+  ---
+  duration_ms: 1.0544
+  type: 'test'
+  ...
+# Subtest: scorer rejects duplicate unknown submissions
+ok 639 - scorer rejects duplicate unknown submissions
+  ---
+  duration_ms: 0.2486
+  type: 'test'
+  ...
+# Subtest: full benchmark retains all 500 original queries and contexts without deduplication
+ok 640 - full benchmark retains all 500 original queries and contexts without deduplication
+  ---
+  duration_ms: 4.0876
+  type: 'test'
+  ...
+# Subtest: missing fixture is not counted as task completion
+ok 641 - missing fixture is not counted as task completion
+  ---
+  duration_ms: 1.2867
+  type: 'test'
+  ...
+# Subtest: B: actual text request renders one boundary and hash; stored method still has full contract
+ok 642 - B: actual text request renders one boundary and hash; stored method still has full contract
+  ---
+  duration_ms: 75.8707
+  type: 'test'
+  ...
+# Subtest: B: all 15 source methods remain independent and professional bodies / license survive rendering
+ok 643 - B: all 15 source methods remain independent and professional bodies / license survive rendering
+  ---
+  duration_ms: 13.5758
+  type: 'test'
+  ...
+# Subtest: B: observations carry real facts, unknown original evidence, bound support and ordered image associations
+ok 644 - B: observations carry real facts, unknown original evidence, bound support and ordered image associations
+  ---
+  duration_ms: 3.6859
+  type: 'test'
+  ...
+# Subtest: B: cache invalidates on question / facts / support / image identity and order, not log time
+ok 645 - B: cache invalidates on question / facts / support / image identity and order, not log time
+  ---
+  duration_ms: 5.2416
+  type: 'test'
+  ...
+# Subtest: B: readonly observation receives current original and bound text, never unrelated active-task facts
+ok 646 - B: readonly observation receives current original and bound text, never unrelated active-task facts
+  ---
+  duration_ms: 2.4243
+  type: 'test'
+  ...
+# Subtest: B: selecting direction two retains unique sections, exact words and bound version without full collection
+ok 647 - B: selecting direction two retains unique sections, exact words and bound version without full collection
+  ---
+  duration_ms: 0.8115
+  type: 'test'
+  ...
+# Subtest: B: source projection removes only exact rendered duplicates and retains delta original once
+ok 648 - B: source projection removes only exact rendered duplicates and retains delta original once
+  ---
+  duration_ms: 0.8047
+  type: 'test'
+  ...
+# Subtest: B: intake exact-message pointers survive native mapping and never point to removed bodies
+ok 649 - B: intake exact-message pointers survive native mapping and never point to removed bodies
+  ---
+  duration_ms: 0.932
+  type: 'test'
+  ...
+# Subtest: B: selected old pending plan contains exact parameters and one copy despite another active task
+ok 650 - B: selected old pending plan contains exact parameters and one copy despite another active task
+  ---
+  duration_ms: 2.4683
+  type: 'test'
+  ...
+# Subtest: B: protected delivery remains zero-call and summary input retains the full selected document
+ok 651 - B: protected delivery remains zero-call and summary input retains the full selected document
+  ---
+  duration_ms: 1.1496
+  type: 'test'
+  ...
+# Subtest: B: field and reference repairs keep one draft and specific candidates, excluding recursive history
+ok 652 - B: field and reference repairs keep one draft and specific candidates, excluding recursive history
+  ---
+  duration_ms: 1.0306
+  type: 'test'
+  ...
+# Subtest: B: root schema echoes never become assistant business drafts, but schema discussion remains valid
+ok 653 - B: root schema echoes never become assistant business drafts, but schema discussion remains valid
+  ---
+  duration_ms: 572.0607
+  type: 'test'
+  ...
+# Subtest: B: evidence spans retain UTF-16 positions for Chinese, newline and emoji
+ok 654 - B: evidence spans retain UTF-16 positions for Chinese, newline and emoji
+  ---
+  duration_ms: 0.5408
+  type: 'test'
+  ...
+# Subtest: B: trace records raw actual projection and normalized transport metrics separately
+ok 655 - B: trace records raw actual projection and normalized transport metrics separately
+  ---
+  duration_ms: 0.6373
+  type: 'test'
+  ...
+# Subtest: prompt revision: real wire examples and explicit input paths core
+ok 656 - prompt revision: real wire examples and explicit input paths core
+  ---
+  duration_ms: 229.471
+  type: 'test'
+  ...
+# Subtest: prompt revision: real wire examples and explicit input paths shadow
+ok 657 - prompt revision: real wire examples and explicit input paths shadow
+  ---
+  duration_ms: 199.6429
+  type: 'test'
+  ...
+# Subtest: prompt revision: real wire examples and explicit input paths image_edit
+ok 658 - prompt revision: real wire examples and explicit input paths image_edit
+  ---
+  duration_ms: 131.2936
+  type: 'test'
+  ...
+# Subtest: prompt revision: only applicable text and media branch
+ok 659 - prompt revision: only applicable text and media branch
+  ---
+  duration_ms: 0.3807
+  type: 'test'
+  ...
+# Subtest: schema compression preserves business properties named type and ordinary schema-looking data
+ok 660 - schema compression preserves business properties named type and ordinary schema-looking data
+  ---
+  duration_ms: 22.7885
+  type: 'test'
+  ...
+# Subtest: native actions retain identical validity before and after prompt compression
+ok 661 - native actions retain identical validity before and after prompt compression
+  ---
+  duration_ms: 114.7531
+  type: 'test'
+  ...
+# Subtest: legacy contracts retain validity for valid and invalid operations
+ok 662 - legacy contracts retain validity for valid and invalid operations
+  ---
+  duration_ms: 319.1574
+  type: 'test'
+  ...
+# Subtest: reference scopes, booleans and existing definitions are preserved
+ok 663 - reference scopes, booleans and existing definitions are preserved
+  ---
+  duration_ms: 5.6302
+  type: 'test'
+  ...
+# Subtest: 747 captured raw content survives identity publication including table and video specs
+ok 664 - 747 captured raw content survives identity publication including table and video specs
+  ---
+  duration_ms: 118.5288
+  type: 'test'
+  ...
+# Subtest: pure prompt identity renderer does not inject template headings or duplicate metadata
+ok 665 - pure prompt identity renderer does not inject template headings or duplicate metadata
+  ---
+  duration_ms: 0.4442
+  type: 'test'
+  ...
+# Subtest: structured document has one authority and retains supplementary sections
+ok 666 - structured document has one authority and retains supplementary sections
+  ---
+  duration_ms: 0.8796
+  type: 'test'
+  ...
+# Subtest: JSON missing-field replay is fixed at transport without changing original input
+ok 667 - JSON missing-field replay is fixed at transport without changing original input
+  ---
+  duration_ms: 26.1456
+  type: 'test'
+  ...
+# Subtest: protocol errors retain redacted body and do not retry as content repairs
+ok 668 - protocol errors retain redacted body and do not retry as content repairs
+  ---
+  duration_ms: 5.5479
+  type: 'test'
+  ...
+# Subtest: billing and authentication are distinguished even when both use HTTP403
+ok 669 - billing and authentication are distinguished even when both use HTTP403
+  ---
+  duration_ms: 1.2839
+  type: 'test'
+  ...
+# Subtest: normalization removes only proven redundant metadata, never a different business count
+ok 670 - normalization removes only proven redundant metadata, never a different business count
+  ---
+  duration_ms: 0.7208
+  type: 'test'
+  ...
+# Subtest: greeting metadata pollution completes intake without another understanding call
+ok 671 - greeting metadata pollution completes intake without another understanding call
+  ---
+  duration_ms: 115.0284
+  type: 'test'
+  ...
+# Subtest: system-only 5x5!=5 is corrected before writing without changing user constraints
+ok 672 - system-only 5x5!=5 is corrected before writing without changing user constraints
+  ---
+  duration_ms: 0.5826
+  type: 'test'
+  ...
+# Subtest: explicit or inherited contradictory timing is not silently loosened
+ok 673 - explicit or inherited contradictory timing is not silently loosened
+  ---
+  duration_ms: 0.5513
+  type: 'test'
+  ...
+# Subtest: missing direction count receives an attributable system default
+ok 674 - missing direction count receives an attributable system default
+  ---
+  duration_ms: 0.3116
+  type: 'test'
+  ...
+# Subtest: missing producer is repaired in method plan; corrupt graphs cannot run
+ok 675 - missing producer is repaired in method plan; corrupt graphs cannot run
+  ---
+  duration_ms: 0.8987
+  type: 'test'
+  ...
+# Subtest: simple titles cannot acquire a video script; explicit requested methods survive
+ok 676 - simple titles cannot acquire a video script; explicit requested methods survive
+  ---
+  duration_ms: 0.2404
+  type: 'test'
+  ...
+# Subtest: scope revision keeps future video while current execution is paused; explicit removal is evidence-bound
+ok 677 - scope revision keeps future video while current execution is paused; explicit removal is evidence-bound
+  ---
+  duration_ms: 0.5344
+  type: 'test'
+  ...
+# Subtest: new task missing a source becomes NEEDS_INPUT despite empty clarify task ID
+ok 678 - new task missing a source becomes NEEDS_INPUT despite empty clarify task ID
+  ---
+  duration_ms: 92.3487
+  type: 'test'
+  ...
+# Subtest: unavailable explicit skill produces a preserved capability gap without planner retry
+ok 679 - unavailable explicit skill produces a preserved capability gap without planner retry
+  ---
+  duration_ms: 81.9086
+  type: 'test'
+  ...
+# Subtest: test verifier can complete procedure without certifying factual support or quality
+ok 680 - test verifier can complete procedure without certifying factual support or quality
+  ---
+  duration_ms: 23.56
+  type: 'test'
+  ...
+# Subtest: image observation reaches actual visual input and is bound to the observed source
+ok 681 - image observation reaches actual visual input and is bound to the observed source
+  ---
+  duration_ms: 14.9401
+  type: 'test'
+  ...
+# Subtest: visual observation failure cannot fabricate a completed analysis or paid generation
+ok 682 - visual observation failure cannot fabricate a completed analysis or paid generation
+  ---
+  duration_ms: 22.4062
+  type: 'test'
+  ...
+# Subtest: selector role preserves contract in producer inputs and binds consumers to stable versions
+ok 683 - selector role preserves contract in producer inputs and binds consumers to stable versions
+  ---
+  duration_ms: 0.443
+  type: 'test'
+  ...
+# Subtest: general script skill has no locked-grid prerequisites and does not ask for additional generated media
+ok 684 - general script skill has no locked-grid prerequisites and does not ask for additional generated media
+  ---
+  duration_ms: 7.6635
+  type: 'test'
+  ...
+# Subtest: orientation labels compile to valid tool ratios without overriding an explicit compatible ratio
+ok 685 - orientation labels compile to valid tool ratios without overriding an explicit compatible ratio
+  ---
+  duration_ms: 2.5737
+  type: 'test'
+  ...
+# Subtest: a title-only delivery renders its verified body without adding status templates or assumptions
+ok 686 - a title-only delivery renders its verified body without adding status templates or assumptions
+  ---
+  duration_ms: 14.1133
+  type: 'test'
+  ...
+# Subtest: captured premature JSON root is repaired without losing future media or approval fields
+ok 687 - captured premature JSON root is repaired without losing future media or approval fields
+  ---
+  duration_ms: 8.3281
+  type: 'test'
+  ...
+# Subtest: syntax repair refuses separate objects, duplicate business keys and unknown suffix fields
+ok 688 - syntax repair refuses separate objects, duplicate business keys and unknown suffix fields
+  ---
+  duration_ms: 1.1297
+  type: 'test'
+  ...
+# Subtest: scope sums pending deliveries independently of immediately permitted media
+ok 689 - scope sums pending deliveries independently of immediately permitted media
+  ---
+  duration_ms: 1.5868
+  type: 'test'
+  ...
+# Subtest: revision preserves omitted future video and rebinds its dependency to updated text
+ok 690 - revision preserves omitted future video and rebinds its dependency to updated text
+  ---
+  duration_ms: 5.1109
+  type: 'test'
+  ...
+# Subtest: task slot aliases resolve only inside the named task and only to one accepted version
+ok 691 - task slot aliases resolve only inside the named task and only to one accepted version
+  ---
+  duration_ms: 0.8907
+  type: 'test'
+  ...
+# Subtest: proposal preparation checks executable parameters without asking a model to certify user approval
+ok 692 - proposal preparation checks executable parameters without asking a model to certify user approval
+  ---
+  duration_ms: 28.948
+  type: 'test'
+  ...
+# Subtest: media planning syntax repair preserves literal newlines and known JSON-mode metadata
+ok 693 - media planning syntax repair preserves literal newlines and known JSON-mode metadata
+  ---
+  duration_ms: 7.2348
+  type: 'test'
+  ...
+# Subtest: a creative text deliverable cannot be replaced by its observation prerequisite
+ok 694 - a creative text deliverable cannot be replaced by its observation prerequisite
+  ---
+  duration_ms: 2.4945
+  type: 'test'
+  ...
+# Subtest: HTTP text inputs bind by candidate, persist revision lineage, and duplicate requests do not execute again
+ok 695 - HTTP text inputs bind by candidate, persist revision lineage, and duplicate requests do not execute again
+  ---
+  duration_ms: 2433.6966
+  type: 'test'
+  ...
+# Subtest: Case1 schema field repair preserves both image requirements and their dependency
+ok 696 - Case1 schema field repair preserves both image requirements and their dependency
+  ---
+  duration_ms: 259.662
+  type: 'test'
+  ...
+# Subtest: schema patches cannot replace the entire plan or drop a slot
+ok 697 - schema patches cannot replace the entire plan or drop a slot
+  ---
+  duration_ms: 81.5594
+  type: 'test'
+  ...
+# Subtest: intent snapshot rejects persisted tampering after JSON reload
+ok 698 - intent snapshot rejects persisted tampering after JSON reload
+  ---
+  duration_ms: 0.8072
+  type: 'test'
+  ...
+# Subtest: real intake accepts only a field patch and exposes an immutable two-step snapshot
+ok 699 - real intake accepts only a field patch and exposes an immutable two-step snapshot
+  ---
+  duration_ms: 531.9826
+  type: 'test'
+  ...
+# Subtest: illegal operation enum is patched in place without changing a query goal
+ok 700 - illegal operation enum is patched in place without changing a query goal
+  ---
+  duration_ms: 66.4144
+  type: 'test'
+  ...
+# Subtest: Case2 one image delivered and second execution failed leaves Task PENDING
+ok 701 - Case2 one image delivered and second execution failed leaves Task PENDING
+  ---
+  duration_ms: 6.8769
+  type: 'test'
+  ...
+# Subtest: removing a pending execution item cannot remove its requirement or complete task
+ok 702 - removing a pending execution item cannot remove its requirement or complete task
+  ---
+  duration_ms: 1.1451
+  type: 'test'
+  ...
+# Subtest: requirement definitions cannot be silently reduced during retry
+ok 703 - requirement definitions cannot be silently reduced during retry
+  ---
+  duration_ms: 0.739
+  type: 'test'
+  ...
+# Subtest: artifact DAG records actual predecessor artifact and task completes only after both requirements
+ok 704 - artifact DAG records actual predecessor artifact and task completes only after both requirements
+  ---
+  duration_ms: 2.2438
+  type: 'test'
+  ...
+# Subtest: Case3 status query supplies required/produced/remaining and passes through composer without new task
+ok 705 - Case3 status query supplies required/produced/remaining and passes through composer without new task
+  ---
+  duration_ms: 11.213
+  type: 'test'
+  ...
+# Subtest: Case4 summarize skill performs intake and composer without creating a production task
+ok 706 - Case4 summarize skill performs intake and composer without creating a production task
+  ---
+  duration_ms: 174.5102
+  type: 'test'
+  ...
+# Subtest: final composer has no state mutation or tool execution authority even with malicious output
+ok 707 - final composer has no state mutation or tool execution authority even with malicious output
+  ---
+  duration_ms: 1.4555
+  type: 'test'
+  ...
+# Subtest: final composer failure never resubmits or removes a previously generated image
+ok 708 - final composer failure never resubmits or removes a previously generated image
+  ---
+  duration_ms: 1.6245
+  type: 'test'
+  ...
+# Subtest: duplicate assistant context is retained once with resolvable source pointers
+ok 709 - duplicate assistant context is retained once with resolvable source pointers
+  ---
+  duration_ms: 0.8921
+  type: 'test'
+  ...
+# Subtest: compiled two-image pipeline submits in dependency order and binds actual first result
+ok 710 - compiled two-image pipeline submits in dependency order and binds actual first result
+  ---
+  duration_ms: 333.9506
+  type: 'test'
+  ...
+# Subtest: answer, summarize and explain never accept a hidden image production obligation
+ok 711 - answer, summarize and explain never accept a hidden image production obligation
+  ---
+  duration_ms: 809.9812
+  type: 'test'
+  ...
+# Subtest: final response replay is idempotent and does not call composer again
+ok 712 - final response replay is idempotent and does not call composer again
+  ---
+  duration_ms: 137.2648
+  type: 'test'
+  ...
+# Subtest: assistant prose displays transport escapes but leaves code and literal examples intact
+ok 713 - assistant prose displays transport escapes but leaves code and literal examples intact
+  ---
+  duration_ms: 0.1436
+  type: 'test'
+  ...
+# Subtest: runtime rejects whole-plan repair and persists the original two requirements without any execution
+ok 714 - runtime rejects whole-plan repair and persists the original two requirements without any execution
+  ---
+  duration_ms: 125.6966
+  type: 'test'
+  ...
+# Subtest: query composer failure cannot be reported as answered or complete and preserves creative focus
+ok 715 - query composer failure cannot be reported as answered or complete and preserves creative focus
+  ---
+  duration_ms: 1.7693
+  type: 'test'
+  ...
+# Subtest: repair fills a missing description without replacing the understood deliverables
+ok 716 - repair fills a missing description without replacing the understood deliverables
+  ---
+  duration_ms: 34.7641
+  type: 'test'
+  ...
+# Subtest: schema repair cannot change summary, file count or existing change constraints
+ok 717 - schema repair cannot change summary, file count or existing change constraints
+  ---
+  duration_ms: 0.836
+  type: 'test'
+  ...
+# Subtest: a later image revision does not erase fulfillment of its predecessor requirement
+ok 718 - a later image revision does not erase fulfillment of its predecessor requirement
+  ---
+  duration_ms: 1.3217
+  type: 'test'
+  ...
+# Subtest: summary reads the selected catalog handle as full source content without a new task
+ok 719 - summary reads the selected catalog handle as full source content without a new task
+  ---
+  duration_ms: 104.8844
+  type: 'test'
+  ...
+# Subtest: compiled creation then modification retains both deliveries and exact parent version
+ok 720 - compiled creation then modification retains both deliveries and exact parent version
+  ---
+  duration_ms: 164.2506
+  type: 'test'
+  ...
+# Subtest: compiled partial failure, status question and explicit resume preserve one task and avoid resubmitting first image
+ok 721 - compiled partial failure, status question and explicit resume preserve one task and avoid resubmitting first image
+  ---
+  duration_ms: 208.6725
+  type: 'test'
+  ...
+# Subtest: prompt schema deduplication expands to the identical contract and keeps validators strict
+ok 722 - prompt schema deduplication expands to the identical contract and keeps validators strict
+  ---
+  duration_ms: 141.6723
+  type: 'test'
+  ...
+# Subtest: empty deliverables and explicit empty question dimensions retain the actual user question
+ok 723 - empty deliverables and explicit empty question dimensions retain the actual user question
+  ---
+  duration_ms: 0.7952
+  type: 'test'
+  ...
+# Subtest: retrieved facts and generated prose never masquerade as verified answer coverage
+ok 724 - retrieved facts and generated prose never masquerade as verified answer coverage
+  ---
+  duration_ms: 1.8355
+  type: 'test'
+  ...
+# Subtest: composer supplements requested ledger counts even when model omits them, without mutating task
+ok 725 - composer supplements requested ledger counts even when model omits them, without mutating task
+  ---
+  duration_ms: 1.8096
+  type: 'test'
+  ...
+# Subtest: identity composer does not receive unrelated task/history bodies; history query retains selected original evidence
+ok 726 - identity composer does not receive unrelated task/history bodies; history query retains selected original evidence
+  ---
+  duration_ms: 0.3924
+  type: 'test'
+  ...
+# Subtest: runtime fingerprint detects edits while preserving loaded version and excluding env/session data
+ok 727 - runtime fingerprint detects edits while preserving loaded version and excluding env/session data
+  ---
+  duration_ms: 152.8814
+  type: 'test'
+  ...
+# Subtest: platform dependency check allows branding but rejects legacy imports and endpoint dependency
+ok 728 - platform dependency check allows branding but rejects legacy imports and endpoint dependency
+  ---
+  duration_ms: 2.0354
+  type: 'test'
+  ...
+# Subtest: missing summary preserves the already parsed two-item snapshot during field repair
+ok 729 - missing summary preserves the already parsed two-item snapshot during field repair
+  ---
+  duration_ms: 603.5559
+  type: 'test'
+  ...
+# Subtest: a non-intent response can retry intake but the first parsed intent is recorded exactly once
+ok 730 - a non-intent response can retry intake but the first parsed intent is recorded exactly once
+  ---
+  duration_ms: 317.2889
+  type: 'test'
+  ...
+# Subtest: an observation routing contradiction repairs only operation kind and preserves visual obligation
+ok 731 - an observation routing contradiction repairs only operation kind and preserves visual obligation
+  ---
+  duration_ms: 370.5505
+  type: 'test'
+  ...
+# Subtest: image edit unit-selector removal cannot change the actual image or its modification request
+ok 732 - image edit unit-selector removal cannot change the actual image or its modification request
+  ---
+  duration_ms: 312.2837
+  type: 'test'
+  ...
+# Subtest: legacy completed text survives a terse final composer without inventing semantic acceptance
+ok 733 - legacy completed text survives a terse final composer without inventing semantic acceptance
+  ---
+  duration_ms: 13.9791
+  type: 'test'
+  ...
+# Subtest: presentation composer appends a bound image even if its prose omits the image
+ok 734 - presentation composer appends a bound image even if its prose omits the image
+  ---
+  duration_ms: 1.0165
+  type: 'test'
+  ...
+# Subtest: real Runtime records intake and composer separately with no production task for a query
+ok 735 - real Runtime records intake and composer separately with no production task for a query
+  ---
+  duration_ms: 117.1633
+  type: 'test'
+  ...
+# Subtest: history sorts, searches and paginates concise user-visible summaries
+ok 736 - history sorts, searches and paginates concise user-visible summaries
+  ---
+  duration_ms: 53.0322
+  type: 'test'
+  ...
+# Subtest: history ignores corrupt and non-session files without recovering or mutating saved runs
+ok 737 - history ignores corrupt and non-session files without recovering or mutating saved runs
+  ---
+  duration_ms: 49.77
+  type: 'test'
+  ...
+# Subtest: history invalidates cached summaries when files change or disappear
+ok 738 - history invalidates cached summaries when files change or disappear
+  ---
+  duration_ms: 10.5138
+  type: 'test'
+  ...
+# Subtest: history extracts visible text from both stored message formats
+ok 739 - history extracts visible text from both stored message formats
+  ---
+  duration_ms: 0.5879
+  type: 'test'
+  ...
+# Subtest: recorded image edit labelled continue becomes a revision without mutating old state
+ok 740 - recorded image edit labelled continue becomes a revision without mutating old state
+  ---
+  duration_ms: 3.5965
+  type: 'test'
+  ...
+# Subtest: recorded prefixed references resolve to actual IDs and duplicate URL/ID collapses
+ok 741 - recorded prefixed references resolve to actual IDs and duplicate URL/ID collapses
+  ---
+  duration_ms: 3.0643
+  type: 'test'
+  ...
+# Subtest: NEEDS_INPUT with a complete replacement recompiles and inherits missing fixed spec and approval
+ok 742 - NEEDS_INPUT with a complete replacement recompiles and inherits missing fixed spec and approval
+  ---
+  duration_ms: 0.5635
+  type: 'test'
+  ...
+# Subtest: changed unfinished constraints cannot silently reuse the old goal; unchanged resume remains valid
+ok 743 - changed unfinished constraints cannot silently reuse the old goal; unchanged resume remains valid
+  ---
+  duration_ms: 0.4848
+  type: 'test'
+  ...
+# Subtest: recorded sequential script/video plan loses invented approval through independent raw-query gate
+ok 744 - recorded sequential script/video plan loses invented approval through independent raw-query gate
+  ---
+  duration_ms: 207.7146
+  type: 'test'
+  ...
+# Subtest: source alias never selects a different session or invents an asset
+ok 745 - source alias never selects a different session or invents an asset
+  ---
+  duration_ms: 1.1901
+  type: 'test'
+  ...
+# Subtest: approval cannot authorize changed frozen parameters
+ok 746 - approval cannot authorize changed frozen parameters
+  ---
+  duration_ms: 1.1286
+  type: 'test'
+  ...
+# Subtest: support artifacts do not authorize an automatic revision
+ok 747 - support artifacts do not authorize an automatic revision
+  ---
+  duration_ms: 0.4026
+  type: 'test'
+  ...
+# Subtest: recorded continue edit passes intake as a newly compiled edit instead of old-task resume
+ok 748 - recorded continue edit passes intake as a newly compiled edit instead of old-task resume
+  ---
+  duration_ms: 122.6542
+  type: 'test'
+  ...
+# Subtest: revision receives original user data for its direct sources without unrelated history
+ok 749 - revision receives original user data for its direct sources without unrelated history
+  ---
+  duration_ms: 2.1843
+  type: 'test'
+  ...
+# Subtest: pure approval restores durable goal without regenerating a dependency graph
+ok 750 - pure approval restores durable goal without regenerating a dependency graph
+  ---
+  duration_ms: 133.9002
+  type: 'test'
+  ...
+# Subtest: explicit clarification cannot silently drop original constraints or quantities
+ok 751 - explicit clarification cannot silently drop original constraints or quantities
+  ---
+  duration_ms: 1.0189
+  type: 'test'
+  ...
+# Subtest: literal ratio clauses fill missing spec and detect contradictory structured input
+ok 752 - literal ratio clauses fill missing spec and detect contradictory structured input
+  ---
+  duration_ms: 1.1534
+  type: 'test'
+  ...
+# Subtest: pending control corrects approval and routes read-only inspection to its own goal
+ok 753 - pending control corrects approval and routes read-only inspection to its own goal
+  ---
+  duration_ms: 155.8306
+  type: 'test'
+  ...
+# Subtest: assetId aliases resolve only known assets and invalid references discard the misleading draft
+ok 754 - assetId aliases resolve only known assets and invalid references discard the misleading draft
+  ---
+  duration_ms: 0.5536
+  type: 'test'
+  ...
+# Subtest: strict intake prompt advertises required controls and bad source IDs are not echoed during recovery
+ok 755 - strict intake prompt advertises required controls and bad source IDs are not echoed during recovery
+  ---
+  duration_ms: 77.0873
+  type: 'test'
+  ...
+# Subtest: A compact edit has delta, precise medium fields, and no duplicate control decisions
+ok 756 - A compact edit has delta, precise medium fields, and no duplicate control decisions
+  ---
+  duration_ms: 222.7027
+  type: 'test'
+  ...
+# Subtest: A media duplicate proof rejects repeated effects but permits independent extra requests
+ok 757 - A media duplicate proof rejects repeated effects but permits independent extra requests
+  ---
+  duration_ms: 19.4855
+  type: 'test'
+  ...
+# Subtest: A legacy global method ownership cannot disappear or be copied to every target
+ok 758 - A legacy global method ownership cannot disappear or be copied to every target
+  ---
+  duration_ms: 1.2078
+  type: 'test'
+  ...
+# Subtest: A query receipts distinguish missing information from topic mismatch and skill reading from execution
+ok 759 - A query receipts distinguish missing information from topic mismatch and skill reading from execution
+  ---
+  duration_ms: 16.0857
+  type: 'test'
+  ...
+# Subtest: A comparison is one ordered observation and failed sets are retried atomically
+ok 760 - A comparison is one ordered observation and failed sets are retried atomically
+  ---
+  duration_ms: 4.3281
+  type: 'test'
+  ...
+# Subtest: B untouched E04 response preserves recorded error in legacy replay and cannot bypass current small contract
+ok 761 - B untouched E04 response preserves recorded error in legacy replay and cannot bypass current small contract
+  ---
+  duration_ms: 320.911
+  type: 'test'
+  ...
+# Subtest: B captured D01 split visual requests become one source-complete request; visual quality remains unverified
+ok 762 - B captured D01 split visual requests become one source-complete request; visual quality remains unverified
+  ---
+  duration_ms: 5.2645
+  type: 'test'
+  ...
+# Subtest: A compact missing control repair locks the original target instead of requesting old continuation
+ok 763 - A compact missing control repair locks the original target instead of requesting old continuation
+  ---
+  duration_ms: 406.056
+  type: 'test'
+  ...
+# Subtest: A saved plan delta preserves facts, hard constraints and existing quote gate while reusing prior methods
+ok 764 - A saved plan delta preserves facts, hard constraints and existing quote gate while reusing prior methods
+  ---
+  duration_ms: 152.4089
+  type: 'test'
+  ...
+# Subtest: C ten sequential natural queries with explicitly simulated model and media, no injected predecessor artifacts
+ok 765 - C ten sequential natural queries with explicitly simulated model and media, no injected predecessor artifacts
+  ---
+  duration_ms: 1670.3755
+  type: 'test'
+  ...
+# Subtest: 10 videos: one durable batch submits and queries all jobs within 4 model decisions
+ok 766 - 10 videos: one durable batch submits and queries all jobs within 4 model decisions
+  ---
+  duration_ms: 91.5658
+  type: 'test'
+  ...
+# Subtest: each deliverable has its own evidence; downstream media opens only after text artifact
+ok 767 - each deliverable has its own evidence; downstream media opens only after text artifact
+  ---
+  duration_ms: 30.3168
+  type: 'test'
+  ...
+# Subtest: confirmation binds to a concrete batch hash and survives roundtrip persistence
+ok 768 - confirmation binds to a concrete batch hash and survives roundtrip persistence
+  ---
+  duration_ms: 37.9697
+  type: 'test'
+  ...
+# Subtest: known executions are reused within a resumed batch, never charged again
+ok 769 - known executions are reused within a resumed batch, never charged again
+  ---
+  duration_ms: 3.9983
+  type: 'test'
+  ...
+# Subtest: background receipts reconcile a limited task to completed without resubmission
+ok 770 - background receipts reconcile a limited task to completed without resubmission
+  ---
+  duration_ms: 3.0211
+  type: 'test'
+  ...
+# Subtest: atomic checkpoint stores unknown side effects and refuses retry after restart
+ok 771 - atomic checkpoint stores unknown side effects and refuses retry after restart
+  ---
+  duration_ms: 51.3084
+  type: 'test'
+  ...
+# Subtest: essential missing source exits after semantic understanding, without routing failure
+ok 772 - essential missing source exits after semantic understanding, without routing failure
+  ---
+  duration_ms: 85.9719
+  type: 'test'
+  ...
+# Subtest: artifact revision keeps parent and rejects invented references
+ok 773 - artifact revision keeps parent and rejects invented references
+  ---
+  duration_ms: 21.8394
+  type: 'test'
+  ...
+# Subtest: observed quality failure reopens the item, feeds replanning and preserves rejected version
+ok 774 - observed quality failure reopens the item, feeds replanning and preserves rejected version
+  ---
+  duration_ms: 13.7644
+  type: 'test'
+  ...
+# Subtest: duration mismatch cannot be silently sent to the provider
+ok 775 - duration mismatch cannot be silently sent to the provider
+  ---
+  duration_ms: 1.2617
+  type: 'test'
+  ...
+# Subtest: independent media slots retain descriptions and cannot be merged into a lossy batch
+ok 776 - independent media slots retain descriptions and cannot be merged into a lossy batch
+  ---
+  duration_ms: 1.2743
+  type: 'test'
+  ...
+# Subtest: background quality rejection is resumable and invokes the bounded continuation hook
+ok 777 - background quality rejection is resumable and invokes the bounded continuation hook
+  ---
+  duration_ms: 2.0572
+  type: 'test'
+  ...
+# Subtest: verification separates preflight parameter checks from actual visual evidence
+ok 778 - verification separates preflight parameter checks from actual visual evidence
+  ---
+  duration_ms: 2.2615
+  type: 'test'
+  ...
+# Subtest: run_skill validates structured output and persists the real text artifact without media tools
+ok 779 - run_skill validates structured output and persists the real text artifact without media tools
+  ---
+  duration_ms: 26.1652
+  type: 'test'
+  ...
+# Subtest: a premature confirmation reply still persists a concrete plan; approval executes those exact arguments
+ok 780 - a premature confirmation reply still persists a concrete plan; approval executes those exact arguments
+  ---
+  duration_ms: 10.5561
+  type: 'test'
+  ...
+# Subtest: intake failure cannot claim an older completed artifact as the new request result
+ok 781 - intake failure cannot claim an older completed artifact as the new request result
+  ---
+  duration_ms: 5.2834
+  type: 'test'
+  ...
+# Subtest: image batch rejects video-only parameters before any provider submission
+ok 782 - image batch rejects video-only parameters before any provider submission
+  ---
+  duration_ms: 0.6616
+  type: 'test'
+  ...
+# Subtest: continuation drafts must validate dependencies before any old-goal reuse
+ok 783 - continuation drafts must validate dependencies before any old-goal reuse
+  ---
+  duration_ms: 153.4959
+  type: 'test'
+  ...
+# Subtest: captured C04-T4 reads pending plan with one intake call, no inherited generation
+ok 784 - captured C04-T4 reads pending plan with one intake call, no inherited generation
+  ---
+  duration_ms: 142.6223
+  type: 'test'
+  ...
+# Subtest: captured inventory reads artifacts and relations without provider task matching
+ok 785 - captured inventory reads artifacts and relations without provider task matching
+  ---
+  duration_ms: 138.9761
+  type: 'test'
+  ...
+# Subtest: captured white cup target keeps image separate from supporting prompt
+ok 786 - captured white cup target keeps image separate from supporting prompt
+  ---
+  duration_ms: 140.4738
+  type: 'test'
+  ...
+# Subtest: captured stage draft assigns direction count only to direction producer
+ok 787 - captured stage draft assigns direction count only to direction producer
+  ---
+  duration_ms: 74.3078
+  type: 'test'
+  ...
+# Subtest: captured selected direction consumes existing version without producing another set
+ok 788 - captured selected direction consumes existing version without producing another set
+  ---
+  duration_ms: 67.2149
+  type: 'test'
+  ...
+# Subtest: captured time edit summary cannot become the source of a new weekly fact
+ok 789 - captured time edit summary cannot become the source of a new weekly fact
+  ---
+  duration_ms: 1.3778
+  type: 'test'
+  ...
+# Subtest: local span replacement preserves everything outside requested time and rejects ambiguous anchors
+ok 790 - local span replacement preserves everything outside requested time and rejects ambiguous anchors
+  ---
+  duration_ms: 1.4979
+  type: 'test'
+  ...
+# Subtest: translation implemented by rewrite is English v1 derived from Chinese v2
+ok 791 - translation implemented by rewrite is English v1 derived from Chinese v2
+  ---
+  duration_ms: 8.4271
+  type: 'test'
+  ...
+# Subtest: subtitle revision removes inherited direction production but keeps source reference
+ok 792 - subtitle revision removes inherited direction production but keeps source reference
+  ---
+  duration_ms: 0.5355
+  type: 'test'
+  ...
+# Subtest: two independent products may legitimately use same direction skill
+ok 793 - two independent products may legitimately use same direction skill
+  ---
+  duration_ms: 0.7053
+  type: 'test'
+  ...
+# Subtest: inserting support prompts and failed candidates does not change visible first image
+ok 794 - inserting support prompts and failed candidates does not change visible first image
+  ---
+  duration_ms: 0.5389
+  type: 'test'
+  ...
+# Subtest: read plan, inventory and message leave original approval, media ledger and focus unchanged
+ok 795 - read plan, inventory and message leave original approval, media ledger and focus unchanged
+  ---
+  duration_ms: 22.4979
+  type: 'test'
+  ...
+# Subtest: previous user exact message is read from typed message evidence
+ok 796 - previous user exact message is read from typed message evidence
+  ---
+  duration_ms: 2.8348
+  type: 'test'
+  ...
+# Subtest: invalid continuation enum repairs only that field, no blanket continue mapping
+ok 797 - invalid continuation enum repairs only that field, no blanket continue mapping
+  ---
+  duration_ms: 52.5371
+  type: 'test'
+  ...
+# Subtest: media merging preserves three distinct logical slots and coverage requirements
+ok 798 - media merging preserves three distinct logical slots and coverage requirements
+  ---
+  duration_ms: 2.2161
+  type: 'test'
+  ...
+# Subtest: 16:9 and square pixels fail before image submit
+ok 799 - 16:9 and square pixels fail before image submit
+  ---
+  duration_ms: 1.5879
+  type: 'test'
+  ...
+# Subtest: changed reference or description cannot approve old pending plan
+ok 800 - changed reference or description cannot approve old pending plan
+  ---
+  duration_ms: 0.9438
+  type: 'test'
+  ...
+# Subtest: future source binding keeps goal immutable and rejects cardinality or source version changes
+ok 801 - future source binding keeps goal immutable and rejects cardinality or source version changes
+  ---
+  duration_ms: 1.4733
+  type: 'test'
+  ...
+# Subtest: simulation coverage cannot satisfy production semantic quality gate
+ok 802 - simulation coverage cannot satisfy production semantic quality gate
+  ---
+  duration_ms: 0.2053
+  type: 'test'
+  ...
+# Subtest: trace keeps business authorization while removing credential authorization
+ok 803 - trace keeps business authorization while removing credential authorization
+  ---
+  duration_ms: 0.1934
+  type: 'test'
+  ...
+# Subtest: media planning carries global facts and constraints into actual model payload
+ok 804 - media planning carries global facts and constraints into actual model payload
+  ---
+  duration_ms: 22.5471
+  type: 'test'
+  ...
+# Subtest: same-turn script binds three real source units before planning without changing accepted goal
+ok 805 - same-turn script binds three real source units before planning without changing accepted goal
+  ---
+  duration_ms: 16.4866
+  type: 'test'
+  ...
+# Subtest: actual text verifier receives original version plus raw delta and candidate, independent of summary
+ok 806 - actual text verifier receives original version plus raw delta and candidate, independent of summary
+  ---
+  duration_ms: 2.9711
+  type: 'test'
+  ...
+# Subtest: mismatched inspection contract returns once then stops with explicit recovery reason
+ok 807 - mismatched inspection contract returns once then stops with explicit recovery reason
+  ---
+  duration_ms: 7.4142
+  type: 'test'
+  ...
+# Subtest: mixed read and production proposal cannot silently drop media authorization scope
+ok 808 - mixed read and production proposal cannot silently drop media authorization scope
+  ---
+  duration_ms: 0.337
+  type: 'test'
+  ...
+# Subtest: test receipt adapter distinguishes mapping success, missing unit and unassessed picture quality
+ok 809 - test receipt adapter distinguishes mapping success, missing unit and unassessed picture quality
+  ---
+  duration_ms: 0.3268
+  type: 'test'
+  ...
+# Subtest: local time change executes the span path and persists bound original plus unchanged text
+ok 810 - local time change executes the span path and persists bound original plus unchanged text
+  ---
+  duration_ms: 13.7366
+  type: 'test'
+  ...
+# Subtest: explicit simulation policy can progress mapped coverage, and the same receipts cannot pass production
+ok 811 - explicit simulation policy can progress mapped coverage, and the same receipts cannot pass production
+  ---
+  duration_ms: 1.6058
+  type: 'test'
+  ...
+# Subtest: a transient Windows rename failure retries without discarding the last checkpoint
+ok 812 - a transient Windows rename failure retries without discarding the last checkpoint
+  ---
+  duration_ms: 220.9409
+  type: 'test'
+  ...
+# Subtest: background verification reports running while truly orphaned work reports interrupted
+ok 813 - background verification reports running while truly orphaned work reports interrupted
+  ---
+  duration_ms: 0.8749
+  type: 'test'
+  ...
+# Subtest: an unaccepted extra proposal can be corrected to the one actual user obligation
+ok 814 - an unaccepted extra proposal can be corrected to the one actual user obligation
+  ---
+  duration_ms: 223.1248
+  type: 'test'
+  ...
+1..814
+# tests 841
+# suites 0
+# pass 841
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8478.3445

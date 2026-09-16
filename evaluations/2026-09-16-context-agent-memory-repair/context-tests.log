@@ -1,0 +1,550 @@
+TAP version 13
+# Subtest: context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+ok 1 - context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+  ---
+  duration_ms: 0.6329
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual finished feedback
+ok 2 - context behavior scripted: identical query branches on actual finished feedback
+  ---
+  duration_ms: 3.4628
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual processing feedback
+ok 3 - context behavior scripted: identical query branches on actual processing feedback
+  ---
+  duration_ms: 0.9819
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual parameter_error feedback
+ok 4 - context behavior scripted: identical query branches on actual parameter_error feedback
+  ---
+  duration_ms: 0.8299
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: one direction and known facts can be delivered as text without creating media
+ok 5 - context behavior scripted: one direction and known facts can be delivered as text without creating media
+  ---
+  duration_ms: 31.9755
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+ok 6 - context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+  ---
+  duration_ms: 17.5379
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+ok 7 - context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+  ---
+  duration_ms: 12.3447
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: observation receives actual image identity plus material and unknown status
+ok 8 - context behavior scripted: observation receives actual image identity plus material and unknown status
+  ---
+  duration_ms: 15.0579
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+ok 9 - context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+  ---
+  duration_ms: 14.1966
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order a,b
+ok 10 - context behavior scripted: grouped independent reads return both call IDs for order a,b
+  ---
+  duration_ms: 9.9965
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order b,a
+ok 11 - context behavior scripted: grouped independent reads return both call IDs for order b,a
+  ---
+  duration_ms: 8.9222
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+ok 12 - context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+  ---
+  duration_ms: 9.9917
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+ok 13 - context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+  ---
+  duration_ms: 12.069
+  type: 'test'
+  ...
+# Subtest: context history stores original roles, text and detached record values without business state
+ok 14 - context history stores original roles, text and detached record values without business state
+  ---
+  duration_ms: 2.731
+  type: 'test'
+  ...
+# Subtest: history persistence is owner scoped, append only, atomic and traversal resistant
+ok 15 - history persistence is owner scoped, append only, atomic and traversal resistant
+  ---
+  duration_ms: 17.2151
+  type: 'test'
+  ...
+# Subtest: queued saves preserve the complete append order
+ok 16 - queued saves preserve the complete append order
+  ---
+  duration_ms: 7.775
+  type: 'test'
+  ...
+# Subtest: history search returns attributable raw snippets with time filters and no cross-session lookup
+ok 17 - history search returns attributable raw snippets with time filters and no cross-session lookup
+  ---
+  duration_ms: 0.79
+  type: 'test'
+  ...
+# Subtest: history reading preserves source text and supports explicit character pagination
+ok 18 - history reading preserves source text and supports explicit character pagination
+  ---
+  duration_ms: 0.3122
+  type: 'test'
+  ...
+# Subtest: context preserves roles and native function call/result identities in original order
+ok 19 - context preserves roles and native function call/result identities in original order
+  ---
+  duration_ms: 0.8301
+  type: 'test'
+  ...
+# Subtest: context keeps tool groups whole across declared group boundaries and keeps chronological order
+ok 20 - context keeps tool groups whole across declared group boundaries and keeps chronological order
+  ---
+  duration_ms: 0.3499
+  type: 'test'
+  ...
+# Subtest: context trimming preserves latest user and complete latest tool feedback without rewriting history
+ok 21 - context trimming preserves latest user and complete latest tool feedback without rewriting history
+  ---
+  duration_ms: 0.4955
+  type: 'test'
+  ...
+# Subtest: oversized tool feedback has an explicit source pointer and can be recovered with read_history
+ok 22 - oversized tool feedback has an explicit source pointer and can be recovered with read_history
+  ---
+  duration_ms: 1.2321
+  type: 'test'
+  ...
+# Subtest: latest user and tool arguments cannot be silently truncated to fit a budget
+ok 23 - latest user and tool arguments cannot be silently truncated to fit a budget
+  ---
+  duration_ms: 0.585
+  type: 'test'
+  ...
+# Subtest: incomplete historical tool groups are explicit omissions, never unmatched model protocol
+ok 24 - incomplete historical tool groups are explicit omissions, never unmatched model protocol
+  ---
+  duration_ms: 0.2392
+  type: 'test'
+  ...
+# Subtest: skill and asset metadata never become system instructions or replace original asset bodies
+ok 25 - skill and asset metadata never become system instructions or replace original asset bodies
+  ---
+  duration_ms: 0.4282
+  type: 'test'
+  ...
+# Subtest: budget includes tool definitions and reserved headroom with a conservative multilingual estimate
+ok 26 - budget includes tool definitions and reserved headroom with a conservative multilingual estimate
+  ---
+  duration_ms: 0.3373
+  type: 'test'
+  ...
+# Subtest: uploaded attachment identities remain in the same user message projection and resolve actual assets
+ok 27 - uploaded attachment identities remain in the same user message projection and resolve actual assets
+  ---
+  duration_ms: 0.3782
+  type: 'test'
+  ...
+# Subtest: trimmed Skill reads retain a precise pointer to their original method text
+ok 28 - trimmed Skill reads retain a precise pointer to their original method text
+  ---
+  duration_ms: 1.373
+  type: 'test'
+  ...
+# Subtest: runtime request traces stay available without duplicating original conversation search or crop notices
+ok 29 - runtime request traces stay available without duplicating original conversation search or crop notices
+  ---
+  duration_ms: 0.4488
+  type: 'test'
+  ...
+# Subtest: only actual server approvals expose exact unsubmitted media parameters to the model
+ok 30 - only actual server approvals expose exact unsubmitted media parameters to the model
+  ---
+  duration_ms: 1.4034
+  type: 'test'
+  ...
+# Subtest: context loop: normal answer is one call with no understanding, planner or final composer
+ok 31 - context loop: normal answer is one call with no understanding, planner or final composer
+  ---
+  duration_ms: 3.543
+  type: 'test'
+  ...
+# Subtest: context loop: independent calls return paired results before dependent next call
+ok 32 - context loop: independent calls return paired results before dependent next call
+  ---
+  duration_ms: 1.6781
+  type: 'test'
+  ...
+# Subtest: context loop: malformed arguments and actionable tool errors return to same model
+ok 33 - context loop: malformed arguments and actionable tool errors return to same model
+  ---
+  duration_ms: 0.7361
+  type: 'test'
+  ...
+# Subtest: context loop: truncated message never becomes successful delivery
+ok 34 - context loop: truncated message never becomes successful delivery
+  ---
+  duration_ms: 0.86
+  type: 'test'
+  ...
+# Subtest: context loop: total step and tool budgets cannot be bypassed by endless calls
+ok 35 - context loop: total step and tool budgets cannot be bypassed by endless calls
+  ---
+  duration_ms: 0.8282
+  type: 'test'
+  ...
+# Subtest: context loop: cancellation closes tool protocol without starting further side effects
+ok 36 - context loop: cancellation closes tool protocol without starting further side effects
+  ---
+  duration_ms: 0.5074
+  type: 'test'
+  ...
+# Subtest: context loop: durable request replay after restart does not call model or tools again
+ok 37 - context loop: durable request replay after restart does not call model or tools again
+  ---
+  duration_ms: 24.2643
+  type: 'test'
+  ...
+# Subtest: context loop: interrupted calls remain inspectable and are never automatically executed
+ok 38 - context loop: interrupted calls remain inspectable and are never automatically executed
+  ---
+  duration_ms: 0.7445
+  type: 'test'
+  ...
+# Subtest: context recovery: provider receipt survives crash between submission and tool-result recording
+ok 39 - context recovery: provider receipt survives crash between submission and tool-result recording
+  ---
+  duration_ms: 0.4214
+  type: 'test'
+  ...
+# Subtest: context model budget: visual observation shares the same total model budget and exact trace
+ok 40 - context model budget: visual observation shares the same total model budget and exact trace
+  ---
+  duration_ms: 33.3484
+  type: 'test'
+  ...
+# Subtest: context loop: actual provider adapter wire preserves native call/result feedback (mock HTTP)
+ok 41 - context loop: actual provider adapter wire preserves native call/result feedback (mock HTTP)
+  ---
+  duration_ms: 4.7231
+  type: 'test'
+  ...
+# Subtest: context entry: separate HTTP serves UI and uses only context sessions; CSRF and model opt-in enforced
+ok 42 - context entry: separate HTTP serves UI and uses only context sessions; CSRF and model opt-in enforced
+  ---
+  duration_ms: 95.5924
+  type: 'test'
+  ...
+# Subtest: context entry: actual HTTP roundtrip streams model response into durable new history
+ok 43 - context entry: actual HTTP roundtrip streams model response into durable new history
+  ---
+  duration_ms: 77.6195
+  type: 'test'
+  ...
+# Subtest: context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions
+ok 44 - context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions
+  ---
+  duration_ms: 141.2748
+  type: 'test'
+  ...
+# Subtest: context architecture: new execution modules never import old business engine
+ok 45 - context architecture: new execution modules never import old business engine
+  ---
+  duration_ms: 3.1355
+  type: 'test'
+  ...
+# Subtest: repair: memory search excludes its own calls/results; exact identities remain readable
+ok 46 - repair: memory search excludes its own calls/results; exact identities remain readable
+  ---
+  duration_ms: 35.4813
+  type: 'test'
+  ...
+# Subtest: repair: surrounding memory cannot reintroduce nested model requests or retrieval echoes
+ok 47 - repair: surrounding memory cannot reintroduce nested model requests or retrieval echoes
+  ---
+  duration_ms: 14.0547
+  type: 'test'
+  ...
+# Subtest: repair: actual catalog projection removes fixed direction count without changing legacy catalog
+ok 48 - repair: actual catalog projection removes fixed direction count without changing legacy catalog
+  ---
+  duration_ms: 21.2503
+  type: 'test'
+  ...
+# Subtest: repair: long adapted methods page without losing original professional content
+ok 49 - repair: long adapted methods page without losing original professional content
+  ---
+  duration_ms: 6.4925
+  type: 'test'
+  ...
+# Subtest: repair: runtime capabilities come from tools, not video Skill names
+ok 50 - repair: runtime capabilities come from tools, not video Skill names
+  ---
+  duration_ms: 26.7535
+  type: 'test'
+  ...
+# Subtest: repair: model receives addressable original messages and saved version identity
+ok 51 - repair: model receives addressable original messages and saved version identity
+  ---
+  duration_ms: 10.6484
+  type: 'test'
+  ...
+# Subtest: repair: save original chat exactly, then create a real child revision; repeat original archival reuses asset
+ok 52 - repair: save original chat exactly, then create a real child revision; repeat original archival reuses asset
+  ---
+  duration_ms: 9.2006
+  type: 'test'
+  ...
+# Subtest: repair: original archival rejects invented messages, changed originals, invalid parent and empty input
+ok 53 - repair: original archival rejects invented messages, changed originals, invalid parent and empty input
+  ---
+  duration_ms: 9.6834
+  type: 'test'
+  ...
+# Subtest: repair: archival and revision keep existing persistence rollback and call idempotency
+ok 54 - repair: archival and revision keep existing persistence rollback and call idempotency
+  ---
+  duration_ms: 9.2669
+  type: 'test'
+  ...
+# Subtest: repair: observation fills exact linked material and co-uploaded unknowns, excludes unrelated documents
+ok 55 - repair: observation fills exact linked material and co-uploaded unknowns, excludes unrelated documents
+  ---
+  duration_ms: 10.4035
+  type: 'test'
+  ...
+# Subtest: repair: image type error recovery retains automatic source/result comparison
+ok 56 - repair: image type error recovery retains automatic source/result comparison
+  ---
+  duration_ms: 8.5571
+  type: 'test'
+  ...
+# Subtest: repair: explicit dual images are deduplicated and impossible source cannot pass visual checking
+ok 57 - repair: explicit dual images are deduplicated and impossible source cannot pass visual checking
+  ---
+  duration_ms: 7.5301
+  type: 'test'
+  ...
+# Subtest: repair: model-supplied verified annotation cannot replace stored unknown or certify output
+ok 58 - repair: model-supplied verified annotation cannot replace stored unknown or certify output
+  ---
+  duration_ms: 8.4643
+  type: 'test'
+  ...
+# Subtest: repair: observer actual wire contains both images, identity pairs, original facts and uncertainty instructions
+ok 59 - repair: observer actual wire contains both images, identity pairs, original facts and uncertainty instructions
+  ---
+  duration_ms: 0.3828
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: model selects memory, archives original, saves revision and judges the returned version
+ok 60 - repair scripted integration: model selects memory, archives original, saves revision and judges the returned version
+  ---
+  duration_ms: 10.5198
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: free creation can propose independent pictures without photos; no approval means no submission
+ok 61 - repair scripted integration: free creation can propose independent pictures without photos; no approval means no submission
+  ---
+  duration_ms: 9.061
+  type: 'test'
+  ...
+# Subtest: repair scripted integration: ordinary answer still ends immediately without a planner, save or second audit
+ok 62 - repair scripted integration: ordinary answer still ends immediately without a planner, save or second audit
+  ---
+  duration_ms: 5.2181
+  type: 'test'
+  ...
+# Subtest: context tools register real capabilities only; simulation is explicit
+ok 63 - context tools register real capabilities only; simulation is explicit
+  ---
+  duration_ms: 54.1798
+  type: 'test'
+  ...
+# Subtest: media always prepares exact proposal before any provider call
+ok 64 - media always prepares exact proposal before any provider call
+  ---
+  duration_ms: 11.0696
+  type: 'test'
+  ...
+# Subtest: simulation also needs approval and never fabricates a real URL or observation
+ok 65 - simulation also needs approval and never fabricates a real URL or observation
+  ---
+  duration_ms: 10.9702
+  type: 'test'
+  ...
+# Subtest: changed parameters, changed tool and mode cannot reuse approval
+ok 66 - changed parameters, changed tool and mode cannot reuse approval
+  ---
+  duration_ms: 19.7966
+  type: 'test'
+  ...
+# Subtest: owner and session isolation prevents approval, source, and receipt reuse
+ok 67 - owner and session isolation prevents approval, source, and receipt reuse
+  ---
+  duration_ms: 9.4186
+  type: 'test'
+  ...
+# Subtest: chat assertions cannot create authorization and unknown fields are rejected
+ok 68 - chat assertions cannot create authorization and unknown fields are rejected
+  ---
+  duration_ms: 8.104
+  type: 'test'
+  ...
+# Subtest: same proposal is submitted once across new callIds, approvalIds and concurrent retries
+ok 69 - same proposal is submitted once across new callIds, approvalIds and concurrent retries
+  ---
+  duration_ms: 20.1499
+  type: 'test'
+  ...
+# Subtest: identical prompt with new call identity can legitimately create another image
+ok 70 - identical prompt with new call identity can legitimately create another image
+  ---
+  duration_ms: 9.082
+  type: 'test'
+  ...
+# Subtest: all proposals in a tool batch can be approved as one concrete group
+ok 71 - all proposals in a tool batch can be approved as one concrete group
+  ---
+  duration_ms: 8.9044
+  type: 'test'
+  ...
+# Subtest: durable inflight receipt precedes provider I/O; unknown response cannot resubmit
+ok 72 - durable inflight receipt precedes provider I/O; unknown response cannot resubmit
+  ---
+  duration_ms: 7.3178
+  type: 'test'
+  ...
+# Subtest: restart with inflight receipt does not resubmit and surfaces unknown
+ok 73 - restart with inflight receipt does not resubmit and surfaces unknown
+  ---
+  duration_ms: 7.9683
+  type: 'test'
+  ...
+# Subtest: known provider rejection reports unsubmitted but does not loop same call
+ok 74 - known provider rejection reports unsubmitted but does not loop same call
+  ---
+  duration_ms: 7.3435
+  type: 'test'
+  ...
+# Subtest: media budget and cancellation are checked immediately before submission
+ok 75 - media budget and cancellation are checked immediately before submission
+  ---
+  duration_ms: 6.8512
+  type: 'test'
+  ...
+# Subtest: cancellation during save prevents provider I/O
+ok 76 - cancellation during save prevents provider I/O
+  ---
+  duration_ms: 8.1577
+  type: 'test'
+  ...
+# Subtest: save failure before submission prevents I/O and after I/O reports uncertainty
+ok 77 - save failure before submission prevents I/O and after I/O reports uncertainty
+  ---
+  duration_ms: 6.8216
+  type: 'test'
+  ...
+# Subtest: video receipt polling queries exact existing receipt and stores final file once
+ok 78 - video receipt polling queries exact existing receipt and stores final file once
+  ---
+  duration_ms: 6.2918
+  type: 'test'
+  ...
+# Subtest: query unavailable or failed is not a successful media delivery
+ok 79 - query unavailable or failed is not a successful media delivery
+  ---
+  duration_ms: 7.275
+  type: 'test'
+  ...
+# Subtest: edit preserves exact image parent and source lineage; image generation has no fake parent
+ok 80 - edit preserves exact image parent and source lineage; image generation has no fake parent
+  ---
+  duration_ms: 7.5206
+  type: 'test'
+  ...
+# Subtest: wrong object type and foreign source IDs are blocked before proposal
+ok 81 - wrong object type and foreign source IDs are blocked before proposal
+  ---
+  duration_ms: 6.3096
+  type: 'test'
+  ...
+# Subtest: observation receives real images, original materials and explicit unknown identity
+ok 82 - observation receives real images, original materials and explicit unknown identity
+  ---
+  duration_ms: 8.6644
+  type: 'test'
+  ...
+# Subtest: observation source original overrides model annotations without inventing verification
+ok 83 - observation source original overrides model annotations without inventing verification
+  ---
+  duration_ms: 7.9505
+  type: 'test'
+  ...
+# Subtest: image observer sends real image inputs and no tools to its adapter
+ok 84 - image observer sends real image inputs and no tools to its adapter
+  ---
+  duration_ms: 0.3401
+  type: 'test'
+  ...
+# Subtest: observation uses runtime model budget and trace wrapper when supplied
+ok 85 - observation uses runtime model budget and trace wrapper when supplied
+  ---
+  duration_ms: 7.298
+  type: 'test'
+  ...
+# Subtest: document saves are immutable, versioned, source bound and retry safe
+ok 86 - document saves are immutable, versioned, source bound and retry safe
+  ---
+  duration_ms: 7.314
+  type: 'test'
+  ...
+# Subtest: measurement uses exact supplied body and read_skill does not leak old task contract
+ok 87 - measurement uses exact supplied body and read_skill does not leak old task contract
+  ---
+  duration_ms: 19.1396
+  type: 'test'
+  ...
+# Subtest: history search and pagination recover actual original text and runtime trace
+ok 88 - history search and pagination recover actual original text and runtime trace
+  ---
+  duration_ms: 7.2182
+  type: 'test'
+  ...
+# Subtest: unexpected extra provider images preserve receipt evidence without false one-image success
+ok 89 - unexpected extra provider images preserve receipt evidence without false one-image success
+  ---
+  duration_ms: 6.4641
+  type: 'test'
+  ...
+# Subtest: uncertain submission with a provider receipt can be queried without resubmission
+ok 90 - uncertain submission with a provider receipt can be queried without resubmission
+  ---
+  duration_ms: 7.1024
+  type: 'test'
+  ...
+1..90
+# tests 90
+# suites 0
+# pass 90
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 542.3403

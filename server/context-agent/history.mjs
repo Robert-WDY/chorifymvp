@@ -146,10 +146,11 @@ export function searchHistory(state, { query = '', limit = 10, before, after } =
   const lower = timestamp(after, -Infinity);
   const words = query.trim().toLocaleLowerCase().split(/\s+/u).filter(Boolean);
   const matches = [];
+  const calls = new Map(state.records.filter(record => record.kind === 'tool_call').map(record => [record.callId, record.name]));
   for (const record of state.records) {
     // Request/response traces repeat chat text and would crowd out its source.
     // Runtime records remain directly addressable by their exact identifier.
-    if (record.kind === 'run_event' && query.trim() !== record.id) continue;
+    if (query.trim() !== record.id && !isMemoryRecord(record, calls)) continue;
     const time = Date.parse(record.at);
     if (time >= upper || time <= lower) continue;
     const raw = recordText(record);
@@ -162,12 +163,23 @@ export function searchHistory(state, { query = '', limit = 10, before, after } =
   return { matches: matches.reverse().slice(0, maximum), totalMatches: matches.length };
 }
 
+// Retrieval is a view of original evidence, not a search through prior searches.
+// Exact IDs can still recover every persisted record, including debug traces.
+function isMemoryRecord(record, calls) {
+  if (record.kind === 'run_event') return false;
+  const name = record.kind === 'tool_call' ? record.name : calls.get(record.callId);
+  return !['search_history', 'read_history'].includes(name);
+}
+
 export function readHistory(state, { messageId, surroundingRange = 0, offset, limit } = {}) {
   if (typeof messageId !== 'string' || !messageId) fail('INVALID_HISTORY_QUERY', 'A history record identifier is required.');
   const index = state.records.findIndex(record => record.id === messageId);
   if (index < 0) fail('HISTORY_NOT_FOUND', 'History record was not found in this session.');
   const surrounding = integer(surroundingRange, 0, 20, 'surroundingRange');
-  const records = clone(state.records.slice(Math.max(0, index - surrounding), index + surrounding + 1));
+  const calls = new Map(state.records.filter(record => record.kind === 'tool_call').map(record => [record.callId, record.name]));
+  const visible = state.records.filter(record => record.id === messageId || isMemoryRecord(record, calls));
+  const position = visible.findIndex(record => record.id === messageId);
+  const records = clone(visible.slice(Math.max(0, position - surrounding), position + surrounding + 1));
   let pagination = null;
   if (offset !== undefined || limit !== undefined) {
     const target = records.find(record => record.id === messageId);
