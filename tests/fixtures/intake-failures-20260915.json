@@ -1,0 +1,139 @@
+[
+  {
+    "query": "分析这张图片，你会给出什么建议",
+    "draft": {
+      "summary": "用户要求对当前深绿色瓶身、浅蓝背景的产品图（artifact 2204426b，v3）做分析并给出建议。这是普通回答请求，不创建新任务、不修改图片；仅基于已有图片证据给出评估与可执行建议。",
+      "turnOperation": {
+        "kind": "answer",
+        "answerContract": {
+          "questionDimensions": [
+            "对这张图片的视觉分析",
+            "针对该图片的改进建议"
+          ],
+          "scope": "session"
+        }
+      },
+      "deliverables": [
+        {
+          "description": "基于当前 v3 产品图（深绿色圆柱瓶、浅蓝背景、1:1、无标志无人无字）给出画面分析（构图/光影/色彩/一致性/商用适配）与可执行改进建议（含可选的后续编辑方向），不生成新图。",
+          "kind": "text",
+          "action": "respond",
+          "form": "analysis",
+          "purpose": "general",
+          "references": [
+            "fixture_image"
+          ],
+          "requiredEvidence": "none",
+          "requestEvidence": "分析这张图片，你会给出什么建议"
+        }
+      ],
+      "gaps": [],
+      "assumptions": [],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": "普通图片分析建议请求，不涉及安全风险。"
+      },
+      "approval": {
+        "required": false,
+        "reason": "仅为分析建议回答，无生产或修改操作。"
+      }
+    }
+  },
+  {
+    "query": "你为什么看不到图片",
+    "draft": {
+      "summary": "用户询问为什么看不到图片。回顾会话记录：上一轮（turnIndex 4）用户让分析一张图片，助手回答中说明“我无法在这里直接‘看到’图片像素内容，只能依据会话记录中该图片的生成背景来判断”。用户此刻的追问是在问这一现象的原因。这是对既有对话答疑，不需要生产任何内容，因此不创建任务。唯一相关原文在 fixture_message。",
+      "deliverables": [
+        {
+          "description": "解释助手为何无法直接查看图片像素内容：只能依据会话记录中的生成背景/上下文做判断，而非逐像素读取画面。",
+          "kind": "text",
+          "action": "respond",
+          "references": [
+            "fixture_message"
+          ],
+          "form": "answer",
+          "query": {
+            "kind": "message",
+            "speaker": "assistant",
+            "messageId": "fixture_message"
+          },
+          "requiredEvidence": "none",
+          "constraints": []
+        }
+      ],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": ""
+      },
+      "turnOperation": {
+        "kind": "answer",
+        "query": {
+          "kind": "message",
+          "speaker": "assistant",
+          "messageId": "fixture_message"
+        }
+      },
+      "gaps": [],
+      "assumptions": [],
+      "approval": {
+        "required": false,
+        "reason": ""
+      }
+    }
+  },
+  {
+    "query": "给我产品的宣传脚本",
+    "draft": {
+      "summary": "用户要求为其产品编写一条宣传脚本。现有可确认的产品事实来自会话历史：一个橙色圆柱形产品瓶（无标志、无标签、无文字），曾被编辑为深绿色瓶身配浅蓝背景的静物产品图。据此用文本形式创作一段产品宣传视频脚本文案（不生成媒体、不作视觉分析）。",
+      "turnOperation": {
+        "kind": "create"
+      },
+      "deliverables": [
+        {
+          "description": "为上述产品编写一条宣传视频脚本：以该产品静物图呈现的圆柱形产品为对象，输出可直接使用的文字脚本（含画面/口播/节奏），不生成图片或视频。",
+          "kind": "text",
+          "action": "create",
+          "count": 1,
+          "constraints": [
+            "文字脚本，不生成媒体"
+          ],
+          "requestEvidence": "给我产品的宣传脚本",
+          "purpose": "marketing",
+          "form": "script",
+          "spec": {
+            "durationSeconds": 15
+          },
+          "requiredMethods": [
+            "video-script-zh-v1"
+          ]
+        }
+      ],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": "为自有无害产品撰写宣传脚本，不涉及违规内容。"
+      },
+      "approval": {
+        "required": false,
+        "reason": "普通文案创作，无需先确认。"
+      },
+      "gaps": [
+        {
+          "description": "产品具体品类、名称、卖点、目标平台、受众及脚本时长均未说明。",
+          "level": "preference",
+          "resolution": "按现有会话中可确认的产品外观（圆柱形产品瓶、可呈现橙或深绿瓶身）先出一版通用宣传脚本；如需聚焦特定卖点、平台或时长，可再补充说明。"
+        }
+      ],
+      "assumptions": [
+        "以会话中已出现的产品（圆柱形产品瓶静物图）作为宣传对象",
+        "默认按短视频宣传脚本形式撰写"
+      ],
+      "facts": [
+        "会话历史中已产出该产品的静物图：橙色圆柱形瓶、无标志、无文字，后改为深绿色瓶身配浅蓝背景。"
+      ],
+      "globalConstraints": []
+    }
+  }
+]

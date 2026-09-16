@@ -1,0 +1,280 @@
+{
+  "id": "05-ordered-formal",
+  "dir": "05-ordered-formal",
+  "group": "顺序Skill",
+  "tone": "正式、明确步骤",
+  "query": "请按顺序为松页书屋完成：第一步使用 marketing-brief-zh-v1 产出周末读书会营销Brief；第二步使用 creative-cover-copy-v2，以第一步Brief为依据生成三条活动宣传文案。活动在店内，周六15点，免费，限20人，没有嘉宾。每步各保存一份文字文档。不要制作封面图或视频。",
+  "expected": {
+    "texts": 2,
+    "skills": [
+      "marketing-brief-zh-v1",
+      "creative-cover-copy-v2"
+    ],
+    "fullDependency": true,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "b930a811-0847-4b8e-bc7a-dce2e3ef947d",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "b930a811-0847-4b8e-bc7a-dce2e3ef947d",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "skill:marketing-brief-zh-v1",
+      "passed": true,
+      "evidence": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+          "contractValidated": true
+        }
+      ]
+    },
+    {
+      "name": "skill:creative-cover-copy-v2",
+      "passed": true,
+      "evidence": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+          "contractValidated": true
+        }
+      ]
+    },
+    {
+      "name": "dependencyEdge",
+      "passed": true,
+      "evidence": [
+        0
+      ]
+    },
+    {
+      "name": "fullUpstreamContent",
+      "passed": true,
+      "evidence": {
+        "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+        "sourceId": "4de23272-bdd5-474b-827c-02ebc2fbcefe"
+      }
+    },
+    {
+      "name": "correctVersion",
+      "passed": true,
+      "evidence": {
+        "artifactVersion": 1,
+        "sourceVersion": 1
+      }
+    },
+    {
+      "name": "upstreamFinishesFirst",
+      "passed": true,
+      "evidence": [
+        {
+          "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+          "start": "2026-09-16T07:47:47.328Z",
+          "end": "2026-09-16T07:47:54.386Z"
+        },
+        {
+          "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+          "start": "2026-09-16T07:47:54.452Z",
+          "end": "2026-09-16T07:47:56.752Z"
+        }
+      ]
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 2,
+  "skills": [
+    {
+      "slug": "marketing-brief-zh-v1",
+      "status": "completed",
+      "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+      "contractValidated": true
+    },
+    {
+      "slug": "creative-cover-copy-v2",
+      "status": "completed",
+      "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+      "start": "2026-09-16T07:47:47.328Z",
+      "end": "2026-09-16T07:47:54.386Z"
+    },
+    {
+      "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+      "start": "2026-09-16T07:47:54.452Z",
+      "end": "2026-09-16T07:47:56.752Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24580,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7023,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 519,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7542
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "marketing-brief-zh-v1",
+      "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+      "characters": 4231,
+      "systemCharacters": 1021,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1679,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 1114,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2793
+      }
+    },
+    {
+      "index": 2,
+      "phase": "text_generation",
+      "methodId": "creative-cover-copy-v2",
+      "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+      "characters": 7638,
+      "systemCharacters": 1017,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 3675,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 333,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 4008
+      }
+    }
+  ],
+  "final": "# 松页书屋周末读书会 · 营销Brief\n\n## 一、主传播目标（建议）\n让本地可到店的读书爱好者知道：松页书屋本周六15:00在店内有一场免费、限20人的周末读书会，并产生“我想报名占位”的行动意愿。\n说明：用户未明确指定传播目标，以上为基于活动事实的“建议”，不是已确认的KPI或效果承诺。\n\n## 二、受众\n- 核心受众（建议）：松页书屋周边、周末下午可到店、喜欢读书但未必有固定读书会圈子的人。\n- 典型场景（创作假设）：周六午后想找个安静去处，愿意和陌生人围着书聊一会儿，但不想被推销或被要求“必须发言”。\n- 动机（创作假设）：免费、离家/离店近、人数有限带来的小圈子感、没有嘉宾带来的平等轻松感。\n- 关注点（待验证）：具体聊什么、要不要提前读书、现场节奏、如何报名。\n\n## 三、已知事实（可作为传播依据）\n1. 主办方/场所：松页书屋。\n2. 活动性质：周末读书会。\n3. 地点：店内举行（具体地址与店内区域未指定）。\n4. 时间：周六15:00（具体日期、结束时间未指定）。\n5. 费用：免费。\n6. 人数：限20人。\n7. 嘉宾：没有嘉宾。\n\n## 四、核心卖点（按与“到店占位”目标的关联度排序）\n1. 免费参加——依据：用户提供的活动事实。\n2. 限20人，小规模——依据：用户提供的活动事实。可表达为“名额有限”，但不得编造“已报满”“手慢无”等未验证状态。\n3. 周六15:00、店内举行——依据：用户提供的活动事实。可强调“周末午后、就近到店”，不得补充具体交通、座位或环境细节。\n4. 无嘉宾，读者之间的交流——依据：用户提供的“没有嘉宾”事实。可表达为“没有嘉宾席，大家就是分享者”，但不得声称具体互动形式或氛围效果。\n\n## 五、风格与表达约束\n### 硬约束（来自用户事实边界）\n- 不得编造嘉宾、作者、领读人。\n- 不得编造共读书目、主题、讨论问题。\n- 不得编造举办平台、直播渠道或线上参与方式。\n- 不得承诺报名人数、转化率、活动效果。\n- 不得把“限20人”写成“仅剩X席”，除非有实时报名数据来源。\n\n### 事实底线\n- 所有对外文案只能使用第三部分的已知事实。\n- 未指定信息若必须出现，应标注“待确认”或留空，不自行补全。\n\n### 表达建议（本阶段建议，非不可修改参数）\n- Do：用短句直接说清“周六15:00 / 松页书屋店内 / 免费 / 限20人 / 无嘉宾”。\n- Do：语气平和、具体、像店主在群里招呼人，而不是强促销。\n- Don't：使用“震撼”“必来”“改变人生”等夸大词。\n- Don't：暗示有神秘嘉宾或隐藏主题。\n- Don't：在没有依据时写“适合所有人”“零门槛”等绝对化表述。\n\n## 六、必要待确认项\n1. 具体日期（“本周六”还是某月某日）。\n2. 店内具体地址或集合点。\n3. 报名方式、联系人、报名截止时间。\n4. 活动结束时间与现场流程。\n5. 是否需要提前阅读某本书，或现场如何选书。\n6. 主要投放渠道与素材形式（用户未指定）。\n7. 传播目标是否就是“到店报名”，还是同时包含其他目标。\n\n以上待确认项不影响已知事实的使用；在确认前，对外文案应停留在已给出的时间、地点、费用、人数和“无嘉宾”信息，不展开流程与内容承诺。\n\n【文案一】\n周六下午，来松页书屋坐坐。\n周末读书会，周六15:00，店内举行。\n免费参加，限20人。没有嘉宾，就是一群读书的人围着书聊一聊。\n名额有限，想来就早点占个位。\n📍松页书屋 · 周六15:00\n\n【文案二】\n松页书屋周末读书会，本周六15:00开始。\n不限主题，不请嘉宾，没有台上台下——大家就是分享者。\n免费，限20人。周末午后，找个安静地方，和陌生人聊聊书。\n报名占位，人满即止。\n📚松页书屋店内 · 周六15:00\n\n【文案三】\n这个周六15:00，松页书屋店内有一场读书会。\n没有嘉宾，没有领读人，围着书，谁想聊就聊。\n免费参与，限20人。周末午后，来店里坐一会儿。\n想来的话，先报名占位。\n🕒周六15:00 · 松页书屋"
+}

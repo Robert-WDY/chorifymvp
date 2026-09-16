@@ -1,0 +1,217 @@
+[
+  {
+    "name": "validate_storyboard",
+    "entrypoint": "scripts/validate-storyboard.py",
+    "description": "校验分段时长、画格编号、时码连续性、网格容量、必要生产字段和默认无箭头无信息栏约束",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "segments",
+        "arrowMode",
+        "visibleArrowsRequested",
+        "underPanelInfo"
+      ],
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "durationSeconds",
+              "panelCount",
+              "columns",
+              "rows",
+              "aspectRatio",
+              "panels"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 32,
+                "minLength": 1
+              },
+              "rows": {
+                "type": "integer",
+                "maximum": 3,
+                "minimum": 1
+              },
+              "panels": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "number",
+                    "startSeconds",
+                    "endSeconds",
+                    "title",
+                    "shotSize",
+                    "cameraPosition",
+                    "cameraState",
+                    "action",
+                    "function",
+                    "dialogue",
+                    "voiceover",
+                    "sound",
+                    "music"
+                  ],
+                  "properties": {
+                    "music": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "sound": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "title": {
+                      "type": "string",
+                      "maxLength": 24,
+                      "minLength": 1
+                    },
+                    "action": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "number": {
+                      "type": "integer",
+                      "maximum": 9,
+                      "minimum": 1
+                    },
+                    "dialogue": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "function": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "shotSize": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "voiceover": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "endSeconds": {
+                      "type": "number",
+                      "maximum": 15,
+                      "exclusiveMinimum": 0
+                    },
+                    "cameraState": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "startSeconds": {
+                      "type": "number",
+                      "maximum": 15,
+                      "minimum": 0
+                    },
+                    "cameraPosition": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 9,
+                "minItems": 2
+              },
+              "columns": {
+                "type": "integer",
+                "maximum": 4,
+                "minimum": 1
+              },
+              "panelCount": {
+                "type": "integer",
+                "maximum": 9,
+                "minimum": 2
+              },
+              "aspectRatio": {
+                "enum": [
+                  "16:9",
+                  "3:1"
+                ],
+                "type": "string"
+              },
+              "durationSeconds": {
+                "type": "number",
+                "maximum": 15,
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "arrowMode": {
+          "enum": [
+            "hidden",
+            "visible"
+          ],
+          "type": "string"
+        },
+        "underPanelInfo": {
+          "type": "boolean"
+        },
+        "visibleArrowsRequested": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "summary"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "object",
+          "required": [
+            "segmentCount",
+            "totalPanels",
+            "totalDurationSeconds"
+          ],
+          "properties": {
+            "totalPanels": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "segmentCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "totalDurationSeconds": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

@@ -1,0 +1,50 @@
+import {mkdir,writeFile,readdir,readFile} from 'node:fs/promises';
+import {createHash,randomUUID} from 'node:crypto';
+import {dataset} from './compiled-dataset.mjs';
+import {Agent} from '../server/agent.mjs';
+import {createBrain,brainConfig} from '../server/adapters.mjs';
+import {ToolRuntime} from '../server/tools.mjs';
+import {ProviderError} from '../server/media.mjs';
+import {Verifier} from '../server/verification.mjs';
+import {loadCatalog} from '../server/catalog.mjs';
+import {currentTask,taskArtifacts,storeOf} from '../server/task-state.mjs';
+const tag=process.argv[2]||'pilot',variants=Number(process.argv[3]||1),concurrency=Number(process.argv[4]||8);
+if(!/^[a-z0-9-]+$/.test(tag)||variants<1||variants>25||concurrency<1||concurrency>32)throw new Error('Invalid arguments');
+const root=new URL('../data/compiled-'+tag+'/',import.meta.url);await mkdir(root,{recursive:false});await mkdir(new URL('runs/',root));
+const only=process.argv.find(a=>a.startsWith('--only='))?.slice(7).split(',');
+const cases=dataset(variants).filter(c=>!only||only.includes(c.id)),catalog=await loadCatalog(),results=[],startedAt=new Date().toISOString();let cursor=0;if(!cases.length)throw new Error('No cases selected');
+async function sourceHash(){const h=createHash('sha256');for(const name of (await readdir(new URL('../server/',import.meta.url))).filter(n=>n.endsWith('.mjs')).sort()){h.update(name);h.update(await readFile(new URL('../server/'+name,import.meta.url)));}h.update(await readFile(new URL('./compiled-dataset.mjs',import.meta.url)));h.update(await readFile(new URL('./compiled-eval.mjs',import.meta.url)));return h.digest('hex');}
+const config=brainConfig();
+const frozenHash=await sourceHash();await writeFile(new URL('source.json',root),JSON.stringify(cases,null,2));await writeFile(new URL('manifest.json',root),JSON.stringify({startedAt,provider:config.provider,model:config.model,reasoningEffort:config.reasoningEffort||'none',concurrency,sourceHash:frozenHash,mode:'real-model-simulated-media',total:cases.length},null,2));
+await mkdir(new URL('code/server/',root),{recursive:true});await mkdir(new URL('code/evals/',root));
+for(const name of(await readdir(new URL('../server/',import.meta.url))).filter(n=>n.endsWith('.mjs')))await writeFile(new URL('code/server/'+name,root),await readFile(new URL('../server/'+name,import.meta.url)));
+for(const name of ['compiled-dataset.mjs','compiled-eval.mjs'])await writeFile(new URL('code/evals/'+name,root),await readFile(new URL('./'+name,import.meta.url)));
+await Promise.all(Array.from({length:concurrency},async()=>{while(cursor<cases.length){
+ const c=cases[cursor++],started=Date.now(),calls=[],submissions=[],snapshots=[],jobs=new Map();let serial=0,polls=0;
+ const base=createBrain();
+ const brain={respond:async(input,tools,signal,options)=>{const call={input:structuredClone(input),tools:tools.map(t=>t.name),at:new Date().toISOString()};calls.push(call);try{return call.output=await base.respond(input,tools,signal,options);}catch(e){call.error=e.message;throw e;}}};
+ const media={config:{imageModel:'simulated',videoModel:'simulated'},image:async args=>{submissions.push({tool:'generate_image',args});if(submissions.length===1&&c.expect.fault==='known')throw new ProviderError('Injected known rejection',false);if(c.expect.fault==='unknown')throw new ProviderError('Injected lost response',true);return{status:'succeeded',images:[{url:`https://fixtures.invalid/${c.id}/${++serial}.png`,size:args.size}],simulated:true};},video:async args=>{submissions.push({tool:'generate_video',args});const taskId=c.id+'-'+ ++serial;jobs.set(taskId,{status:'succeeded',taskId,videoUrl:`https://fixtures.invalid/${taskId}.mp4`,simulated:true});return{status:'queued',taskId,simulated:true};},getVideo:async id=>{if(c.expect.fault==='poll'&&polls++===0)throw new Error('Injected query timeout');return jobs.get(id);}};
+ const runtime=new ToolRuntime({catalog,brain,media}),state={id:randomUUID(),messages:[],events:[]};const agent=new Agent({brain,catalog,runtime,verifier:new Verifier(brain),simulation:true});
+ for(const query of c.queries){await agent.run(state,query,()=>{},AbortSignal.timeout(180000));snapshots.push({status:state.status,task:structuredClone(currentTask(state)),artifacts:structuredClone(taskArtifacts(state)),submissionCount:submissions.length});}
+ if(state.status==='waiting')await agent.run(state,'继续已提交任务',()=>{},AbortSignal.timeout(180000),{resumeTaskId:currentTask(state).id});
+ const task=currentTask(state),artifacts=taskArtifacts(state).filter(a=>a.purpose==='deliverable'&&['passed','simulated_passed'].includes(a.verification.semantic));
+ const counts=Object.fromEntries(['text','image','video'].map(k=>[k,artifacts.filter(a=>a.type===k).length]));
+ const expectedStatus=c.expect.state||((c.expect.image||c.expect.video)?'simulated':'completed');
+ const checks={understanding:!!task&&!state.events.some(e=>e.type==='intent_error'),state:[expectedStatus].flat().includes(state.status),modelToolIsolation:calls.every(c=>!c.tools.length),...Object.fromEntries(['text','image','video'].filter(k=>c.expect[k]).map(k=>[k,counts[k]>=c.expect[k]]))};
+ if(c.expect.noMedia)checks.noMedia=!submissions.length;
+ if(c.expect.confirm)checks.confirm=snapshots[0].task?.status==='WAIT_CONFIRM'&&snapshots[0].submissionCount===0;
+ if(c.expect.clarifyConfirm)checks.clarifyConfirm=snapshots[0].task?.approval.required===true&&snapshots[0].status==='needs_input'&&snapshots[1].task?.status==='WAIT_CONFIRM'&&snapshots[1].submissionCount===0&&snapshots[0].task.id===snapshots[1].task.id;
+ if(c.expect.revision)checks.revision=artifacts.some(a=>a.parentId&&a.version===2);
+ if(c.expect.edit)checks.edit=submissions.some(s=>s.args.referenceImages?.includes('https://fixtures.invalid/source.png'));
+ if(c.expect.dependency)checks.dependency=!!task?.items.some(i=>i.dependsOn.length);
+ if(c.expect.independent)checks.independent=task?.items.every(i=>!i.dependsOn.length);
+ if(c.expect.fault==='unknown')checks.noRetry=submissions.length===1;
+ const mediaNodes=task?.executionPlan?.nodes.filter(n=>n.kind==='media')||[];
+ if(c.expect.image||c.expect.video)checks.skillContract=mediaNodes.length>0&&mediaNodes.every(n=>n.skillArtifactId&&storeOf(state).artifacts[n.skillArtifactId]?.metadata.structure);
+ if(submissions.length)checks.parameters=submissions.every(s=>s.tool==='generate_image'?!!s.args.prompt:!!s.args.prompt&&s.args.duration>=2&&s.args.duration<=12);
+ const result={id:c.id,family:c.family,queries:c.queries,expected:c.expect,status:state.status,counts,checks,passed:Object.values(checks).every(Boolean),modelCalls:calls.length,submissions:submissions.length,durationMs:Date.now()-started,reason:task?.reason||state.events.findLast(e=>e.type==='intent_error')?.error,realMediaArtifacts:0};
+ await writeFile(new URL('runs/'+c.id+'.json',root),JSON.stringify({result,state,snapshots,calls,submissions},null,2));results.push(result);
+ if(results.length%10===0){await writeFile(new URL('progress.json',root),JSON.stringify({completed:results.length,total:cases.length,passed:results.filter(r=>r.passed).length}));console.log(JSON.stringify({completed:results.length,total:cases.length,passed:results.filter(r=>r.passed).length}));}
+}}));
+const summary={startedAt,finishedAt:new Date().toISOString(),sourceUnchanged:frozenHash===await sourceHash(),total:results.length,passed:results.filter(r=>r.passed).length,modelCalls:results.reduce((n,r)=>n+r.modelCalls,0),realMediaArtifacts:0,byFamily:Object.fromEntries([...new Set(cases.map(c=>c.family))].map(f=>{const rows=results.filter(r=>r.family===f);return[f,{total:rows.length,passed:rows.filter(r=>r.passed).length}];}))};
+await writeFile(new URL('results.json',root),JSON.stringify(results.sort((a,b)=>a.id.localeCompare(b.id)),null,2));await writeFile(new URL('summary.json',root),JSON.stringify(summary,null,2));console.log(JSON.stringify(summary));

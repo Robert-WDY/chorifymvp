@@ -1,0 +1,28 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {parseStructured,relevantSchemaErrors} from '../server/structured-codec.mjs';
+import {modelStage,structuredModelOutput,cleanDisplay} from '../dist/debug/model-evidence.mjs';
+import {compactIntakePayload,evidenceContext} from '../server/model-context.mjs';
+import {Verifier} from '../server/verification.mjs';
+import {withTrace,tracedBrain} from '../server/trace-context.mjs';
+const reply=text=>[{type:'message',content:[{type:'output_text',text}]}];
+test('JSON fallback handles nested trailing commas without modifying string content',()=>assert.deepEqual(parseStructured('{"a":[1,],"text":",}",}'),{a:[1],text:',}'}));
+test('JSON fallback never invents truncated data or merges outputs',()=>{assert.throws(()=>parseStructured('{"a":'));assert.throws(()=>parseStructured('{"a":1}{"b":2}'));});
+test('image schema errors report image branch, not a false requirement for text output',()=>{const schema={properties:{deliverables:{items:{oneOf:[{properties:{kind:{const:'text'}}},{properties:{kind:{const:'image'}}}]}}}};const errors=[{instancePath:'/deliverables/0/kind',schemaPath:'#/oneOf/0/kind',keyword:'const'},{instancePath:'/deliverables/0',schemaPath:'#/oneOf/1/additionalProperties',keyword:'additionalProperties'}];assert.deepEqual(relevantSchemaErrors(schema,{deliverables:[{kind:'image'}]},errors),[errors[1]]);});
+test('display parses structured content and hides irrelevant token metadata',()=>{const v=structuredModelOutput(reply('{"content":"真实正文"}'));assert.equal(v[0].value.content,'真实正文');assert.deepEqual(cleanDisplay({annotations:[],logprobs:[],content:'keep'}),{content:'keep'});});
+test('display preserves malformed model output rather than dropping it',()=>assert.equal(structuredModelOutput(reply('{broken'))[0].value,'{broken'));
+test('historic verification has a phase even without explicit method metadata',()=>assert.equal(modelStage({validations:[{phase:'verify_text',attempt:0}]}).title,'验收文字'));
+test('runtime stage distinguishes plan generation and repair attempt',()=>{const s=modelStage({tracePhase:'media_plan',attempt:1});assert.equal(s.title,'编写媒体工具参数');assert.equal(s.repair,true);});
+test('intake deduplicates only identical evidence and preserves its source',()=>{const p={conversation:{recentMessages:[{role:'user',messageId:'m',content:'original'}],recentAttempts:[{input:'original'},{input:'different'}]},sourceDocuments:[{id:'a',content:'original'}]};compactIntakePayload(p);assert.equal(p.conversation.recentAttempts[0].inputMessageId,'m');assert.equal(p.conversation.recentAttempts[1].input,'different');assert.equal(p.sourceDocuments[0].contentMessageId,'m');assert.equal(p.conversation.recentMessages[0].content,'original');});
+test('catalog views refer to canonical entries without duplicating source metadata',()=>{const entry={handle:'ref',id:'a',version:3,sourceHash:'hash',readable:true};const p={referenceCatalog:{entries:[entry],views:{production:[{...entry}]}},sourceDocuments:[{id:'ref',content:'full'}],taskSnapshot:{artifacts:[{id:'a',excerpt:'full'}]}};compactIntakePayload(p);assert.deepEqual(p.referenceCatalog.views.production,['ref']);assert.equal(p.referenceCatalog.entries[0].sourceHash,'hash');assert.equal(p.taskSnapshot.artifacts[0].excerpt,undefined);assert.equal(p.sourceDocuments[0].content,'full');});
+test('downstream evidence uses accepted item quote not entire conversation',()=>{const task={id:'t',query:'whole multi target request',goal:{semantic:{deliverables:[{requestEvidence:'current target'}]}}};const c=evidenceContext({taskStore:{activeTaskId:'t',tasks:{t:task}}},{index:0});assert.equal(c.query,undefined);assert.equal(c.requestEvidence,'current target');assert.equal(c.provenance.taskId,'t');});
+test('media verification receives the real dependent selling point and stable item binding',async()=>{
+ const item={id:'image',index:1,description:'宣传图呼应卖点',operation:'generate_image',references:['task:0'],dependsOn:[0],spec:{},constraints:[]};
+ const source={id:'selling',taskId:'t',itemId:'point',type:'text',content:'黑色衬托咖啡色彩',status:'completed',purpose:'deliverable',publication:'current',version:1,verification:{technical:'passed',semantic:'passed'}};
+ const state={currentRunId:'r',turns:[{runId:'r',decision:{status:'accepted'}}],taskStore:{activeTaskId:'t',tasks:{t:{id:'t',items:[{id:'point'},item],contract:{facts:[],globalConstraints:[]}}},artifacts:{selling:source}}};
+ let payload;const brain=tracedBrain({respond:async(input)=>{payload=JSON.parse(input[1].content[0].text);return reply('{"outcome":"passed","issues":[],}');}});
+ const result=await withTrace(state,async()=>{},()=>new Verifier(brain).verifyArtifact(item,{id:'result',type:'image',taskId:'t',url:'https://example.invalid/image.png'},state,new AbortController().signal));
+ assert.equal(result.passed,true);assert.equal(payload.sources[0].content,source.content);assert.equal(payload.sources[0].version,1);
+ assert.equal(state.modelCalls[0].nodeId,'image');assert.equal(state.modelCalls[0].tracePhase,'verify_media');assert.equal(state.modelCalls.length,1);
+ assert.ok(state.modelCalls[0].validations.some(v=>v.operation==='remove_trailing_comma'));
+});

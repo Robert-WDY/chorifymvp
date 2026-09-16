@@ -1,0 +1,182 @@
+{
+  "id": "12-text-terse",
+  "dir": "12-text-terse",
+  "group": "文字",
+  "tone": "简短清单",
+  "query": "小岛焙坊朋友圈文案。海盐贝果明天开售，12元/个，每天8点开门。正文80—120字，末尾一个短标题。自然口吻。一份文字即可，不加优惠、销量，不做图片视频。",
+  "expected": {
+    "texts": 1,
+    "bodyMin": 80,
+    "bodyMax": 120,
+    "facts": [
+      "12元",
+      "8点"
+    ],
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "7093dab5-29c7-412d-aa3b-31817fe303d3",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "7093dab5-29c7-412d-aa3b-31817fe303d3",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "bodyLength",
+      "passed": false,
+      "evidence": {
+        "title": "明日开售",
+        "body": "明天，小岛焙坊的海盐贝果就开售了。海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。",
+        "bodyCharacters": 77,
+        "bodyWithoutPunctuation": 68,
+        "contentCharacters": 81
+      }
+    },
+    {
+      "name": "fact:12元",
+      "passed": true
+    },
+    {
+      "name": "fact:8点",
+      "passed": true
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "bodyLength"
+  ],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [],
+  "windows": [
+    {
+      "nodeId": "12f9c1d7-66b6-425f-9dca-eb2614d15432",
+      "start": "2026-09-16T07:48:13.797Z",
+      "end": "2026-09-16T07:48:14.894Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "copy": {
+    "title": "明日开售",
+    "body": "明天，小岛焙坊的海盐贝果就开售了。海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。",
+    "bodyCharacters": 77,
+    "bodyWithoutPunctuation": 68,
+    "contentCharacters": 81
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24502,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6999,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 244,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7243
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "",
+      "nodeId": "12f9c1d7-66b6-425f-9dca-eb2614d15432",
+      "characters": 2998,
+      "systemCharacters": 778,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1142,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 75,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1217
+      }
+    }
+  ],
+  "final": "明天，小岛焙坊的海盐贝果就开售了。\n\n海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。\n\n明日开售"
+}

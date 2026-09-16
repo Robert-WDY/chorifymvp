@@ -1,0 +1,83 @@
+{
+  "modelCalls": 0,
+  "mediaCalls": 0,
+  "productEdits": 0,
+  "diagnoses": [
+    {
+      "case": "01-dep-casual",
+      "originalError": {
+        "message": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+        "issues": [
+          {
+            "path": "/deliverables/1/requestEvidence"
+          }
+        ]
+      },
+      "localCounterfactual": "Only the saved quote was replaced with a genuine continuous excerpt, in memory; binding then passed. This is not a new real-model success.",
+      "repairedEvidence": [
+        {
+          "messageId": "diagnostic-current",
+          "start": 25,
+          "end": 53,
+          "text": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。"
+        }
+      ],
+      "selectionUnchanged": true
+    },
+    {
+      "case": "20-empty-formal",
+      "isDeferred": true,
+      "activation": {
+        "timing": "after_user_input",
+        "condition": "未提供上一版已确认的创意方向产物来源或版本，无法定位要修改的第二个创意方向。"
+      },
+      "workflowError": {
+        "message": "执行图缺少选定方向的前置生产节点，不能删除选择要求继续",
+        "code": "missing_dependency"
+      },
+      "conclusion": "A deferred missing-source item is rejected by workflow preflight before the later deferred-stage guard."
+    },
+    {
+      "case": "11-text-casual",
+      "bodyCharacters": 67,
+      "bodyWithoutPunctuation": 59,
+      "verdict": {
+        "passed": true,
+        "outcome": "passed",
+        "uncertain": false,
+        "issues": [],
+        "evaluationPolicy": "delivery_only",
+        "checker": {
+          "kind": "program",
+          "phase": "delivery_presence"
+        },
+        "quality": {
+          "status": "not_evaluated"
+        },
+        "recovery": null
+      },
+      "conclusion": "delivery_only accepts the saved short copy; this reproduces the acceptance gap, not a passing business outcome."
+    },
+    {
+      "case": "12-text-terse",
+      "bodyCharacters": 77,
+      "bodyWithoutPunctuation": 68,
+      "verdict": {
+        "passed": true,
+        "outcome": "passed",
+        "uncertain": false,
+        "issues": [],
+        "evaluationPolicy": "delivery_only",
+        "checker": {
+          "kind": "program",
+          "phase": "delivery_presence"
+        },
+        "quality": {
+          "status": "not_evaluated"
+        },
+        "recovery": null
+      },
+      "conclusion": "delivery_only accepts the saved short copy; this reproduces the acceptance gap, not a passing business outcome."
+    }
+  ]
+}

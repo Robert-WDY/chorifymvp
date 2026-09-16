@@ -1,0 +1,20 @@
+[
+  {
+    "path": "tests/fixtures/747-publication.json",
+    "sourceRecord": "real-media-query-audit-20260911/747-original-trace.json",
+    "sha256": "630ce28442e7f9505026aa7eaaa8edaebaddc36ea13111875afb46bc679dc4b8",
+    "policy": "Extract only model output read by existing regression assertions; raw output text unchanged"
+  },
+  {
+    "path": "tests/fixtures/premature-json-approval.json",
+    "sourceRecord": "boundary-repair-live-confirm-20260914/approval.json",
+    "sha256": "f854d28602e682ee6815a95fc582b52f4f235c748132771f8947fc6be7c68c75",
+    "policy": "Extract only model output read by existing regression assertions; raw output text unchanged"
+  },
+  {
+    "path": "tests/fixtures/media-plan-newlines.json",
+    "sourceRecord": "boundary-repair-live-release-20260914/revision.json",
+    "sha256": "73c1245e7086c7b3bfc7f89c2e0dbf4a403281e8ba8f0dcb34899159181e3754",
+    "policy": "Extract only model output read by existing regression assertions; raw output text unchanged"
+  }
+]

@@ -1,0 +1,4 @@
+[
+ {"id":"21-image-direct","group":"媒体直接生成对照","tone":"口语、直接生产请求","marker":"夏径茶饮","query":"给夏径茶饮生成一张桂花乌龙海报，米白底，9:16竖版，单杯浅金茶汤，少量桂花枝叶，自然光，不要人、文字、Logo和水印。","expected":{"mediaType":"image","quantity":1,"waitApproval":true,"noMedia":true}},
+ {"id":"22-video-direct","group":"媒体直接生成对照","tone":"正式、直接生产请求","marker":"泊云空街","query":"请为《泊云空街》生成一段5秒、9:16竖版视频：雨后的空街，一镜到底缓慢向前推进，没有人物、字幕、Logo和水印。","expected":{"mediaType":"video","quantity":1,"waitApproval":true,"noMedia":true}}
+]

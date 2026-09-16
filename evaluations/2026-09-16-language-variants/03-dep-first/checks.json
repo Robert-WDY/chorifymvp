@@ -1,0 +1,317 @@
+{
+  "id": "03-dep-first",
+  "dir": "03-dep-first",
+  "group": "方向依赖",
+  "tone": "短句、否定强调",
+  "query": "木桥面包，海盐贝果12元。先写两个创意方向，合存一份。再拿第一个写一条朋友圈文案，另存一份。注意：要第一个，不是第二个。别编优惠销量。只写文字，不要图片视频。",
+  "expected": {
+    "texts": 2,
+    "unitType": "directions",
+    "indexes": [
+      1
+    ],
+    "upstreamUnits": 2,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "4d8ea699-48d0-43b2-b00f-bb6fde32205c",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "4d8ea699-48d0-43b2-b00f-bb6fde32205c",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "boundRequestedIndexes",
+      "passed": true,
+      "evidence": {
+        "type": "direction",
+        "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+        "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+        "version": 1,
+        "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+        "unitIds": [
+          "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+        ],
+        "indexes": [
+          1
+        ],
+        "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+        "index": 1
+      }
+    },
+    {
+      "name": "upstreamUnitCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "realSourceVersion",
+      "passed": true,
+      "evidence": {
+        "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+        "version": 1
+      }
+    },
+    {
+      "name": "bindingReceiptMatches",
+      "passed": true
+    },
+    {
+      "name": "onlySelectedDirectionContent",
+      "passed": true,
+      "evidence": {
+        "index": 1
+      }
+    },
+    {
+      "name": "noUnselectedUnitBody",
+      "passed": true
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 2,
+  "skills": [
+    {
+      "slug": "direction-designer-zh-v1",
+      "status": "completed",
+      "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+      "contractValidated": true
+    },
+    {
+      "slug": "creative-cover-copy-v2",
+      "status": "completed",
+      "artifactId": "4a324949-9048-4af2-9d92-9aedeb6b525d",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "8d40e999-c776-4595-9178-bca292f870da",
+      "start": "2026-09-16T07:47:37.913Z",
+      "end": "2026-09-16T07:47:42.752Z"
+    },
+    {
+      "nodeId": "2bcb6fb9-e151-410c-b99c-9492a998c96e",
+      "start": "2026-09-16T07:47:42.825Z",
+      "end": "2026-09-16T07:47:44.657Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "selection": {
+    "binding": {
+      "type": "direction",
+      "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+      "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+      "version": 1,
+      "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+      "unitIds": [
+        "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+      ],
+      "indexes": [
+        1
+      ],
+      "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+      "index": 1
+    },
+    "artifactBinding": {
+      "type": "direction",
+      "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+      "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+      "version": 1,
+      "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+      "unitIds": [
+        "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+      ],
+      "indexes": [
+        1
+      ],
+      "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+      "index": 1
+    },
+    "sources": [
+      {
+        "id": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+        "type": "text",
+        "version": 1,
+        "taskId": "8c22e836-5693-4d7a-9a77-66a28f8f21c0",
+        "provenance": {
+          "origin": "model_artifact",
+          "factualSupport": "not_checked",
+          "sourceTaskId": "8c22e836-5693-4d7a-9a77-66a28f8f21c0"
+        },
+        "relation": "selected_direction",
+        "role": "text",
+        "dependencyIndex": 0,
+        "sourceSections": [
+          {
+            "title": "说明",
+            "content": "以上两个方向均基于已确认的事实：品牌名为木桥面包、产品为海盐贝果、售价12元。未使用或虚构任何优惠、销量、获奖、原料产地或健康功效信息。"
+          }
+        ],
+        "selectedDirection": {
+          "title": "方向一：清晨桥头的那一口——用场景情绪拉近距离",
+          "content": "切入角度：把“木桥面包”这个品牌名里的“桥”化为真实的清晨通勤场景，让海盐贝果成为路过时顺手带走的小确幸。\n\n主要场景：工作日的早晨，上班族经过街角面包店，玻璃柜里刚出炉的海盐贝果泛着微光。\n\n表达机制：以第一人称或旁白式口吻，从“赶时间”到“停下来买一个”的情绪转折，突出12元的价格门槛低，是一份不需要犹豫的日常犒赏；海盐的微咸与贝果的嚼劲带来朴素的满足感，不夸大成“治愈一切”，只落在“早上多了一点力气”。\n\n可想象的开场：“今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。”\n\n内容侧重：温暖、日常、低压力，用画面感语言让人联想到清晨街景。",
+          "id": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+          "version": 1,
+          "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "index": 1
+        }
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24504,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7003,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 410,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7413
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "direction-designer-zh-v1",
+      "nodeId": "8d40e999-c776-4595-9178-bca292f870da",
+      "characters": 4601,
+      "systemCharacters": 1375,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1771,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 641,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2412
+      }
+    },
+    {
+      "index": 2,
+      "phase": "text_generation",
+      "methodId": "creative-cover-copy-v2",
+      "nodeId": "2bcb6fb9-e151-410c-b99c-9492a998c96e",
+      "characters": 6832,
+      "systemCharacters": 1017,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 3141,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 181,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3322
+      }
+    }
+  ],
+  "final": "### 创意方向\n1. 标题：方向一：清晨桥头的那一口——用场景情绪拉近距离\n画面：切入角度：把“木桥面包”这个品牌名里的“桥”化为真实的清晨通勤场景，让海盐贝果成为路过时顺手带走的小确幸。\n\n主要场景：工作日的早晨，上班族经过街角面包店，玻璃柜里刚出炉的海盐贝果泛着微光。\n\n表达机制：以第一人称或旁白式口吻，从“赶时间”到“停下来买一个”的情绪转折，突出12元的价格门槛低，是一份不需要犹豫的日常犒赏；海盐的微咸与贝果的嚼劲带来朴素的满足感，不夸大成“治愈一切”，只落在“早上多了一点力气”。\n\n可想象的开场：“今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。”\n\n内容侧重：温暖、日常、低压力，用画面感语言让人联想到清晨街景。\n2. 标题：方向二：12元的海盐贝果——用直白对比制造记忆点\n画面：切入角度：把“12元”和“海盐贝果”并列成一句干脆利落的短文案，不煽情，不绕弯子，靠简洁重复形成节奏。\n\n主要场景：可以是店内柜台前、外卖包装袋上、或是手机屏幕上快速划过的信息流海报文案。\n\n表达机制：用短句和重复结构强化“木桥面包，海盐贝果12元”这一核心信息，让价格本身成为话题点——不承诺便宜到夸张，只强调“一枚贝果，12元，值不值你说了算”；通过“海盐”与“12元”的组合制造轻微反差，因为海盐贝果听起来不像12元能随便买到的样子，但这里就是。\n\n可想象的开场：“木桥面包。海盐贝果。12元。没了。”\n\n内容侧重：干脆、有节奏、适合文字海报或社媒短文案，信息密度高，不依赖情节。\n\n### 推荐依据\n推荐方向一。理由：当前只提供了品牌名、产品名和价格三个事实，没有销量、优惠或口碑素材。方向一不额外虚构数据，把12元贝果放进“日常路过顺手买”的真实场景，依靠情绪和画面让人自然记住木桥面包；同时为后续内容扩展留出空间，比如加入具体时段、店员动作或顾客反应，这些都可以在不编造事实的前提下继续细化。方向二更依赖短文案的冲击力，在缺少视觉排版时文字本身容易显得单薄，适合作为备选或后续传播中的辅助口径。\n\n### 说明\n以上两个方向均基于已确认的事实：品牌名为木桥面包、产品为海盐贝果、售价12元。未使用或虚构任何优惠、销量、获奖、原料产地或健康功效信息。\n\n今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。\n\n玻璃柜里刚出炉的那一排，还泛着微光。本来想着赶时间，脚还是停了。\n\n12元，一个海盐贝果。海盐的微咸，面团的嚼劲，说不上治愈什么，就是早上多了一点力气。\n\n木桥面包，街角那家。路过的时候，不妨也停一下。"
+}

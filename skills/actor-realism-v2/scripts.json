@@ -1,0 +1,257 @@
+[
+  {
+    "name": "validate_prompt_preservation",
+    "entrypoint": "scripts/validate-prompt-preservation.py",
+    "description": "检查已有提示词优化前后是否保留指定原文、镜号、时码、画幅、分辨率和参数标记",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "originalText",
+        "optimizedText"
+      ],
+      "properties": {
+        "originalText": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "optimizedText": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "lockedLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "default": [],
+          "maxItems": 200
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "required": [
+        "valid",
+        "readyToDeliver",
+        "missingLockedLiterals",
+        "protectedTokenDifferences",
+        "warnings",
+        "summary"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "object",
+          "required": [
+            "lockedLiteralCount",
+            "protectedTokenCountOriginal",
+            "protectedTokenCountOptimized"
+          ],
+          "properties": {
+            "lockedLiteralCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "protectedTokenCountOriginal": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "protectedTokenCountOptimized": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readyToDeliver": {
+          "type": "boolean"
+        },
+        "missingLockedLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protectedTokenDifferences": {
+          "type": "object",
+          "required": [
+            "missing",
+            "added"
+          ],
+          "properties": {
+            "added": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "validate_segment_timeline",
+    "entrypoint": "scripts/validate-segment-timeline.py",
+    "description": "检查原始剧本分段的时间连续性、单段时长、总时长和独立提示词完整性",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "totalDuration",
+        "segments"
+      ],
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "start",
+              "end",
+              "duration",
+              "prompt"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              "end": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "prompt": {
+                "type": "string",
+                "maxLength": 20000,
+                "minLength": 1
+              },
+              "duration": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 100,
+          "minItems": 1
+        },
+        "tolerance": {
+          "type": "number",
+          "default": 0.01,
+          "maximum": 0.5,
+          "minimum": 0
+        },
+        "totalDuration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "maxSegmentDuration": {
+          "type": "number",
+          "default": 15,
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "required": [
+        "valid",
+        "readyToDeliver",
+        "totalDuration",
+        "segmentCount",
+        "durationSum",
+        "segments",
+        "errors",
+        "warnings"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "start",
+              "end",
+              "duration"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "end": {
+                "type": "number"
+              },
+              "start": {
+                "type": "number"
+              },
+              "duration": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "durationSum": {
+          "type": "number",
+          "minimum": 0
+        },
+        "segmentCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "totalDuration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "readyToDeliver": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

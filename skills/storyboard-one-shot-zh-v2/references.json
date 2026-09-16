@@ -1,0 +1,105 @@
+[
+  {
+    "path": "references/arrow-grammar.md",
+    "mimeType": "text/markdown",
+    "text": "# 故事板箭头语法\n\n箭头同时表达两个维度：\n\n1. **颜色和标签**：谁或什么在运动。\n2. **箭头形状**：运动如何发生。\n\n不得只写“加一个箭头”。每条箭头都必须给出对象、形状、方向、起点、终点和标签。\n\n## 箭头必要性门槛\n\n箭头是制作信息，不是装饰。设计每格时按以下顺序筛选：\n\n1. 先确定唯一摄影机状态：一条摄影机箭头，或一个 `LOCKED` 标签。\n2. 再检查人物、物体或视线是否存在无法仅靠静态画面读懂的关键变化。\n3. 只有该变化会影响视频生成方向、动作起止或叙事理解时才增加辅助箭头。\n4. 每格默认0–1条辅助箭头；两个独立关键动作同时发生时最多2条。\n5. 无法明确写出对象、起点、终点、方向和叙事目的的箭头必须删除。\n6. 默认不生成 `CUT`、`FLOW`、`ATTN` 或 `FX`；只有镜头关系确实依赖它们时才启用。\n\n类别表表示“可用词汇”，不是要求每张故事板把所有颜色都用一遍。\n\n## 语义颜色\n\n| 对象 | 颜色与标签 | 用途 |\n|---|---|---|\n| 摄影机运动 | 粗黄色、黑色描边，`CAM` | 推、拉、摇、移、跟、升降、环绕、手持 |\n| 人物运动 | 紫色，`ACT` | 行走、跑动、转身、伸手、蹲伏和表演动作 |\n| 产品/物体运动 | 橙色，`OBJ` | 掉落、旋转、打开、滑动、按钮和道具操作 |\n| 视线 | 蓝色，`EYE` | 人物眼睛看向的目标 |\n| 注意力引导 | 红色，`ATTN` | 观众应先看哪里、再看哪里 |\n| 跨镜转场 | 灰白色黑描边，`CUT` | Shot 之间的匹配剪辑、方向延续和转场关系 |\n| 构图流向/对比 | 绿色，`FLOW` | 表情→产品→文字、前后状态和视觉动线 |\n| 功能/效果 | 青色，`FX` | 光泽、防护、吸收、阻挡、能量或焦点转移 |\n\n摄影机箭头永远是最粗、最醒目的箭头。辅助箭头不得与摄影机箭头争夺层级。\n\n## 箭头渲染硬标准\n\n- 摄影机箭头：纯黄色实色填充、粗黑描边、完全不透明、边缘锐利，具有干净矢量标注感。\n- 辅助箭头：使用对应纯色、细黑描边、完全不透明，尺寸明显小于摄影机箭头。\n- 禁止模糊、柔焦、发光、半透明、渐变、投影、烟雾遮挡、运动拖影、铅笔排线填充或与背景纹理融合。\n- 箭头标签只用一个短词，例如 `TRACK`、`PUSH`、`LOCKED`、`OBJ`；不得重复 `CAM CAM` 或生成长句。\n- 摄影机箭头优先固定在纯画面区边缘安全带，不得横穿主体。\n\n## 箭头形状\n\n| 样式 | 含义 |\n|---|---|\n| 直箭头 `→` | 人物、物体或摄影机直线移动 |\n| 弯箭头 `↷` | 转身、转头、摇镜、旋转或弧线移动 |\n| 双向箭头 `↔` | 左右移动、往返、来回对比 |\n| 向内双箭头 `→ ←` | 摄影机推进、变焦靠近、强调主体 |\n| 向外双箭头 `← →` | 摄影机拉远、展示空间或关系 |\n| 环绕箭头 `⟳` | 产品旋转、摄影机环绕或人物转圈 |\n| 虚线箭头 | 预期轨迹、尚未完成的动作或弱提示 |\n| 粗箭头 | 主要运动或主要摄影机意图 |\n| 细箭头 | 次要动作、视线或辅助说明 |\n\n旋转不是独立颜色。根据旋转对象选颜色：摄影机环绕用黄色，产品旋转用橙色，人物转身用紫色。\n\n## 摄影机运动必填\n\n每个画格必须从下表选择一种状态或运动。\n\n| 镜头运动 | 画法 | 短标签 |\n|---|---|---|\n| 固定机位 | 不画运动箭头，在画格边缘放黑白标签 | `LOCKED` |\n| 推进 / Dolly in | 两侧粗黄色向内箭头，或沿透视轴指向主体 | `PUSH IN` |\n| 拉远 / Dolly out | 从主体向画格两侧发散的粗黄色箭头 | `PULL OUT` |\n| 摇摄 | 画格顶部或侧边的粗黄色弯箭头 | `PAN L/R`、`TILT UP/DOWN` |\n| 横移 / 升降 | 沿画格边缘的粗黄色直箭头 | `TRUCK L/R`、`CRANE UP/DOWN` |\n| 跟拍 | 与人物运动方向平行的粗黄色箭头 | `FOLLOW`、`TRACK` |\n| 环绕 | 围绕主体的粗黄色弧形箭头 | `ARC`、`ORBIT` |\n| 手持 | 画格边缘短促黄色波浪箭头 | `HANDHELD` |\n| 快速甩镜 | 带运动线的粗黄色弧形箭头 | `WHIP PAN` |\n| 变焦 | 画格边缘向内或向外的黄色双箭头 | `ZOOM IN/OUT` |\n\n推拉、横移和变焦必须用短标签区分，不能只靠相似箭形。\n\n## 转场与构图流向\n\n- 只有转场关系本身需要被解释时才使用转场箭头；普通硬切默认不画 `CUT`。\n- 转场箭头放在两个画格之间的留白区域，从上一镜指向下一镜。\n- 用短标签说明 `CUT`、`MATCH CUT`、`WHIP CUT`、`FADE` 或 `DISSOLVE`。\n- 构图流向箭头只解释画面阅读顺序，不代表真实物体运动。\n- 不要用跨镜箭头代替摄影机运动箭头；两者表达不同信息。\n\n## 每格提示词格式\n\n```text\n镜头运动：PUSH IN，从画格左右边缘用两条粗黄色黑描边箭头向人物眼睛收拢，标签“CAM PUSH”。\n人物运动：紫色弯箭头，从人物肩部沿转身方向指向仓库门，标签“ACT”。\n视线：蓝色细箭头，从双眼指向门把手，标签“EYE”。\n注意力：红色短箭头从安全负空间指向正在转动的门把手，标签“ATTN”。\n```\n\n固定镜头：\n\n```text\n镜头运动：LOCKED；不画黄色运动箭头，在画格右上角放黑底白字“LOCKED”标签。\n```\n\n## 放置规则\n\n- 摄影机箭头优先沿画格边缘、透视轴或摄影机移动路径放置。\n- 人物和物体箭头紧邻运动轮廓，但不穿过身体、产品或道具。\n- 视线箭头从眼睛旁边开始，不直接盖住瞳孔。\n- 注意力箭头从负空间指向目标，不从文字栏穿过画面。\n- 箭头不得遮挡脸、手部动作点、品牌、标签、按钮、镜号、时间码或固定台词。\n- 同一画格只保留一条主摄影机箭头或一个 `LOCKED`，默认不超过一条辅助箭头；确有两个独立关键动作时最多两条。\n\n## 生图前箭头预检\n\n逐格回答：\n\n```text\n摄影机状态是否唯一？\n辅助箭头是否不可替代？\n每条箭头的对象、起点、终点和方向是否明确？\n是否存在普通 CUT、装饰箭头或重复箭头？\n是否写明实色、锐利、黑描边、完全不透明？\n图例是否只列实际使用类别？\n```\n\n任一答案不合格时，先修改提示词再调用生图。",
+    "headings": [
+      "references/arrow-grammar.md > 故事板箭头语法",
+      "references/arrow-grammar.md > 故事板箭头语法 > 箭头必要性门槛",
+      "references/arrow-grammar.md > 故事板箭头语法 > 语义颜色",
+      "references/arrow-grammar.md > 故事板箭头语法 > 箭头渲染硬标准",
+      "references/arrow-grammar.md > 故事板箭头语法 > 箭头形状",
+      "references/arrow-grammar.md > 故事板箭头语法 > 摄影机运动必填",
+      "references/arrow-grammar.md > 故事板箭头语法 > 转场与构图流向",
+      "references/arrow-grammar.md > 故事板箭头语法 > 每格提示词格式",
+      "references/arrow-grammar.md > 故事板箭头语法 > 放置规则",
+      "references/arrow-grammar.md > 故事板箭头语法 > 生图前箭头预检"
+    ]
+  },
+  {
+    "path": "references/core-contract.md",
+    "mimeType": "text/markdown",
+    "text": "# 核心执行合同\n\n- 每张故事板只覆盖 `1–15s`，对应一个独立视频段落和一次整图生成。\n- 超过 15 秒必须按叙事节拍拆成多张，不压缩固定台词、关键动作或摄影机运动。\n- 每段镜头从 `0s` 计时，同时标注全片范围；镜头时码连续、无重叠、无空隙，总和等于本段时长。\n- 每格只表达一个动作或信息变化，并且恰好有一种摄影机状态：一条主摄影机箭头或 `LOCKED`。\n- 每格由顶部标题栏、纯画面区和画下四行制作信息区组成。台词、VO、声音、音乐、景别、机位和分镜功能不得进入纯画面区。\n- 画下四行必须包含：分镜功能；景别＋机位＋镜头运动；角色台词＋VO；环境声/音效＋音乐。空字段写 `无`。\n- 固定台词和 VO 必须逐字保留；人物、产品、场景、屏幕方向和光线跨格连续。\n- 不加载内置示例图，也不从示例图继承人物、产品、场景或固定画风；表现媒介服从用户要求。\n- 奇数格使用明确的非空白布局，不得用空格凑矩形网格。\n- 用户只要提示词时不调用生图；用户明确要求生成时，每张故事板只调用一次 `generate_image`，不得逐格生成。",
+    "headings": [
+      "references/core-contract.md > 核心执行合同"
+    ]
+  },
+  {
+    "path": "references/director-selection.md",
+    "mimeType": "text/markdown",
+    "text": "# 导演规则选择\n\nChoose director rule systems by dramatic function, not by taste.\n\n## Quick Map\n\n| 戏剧问题 | 主规则优先 | 可辅佐 |\n|---|---|---|\n| 角色第一次看见真相、奇观、恐惧或亲情唤醒 | 斯皮尔伯格 | 希区柯克、维伦纽瓦 |\n| 多线并行、倒计时、谜题、系统压迫 | 诺兰 | 芬奇、维伦纽瓦 |\n| 谎言、审讯、调查、控制、监控感 | 芬奇 | 希区柯克、诺兰 |\n| 观众知道危险而角色不知道 | 希区柯克 | 斯皮尔伯格、芬奇 |\n| 群像对峙、行动方向、权力冲突 | 黑泽明 | 诺兰、库布里克 |\n| 家庭沉默、代际秩序、关系无法说破 | 小津安二郎 | 王家卫、斯皮尔伯格 |\n| 爱而不得、暧昧、错过、记忆碎片 | 王家卫 | 小津、朴赞郁 |\n| 欲望、复仇、窥视、精密心理操控 | 朴赞郁 | 芬奇、希区柯克 |\n| 制度恐惧、冷峻仪式、疯狂、空间秩序 | 库布里克 | 芬奇、维伦纽瓦 |\n| 巨大尺度、沉默、神秘、命运压迫 | 维伦纽瓦 | 诺兰、库布里克 |\n\n## Selection Rules\n\n- Pick one primary system. Secondary systems may modify composition or pacing, but must not fight the primary dramatic logic.\n- Avoid \"director soup\". If more than three directors seem relevant, diagnose the scene again.\n- Do not write \"像某导演\". Write \"调用某导演的某条规则 because...\"\n- If the scene is dialogue-heavy, do not assume it needs static coverage. Use power, concealment, and spatial geometry to choose rules.\n\n## Hybrid Patterns\n\n- Spielberg + Hitchcock: emotional discovery with hidden danger.\n- Nolan + Fincher: investigation under time pressure; information architecture with controlled surveillance.\n- Ozu + Wong Kar-wai: quiet domestic pain and unsaid longing.\n- Park + Fincher: psychological control, seduction, manipulation, forensic attention.\n- Kurosawa + Kubrick: group power conflict inside a rigid system.\n- Villeneuve + Nolan: personal choice dwarfed by cosmic, historical, or institutional scale.",
+    "headings": [
+      "references/director-selection.md > 导演规则选择",
+      "references/director-selection.md > 导演规则选择 > Quick Map",
+      "references/director-selection.md > 导演规则选择 > Selection Rules",
+      "references/director-selection.md > 导演规则选择 > Hybrid Patterns"
+    ]
+  },
+  {
+    "path": "references/one-shot-prompt-template.md",
+    "mimeType": "text/markdown",
+    "text": "# 单次整图故事板提示词模板\n\n按以下顺序填充并合并为一个连续提示词。删除所有方括号占位符后再交付。\n\n```text\n当前提示词只负责故事板 [编号]，对应全片 [起始–结束]、本段时长 [不超过15秒]。\n一张图完成当前段落，禁止输出单独画格。生成一张完整的专业电影故事板成品，\n画布中包含严格 [N] 个独立画格，布局为 [明确网格，或上N格＋下N格的奇数格布局]，\n阅读顺序从左到右、从上到下。不得用空白格凑数，不得增加、删除、合并、重复或打乱画格。\n\n【成品类型与画布】\n横向 [16:9 / 3:1] 故事板纸张，顶部统一标题“[项目名｜故事板编号]”，\n副标题“全片 [全片时间范围]｜本段 [0–本段时长]｜[段落主题]”。\n每格等宽等高，边框清楚，格间留白统一。每格顶部有短标题条，包含精确镜号与时间码；\n每格由“标题栏＋纯画面区＋画下制作信息区”组成。制作信息区位于画面边框下方，\n固定四行显示分镜功能、景别/机位/镜头运动、角色台词/VO、环境声/音效/音乐。\n整张画布底部有统一箭头图例。\n\n【文字与画面分离】\n纯画面区只允许人物、场景、道具和制作箭头，不得出现角色台词、VO、CTA、声音、音乐、\n景别、机位、分镜功能、字幕、对白气泡或任何说明文字。镜号、时间和短标题只放在顶部标题栏。\n所有角色台词和 VO 必须逐字放在画面下方的制作信息区，绝不能叠加在人物或场景上。\n\n【统一视觉风格】\n[用户明确指定故事板表现媒介时在这里逐字落实。]\n不得加载或模仿任何内置示例图，不得继承示例中的人物、产品、场景、构图或固定铅笔风格。\n用户未指定故事板媒介时，使用无品牌、无特定作者模仿的中性专业电影故事板表现，\n重点保证镜头、动作、空间关系和制作信息可读。未来视频的摄影风格只控制构图、灯光、\n色彩和表演逻辑，不擅自追加特定作者或示例图风格。\n\n【全局连续性】\n主角：[身份、年龄、脸型、发型、服装、标志性特征]。\n产品：[名称、外形、颜色、包装结构、品牌和标签位置]。\n场景：[空间结构、固定道具、光线、屏幕方向]。\n所有画格必须保持同一人物身份、脸、发型、服装、产品比例、标签结构、场景方向和光线逻辑。\n人物跨格动作必须从上一格结束状态自然延续到下一格开始状态。\n\n【画格 1｜S01｜[0–Xs]｜[短标题]】\n纯画面区：[人物、产品、场景、前中后景和关键状态；不得包含台词或说明文字]。\n构图：[景别、机位、角度、焦段感、视觉重点]。\n镜头运动：[LOCKED / PUSH IN / PULL OUT / PAN L/R / TILT UP/DOWN / TRACK / DOLLY / CRANE / ARC / HANDHELD]。\n动作：[唯一动作及其起止状态]。\n箭头：先写且只写一条粗黄色黑描边摄影机箭头或一个 `LOCKED` 标签；人物、物体、视线等辅助箭头只有无法靠画面直接读懂时才增加，默认0–1条。\n画下制作信息区精确写：\n“分镜功能：[本镜为什么存在]”\n“景别：[景别]｜机位：[高度＋角度＋视点]｜镜头运动：[短标签]”\n“角色台词：[逐字台词/无]｜VO：[逐字旁白/无]”\n“环境声/音效：[声音/无]｜音乐：[音乐设计/无]”\n\n【画格 2｜S02｜[X–Xs]｜[短标题]】\n纯画面区：[...；不得包含台词或说明文字]\n构图：[...]\n镜头运动：[...]\n动作：[...]\n连续性：继承 S01 的 [人物位置、朝向、道具/产品状态]。\n箭头：[...]\n画下制作信息区：\n“分镜功能：[...]”\n“景别：[...]｜机位：[...]｜镜头运动：[...]”\n“角色台词：[...]｜VO：[...]”\n“环境声/音效：[...]｜音乐：[...]”\n\n[按同一格式继续到最后一格；每格只写一个动作或信息变化]\n\n【最终画格与转化】\n最后一格必须完成 [结果/情绪落点/产品记忆/CTA]。CTA 如需出现，只能写在画下制作信息区，\n不得叠加到纯画面区，不得生成字幕轨或对话气泡。\n\n【箭头图例】\n画布底部生成一条清楚、统一的图例，只列出本张实际使用的类别：\n粗黄色黑描边＝摄影机运动；紫色＝人物运动；橙色＝产品/物体运动；\n蓝色＝视线方向；红色＝注意力引导；灰白色＝跨镜转场；\n绿色＝构图流向/前后对比；青色＝功能/效果。未使用的类别从图例中删除。\n箭形含义：直箭头＝直线移动；弯箭头＝转向/摇镜；双向箭头＝往返；\n向内双箭头＝推进；向外双箭头＝拉远；环绕箭头＝旋转/环绕；\n虚线箭头＝预期轨迹；粗箭头＝主要运动；细箭头＝次要动作。\n箭头为完全不透明、边缘锐利、实色填充、粗黑描边的矢量式制作标记；禁止模糊、发光、\n半透明、渐变、阴影、拖影或融入画面纹理。不得遮挡脸、手、产品品牌、标签、按钮和关键动作。\n底部红色小字：“箭头与标记仅供故事板阅读，最终视频不得出现。”\n\n【参考图职责】\n参考图 1：[人物身份参考，只锁定脸、发型、体型和服装]。\n参考图 2：[产品真实性参考，锁定外形、比例、品牌和标签结构]。\n参考图 3：[场景空间参考，锁定地点、道具和光线]。\n参考图 4：[用户提供的风格参考，只控制表现媒介，不复制人物、产品或场景内容]。\n[按实际上传顺序逐张列出，不存在的参考图条目直接删除]\n\n【硬性禁止】\n禁止单独输出画格，禁止多张图片，禁止与用户指定故事板媒介冲突，禁止海报风、拼贴风、\n分屏中的连续动作、气泡、长段正文、字幕轨、水印、\nLogo 变形、产品结构漂移、人物换脸、服装变化、左右方向翻转、额外人物、额外画格、\n重复画格、错序、文字乱码、伪汉字、英文字母替代中文、角色台词或 VO 叠在纯画面区、\n裁切标题栏、裁切画下制作信息区或裁切底部图例、模糊箭头、透明箭头、无意义箭头、\n重复箭头或为了填满图例而添加的箭头。\n最终只输出一张完整、可直接交付的多格故事板成品。\n```\n\n## 编写规则\n\n- 把最重要的“一张图、固定画格数、固定网格、禁止拆分”放在提示词最前面。\n- 每格的画面描述控制在 60–140 个汉字，避免信息互相争抢。\n- 每格文字只放在顶部标题栏和画下制作信息区，纯画面区不得出现字幕。\n- 每格必须写摄影机运动；固定镜头写 `LOCKED`，其余使用 `PUSH`、`PULL`、`PAN`、`TILT`、`TRACK`、`DOLLY`、`CRANE`、`ARC` 等短标签。\n- 固定角色台词和 VO 必须逐字写在画下制作信息区；长台词允许换行，不得缩写或移入画面。\n- 每张故事板内部使用唯一连续镜号；镜头时间使用从0开始的本段时间，不得重叠或倒退，总和必须等于本段时长。\n- 同时在故事板副标题标明全片时间范围，便于多张故事板衔接。\n- 参考图必须按实际上传顺序说明职责，避免模型混淆人物、产品和风格。\n- 产品信息不确定时不要编造品牌文字；写“严格复现产品参考图中的品牌与标签结构”。\n\n## 推荐参数\n\n| 画格 | 网格 | 画幅 |\n|---:|---|---|\n| 2 | 2×1 | 16:9 |\n| 3 | 3×1 | 16:9 |\n| 4 | 2×2 | 16:9 |\n| 5 | 上3下2，不设空白格 | 16:9 |\n| 6 | 3×2 | 16:9 |\n| 7 | 上4下3，不设空白格 | 最宽可用画幅，优先3:1 |\n| 8 | 4×2 | 最宽可用画幅，优先3:1 |\n| 9 | 3×3 | 16:9 |\n\n一次生成承载的信息越多，文字和人物一致性越难。除非剧本确有必要，不超过 9 格。奇数格必须明确上下排数量，不得生成额外空白画格。\n\n## creative 执行提示词压缩\n\n每张故事板实际调用 `generate_image` 前，分别生成一份压缩执行版：\n\n- 只保留开头硬约束、参考图职责、统一风格、全局连续性、逐格纯画面、画下制作信息区和最终禁令。\n- 合并重复的画布、文字与负面约束，目标长度约 2,000–4,000 个汉字。\n- 将多张身份资产预先合成一张资产板，例如：左上人物、右上产品/道具、下方场景；在提示词中明确位置职责。\n- 优先使用一张职责清楚的资产板；确需多张参考时逐张声明唯一职责，避免身份、产品、场景和风格互相污染。\n- 景别、机位、镜头运动、分镜功能、角色台词、VO、声音和音乐是不可删除字段。\n- 固定台词逐字保留在画下制作信息区；压缩重复形容词，不压缩字段或把文字移入画面。",
+    "headings": [
+      "references/one-shot-prompt-template.md > 单次整图故事板提示词模板",
+      "references/one-shot-prompt-template.md > 单次整图故事板提示词模板 > 编写规则",
+      "references/one-shot-prompt-template.md > 单次整图故事板提示词模板 > 推荐参数",
+      "references/one-shot-prompt-template.md > 单次整图故事板提示词模板 > creative 执行提示词压缩"
+    ]
+  },
+  {
+    "path": "references/panel-layout.md",
+    "mimeType": "text/markdown",
+    "text": "# 故事板画格版式\n\n每个画格必须由三个物理分离的区域组成：\n\n```text\n┌──────────────────────────────────┐\n│ S01｜0–3s｜短标题                │  顶部标题栏\n├──────────────────────────────────┤\n│                                  │\n│            纯画面区              │  只放画面与制作箭头\n│                                  │\n├──────────────────────────────────┤\n│ 分镜功能：……                     │\n│ 景别：……｜机位：……｜镜头：……   │  画下制作信息区\n│ 角色台词：……｜VO：……            │\n│ 环境声/音效：……｜音乐：……       │\n└──────────────────────────────────┘\n```\n\n## 顶部标题栏\n\n只显示镜号、时间范围和短标题，例如：`S03｜4–6.5s｜十分钟后`。\n\n## 纯画面区\n\n允许：\n\n- 人物、产品、道具、环境和光线；\n- 摄影机、人物、物体、视线和注意力箭头；\n- 简短箭头标签，如 `CAM PUSH`、`ACT`、`OBJ`、`EYE`。\n\n禁止：\n\n- 角色台词、VO、CTA、字幕和对白气泡；\n- 分镜功能、景别、机位和镜头说明；\n- 环境声、音效和音乐文字；\n- 任何解释性段落。\n\n角色正在说话时，只通过嘴型、表情和表演体现，不把台词写在人物旁边或叠在画面底部。\n\n箭头使用画格边缘安全带：摄影机箭头贴近上、下或侧边放置，辅助箭头紧邻实际动作点。每格只保留一条摄影机箭头或一个 `LOCKED`，默认0–1条辅助箭头。不得为了填满版式或图例添加装饰箭头。\n\n## 画下制作信息区\n\n该区域必须位于纯画面边框之外，占每格总高度约 25%–35%，使用与画面明显区分的纯色底板。\n\n固定四行：\n\n```text\n分镜功能：[注意力 / 建立空间 / 信息揭示 / 情绪 / 动作 / 证明 / 转化等]\n景别：[景别]｜机位：[高度＋角度＋视点]｜镜头运动：[运动或 LOCKED]\n角色台词：[逐字台词或无]｜VO：[逐字旁白或无]\n环境声/音效：[声音或无]｜音乐：[音乐设计或无]\n```\n\n不得合并或删除字段。没有内容时写 `无`。\n\n## 景别词表\n\n| 中文 | 英文短码 | 用途 |\n|---|---|---|\n| 大远景 | ELS | 展示宏观环境、孤立感和尺度 |\n| 全景 | LS/FS | 读取完整人物、走位和空间 |\n| 中全景 | MLS | 人物膝部以上与环境关系 |\n| 中景 | MS | 对话、动作和人物关系 |\n| 中近景 | MCU | 表演、反应和道具操作 |\n| 近景 | CU | 面部情绪、关键产品 |\n| 大特写 | ECU | 眼睛、嘴、按钮和细节 |\n| 插入特写 | INSERT | 道具、文字、线索和动作点 |\n| 过肩镜头 | OTS | 对话、视线和权力关系 |\n| 主观镜头 | POV | 角色看到的内容 |\n\n每格只能有一个主景别，可补充 `OTS`、`POV` 或 `INSERT` 类型。\n\n## 机位字段\n\n机位至少包含以下三项：\n\n```text\n高度：地面 / 低机位 / 腰平 / 胸平 / 眼平 / 高机位 / 顶视\n角度：平视 / 仰视 / 俯视 / 倾斜 / 正上方\n视点：正面 / 侧面 / 背面 / 过肩 / 主观 / 客观观察\n```\n\n例：`机位：眼平＋轻微俯视＋右后过肩`。\n\n## 分镜功能\n\n分镜功能说明“为什么需要这一镜”，不能只复述画面。可用类型：\n\n- 建立时间、地点和空间；\n- 建立人物、关系或产品；\n- 引导注意力；\n- 制造悬念或隐藏信息；\n- 揭示线索或反转；\n- 强调动作节点；\n- 捕捉情绪反应；\n- 证明功能或效果；\n- 完成对比；\n- 推动转化或 CTA；\n- 收束、留悬念或切黑。\n\n## 全局图例\n\n所有画格完成后，在整张故事板最底部放统一箭头图例。图例不能占用任何画格的纯画面区或制作信息区，只列出本张实际使用的箭头类别。\n\n## 奇数格布局\n\n- 3 格：单排 3 格。\n- 5 格：上排 3 格、下排 2 格；上下排视觉宽度平衡，不得出现第 6 个空白画格。\n- 7 格：上排 4 格、下排 3 格；使用最宽可用画幅，不得出现第 8 个空白画格。\n- 奇数格仍保持从左到右、从上到下的唯一阅读顺序。不得用标题、图例、空白占位或装饰块冒充画格。",
+    "headings": [
+      "references/panel-layout.md > 故事板画格版式",
+      "references/panel-layout.md > 故事板画格版式 > 顶部标题栏",
+      "references/panel-layout.md > 故事板画格版式 > 纯画面区",
+      "references/panel-layout.md > 故事板画格版式 > 画下制作信息区",
+      "references/panel-layout.md > 故事板画格版式 > 景别词表",
+      "references/panel-layout.md > 故事板画格版式 > 机位字段",
+      "references/panel-layout.md > 故事板画格版式 > 分镜功能",
+      "references/panel-layout.md > 故事板画格版式 > 全局图例",
+      "references/panel-layout.md > 故事板画格版式 > 奇数格布局"
+    ]
+  },
+  {
+    "path": "references/segmentation.md",
+    "mimeType": "text/markdown",
+    "text": "# Seedance 2.0 故事板分段\n\n每张故事板对应一次最长15秒的 Seedance 2.0 视频生成。先分段，再拆镜，再写故事板提示词。\n\n## 硬限制\n\n- 每段时长必须为 `1–15s`。\n- 总时长超过15秒必须生成多张故事板。\n- 每张故事板独立从本段 `0s` 开始计时。\n- 故事板标题同时标明全片时间范围，例如：`故事板 B｜全片 12–25s｜本段 0–13s`。\n- 不得用压缩剧情、删除关键台词或让动作过快的方式把长剧本塞进15秒。\n\n## 分段顺序\n\n1. 标记所有场景、时间、空间、人物目标和状态变化。\n2. 标记固定台词、关键动作和摄影机运动的完整起止。\n3. 寻找自然段落边界。\n4. 检查每段不超过15秒。\n5. 为每段记录开始状态、结束状态和下一段交接状态。\n6. 在段内分配镜头时间和画格数量。\n\n## 优先切段位置\n\n按优先级选择：\n\n1. 场景、地点或时间变化；\n2. 一个动作完成后的停顿；\n3. 信息揭示、反转或悬念落点；\n4. 人物目标或权力关系改变；\n5. 产品出现、证明或 CTA 阶段变化；\n6. 音乐节拍、切黑、闪白或明确转场。\n\n避免：\n\n- 在一句固定台词中间切段；\n- 在开门、转身、拿起产品等动作中间切段；\n- 在 `PUSH IN`、`PAN`、`TRACK` 等摄影机运动尚未完成时切段；\n- 让下一段无缘无故重置人物、道具、光线或屏幕方向。\n\n## 时长安排\n\n- 普通镜头：约 `1.5–3s`。\n- 建立环境：约 `2–4s`。\n- 情绪反应或悬念停顿：约 `1–2.5s`。\n- 固定台词：按自然语速估算，中文通常约每秒 `3–4` 个汉字，并预留表演停顿。\n- 复杂动作：给足起始、执行和结束状态，不得只按字数估时。\n\n推荐画格数：\n\n| 段落时长 | 推荐画格 |\n|---:|---:|\n| 1–5s | 2–4格 |\n| 6–10s | 4–6格 |\n| 11–15s | 5–9格 |\n\n画格数由动作和信息节拍决定，不为填满网格而增加空镜。\n\n## 连续性交接\n\n每张故事板末尾记录：\n\n```text\n结束状态：\n人物位置与朝向：\n人物情绪与动作：\n服装与外观：\n产品/道具位置和状态：\n场景与光线：\n摄影机最后方向：\n声音与音乐尾点：\n```\n\n下一张故事板开头必须继承这些状态。需要跳时、换场或重置状态时，在标题和第一镜明确说明。\n\n## 25秒示例\n\n不要机械拆成 `0–15s` 和 `15–25s`。如果12秒处正好完成一次反转，应拆为：\n\n```text\n故事板 A：全片 0–12s，本段 0–12s\n目标：建立人物、制造问题、完成第一次揭示\n结束状态：人物发现关键线索\n\n故事板 B：全片 12–25s，本段 0–13s\n开始状态：继承人物发现线索后的姿态、视线和道具位置\n目标：升级冲突、完成结果或悬念\n```\n\n每张故事板分别生成一份完整提示词和一张完整故事板图。",
+    "headings": [
+      "references/segmentation.md > Seedance 2.0 故事板分段",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 硬限制",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 分段顺序",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 优先切段位置",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 时长安排",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 连续性交接",
+      "references/segmentation.md > Seedance 2.0 故事板分段 > 25秒示例"
+    ]
+  },
+  {
+    "path": "references/visual-grammar.md",
+    "mimeType": "text/markdown",
+    "text": "# 视觉语法武器库\n\nUse visual devices to change how the audience reads power, information, intimacy, danger, and truth. Do not use a device merely because it looks cinematic.\n\n## Core Devices\n\n### 前景遮挡\n\n- Use for secrecy, surveillance, shame, partial knowledge, emotional distance.\n- Stage with doorframes, shoulders, curtains, glass, monitors, shelves, stair rails, car windows.\n- Effect: the audience becomes a partial observer.\n\n### 框中框\n\n- Use for confinement by family, institution, guilt, social role, memory.\n- Stage through doorways, mirrors, windows, TV screens, elevator doors, office partitions.\n- Effect: psychological imprisonment becomes visible.\n\n### 俯视 / 正上方\n\n- Use for judgment, fate, evidence, vulnerability, system pressure.\n- Stage over tables, beds, maps, crime scenes, floors, ritual layouts.\n- Effect: people become pieces in a larger order.\n\n### 仰视 / 低角度\n\n- Use for threat, awe, intimidation, moral scale, childlike viewpoint.\n- Stage with ceiling, height, architecture, weapon, authority figure, vertical light.\n- Effect: viewer feels physically smaller.\n\n### 大角度 / 极端角度\n\n- Use for moral instability, fractured reality, danger, obsession, subjective shock.\n- Stage with tilted axis, steep diagonal, low side angle, extreme high angle, or compressed corner angle.\n- Effect: the world feels tilted or dominated.\n- Warning: avoid random Dutch angle without a dramatic break.\n\n### 负空间\n\n- Use for absence, threat outside frame, loneliness, waiting, unsaid information.\n- Stage by pushing characters to thirds/corners and leaving hallway, wall, darkness, desert, or doorway dominant.\n- Effect: the unseen becomes active.\n\n### 延迟反打\n\n- Use when what a character sees should arrive late.\n- Stage by holding face, breath, stillness, eye line, swallowed reaction before revealing the object.\n- Effect: suspense, awe, dread, discovery.\n\n### 长焦压缩\n\n- Use for trapped emotion, surveillance from distance, crowd/system pressure.\n- Stage with 85mm-135mm feeling, compressed planes, shallow depth.\n- Effect: background pressure feels close.\n\n### 广角压力\n\n- Use when architecture, threshold, distance, or room geography is the threat.\n- Stage with 24mm-35mm feeling, strong foreground, deep background, controlled lines.\n- Effect: space becomes active.\n\n### 运动揭示\n\n- Use for hidden evidence, new character, shifting power.\n- Stage with lateral move, slow push, pull-back, actor crossing foreground.\n- Effect: information is discovered physically.\n\n### 稳定压迫\n\n- Use for procedural danger, cold power, bureaucracy, psychological control.\n- Stage locked-off, symmetrical, mechanically smooth, long take.\n- Effect: audience searches for tiny deviations.\n\n### 手持贴身\n\n- Use for injury, fear, pursuit, panic, subjective moral shock.\n- Stage movement with breath and body, not random shake.\n- Effect: stress transfers into the viewer's body.\n\n### 插入镜头作为线索\n\n- Use when a prop changes knowledge.\n- Stage object with contact, weight, texture, readable detail.\n- Effect: object becomes plot.\n\n### 轴线压力\n\n- Use when moral or power boundaries shift.\n- Stage clear left/right relation, table lines, door thresholds, crossing movements.\n- Effect: movement becomes argument.\n\n### 群像层次\n\n- Use when multiple characters react differently.\n- Stage foreground/midground/background reactions, staggered timing, hierarchy in depth.\n- Effect: social space feels alive.\n\n### 视线错位\n\n- Use when characters cannot or will not meet emotionally.\n- Stage one looking at object, one at person, one offscreen; keep eye lines intentionally mismatched.\n- Effect: relationship fracture becomes visible.\n\n### 声音先行 / 画外信息\n\n- Use when image should withhold danger or truth.\n- Stage sound before reveal: breath, door, machine, footsteps, phone vibration, crowd hush.\n- Effect: offscreen space becomes threatening or meaningful.\n\n## Anti-Ordinary Check\n\nIf a shot can be replaced by \"medium shot of person speaking\" without losing meaning, redesign by choosing one:\n\n- obstruct the view\n- delay the reverse\n- move the character across a boundary\n- place a prop between people\n- change height relation\n- compress the background\n- widen to expose system or loneliness\n- hold still longer than comfort\n- cut away earlier than expected\n- let sound reveal what image withholds",
+    "headings": [
+      "references/visual-grammar.md > 视觉语法武器库",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 前景遮挡",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 框中框",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 俯视 / 正上方",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 仰视 / 低角度",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 大角度 / 极端角度",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 负空间",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 延迟反打",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 长焦压缩",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 广角压力",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 运动揭示",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 稳定压迫",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 手持贴身",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 插入镜头作为线索",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 轴线压力",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 群像层次",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 视线错位",
+      "references/visual-grammar.md > 视觉语法武器库 > Core Devices > 声音先行 / 画外信息",
+      "references/visual-grammar.md > 视觉语法武器库 > Anti-Ordinary Check"
+    ]
+  }
+]

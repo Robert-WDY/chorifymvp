@@ -1,0 +1,213 @@
+{
+  "id": "08-parallel-casual",
+  "dir": "08-parallel-casual",
+  "group": "并行",
+  "tone": "口语、否定串联",
+  "query": "两件不相干的事一起做哈，不用等彼此，也别拿上一份当下一份素材。一件是给云角花铺写明天10点到晚上8点营业的通知，别编活动；另一件是写8秒雨后街景的4镜头脚本，每镜2秒，没人没字幕。各存一份，只要文字，别生成图视频。",
+  "expected": {
+    "texts": 2,
+    "parallel": true,
+    "noDependencies": true,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "72f2e28e-a134-429d-b36f-9412e22edf94",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "72f2e28e-a134-429d-b36f-9412e22edf94",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "noDependencyEdges",
+      "passed": true,
+      "evidence": [
+        [],
+        []
+      ]
+    },
+    {
+      "name": "actualParallelCalls",
+      "passed": false,
+      "evidence": [
+        {
+          "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+          "start": "2026-09-16T07:48:00.907Z",
+          "end": "2026-09-16T07:48:01.998Z"
+        },
+        {
+          "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+          "start": "2026-09-16T07:48:02.029Z",
+          "end": "2026-09-16T07:48:05.015Z"
+        }
+      ]
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "actualParallelCalls"
+  ],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 2,
+  "skills": [],
+  "windows": [
+    {
+      "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+      "start": "2026-09-16T07:48:00.907Z",
+      "end": "2026-09-16T07:48:01.998Z"
+    },
+    {
+      "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+      "start": "2026-09-16T07:48:02.029Z",
+      "end": "2026-09-16T07:48:05.015Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24532,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7027,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 321,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7348
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "",
+      "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+      "characters": 2685,
+      "systemCharacters": 778,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 998,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1038
+      }
+    },
+    {
+      "index": 2,
+      "phase": "text_generation",
+      "methodId": "",
+      "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+      "characters": 3111,
+      "systemCharacters": 778,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1088,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 360,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1448
+      }
+    }
+  ],
+  "final": "【营业时间通知】\n\n云角花铺明日营业时间为10:00至20:00。\n\n请合理安排到店时间，感谢您的关注。\n\n【镜头1 | 0:00–0:02】\n雨后街道，湿润的沥青路面反射着两侧街灯的暖黄光斑。镜头贴近地面拍摄，焦外虚化的光点在水洼中轻轻晃动。雨已停，屋檐仍在间歇滴水，偶尔有小水珠落下，在积水中泛起短促的涟漪。画面中没有任何行人或车辆。\n\n【镜头2 | 0:02–0:04】\n镜头缓慢上摇，从路缘的低视角抬升至人行道与临街店铺玻璃幕墙的交界处。玻璃上映着对面街灯与便利店招牌的倒影，虚化且柔和。地砖缝隙积着薄水，顺坡缓缓流淌。街角自动贩卖机的灯光在潮湿空气中微微晕开。画面保持空无一人的状态。\n\n【镜头3 | 0:04–0:06】\n镜头平移至临街的窄巷入口，墙面上雨水顺砖缝和排水管向下滑落。地面水洼中映出头顶交错的电线与屋檐轮廓，微风吹动时水面皱起细纹。几片被雨打落的树叶贴在湿漉漉的地面上，静止不动。无任何人物出现。\n\n【镜头4 | 0:06–0:08】\n镜头拉远，定格在整条雨后的街道全景。地面反射着两侧店铺熄灭与仍亮着的灯光，路面由近及远的湿痕逐渐消隐。远处路灯在薄雾般的空气中晕出光团，树叶尖挂着最后几颗水珠，缓缓滴落。街道安静、空荡，无人经过。画面中没有文字或字幕元素。"
+}

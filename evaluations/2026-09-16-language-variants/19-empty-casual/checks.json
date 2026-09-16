@@ -1,0 +1,116 @@
+{
+  "id": "19-empty-casual",
+  "dir": "19-empty-casual",
+  "group": "空会话引用",
+  "tone": "口语、假定历史",
+  "query": "就刚才第二个吧，弄年轻点，其他别动。",
+  "expected": {
+    "needsInput": true,
+    "texts": 0,
+    "noMedia": true
+  },
+  "status": "needs_input",
+  "sessionId": "75288508-ac8a-488b-9c5e-0e3afe9c390b",
+  "calls": 1,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "75288508-ac8a-488b-9c5e-0e3afe9c390b",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 0,
+        "actual": 0
+      }
+    },
+    {
+      "name": "clarifiesMissingReference",
+      "passed": true,
+      "evidence": {
+        "status": "needs_input",
+        "tasks": [
+          "NEEDS_INPUT"
+        ]
+      }
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "NEEDS_INPUT"
+  ],
+  "taskReason": [
+    "用户指代的\"刚才第二个\"在本次提供的会话与参考证据中未出现，无法确定被修改的对象及其版本。"
+  ],
+  "artifactCount": 0,
+  "skills": [],
+  "windows": [],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24443,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6963,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 264,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7227
+      }
+    }
+  ],
+  "final": "还需要补充：用户指代的\"刚才第二个\"在本次提供的会话与参考证据中未出现，无法确定被修改的对象及其版本。"
+}

@@ -1,0 +1,277 @@
+{
+  "cases": 22,
+  "totalModelCalls": 51,
+  "recordedModelCalls": 51,
+  "strictPassed": 13,
+  "strictUnmet": 9,
+  "usage": {
+    "inputTokens": 208377,
+    "outputTokens": 19679,
+    "cachedTokens": 124800,
+    "totalTokens": 228056
+  },
+  "uniqueSessions": 22,
+  "allIsolationChecksPass": true,
+  "actualMediaSubmissions": 0,
+  "mediaAttempts": 0,
+  "sourceUnchanged": true,
+  "firstWirePasses": 22,
+  "rows": [
+    {
+      "id": "01-dep-casual",
+      "status": "failed",
+      "passed": false,
+      "failed": [
+        "artifactCount",
+        "completed",
+        "boundRequestedIndexes",
+        "upstreamUnitCount",
+        "realSourceVersion",
+        "bindingReceiptMatches",
+        "onlySelectedDirectionContent",
+        "noUnselectedUnitBody"
+      ],
+      "calls": 3,
+      "errors": [
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        },
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        },
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        }
+      ],
+      "wire": true
+    },
+    {
+      "id": "02-dep-formal",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "03-dep-first",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "04-dep-shots",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "05-ordered-formal",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "06-ordered-casual",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "07-parallel-formal",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "actualParallelCalls"
+      ],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "08-parallel-casual",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "actualParallelCalls"
+      ],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "09-skill-formal",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "10-skill-casual",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "11-text-casual",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "bodyLength"
+      ],
+      "calls": 2,
+      "copy": {
+        "title": "海盐贝果，明天见",
+        "body": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。",
+        "bodyCharacters": 67,
+        "bodyWithoutPunctuation": 59,
+        "contentCharacters": 75
+      },
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "12-text-terse",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "bodyLength"
+      ],
+      "calls": 2,
+      "copy": {
+        "title": "明日开售",
+        "body": "明天，小岛焙坊的海盐贝果就开售了。海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。",
+        "bodyCharacters": 77,
+        "bodyWithoutPunctuation": 68,
+        "contentCharacters": 81
+      },
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "13-script-casual",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "14-script-formal",
+      "status": "completed",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "15-image-casual",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "16-image-formal",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "17-video-casual",
+      "status": "completed",
+      "passed": false,
+      "failed": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "18-video-formal",
+      "status": "needs_input",
+      "passed": true,
+      "failed": [],
+      "calls": 3,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "19-empty-casual",
+      "status": "needs_input",
+      "passed": true,
+      "failed": [],
+      "calls": 1,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "20-empty-formal",
+      "status": "blocked",
+      "passed": false,
+      "failed": [
+        "clarifiesMissingReference"
+      ],
+      "calls": 1,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "21-image-direct",
+      "status": "needs_input",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    },
+    {
+      "id": "22-video-direct",
+      "status": "needs_input",
+      "passed": true,
+      "failed": [],
+      "calls": 2,
+      "errors": [],
+      "wire": true
+    }
+  ]
+}

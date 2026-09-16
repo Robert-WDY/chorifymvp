@@ -1,0 +1,249 @@
+{
+  "id": "01-dep-casual",
+  "dir": "01-dep-casual",
+  "group": "方向依赖",
+  "tone": "口语、省略",
+  "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+  "expected": {
+    "texts": 2,
+    "unitType": "directions",
+    "indexes": [
+      2
+    ],
+    "upstreamUnits": 2,
+    "shots": 4,
+    "duration": 8,
+    "noMedia": true
+  },
+  "status": "failed",
+  "sessionId": "c7855a1e-4c49-4756-abc5-5b451e349873",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "c7855a1e-4c49-4756-abc5-5b451e349873",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": false,
+      "evidence": {
+        "expected": 2,
+        "actual": 0
+      }
+    },
+    {
+      "name": "completed",
+      "passed": false,
+      "evidence": "failed"
+    },
+    {
+      "name": "boundRequestedIndexes",
+      "passed": false
+    },
+    {
+      "name": "upstreamUnitCount",
+      "passed": false,
+      "evidence": {
+        "expected": 2,
+        "actual": 0
+      }
+    },
+    {
+      "name": "realSourceVersion",
+      "passed": false,
+      "evidence": {}
+    },
+    {
+      "name": "bindingReceiptMatches",
+      "passed": false
+    },
+    {
+      "name": "onlySelectedDirectionContent",
+      "passed": false,
+      "evidence": {}
+    },
+    {
+      "name": "noUnselectedUnitBody",
+      "passed": false
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "artifactCount",
+    "completed",
+    "boundRequestedIndexes",
+    "upstreamUnitCount",
+    "realSourceVersion",
+    "bindingReceiptMatches",
+    "onlySelectedDirectionContent",
+    "noUnselectedUnitBody"
+  ],
+  "taskStatus": [],
+  "taskReason": [],
+  "artifactCount": 0,
+  "skills": [],
+  "windows": [],
+  "parallelOverlap": false,
+  "selection": {
+    "sources": []
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24543,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        }
+      ],
+      "usage": {
+        "input_tokens": 7034,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 574,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7608
+      }
+    },
+    {
+      "index": 1,
+      "phase": "understand",
+      "characters": 2964,
+      "systemCharacters": 378,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "lockedDraft",
+        "error",
+        "lockedFieldsPolicy",
+        "paths",
+        "missingPaths",
+        "removePaths",
+        "fieldKeys",
+        "conversation"
+      ],
+      "recentMessages": 0,
+      "errors": [
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        }
+      ],
+      "repairPaths": [
+        "/deliverables/1/requestEvidence"
+      ],
+      "patch": {
+        "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+      },
+      "usage": {
+        "input_tokens": 1080,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1117
+      }
+    },
+    {
+      "index": 2,
+      "phase": "understand",
+      "characters": 2964,
+      "systemCharacters": 378,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "lockedDraft",
+        "error",
+        "lockedFieldsPolicy",
+        "paths",
+        "missingPaths",
+        "removePaths",
+        "fieldKeys",
+        "conversation"
+      ],
+      "recentMessages": 0,
+      "errors": [
+        {
+          "phase": "understand",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+          "failureStage": "reference"
+        }
+      ],
+      "repairPaths": [
+        "/deliverables/1/requestEvidence"
+      ],
+      "patch": {
+        "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+      },
+      "usage": {
+        "input_tokens": 1080,
+        "input_tokens_details": {
+          "cached_tokens": 896
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1117
+      }
+    }
+  ],
+  "final": "系统未能完成本轮请求整理，尚未执行生成。"
+}

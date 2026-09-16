@@ -1,0 +1,25 @@
+{
+  "runtimeDirectoriesByteIdentical": true,
+  "modelTraceInputOutputEqualToOriginal": 22,
+  "queriesAndExpectedByteIdentical": true,
+  "changedImportedFiles": [
+    {
+      "path": "tests/repair-boundaries.test.mjs",
+      "sourceHash": "e1ccbab2800b86fc2cd59a1f0bade29be39ad25ea3d5c3c48f8feec579333aa3",
+      "publishedHash": "6ffb9ba67415e52ccb8b9ee76eb7bd50586ea16803d3955f21895fbc8670ba82"
+    },
+    {
+      "path": "README.md",
+      "sourceHash": "d5ea12bcbe63a1aefccdd111ecac2b8d295181c0854a5d45a05d30204e795d06",
+      "publishedHash": "0510c933e19b27780bb92e4d5a4387dd4e38917509398290a55a30ae8530c817"
+    }
+  ],
+  "excludedSensitiveRoots": [
+    ".env",
+    "data/",
+    "node_modules/",
+    "Python/"
+  ],
+  "newModelCallsDuringGitImport": 0,
+  "mediaCallsDuringGitImport": 0
+}

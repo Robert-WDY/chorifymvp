@@ -1,0 +1,330 @@
+{
+  "id": "04-dep-shots",
+  "dir": "04-dep-shots",
+  "group": "镜头依赖",
+  "tone": "口语、选多个",
+  "query": "给《微雨巷口》先写一份8秒的雨后街道分镜，4镜，每镜2秒，无人无字。然后只取第2镜和第4镜，分别写中文生图提示词，把这两段提示词合存为另一份文字，别把第1镜第3镜混进去。总共两份文档，图片视频都别实际生成。",
+  "expected": {
+    "texts": 2,
+    "unitType": "shots",
+    "indexes": [
+      2,
+      4
+    ],
+    "upstreamUnits": 4,
+    "duration": 8,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "c11adb92-a3f7-4002-931c-57d4c18323b2",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "c11adb92-a3f7-4002-931c-57d4c18323b2",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "boundRequestedIndexes",
+      "passed": true,
+      "evidence": {
+        "type": "shot",
+        "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+        "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+        "version": 1,
+        "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+        "unitIds": [
+          "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+          "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+        ],
+        "indexes": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "name": "upstreamUnitCount",
+      "passed": true,
+      "evidence": {
+        "expected": 4,
+        "actual": 4
+      }
+    },
+    {
+      "name": "realSourceVersion",
+      "passed": true,
+      "evidence": {
+        "artifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+        "version": 1
+      }
+    },
+    {
+      "name": "bindingReceiptMatches",
+      "passed": true
+    },
+    {
+      "name": "onlySelectedShotBodies",
+      "passed": true,
+      "evidence": [
+        {
+          "content": "镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。",
+          "durationSeconds": 2
+        },
+        {
+          "content": "镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。",
+          "durationSeconds": 2
+        }
+      ]
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 2,
+  "skills": [
+    {
+      "slug": "storyboard-one-shot-zh-v2",
+      "status": "completed",
+      "artifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+      "contractValidated": true
+    },
+    {
+      "slug": "image-prompt-gallery-director-v2",
+      "status": "completed",
+      "artifactId": "b68147d4-43dc-4670-9d9d-4859e32f12b6",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "1e6db646-b702-48c1-8366-cc1f5aad192e",
+      "start": "2026-09-16T07:47:42.267Z",
+      "end": "2026-09-16T07:47:44.815Z"
+    },
+    {
+      "nodeId": "7617804c-11e0-4ad5-b2b3-f7242e21d1a4",
+      "start": "2026-09-16T07:47:44.897Z",
+      "end": "2026-09-16T07:47:49.788Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "selection": {
+    "binding": {
+      "type": "shot",
+      "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+      "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+      "version": 1,
+      "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+      "unitIds": [
+        "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+        "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+      ],
+      "indexes": [
+        2,
+        4
+      ]
+    },
+    "artifactBinding": {
+      "type": "shot",
+      "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+      "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+      "version": 1,
+      "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+      "unitIds": [
+        "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+        "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+      ],
+      "indexes": [
+        2,
+        4
+      ]
+    },
+    "sources": [
+      {
+        "id": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+        "type": "text",
+        "version": 1,
+        "taskId": "26609336-f1b5-4197-b89a-56fa88fb7209",
+        "structure": {
+          "shots": [
+            {
+              "content": "镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。",
+              "durationSeconds": 2
+            },
+            {
+              "content": "镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。",
+              "durationSeconds": 2
+            }
+          ]
+        },
+        "provenance": {
+          "origin": "model_artifact",
+          "factualSupport": "not_checked",
+          "sourceTaskId": "26609336-f1b5-4197-b89a-56fa88fb7209"
+        },
+        "relation": "selected_units",
+        "role": "text",
+        "dependencyIndex": 0,
+        "sourceSections": [
+          {
+            "title": "分镜规格",
+            "content": "标题：微雨巷口\n总时长：8秒\n镜头数：4镜\n单镜时长：每镜2秒\n画面要求：雨后街道，无人、无字\n时间轴：第1镜 0:00-0:02；第2镜 0:02-0:04；第3镜 0:04-0:06；第4镜 0:06-0:08\n说明：本次仅输出文字分镜，不实际生成任何图片或视频。"
+          }
+        ],
+        "selectedUnits": [
+          "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+          "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+        ]
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24528,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7029,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 644,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7673
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "storyboard-one-shot-zh-v2",
+      "nodeId": "1e6db646-b702-48c1-8366-cc1f5aad192e",
+      "characters": 5098,
+      "systemCharacters": 1415,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1908,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 325,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2233
+      }
+    },
+    {
+      "index": 2,
+      "phase": "text_generation",
+      "methodId": "image-prompt-gallery-director-v2",
+      "nodeId": "7617804c-11e0-4ad5-b2b3-f7242e21d1a4",
+      "characters": 8566,
+      "systemCharacters": 1098,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 4175,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 926,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 5101
+      }
+    }
+  ],
+  "final": "### 镜头\n1. 画面：雨后巷口全景：湿漉漉的砖石路面映着两侧墙头与灰白天光，墙角低洼处积水微微发亮，檐角水珠将落未落。\n时长（秒）：2\n2. 画面：镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。\n时长（秒）：2\n3. 画面：镜头拉近地面：积水表面泛起细密涟漪，倒影里电线与斑驳屋檐随波轻晃，一颗水珠从上方坠下，溅开一圈光点。\n时长（秒）：2\n4. 画面：镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。\n时长（秒）：2\n\n### 总时长（秒）\n8\n\n### 分镜规格\n标题：微雨巷口\n总时长：8秒\n镜头数：4镜\n单镜时长：每镜2秒\n画面要求：雨后街道，无人、无字\n时间轴：第1镜 0:00-0:02；第2镜 0:02-0:04；第3镜 0:04-0:06；第4镜 0:06-0:08\n说明：本次仅输出文字分镜，不实际生成任何图片或视频。\n\n【第2镜提示词】\n以雨后巷口为背景，镜头位于街道中央并沿道路缓缓前推。画面为青灰砖墙，墙面被雨水浸出深浅不一的水痕，砖缝处颜色更深。画面下方的排水沟中，一道细流夹着几片湿润的落叶缓缓淌过。道路右侧有一扇紧闭的旧木门，木质表面被雨雾濡湿，深色木纹清晰，门环上凝着一颗颗水珠，水珠表面有微弱高光。巷口空无一人，地面布满湿漉亮面和浅水洼，天光在积水中形成柔和反光。整体色调为冷青灰，微阴的漫射光从上方洒落，光线柔和无直射阴影，空气中有淡淡水汽感。写实摄影风格，画面干净，构图平稳，视线高度接近人眼，画幅横向，无人物、无文字、无标志。\n\n【第4镜提示词】\n以雨后街巷的尽头为背景，镜头望向巷口深处，画面由近及远逐渐收窄，形成一点透视。近处仍是湿漉的灰砖墙面与地面浅水洼，中景处两侧建筑向远处延伸，轮廓在淡淡的雨雾中逐渐柔化。远处巷口融入朦胧的灰白色调，雾气弥漫，尽头有一片积水，映出天边一点微弱天光。巷子安静无人，没有车辆、没有文字、没有招牌。整体色调为冷灰白，光线为清晨或傍晚的柔和漫射光，雨雾提供高湿度空气感，画面有轻微景深虚化，远端细节柔化但不模糊。写实摄影风格，安静、克制的氛围，画幅横向，无人、无字。"
+}

@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import {randomUUID} from 'node:crypto';
+import {createBrain} from '../server/adapters.mjs';
+import {loadCatalog} from '../server/catalog.mjs';
+import {createTask} from '../server/task-state.mjs';
+import {acceptRevision} from '../server/task-contract.mjs';
+import {TaskExecutor} from '../server/execution-engine.mjs';
+import {runCompiled} from '../server/compiled-runtime.mjs';
+import {Verifier} from '../server/verification.mjs';
+import {Agent} from '../server/agent.mjs';
+const out='data/operation-contract-repair-20260914',samples=JSON.parse(fs.readFileSync(out+'/real-samples-final-targets.json')),g=structuredClone(samples.results.findLast(r=>r.id==='C03-T4'&&r.passed).goal),f=JSON.parse(fs.readFileSync('tests/fixtures/operation-contract-raw.json')).find(f=>f.id==='C03-T4'),catalog=await loadCatalog();
+const state={id:randomUUID(),messages:[],events:[],assets:[],currentRunId:randomUUID(),taskStore:{version:1,activeTaskId:null,tasks:Object.fromEntries(f.candidates.map(t=>[t.id,t])),artifacts:Object.fromEntries(f.artifacts.map(a=>[a.id,a])),executions:{},inputs:{},decisions:[]}},calls=[],transportCalls=[];
+const base=createBrain(process.env,async(url,opts)=>{if(transportCalls.length>=30)throw Error('model budget');const record={request:JSON.parse(opts.body),startedAt:new Date().toISOString()};transportCalls.push(record);const response=await fetch(url,opts);record.response=await response.clone().json();record.finishedAt=new Date().toISOString();return response;});
+const brain={config:base.config,respond:async(input,tools,signal,options)=>{const c={input,options,startedAt:new Date().toISOString()};calls.push(c);try{c.output=await base.respond(input,tools,signal,options);return c.output;}catch(e){c.error=e.message;throw e;}finally{c.finishedAt=new Date().toISOString();}}};
+const task=createTask(state,g,f.query);acceptRevision(task,state.currentRunId);
+const save=async()=>fs.writeFileSync(out+'/live-change-set.json',JSON.stringify({mode:'real_text_delta_and_verifier',newMedia:0,state,calls,transportCalls},null,2));
+const runtime={capabilities:()=>({}),execute:async()=>{throw Error('external tool denied');}},executor=new TaskExecutor({state,brain,catalog,runtime,verifier:new Verifier(brain),save});
+await runCompiled(executor,AbortSignal.timeout(240000),async()=>{});await Agent.prototype.finish.call({},state,async e=>{state.events.push(e);});await save();console.log(JSON.stringify({status:task.status,changeSets:task.changeSets,calls:calls.length,transportCalls:transportCalls.length}));

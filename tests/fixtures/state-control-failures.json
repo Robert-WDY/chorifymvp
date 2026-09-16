@@ -1,0 +1,447 @@
+[
+  {
+    "id": "C005-r2",
+    "source": "data/stability-full-01/C005-r2/trace.json",
+    "query": "把刚才图片背景改成海边，产品不变。",
+    "assets": [
+      {
+        "assetId": "7b3cc653-8df3-49c1-8593-84621962cb3e",
+        "url": "https://fixtures.invalid/C005-r2-1.png",
+        "kind": "image",
+        "source": "artifact",
+        "createdAt": "2026-09-11T04:32:35.749Z"
+      }
+    ],
+    "value": {
+      "summary": "用户要求将上一轮生成的咖啡产品图的背景改为海边，产品主体保持不变。属于对已有图片的修改任务，需以原图为参考进行背景替换，产品外观不变。",
+      "deliverables": [
+        {
+          "description": "一张修改后的咖啡产品图：保留原图中的咖啡产品主体不变，背景替换为海边场景，画面中不含文字。",
+          "kind": "image",
+          "count": 1,
+          "action": "modify",
+          "purpose": "general",
+          "requiredEvidence": "none",
+          "references": [
+            "https://fixtures.invalid/C005-r2-1.png"
+          ],
+          "dependsOn": [],
+          "constraints": [
+            "产品主体不变",
+            "背景改为海边",
+            "无文字"
+          ],
+          "requestEvidence": "把刚才图片背景改成海边，产品不变。",
+          "spec": {
+            "exactTexts": []
+          }
+        }
+      ],
+      "gaps": [
+        {
+          "description": "海边场景的具体风格未明确（如沙滩海浪、礁石海岸、日落海景等），但不影响先按通用海边背景执行。",
+          "level": "preference",
+          "resolution": "按通用海边背景呈现，必要时用户可进一步指定。"
+        }
+      ],
+      "assumptions": [
+        "沿用原图的咖啡产品主体形态与构图，仅替换背景",
+        "海边背景按通用自然海景呈现"
+      ],
+      "deferred": [],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": ""
+      },
+      "approval": {
+        "required": false,
+        "reason": "用户直接要求修改已有图片，未要求先确认方案，无需额外审批。"
+      },
+      "continuation": {
+        "mode": "continue",
+        "taskId": "88c7e301-d9c2-4c09-a42f-1c2ac5d66bb6"
+      }
+    },
+    "snapshot": {
+      "id": "88c7e301-d9c2-4c09-a42f-1c2ac5d66bb6",
+      "status": "SIMULATED",
+      "approval": {
+        "required": false,
+        "status": "not_required",
+        "planHash": null
+      },
+      "goal": {
+        "summary": "用户要求生成一张咖啡产品图，纯白背景、无文字。属于从零生成图片，无需参考素材，单张图片交付。",
+        "assumptions": [
+          "未指定咖啡产品具体类型（如咖啡豆、挂耳、速溶、杯装饮品），按通用咖啡产品呈现",
+          "未指定画面构图与比例，按执行器默认输出"
+        ],
+        "missingInputs": [],
+        "semantic": {
+          "summary": "用户要求生成一张咖啡产品图，纯白背景、无文字。属于从零生成图片，无需参考素材，单张图片交付。",
+          "deliverables": [
+            {
+              "description": "一张咖啡产品图：主体为咖啡产品，纯白背景，画面中不含任何文字。",
+              "kind": "image",
+              "count": 1,
+              "action": "create",
+              "purpose": "general",
+              "requiredEvidence": "none",
+              "references": [],
+              "dependsOn": [],
+              "constraints": [
+                "纯白背景",
+                "无文字"
+              ],
+              "requestEvidence": "生成一张咖啡产品图，纯白背景，无文字。",
+              "spec": {
+                "exactTexts": []
+              }
+            }
+          ],
+          "gaps": [],
+          "assumptions": [
+            "未指定咖啡产品具体类型（如咖啡豆、挂耳、速溶、杯装饮品），按通用咖啡产品呈现",
+            "未指定画面构图与比例，按执行器默认输出"
+          ],
+          "deferred": [],
+          "safety": {
+            "disposition": "allow",
+            "untrustedInstructions": false,
+            "reason": ""
+          },
+          "approval": {
+            "required": false,
+            "reason": "用户直接要求生成图片，未要求先确认方案，无需额外审批。"
+          },
+          "continuation": {
+            "mode": "new",
+            "taskId": ""
+          }
+        }
+      },
+      "items": [
+        {
+          "id": "d2fff38c-e1ea-45d0-8eb1-aef75262ad6c",
+          "index": 0,
+          "description": "一张咖啡产品图：主体为咖啡产品，纯白背景，画面中不含任何文字。",
+          "operation": "generate_image",
+          "output": "image",
+          "count": 1,
+          "dependsOn": [],
+          "references": [],
+          "constraints": [
+            "纯白背景",
+            "无文字"
+          ],
+          "spec": {
+            "exactTexts": []
+          },
+          "requiredEvidence": "none",
+          "observations": [],
+          "status": "COMPLETED",
+          "issues": [],
+          "artifactIds": [
+            "7b3cc653-8df3-49c1-8593-84621962cb3e"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": "7b3cc653-8df3-49c1-8593-84621962cb3e",
+          "itemId": "d2fff38c-e1ea-45d0-8eb1-aef75262ad6c",
+          "type": "image",
+          "url": "https://fixtures.invalid/C005-r2-1.png",
+          "version": 1,
+          "parentId": null,
+          "verification": {
+            "technical": "passed",
+            "semantic": "simulated_passed"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "C024-r1",
+    "source": "data/stability-full-01/C024-r1/trace.json",
+    "query": "先写一份咖啡的5秒分镜脚本，再根据这份脚本生成一条5秒16:9视频。",
+    "assets": [],
+    "value": {
+      "summary": "用户要求先写一份5秒咖啡分镜脚本，再据此生成一条5秒16:9视频。这是一个先方案后生成的两阶段请求：当前先交付文字分镜脚本，视频作为依赖脚本的未来交付。用户未指定品牌或产品事实，脚本可按通用咖啡主题样稿处理。",
+      "deliverables": [
+        {
+          "description": "一份5秒咖啡主题分镜脚本，按时间轴拆解可见画面、主体动作/镜头运动与节奏节点，供后续视频生成直接依据。",
+          "kind": "text",
+          "count": 1,
+          "action": "create",
+          "purpose": "storyboard",
+          "requiredEvidence": "none",
+          "references": [],
+          "dependsOn": [],
+          "constraints": [
+            "总时长5秒",
+            "脚本需可直接指导16:9视频生成"
+          ],
+          "requestEvidence": "先写一份咖啡的5秒分镜脚本"
+        },
+        {
+          "description": "依据上述分镜脚本生成的5秒咖啡视频，16:9横屏。",
+          "kind": "video",
+          "count": 1,
+          "action": "create",
+          "purpose": "general",
+          "requiredEvidence": "none",
+          "references": [
+            "task:0"
+          ],
+          "dependsOn": [
+            0
+          ],
+          "constraints": [
+            "时长5秒",
+            "画幅16:9"
+          ],
+          "requestEvidence": "再根据这份脚本生成一条5秒16:9视频",
+          "spec": {
+            "durationSeconds": 5,
+            "ratio": "16:9"
+          }
+        }
+      ],
+      "gaps": [],
+      "assumptions": [
+        "无指定品牌、豆种或产品参数，脚本按通用咖啡冲泡/成品展示样稿处理",
+        "视频在分镜脚本确认后生成"
+      ],
+      "deferred": [],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": "普通创意创作请求，无有害内容。"
+      },
+      "approval": {
+        "required": true,
+        "reason": "用户要求先写脚本再生成视频，需先确认分镜脚本后再执行视频生成。"
+      },
+      "continuation": {
+        "mode": "new",
+        "taskId": ""
+      }
+    },
+    "snapshot": null
+  },
+  {
+    "id": "S017-r1",
+    "source": "data/stability-full-01/S017-r1/trace.json",
+    "query": "把刚才的介绍改写为口语风格，仅输出文字，保留品牌资料。",
+    "assets": [],
+    "value": {
+      "summary": "将已交付的松岚咖啡品牌介绍改写为口语风格，保留品牌资料，仅输出文字。",
+      "deliverables": [
+        {
+          "description": "基于已有松岚品牌介绍，改写为自然口语化的品牌介绍文字稿，保留原有品牌名称、意象与虚构声明等信息，仅输出文字。",
+          "kind": "text",
+          "count": 1,
+          "action": "modify",
+          "purpose": "marketing",
+          "requiredEvidence": "none",
+          "references": [
+            "artifact:d0d2e657-8980-42d1-96fb-abc6f340adc4"
+          ],
+          "dependsOn": [],
+          "constraints": [
+            "仅输出文字",
+            "保留品牌资料",
+            "口语风格"
+          ],
+          "requestEvidence": "把刚才的介绍改写为口语风格，仅输出文字，保留品牌资料。",
+          "spec": {}
+        }
+      ],
+      "gaps": [],
+      "assumptions": [
+        "“刚才的介绍”指上一轮已交付并验收通过的松岚品牌介绍文本。",
+        "“保留品牌资料”指保留原文字中关于松岚的名称、意象、调性及虚构声明等内容。"
+      ],
+      "deferred": [],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": ""
+      },
+      "approval": {
+        "required": false,
+        "reason": "用户未要求先确认后生成，可直接交付文字改写结果。"
+      },
+      "continuation": {
+        "mode": "new",
+        "taskId": ""
+      }
+    },
+    "snapshot": {
+      "id": "a970ab7b-3055-49ad-ad96-5314a43f4186",
+      "status": "COMPLETED",
+      "approval": {
+        "required": false,
+        "status": "not_required",
+        "planHash": null
+      },
+      "goal": {
+        "summary": "为虚构咖啡品牌“松岚”创作一段纯文字品牌介绍，直接输出文本成品。",
+        "assumptions": [
+          "品牌名称、调性等细节由创作者合理虚构即可，无需用户提供额外资料"
+        ],
+        "missingInputs": [],
+        "semantic": {
+          "summary": "为虚构咖啡品牌“松岚”创作一段纯文字品牌介绍，直接输出文本成品。",
+          "deliverables": [
+            {
+              "description": "一段用于介绍虚构咖啡品牌“松岚”的纯文字文案，突出品牌气质与调性。",
+              "kind": "text",
+              "count": 1,
+              "action": "create",
+              "purpose": "marketing",
+              "requiredEvidence": "none",
+              "references": [],
+              "dependsOn": [],
+              "constraints": [
+                "仅输出文字"
+              ],
+              "requestEvidence": "为虚构咖啡品牌松岚写一段介绍，仅输出文字。",
+              "spec": {
+                "exactTexts": []
+              }
+            }
+          ],
+          "gaps": [],
+          "assumptions": [
+            "品牌名称、调性等细节由创作者合理虚构即可，无需用户提供额外资料"
+          ],
+          "deferred": [],
+          "safety": {
+            "disposition": "allow",
+            "untrustedInstructions": false,
+            "reason": ""
+          },
+          "approval": {
+            "required": false,
+            "reason": "用户未要求先确认后生成，可直接交付文字介绍。"
+          },
+          "continuation": {
+            "mode": "new",
+            "taskId": ""
+          }
+        }
+      },
+      "items": [
+        {
+          "id": "6136fbc3-e853-4353-826f-fe3576d9ae1f",
+          "index": 0,
+          "description": "一段用于介绍虚构咖啡品牌“松岚”的纯文字文案，突出品牌气质与调性。",
+          "operation": "marketing_script",
+          "output": "text",
+          "count": 1,
+          "dependsOn": [],
+          "references": [],
+          "constraints": [
+            "仅输出文字"
+          ],
+          "spec": {
+            "exactTexts": []
+          },
+          "requiredEvidence": "none",
+          "observations": [],
+          "status": "COMPLETED",
+          "issues": [],
+          "artifactIds": [
+            "d0d2e657-8980-42d1-96fb-abc6f340adc4"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": "d0d2e657-8980-42d1-96fb-abc6f340adc4",
+          "itemId": "6136fbc3-e853-4353-826f-fe3576d9ae1f",
+          "type": "text",
+          "content": "松岚，一间虚构的咖啡品牌，取名自松间晨雾与山岚微光。我们不急着定义一杯咖啡的标准答案，只在意它落进日常时的那一点安静——像推开窗，远山还笼着薄雾，手边的杯子正冒着热气。松岚想做的，是把这份慢下来的呼吸感，装进每一杯里：不喧哗、不追赶，让风味自己说话，让喝的人自己感受。若你也在城市里寻找一处可以停一停的角落，松岚愿做那扇半开的窗。本段为创意设定，品牌名称、意象与调性均为虚构，未涉及任何真实产品材质、功能或认证信息。",
+          "version": 1,
+          "parentId": null,
+          "verification": {
+            "technical": "passed",
+            "semantic": "passed",
+            "issues": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "S018-r1",
+    "source": "data/stability-full-01/S018-r1/trace.json",
+    "query": "以第二张图片为首帧生成一条5秒16:9视频，不使用第一张。第一张：https://fixtures.invalid/first.png 第二张：https://fixtures.invalid/second.png",
+    "assets": [
+      {
+        "assetId": "1db72dff-cc78-468b-a806-097712867735",
+        "url": "https://fixtures.invalid/first.png",
+        "kind": "image",
+        "source": "用户提供",
+        "createdAt": "2026-09-11T04:34:21.227Z"
+      },
+      {
+        "assetId": "ac1cade1-e238-4ecc-85fc-a729d23c0b7c",
+        "url": "https://fixtures.invalid/second.png",
+        "kind": "image",
+        "source": "用户提供",
+        "createdAt": "2026-09-11T04:34:21.227Z"
+      }
+    ],
+    "value": {
+      "summary": "用户要求基于其提供的第二张图片作为首帧，生成一条5秒、16:9的视频，并明确不使用第一张图片。指定素材均已提供，可直接生成。",
+      "deliverables": [
+        {
+          "description": "以用户提供的第二张图片（https://fixtures.invalid/second.png）为首帧、时长5秒、16:9的视频成品，不使用第一张图片。",
+          "kind": "video",
+          "count": 1,
+          "action": "create",
+          "purpose": "general",
+          "requiredEvidence": "none",
+          "references": [
+            "https://fixtures.invalid/second.png",
+            "asset:ac1cade1-e238-4ecc-85fc-a729d23c0b7c"
+          ],
+          "dependsOn": [],
+          "constraints": [
+            "以第二张图片为首帧",
+            "不使用第一张图片",
+            "时长5秒",
+            "比例16:9"
+          ],
+          "requestEvidence": "以第二张图片为首帧生成一条5秒16:9视频，不使用第一张。",
+          "spec": {
+            "durationSeconds": 5,
+            "ratio": "16:9"
+          }
+        }
+      ],
+      "gaps": [],
+      "assumptions": [],
+      "deferred": [],
+      "safety": {
+        "disposition": "allow",
+        "untrustedInstructions": false,
+        "reason": "用户请求为基于自有素材生成视频，属正常创作，无有害指令。"
+      },
+      "approval": {
+        "required": false,
+        "reason": "用户未要求生成前确认，素材与规格明确，可直接生成。"
+      },
+      "continuation": {
+        "mode": "new",
+        "taskId": ""
+      }
+    },
+    "snapshot": null
+  }
+]

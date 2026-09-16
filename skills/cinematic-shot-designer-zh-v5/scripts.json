@@ -1,0 +1,118 @@
+[
+  {
+    "name": "validate_storyboard",
+    "entrypoint": "scripts/validate-storyboard.py",
+    "description": "校验多宫格总提示词的宫格数量、连续编号、说明栏和网格一致性",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "prompt",
+        "panelCount",
+        "columns",
+        "rows"
+      ],
+      "properties": {
+        "rows": {
+          "type": "integer",
+          "maximum": 24,
+          "minimum": 1
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "columns": {
+          "type": "integer",
+          "maximum": 6,
+          "minimum": 1
+        },
+        "panelCount": {
+          "type": "integer",
+          "maximum": 24,
+          "minimum": 3
+        },
+        "aspectRatio": {
+          "type": "string",
+          "default": "",
+          "maxLength": 20
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "required": [
+        "valid",
+        "readyForGeneration",
+        "expectedPanelCount",
+        "detectedPanelCount",
+        "detectedPanelNumbers",
+        "grid",
+        "errors",
+        "warnings"
+      ],
+      "properties": {
+        "grid": {
+          "type": "object",
+          "required": [
+            "columns",
+            "rows",
+            "capacity"
+          ],
+          "properties": {
+            "rows": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "columns": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "capacity": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "detectedPanelCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expectedPanelCount": {
+          "type": "integer",
+          "maximum": 24,
+          "minimum": 3
+        },
+        "readyForGeneration": {
+          "type": "boolean"
+        },
+        "detectedPanelNumbers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "maximum": 99,
+            "minimum": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

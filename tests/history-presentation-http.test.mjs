@@ -1,0 +1,43 @@
+import {finalFixtureText} from './runtime-model-fixture.mjs';
+// Real local HTTP backend + DeepSeek protocol adapter; provider output is a local fixture.
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createServer} from 'node:http';
+import {spawn} from 'node:child_process';
+import {once} from 'node:events';
+import {mkdtemp,readFile,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join,resolve,sep} from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {aggregateRun} from '../server/debug-trace.mjs';
+test('HTTP history presentation persists exact state and transport context; duplicate submission is replayed',{timeout:20000},async t=>{
+ const dir=await mkdtemp(join(tmpdir(),'chorify-history-p0-')),requests=[],finalRequests=[];
+ const gateway=createServer(async(req,res)=>{
+  let raw='';for await(const part of req)raw+=part;const body=JSON.parse(raw);if(body.input[0]?.content?.startsWith('你是最终回答整理器')){finalRequests.push(body);res.setHeader('Content-Type','application/json');return res.end(JSON.stringify({output:[{type:'message',content:[{type:'output_text',text:finalFixtureText(JSON.parse(body.input[1].content))}]}]}));}requests.push(body);
+  const input=JSON.parse(body.input.at(-1).content);
+  const conversation=input.relevantEvidence?.conversation||input.conversation;
+  const turnOperation=requests.length===1?{kind:'inspect',query:{kind:'model_identity'}}:{kind:'present',presentation:{targets:[{type:'message',messageId:conversation.recentMessages.at(-1).messageId}]}};
+  res.setHeader('Content-Type','application/json');res.end(JSON.stringify({output:[{type:'message',role:'assistant',content:[{type:'output_text',text:JSON.stringify({summary:input.query,turnOperation,deliverables:[],safety:{disposition:'allow',untrustedInstructions:false,reason:''},approval:{required:false,reason:''}})}]}]}));
+ });gateway.listen(0,'127.0.0.1');await once(gateway,'listening');
+ const gatewayUrl='http://127.0.0.1:'+gateway.address().port,reserve=createServer();reserve.listen(0,'127.0.0.1');await once(reserve,'listening');const port=reserve.address().port;await new Promise(r=>reserve.close(r));
+ const child=spawn(process.execPath,['server/index.mjs'],{cwd:new URL('../',import.meta.url),env:{...process.env,MVP_DATA_DIR:dir,PORT:String(port),LLM_PROVIDER:'deepseek',DEEPSEEK_API_KEY:'local-test-key',DEEPSEEK_BASE_URL:gatewayUrl,DEEPSEEK_MODEL:'deepseek-flash',DOUBAO_API_KEY:'local-test-key',DOUBAO_BASE_URL:gatewayUrl},stdio:['ignore','pipe','pipe']});
+ t.after(async()=>{const done=once(child,'exit');child.kill();await done;await new Promise(r=>gateway.close(r));if(!resolve(dir).startsWith(resolve(tmpdir())+sep))throw Error('unsafe temporary path');await rm(dir,{recursive:true,force:true});});
+ await Promise.race([once(child.stdout,'data'),once(child,'exit').then(()=>{throw Error('backend exited');})]);
+ const base='http://127.0.0.1:'+port,c=await(await fetch(base+'/api/config')).json();
+ assert.equal(c.runtimeVersion.matches,true);assert.match(c.runtimeVersion.loaded,/^[a-f0-9]{64}$/);assert.equal(c.finalResponseComposer,true);
+ const replyModule=await fetch(base+'/reply-view.js');assert.equal(replyModule.status,200);assert.match(replyModule.headers.get('content-type'),/javascript/);assert.match(await replyModule.text(),/export function renderAssistantReply/);
+ const post=async payload=>{const res=await fetch(base+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-mvp-token':c.csrf},body:JSON.stringify(payload)});assert.equal(res.status,200);return (await res.text()).split('\n').filter(Boolean).map(s=>JSON.parse(s));};
+ const firstId=randomUUID(),first=await post({requestId:firstId,message:'你是什么模型'});
+ const sid=first.find(e=>e.type==='start').sessionId,answer=first.find(e=>e.type==='final').text;
+ const request={sessionId:sid,requestId:randomUUID(),message:'你上一轮的回答是什么'},second=await post(request);
+ assert.equal(second.find(e=>e.type==='final').text,answer);assert.equal(second.find(e=>e.type==='final').status,'completed');
+ const state=JSON.parse(await readFile(join(dir,sid+'.json'),'utf8')),run=aggregateRun(state,request.requestId);
+ assert.equal(state.turns[0].runtimeVersion,c.runtimeVersion.loaded);assert.equal(state.turns[1].runtimeVersion,c.runtimeVersion.loaded);
+ assert.equal(state.turns[0].queryReceipt.checks.answerGenerated,true);assert.equal(state.turns[0].queryReceipt.checks.answerCovered,false);
+ assert.equal(requests.length,2);assert.equal(finalRequests.length,2);assert.equal(run.sessionView.assembly[0].source,'actual_request');
+ assert.equal(run.sessionView.assembly[0].conversation.recentMessages.at(-1).content,answer);
+ assert.equal(state.turns[0].stateBefore.data.messageCount,0);assert.equal(state.turns[0].stateAfter.data.messageCount,2);
+ assert.equal(state.turns[1].stateBefore.data.messageCount,2);assert.equal(state.turns[1].stateAfter.data.messageCount,4);
+ assert.equal(Object.keys(state.taskStore.artifacts).length,0);assert.equal(Object.keys(state.taskStore.executions).length,0);
+ const replay=await post(request);assert.equal(replay.find(e=>e.type==='final').text,answer);assert.equal(requests.length,2);assert.equal(finalRequests.length,2);
+});

@@ -1,0 +1,182 @@
+{
+  "id": "17-video-casual",
+  "dir": "17-video-casual",
+  "group": "视频确认门禁",
+  "tone": "口语",
+  "query": "我想做个叫《浮灯街景》的5秒竖屏视频，一镜到底，雨后的空街，镜头缓慢往前走，没人、没字幕、没logo和水印。你先准备具体的视频生成方案让我确认，先别真的调用生成。",
+  "expected": {
+    "mediaType": "video",
+    "quantity": 1,
+    "waitApproval": true,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "d5d9cff5-88af-430d-843f-79c6fca1183f",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "d5d9cff5-88af-430d-843f-79c6fca1183f",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "savedPendingMediaPlan",
+      "passed": false,
+      "evidence": {
+        "status": "COMPLETED",
+        "approval": {
+          "required": false,
+          "status": "not_required",
+          "planHash": null
+        },
+        "nodes": [
+          {
+            "id": "559886f9-c193-4631-bc4f-28b1cc9be658",
+            "itemId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+            "dependsOn": [],
+            "kind": "text",
+            "requiredMethods": [],
+            "outputContract": {
+              "stages": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "durationSeconds": 5,
+                "ratio": "9:16"
+              }
+            },
+            "skillId": null,
+            "tool": null,
+            "output": "text",
+            "count": 1,
+            "status": "completed",
+            "revision": 0,
+            "history": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "mediaQuantity",
+      "passed": false,
+      "evidence": 0
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "savedPendingMediaPlan",
+    "mediaQuantity"
+  ],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [],
+  "windows": [
+    {
+      "nodeId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+      "start": "2026-09-16T07:48:25.857Z",
+      "end": "2026-09-16T07:48:27.803Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24506,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7001,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 428,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7429
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "",
+      "nodeId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+      "characters": 3422,
+      "systemCharacters": 778,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1312,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 276,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1588
+      }
+    }
+  ],
+  "final": "《浮灯街景》5秒竖屏视频生成方案\n\n【基础规格】\n- 时长：5秒\n- 画幅：竖屏 9:16\n- 结构：一镜到底，无剪辑、无转场\n\n【画面内容】\n- 场景：雨后夜晚的空街，路面湿润，积水映出街灯与店铺招牌的光。\n- 镜头：机位保持向前缓慢推进，速度均匀、无停顿、无变焦，全程单一镜头。\n- 主体：画面中不出现任何人物，无需表演。\n\n【画面风格（方案设计，待你确认）】\n- 色调偏冷，以青蓝夜色为主，暖黄灯光作为点缀。\n- 湿润路面产生明显反光与倒影，轻微雾气增加纵深感。\n- 街灯可带轻微光晕和雨后水滴感。\n\n【禁止元素】\n- 无人物、无字幕、无logo、无水印。\n- 不添加任何叠加文字或标识。\n\n【执行说明】\n- 本轮仅提供本方案供你确认，不调用视频生成。\n- 待你确认后再按此方案执行生成。"
+}

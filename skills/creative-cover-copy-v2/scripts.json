@@ -1,0 +1,349 @@
+[
+  {
+    "name": "validate_copy_evidence",
+    "entrypoint": "scripts/validate-copy-evidence.py",
+    "description": "检查每套文案的证据引用、禁止短语、封面文字长度和高风险绝对化表达",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "platform",
+        "validEvidenceIds",
+        "directions"
+      ],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "directions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "coverText",
+              "title",
+              "body",
+              "cta",
+              "evidenceIds"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              "cta": {
+                "type": "string",
+                "maxLength": 5000,
+                "minLength": 1
+              },
+              "body": {
+                "type": "string",
+                "maxLength": 100000,
+                "minLength": 1
+              },
+              "title": {
+                "type": "string",
+                "maxLength": 2000,
+                "minLength": 1
+              },
+              "coverText": {
+                "type": "string",
+                "maxLength": 500,
+                "minLength": 1
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 100,
+                  "minLength": 1
+                },
+                "maxItems": 500,
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 20,
+          "minItems": 1
+        },
+        "forbiddenPhrases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1
+          },
+          "maxItems": 500
+        },
+        "validEvidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "maxItems": 500,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "stringList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "summaries"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "coverTextLength",
+              "evidenceCount",
+              "unknownEvidenceIds",
+              "foundForbiddenPhrases",
+              "highRiskPhrases"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "evidenceCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "coverTextLength": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "highRiskPhrases": {
+                "$ref": "#/$defs/stringList"
+              },
+              "unknownEvidenceIds": {
+                "$ref": "#/$defs/stringList"
+              },
+              "foundForbiddenPhrases": {
+                "$ref": "#/$defs/stringList"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "validate_cover_prompt_contract",
+    "entrypoint": "scripts/validate-cover-prompt-contract.py",
+    "description": "检查封面提示词的精确文字、必须保持项、禁止内容、画幅和参考图职责冲突",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "prompt",
+        "aspectRatio"
+      ],
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "exactTexts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 100
+        },
+        "aspectRatio": {
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "referenceRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "referenceId",
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              "priority": {
+                "type": "integer",
+                "default": 50,
+                "maximum": 100,
+                "minimum": 1
+              },
+              "referenceId": {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        },
+        "requiredLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 500
+        },
+        "forbiddenLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "stringList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "checks",
+        "normalizedReferenceRoles"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "required": [
+            "promptLength",
+            "missingExactTexts",
+            "missingRequiredLiterals",
+            "foundForbiddenLiterals",
+            "duplicateReferenceIds",
+            "duplicateRoles"
+          ],
+          "properties": {
+            "promptLength": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duplicateRoles": {
+              "$ref": "#/$defs/stringList"
+            },
+            "missingExactTexts": {
+              "$ref": "#/$defs/stringList"
+            },
+            "duplicateReferenceIds": {
+              "$ref": "#/$defs/stringList"
+            },
+            "foundForbiddenLiterals": {
+              "$ref": "#/$defs/stringList"
+            },
+            "missingRequiredLiterals": {
+              "$ref": "#/$defs/stringList"
+            }
+          },
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "normalizedReferenceRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "referenceId",
+              "role",
+              "priority"
+            ],
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1
+              },
+              "referenceId": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

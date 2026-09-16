@@ -1,0 +1,173 @@
+[
+  {
+    "summary": "生成三个文字创意方向",
+    "turnOperation": {
+      "kind": "create"
+    },
+    "deliverables": [
+      {
+        "description": "依据白色桌面加湿器的已知信息设计三个不同方向，容量与噪音不作性能承诺。",
+        "kind": "text",
+        "action": "create",
+        "count": 3,
+        "artifactCount": 1,
+        "form": "directions",
+        "requiredMethods": [
+          "direction-designer-zh-v1"
+        ],
+        "requestEvidence": "使用创意方向设计Skill给我三个广告方向，只要文字，不生成媒体。"
+      }
+    ],
+    "facts": [
+      "产品是白色桌面加湿器"
+    ],
+    "gaps": [],
+    "assumptions": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": ""
+    }
+  },
+  {
+    "summary": "先产品理解，再写营销Brief",
+    "turnOperation": {
+      "kind": "create"
+    },
+    "deliverables": [
+      {
+        "description": "梳理白色泵头瓶的已知事实、容量未知及可使用信息。",
+        "kind": "text",
+        "action": "create",
+        "count": 1,
+        "form": "analysis",
+        "requiredMethods": [
+          "product-understanding-zh-v1"
+        ],
+        "requestEvidence": "先做产品理解"
+      },
+      {
+        "description": "使用前序产品理解产出营销Brief，不把未知容量或性能补成事实。",
+        "kind": "text",
+        "action": "create",
+        "count": 1,
+        "form": "composite",
+        "requiredMethods": [
+          "marketing-brief-zh-v1"
+        ],
+        "dependsOn": [
+          0
+        ],
+        "references": [
+          "task:0"
+        ],
+        "requestEvidence": "再基于理解写营销Brief"
+      }
+    ],
+    "facts": [
+      "产品是白色泵头瓶"
+    ],
+    "gaps": [],
+    "assumptions": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": ""
+    }
+  },
+  {
+    "summary": "生成一张深蓝底白杯图片",
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "turnOperation": {
+      "kind": "create"
+    },
+    "deliverables": [
+      {
+        "description": "一张深蓝背景白杯图，无人无字。",
+        "kind": "image",
+        "action": "create",
+        "count": 1,
+        "constraints": [
+          "无人",
+          "无字"
+        ],
+        "spec": {
+          "ratio": "1:1"
+        },
+        "requestEvidence": "生成一张深蓝背景的白杯图，1:1，无人无字。"
+      }
+    ],
+    "approval": {
+      "required": false,
+      "reason": ""
+    }
+  },
+  {
+    "deliverables": [],
+    "facts": [],
+    "gaps": [],
+    "assumptions": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": ""
+    },
+    "summary": "示例：展示已保存图片",
+    "turnOperation": {
+      "kind": "present",
+      "presentation": {
+        "targets": [
+          {
+            "type": "artifact",
+            "artifactId": "example-image",
+            "version": 3
+          }
+        ]
+      }
+    }
+  },
+  {
+    "deliverables": [],
+    "facts": [],
+    "gaps": [],
+    "assumptions": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": ""
+    },
+    "summary": "示例：仅将待确认视频方案改为竖屏",
+    "turnOperation": {
+      "kind": "revise_plan",
+      "targetTaskId": "example-task"
+    },
+    "revisionDelta": {
+      "changes": [
+        {
+          "field": "ratio",
+          "to": "9:16"
+        }
+      ]
+    }
+  }
+]

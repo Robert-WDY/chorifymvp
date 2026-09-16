@@ -1,0 +1,182 @@
+{
+  "id": "11-text-casual",
+  "dir": "11-text-casual",
+  "group": "文字",
+  "tone": "轻松口语",
+  "query": "帮白石烘焙写条朋友圈呗，明天海盐贝果开卖，一个12元，早上8点开门。说话自然点，正文80到120字，最后放个短标题。就一份文字，优惠和销量别瞎编，也不用配图。",
+  "expected": {
+    "texts": 1,
+    "bodyMin": 80,
+    "bodyMax": 120,
+    "facts": [
+      "12元",
+      "8点"
+    ],
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "ec2b32e8-af3b-4f30-9510-74ff53c5524a",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "ec2b32e8-af3b-4f30-9510-74ff53c5524a",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "bodyLength",
+      "passed": false,
+      "evidence": {
+        "title": "海盐贝果，明天见",
+        "body": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。",
+        "bodyCharacters": 67,
+        "bodyWithoutPunctuation": 59,
+        "contentCharacters": 75
+      }
+    },
+    {
+      "name": "fact:12元",
+      "passed": true
+    },
+    {
+      "name": "fact:8点",
+      "passed": true
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "bodyLength"
+  ],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [],
+  "windows": [
+    {
+      "nodeId": "c04c7f43-a6bc-4a1b-84df-eea119383a27",
+      "start": "2026-09-16T07:48:10.834Z",
+      "end": "2026-09-16T07:48:11.908Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "copy": {
+    "title": "海盐贝果，明天见",
+    "body": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。",
+    "bodyCharacters": 67,
+    "bodyWithoutPunctuation": 59,
+    "contentCharacters": 75
+  },
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24504,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7004,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 302,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7306
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "",
+      "nodeId": "c04c7f43-a6bc-4a1b-84df-eea119383a27",
+      "characters": 2964,
+      "systemCharacters": 778,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1175,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1241
+      }
+    }
+  ],
+  "final": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。\n\n海盐贝果，明天见"
+}

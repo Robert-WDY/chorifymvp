@@ -1,0 +1,85 @@
+{
+  "origin": "2026-09-16 real model response to synthetic fresh-session query; unchanged failure sample",
+  "query": "为迟来咖啡的新款无糖冷萃先写两个不同的广告创意方向，分别编号1和2，保存为一份文字。然后只根据第二个方向，写一个8秒、4个镜头的视频脚本，每镜2秒，另存为第二份文字。已知产品只有透明无字杯、琥珀色咖啡和冰块，不编造产地、价格或功效。你直接采用第二个方向，不用等我选择。只要这两份文字，不生成图片或视频。",
+  "response": {
+    "summary": "先写两个广告创意方向（编号1、2）保存为一份文字，再只采用第二个方向写8秒4镜（每镜2秒）视频脚本另存为一份文字；仅文字，不生成图片或视频。",
+    "turnOperation": {
+      "kind": "create"
+    },
+    "deliverables": [
+      {
+        "description": "为迟来咖啡新款无糖冷萃写两个不同的广告创意方向，分别编号1和2，合并保存为一份文字；仅使用透明无字杯、琥珀色咖啡、冰块这些已知元素，不编造产地、价格或功效。",
+        "kind": "text",
+        "action": "create",
+        "count": 2,
+        "artifactCount": 1,
+        "form": "directions",
+        "contentCardinality": 2,
+        "requiredMethods": [
+          "direction-designer-zh-v1"
+        ],
+        "requestEvidence": "为迟来咖啡的新款无糖冷萃先写两个不同的广告创意方向，分别编号1和2，保存为一份文字。",
+        "constraints": [
+          "只写两个方向，编号1和2",
+          "仅可用透明无字杯、琥珀色咖啡、冰块",
+          "不编造产地、价格或功效",
+          "保存为一份文字"
+        ],
+        "spec": {
+          "directionCount": 2
+        }
+      },
+      {
+        "description": "只依据第二个创意方向写视频脚本，8秒共4个镜头，每镜2秒，另存为第二份文字；不生成图片或视频。",
+        "kind": "text",
+        "action": "create",
+        "count": 1,
+        "artifactCount": 1,
+        "form": "script",
+        "requiredMethods": [
+          "video-script-zh-v1"
+        ],
+        "dependsOn": [
+          0
+        ],
+        "references": [
+          "task:0"
+        ],
+        "selector": {
+          "type": "direction",
+          "sourceArtifactId": "task:0",
+          "version": 1,
+          "directionId": "2",
+          "directionIndex": 2
+        },
+        "requestEvidence": "然后只根据第二个方向，写一个8秒、4个镜头的视频脚本，每镜2秒，另存为第二份文字。",
+        "constraints": [
+          "只根据第二个方向",
+          "总时长8秒",
+          "4个镜头，每镜2秒",
+          "不生成图片或视频"
+        ],
+        "spec": {
+          "shotCount": 4,
+          "secondsPerShot": 2,
+          "durationSeconds": 8
+        }
+      }
+    ],
+    "facts": [
+      "产品为迟来咖啡的新款无糖冷萃",
+      "可用元素：透明无字杯、琥珀色咖啡、冰块"
+    ],
+    "assumptions": [],
+    "gaps": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": "用户明确要求直接采用第二个方向，无需等待选择。"
+    }
+  }
+}

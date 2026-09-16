@@ -1,0 +1,158 @@
+{
+  "id": "14-script-formal",
+  "dir": "14-script-formal",
+  "group": "脚本不是视频",
+  "tone": "正式、否定前置",
+  "query": "不调用图片或视频生成。请为远汀影像提交一份关于雨后街道的文字分镜：总时长8秒，4镜，每镜2秒；画面中不得有人物、字幕、Logo或水印。仅保存一份脚本文档。",
+  "expected": {
+    "texts": 1,
+    "shots": 4,
+    "duration": 8,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "1b48fa55-b286-44aa-8a83-63dd20475eb0",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "1b48fa55-b286-44aa-8a83-63dd20475eb0",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [
+    {
+      "slug": "storyboard-one-shot-zh-v2",
+      "status": "completed",
+      "artifactId": "431bd429-0854-4c90-877d-5def119dbac1",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "429d04f1-54d1-44b9-b3f1-82b1ed95cc28",
+      "start": "2026-09-16T07:48:17.151Z",
+      "end": "2026-09-16T07:48:20.565Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24502,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7001,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 377,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7378
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "storyboard-one-shot-zh-v2",
+      "nodeId": "429d04f1-54d1-44b9-b3f1-82b1ed95cc28",
+      "characters": 5163,
+      "systemCharacters": 1415,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1932,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 539,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2471
+      }
+    }
+  ],
+  "final": "### 镜头\n1. 画面：镜头1（0-2秒）：低角度近景。积水的柏油路面，雨滴持续坠落砸出环形涟漪，水面倒映灰蓝天空与街边梧桐树冠；画面边缘可见湿漉漉的路缘石，无人物入镜。\n时长（秒）：2\n2. 画面：镜头2（2-4秒）：中景平摇。沿人行道缓缓移动，镜头扫过被雨水打湿的店铺玻璃门与悬挂的雨帘，霓虹灯牌在玻璃上留下晕开的光斑，屋檐持续滴水，路面水光反亮，店铺内外均无人物出现。\n时长（秒）：2\n3. 画面：镜头3（4-6秒）：特写。一片悬在枝叶尖端的积水叶，水珠沿叶脉缓慢聚拢、拉长、滴落；背景是虚化的湿街与灰白天空，焦点落在水珠与叶面雨痕，无字幕或标识。\n时长（秒）：2\n4. 画面：镜头4（6-8秒）：高角度俯瞰。整条雨后的街道向远处延伸，路面积水如镜面般铺开，倒映两侧路灯与树影；镜头缓缓拉远，雨势渐歇，最后呈现宁静、清透的雨后街景，画面中不出现任何人物、字幕、Logo或水印。\n时长（秒）：2\n\n### 总时长（秒）\n8\n\n### 规格说明\n- 出品方：远汀影像\n- 主题：雨后街道\n- 总时长：8秒\n- 镜头数：4个\n- 单镜时长：2秒\n- 交付形式：文字分镜脚本，不生成图片或视频\n- 硬性约束：画面中不得出现人物、字幕、Logo或水印\n\n### 影调与声音\n- 影调：冷灰蓝色调为主，保留湿润路面的反光与柔和漫射光，避免高饱和。\n- 氛围：安静、清透、略带余韵，雨后水汽感贯穿全片。\n- 声音建议（如后续有声版）：雨滴声由密渐疏，结尾收于环境底噪，无对白、无解说。\n\n### 创意细节假设\n以下为合理创意的非关键设定，非用户事实确认项：拍摄角度、景别、光线氛围与灯具样式为创意设计，实际拍摄可按现场条件调整；画面主体统一为雨后街道环境本身。"
+}

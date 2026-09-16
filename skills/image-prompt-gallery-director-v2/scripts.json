@@ -1,0 +1,229 @@
+[
+  {
+    "name": "validate_image_prompt_contract",
+    "entrypoint": "scripts/validate-image-prompt-contract.py",
+    "description": "对最终中英文提示词执行精确文字、必须保留文字、禁止文字和参考图职责的确定性质检",
+    "inputSchema": {
+      "type": "object",
+      "$defs": {
+        "textContract": {
+          "type": "object",
+          "required": [
+            "text"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "maxLength": 2000,
+              "minLength": 1
+            },
+            "target": {
+              "enum": [
+                "zh",
+                "en",
+                "both",
+                "either"
+              ],
+              "type": "string",
+              "default": "either"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "properties": {
+        "mustKeep": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/textContract"
+          },
+          "maxItems": 200
+        },
+        "promptEn": {
+          "type": "string",
+          "maxLength": 100000
+        },
+        "promptZh": {
+          "type": "string",
+          "maxLength": 100000
+        },
+        "exactTexts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/textContract"
+          },
+          "maxItems": 200
+        },
+        "forbiddenTexts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/textContract"
+          },
+          "maxItems": 200
+        },
+        "referenceRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "referenceId",
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              "priority": {
+                "type": "integer",
+                "default": 50,
+                "maximum": 100,
+                "minimum": 1
+              },
+              "referenceId": {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "textContractList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "text",
+              "target"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "target": {
+                "enum": [
+                  "zh",
+                  "en",
+                  "both",
+                  "either"
+                ],
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "checks",
+        "normalizedReferenceRoles"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "required": [
+            "exactTextCount",
+            "mustKeepCount",
+            "forbiddenTextCount",
+            "missingExactTexts",
+            "missingMustKeep",
+            "foundForbiddenTexts",
+            "duplicateReferenceIds",
+            "duplicateRoles"
+          ],
+          "properties": {
+            "mustKeepCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duplicateRoles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "exactTextCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missingMustKeep": {
+              "$ref": "#/$defs/textContractList"
+            },
+            "missingExactTexts": {
+              "$ref": "#/$defs/textContractList"
+            },
+            "forbiddenTextCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "foundForbiddenTexts": {
+              "$ref": "#/$defs/textContractList"
+            },
+            "duplicateReferenceIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "normalizedReferenceRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "referenceId",
+              "role",
+              "priority"
+            ],
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer",
+                "maximum": 100,
+                "minimum": 1
+              },
+              "referenceId": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

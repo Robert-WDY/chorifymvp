@@ -1,0 +1,200 @@
+{
+  "id": "22-video-direct",
+  "dir": "media-controls/22-video-direct",
+  "group": "媒体直接生成对照",
+  "tone": "正式、直接生产请求",
+  "query": "请为《泊云空街》生成一段5秒、9:16竖版视频：雨后的空街，一镜到底缓慢向前推进，没有人物、字幕、Logo和水印。",
+  "expected": {
+    "mediaType": "video",
+    "quantity": 1,
+    "waitApproval": true,
+    "noMedia": true
+  },
+  "status": "needs_input",
+  "sessionId": "3fcf63e7-2627-4629-9598-9e8d85c065fa",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "3fcf63e7-2627-4629-9598-9e8d85c065fa",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "savedPendingMediaPlan",
+      "passed": true,
+      "evidence": {
+        "status": "WAIT_CONFIRM",
+        "approval": {
+          "required": true,
+          "status": "pending",
+          "planHash": "1558fd3e755ff7c6d65b033a1c048d414ee929c5954a6e686017285c01c64d07",
+          "source": "explicit_control",
+          "revision": 1,
+          "contractHash": "0c7921f52534b4f5b656f6de4c610a56b4d36237faad0f15d7ebc138c4fde253",
+          "payload": {
+            "batchId": "5171b87c-1581-4013-b4c7-aa0f5ca09746",
+            "itemId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+            "tool": "generate_video",
+            "items": [
+              {
+                "prompt": "《泊云空街》单件成品视频。9:16竖版，5秒，一镜到底：镜头沿雨后的空街缓慢向前推进，画面自始至终为同一连续长镜头，不剪切、不转场。场景为雨后的空街，路面湿润并有浅浅积水，水面倒映周边建筑与天色，街边建筑、店铺外立面、行道树与路灯清晰可见，雨刚停、空气湿润，光线柔和偏冷，地面反光与轻微水汽增强雨后氛围。镜头运动：平稳、缓慢、持续向前推进，速度均匀，不起伏、不晃动、不后退、不横移、不变焦、不切换视角；推进过程中前景与中景元素自然进入画框并逐渐接近，背景缓慢收拢，透视关系随推进自然变化。画面要求：无人物出现，无字幕，无Logo，无水印，无文字标牌内容。音频要求：不添加音乐、旁白或对白。整体风格为真实场景质感、自然光照、安静无人氛围。",
+                "duration": 5,
+                "ratio": "9:16",
+                "resolution": "720p"
+              }
+            ]
+          }
+        },
+        "nodes": [
+          {
+            "id": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+            "itemId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+            "dependsOn": [],
+            "kind": "media",
+            "requiredMethods": [],
+            "outputContract": {
+              "stages": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "durationSeconds": 5,
+                "ratio": "9:16"
+              }
+            },
+            "skillId": "video_creation_skill",
+            "tool": "generate_video",
+            "output": "video",
+            "count": 1,
+            "status": "prepared",
+            "revision": 1,
+            "history": [],
+            "batchId": "5171b87c-1581-4013-b4c7-aa0f5ca09746",
+            "argsHash": "078ff45e4503689e5ac434c225479ac0c65b553efea3d3b25c24ee9f3a843723",
+            "skillArtifactId": "aaef737f-2203-4cdb-8260-5fd7791564f2"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mediaQuantity",
+      "passed": true,
+      "evidence": 1
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "WAIT_CONFIRM"
+  ],
+  "taskReason": [
+    "请确认已展示的具体方案"
+  ],
+  "artifactCount": 0,
+  "skills": [
+    {
+      "slug": "video_creation_skill",
+      "status": "completed",
+      "artifactId": "aaef737f-2203-4cdb-8260-5fd7791564f2",
+      "contractValidated": true
+    }
+  ],
+  "windows": [],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24482,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6989,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 233,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7222
+      }
+    },
+    {
+      "index": 1,
+      "phase": "media_plan",
+      "methodId": "video_creation_skill",
+      "nodeId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+      "characters": 3808,
+      "systemCharacters": 1716,
+      "payloadKeys": [
+        "facts",
+        "globalConstraints",
+        "evidenceContext",
+        "supportingSources",
+        "executionPhase",
+        "authorization",
+        "loadedMethods",
+        "methodReferences",
+        "goal",
+        "sources",
+        "feedback"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1268,
+        "input_tokens_details": {
+          "cached_tokens": 384
+        },
+        "output_tokens": 369,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1637
+      }
+    }
+  ],
+  "final": "本轮尚未全部完成。请确认已展示的具体方案"
+}

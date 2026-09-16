@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {scoreCase,auditDataset} from '../evals/benchmark-v2-scoring.mjs';
+const sample={id:'U031',category:'image_creation',query:'生成海报',history:[],expected:{operations:['propose_image_batch'],needClarification:false,dependency:false}};
+const state=()=>({goal:{tasks:[{operation:'generate_image',dependsOn:[]}],needsClarification:false},status:'completed',events:[{type:'tool_result',name:'generate_image',result:{images:[{url:'https://benchmark.invalid/a.png'}]}},{type:'final',text:'已完成 https://benchmark.invalid/a.png'}]});
+test('benchmark preserves original label mismatch and reports mapping separately',()=>{const r=scoreCase(sample,state());assert.equal(r.rawPassed,false);assert.equal(r.compatiblePassed,true);assert.equal(r.mediaCountCheck.passed,true);assert.deepEqual(r.unsupportedAnswerURLs,[]);});
+test('material retrieval is not credited without actual successful tool observation',()=>{const c={...sample,expected:{...sample.expected,operations:['find_material','propose_image_batch']}};assert.equal(scoreCase(c,state()).compatiblePassed,false);const s=state();s.events.push({type:'tool_result',name:'find_material',result:{assets:[]}});assert.equal(scoreCase(c,s).compatiblePassed,true);});
+test('a completed flag is not used as benchmark task correctness',()=>{const c={...sample,category:'intent',expected:{...sample.expected,operations:['answer']}};const r=scoreCase(c,state());assert.equal(r.completedWithObservableOutput,true);assert.equal(r.compatiblePassed,false);assert.equal(r.forbiddenGeneration,true);});
+test('audit detects repeated inputs with contradictory operation labels',()=>{const a=auditDataset([sample,{...sample,id:'U032'}, {...sample,id:'U033',expected:{...sample.expected,operations:['read_video']}}]);assert.equal(a.rows,3);assert.equal(a.uniqueQueries,1);assert.equal(a.uniqueInputAndLabels,2);assert.equal(a.conflictingLabels.length,1);});

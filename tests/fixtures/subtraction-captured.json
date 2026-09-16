@@ -1,0 +1,2696 @@
+[
+  {
+    "case": "E04-T3",
+    "callId": "f8f22557-d66d-4c26-9c15-c4aed6c545e8",
+    "query": "我还想保留另一个方向：从最初的白底原图出发，把椅子改成蓝色，背景仍白。灰底黄椅那张也保留，这是另一个分支。",
+    "rawText": "{\n  \"summary\": \"用户要求在已有黄椅白底原图分支上新增一个方向：把椅子改成蓝色、背景仍白；同时保留已有的灰底黄椅分支。即基于同一白底原图衍生出蓝色椅子版本，与灰底黄椅版本并列为两个分支。\",\n  \"deliverables\": [\n    {\n      \"description\": \"基于最初白底黄椅产品原图，将椅子颜色改为蓝色、背景仍为白色的产品图（蓝椅白底分支）。1:1 画幅，无人无字，椅子全貌清楚。\",\n      \"kind\": \"image\",\n      \"count\": 1,\n      \"action\": \"create\",\n      \"purpose\": \"general\",\n      \"requiredEvidence\": \"none\",\n      \"references\": [\n        \"ref_b14f719e73e0_2\"\n      ],\n      \"dependsOn\": [],\n      \"constraints\": [\n        \"基于最初的白底原图\",\n        \"椅子改成蓝色\",\n        \"背景仍为白色\",\n        \"1:1 画幅\",\n        \"无人无字，椅子全貌清楚\"\n      ],\n      \"requestEvidence\": \"从最初的白底原图出发，把椅子改成蓝色，背景仍白\"\n    },\n    {\n      \"description\": \"保留已有灰底黄椅版本作为另一个分支（灰底浅灰背景、黄色椅子不变）的产品图，作为并列分支保留。\",\n      \"kind\": \"image\",\n      \"count\": 1,\n      \"action\": \"modify\",\n      \"purpose\": \"general\",\n      \"requiredEvidence\": \"none\",\n      \"references\": [\n        \"ref_b14f719e73e0_1\"\n      ],\n      \"dependsOn\": [],\n      \"constraints\": [\n        \"浅灰背景\",\n        \"黄色椅子保持不变\",\n        \"1:1 画幅\",\n        \"无人无字，椅子全貌清楚\"\n      ],\n      \"requestEvidence\": \"灰底黄椅那张也保留，这是另一个分支\"\n    }\n  ],\n  \"gaps\": [\n    {\n      \"description\": \"蓝色椅子的具体蓝色色值/色调未指定（如宝蓝、天蓝、藏蓝等），执行器可按视觉自然度自定或用户补充。\",\n      \"level\": \"preference\",\n      \"resolution\": \"由执行器选择与白底搭配自然的蓝色调，用户可后续指定具体色值。\",\n      \"kind\": \"preference\"\n    }\n  ],\n  \"assumptions\": [\n    \"蓝色椅子分支基于最初的白底黄椅原图做颜色替换，椅子造型、材质、比例、位置与构图保持不变，仅改椅子颜色为蓝色，背景保持纯白。\",\n    \"灰底黄椅分支沿用已生成的灰底修改版（浅灰背景约 #D9D9D9，黄色椅子不变），本轮作为并列分支保留。\"\n  ],\n  \"deferred\": [],\n  \"safety\": {\n    \"disposition\": \"allow\",\n    \"untrustedInstructions\": false,\n    \"reason\": \"普通产品图颜色替换与分支保留请求，无有害内容。\"\n  },\n  \"turnOperation\": {\n    \"kind\": \"create\"\n  },\n  \"spec\": {\n    \"ratio\": \"1:1\"\n  },\n  \"facts\": [],\n  \"requiredMethods\": [],\n  \"globalConstraints\": [\n    \"蓝椅分支：椅子改成蓝色、背景仍白\",\n    \"灰底黄椅分支保留为另一分支\",\n    \"无人无字，椅子全貌清楚\"\n  ],\n  \"approval\": {\n    \"required\": false,\n    \"reason\": \"用户直接要求执行图片分支生成与保留，无需额外确认。\"\n  },\n  \"continuation\": {\n    \"mode\": \"new\",\n    \"taskId\": \"\"\n  }\n}",
+    "rawSha256": "c09185e3c5a282b09f8127a6cc7199c7d7a2244c4de9933a3e59b03740e9e5e3",
+    "before": {
+      "sessionId": "d022262a-d8c7-4813-8e6a-546250ef2a20",
+      "runId": "340acf5f-26ad-4095-abbe-a474302d1df5",
+      "taskSnapshot": {
+        "id": "ac528ee5-7453-4f42-9e69-19323df025e2",
+        "query": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+        "status": "COMPLETED",
+        "reason": null,
+        "actions": {
+          "canResume": false,
+          "requiresApproval": false,
+          "resumeLabel": "继续剩余任务"
+        },
+        "goal": {
+          "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+          "assumptions": [
+            "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+          ],
+          "missingInputs": [],
+          "facts": [],
+          "globalConstraints": [
+            "黄色椅子保持不变",
+            "背景改为浅灰",
+            "无人无字，椅子全貌清楚"
+          ]
+        },
+        "approval": {
+          "required": false,
+          "status": "not_required",
+          "planHash": null
+        },
+        "items": [
+          {
+            "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+            "index": 0,
+            "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+            "operation": "edit_image",
+            "output": "image",
+            "count": 1,
+            "dependsOn": [],
+            "references": [
+              "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+            ],
+            "constraints": [
+              "背景改为浅灰",
+              "黄色椅子保持不变",
+              "1:1 画幅",
+              "无人无字，椅子全貌清楚"
+            ],
+            "spec": {
+              "ratio": "1:1"
+            },
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "specOrigins": {
+              "ratio": {
+                "value": "1:1",
+                "origin": "unattributed",
+                "sourceTurn": "current",
+                "evidence": "",
+                "adjustable": false
+              }
+            },
+            "executionShape": "direct",
+            "sourceSelection": {
+              "source": "ref_2e3e094cb83b_0",
+              "unitType": "products",
+              "mode": "all",
+              "layout": "separate_images"
+            },
+            "referenceBindings": [
+              {
+                "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                "version": 1,
+                "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                "purpose": "history",
+                "catalogVersion": "2e3e094cb83b"
+              }
+            ],
+            "businessOperation": "modify",
+            "resultRelation": "revision_of",
+            "observations": [],
+            "status": "COMPLETED",
+            "issues": [],
+            "artifactIds": [
+              "73c78c9b-4ddd-4432-a077-bfadaf4b3db8"
+            ]
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+            "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+            "type": "image",
+            "purpose": "deliverable",
+            "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377285265418dc372c31e32e536f515bc41512c86c85d81_0.jpeg?[REDACTED_QUERY]",
+            "version": 1,
+            "parentId": null,
+            "verification": {
+              "technical": "passed",
+              "semantic": "passed",
+              "issues": [],
+              "comparison": {
+                "sourceObserved": true,
+                "resultObserved": true,
+                "requestedChanges": "passed",
+                "preservedRegions": "passed"
+              }
+            },
+            "contentAvailable": false
+          }
+        ],
+        "executions": [
+          {
+            "id": "7c31c26a-5067-44ac-871c-01478fe7ef83",
+            "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+            "tool": "generate_image",
+            "status": "succeeded"
+          }
+        ]
+      },
+      "taskCandidates": [
+        {
+          "id": "ac644526-d221-4187-aeef-f98e92299d02",
+          "query": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+          "goal": {
+            "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+            "tasks": [
+              {
+                "operation": "generate_image",
+                "output": "image",
+                "count": 1,
+                "artifactCount": 1,
+                "contentCardinality": 1,
+                "references": [],
+                "dependsOn": [],
+                "constraints": [],
+                "requiredMethods": [],
+                "requiredEvidence": "none",
+                "spec": {
+                  "ratio": "1:1"
+                }
+              }
+            ],
+            "skills": [],
+            "assumptions": [],
+            "missingInputs": [],
+            "needsClarification": false,
+            "safety": {
+              "disposition": "allow"
+            },
+            "semantic": {
+              "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+              "deliverables": [
+                {
+                  "description": "黄椅白底原版",
+                  "kind": "image",
+                  "action": "create",
+                  "references": [],
+                  "dependsOn": [],
+                  "constraints": [],
+                  "requiredMethods": []
+                }
+              ],
+              "facts": [],
+              "globalConstraints": [],
+              "approval": {
+                "required": false
+              },
+              "continuation": {
+                "mode": "new",
+                "taskId": ""
+              }
+            }
+          },
+          "parentTaskId": null,
+          "revision": 1,
+          "status": "COMPLETED",
+          "createdAt": "2026-09-14T09:14:15.865Z",
+          "updatedAt": "2026-09-14T09:14:15.865Z",
+          "plan": null,
+          "approval": {
+            "required": false,
+            "status": "not_required",
+            "planHash": null
+          },
+          "items": [],
+          "verification": {
+            "status": "pending",
+            "issues": []
+          },
+          "transitions": [
+            {
+              "from": null,
+              "to": "PLANNING",
+              "at": "2026-09-14T09:14:15.865Z",
+              "reason": null
+            },
+            {
+              "from": "PLANNING",
+              "to": "COMPLETED",
+              "at": "2026-09-14T09:14:26.184Z",
+              "reason": null
+            }
+          ],
+          "fixtureSetup": {
+            "runId": "f34fd712-c99c-4626-b861-c4767865a33c",
+            "bypassed": "intake_and_upstream_skill_execution",
+            "status": "constructed_not_scored",
+            "note": "Input installation only; no successful upstream Agent/Skill execution claimed"
+          },
+          "requestId": "fixture_88c92ff8-eb4d-404b-ae05-321ffb6bf8f7",
+          "contract": {
+            "version": 1,
+            "hash": "8003ba879ce626cbe9be8c6147f74aba364c00e0def313e8ded513e853531aec",
+            "goal": {
+              "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+              "tasks": [
+                {
+                  "operation": "generate_image",
+                  "output": "image",
+                  "count": 1,
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "references": [],
+                  "dependsOn": [],
+                  "constraints": [],
+                  "requiredMethods": [],
+                  "requiredEvidence": "none",
+                  "spec": {
+                    "ratio": "1:1"
+                  }
+                }
+              ],
+              "skills": [],
+              "assumptions": [],
+              "missingInputs": [],
+              "needsClarification": false,
+              "safety": {
+                "disposition": "allow"
+              },
+              "semantic": {
+                "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+                "deliverables": [
+                  {
+                    "description": "黄椅白底原版",
+                    "kind": "image",
+                    "action": "create",
+                    "references": [],
+                    "dependsOn": [],
+                    "constraints": [],
+                    "requiredMethods": []
+                  }
+                ],
+                "facts": [],
+                "globalConstraints": [],
+                "approval": {
+                  "required": false
+                },
+                "continuation": {
+                  "mode": "new",
+                  "taskId": ""
+                }
+              }
+            },
+            "acceptedAt": "2026-09-14T09:14:15.865Z",
+            "requestId": "fixture_88c92ff8-eb4d-404b-ae05-321ffb6bf8f7",
+            "scopeAudit": null,
+            "finalObligations": {
+              "media": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              }
+            },
+            "executionPermission": {
+              "mediaSubmission": "allowed"
+            },
+            "specOrigins": [
+              {
+                "itemId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                "fields": {}
+              }
+            ],
+            "effects": {
+              "mediaSubmissionAllowed": true
+            },
+            "requirements": [
+              {
+                "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:delivery",
+                "category": "delivery",
+                "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                "value": {
+                  "output": "image",
+                  "artifactCount": 1,
+                  "contentCardinality": 1
+                },
+                "evidence": "accepted_artifact"
+              },
+              {
+                "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:spec",
+                "category": "content",
+                "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                "value": {
+                  "ratio": "1:1"
+                },
+                "evidence": "schema_and_binding"
+              },
+              {
+                "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:authorization",
+                "category": "authorization",
+                "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                "value": false,
+                "evidence": "revision_bound_approval"
+              }
+            ],
+            "facts": [],
+            "globalConstraints": []
+          },
+          "revisions": [
+            {
+              "version": 1,
+              "hash": "8003ba879ce626cbe9be8c6147f74aba364c00e0def313e8ded513e853531aec",
+              "goal": {
+                "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+                "tasks": [
+                  {
+                    "operation": "generate_image",
+                    "output": "image",
+                    "count": 1,
+                    "artifactCount": 1,
+                    "contentCardinality": 1,
+                    "references": [],
+                    "dependsOn": [],
+                    "constraints": [],
+                    "requiredMethods": [],
+                    "requiredEvidence": "none",
+                    "spec": {
+                      "ratio": "1:1"
+                    }
+                  }
+                ],
+                "skills": [],
+                "assumptions": [],
+                "missingInputs": [],
+                "needsClarification": false,
+                "safety": {
+                  "disposition": "allow"
+                },
+                "semantic": {
+                  "summary": "生成一张黄色椅子在白色背景中的产品图，1:1，无人无字，椅子全貌清楚。",
+                  "deliverables": [
+                    {
+                      "description": "黄椅白底原版",
+                      "kind": "image",
+                      "action": "create",
+                      "references": [],
+                      "dependsOn": [],
+                      "constraints": [],
+                      "requiredMethods": []
+                    }
+                  ],
+                  "facts": [],
+                  "globalConstraints": [],
+                  "approval": {
+                    "required": false
+                  },
+                  "continuation": {
+                    "mode": "new",
+                    "taskId": ""
+                  }
+                }
+              },
+              "acceptedAt": "2026-09-14T09:14:15.865Z",
+              "requestId": "fixture_88c92ff8-eb4d-404b-ae05-321ffb6bf8f7",
+              "scopeAudit": null,
+              "finalObligations": {
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                }
+              },
+              "executionPermission": {
+                "mediaSubmission": "allowed"
+              },
+              "specOrigins": [
+                {
+                  "itemId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                  "fields": {}
+                }
+              ],
+              "effects": {
+                "mediaSubmissionAllowed": true
+              },
+              "requirements": [
+                {
+                  "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:delivery",
+                  "category": "delivery",
+                  "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                  "value": {
+                    "output": "image",
+                    "artifactCount": 1,
+                    "contentCardinality": 1
+                  },
+                  "evidence": "accepted_artifact"
+                },
+                {
+                  "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:spec",
+                  "category": "content",
+                  "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                  "value": {
+                    "ratio": "1:1"
+                  },
+                  "evidence": "schema_and_binding"
+                },
+                {
+                  "id": "1163e1ba-0cdd-4f2a-906c-89796456a8cf:authorization",
+                  "category": "authorization",
+                  "nodeId": "1163e1ba-0cdd-4f2a-906c-89796456a8cf",
+                  "value": false,
+                  "evidence": "revision_bound_approval"
+                }
+              ],
+              "facts": [],
+              "globalConstraints": []
+            }
+          ],
+          "artifacts": []
+        },
+        {
+          "id": "ac528ee5-7453-4f42-9e69-19323df025e2",
+          "query": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+          "goal": {
+            "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+            "mode": "edit",
+            "tasks": [
+              {
+                "operation": "edit_image",
+                "output": "image",
+                "count": 1,
+                "dependsOn": [],
+                "references": [
+                  "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                ],
+                "constraints": [
+                  "背景改为浅灰",
+                  "黄色椅子保持不变",
+                  "1:1 画幅",
+                  "无人无字，椅子全貌清楚"
+                ],
+                "requiredEvidence": "none",
+                "queryTaskIds": [],
+                "requiredMethods": [],
+                "artifactCount": 1,
+                "contentCardinality": 1,
+                "spec": {
+                  "ratio": "1:1"
+                },
+                "specOrigins": {
+                  "ratio": {
+                    "value": "1:1",
+                    "origin": "unattributed",
+                    "sourceTurn": "current",
+                    "evidence": "",
+                    "adjustable": false
+                  }
+                },
+                "executionShape": "direct",
+                "referenceBindings": [
+                  {
+                    "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                    "version": 1,
+                    "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                    "purpose": "history",
+                    "catalogVersion": "2e3e094cb83b"
+                  }
+                ],
+                "sourceSelection": {
+                  "source": "ref_2e3e094cb83b_0",
+                  "unitType": "products",
+                  "mode": "all",
+                  "layout": "separate_images"
+                },
+                "businessOperation": "modify",
+                "resultRelation": "revision_of"
+              }
+            ],
+            "skills": [],
+            "assumptions": [
+              "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+            ],
+            "missingInputs": [],
+            "needsClarification": false,
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "semantic": {
+              "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+              "deliverables": [
+                {
+                  "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+                  "kind": "image",
+                  "count": 1,
+                  "action": "modify",
+                  "purpose": "general",
+                  "requiredEvidence": "none",
+                  "references": [
+                    "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                  ],
+                  "dependsOn": [],
+                  "constraints": [
+                    "背景改为浅灰",
+                    "黄色椅子保持不变",
+                    "1:1 画幅",
+                    "无人无字，椅子全貌清楚"
+                  ],
+                  "requestEvidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+                  "businessOperation": "modify",
+                  "resultRelation": "revision_of",
+                  "executionShape": "direct",
+                  "sourceSelection": {
+                    "source": "ref_2e3e094cb83b_0",
+                    "unitType": "products",
+                    "mode": "all",
+                    "layout": "separate_images"
+                  },
+                  "spec": {
+                    "ratio": "1:1"
+                  },
+                  "specOrigins": {
+                    "ratio": {
+                      "value": "1:1",
+                      "origin": "unattributed",
+                      "sourceTurn": "current",
+                      "evidence": "",
+                      "adjustable": false
+                    }
+                  },
+                  "referenceBindings": [
+                    {
+                      "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                      "version": 1,
+                      "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                      "purpose": "history",
+                      "catalogVersion": "2e3e094cb83b"
+                    }
+                  ],
+                  "requiredMethods": []
+                }
+              ],
+              "gaps": [],
+              "assumptions": [
+                "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+              ],
+              "deferred": [],
+              "safety": {
+                "disposition": "allow",
+                "untrustedInstructions": false,
+                "reason": ""
+              },
+              "turnOperation": {
+                "kind": "modify"
+              },
+              "spec": {
+                "ratio": "1:1"
+              },
+              "facts": [],
+              "requiredMethods": [],
+              "globalConstraints": [
+                "黄色椅子保持不变",
+                "背景改为浅灰",
+                "无人无字，椅子全貌清楚"
+              ],
+              "approval": {
+                "required": false,
+                "reason": "用户直接要求生成修改版图片，无需二次确认。"
+              },
+              "continuation": {
+                "mode": "revise",
+                "taskId": "ac644526-d221-4187-aeef-f98e92299d02"
+              }
+            },
+            "intakeTrace": [
+              {
+                "phase": "understand",
+                "attempt": 0,
+                "durationMs": 2961,
+                "ok": false,
+                "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+              },
+              {
+                "phase": "understand",
+                "attempt": 1,
+                "durationMs": 2493,
+                "ok": false,
+                "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+              },
+              {
+                "phase": "understand",
+                "attempt": 2,
+                "durationMs": 4986,
+                "ok": true
+              },
+              {
+                "phase": "extract_request_contract",
+                "attempt": 0,
+                "durationMs": 2100,
+                "ok": true
+              },
+              {
+                "phase": "select_capabilities",
+                "attempt": 0,
+                "durationMs": 1400,
+                "ok": true
+              }
+            ],
+            "requestContract": {
+              "finalDeliverables": [
+                {
+                  "kind": "image",
+                  "count": 1,
+                  "timing": "now",
+                  "requiredObservation": "image",
+                  "observationEvidence": "把背景改成浅灰",
+                  "evidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。"
+                }
+              ],
+              "requiredMethods": [],
+              "systemFacts": [],
+              "textFileCount": null,
+              "readOnly": false,
+              "evidence": "用户要求在原图上修改背景颜色，产出一张灰底修改版图片",
+              "mediaChanges": [
+                {
+                  "kind": "image",
+                  "count": 1,
+                  "evidence": "作为灰底修改版"
+                }
+              ],
+              "media": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              },
+              "finalObligations": {
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                }
+              },
+              "currentPermission": {
+                "mediaSubmission": "approval_gate"
+              },
+              "proposedMedia": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              },
+              "proposedReadOnly": false,
+              "scopeSource": "previous_plus_explicit_delta",
+              "candidateMethods": []
+            },
+            "capabilityRoutes": [
+              {
+                "deliverableIndex": 0,
+                "operation": "edit_image",
+                "skills": []
+              }
+            ]
+          },
+          "parentTaskId": "ac644526-d221-4187-aeef-f98e92299d02",
+          "revision": 1,
+          "status": "COMPLETED",
+          "createdAt": "2026-09-14T09:14:40.138Z",
+          "updatedAt": "2026-09-14T09:14:58.683Z",
+          "plan": {
+            "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+            "steps": [
+              {
+                "title": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+                "status": "done"
+              }
+            ],
+            "revision": 1
+          },
+          "approval": {
+            "required": false,
+            "status": "not_required",
+            "planHash": null
+          },
+          "items": [
+            {
+              "operation": "edit_image",
+              "output": "image",
+              "count": 1,
+              "dependsOn": [],
+              "references": [
+                "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+              ],
+              "constraints": [
+                "背景改为浅灰",
+                "黄色椅子保持不变",
+                "1:1 画幅",
+                "无人无字，椅子全貌清楚"
+              ],
+              "requiredEvidence": "none",
+              "queryTaskIds": [],
+              "requiredMethods": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "ratio": "1:1"
+              },
+              "specOrigins": {
+                "ratio": {
+                  "value": "1:1",
+                  "origin": "unattributed",
+                  "sourceTurn": "current",
+                  "evidence": "",
+                  "adjustable": false
+                }
+              },
+              "executionShape": "direct",
+              "referenceBindings": [
+                {
+                  "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                  "version": 1,
+                  "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                  "purpose": "history",
+                  "catalogVersion": "2e3e094cb83b"
+                }
+              ],
+              "sourceSelection": {
+                "source": "ref_2e3e094cb83b_0",
+                "unitType": "products",
+                "mode": "all",
+                "layout": "separate_images"
+              },
+              "businessOperation": "modify",
+              "resultRelation": "revision_of",
+              "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+              "index": 0,
+              "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+              "status": "COMPLETED",
+              "artifactIds": [
+                "73c78c9b-4ddd-4432-a077-bfadaf4b3db8"
+              ],
+              "observations": [],
+              "methods": [
+                {
+                  "skillId": "image_creation_skill",
+                  "status": "validated",
+                  "contractVersion": 1,
+                  "input": {
+                    "facts": [],
+                    "globalConstraints": [
+                      "黄色椅子保持不变",
+                      "背景改为浅灰",
+                      "无人无字，椅子全貌清楚"
+                    ],
+                    "evidenceContext": {
+                      "query": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+                      "facts": [],
+                      "globalConstraints": [
+                        "黄色椅子保持不变",
+                        "背景改为浅灰",
+                        "无人无字，椅子全貌清楚"
+                      ],
+                      "requestEvidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+                      "assumptions": [
+                        "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+                      ],
+                      "gaps": [],
+                      "plannedMedia": [],
+                      "sourceRequests": [],
+                      "sources": [
+                        {
+                          "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                          "type": "image",
+                          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]",
+                          "version": 1
+                        }
+                      ],
+                      "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。"
+                    },
+                    "supportingSources": [],
+                    "executionPhase": "prepare_only",
+                    "authorization": {
+                      "source": "task_state",
+                      "required": false,
+                      "status": "not_required",
+                      "revision": 1
+                    },
+                    "loadedMethods": [],
+                    "methodReferences": [
+                      {
+                        "slug": "image-prompt-gallery-director-v2",
+                        "workflow": [
+                          "读取画面约束和参考角色",
+                          "选择清单内参考资料",
+                          "交付布局主体光影文字与排除项"
+                        ]
+                      },
+                      {
+                        "slug": "creative-cover-copy-v2",
+                        "workflow": [
+                          "整理用户提供的产品与媒体证据",
+                          "撰写文案和封面信息",
+                          "核对文案和画面约束"
+                        ]
+                      }
+                    ],
+                    "goal": {
+                      "inheritedSize": null,
+                      "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+                      "count": 1,
+                      "constraints": [
+                        "背景改为浅灰",
+                        "黄色椅子保持不变",
+                        "1:1 画幅",
+                        "无人无字，椅子全貌清楚"
+                      ],
+                      "spec": {
+                        "ratio": "1:1"
+                      },
+                      "references": [
+                        "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]"
+                      ],
+                      "operation": "edit_image"
+                    },
+                    "sources": [
+                      {
+                        "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                        "type": "image",
+                        "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]",
+                        "version": 1,
+                        "provenance": {
+                          "origin": "user_input",
+                          "factualSupport": "not_checked"
+                        },
+                        "relation": "user_input",
+                        "role": "image"
+                      }
+                    ],
+                    "feedback": []
+                  },
+                  "outputArtifactIds": [
+                    "ec19b4c0-db0c-417e-829f-d8161a19e4e5"
+                  ]
+                }
+              ],
+              "issues": []
+            }
+          ],
+          "verification": {
+            "status": "passed",
+            "quality": "passed",
+            "issues": [],
+            "semantic": "passed"
+          },
+          "supersedes": "ac644526-d221-4187-aeef-f98e92299d02",
+          "transitions": [
+            {
+              "from": null,
+              "to": "PLANNING",
+              "at": "2026-09-14T09:14:40.138Z",
+              "reason": null
+            },
+            {
+              "from": "PLANNING",
+              "to": "EXECUTING",
+              "at": "2026-09-14T09:14:44.923Z",
+              "reason": null
+            },
+            {
+              "from": "EXECUTING",
+              "to": "VERIFYING",
+              "at": "2026-09-14T09:14:56.670Z",
+              "reason": null
+            },
+            {
+              "from": "VERIFYING",
+              "to": "COMPLETED",
+              "at": "2026-09-14T09:14:58.629Z",
+              "reason": null
+            }
+          ],
+          "requestId": "f59aed3f-d433-4eab-bcbf-b67dabf86a51",
+          "contract": {
+            "version": 1,
+            "hash": "6d463f44103e461804115c4adcb9211ca33de428d4fa49a1d095b3eebcfc1813",
+            "goal": {
+              "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+              "mode": "edit",
+              "tasks": [
+                {
+                  "operation": "edit_image",
+                  "output": "image",
+                  "count": 1,
+                  "dependsOn": [],
+                  "references": [
+                    "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                  ],
+                  "constraints": [
+                    "背景改为浅灰",
+                    "黄色椅子保持不变",
+                    "1:1 画幅",
+                    "无人无字，椅子全貌清楚"
+                  ],
+                  "requiredEvidence": "none",
+                  "queryTaskIds": [],
+                  "requiredMethods": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "ratio": "1:1"
+                  },
+                  "specOrigins": {
+                    "ratio": {
+                      "value": "1:1",
+                      "origin": "unattributed",
+                      "sourceTurn": "current",
+                      "evidence": "",
+                      "adjustable": false
+                    }
+                  },
+                  "executionShape": "direct",
+                  "referenceBindings": [
+                    {
+                      "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                      "version": 1,
+                      "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                      "purpose": "history",
+                      "catalogVersion": "2e3e094cb83b"
+                    }
+                  ],
+                  "sourceSelection": {
+                    "source": "ref_2e3e094cb83b_0",
+                    "unitType": "products",
+                    "mode": "all",
+                    "layout": "separate_images"
+                  },
+                  "businessOperation": "modify",
+                  "resultRelation": "revision_of"
+                }
+              ],
+              "skills": [],
+              "assumptions": [
+                "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+              ],
+              "missingInputs": [],
+              "needsClarification": false,
+              "safety": {
+                "disposition": "allow",
+                "untrustedInstructions": false,
+                "reason": ""
+              },
+              "semantic": {
+                "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+                "deliverables": [
+                  {
+                    "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+                    "kind": "image",
+                    "count": 1,
+                    "action": "modify",
+                    "purpose": "general",
+                    "requiredEvidence": "none",
+                    "references": [
+                      "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                    ],
+                    "dependsOn": [],
+                    "constraints": [
+                      "背景改为浅灰",
+                      "黄色椅子保持不变",
+                      "1:1 画幅",
+                      "无人无字，椅子全貌清楚"
+                    ],
+                    "requestEvidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+                    "businessOperation": "modify",
+                    "resultRelation": "revision_of",
+                    "executionShape": "direct",
+                    "sourceSelection": {
+                      "source": "ref_2e3e094cb83b_0",
+                      "unitType": "products",
+                      "mode": "all",
+                      "layout": "separate_images"
+                    },
+                    "spec": {
+                      "ratio": "1:1"
+                    },
+                    "specOrigins": {
+                      "ratio": {
+                        "value": "1:1",
+                        "origin": "unattributed",
+                        "sourceTurn": "current",
+                        "evidence": "",
+                        "adjustable": false
+                      }
+                    },
+                    "referenceBindings": [
+                      {
+                        "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                        "version": 1,
+                        "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                        "purpose": "history",
+                        "catalogVersion": "2e3e094cb83b"
+                      }
+                    ],
+                    "requiredMethods": []
+                  }
+                ],
+                "gaps": [],
+                "assumptions": [
+                  "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+                ],
+                "deferred": [],
+                "safety": {
+                  "disposition": "allow",
+                  "untrustedInstructions": false,
+                  "reason": ""
+                },
+                "turnOperation": {
+                  "kind": "modify"
+                },
+                "spec": {
+                  "ratio": "1:1"
+                },
+                "facts": [],
+                "requiredMethods": [],
+                "globalConstraints": [
+                  "黄色椅子保持不变",
+                  "背景改为浅灰",
+                  "无人无字，椅子全貌清楚"
+                ],
+                "approval": {
+                  "required": false,
+                  "reason": "用户直接要求生成修改版图片，无需二次确认。"
+                },
+                "continuation": {
+                  "mode": "revise",
+                  "taskId": "ac644526-d221-4187-aeef-f98e92299d02"
+                }
+              },
+              "intakeTrace": [
+                {
+                  "phase": "understand",
+                  "attempt": 0,
+                  "durationMs": 2961,
+                  "ok": false,
+                  "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+                },
+                {
+                  "phase": "understand",
+                  "attempt": 1,
+                  "durationMs": 2493,
+                  "ok": false,
+                  "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+                },
+                {
+                  "phase": "understand",
+                  "attempt": 2,
+                  "durationMs": 4986,
+                  "ok": true
+                },
+                {
+                  "phase": "extract_request_contract",
+                  "attempt": 0,
+                  "durationMs": 2100,
+                  "ok": true
+                },
+                {
+                  "phase": "select_capabilities",
+                  "attempt": 0,
+                  "durationMs": 1400,
+                  "ok": true
+                }
+              ],
+              "requestContract": {
+                "finalDeliverables": [
+                  {
+                    "kind": "image",
+                    "count": 1,
+                    "timing": "now",
+                    "requiredObservation": "image",
+                    "observationEvidence": "把背景改成浅灰",
+                    "evidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。"
+                  }
+                ],
+                "requiredMethods": [],
+                "systemFacts": [],
+                "textFileCount": null,
+                "readOnly": false,
+                "evidence": "用户要求在原图上修改背景颜色，产出一张灰底修改版图片",
+                "mediaChanges": [
+                  {
+                    "kind": "image",
+                    "count": 1,
+                    "evidence": "作为灰底修改版"
+                  }
+                ],
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                },
+                "finalObligations": {
+                  "media": {
+                    "image": 1,
+                    "video": 0,
+                    "audio": 0
+                  }
+                },
+                "currentPermission": {
+                  "mediaSubmission": "approval_gate"
+                },
+                "proposedMedia": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                },
+                "proposedReadOnly": false,
+                "scopeSource": "previous_plus_explicit_delta",
+                "candidateMethods": []
+              },
+              "capabilityRoutes": [
+                {
+                  "deliverableIndex": 0,
+                  "operation": "edit_image",
+                  "skills": []
+                }
+              ]
+            },
+            "acceptedAt": "2026-09-14T09:14:40.138Z",
+            "requestId": "f59aed3f-d433-4eab-bcbf-b67dabf86a51",
+            "scopeAudit": {
+              "finalDeliverables": [
+                {
+                  "kind": "image",
+                  "count": 1,
+                  "timing": "now",
+                  "requiredObservation": "image",
+                  "observationEvidence": "把背景改成浅灰",
+                  "evidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。"
+                }
+              ],
+              "requiredMethods": [],
+              "systemFacts": [],
+              "textFileCount": null,
+              "readOnly": false,
+              "evidence": "用户要求在原图上修改背景颜色，产出一张灰底修改版图片",
+              "mediaChanges": [
+                {
+                  "kind": "image",
+                  "count": 1,
+                  "evidence": "作为灰底修改版"
+                }
+              ],
+              "media": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              },
+              "finalObligations": {
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                }
+              },
+              "currentPermission": {
+                "mediaSubmission": "approval_gate"
+              },
+              "proposedMedia": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              },
+              "proposedReadOnly": false,
+              "scopeSource": "previous_plus_explicit_delta",
+              "candidateMethods": []
+            },
+            "finalObligations": {
+              "media": {
+                "image": 1,
+                "video": 0,
+                "audio": 0
+              }
+            },
+            "executionPermission": {
+              "mediaSubmission": "allowed"
+            },
+            "specOrigins": [
+              {
+                "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "fields": {
+                  "ratio": {
+                    "value": "1:1",
+                    "origin": "unattributed",
+                    "sourceTurn": "current",
+                    "evidence": "",
+                    "adjustable": false
+                  }
+                }
+              }
+            ],
+            "effects": {
+              "mediaSubmissionAllowed": true
+            },
+            "requirements": [
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:delivery",
+                "category": "delivery",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": {
+                  "output": "image",
+                  "artifactCount": 1,
+                  "contentCardinality": 1
+                },
+                "evidence": "accepted_artifact"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:spec",
+                "category": "content",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": {
+                  "ratio": "1:1"
+                },
+                "evidence": "schema_and_binding"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:0",
+                "category": "content",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": "背景改为浅灰",
+                "evidence": "acceptance"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:1",
+                "category": "content",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": "黄色椅子保持不变",
+                "evidence": "acceptance"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:2",
+                "category": "content",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": "1:1 画幅",
+                "evidence": "acceptance"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:3",
+                "category": "content",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": "无人无字，椅子全貌清楚",
+                "evidence": "acceptance"
+              },
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:authorization",
+                "category": "authorization",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "value": false,
+                "evidence": "revision_bound_approval"
+              }
+            ],
+            "facts": [],
+            "globalConstraints": [
+              "黄色椅子保持不变",
+              "背景改为浅灰",
+              "无人无字，椅子全貌清楚"
+            ]
+          },
+          "revisions": [
+            {
+              "version": 1,
+              "hash": "6d463f44103e461804115c4adcb9211ca33de428d4fa49a1d095b3eebcfc1813",
+              "goal": {
+                "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+                "mode": "edit",
+                "tasks": [
+                  {
+                    "operation": "edit_image",
+                    "output": "image",
+                    "count": 1,
+                    "dependsOn": [],
+                    "references": [
+                      "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                    ],
+                    "constraints": [
+                      "背景改为浅灰",
+                      "黄色椅子保持不变",
+                      "1:1 画幅",
+                      "无人无字，椅子全貌清楚"
+                    ],
+                    "requiredEvidence": "none",
+                    "queryTaskIds": [],
+                    "requiredMethods": [],
+                    "artifactCount": 1,
+                    "contentCardinality": 1,
+                    "spec": {
+                      "ratio": "1:1"
+                    },
+                    "specOrigins": {
+                      "ratio": {
+                        "value": "1:1",
+                        "origin": "unattributed",
+                        "sourceTurn": "current",
+                        "evidence": "",
+                        "adjustable": false
+                      }
+                    },
+                    "executionShape": "direct",
+                    "referenceBindings": [
+                      {
+                        "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                        "version": 1,
+                        "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                        "purpose": "history",
+                        "catalogVersion": "2e3e094cb83b"
+                      }
+                    ],
+                    "sourceSelection": {
+                      "source": "ref_2e3e094cb83b_0",
+                      "unitType": "products",
+                      "mode": "all",
+                      "layout": "separate_images"
+                    },
+                    "businessOperation": "modify",
+                    "resultRelation": "revision_of"
+                  }
+                ],
+                "skills": [],
+                "assumptions": [
+                  "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+                ],
+                "missingInputs": [],
+                "needsClarification": false,
+                "safety": {
+                  "disposition": "allow",
+                  "untrustedInstructions": false,
+                  "reason": ""
+                },
+                "semantic": {
+                  "summary": "用户要求基于现有黄椅白底产品图做局部图片修改：背景改为浅灰，黄色椅子保持不变，产出灰底修改版图片。",
+                  "deliverables": [
+                    {
+                      "description": "在现有黄椅白底产品图基础上，将背景改为浅灰、黄色椅子保持不变的灰底修改版产品图。",
+                      "kind": "image",
+                      "count": 1,
+                      "action": "modify",
+                      "purpose": "general",
+                      "requiredEvidence": "none",
+                      "references": [
+                        "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d"
+                      ],
+                      "dependsOn": [],
+                      "constraints": [
+                        "背景改为浅灰",
+                        "黄色椅子保持不变",
+                        "1:1 画幅",
+                        "无人无字，椅子全貌清楚"
+                      ],
+                      "requestEvidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。",
+                      "businessOperation": "modify",
+                      "resultRelation": "revision_of",
+                      "executionShape": "direct",
+                      "sourceSelection": {
+                        "source": "ref_2e3e094cb83b_0",
+                        "unitType": "products",
+                        "mode": "all",
+                        "layout": "separate_images"
+                      },
+                      "spec": {
+                        "ratio": "1:1"
+                      },
+                      "specOrigins": {
+                        "ratio": {
+                          "value": "1:1",
+                          "origin": "unattributed",
+                          "sourceTurn": "current",
+                          "evidence": "",
+                          "adjustable": false
+                        }
+                      },
+                      "referenceBindings": [
+                        {
+                          "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+                          "version": 1,
+                          "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+                          "purpose": "history",
+                          "catalogVersion": "2e3e094cb83b"
+                        }
+                      ],
+                      "requiredMethods": []
+                    }
+                  ],
+                  "gaps": [],
+                  "assumptions": [
+                    "浅灰背景指中性浅灰色底，如 #D9D9D9 附近，具体灰度由执行器按视觉自然度微调"
+                  ],
+                  "deferred": [],
+                  "safety": {
+                    "disposition": "allow",
+                    "untrustedInstructions": false,
+                    "reason": ""
+                  },
+                  "turnOperation": {
+                    "kind": "modify"
+                  },
+                  "spec": {
+                    "ratio": "1:1"
+                  },
+                  "facts": [],
+                  "requiredMethods": [],
+                  "globalConstraints": [
+                    "黄色椅子保持不变",
+                    "背景改为浅灰",
+                    "无人无字，椅子全貌清楚"
+                  ],
+                  "approval": {
+                    "required": false,
+                    "reason": "用户直接要求生成修改版图片，无需二次确认。"
+                  },
+                  "continuation": {
+                    "mode": "revise",
+                    "taskId": "ac644526-d221-4187-aeef-f98e92299d02"
+                  }
+                },
+                "intakeTrace": [
+                  {
+                    "phase": "understand",
+                    "attempt": 0,
+                    "durationMs": 2961,
+                    "ok": false,
+                    "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+                  },
+                  {
+                    "phase": "understand",
+                    "attempt": 1,
+                    "durationMs": 2493,
+                    "ok": false,
+                    "error": "结构化格式错误：/ must NOT have additional properties {\"additionalProperty\":\"specOrigins\"}"
+                  },
+                  {
+                    "phase": "understand",
+                    "attempt": 2,
+                    "durationMs": 4986,
+                    "ok": true
+                  },
+                  {
+                    "phase": "extract_request_contract",
+                    "attempt": 0,
+                    "durationMs": 2100,
+                    "ok": true
+                  },
+                  {
+                    "phase": "select_capabilities",
+                    "attempt": 0,
+                    "durationMs": 1400,
+                    "ok": true
+                  }
+                ],
+                "requestContract": {
+                  "finalDeliverables": [
+                    {
+                      "kind": "image",
+                      "count": 1,
+                      "timing": "now",
+                      "requiredObservation": "image",
+                      "observationEvidence": "把背景改成浅灰",
+                      "evidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。"
+                    }
+                  ],
+                  "requiredMethods": [],
+                  "systemFacts": [],
+                  "textFileCount": null,
+                  "readOnly": false,
+                  "evidence": "用户要求在原图上修改背景颜色，产出一张灰底修改版图片",
+                  "mediaChanges": [
+                    {
+                      "kind": "image",
+                      "count": 1,
+                      "evidence": "作为灰底修改版"
+                    }
+                  ],
+                  "media": {
+                    "image": 1,
+                    "video": 0,
+                    "audio": 0
+                  },
+                  "finalObligations": {
+                    "media": {
+                      "image": 1,
+                      "video": 0,
+                      "audio": 0
+                    }
+                  },
+                  "currentPermission": {
+                    "mediaSubmission": "approval_gate"
+                  },
+                  "proposedMedia": {
+                    "image": 1,
+                    "video": 0,
+                    "audio": 0
+                  },
+                  "proposedReadOnly": false,
+                  "scopeSource": "previous_plus_explicit_delta",
+                  "candidateMethods": []
+                },
+                "capabilityRoutes": [
+                  {
+                    "deliverableIndex": 0,
+                    "operation": "edit_image",
+                    "skills": []
+                  }
+                ]
+              },
+              "acceptedAt": "2026-09-14T09:14:40.138Z",
+              "requestId": "f59aed3f-d433-4eab-bcbf-b67dabf86a51",
+              "scopeAudit": {
+                "finalDeliverables": [
+                  {
+                    "kind": "image",
+                    "count": 1,
+                    "timing": "now",
+                    "requiredObservation": "image",
+                    "observationEvidence": "把背景改成浅灰",
+                    "evidence": "在这张图上把背景改成浅灰，黄色椅子不变，作为灰底修改版。"
+                  }
+                ],
+                "requiredMethods": [],
+                "systemFacts": [],
+                "textFileCount": null,
+                "readOnly": false,
+                "evidence": "用户要求在原图上修改背景颜色，产出一张灰底修改版图片",
+                "mediaChanges": [
+                  {
+                    "kind": "image",
+                    "count": 1,
+                    "evidence": "作为灰底修改版"
+                  }
+                ],
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                },
+                "finalObligations": {
+                  "media": {
+                    "image": 1,
+                    "video": 0,
+                    "audio": 0
+                  }
+                },
+                "currentPermission": {
+                  "mediaSubmission": "approval_gate"
+                },
+                "proposedMedia": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                },
+                "proposedReadOnly": false,
+                "scopeSource": "previous_plus_explicit_delta",
+                "candidateMethods": []
+              },
+              "finalObligations": {
+                "media": {
+                  "image": 1,
+                  "video": 0,
+                  "audio": 0
+                }
+              },
+              "executionPermission": {
+                "mediaSubmission": "allowed"
+              },
+              "specOrigins": [
+                {
+                  "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "fields": {
+                    "ratio": {
+                      "value": "1:1",
+                      "origin": "unattributed",
+                      "sourceTurn": "current",
+                      "evidence": "",
+                      "adjustable": false
+                    }
+                  }
+                }
+              ],
+              "effects": {
+                "mediaSubmissionAllowed": true
+              },
+              "requirements": [
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:delivery",
+                  "category": "delivery",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": {
+                    "output": "image",
+                    "artifactCount": 1,
+                    "contentCardinality": 1
+                  },
+                  "evidence": "accepted_artifact"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:spec",
+                  "category": "content",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": {
+                    "ratio": "1:1"
+                  },
+                  "evidence": "schema_and_binding"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:0",
+                  "category": "content",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": "背景改为浅灰",
+                  "evidence": "acceptance"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:1",
+                  "category": "content",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": "黄色椅子保持不变",
+                  "evidence": "acceptance"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:2",
+                  "category": "content",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": "1:1 画幅",
+                  "evidence": "acceptance"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:3",
+                  "category": "content",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": "无人无字，椅子全貌清楚",
+                  "evidence": "acceptance"
+                },
+                {
+                  "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:authorization",
+                  "category": "authorization",
+                  "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                  "value": false,
+                  "evidence": "revision_bound_approval"
+                }
+              ],
+              "facts": [],
+              "globalConstraints": [
+                "黄色椅子保持不变",
+                "背景改为浅灰",
+                "无人无字，椅子全貌清楚"
+              ]
+            }
+          ],
+          "validationMode": "production",
+          "protocol": "compiled-v1",
+          "validationPolicy": "strict",
+          "runtimeFacts": {
+            "modelIdentity": {
+              "configuredModel": "deepseek-flash",
+              "provider": "deepseek",
+              "underlyingVersion": null
+            },
+            "source": "runtime_registry",
+            "schemaVersion": 1,
+            "entries": [
+              {
+                "operation": "generate_image",
+                "tool": "generate_image",
+                "registered": true,
+                "compilable": true,
+                "adapterImplemented": true,
+                "configured": true,
+                "permission": "task_contract",
+                "specSupport": {
+                  "defaultSize": "2048x2048"
+                },
+                "health": "unknown",
+                "quoteAvailable": false,
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "prompt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 30000
+                    },
+                    "size": {
+                      "type": "string",
+                      "enum": [
+                        "1K",
+                        "2K",
+                        "4K",
+                        "2048x2048",
+                        "2560x1440",
+                        "1440x2560",
+                        "1728x2304",
+                        "2304x1728"
+                      ]
+                    },
+                    "referenceImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^https://",
+                        "maxLength": 8000
+                      },
+                      "maxItems": 4
+                    }
+                  },
+                  "required": [
+                    "prompt"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "operation": "edit_image",
+                "tool": "generate_image",
+                "registered": true,
+                "compilable": true,
+                "adapterImplemented": true,
+                "configured": true,
+                "permission": "task_contract",
+                "specSupport": {
+                  "defaultSize": "2048x2048"
+                },
+                "health": "unknown",
+                "quoteAvailable": false,
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "prompt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 30000
+                    },
+                    "size": {
+                      "type": "string",
+                      "enum": [
+                        "1K",
+                        "2K",
+                        "4K",
+                        "2048x2048",
+                        "2560x1440",
+                        "1440x2560",
+                        "1728x2304",
+                        "2304x1728"
+                      ]
+                    },
+                    "referenceImages": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^https://",
+                        "maxLength": 8000
+                      },
+                      "maxItems": 4
+                    }
+                  },
+                  "required": [
+                    "prompt"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "operation": "generate_video",
+                "tool": "generate_video",
+                "registered": true,
+                "compilable": true,
+                "adapterImplemented": true,
+                "configured": true,
+                "permission": "task_contract",
+                "specSupport": {
+                  "durationSeconds": {
+                    "min": 2,
+                    "max": 12
+                  },
+                  "defaultDurationSeconds": 5
+                },
+                "health": "unknown",
+                "quoteAvailable": false,
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "prompt": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 30000
+                    },
+                    "duration": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 12
+                    },
+                    "ratio": {
+                      "type": "string",
+                      "enum": [
+                        "16:9",
+                        "9:16",
+                        "1:1",
+                        "4:3",
+                        "3:4",
+                        "21:9"
+                      ]
+                    },
+                    "resolution": {
+                      "type": "string",
+                      "enum": [
+                        "480p",
+                        "720p",
+                        "1080p"
+                      ]
+                    },
+                    "firstFrameUrl": {
+                      "type": "string",
+                      "pattern": "^https://",
+                      "maxLength": 8000
+                    }
+                  },
+                  "required": [
+                    "prompt"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "operation": "analyze_image",
+                "tool": "analyze_image",
+                "registered": true,
+                "compilable": true,
+                "adapterImplemented": true,
+                "configured": true,
+                "permission": "read_only",
+                "health": "unknown",
+                "quoteAvailable": false
+              }
+            ],
+            "unsupported": [
+              {
+                "operation": "edit_video",
+                "compilable": false,
+                "reason": "未实现通用视频编辑"
+              }
+            ],
+            "skills": [
+              {
+                "slug": "actor-realism-v2",
+                "name": "演员真实感与情绪优化器（V2）",
+                "description": "优化原始剧本、小说片段、对白或已有图片/视频提示词中的真人外观、自然情绪、微表情、呼吸、声音、动作因果和人物一致性。原始文本可估时并按自然节拍分成可独立生成的视频提示词；已有提示词严格保留原分镜、分段、镜号、时码、事件顺序、固定台词、画幅、音频和参数结构，只在原结构内增强真实感与表演。适用于真实感优化、情绪优化、人物不僵硬、微表情、剧本转分段提示词、图片提示词人物优化、视频提示词表演优化、图生视频表演，以及 Seedance/Kling/Veo/即梦等人物生成提示词优化。",
+                "workflow": [
+                  "读取原始正文与锁定信息",
+                  "检查动作、身份与表演连续性",
+                  "输出保留约束的优化正文"
+                ],
+                "version": 2,
+                "operations": [
+                  "rewrite",
+                  "storyboard",
+                  "generate_image",
+                  "edit_image",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "asset-lock-generator-lite-v2",
+                "name": "简易资产锁生成器（V2）",
+                "description": "在 creative 中按严格固定的正常生图预算生成无新增说明文字的简易人物多视角参考图、环境多视角参考图和产品多视角参考图。人物流程固定先生成正面全身锚点并创建持久确认卡，用户确认后按原技能版本恢复，再以该锚点为唯一参考一次生成正面、人物自身右侧、背面和面部特写；环境固定 2 次：顶视平面图后，一次生成 C1–C4；产品固定 1 次：同一张母图包含正面、产品自身右侧、背面，以及仅由真实证据支持的状态格和交互格。适用于简易资产锁、轻量人物锁、人物三视图、面部特写、C1–C4 场景锁、产品三视图、产品状态锁、产品交互锁和低调用预算资产一致性任务。",
+                "workflow": [
+                  "确认真实资产引用与预算",
+                  "制定锚点及视图方案",
+                  "按任务授权执行并验证引用一致性"
+                ],
+                "version": 2,
+                "operations": [
+                  "generate_image",
+                  "edit_image"
+                ]
+              },
+              {
+                "slug": "creative-cover-copy-v2",
+                "name": "文案与封面导演",
+                "description": "使用 creative 当前素材与真实 MCP 工具理解视频、图片、产品资料和用户需求，建立证据表，提炼短视频文案、标题钩子、封面主句、正文/口播与 CTA，并在用户明确授权时使用参考图生成一致封面。适用于视频内容总结、抖音/快手/小红书/B站/电商文案、种草或广告文案、标题优化、封面策划、视频或图片转封面、参考图生封面、批量封面方案、历史样例风格学习，以及“读素材→写文案→做封面”的完整流程。",
+                "workflow": [
+                  "整理用户提供的产品与媒体证据",
+                  "撰写文案和封面信息",
+                  "核对文案和画面约束"
+                ],
+                "version": 2,
+                "operations": [
+                  "marketing_script",
+                  "rewrite",
+                  "generate_image",
+                  "edit_image"
+                ]
+              },
+              {
+                "slug": "creative-prompt-rewrite",
+                "name": "提示词改写",
+                "description": "用于改写和优化短视频生成提示词。适用于用户要求保留原有剧情、人物冲突、产品使用过程和视觉冲击，同时提高 Seedance、Kling、Runway 等视频模型的生成稳定性；包括强 3 秒 Hook、分镜压缩、人物反应具体化、人物与产品连续性、连续变身、生成失败后的逐镜恢复，以及在尽量保留用户核心意图前提下进行必要的最小安全调整。",
+                "workflow": [
+                  "提取必须保留的信息",
+                  "修正冲突和不可执行的描述",
+                  "交付可执行提示词并检查保留项"
+                ],
+                "version": 2,
+                "operations": [
+                  "rewrite",
+                  "generate_video",
+                  "storyboard"
+                ]
+              },
+              {
+                "slug": "cinematic-shot-designer-zh-v5",
+                "name": "导演多宫格分镜设计师（V5）",
+                "description": "将剧本、对白或单场戏设计成一张可单次生成的中文多宫格导演分镜图，并输出整版故事板提示词；适用于“多宫格分镜、整版故事板、storyboard contact sheet、导演镜头设计、单张图容纳全部镜头、一次生成全部镜头”等需求。只生成一张整版图片，禁止逐镜生图、批量生图或生成后拼接。",
+                "workflow": [
+                  "解析原场景",
+                  "规划同一张画面内的多宫格镜头",
+                  "核对整版构图与台词"
+                ],
+                "version": 3,
+                "operations": [
+                  "storyboard",
+                  "generate_image"
+                ]
+              },
+              {
+                "slug": "cinematic-style-optimizer-v2",
+                "name": "电影画面风格优化器（V2）",
+                "description": "分析剧本、场景描述、分镜文本或已有图片/视频生成提示词，为内容匹配兼容的电影画面风格，并在不改变剧情、事件顺序、镜头结构、台词、时码、音频、画幅和生成参数的前提下优化影调、色彩、光线、肤色、黑位、高光、颗粒和光学质感；内置统一母版下22种主风格的提示词与效果图。适用于画面风格库、电影感、影调、调色、ARRI/Log/胶片质感、冷暖色调、风格匹配、提示词风格优化、效果对比和风格示例等需求。",
+                "workflow": [
+                  "保留原事件与参数",
+                  "选择兼容影调与光学风格",
+                  "输出风格提示词并核对不变项"
+                ],
+                "version": 2,
+                "operations": [
+                  "rewrite",
+                  "generate_image",
+                  "edit_image",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "direction-designer-zh-v1",
+                "name": "创意方向设计",
+                "description": "创作流程「方向」站执行器。基于已确认的商品理解与 Brief 产出营销方向：一个推荐方向（切入角度/理由/场景建议/参考开头 3 秒）+ 2–3 个备选方向。Use when the flow engine advances the direction stage.",
+                "workflow": [
+                  "整理目标受众及事实缺口",
+                  "提出差异化创意方向",
+                  "给出方向选择依据"
+                ],
+                "version": 2,
+                "operations": [
+                  "answer",
+                  "marketing_script",
+                  "storyboard",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "image-prompt-gallery-director-v2",
+                "name": "图片提示词案例导演（V2）",
+                "description": "将模糊、零散或带参考图的视觉需求转化为模型无关、可直接复制的专业图片生成或图片编辑提示词包；从内置 162 个案例中按任务检索最相关的结构，规划构图、镜头、材质、灯光、文字、必须保持项和排除项。适用于图片提示词、提示词优化、案例库检索、人物/场景/产品/海报/品牌/UI/信息图/科研图/技术图、参考图编辑、多参考合成、精确画面文字和中英双语提示词。只负责提示词规划，不执行生图。",
+                "workflow": [
+                  "读取画面约束和参考角色",
+                  "选择清单内参考资料",
+                  "交付布局主体光影文字与排除项"
+                ],
+                "version": 2,
+                "operations": [
+                  "rewrite",
+                  "generate_image",
+                  "edit_image"
+                ]
+              },
+              {
+                "slug": "marketing-brief-zh-v1",
+                "name": "营销需求简报",
+                "description": "创作流程「Brief」站执行器。基于已确认的商品理解产出营销 Brief：营销目标、受众细化、核心卖点（绑定真实依据）、风格基调、表达约束 do/don't。Use when the flow engine advances the brief stage.",
+                "workflow": [
+                  "区分产品事实与假设",
+                  "归纳受众卖点传播目标",
+                  "交付营销brief并标注待核验信息"
+                ],
+                "version": 2,
+                "operations": [
+                  "marketing_script",
+                  "answer",
+                  "storyboard"
+                ]
+              },
+              {
+                "slug": "product-understanding-zh-v1",
+                "name": "产品理解",
+                "description": "创作流程「理解」站执行器。把用户提供的商品信息（文字 + 商品图）确认成一份结构化的商品理解文档：产品事实、目标平台、目标人群、条数与时长建议、待确认假设。Use when the flow engine advances the understanding stage.",
+                "workflow": [
+                  "读取现有产品证据",
+                  "提炼卖点与使用场景",
+                  "分离未知事实和可用结论"
+                ],
+                "version": 2,
+                "operations": [
+                  "marketing_script",
+                  "analyze_image",
+                  "review_content",
+                  "answer"
+                ]
+              },
+              {
+                "slug": "storyboard-one-shot-zh",
+                "name": "文字分镜",
+                "description": "编写可追溯的文字分镜，输出完整镜头内容、镜头时长、总时长及补充章节。可消费已选方向，不生成宫格图片，不需要锁图。",
+                "workflow": [
+                  "提取事件对白与视觉约束",
+                  "编排镜头时序",
+                  "交付完整分镜正文"
+                ],
+                "version": 2,
+                "operations": [
+                  "storyboard",
+                  "rewrite",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "storyboard-one-shot-zh-v2",
+                "name": "文字分镜（V2）",
+                "description": "编写可追溯的文字分镜，输出完整镜头内容、镜头时长、总时长及补充章节。可消费已选方向，不生成宫格图片，不需要锁图。",
+                "workflow": [
+                  "提取事件与对白",
+                  "编排镜头和实际时长",
+                  "核对连续性并输出分镜"
+                ],
+                "version": 2,
+                "operations": [
+                  "storyboard",
+                  "rewrite",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "video-decomposition-zh-v1",
+                "name": "视频拆解",
+                "description": "参考视频拆解器。对用户提供的视频(原生视频输入)做证据化逐层拆解:结构时间轴、钩子、受众、视听语言、爆点特色、可复刻分镜模板。Use when the user uploads a reference video to learn from, or the video-analysis tool runs.",
+                "workflow": [
+                  "读取真实视频观察",
+                  "拆解镜头节奏与卖点",
+                  "标注证据与不确定项"
+                ],
+                "version": 2,
+                "operations": [
+                  "read_video",
+                  "analyze_video",
+                  "storyboard"
+                ]
+              },
+              {
+                "slug": "video-prompt-safety-zh-v1",
+                "name": "视频提示词检查",
+                "description": "审查即将用于视频生成的提示词是否符合法律、道德、伦理与内容安全规范。同时你也需要审查是否涉及色情，暴力内容，同时返回用户的输入。",
+                "workflow": [
+                  "区分待审材料与执行指令",
+                  "审查风险与夸大事实",
+                  "输出理由及安全调整建议"
+                ],
+                "version": 2,
+                "operations": [
+                  "review_content",
+                  "rewrite",
+                  "generate_video"
+                ]
+              },
+              {
+                "slug": "video-script-zh-v1",
+                "name": "视频脚本创作",
+                "description": "根据用户事实、目标和可选来源编写普通宣传、口播或广告视频文字脚本。没有宫格图前置要求；不生成媒体；按明确时长和格式交付完整正文。",
+                "workflow": [
+                  "明确受众目标与信息边界",
+                  "编排开场正文和收尾",
+                  "检查时长与台词并交付"
+                ],
+                "version": 2,
+                "operations": [
+                  "marketing_script",
+                  "storyboard",
+                  "generate_video",
+                  "rewrite"
+                ]
+              }
+            ],
+            "quote": {
+              "status": "unavailable",
+              "source": null,
+              "version": null,
+              "currency": null,
+              "unitPrice": null,
+              "total": null,
+              "expiresAt": null,
+              "canAuthorize": false,
+              "reason": "当前部署未配置可核验的报价来源，不能提供实际金额。"
+            },
+            "version": "4361f7b5388ca87e18f8298c1f2248a0662424e168e9e8209093015bdb00375e",
+            "observedAt": "2026-09-14T09:14:40.157Z"
+          },
+          "executionPlan": {
+            "version": 2,
+            "coverage": [
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:delivery",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "accepted_artifact",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:spec",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "schema_and_binding",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:0",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "acceptance",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:1",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "acceptance",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:2",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "acceptance",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:constraint:3",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "acceptance",
+                "status": "mapped"
+              },
+              {
+                "requirementId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd:authorization",
+                "nodeId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "evidence": "revision_bound_approval",
+                "status": "mapped"
+              }
+            ],
+            "goalHash": "4c6bfb2a25a8d980cce957bdb6111f259d3f1bcb653b2c40d6818c879af641c9",
+            "nodes": [
+              {
+                "id": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+                "dependsOn": [],
+                "kind": "media",
+                "requiredMethods": [],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "ratio": "1:1"
+                  }
+                },
+                "skillId": "image_creation_skill",
+                "tool": "generate_image",
+                "output": "image",
+                "count": 1,
+                "status": "completed",
+                "revision": 1,
+                "history": [],
+                "batchId": "179c0d80-2443-4642-a301-bd5ee639bc1c",
+                "argsHash": "4b5956df6431249ea964d285370bcbc3fce264bcf2e86692fb85c55085ac25a3",
+                "skillArtifactId": "ec19b4c0-db0c-417e-829f-d8161a19e4e5"
+              }
+            ],
+            "graphHash": "1398d8638ba6c19f1e286b91bb2efb13a673d92bda07fdda95430d747985d226"
+          },
+          "reason": null,
+          "planChecks": {
+            "4b5956df6431249ea964d285370bcbc3fce264bcf2e86692fb85c55085ac25a3": {
+              "passed": true,
+              "uncertain": false,
+              "issues": [],
+              "checker": {
+                "kind": "program",
+                "phase": "proposal_parameters"
+              },
+              "checks": [
+                "tool_schema",
+                "preconditions",
+                "scope",
+                "fixed_specs"
+              ],
+              "quality": {
+                "status": "not_evaluated"
+              },
+              "authorization": {
+                "source": "task_state",
+                "required": false,
+                "status": "not_required"
+              }
+            }
+          },
+          "batches": {
+            "179c0d80-2443-4642-a301-bd5ee639bc1c": {
+              "id": "179c0d80-2443-4642-a301-bd5ee639bc1c",
+              "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+              "taskId": "ac528ee5-7453-4f42-9e69-19323df025e2",
+              "tool": "generate_image",
+              "items": [
+                {
+                  "prompt": "编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参考图中黄色椅子的所有可视化特征：椅子的整体轮廓与造型结构、椅背与椅座的形状、椅腿的形态与数量、黄色涂装的具体色相与明度、表面材质与光泽质感、椅子在画面中的位置、大小、比例与透视角度、椅子的投影形态与落点。不得改变椅子的任何细节，不得重绘、替换或重新设计椅子。\n\n【需要修改的内容】仅将原图的纯白背景替换为均匀的中性浅灰色背景，色值约为 #D9D9D9（可用非常轻微的灰度微调，使画面视觉自然、干净、专业商品图风格）。浅灰背景要求平整、均匀、无渐变杂色、无纹理、无可见的布景痕迹。椅子边缘与浅灰背景衔接自然，边缘清晰无白边、无残留白色描边；椅子底部投影由白底自然过渡到浅灰底上，保持原有投影的柔和度与真实感。\n\n【画幅与构图】保持 1:1 正方形画幅，与原图构图与取景完全一致，椅子居中且全貌完整可见，不裁切椅子的任何部位。\n\n【排除项】画面中不得出现人物、手、文字、字母、数字、logo、水印、标签、装饰道具或任何多余元素；不得出现背景渐变、色块、光影装饰或环境道具；不得添加任何新的家具或背景场景。\n\n【画面风格】干净、专业的产品展示图风格，主体清晰突出，浅灰背景与黄色椅子形成自然、协调的对比关系，整体色调真实自然，光线均匀。\n\n输出：一张 1:1 的灰底修改版黄椅产品图。",
+                  "referenceImages": [
+                    "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]"
+                  ],
+                  "size": "2048x2048"
+                }
+              ],
+              "executionIds": [
+                "7c31c26a-5067-44ac-871c-01478fe7ef83"
+              ],
+              "status": "completed"
+            }
+          },
+          "artifacts": [
+            {
+              "relationships": [],
+              "id": "ec19b4c0-db0c-417e-829f-d8161a19e4e5",
+              "taskId": "ac528ee5-7453-4f42-9e69-19323df025e2",
+              "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+              "type": "prompt",
+              "purpose": "support",
+              "status": "completed",
+              "version": 1,
+              "parentId": null,
+              "content": "在用户提供的黄椅白底产品图基础上做背景替换编辑：仅把纯白背景改为中性浅灰（约 #D9D9D9），黄色椅子的造型、颜色、材质、比例、位置与画面构图全部原样保留，保持 1:1 画幅、无人无字、椅子全貌清楚，输出一张灰底修改版产品图。\n编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参考图中黄色椅子的所有可视化特征：椅子的整体轮廓与造型结构、椅背与椅座的形状、椅腿的形态与数量、黄色涂装的具体色相与明度、表面材质与光泽质感、椅子在画面中的位置、大小、比例与透视角度、椅子的投影形态与落点。不得改变椅子的任何细节，不得重绘、替换或重新设计椅子。\n\n【需要修改的内容】仅将原图的纯白背景替换为均匀的中性浅灰色背景，色值约为 #D9D9D9（可用非常轻微的灰度微调，使画面视觉自然、干净、专业商品图风格）。浅灰背景要求平整、均匀、无渐变杂色、无纹理、无可见的布景痕迹。椅子边缘与浅灰背景衔接自然，边缘清晰无白边、无残留白色描边；椅子底部投影由白底自然过渡到浅灰底上，保持原有投影的柔和度与真实感。\n\n【画幅与构图】保持 1:1 正方形画幅，与原图构图与取景完全一致，椅子居中且全貌完整可见，不裁切椅子的任何部位。\n\n【排除项】画面中不得出现人物、手、文字、字母、数字、logo、水印、标签、装饰道具或任何多余元素；不得出现背景渐变、色块、光影装饰或环境道具；不得添加任何新的家具或背景场景。\n\n【画面风格】干净、专业的产品展示图风格，主体清晰突出，浅灰背景与黄色椅子形成自然、协调的对比关系，整体色调真实自然，光线均匀。\n\n输出：一张 1:1 的灰底修改版黄椅产品图。",
+              "sourceExecutionId": null,
+              "createdAt": "2026-09-14T09:14:44.871Z",
+              "metadata": {
+                "skill": "image_creation_skill",
+                "contractVersion": 1,
+                "structure": {
+                  "concept": "在用户提供的黄椅白底产品图基础上做背景替换编辑：仅把纯白背景改为中性浅灰（约 #D9D9D9），黄色椅子的造型、颜色、材质、比例、位置与画面构图全部原样保留，保持 1:1 画幅、无人无字、椅子全貌清楚，输出一张灰底修改版产品图。",
+                  "preservedConstraints": [
+                    "背景由白底改为浅灰（中性浅灰，约 #D9D9D9，具体灰度按视觉自然度微调）",
+                    "黄色椅子保持不变：颜色、造型、材质纹理、比例、位置与构图沿用原图",
+                    "1:1 画幅，与原图尺寸一致",
+                    "画面中无人、无文字、无 logo、无水印",
+                    "椅子全貌清楚，不裁切、不遮挡"
+                  ],
+                  "safety": {
+                    "passed": true,
+                    "reason": "该请求为常规产品图片背景替换编辑，仅修改背景颜色，不涉及人物、敏感内容、违法信息或版权规避；参考图来自用户输入的真实来源，方案中未声称任何品牌事实已核实。"
+                  },
+                  "items": [
+                    {
+                      "prompt": "编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参考图中黄色椅子的所有可视化特征：椅子的整体轮廓与造型结构、椅背与椅座的形状、椅腿的形态与数量、黄色涂装的具体色相与明度、表面材质与光泽质感、椅子在画面中的位置、大小、比例与透视角度、椅子的投影形态与落点。不得改变椅子的任何细节，不得重绘、替换或重新设计椅子。\n\n【需要修改的内容】仅将原图的纯白背景替换为均匀的中性浅灰色背景，色值约为 #D9D9D9（可用非常轻微的灰度微调，使画面视觉自然、干净、专业商品图风格）。浅灰背景要求平整、均匀、无渐变杂色、无纹理、无可见的布景痕迹。椅子边缘与浅灰背景衔接自然，边缘清晰无白边、无残留白色描边；椅子底部投影由白底自然过渡到浅灰底上，保持原有投影的柔和度与真实感。\n\n【画幅与构图】保持 1:1 正方形画幅，与原图构图与取景完全一致，椅子居中且全貌完整可见，不裁切椅子的任何部位。\n\n【排除项】画面中不得出现人物、手、文字、字母、数字、logo、水印、标签、装饰道具或任何多余元素；不得出现背景渐变、色块、光影装饰或环境道具；不得添加任何新的家具或背景场景。\n\n【画面风格】干净、专业的产品展示图风格，主体清晰突出，浅灰背景与黄色椅子形成自然、协调的对比关系，整体色调真实自然，光线均匀。\n\n输出：一张 1:1 的灰底修改版黄椅产品图。",
+                      "referenceImages": [
+                        "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]"
+                      ],
+                      "size": "2048x2048"
+                    }
+                  ]
+                }
+              },
+              "verification": {
+                "technical": "passed",
+                "semantic": "passed"
+              }
+            },
+            {
+              "relationships": [],
+              "id": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+              "taskId": "ac528ee5-7453-4f42-9e69-19323df025e2",
+              "itemId": "a02f0c23-a8b8-4618-abcf-16b965a6c6dd",
+              "type": "image",
+              "purpose": "deliverable",
+              "status": "completed",
+              "version": 1,
+              "parentId": null,
+              "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377285265418dc372c31e32e536f515bc41512c86c85d81_0.jpeg?[REDACTED_QUERY]",
+              "sourceExecutionId": "7c31c26a-5067-44ac-871c-01478fe7ef83",
+              "createdAt": "2026-09-14T09:14:56.670Z",
+              "metadata": {
+                "simulated": false,
+                "args": {
+                  "prompt": "编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参考图中黄色椅子的所有可视化特征：椅子的整体轮廓与造型结构、椅背与椅座的形状、椅腿的形态与数量、黄色涂装的具体色相与明度、表面材质与光泽质感、椅子在画面中的位置、大小、比例与透视角度、椅子的投影形态与落点。不得改变椅子的任何细节，不得重绘、替换或重新设计椅子。\n\n【需要修改的内容】仅将原图的纯白背景替换为均匀的中性浅灰色背景，色值约为 #D9D9D9（可用非常轻微的灰度微调，使画面视觉自然、干净、专业商品图风格）。浅灰背景要求平整、均匀、无渐变杂色、无纹理、无可见的布景痕迹。椅子边缘与浅灰背景衔接自然，边缘清晰无白边、无残留白色描边；椅子底部投影由白底自然过渡到浅灰底上，保持原有投影的柔和度与真实感。\n\n【画幅与构图】保持 1:1 正方形画幅，与原图构图与取景完全一致，椅子居中且全貌完整可见，不裁切椅子的任何部位。\n\n【排除项】画面中不得出现人物、手、文字、字母、数字、logo、水印、标签、装饰道具或任何多余元素；不得出现背景渐变、色块、光影装饰或环境道具；不得添加任何新的家具或背景场景。\n\n【画面风格】干净、专业的产品展示图风格，主体清晰突出，浅灰背景与黄色椅子形成自然、协调的对比关系，整体色调真实自然，光线均匀。\n\n输出：一张 1:1 的灰底修改版黄椅产品图。",
+                  "referenceImages": [
+                    "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]"
+                  ],
+                  "size": "2048x2048"
+                },
+                "provider": {
+                  "size": "2048x2048"
+                }
+              },
+              "verification": {
+                "technical": "passed",
+                "semantic": "passed",
+                "issues": [],
+                "comparison": {
+                  "sourceObserved": true,
+                  "resultObserved": true,
+                  "requestedChanges": "passed",
+                  "preservedRegions": "passed"
+                }
+              },
+              "verificationAttempts": [
+                {
+                  "runId": "f59aed3f-d433-4eab-bcbf-b67dabf86a51",
+                  "evidenceHash": "8c410cf35c94f717ab9e55f2f8fbd14896dfea21efb86e087e00ef088e25439f",
+                  "status": "completed",
+                  "startedAt": "2026-09-14T09:14:56.678Z",
+                  "verdict": {
+                    "outcome": "passed",
+                    "issues": [],
+                    "comparison": {
+                      "sourceObserved": true,
+                      "resultObserved": true,
+                      "requestedChanges": "passed",
+                      "preservedRegions": "passed"
+                    },
+                    "passed": true,
+                    "uncertain": false,
+                    "checker": {
+                      "kind": "model",
+                      "model": "deepseek-flash",
+                      "phase": "edit"
+                    }
+                  },
+                  "finishedAt": "2026-09-14T09:14:58.628Z"
+                }
+              ],
+              "acceptance": {
+                "checker": {
+                  "kind": "model",
+                  "model": "deepseek-flash",
+                  "phase": "edit"
+                },
+                "inputHash": "e22cc6af7789bb8cb48370ac57699837598938fc8f1bd5e3bd2f14b94a0471d5",
+                "quality": {
+                  "outcome": "passed",
+                  "issues": [],
+                  "comparison": {
+                    "sourceObserved": true,
+                    "resultObserved": true,
+                    "requestedChanges": "passed",
+                    "preservedRegions": "passed"
+                  },
+                  "passed": true,
+                  "uncertain": false,
+                  "checker": {
+                    "kind": "model",
+                    "model": "deepseek-flash",
+                    "phase": "edit"
+                  },
+                  "status": "passed"
+                },
+                "factualSupport": "model_checked"
+              }
+            }
+          ]
+        }
+      ],
+      "assets": [
+        {
+          "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+          "assetId": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+          "kind": "image",
+          "type": "image",
+          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]",
+          "version": 1,
+          "purpose": "input",
+          "metadata": {
+            "fixtureSetup": true,
+            "fixtureKey": "chair-yellow",
+            "receiptId": "13c1f52e-5066-40eb-bd95-e72de2a172cd",
+            "provider": {
+              "size": "2048x2048"
+            },
+            "qualityNotScored": true
+          },
+          "source": "evaluation_fixture",
+          "sessionId": "d022262a-d8c7-4813-8e6a-546250ef2a20"
+        },
+        {
+          "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+          "assetId": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+          "kind": "image",
+          "type": "image",
+          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377256084c26ebaa89f61563ae66be53d1b05a6aa891f4e_0.jpeg?[REDACTED_QUERY]",
+          "version": 1,
+          "purpose": "input",
+          "metadata": {
+            "fixtureSetup": true,
+            "fixtureKey": "chair-yellow",
+            "receiptId": "13c1f52e-5066-40eb-bd95-e72de2a172cd",
+            "provider": {
+              "size": "2048x2048"
+            },
+            "qualityNotScored": true
+          },
+          "source": "evaluation_fixture",
+          "sessionId": "d022262a-d8c7-4813-8e6a-546250ef2a20"
+        },
+        {
+          "assetId": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377285265418dc372c31e32e536f515bc41512c86c85d81_0.jpeg?[REDACTED_QUERY]",
+          "kind": "image",
+          "source": "artifact",
+          "createdAt": "2026-09-14T09:14:56.670Z"
+        }
+      ]
+    },
+    "capturedReferenceCatalog": {
+      "version": "b14f719e73e0",
+      "views": {
+        "imageTargets": [
+          {
+            "handle": "ref_b14f719e73e0_1",
+            "id": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+            "version": 1,
+            "type": "image",
+            "sourceHash": "867c7d8f43e83788776a1285aa285540a58c3d5663e6ee8ad3d661a39bddd1ec",
+            "readable": true,
+            "productionUsable": true,
+            "visibleOrdinal": 1
+          },
+          {
+            "handle": "ref_b14f719e73e0_2",
+            "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+            "version": 1,
+            "type": "image",
+            "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+            "readable": true,
+            "productionUsable": true,
+            "visibleOrdinal": 2
+          }
+        ],
+        "production": [
+          {
+            "handle": "ref_b14f719e73e0_1",
+            "id": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+            "version": 1,
+            "type": "image",
+            "sourceHash": "867c7d8f43e83788776a1285aa285540a58c3d5663e6ee8ad3d661a39bddd1ec",
+            "readable": true,
+            "productionUsable": true,
+            "visibleOrdinal": 1
+          },
+          {
+            "handle": "ref_b14f719e73e0_2",
+            "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+            "version": 1,
+            "type": "image",
+            "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+            "readable": true,
+            "productionUsable": true,
+            "visibleOrdinal": 2
+          }
+        ],
+        "readableSupport": [
+          {
+            "handle": "ref_b14f719e73e0_0",
+            "id": "ec19b4c0-db0c-417e-829f-d8161a19e4e5",
+            "version": 1,
+            "type": "prompt",
+            "sourceHash": "4a9bf3a8ee6e0c3891f0258be13be0090cf0313f731b4f92afcbb9f2273c1967",
+            "readable": true,
+            "productionUsable": false,
+            "excerpt": "在用户提供的黄椅白底产品图基础上做背景替换编辑：仅把纯白背景改为中性浅灰（约 #D9D9D9），黄色椅子的造型、颜色、材质、比例、位置与画面构图全部原样保留，保持 1:1 画幅、无人无字、椅子全貌清楚，输出一张灰底修改版产品图。\n编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参"
+          }
+        ]
+      },
+      "entries": [
+        {
+          "handle": "ref_b14f719e73e0_0",
+          "id": "ec19b4c0-db0c-417e-829f-d8161a19e4e5",
+          "version": 1,
+          "type": "prompt",
+          "sourceHash": "4a9bf3a8ee6e0c3891f0258be13be0090cf0313f731b4f92afcbb9f2273c1967",
+          "readable": true,
+          "productionUsable": false,
+          "excerpt": "在用户提供的黄椅白底产品图基础上做背景替换编辑：仅把纯白背景改为中性浅灰（约 #D9D9D9），黄色椅子的造型、颜色、材质、比例、位置与画面构图全部原样保留，保持 1:1 画幅、无人无字、椅子全貌清楚，输出一张灰底修改版产品图。\n编辑任务：基于参考图进行背景替换，输出一张灰底修改版产品图。\n\n【必须保持不变】完整保留参",
+          "units": []
+        },
+        {
+          "handle": "ref_b14f719e73e0_1",
+          "id": "73c78c9b-4ddd-4432-a077-bfadaf4b3db8",
+          "version": 1,
+          "type": "image",
+          "sourceHash": "867c7d8f43e83788776a1285aa285540a58c3d5663e6ee8ad3d661a39bddd1ec",
+          "readable": true,
+          "productionUsable": true,
+          "visibleOrdinal": 1,
+          "units": []
+        },
+        {
+          "handle": "ref_b14f719e73e0_2",
+          "id": "dce1b33a-1808-4cbc-88aa-de2c3fa62a1d",
+          "version": 1,
+          "type": "image",
+          "sourceHash": "4d28bdc57de6c38f928fb75d336474221dbcb806ad1cd374e2e682ef0e13d218",
+          "readable": true,
+          "productionUsable": true,
+          "visibleOrdinal": 2,
+          "units": []
+        }
+      ]
+    }
+  },
+  {
+    "case": "D01-cup-observation-2",
+    "item": {
+      "dependsOn": [],
+      "references": [
+        "7e7983b3-3fe6-446e-aa05-41f9b8da1890",
+        "2901a24c-5eda-4c45-9719-a9a4879a9e8c"
+      ],
+      "requiredEvidence": "image",
+      "id": "68164f72-7071-4172-a759-430f56912f7d",
+      "description": "实际读取第一张（修改前）与第二张（修改后）图片，逐项对比并如实报告：背景是否改变、杯子形状是否明显变化、杯子位置是否明显变化；指出可见偏差，不做任何图像生成或修改。"
+    },
+    "sources": {
+      "7e7983b3-3fe6-446e-aa05-41f9b8da1890": {
+        "id": "7e7983b3-3fe6-446e-aa05-41f9b8da1890",
+        "assetId": "7e7983b3-3fe6-446e-aa05-41f9b8da1890",
+        "type": "image",
+        "kind": "image",
+        "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789376947121600632cde03e2cf85ca25a1fd03fe18a499cf3_0.jpeg?[REDACTED_QUERY]",
+        "version": 1,
+        "purpose": "input",
+        "sessionId": "09fc401f-d18b-4eed-8eaf-5a8d99077830",
+        "source": "evaluation_fixture",
+        "metadata": {
+          "fixtureSetup": true,
+          "postIndex": 5,
+          "visibleOrder": 1
+        }
+      },
+      "2901a24c-5eda-4c45-9719-a9a4879a9e8c": {
+        "id": "2901a24c-5eda-4c45-9719-a9a4879a9e8c",
+        "assetId": "2901a24c-5eda-4c45-9719-a9a4879a9e8c",
+        "type": "image",
+        "kind": "image",
+        "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377035842f2bc763de04867cc2f13d375222e0d802115ca_0.jpeg?[REDACTED_QUERY]",
+        "version": 1,
+        "purpose": "input",
+        "sessionId": "09fc401f-d18b-4eed-8eaf-5a8d99077830",
+        "source": "evaluation_fixture",
+        "metadata": {
+          "fixtureSetup": true,
+          "postIndex": 8,
+          "visibleOrder": 2
+        }
+      }
+    },
+    "observations": [
+      {
+        "tool": "analyze_image",
+        "args": {
+          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789376947121600632cde03e2cf85ca25a1fd03fe18a499cf3_0.jpeg?[REDACTED_QUERY]",
+          "question": "实际读取第一张（修改前）与第二张（修改后）图片，逐项对比并如实报告：背景是否改变、杯子形状是否明显变化、杯子位置是否明显变化；指出可见偏差，不做任何图像生成或修改。"
+        },
+        "result": {
+          "text": "**第一张（修改前）：**  \n- 背景：纯深蓝色，带有微弱的材质颗粒感与渐变明暗。  \n- 杯子形状：白色陶瓷杯，杯身呈上宽下窄的圆台形，表面有横向环形纹理，杯口边缘圆润。  \n- 杯子位置：居中略偏下，占据画面中心区域，杯口大致朝向正前方。  \n\n**第二张（修改后）：**  \n- 背景：纯深蓝色，纹理和明暗渐变与第一张一致。  \n- 杯子形状：白色陶瓷杯，但杯身轮廓比第一张稍显饱满，横向纹理的间距在视觉上略有压缩；杯口边缘的圆润度无明显改变。  \n- 杯子位置：整体位置与第一张相同，仍居中略偏下。  \n\n**对比结论：**  \n- **背景是否改变**：未改变。两张图的蓝色底色、颗粒质感及明暗分布相同。  \n- **杯子形状是否明显变化**：存在轻微差异。修改后的杯身轮廓更饱满，细密的横向纹理在视觉上略微收缩，但整体形状保持为同一款上宽下窄的陶瓷杯。  \n- **杯子位置是否明显变化**：未发生明显变化。两者均居中略偏下，杯口朝向一致。  \n\n**可见偏差说明：**  \n除杯身轮廓的轻微饱满度和纹理间距的视觉变化外，未见其他结构性偏差（如杯口变形、背景色偏、位置大幅偏移等）。该项结论基于实际可见的像素内容，未进行任何图像生成或修改。"
+        },
+        "source": {
+          "id": "7e7983b3-3fe6-446e-aa05-41f9b8da1890",
+          "version": 1,
+          "digest": "100dd05bb2aa69b862a75cf3c80e6563c2d84e2481974fb2d68d1509e48b7d93"
+        },
+        "checker": "vision_model"
+      },
+      {
+        "tool": "analyze_image",
+        "args": {
+          "url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377035842f2bc763de04867cc2f13d375222e0d802115ca_0.jpeg?[REDACTED_QUERY]",
+          "question": "实际读取第一张（修改前）与第二张（修改后）图片，逐项对比并如实报告：背景是否改变、杯子形状是否明显变化、杯子位置是否明显变化；指出可见偏差，不做任何图像生成或修改。"
+        },
+        "result": {
+          "text": "对比结果如下：\n\n1. **背景**：未见改变。两张图的背景均为单一浅米色/奶白色，无可见纹理、渐变或光影结构变化。\n2. **杯子形状**：未见明显变化。杯身比例、杯口椭圆形轮廓以及表面的横向环状纹理一致，没有变形或重塑的迹象。\n3. **杯子位置**：未见明显变化。杯子在画面中的相对位置、占幅以及投影方向一致。\n\n**可见偏差与说明**：当前提供的两张图片在我读取的视觉信息上呈现高度一致，我没有检测到足以判断为“修改”的可见偏差。以上结论基于这两张图片的实际画面，未参考文件名。"
+        },
+        "source": {
+          "id": "2901a24c-5eda-4c45-9719-a9a4879a9e8c",
+          "version": 1,
+          "digest": "d10a64aa05019c8688ba0fb1f57e885a0d576e4051ed2ef2a149255af3ddc0e0"
+        },
+        "checker": "vision_model"
+      }
+    ],
+    "visionCalls": [
+      {
+        "id": "85fff504-a785-4615-941f-264005816359",
+        "input": [
+          {
+            "role": "system",
+            "content": "分析实际提供的媒体并回答问题。看不清的内容说明不确定，不根据文件名猜测。"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "实际读取第一张（修改前）与第二张（修改后）图片，逐项对比并如实报告：背景是否改变、杯子形状是否明显变化、杯子位置是否明显变化；指出可见偏差，不做任何图像生成或修改。"
+              },
+              {
+                "type": "input_image",
+                "image_url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789376947121600632cde03e2cf85ca25a1fd03fe18a499cf3_0.jpeg?[REDACTED_QUERY]"
+              }
+            ]
+          }
+        ],
+        "output": [
+          {
+            "type": "message",
+            "id": "70f24b49-969d-4ec3-8fff-caed27b99d1e",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "**第一张（修改前）：**  \n- 背景：纯深蓝色，带有微弱的材质颗粒感与渐变明暗。  \n- 杯子形状：白色陶瓷杯，杯身呈上宽下窄的圆台形，表面有横向环形纹理，杯口边缘圆润。  \n- 杯子位置：居中略偏下，占据画面中心区域，杯口大致朝向正前方。  \n\n**第二张（修改后）：**  \n- 背景：纯深蓝色，纹理和明暗渐变与第一张一致。  \n- 杯子形状：白色陶瓷杯，但杯身轮廓比第一张稍显饱满，横向纹理的间距在视觉上略有压缩；杯口边缘的圆润度无明显改变。  \n- 杯子位置：整体位置与第一张相同，仍居中略偏下。  \n\n**对比结论：**  \n- **背景是否改变**：未改变。两张图的蓝色底色、颗粒质感及明暗分布相同。  \n- **杯子形状是否明显变化**：存在轻微差异。修改后的杯身轮廓更饱满，细密的横向纹理在视觉上略微收缩，但整体形状保持为同一款上宽下窄的陶瓷杯。  \n- **杯子位置是否明显变化**：未发生明显变化。两者均居中略偏下，杯口朝向一致。  \n\n**可见偏差说明：**  \n除杯身轮廓的轻微饱满度和纹理间距的视觉变化外，未见其他结构性偏差（如杯口变形、背景色偏、位置大幅偏移等）。该项结论基于实际可见的像素内容，未进行任何图像生成或修改。"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ]
+      },
+      {
+        "id": "14c42ed8-eb24-47cf-9611-4df180db087d",
+        "input": [
+          {
+            "role": "system",
+            "content": "分析实际提供的媒体并回答问题。看不清的内容说明不确定，不根据文件名猜测。"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "input_text",
+                "text": "实际读取第一张（修改前）与第二张（修改后）图片，逐项对比并如实报告：背景是否改变、杯子形状是否明显变化、杯子位置是否明显变化；指出可见偏差，不做任何图像生成或修改。"
+              },
+              {
+                "type": "input_image",
+                "image_url": "https://ark-content-generation-v2-cn-beijing.tos-cn-beijing.volces.com/doubao-seedream-4-0/021789377035842f2bc763de04867cc2f13d375222e0d802115ca_0.jpeg?[REDACTED_QUERY]"
+              }
+            ]
+          }
+        ],
+        "output": [
+          {
+            "type": "message",
+            "id": "45dca82b-fda1-4fe7-9ed7-f83ba73977f4",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "对比结果如下：\n\n1. **背景**：未见改变。两张图的背景均为单一浅米色/奶白色，无可见纹理、渐变或光影结构变化。\n2. **杯子形状**：未见明显变化。杯身比例、杯口椭圆形轮廓以及表面的横向环状纹理一致，没有变形或重塑的迹象。\n3. **杯子位置**：未见明显变化。杯子在画面中的相对位置、占幅以及投影方向一致。\n\n**可见偏差与说明**：当前提供的两张图片在我读取的视觉信息上呈现高度一致，我没有检测到足以判断为“修改”的可见偏差。以上结论基于这两张图片的实际画面，未参考文件名。"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ]
+      }
+    ]
+  }
+]

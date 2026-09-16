@@ -1,0 +1,14 @@
+{
+  "actor-realism-v2/validate_prompt_preservation": "f648073373ade22becffd51e17d0a8029bf9c8578df028fea225e38c4faac2bd",
+  "actor-realism-v2/validate_segment_timeline": "783403c263e14a82322c29aa2a6baf8b894663240c46f7cd919a7786e355dfd6",
+  "asset-lock-generator-lite-v2/plan_asset_lock_budget": "2a59d09eed16ffacc85772b23eb892f3af6bc62fb0b8e7de5e58be10a8b2a498",
+  "asset-lock-generator-lite-v2/validate_asset_lock_prompt": "88871ec5e2a9e8f06b7730ad48f76c7a026a04cdfcc08e2aa4fde51dc4017774",
+  "creative-cover-copy-v2/validate_copy_evidence": "3d169069401f57723822e0e095711cd1c284de89e97ae50312db2a3de7c1cc6a",
+  "creative-cover-copy-v2/validate_cover_prompt_contract": "5c5256562097b15d8f27dc4e28e8447eaf8e4b402651e2e780c4deda63ab864a",
+  "cinematic-shot-designer-zh-v5/validate_storyboard": "41d8cb7b77900fb71dfaa266cb9646a8e1b36e2883699202573ee0eff2175389",
+  "cinematic-style-optimizer-v2/validate_style_preservation": "63297a3913353767eca737a0f846db722529d075e8bcfa6eae840ea80ba80c60",
+  "image-prompt-gallery-director-v2/validate_image_prompt_contract": "3026456a2a45fc9f524bf55b4a4c1fc3dc1376bdd3415494a49da29b7fa20b9a",
+  "storyboard-one-shot-zh/validate_storyboard": "449d87cdffdaaf2fd39e5b404dbdc61935ecb8ce59ecbfa57c3ed7d81ea9e747",
+  "storyboard-one-shot-zh-v2/validate_storyboard_timeline": "8625c77a4753c42247dc1ed2bcc0b2e3ca9229c8a4f5c1be5f8eb138e4174f71",
+  "storyboard-one-shot-zh-v2/validate_storyboard_prompt_contract": "6d07f2879d589f37f6f982fb303d17024856ffd14671f7ecd502bd6db33dc201"
+}

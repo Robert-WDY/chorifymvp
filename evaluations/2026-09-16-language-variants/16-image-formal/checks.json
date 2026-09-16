@@ -1,0 +1,192 @@
+{
+  "id": "16-image-formal",
+  "dir": "16-image-formal",
+  "group": "图片确认门禁",
+  "tone": "正式规格",
+  "query": "为雾庭茶饮准备1张1440×2560的桂花乌龙海报生成方案。米白背景、单杯浅金色茶汤、少量桂花与枝叶、柔和自然光；禁止人物、文字、Logo和水印。请保存可供确认的图片方案，我批准后才能提交实际生成，本轮只准备。",
+  "expected": {
+    "mediaType": "image",
+    "quantity": 1,
+    "waitApproval": true,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "721acc4e-5afa-4ba3-b1d8-b3d44695937a",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "721acc4e-5afa-4ba3-b1d8-b3d44695937a",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "savedPendingMediaPlan",
+      "passed": false,
+      "evidence": {
+        "status": "COMPLETED",
+        "approval": {
+          "required": false,
+          "status": "not_required",
+          "planHash": null
+        },
+        "nodes": [
+          {
+            "id": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+            "itemId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+            "dependsOn": [],
+            "kind": "text",
+            "requiredMethods": [
+              "image-prompt-gallery-director-v2"
+            ],
+            "outputContract": {
+              "stages": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "ratio": "1440×2560",
+                "directionCount": 1
+              }
+            },
+            "skillId": null,
+            "tool": null,
+            "output": "text",
+            "count": 1,
+            "status": "completed",
+            "revision": 0,
+            "history": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "mediaQuantity",
+      "passed": false,
+      "evidence": 0
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "savedPendingMediaPlan",
+    "mediaQuantity"
+  ],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [
+    {
+      "slug": "image-prompt-gallery-director-v2",
+      "status": "completed",
+      "artifactId": "697652a9-bbfc-4fe7-8973-88c02ab26876",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+      "start": "2026-09-16T07:48:23.249Z",
+      "end": "2026-09-16T07:48:27.604Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24530,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7016,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 403,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7419
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "image-prompt-gallery-director-v2",
+      "nodeId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+      "characters": 7743,
+      "systemCharacters": 1098,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 3731,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 708,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 4439
+      }
+    }
+  ],
+  "final": "1440×2560竖版海报摄影方案。米白哑光背景，背景带轻微细腻纸张纹理，整体无杂色。画面中央偏下放置一只透明或浅白瓷质茶杯，单杯，杯内盛浅金色茶汤，茶汤透亮，液面平静，杯壁清澈，可见极少量细小茶毫或温润反光。杯口上方及杯侧散落少量干燥桂花：花瓣纤细、金橙色，约七八粒，分布稀疏，有聚有散，不堆叠成团；另配一两枝细弱枝叶，叶片小巧，颜色偏深绿，枝干自然弯曲，从画面上方或侧后方轻轻探入，叶片与桂花仅作点缀，不遮挡杯身。柔和自然光从画面左上方或正上方漫入，光线均匀，无强反差；茶杯底部在米白台面留下浅淡、边缘柔和的投影，桂花与枝叶投下细微软影。整体色调温暖安静，低饱和，浅金与米白为主，辅以少量叶绿；构图留足负空间，杯体清晰，画面边缘干净。摄影风格：静物产品摄影，俯拍或微侧俯视，50mm至85mm等效中焦，浅景深，背景轻微虚化，杯口与茶汤焦点清晰，自然光，无滤镜感。禁止：人物、人脸、手部；任何文字、字母、数字、标签；Logo、商标、品牌标识；水印、签名、印章；额外杯具或茶壶；浓艳色彩、戏剧化强光、人工硬光。"
+}

@@ -1,0 +1,280 @@
+{
+  "id": "06-ordered-casual",
+  "dir": "06-ordered-casual",
+  "group": "顺序Skill",
+  "tone": "口语、延迟描述",
+  "query": "石阶咖啡周日早上10点在店里办免费试饮，最多15人，不送礼品。用 marketing-brief-zh-v1 先给我整一份营销Brief，等它出来了再交给 creative-cover-copy-v2 写两条招募文案。我要Brief一份、两条文案合一份，一共两份文字。别把这两步同时做，也别出图或视频。",
+  "expected": {
+    "texts": 2,
+    "skills": [
+      "marketing-brief-zh-v1",
+      "creative-cover-copy-v2"
+    ],
+    "fullDependency": true,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "8c32c0c1-4aa2-45cc-8e51-744013c9dac2",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "8c32c0c1-4aa2-45cc-8e51-744013c9dac2",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 2,
+        "actual": 2
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "skill:marketing-brief-zh-v1",
+      "passed": true,
+      "evidence": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+          "contractValidated": true
+        }
+      ]
+    },
+    {
+      "name": "skill:creative-cover-copy-v2",
+      "passed": true,
+      "evidence": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+          "contractValidated": true
+        }
+      ]
+    },
+    {
+      "name": "dependencyEdge",
+      "passed": true,
+      "evidence": [
+        0
+      ]
+    },
+    {
+      "name": "fullUpstreamContent",
+      "passed": true,
+      "evidence": {
+        "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+        "sourceId": "7cd163db-3202-40e7-a437-fa3ea809a883"
+      }
+    },
+    {
+      "name": "correctVersion",
+      "passed": true,
+      "evidence": {
+        "artifactVersion": 1,
+        "sourceVersion": 1
+      }
+    },
+    {
+      "name": "upstreamFinishesFirst",
+      "passed": true,
+      "evidence": [
+        {
+          "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+          "start": "2026-09-16T07:47:53.389Z",
+          "end": "2026-09-16T07:47:56.589Z"
+        },
+        {
+          "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+          "start": "2026-09-16T07:47:56.668Z",
+          "end": "2026-09-16T07:47:58.550Z"
+        }
+      ]
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 2,
+  "skills": [
+    {
+      "slug": "marketing-brief-zh-v1",
+      "status": "completed",
+      "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+      "contractValidated": true
+    },
+    {
+      "slug": "creative-cover-copy-v2",
+      "status": "completed",
+      "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+      "start": "2026-09-16T07:47:53.389Z",
+      "end": "2026-09-16T07:47:56.589Z"
+    },
+    {
+      "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+      "start": "2026-09-16T07:47:56.668Z",
+      "end": "2026-09-16T07:47:58.550Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24576,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7028,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 418,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7446
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "marketing-brief-zh-v1",
+      "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+      "characters": 4189,
+      "systemCharacters": 1021,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1696,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 515,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2211
+      }
+    },
+    {
+      "index": 2,
+      "phase": "text_generation",
+      "methodId": "creative-cover-copy-v2",
+      "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+      "characters": 6961,
+      "systemCharacters": 1017,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 3259,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 230,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3489
+      }
+    }
+  ],
+  "final": "# 石阶咖啡周日免费试饮活动营销Brief\n\n## 主传播目标\n吸引目标人群在周日早上10点走进石阶咖啡门店，参与免费试饮（人数上限15人）。\n\n## 已知事实（可作为传播依据）\n- 活动地点：石阶咖啡店内\n- 活动时间：周日早上10点\n- 活动形式：免费试饮\n- 人数上限：15人\n- 不送礼品（无附加赠品）\n\n## 受众\n待核验。当前资料未说明目标受众、消费习惯或人群特征，暂不虚构。\n\n## 核心卖点\n暂无可依据的产品信息或风味卖点，以下均为待核验项：\n- 试饮的具体产品：待核验\n- 产品风味 / 特点：待核验\n- 门店环境或服务亮点：待核验\n- 与同类活动的差异点：待核验\n\n## 活动信息一览\n- 时间：周日 10:00\n- 地点：石阶咖啡店内\n- 费用：免费\n- 名额：限15人\n- 礼品：无\n\n## 风格与表达约束\n- 基调：简洁、友好、直给；不渲染未证实的品质或效果\n- Do：明确写出时间、地点、免费、限15人、无礼品\n- Don't：不编造产品名称、风味、价格、认证、销量或赠品；不使用夸张承诺\n- 名额有限可作为催促行动的真实依据，但不得夸大稀缺程度\n\n## 必要待确认项\n1. 试饮的具体产品与风味描述\n2. 目标受众与到店动机\n3. 是否需要预约或到店即参加\n4. 发布渠道与文案条数（后续阶段再定）\n\n## 备注\n本Brief仅基于已确认事实；所有标注“待核验”的内容不得在后续招募文案中当作已确认信息使用。\n\n【文案一】\n\n周日早上10点，石阶咖啡店内免费试饮，限15人，不送礼品。\n\n不用花钱，先来喝一杯，合适再决定。名额只有15个，到店即参与。\n\n周日10:00，石阶咖啡见。\n\n【文案二】\n\n本周日早上10点，石阶咖啡免费试饮，只在店里，限15人，不送礼品。\n\n想想平时试一杯要多少心动成本，这次免费。15个位置，早到早坐。\n\n周日10:00，来石阶咖啡喝一杯。"
+}

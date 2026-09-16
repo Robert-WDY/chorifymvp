@@ -1,0 +1,14 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const source=JSON.parse(await readFile(new URL('../data/91f56008-99e5-4475-9646-7f68774d6d1f.json',import.meta.url),'utf8'));
+const url=process.env.EVAL_IMAGE_URL||source.assets?.find(a=>a.kind==='image')?.url||source.events.flatMap(e=>e.result?.images||[])[0]?.url;
+if(!url)throw new Error('No existing image URL available');
+const base='http://127.0.0.1:3210',config=await(await fetch(base+'/api/config')).json();
+const message='请实际看看这张图片，用两句话描述可见内容。不创作新图片，不要根据链接名字猜测。'+url;
+const response=await fetch(base+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json','X-MVP-Token':config.csrf},body:JSON.stringify({message}),signal:AbortSignal.timeout(240000)});
+if(!response.ok)throw new Error('HTTP '+response.status);
+const events=(await response.text()).split('\n').filter(Boolean).map(JSON.parse);
+const goal=events.find(e=>e.type==='intent')?.goal,final=events.at(-1);
+const calls=events.filter(e=>e.type==='tool_result');
+const passed=goal?.tasks.some(t=>t.operation==='analyze_image'&&t.requiredEvidence==='image')&&calls.some(e=>e.name==='analyze_image'&&!e.result.isError&&e.result.text?.length>10)&&!calls.some(e=>['generate_image','edit_image','generate_video'].includes(e.name))&&final.status==='completed';
+await writeFile(new URL('../data/http-vision-check.json',import.meta.url),JSON.stringify({mode:'real-http-real-doubao-existing-image-no-generation',sessionId:events[0].sessionId,passed,goal,tools:calls.map(e=>({name:e.name,result:e.result})),answer:final.text,status:final.status},null,2));
+console.log(JSON.stringify({passed,status:final.status,tools:calls.map(e=>e.name),answer:final.text}));if(!passed)process.exitCode=1;

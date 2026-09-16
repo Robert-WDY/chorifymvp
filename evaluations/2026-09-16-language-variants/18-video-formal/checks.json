@@ -1,0 +1,221 @@
+{
+  "id": "18-video-formal",
+  "dir": "18-video-formal",
+  "group": "视频确认门禁",
+  "tone": "正式",
+  "query": "项目《望潮街景》：请准备1段5秒、9:16视频的生成方案，内容为雨后空街、单镜头缓慢推进，不含人物、字幕、Logo或水印。本次应保存待批准方案，收到我后续确认才可提交生成。",
+  "expected": {
+    "mediaType": "video",
+    "quantity": 1,
+    "waitApproval": true,
+    "noMedia": true
+  },
+  "status": "needs_input",
+  "sessionId": "6e80fef0-a161-470a-b9e4-5dfe8a14fce9",
+  "calls": 3,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "6e80fef0-a161-470a-b9e4-5dfe8a14fce9",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "savedPendingMediaPlan",
+      "passed": true,
+      "evidence": {
+        "status": "WAIT_CONFIRM",
+        "approval": {
+          "required": true,
+          "status": "pending",
+          "planHash": "b8a9e7e69f2638e88cb5bf0f4ebc327fe293e5da21af28f8d259036dd8e53bbd",
+          "source": "explicit_control",
+          "revision": 1,
+          "contractHash": "30988a5f0b077f86f8e2d540f2a5f0cd46f5801a11e814bc0f7c90cfcd1bc652",
+          "payload": {
+            "batchId": "54ce4ab4-af51-4205-b1af-1e67abb4ee58",
+            "itemId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+            "tool": "generate_video",
+            "items": [
+              {
+                "prompt": "生成一段完整的5秒9:16竖屏视频《望潮街景》。全片为单镜头，画面主题是雨后空街。镜头以缓慢、平稳向前推进的方式移动，保持同一空间连续，不切镜、不拼接额外镜头。场景为雨后的城市街道，地面湿润并有积水反光，路面、人行道、店铺招牌轮廓、街灯或远处建筑可在不指向真实品牌与可识别标识的前提下作为环境元素；空气中有雨后清新、微凉的氛围，可使用柔和自然光、低饱和色调和细腻水汽感，强化潮意与安静空街的气质。画面中不得出现人物，不得出现字幕，不得出现Logo，不得出现水印。不要自动添加对白、旁白、音乐、音效字幕或任何文字信息；如生成系统默认包含声音，也应保持无对白、无旁白、无文字类音频。构图适合9:16竖屏，主体空间沿街道纵深展开，推进速度均匀缓慢，5秒内完整覆盖从起始视角到略微深入街景的过程，不出现突兀转场。分辨率按当前运行时要求输出720p。整体为可审查的创意视觉方案，不暗示任何未确认的产品功效或事实。",
+                "duration": 5,
+                "ratio": "9:16",
+                "resolution": "720p"
+              }
+            ]
+          }
+        },
+        "nodes": [
+          {
+            "id": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+            "itemId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+            "dependsOn": [],
+            "kind": "media",
+            "requiredMethods": [],
+            "outputContract": {
+              "stages": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "durationSeconds": 5,
+                "ratio": "9:16"
+              }
+            },
+            "skillId": "video_creation_skill",
+            "tool": "generate_video",
+            "output": "video",
+            "count": 1,
+            "status": "prepared",
+            "revision": 1,
+            "history": [],
+            "batchId": "54ce4ab4-af51-4205-b1af-1e67abb4ee58",
+            "argsHash": "2039f22c75bb385dfa83bf2479de67f80d0c04cbc66c3348f05adb944d5d9d5d",
+            "skillArtifactId": "4950b4fe-1fef-4443-9514-ce4929dd45c8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mediaQuantity",
+      "passed": true,
+      "evidence": 1
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "WAIT_CONFIRM"
+  ],
+  "taskReason": [
+    "请确认已展示的具体方案"
+  ],
+  "artifactCount": 0,
+  "skills": [
+    {
+      "slug": "video_creation_skill",
+      "status": "completed",
+      "artifactId": "4950b4fe-1fef-4443-9514-ce4929dd45c8",
+      "contractValidated": true
+    }
+  ],
+  "windows": [],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24511,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7008,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 383,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7391
+      }
+    },
+    {
+      "index": 1,
+      "phase": "extract_confirmation_gate",
+      "characters": 525,
+      "systemCharacters": 218,
+      "payloadKeys": [
+        "query"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 210
+      }
+    },
+    {
+      "index": 2,
+      "phase": "media_plan",
+      "methodId": "video_creation_skill",
+      "nodeId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+      "characters": 4047,
+      "systemCharacters": 1716,
+      "payloadKeys": [
+        "facts",
+        "globalConstraints",
+        "evidenceContext",
+        "supportingSources",
+        "executionPhase",
+        "authorization",
+        "loadedMethods",
+        "methodReferences",
+        "goal",
+        "sources",
+        "feedback"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1402,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 638,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2040
+      }
+    }
+  ],
+  "final": "本轮尚未全部完成。请确认已展示的具体方案"
+}

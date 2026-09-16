@@ -1,0 +1,7 @@
+{
+  "date": "2026-09-16",
+  "configuredSecretMatches": 0,
+  "credentialShapeMatches": 0,
+  "signedURLMatches": 0,
+  "note": "Scanned exported code, fixtures and evidence. Runtime .env, data, dependencies and bundled interpreter are excluded. Some legacy scripts retain historical local paths and require external datasets."
+}

@@ -1,0 +1,4654 @@
+{
+  "cases": 22,
+  "totalModelCalls": 51,
+  "recordedModelCalls": 51,
+  "strictPassed": 13,
+  "strictUnmet": 9,
+  "usage": {
+    "inputTokens": 208377,
+    "outputTokens": 19679,
+    "cachedTokens": 124800,
+    "totalTokens": 228056
+  },
+  "uniqueSessions": 22,
+  "allIsolationChecksPass": true,
+  "actualMediaSubmissions": 0,
+  "mediaAttempts": 0,
+  "sourceUnchanged": true,
+  "firstWirePasses": 22,
+  "rows": [
+    {
+      "id": "01-dep-casual",
+      "dir": "01-dep-casual",
+      "group": "方向依赖",
+      "tone": "口语、省略",
+      "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+      "expected": {
+        "texts": 2,
+        "unitType": "directions",
+        "indexes": [
+          2
+        ],
+        "upstreamUnits": 2,
+        "shots": 4,
+        "duration": 8,
+        "noMedia": true
+      },
+      "status": "failed",
+      "sessionId": "c7855a1e-4c49-4756-abc5-5b451e349873",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "c7855a1e-4c49-4756-abc5-5b451e349873",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": false,
+          "evidence": {
+            "expected": 2,
+            "actual": 0
+          }
+        },
+        {
+          "name": "completed",
+          "passed": false,
+          "evidence": "failed"
+        },
+        {
+          "name": "boundRequestedIndexes",
+          "passed": false
+        },
+        {
+          "name": "upstreamUnitCount",
+          "passed": false,
+          "evidence": {
+            "expected": 2,
+            "actual": 0
+          }
+        },
+        {
+          "name": "realSourceVersion",
+          "passed": false,
+          "evidence": {}
+        },
+        {
+          "name": "bindingReceiptMatches",
+          "passed": false
+        },
+        {
+          "name": "onlySelectedDirectionContent",
+          "passed": false,
+          "evidence": {}
+        },
+        {
+          "name": "noUnselectedUnitBody",
+          "passed": false
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "artifactCount",
+        "completed",
+        "boundRequestedIndexes",
+        "upstreamUnitCount",
+        "realSourceVersion",
+        "bindingReceiptMatches",
+        "onlySelectedDirectionContent",
+        "noUnselectedUnitBody"
+      ],
+      "taskStatus": [],
+      "taskReason": [],
+      "artifactCount": 0,
+      "skills": [],
+      "windows": [],
+      "parallelOverlap": false,
+      "selection": {
+        "sources": []
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24543,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [
+            {
+              "phase": "understand",
+              "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+              "failureStage": "reference"
+            }
+          ],
+          "usage": {
+            "input_tokens": 7034,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 574,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7608
+          }
+        },
+        {
+          "index": 1,
+          "phase": "understand",
+          "characters": 2964,
+          "systemCharacters": 378,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "lockedDraft",
+            "error",
+            "lockedFieldsPolicy",
+            "paths",
+            "missingPaths",
+            "removePaths",
+            "fieldKeys",
+            "conversation"
+          ],
+          "recentMessages": 0,
+          "errors": [
+            {
+              "phase": "understand",
+              "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+              "failureStage": "reference"
+            }
+          ],
+          "repairPaths": [
+            "/deliverables/1/requestEvidence"
+          ],
+          "patch": {
+            "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+          },
+          "usage": {
+            "input_tokens": 1080,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 37,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1117
+          }
+        },
+        {
+          "index": 2,
+          "phase": "understand",
+          "characters": 2964,
+          "systemCharacters": 378,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "lockedDraft",
+            "error",
+            "lockedFieldsPolicy",
+            "paths",
+            "missingPaths",
+            "removePaths",
+            "fieldKeys",
+            "conversation"
+          ],
+          "recentMessages": 0,
+          "errors": [
+            {
+              "phase": "understand",
+              "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+              "failureStage": "reference"
+            }
+          ],
+          "repairPaths": [
+            "/deliverables/1/requestEvidence"
+          ],
+          "patch": {
+            "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+          },
+          "usage": {
+            "input_tokens": 1080,
+            "input_tokens_details": {
+              "cached_tokens": 896
+            },
+            "output_tokens": 37,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1117
+          }
+        }
+      ],
+      "final": "系统未能完成本轮请求整理，尚未执行生成。"
+    },
+    {
+      "id": "02-dep-formal",
+      "dir": "02-dep-formal",
+      "group": "方向依赖",
+      "tone": "正式、先讲结果",
+      "query": "最终需要两份文字成果：青屿茶饮的三个桂花乌龙传播方向，以及以其中第3个方向为唯一创意依据的60至100字宣传文案。请先完成方向文档，再据此写文案。我明确选定第3个，不需要确认。已知事实仅为无糖，不得添加价格、产地和功效；不生成任何图片或视频。",
+      "expected": {
+        "texts": 2,
+        "unitType": "directions",
+        "indexes": [
+          3
+        ],
+        "upstreamUnits": 3,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "ca363d74-97fd-4a6d-8a05-ad3339d26636",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "ca363d74-97fd-4a6d-8a05-ad3339d26636",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "boundRequestedIndexes",
+          "passed": true,
+          "evidence": {
+            "type": "direction",
+            "sourceId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+            "sourceArtifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+            "version": 1,
+            "sourceHash": "2120e3cd3b094aeae74e435c613118265f66093fa1e2c8671c327f12bf5eb2cf",
+            "unitIds": [
+              "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7"
+            ],
+            "indexes": [
+              3
+            ],
+            "unitId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7",
+            "index": 3
+          }
+        },
+        {
+          "name": "upstreamUnitCount",
+          "passed": true,
+          "evidence": {
+            "expected": 3,
+            "actual": 3
+          }
+        },
+        {
+          "name": "realSourceVersion",
+          "passed": true,
+          "evidence": {
+            "artifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+            "version": 1
+          }
+        },
+        {
+          "name": "bindingReceiptMatches",
+          "passed": true
+        },
+        {
+          "name": "onlySelectedDirectionContent",
+          "passed": true,
+          "evidence": {
+            "index": 3
+          }
+        },
+        {
+          "name": "noUnselectedUnitBody",
+          "passed": true
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "direction-designer-zh-v1",
+          "status": "completed",
+          "artifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "2b590d87-0876-4733-a653-ce2333c44345",
+          "start": "2026-09-16T07:47:33.387Z",
+          "end": "2026-09-16T07:47:37.501Z"
+        },
+        {
+          "nodeId": "01bf4d6e-2a52-4065-bf19-5f9a56fc6ce8",
+          "start": "2026-09-16T07:47:37.587Z",
+          "end": "2026-09-16T07:47:38.919Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "selection": {
+        "binding": {
+          "type": "direction",
+          "sourceId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+          "sourceArtifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+          "version": 1,
+          "sourceHash": "2120e3cd3b094aeae74e435c613118265f66093fa1e2c8671c327f12bf5eb2cf",
+          "unitIds": [
+            "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7"
+          ],
+          "indexes": [
+            3
+          ],
+          "unitId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7",
+          "index": 3
+        },
+        "artifactBinding": {
+          "type": "direction",
+          "sourceId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+          "sourceArtifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+          "version": 1,
+          "sourceHash": "2120e3cd3b094aeae74e435c613118265f66093fa1e2c8671c327f12bf5eb2cf",
+          "unitIds": [
+            "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7"
+          ],
+          "indexes": [
+            3
+          ],
+          "unitId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7",
+          "index": 3
+        },
+        "sources": [
+          {
+            "id": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+            "type": "text",
+            "version": 1,
+            "taskId": "81ef1c93-8c3b-4545-8dac-bc6f65bad391",
+            "provenance": {
+              "origin": "model_artifact",
+              "factualSupport": "not_checked",
+              "sourceTaskId": "81ef1c93-8c3b-4545-8dac-bc6f65bad391"
+            },
+            "relation": "selected_direction",
+            "role": "text",
+            "dependencyIndex": 0,
+            "selectedDirection": {
+              "title": "方向三：无糖的桂花乌龙，配什么时刻",
+              "content": "切入角度：时刻搭配清单——以轻量并列结构把无糖桂花乌龙与不同生活片段并列，不定义它必须属于哪类人。主要场景：早晨开工前、夜晚独处、雨天窗边、加班间隙。表达机制：每一小段以“这个时刻/那杯茶”的对应句式推进，保持短促、可截断，方便拆成多支短片或图文卡片。可想象的开场：黑屏白字“有些时刻，不需要加糖”，随后画面切到一杯桂花乌龙放在窗边。",
+              "id": "ba13d41b-2d56-424a-bdc5-1f8766180dfd:v1:directions:2:7a34ee7000b7",
+              "version": 1,
+              "artifactId": "ba13d41b-2d56-424a-bdc5-1f8766180dfd",
+              "index": 3
+            }
+          }
+        ]
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24546,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7025,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 384,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7409
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "direction-designer-zh-v1",
+          "nodeId": "2b590d87-0876-4733-a653-ce2333c44345",
+          "characters": 4571,
+          "systemCharacters": 1375,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1725,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 491,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2216
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "01bf4d6e-2a52-4065-bf19-5f9a56fc6ce8",
+          "characters": 3787,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1453,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 63,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1516
+          }
+        }
+      ],
+      "final": "### 创意方向\n1. 标题：方向一：把“无糖”喝成一种习惯\n画面：切入角度：日常习惯替代——不把无糖当作节食或牺牲，而是当作每天顺手就能完成的清爽选择。主要场景：办公室下午三点、午饭后、通勤路上随手买一杯。表达机制：用重复出现的日常片段，让“无糖的桂花乌龙”成为固定选项；台词侧重“今天也这样喝”，不强调功效或甜味替代。可想象的开场：镜头从电脑屏幕前的一杯饮品开始，一只手拿起杯子，画外音说“下午三点，还是老样子，无糖桂花乌龙”。\n2. 标题：方向二：无糖是前提，不是卖点\n画面：切入角度：反套路坦诚——不反复宣称“我们无糖”，而是默认无糖已经成立，直接谈这杯茶在社交或休息时带来的轻松感。主要场景：朋友聚会、周末独处、咖啡馆聊天。表达机制：用对话和轻松氛围带出选择，让“无糖”作为背景信息自然存在，而不是口号；避免健康承诺与比较性宣称。可想象的开场：两人坐下，一人问“你喝什么”，另一人回答“桂花乌龙，无糖的”，然后继续闲聊，镜头停在杯子上。\n3. 标题：方向三：无糖的桂花乌龙，配什么时刻\n画面：切入角度：时刻搭配清单——以轻量并列结构把无糖桂花乌龙与不同生活片段并列，不定义它必须属于哪类人。主要场景：早晨开工前、夜晚独处、雨天窗边、加班间隙。表达机制：每一小段以“这个时刻/那杯茶”的对应句式推进，保持短促、可截断，方便拆成多支短片或图文卡片。可想象的开场：黑屏白字“有些时刻，不需要加糖”，随后画面切到一杯桂花乌龙放在窗边。\n\n### 推荐依据\n建议优先考虑方向三。它把“无糖”放在多个具体时刻中，既保留已知事实，又不需要额外价格、产地或功效信息；结构上便于拆分和复用，适合后续按不同平台节奏展开。方向一更依赖日常重复来建立记忆，方向二更依赖对话表演，两者对制作条件的要求相对更集中。\n\n有些时刻，不需要加糖。早晨开工前，那杯桂花乌龙先替你静一静；夜晚独处，花香比话语更懂陪伴；雨天窗边，热气慢慢散开；加班间隙，一口清甜回神。这个时刻，那杯茶，刚好。"
+    },
+    {
+      "id": "03-dep-first",
+      "dir": "03-dep-first",
+      "group": "方向依赖",
+      "tone": "短句、否定强调",
+      "query": "木桥面包，海盐贝果12元。先写两个创意方向，合存一份。再拿第一个写一条朋友圈文案，另存一份。注意：要第一个，不是第二个。别编优惠销量。只写文字，不要图片视频。",
+      "expected": {
+        "texts": 2,
+        "unitType": "directions",
+        "indexes": [
+          1
+        ],
+        "upstreamUnits": 2,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "4d8ea699-48d0-43b2-b00f-bb6fde32205c",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "4d8ea699-48d0-43b2-b00f-bb6fde32205c",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "boundRequestedIndexes",
+          "passed": true,
+          "evidence": {
+            "type": "direction",
+            "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+            "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+            "version": 1,
+            "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+            "unitIds": [
+              "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+            ],
+            "indexes": [
+              1
+            ],
+            "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+            "index": 1
+          }
+        },
+        {
+          "name": "upstreamUnitCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "realSourceVersion",
+          "passed": true,
+          "evidence": {
+            "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+            "version": 1
+          }
+        },
+        {
+          "name": "bindingReceiptMatches",
+          "passed": true
+        },
+        {
+          "name": "onlySelectedDirectionContent",
+          "passed": true,
+          "evidence": {
+            "index": 1
+          }
+        },
+        {
+          "name": "noUnselectedUnitBody",
+          "passed": true
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "direction-designer-zh-v1",
+          "status": "completed",
+          "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "4a324949-9048-4af2-9d92-9aedeb6b525d",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "8d40e999-c776-4595-9178-bca292f870da",
+          "start": "2026-09-16T07:47:37.913Z",
+          "end": "2026-09-16T07:47:42.752Z"
+        },
+        {
+          "nodeId": "2bcb6fb9-e151-410c-b99c-9492a998c96e",
+          "start": "2026-09-16T07:47:42.825Z",
+          "end": "2026-09-16T07:47:44.657Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "selection": {
+        "binding": {
+          "type": "direction",
+          "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "version": 1,
+          "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+          "unitIds": [
+            "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+          ],
+          "indexes": [
+            1
+          ],
+          "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+          "index": 1
+        },
+        "artifactBinding": {
+          "type": "direction",
+          "sourceId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "sourceArtifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+          "version": 1,
+          "sourceHash": "062cf2c87c0fd0a54396af1b616e0ef6df79085ab132156030568a966c91bcab",
+          "unitIds": [
+            "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509"
+          ],
+          "indexes": [
+            1
+          ],
+          "unitId": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+          "index": 1
+        },
+        "sources": [
+          {
+            "id": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+            "type": "text",
+            "version": 1,
+            "taskId": "8c22e836-5693-4d7a-9a77-66a28f8f21c0",
+            "provenance": {
+              "origin": "model_artifact",
+              "factualSupport": "not_checked",
+              "sourceTaskId": "8c22e836-5693-4d7a-9a77-66a28f8f21c0"
+            },
+            "relation": "selected_direction",
+            "role": "text",
+            "dependencyIndex": 0,
+            "sourceSections": [
+              {
+                "title": "说明",
+                "content": "以上两个方向均基于已确认的事实：品牌名为木桥面包、产品为海盐贝果、售价12元。未使用或虚构任何优惠、销量、获奖、原料产地或健康功效信息。"
+              }
+            ],
+            "selectedDirection": {
+              "title": "方向一：清晨桥头的那一口——用场景情绪拉近距离",
+              "content": "切入角度：把“木桥面包”这个品牌名里的“桥”化为真实的清晨通勤场景，让海盐贝果成为路过时顺手带走的小确幸。\n\n主要场景：工作日的早晨，上班族经过街角面包店，玻璃柜里刚出炉的海盐贝果泛着微光。\n\n表达机制：以第一人称或旁白式口吻，从“赶时间”到“停下来买一个”的情绪转折，突出12元的价格门槛低，是一份不需要犹豫的日常犒赏；海盐的微咸与贝果的嚼劲带来朴素的满足感，不夸大成“治愈一切”，只落在“早上多了一点力气”。\n\n可想象的开场：“今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。”\n\n内容侧重：温暖、日常、低压力，用画面感语言让人联想到清晨街景。",
+              "id": "7d582c1b-47ae-4add-be3a-3911bc14eec2:v1:directions:0:ab96318bf509",
+              "version": 1,
+              "artifactId": "7d582c1b-47ae-4add-be3a-3911bc14eec2",
+              "index": 1
+            }
+          }
+        ]
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24504,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7003,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 410,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7413
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "direction-designer-zh-v1",
+          "nodeId": "8d40e999-c776-4595-9178-bca292f870da",
+          "characters": 4601,
+          "systemCharacters": 1375,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1771,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 641,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2412
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "creative-cover-copy-v2",
+          "nodeId": "2bcb6fb9-e151-410c-b99c-9492a998c96e",
+          "characters": 6832,
+          "systemCharacters": 1017,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 3141,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 181,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 3322
+          }
+        }
+      ],
+      "final": "### 创意方向\n1. 标题：方向一：清晨桥头的那一口——用场景情绪拉近距离\n画面：切入角度：把“木桥面包”这个品牌名里的“桥”化为真实的清晨通勤场景，让海盐贝果成为路过时顺手带走的小确幸。\n\n主要场景：工作日的早晨，上班族经过街角面包店，玻璃柜里刚出炉的海盐贝果泛着微光。\n\n表达机制：以第一人称或旁白式口吻，从“赶时间”到“停下来买一个”的情绪转折，突出12元的价格门槛低，是一份不需要犹豫的日常犒赏；海盐的微咸与贝果的嚼劲带来朴素的满足感，不夸大成“治愈一切”，只落在“早上多了一点力气”。\n\n可想象的开场：“今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。”\n\n内容侧重：温暖、日常、低压力，用画面感语言让人联想到清晨街景。\n2. 标题：方向二：12元的海盐贝果——用直白对比制造记忆点\n画面：切入角度：把“12元”和“海盐贝果”并列成一句干脆利落的短文案，不煽情，不绕弯子，靠简洁重复形成节奏。\n\n主要场景：可以是店内柜台前、外卖包装袋上、或是手机屏幕上快速划过的信息流海报文案。\n\n表达机制：用短句和重复结构强化“木桥面包，海盐贝果12元”这一核心信息，让价格本身成为话题点——不承诺便宜到夸张，只强调“一枚贝果，12元，值不值你说了算”；通过“海盐”与“12元”的组合制造轻微反差，因为海盐贝果听起来不像12元能随便买到的样子，但这里就是。\n\n可想象的开场：“木桥面包。海盐贝果。12元。没了。”\n\n内容侧重：干脆、有节奏、适合文字海报或社媒短文案，信息密度高，不依赖情节。\n\n### 推荐依据\n推荐方向一。理由：当前只提供了品牌名、产品名和价格三个事实，没有销量、优惠或口碑素材。方向一不额外虚构数据，把12元贝果放进“日常路过顺手买”的真实场景，依靠情绪和画面让人自然记住木桥面包；同时为后续内容扩展留出空间，比如加入具体时段、店员动作或顾客反应，这些都可以在不编造事实的前提下继续细化。方向二更依赖短文案的冲击力，在缺少视觉排版时文字本身容易显得单薄，适合作为备选或后续传播中的辅助口径。\n\n### 说明\n以上两个方向均基于已确认的事实：品牌名为木桥面包、产品为海盐贝果、售价12元。未使用或虚构任何优惠、销量、获奖、原料产地或健康功效信息。\n\n今天没赖床，是因为路过木桥的时候，闻到了海盐贝果的味道。\n\n玻璃柜里刚出炉的那一排，还泛着微光。本来想着赶时间，脚还是停了。\n\n12元，一个海盐贝果。海盐的微咸，面团的嚼劲，说不上治愈什么，就是早上多了一点力气。\n\n木桥面包，街角那家。路过的时候，不妨也停一下。"
+    },
+    {
+      "id": "04-dep-shots",
+      "dir": "04-dep-shots",
+      "group": "镜头依赖",
+      "tone": "口语、选多个",
+      "query": "给《微雨巷口》先写一份8秒的雨后街道分镜，4镜，每镜2秒，无人无字。然后只取第2镜和第4镜，分别写中文生图提示词，把这两段提示词合存为另一份文字，别把第1镜第3镜混进去。总共两份文档，图片视频都别实际生成。",
+      "expected": {
+        "texts": 2,
+        "unitType": "shots",
+        "indexes": [
+          2,
+          4
+        ],
+        "upstreamUnits": 4,
+        "duration": 8,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "c11adb92-a3f7-4002-931c-57d4c18323b2",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "c11adb92-a3f7-4002-931c-57d4c18323b2",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "boundRequestedIndexes",
+          "passed": true,
+          "evidence": {
+            "type": "shot",
+            "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+            "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+            "version": 1,
+            "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+            "unitIds": [
+              "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+              "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+            ],
+            "indexes": [
+              2,
+              4
+            ]
+          }
+        },
+        {
+          "name": "upstreamUnitCount",
+          "passed": true,
+          "evidence": {
+            "expected": 4,
+            "actual": 4
+          }
+        },
+        {
+          "name": "realSourceVersion",
+          "passed": true,
+          "evidence": {
+            "artifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+            "version": 1
+          }
+        },
+        {
+          "name": "bindingReceiptMatches",
+          "passed": true
+        },
+        {
+          "name": "onlySelectedShotBodies",
+          "passed": true,
+          "evidence": [
+            {
+              "content": "镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。",
+              "durationSeconds": 2
+            },
+            {
+              "content": "镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。",
+              "durationSeconds": 2
+            }
+          ]
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "storyboard-one-shot-zh-v2",
+          "status": "completed",
+          "artifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+          "contractValidated": true
+        },
+        {
+          "slug": "image-prompt-gallery-director-v2",
+          "status": "completed",
+          "artifactId": "b68147d4-43dc-4670-9d9d-4859e32f12b6",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "1e6db646-b702-48c1-8366-cc1f5aad192e",
+          "start": "2026-09-16T07:47:42.267Z",
+          "end": "2026-09-16T07:47:44.815Z"
+        },
+        {
+          "nodeId": "7617804c-11e0-4ad5-b2b3-f7242e21d1a4",
+          "start": "2026-09-16T07:47:44.897Z",
+          "end": "2026-09-16T07:47:49.788Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "selection": {
+        "binding": {
+          "type": "shot",
+          "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+          "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+          "version": 1,
+          "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+          "unitIds": [
+            "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+            "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+          ],
+          "indexes": [
+            2,
+            4
+          ]
+        },
+        "artifactBinding": {
+          "type": "shot",
+          "sourceId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+          "sourceArtifactId": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+          "version": 1,
+          "sourceHash": "2f3bfa528e04588fc9d649a1fcaeb5c98713980052869ef97b704f24028843c6",
+          "unitIds": [
+            "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+            "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+          ],
+          "indexes": [
+            2,
+            4
+          ]
+        },
+        "sources": [
+          {
+            "id": "d94ac7d7-ace1-4e50-92c9-0018490f3ff7",
+            "type": "text",
+            "version": 1,
+            "taskId": "26609336-f1b5-4197-b89a-56fa88fb7209",
+            "structure": {
+              "shots": [
+                {
+                  "content": "镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。",
+                  "durationSeconds": 2
+                },
+                {
+                  "content": "镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。",
+                  "durationSeconds": 2
+                }
+              ]
+            },
+            "provenance": {
+              "origin": "model_artifact",
+              "factualSupport": "not_checked",
+              "sourceTaskId": "26609336-f1b5-4197-b89a-56fa88fb7209"
+            },
+            "relation": "selected_units",
+            "role": "text",
+            "dependencyIndex": 0,
+            "sourceSections": [
+              {
+                "title": "分镜规格",
+                "content": "标题：微雨巷口\n总时长：8秒\n镜头数：4镜\n单镜时长：每镜2秒\n画面要求：雨后街道，无人、无字\n时间轴：第1镜 0:00-0:02；第2镜 0:02-0:04；第3镜 0:04-0:06；第4镜 0:06-0:08\n说明：本次仅输出文字分镜，不实际生成任何图片或视频。"
+              }
+            ],
+            "selectedUnits": [
+              "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:1:4e5da5a1e24b",
+              "d94ac7d7-ace1-4e50-92c9-0018490f3ff7:v1:shots:3:055db59c3466"
+            ]
+          }
+        ]
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24528,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7029,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 644,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7673
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "storyboard-one-shot-zh-v2",
+          "nodeId": "1e6db646-b702-48c1-8366-cc1f5aad192e",
+          "characters": 5098,
+          "systemCharacters": 1415,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1908,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 325,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2233
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "image-prompt-gallery-director-v2",
+          "nodeId": "7617804c-11e0-4ad5-b2b3-f7242e21d1a4",
+          "characters": 8566,
+          "systemCharacters": 1098,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 4175,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 926,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 5101
+          }
+        }
+      ],
+      "final": "### 镜头\n1. 画面：雨后巷口全景：湿漉漉的砖石路面映着两侧墙头与灰白天光，墙角低洼处积水微微发亮，檐角水珠将落未落。\n时长（秒）：2\n2. 画面：镜头沿街道缓缓前移：青灰墙面被雨水浸出深浅水痕，排水沟中细流挟着几片落叶缓缓淌过，路边木门紧闭，门环凝着水珠。\n时长（秒）：2\n3. 画面：镜头拉近地面：积水表面泛起细密涟漪，倒影里电线与斑驳屋檐随波轻晃，一颗水珠从上方坠下，溅开一圈光点。\n时长（秒）：2\n4. 画面：镜头望向巷口深处：雨雾淡淡笼罩，街道向远处收窄并融入朦胧的灰白色调，积水映着尽头一点天光，巷子安静无人。\n时长（秒）：2\n\n### 总时长（秒）\n8\n\n### 分镜规格\n标题：微雨巷口\n总时长：8秒\n镜头数：4镜\n单镜时长：每镜2秒\n画面要求：雨后街道，无人、无字\n时间轴：第1镜 0:00-0:02；第2镜 0:02-0:04；第3镜 0:04-0:06；第4镜 0:06-0:08\n说明：本次仅输出文字分镜，不实际生成任何图片或视频。\n\n【第2镜提示词】\n以雨后巷口为背景，镜头位于街道中央并沿道路缓缓前推。画面为青灰砖墙，墙面被雨水浸出深浅不一的水痕，砖缝处颜色更深。画面下方的排水沟中，一道细流夹着几片湿润的落叶缓缓淌过。道路右侧有一扇紧闭的旧木门，木质表面被雨雾濡湿，深色木纹清晰，门环上凝着一颗颗水珠，水珠表面有微弱高光。巷口空无一人，地面布满湿漉亮面和浅水洼，天光在积水中形成柔和反光。整体色调为冷青灰，微阴的漫射光从上方洒落，光线柔和无直射阴影，空气中有淡淡水汽感。写实摄影风格，画面干净，构图平稳，视线高度接近人眼，画幅横向，无人物、无文字、无标志。\n\n【第4镜提示词】\n以雨后街巷的尽头为背景，镜头望向巷口深处，画面由近及远逐渐收窄，形成一点透视。近处仍是湿漉的灰砖墙面与地面浅水洼，中景处两侧建筑向远处延伸，轮廓在淡淡的雨雾中逐渐柔化。远处巷口融入朦胧的灰白色调，雾气弥漫，尽头有一片积水，映出天边一点微弱天光。巷子安静无人，没有车辆、没有文字、没有招牌。整体色调为冷灰白，光线为清晨或傍晚的柔和漫射光，雨雾提供高湿度空气感，画面有轻微景深虚化，远端细节柔化但不模糊。写实摄影风格，安静、克制的氛围，画幅横向，无人、无字。"
+    },
+    {
+      "id": "05-ordered-formal",
+      "dir": "05-ordered-formal",
+      "group": "顺序Skill",
+      "tone": "正式、明确步骤",
+      "query": "请按顺序为松页书屋完成：第一步使用 marketing-brief-zh-v1 产出周末读书会营销Brief；第二步使用 creative-cover-copy-v2，以第一步Brief为依据生成三条活动宣传文案。活动在店内，周六15点，免费，限20人，没有嘉宾。每步各保存一份文字文档。不要制作封面图或视频。",
+      "expected": {
+        "texts": 2,
+        "skills": [
+          "marketing-brief-zh-v1",
+          "creative-cover-copy-v2"
+        ],
+        "fullDependency": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "b930a811-0847-4b8e-bc7a-dce2e3ef947d",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "b930a811-0847-4b8e-bc7a-dce2e3ef947d",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "skill:marketing-brief-zh-v1",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+              "contractValidated": true
+            },
+            {
+              "slug": "creative-cover-copy-v2",
+              "status": "completed",
+              "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+              "contractValidated": true
+            }
+          ]
+        },
+        {
+          "name": "skill:creative-cover-copy-v2",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+              "contractValidated": true
+            },
+            {
+              "slug": "creative-cover-copy-v2",
+              "status": "completed",
+              "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+              "contractValidated": true
+            }
+          ]
+        },
+        {
+          "name": "dependencyEdge",
+          "passed": true,
+          "evidence": [
+            0
+          ]
+        },
+        {
+          "name": "fullUpstreamContent",
+          "passed": true,
+          "evidence": {
+            "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+            "sourceId": "4de23272-bdd5-474b-827c-02ebc2fbcefe"
+          }
+        },
+        {
+          "name": "correctVersion",
+          "passed": true,
+          "evidence": {
+            "artifactVersion": 1,
+            "sourceVersion": 1
+          }
+        },
+        {
+          "name": "upstreamFinishesFirst",
+          "passed": true,
+          "evidence": [
+            {
+              "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+              "start": "2026-09-16T07:47:47.328Z",
+              "end": "2026-09-16T07:47:54.386Z"
+            },
+            {
+              "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+              "start": "2026-09-16T07:47:54.452Z",
+              "end": "2026-09-16T07:47:56.752Z"
+            }
+          ]
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "4de23272-bdd5-474b-827c-02ebc2fbcefe",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "58f69af4-f4c2-4672-b29f-7c8521ae6757",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+          "start": "2026-09-16T07:47:47.328Z",
+          "end": "2026-09-16T07:47:54.386Z"
+        },
+        {
+          "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+          "start": "2026-09-16T07:47:54.452Z",
+          "end": "2026-09-16T07:47:56.752Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24580,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7023,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 519,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7542
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "marketing-brief-zh-v1",
+          "nodeId": "fc82b06e-4836-4601-b40a-3e9909067691",
+          "characters": 4231,
+          "systemCharacters": 1021,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1679,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 1114,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2793
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "creative-cover-copy-v2",
+          "nodeId": "8e03e655-8e55-4d13-ab33-2764467b2564",
+          "characters": 7638,
+          "systemCharacters": 1017,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 3675,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 333,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 4008
+          }
+        }
+      ],
+      "final": "# 松页书屋周末读书会 · 营销Brief\n\n## 一、主传播目标（建议）\n让本地可到店的读书爱好者知道：松页书屋本周六15:00在店内有一场免费、限20人的周末读书会，并产生“我想报名占位”的行动意愿。\n说明：用户未明确指定传播目标，以上为基于活动事实的“建议”，不是已确认的KPI或效果承诺。\n\n## 二、受众\n- 核心受众（建议）：松页书屋周边、周末下午可到店、喜欢读书但未必有固定读书会圈子的人。\n- 典型场景（创作假设）：周六午后想找个安静去处，愿意和陌生人围着书聊一会儿，但不想被推销或被要求“必须发言”。\n- 动机（创作假设）：免费、离家/离店近、人数有限带来的小圈子感、没有嘉宾带来的平等轻松感。\n- 关注点（待验证）：具体聊什么、要不要提前读书、现场节奏、如何报名。\n\n## 三、已知事实（可作为传播依据）\n1. 主办方/场所：松页书屋。\n2. 活动性质：周末读书会。\n3. 地点：店内举行（具体地址与店内区域未指定）。\n4. 时间：周六15:00（具体日期、结束时间未指定）。\n5. 费用：免费。\n6. 人数：限20人。\n7. 嘉宾：没有嘉宾。\n\n## 四、核心卖点（按与“到店占位”目标的关联度排序）\n1. 免费参加——依据：用户提供的活动事实。\n2. 限20人，小规模——依据：用户提供的活动事实。可表达为“名额有限”，但不得编造“已报满”“手慢无”等未验证状态。\n3. 周六15:00、店内举行——依据：用户提供的活动事实。可强调“周末午后、就近到店”，不得补充具体交通、座位或环境细节。\n4. 无嘉宾，读者之间的交流——依据：用户提供的“没有嘉宾”事实。可表达为“没有嘉宾席，大家就是分享者”，但不得声称具体互动形式或氛围效果。\n\n## 五、风格与表达约束\n### 硬约束（来自用户事实边界）\n- 不得编造嘉宾、作者、领读人。\n- 不得编造共读书目、主题、讨论问题。\n- 不得编造举办平台、直播渠道或线上参与方式。\n- 不得承诺报名人数、转化率、活动效果。\n- 不得把“限20人”写成“仅剩X席”，除非有实时报名数据来源。\n\n### 事实底线\n- 所有对外文案只能使用第三部分的已知事实。\n- 未指定信息若必须出现，应标注“待确认”或留空，不自行补全。\n\n### 表达建议（本阶段建议，非不可修改参数）\n- Do：用短句直接说清“周六15:00 / 松页书屋店内 / 免费 / 限20人 / 无嘉宾”。\n- Do：语气平和、具体、像店主在群里招呼人，而不是强促销。\n- Don't：使用“震撼”“必来”“改变人生”等夸大词。\n- Don't：暗示有神秘嘉宾或隐藏主题。\n- Don't：在没有依据时写“适合所有人”“零门槛”等绝对化表述。\n\n## 六、必要待确认项\n1. 具体日期（“本周六”还是某月某日）。\n2. 店内具体地址或集合点。\n3. 报名方式、联系人、报名截止时间。\n4. 活动结束时间与现场流程。\n5. 是否需要提前阅读某本书，或现场如何选书。\n6. 主要投放渠道与素材形式（用户未指定）。\n7. 传播目标是否就是“到店报名”，还是同时包含其他目标。\n\n以上待确认项不影响已知事实的使用；在确认前，对外文案应停留在已给出的时间、地点、费用、人数和“无嘉宾”信息，不展开流程与内容承诺。\n\n【文案一】\n周六下午，来松页书屋坐坐。\n周末读书会，周六15:00，店内举行。\n免费参加，限20人。没有嘉宾，就是一群读书的人围着书聊一聊。\n名额有限，想来就早点占个位。\n📍松页书屋 · 周六15:00\n\n【文案二】\n松页书屋周末读书会，本周六15:00开始。\n不限主题，不请嘉宾，没有台上台下——大家就是分享者。\n免费，限20人。周末午后，找个安静地方，和陌生人聊聊书。\n报名占位，人满即止。\n📚松页书屋店内 · 周六15:00\n\n【文案三】\n这个周六15:00，松页书屋店内有一场读书会。\n没有嘉宾，没有领读人，围着书，谁想聊就聊。\n免费参与，限20人。周末午后，来店里坐一会儿。\n想来的话，先报名占位。\n🕒周六15:00 · 松页书屋"
+    },
+    {
+      "id": "06-ordered-casual",
+      "dir": "06-ordered-casual",
+      "group": "顺序Skill",
+      "tone": "口语、延迟描述",
+      "query": "石阶咖啡周日早上10点在店里办免费试饮，最多15人，不送礼品。用 marketing-brief-zh-v1 先给我整一份营销Brief，等它出来了再交给 creative-cover-copy-v2 写两条招募文案。我要Brief一份、两条文案合一份，一共两份文字。别把这两步同时做，也别出图或视频。",
+      "expected": {
+        "texts": 2,
+        "skills": [
+          "marketing-brief-zh-v1",
+          "creative-cover-copy-v2"
+        ],
+        "fullDependency": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "8c32c0c1-4aa2-45cc-8e51-744013c9dac2",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "8c32c0c1-4aa2-45cc-8e51-744013c9dac2",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "skill:marketing-brief-zh-v1",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+              "contractValidated": true
+            },
+            {
+              "slug": "creative-cover-copy-v2",
+              "status": "completed",
+              "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+              "contractValidated": true
+            }
+          ]
+        },
+        {
+          "name": "skill:creative-cover-copy-v2",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+              "contractValidated": true
+            },
+            {
+              "slug": "creative-cover-copy-v2",
+              "status": "completed",
+              "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+              "contractValidated": true
+            }
+          ]
+        },
+        {
+          "name": "dependencyEdge",
+          "passed": true,
+          "evidence": [
+            0
+          ]
+        },
+        {
+          "name": "fullUpstreamContent",
+          "passed": true,
+          "evidence": {
+            "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+            "sourceId": "7cd163db-3202-40e7-a437-fa3ea809a883"
+          }
+        },
+        {
+          "name": "correctVersion",
+          "passed": true,
+          "evidence": {
+            "artifactVersion": 1,
+            "sourceVersion": 1
+          }
+        },
+        {
+          "name": "upstreamFinishesFirst",
+          "passed": true,
+          "evidence": [
+            {
+              "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+              "start": "2026-09-16T07:47:53.389Z",
+              "end": "2026-09-16T07:47:56.589Z"
+            },
+            {
+              "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+              "start": "2026-09-16T07:47:56.668Z",
+              "end": "2026-09-16T07:47:58.550Z"
+            }
+          ]
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "7cd163db-3202-40e7-a437-fa3ea809a883",
+          "contractValidated": true
+        },
+        {
+          "slug": "creative-cover-copy-v2",
+          "status": "completed",
+          "artifactId": "719b2688-7048-44a4-9f7a-7054c07edacd",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+          "start": "2026-09-16T07:47:53.389Z",
+          "end": "2026-09-16T07:47:56.589Z"
+        },
+        {
+          "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+          "start": "2026-09-16T07:47:56.668Z",
+          "end": "2026-09-16T07:47:58.550Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24576,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7028,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 418,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7446
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "marketing-brief-zh-v1",
+          "nodeId": "a8790068-fd5b-49dd-b4a6-ea3eb27c6a47",
+          "characters": 4189,
+          "systemCharacters": 1021,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1696,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 515,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2211
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "creative-cover-copy-v2",
+          "nodeId": "2ef03095-5060-4e99-8efe-a2040aba450d",
+          "characters": 6961,
+          "systemCharacters": 1017,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 3259,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 230,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 3489
+          }
+        }
+      ],
+      "final": "# 石阶咖啡周日免费试饮活动营销Brief\n\n## 主传播目标\n吸引目标人群在周日早上10点走进石阶咖啡门店，参与免费试饮（人数上限15人）。\n\n## 已知事实（可作为传播依据）\n- 活动地点：石阶咖啡店内\n- 活动时间：周日早上10点\n- 活动形式：免费试饮\n- 人数上限：15人\n- 不送礼品（无附加赠品）\n\n## 受众\n待核验。当前资料未说明目标受众、消费习惯或人群特征，暂不虚构。\n\n## 核心卖点\n暂无可依据的产品信息或风味卖点，以下均为待核验项：\n- 试饮的具体产品：待核验\n- 产品风味 / 特点：待核验\n- 门店环境或服务亮点：待核验\n- 与同类活动的差异点：待核验\n\n## 活动信息一览\n- 时间：周日 10:00\n- 地点：石阶咖啡店内\n- 费用：免费\n- 名额：限15人\n- 礼品：无\n\n## 风格与表达约束\n- 基调：简洁、友好、直给；不渲染未证实的品质或效果\n- Do：明确写出时间、地点、免费、限15人、无礼品\n- Don't：不编造产品名称、风味、价格、认证、销量或赠品；不使用夸张承诺\n- 名额有限可作为催促行动的真实依据，但不得夸大稀缺程度\n\n## 必要待确认项\n1. 试饮的具体产品与风味描述\n2. 目标受众与到店动机\n3. 是否需要预约或到店即参加\n4. 发布渠道与文案条数（后续阶段再定）\n\n## 备注\n本Brief仅基于已确认事实；所有标注“待核验”的内容不得在后续招募文案中当作已确认信息使用。\n\n【文案一】\n\n周日早上10点，石阶咖啡店内免费试饮，限15人，不送礼品。\n\n不用花钱，先来喝一杯，合适再决定。名额只有15个，到店即参与。\n\n周日10:00，石阶咖啡见。\n\n【文案二】\n\n本周日早上10点，石阶咖啡免费试饮，只在店里，限15人，不送礼品。\n\n想想平时试一杯要多少心动成本，这次免费。15个位置，早到早坐。\n\n周日10:00，来石阶咖啡喝一杯。"
+    },
+    {
+      "id": "07-parallel-formal",
+      "dir": "07-parallel-formal",
+      "group": "并行",
+      "tone": "正式",
+      "query": "请同时执行两个互不依赖的文字任务，分别保存，不设置前后依赖：A，为南枝花房写周末营业通知，时间10点至20点，无优惠信息；B，为雨后街道写8秒4镜文字脚本，每镜2秒，无人、无字幕。仅交付这两份文字，禁止生成图片或视频。",
+      "expected": {
+        "texts": 2,
+        "parallel": true,
+        "noDependencies": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "5445c6aa-8c46-4f11-aaae-8450d1e78798",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "5445c6aa-8c46-4f11-aaae-8450d1e78798",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "noDependencyEdges",
+          "passed": true,
+          "evidence": [
+            [],
+            []
+          ]
+        },
+        {
+          "name": "actualParallelCalls",
+          "passed": false,
+          "evidence": [
+            {
+              "nodeId": "a34393e9-1877-4be2-8cd8-075d44b6f4e7",
+              "start": "2026-09-16T07:47:59.283Z",
+              "end": "2026-09-16T07:47:59.972Z"
+            },
+            {
+              "nodeId": "7739a9b5-595a-474e-8196-abccd5575df4",
+              "start": "2026-09-16T07:48:00.029Z",
+              "end": "2026-09-16T07:48:01.854Z"
+            }
+          ]
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "actualParallelCalls"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [
+        {
+          "slug": "storyboard-one-shot-zh-v2",
+          "status": "completed",
+          "artifactId": "6e360c2d-f7f1-4057-b43a-63d0c179a5f6",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "a34393e9-1877-4be2-8cd8-075d44b6f4e7",
+          "start": "2026-09-16T07:47:59.283Z",
+          "end": "2026-09-16T07:47:59.972Z"
+        },
+        {
+          "nodeId": "7739a9b5-595a-474e-8196-abccd5575df4",
+          "start": "2026-09-16T07:48:00.029Z",
+          "end": "2026-09-16T07:48:01.854Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24534,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7024,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 401,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7425
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "a34393e9-1877-4be2-8cd8-075d44b6f4e7",
+          "characters": 2781,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1048,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 40,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1088
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "storyboard-one-shot-zh-v2",
+          "nodeId": "7739a9b5-595a-474e-8196-abccd5575df4",
+          "characters": 4963,
+          "systemCharacters": 1415,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1807,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 260,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2067
+          }
+        }
+      ],
+      "final": "【周末营业通知】\n\n南枝花房本周末正常营业。\n\n营业时间：10:00–20:00\n\n欢迎光临。\n\n### 镜头\n1. 画面：雨刚停。夜色中的柏油路面被雨水浸透，像一层黑亮的镜面，把两侧店铺暖黄的灯光拉成一道道纵向的光带，随路面微微起伏。\n时长（秒）：2\n2. 画面：镜头缓缓前移。路面积水处，一辆不存在的车驶过后留下的水痕还在微微晃动，映出上方招牌的红色倒影，被细小的涟漪反复揉碎又聚拢。\n时长（秒）：2\n3. 画面：镜头压低至贴近地面。雨水顺着路沿的缝隙汇成一股细流，缓缓穿过一片被风打落的梧桐叶，叶片被水流推动，打着旋漂向排水口。\n时长（秒）：2\n4. 画面：镜头继续向前滑行，穿过空荡的人行道，远处街口信号灯由红转绿，绿光洒在湿漉漉的大片路面上，画面渐隐。\n时长（秒）：2\n\n### 总时长（秒）\n8\n\n### 规格说明\n- 总时长：8秒\n- 镜头数：4镜\n- 每镜时长：2秒\n- 画面要求：无人、无字幕\n- 交付形式：文字脚本"
+    },
+    {
+      "id": "08-parallel-casual",
+      "dir": "08-parallel-casual",
+      "group": "并行",
+      "tone": "口语、否定串联",
+      "query": "两件不相干的事一起做哈，不用等彼此，也别拿上一份当下一份素材。一件是给云角花铺写明天10点到晚上8点营业的通知，别编活动；另一件是写8秒雨后街景的4镜头脚本，每镜2秒，没人没字幕。各存一份，只要文字，别生成图视频。",
+      "expected": {
+        "texts": 2,
+        "parallel": true,
+        "noDependencies": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "72f2e28e-a134-429d-b36f-9412e22edf94",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "72f2e28e-a134-429d-b36f-9412e22edf94",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 2,
+            "actual": 2
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "noDependencyEdges",
+          "passed": true,
+          "evidence": [
+            [],
+            []
+          ]
+        },
+        {
+          "name": "actualParallelCalls",
+          "passed": false,
+          "evidence": [
+            {
+              "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+              "start": "2026-09-16T07:48:00.907Z",
+              "end": "2026-09-16T07:48:01.998Z"
+            },
+            {
+              "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+              "start": "2026-09-16T07:48:02.029Z",
+              "end": "2026-09-16T07:48:05.015Z"
+            }
+          ]
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "actualParallelCalls"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 2,
+      "skills": [],
+      "windows": [
+        {
+          "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+          "start": "2026-09-16T07:48:00.907Z",
+          "end": "2026-09-16T07:48:01.998Z"
+        },
+        {
+          "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+          "start": "2026-09-16T07:48:02.029Z",
+          "end": "2026-09-16T07:48:05.015Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24532,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7027,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 321,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7348
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "0cf6e8f0-7374-41a9-9c94-03cda90d81f8",
+          "characters": 2685,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 998,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 40,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1038
+          }
+        },
+        {
+          "index": 2,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "57e55fcc-db53-4a2c-a1fb-1a1fc48e5e04",
+          "characters": 3111,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1088,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 360,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1448
+          }
+        }
+      ],
+      "final": "【营业时间通知】\n\n云角花铺明日营业时间为10:00至20:00。\n\n请合理安排到店时间，感谢您的关注。\n\n【镜头1 | 0:00–0:02】\n雨后街道，湿润的沥青路面反射着两侧街灯的暖黄光斑。镜头贴近地面拍摄，焦外虚化的光点在水洼中轻轻晃动。雨已停，屋檐仍在间歇滴水，偶尔有小水珠落下，在积水中泛起短促的涟漪。画面中没有任何行人或车辆。\n\n【镜头2 | 0:02–0:04】\n镜头缓慢上摇，从路缘的低视角抬升至人行道与临街店铺玻璃幕墙的交界处。玻璃上映着对面街灯与便利店招牌的倒影，虚化且柔和。地砖缝隙积着薄水，顺坡缓缓流淌。街角自动贩卖机的灯光在潮湿空气中微微晕开。画面保持空无一人的状态。\n\n【镜头3 | 0:04–0:06】\n镜头平移至临街的窄巷入口，墙面上雨水顺砖缝和排水管向下滑落。地面水洼中映出头顶交错的电线与屋檐轮廓，微风吹动时水面皱起细纹。几片被雨打落的树叶贴在湿漉漉的地面上，静止不动。无任何人物出现。\n\n【镜头4 | 0:06–0:08】\n镜头拉远，定格在整条雨后的街道全景。地面反射着两侧店铺熄灭与仍亮着的灯光，路面由近及远的湿痕逐渐消隐。远处路灯在薄雾般的空气中晕出光团，树叶尖挂着最后几颗水珠，缓缓滴落。街道安静、空荡，无人经过。画面中没有文字或字幕元素。"
+    },
+    {
+      "id": "09-skill-formal",
+      "dir": "09-skill-formal",
+      "group": "指定Skill",
+      "tone": "正式",
+      "query": "请调用 marketing-brief-zh-v1，为禾岸茶社的无糖桂花乌龙冷泡茶编写一份营销Brief。价格18元，面向午休办公人群；未提供产地、销量或功效证据。请区分已知事实、受众场景和不得宣称的内容。本轮仅交付这一份文字Brief。",
+      "expected": {
+        "texts": 1,
+        "skills": [
+          "marketing-brief-zh-v1"
+        ],
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "42244ad7-9975-43d6-9f4d-c1400c5870e3",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "42244ad7-9975-43d6-9f4d-c1400c5870e3",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "skill:marketing-brief-zh-v1",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "926ad0bc-83d2-48a4-8dde-6e39cd4530c3",
+              "contractValidated": true
+            }
+          ]
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "926ad0bc-83d2-48a4-8dde-6e39cd4530c3",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "e4373c42-9b28-4b6f-a746-1f4717877984",
+          "start": "2026-09-16T07:48:04.236Z",
+          "end": "2026-09-16T07:48:08.587Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24544,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7014,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 385,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7399
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "marketing-brief-zh-v1",
+          "nodeId": "e4373c42-9b28-4b6f-a746-1f4717877984",
+          "characters": 4535,
+          "systemCharacters": 1021,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1896,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 758,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2654
+          }
+        }
+      ],
+      "final": "# 禾岸茶社 无糖桂花乌龙冷泡茶 营销Brief\n\n## 1. 主传播目标\n让午休办公人群在 18 元价位下，把「禾岸茶社 无糖桂花乌龙冷泡茶」纳入午休时段的饮品选择，并记住它是一个无糖、桂花乌龙风味的冷泡茶选项。\n\n## 2. 已知事实（可用于对外表达）\n- 品牌：禾岸茶社。\n- 产品：无糖桂花乌龙冷泡茶。\n- 价格：18 元。\n- 目标受众：午休办公人群。\n\n以上四项由用户本轮明确提供，可作为事实性表达的基础。\n\n## 3. 受众场景（创作假设，非已核实事实）\n- 场景：工作日午休，写字楼或办公区附近，用餐后到下午开工前的一段短休。\n- 动机假设：想喝点有风味但不想摄入糖的饮品，希望比白水更有滋味，又不希望太麻烦或太重。\n- 关注点假设：价格是否合适、喝起来是否清爽、是否真的是无糖、购买是否方便。\n\n以上为基于「午休办公人群」定位提出的场景与动机假设，属于创作方向，不代表已验证的人群行为结论。\n\n## 4. 核心卖点与依据\n- 无糖桂花乌龙冷泡茶（依据：用户给定的产品名）。\n- 18 元（依据：用户给定价格）。\n- 适合午休时段的饮用选择（依据：用户给定目标受众为午休办公人群；此条为定位表达，非效果承诺）。\n\n价格与产品属性之外的具体口感、香气强度等描述，未有证据时不作宣称。\n\n## 5. 风格与表达基调（本阶段建议，非硬约束）\n- 建议基调：轻松、清爽、简短，贴合午休短暂放松的节奏。\n- Do：围绕「午休」「无糖」「18 元」「桂花乌龙」这些已确认信息表达。\n- Don't：不写「最好喝」「最解腻」等绝对化说法；不使用未提供的产地、销量、功效类表述。\n\n## 6. 不得宣称的内容\n- 不得宣称产地，因为没有提供产地证据。\n- 不得宣称销量，因为没有提供销量证据。\n- 不得宣称功效，例如提神、助消化、减肥等，因为没有提供功效证据。\n- 不得把上述待核验信息写成事实性宣称。\n\n## 7. 待确认项\n- 产地：待核验，未知。\n- 销量：待核验，未知。\n- 功效：待核验，未知。\n\n## 8. 输出范围\n本轮仅交付这一份文字Brief，不生成图片或视频等媒体。"
+    },
+    {
+      "id": "10-skill-casual",
+      "dir": "10-skill-casual",
+      "group": "指定Skill",
+      "tone": "口语、英文名嵌入",
+      "query": "苔光茶铺卖18元的无糖桂花乌龙，想面向中午出来买喝的上班族。用那个 marketing-brief-zh-v1 Skill 帮我写个营销Brief就行，一份文字。产地、效果、卖了多少都不知道，别替我编。不要再往下做创意和图片视频。",
+      "expected": {
+        "texts": 1,
+        "skills": [
+          "marketing-brief-zh-v1"
+        ],
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "217551c4-9497-4419-a099-61b36ebc7998",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "217551c4-9497-4419-a099-61b36ebc7998",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "skill:marketing-brief-zh-v1",
+          "passed": true,
+          "evidence": [
+            {
+              "slug": "marketing-brief-zh-v1",
+              "status": "completed",
+              "artifactId": "3bd5f476-65b1-42e9-a746-cdafd22f365b",
+              "contractValidated": true
+            }
+          ]
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "3bd5f476-65b1-42e9-a746-cdafd22f365b",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "27e43359-8175-419f-b4db-518f60ec750a",
+          "start": "2026-09-16T07:48:07.369Z",
+          "end": "2026-09-16T07:48:13.079Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24540,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7007,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 384,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7391
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "marketing-brief-zh-v1",
+          "nodeId": "27e43359-8175-419f-b4db-518f60ec750a",
+          "characters": 4720,
+          "systemCharacters": 1021,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1885,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 972,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2857
+          }
+        }
+      ],
+      "final": "# 营销Brief：苔光茶铺 · 无糖桂花乌龙\n\n## 一、主传播目标\n\n**建议目标：** 让午间外出买饮品的上班族在选品时，将「苔光茶铺无糖桂花乌龙（18元）」纳入即时可选项。\n\n- 本目标依据用户给定的受众与产品形成，属本阶段建议，非用户已确认的投放规格。\n- 不延伸为复购、口碑或转化率承诺；创意建议是否有效尚未验证。\n\n## 二、目标受众\n\n**人群：** 中午出来买喝的上班族。\n\n**场景与动机（依据用户给定受众展开，属描述性假设，非已证实调研结论）：**\n- 午休时间有限，购买决策快，倾向就近、快速、不用排长队。\n- 常同时兼顾午餐口味与下午状态，对「清爽、不腻、不沉重」有倾向。\n- 在无糖与有糖之间做选择时，会看配料、口感等信息是否清楚。\n\n**关注点：** 口味是否顺口、甜度与糖分信息是否明确、18元在午间饮品中的位置、拿到手的速度。\n\n## 三、核心卖点（按与主目标关联度排序）\n\n1. **无糖**：来自用户给定产品名称「无糖桂花乌龙」。（依据：用户提供事实）\n2. **桂花乌龙口味组合**：来自产品名称。（依据：用户提供事实）\n3. **18元售价**：来自用户给定。（依据：用户提供事实）\n4. **午间即时可得**：基于受众场景的表达方向，是否成立取决于门店实际出杯效率，须核实后再作为卖点使用。（依据：创作假设，待核验）\n\n> 以上卖点不作产地、功效或销量方面的展开表述。\n\n## 四、风格与表达约束\n\n**风格基调（建议）：** 清爽、直接、口语化；用午休间隙能一眼读完的短句，重点信息前置。\n\n**Do：**\n- 明确写出「无糖」「桂花乌龙」「18元」。\n- 结合午间买饮品的场景描述，语言具体、可感知。\n- 保持信息准确，不超出已确认事实范围。\n\n**Don't：**\n- 不编造产地、原料等级、工艺或认证。\n- 不声称任何饮用效果、健康功效或功能利益。\n- 不使用「销量第几」「最多人买」等未提供的销量或排名表述。\n- 不替用户确定投放平台、预算、条数或时长。\n\n## 五、待核验信息（不得作为事实写入传播物料）\n\n| 项目 | 状态 | 说明 |\n| --- | --- | --- |\n| 桂花乌龙的产地（茶叶与桂花来源） | 未知 | 未经确认，不写入任何文案 |\n| 产品功效或饮用效果 | 未知 | 未经确认，不写入任何文案 |\n| 销量数据 | 未知 | 未经确认，不写入任何文案 |\n| 甜度标识、规格容量、冷热饮形式 | 未提供 | 如需使用须另行核实 |\n| 门店出杯效率、供应时段 | 未提供 | 如需支撑「午间可得」表达须另行核实 |\n\n## 六、待确认项\n\n- 主传播目标是否沿用本Brief建议。\n- 是否限定投放平台或内容形式。\n- 是否需要补充门店、时段或规格等信息。\n\n以上未确认事项不擅自确定为已定规格。"
+    },
+    {
+      "id": "11-text-casual",
+      "dir": "11-text-casual",
+      "group": "文字",
+      "tone": "轻松口语",
+      "query": "帮白石烘焙写条朋友圈呗，明天海盐贝果开卖，一个12元，早上8点开门。说话自然点，正文80到120字，最后放个短标题。就一份文字，优惠和销量别瞎编，也不用配图。",
+      "expected": {
+        "texts": 1,
+        "bodyMin": 80,
+        "bodyMax": 120,
+        "facts": [
+          "12元",
+          "8点"
+        ],
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "ec2b32e8-af3b-4f30-9510-74ff53c5524a",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "ec2b32e8-af3b-4f30-9510-74ff53c5524a",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "bodyLength",
+          "passed": false,
+          "evidence": {
+            "title": "海盐贝果，明天见",
+            "body": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。",
+            "bodyCharacters": 67,
+            "bodyWithoutPunctuation": 59,
+            "contentCharacters": 75
+          }
+        },
+        {
+          "name": "fact:12元",
+          "passed": true
+        },
+        {
+          "name": "fact:8点",
+          "passed": true
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "bodyLength"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [],
+      "windows": [
+        {
+          "nodeId": "c04c7f43-a6bc-4a1b-84df-eea119383a27",
+          "start": "2026-09-16T07:48:10.834Z",
+          "end": "2026-09-16T07:48:11.908Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "copy": {
+        "title": "海盐贝果，明天见",
+        "body": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。",
+        "bodyCharacters": 67,
+        "bodyWithoutPunctuation": 59,
+        "contentCharacters": 75
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24504,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7004,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 302,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7306
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "c04c7f43-a6bc-4a1b-84df-eea119383a27",
+          "characters": 2964,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1175,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 66,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1241
+          }
+        }
+      ],
+      "final": "明天海盐贝果开卖啦，一个12元。早上8点开门，想吃的记得早点来。海盐的咸香配上贝果的韧劲，越嚼越有味道。白石烘焙，等你们来尝尝这一口。\n\n海盐贝果，明天见"
+    },
+    {
+      "id": "12-text-terse",
+      "dir": "12-text-terse",
+      "group": "文字",
+      "tone": "简短清单",
+      "query": "小岛焙坊朋友圈文案。海盐贝果明天开售，12元/个，每天8点开门。正文80—120字，末尾一个短标题。自然口吻。一份文字即可，不加优惠、销量，不做图片视频。",
+      "expected": {
+        "texts": 1,
+        "bodyMin": 80,
+        "bodyMax": 120,
+        "facts": [
+          "12元",
+          "8点"
+        ],
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "7093dab5-29c7-412d-aa3b-31817fe303d3",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "7093dab5-29c7-412d-aa3b-31817fe303d3",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        },
+        {
+          "name": "bodyLength",
+          "passed": false,
+          "evidence": {
+            "title": "明日开售",
+            "body": "明天，小岛焙坊的海盐贝果就开售了。海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。",
+            "bodyCharacters": 77,
+            "bodyWithoutPunctuation": 68,
+            "contentCharacters": 81
+          }
+        },
+        {
+          "name": "fact:12元",
+          "passed": true
+        },
+        {
+          "name": "fact:8点",
+          "passed": true
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "bodyLength"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [],
+      "windows": [
+        {
+          "nodeId": "12f9c1d7-66b6-425f-9dca-eb2614d15432",
+          "start": "2026-09-16T07:48:13.797Z",
+          "end": "2026-09-16T07:48:14.894Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "copy": {
+        "title": "明日开售",
+        "body": "明天，小岛焙坊的海盐贝果就开售了。海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。",
+        "bodyCharacters": 77,
+        "bodyWithoutPunctuation": 68,
+        "contentCharacters": 81
+      },
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24502,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6999,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 244,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7243
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "12f9c1d7-66b6-425f-9dca-eb2614d15432",
+          "characters": 2998,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1142,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 75,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1217
+          }
+        }
+      ],
+      "final": "明天，小岛焙坊的海盐贝果就开售了。\n\n海盐的微咸裹着麦香，咬下去外韧内软，是适合慢慢嚼的那一种。每天8点开门，海盐贝果12元一个，想尝第一炉的话，早点来就好。\n\n明日开售"
+    },
+    {
+      "id": "13-script-casual",
+      "dir": "13-script-casual",
+      "group": "脚本不是视频",
+      "tone": "口语、容易混淆词",
+      "query": "帮蓝羽航旅写个波音747的宣传视频脚本，8秒4个镜头，每镜2秒，存成一份文字。只要脚本，不是真的去生成视频，也别出图。别编航空公司、票价和运营航线。",
+      "expected": {
+        "texts": 1,
+        "shots": 4,
+        "duration": 8,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "dfd243de-94dd-4570-8b30-8df1353061a4",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "dfd243de-94dd-4570-8b30-8df1353061a4",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "video-script-zh-v1",
+          "status": "completed",
+          "artifactId": "34b2095b-d845-4672-8a6a-ef203d0ac569",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "aa8075b9-5aff-4ee8-84f8-692effb190e8",
+          "start": "2026-09-16T07:48:15.464Z",
+          "end": "2026-09-16T07:48:18.811Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24499,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6997,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 350,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7347
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "video-script-zh-v1",
+          "nodeId": "aa8075b9-5aff-4ee8-84f8-692effb190e8",
+          "characters": 4758,
+          "systemCharacters": 1009,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1900,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 605,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2505
+          }
+        }
+      ],
+      "final": "# 蓝羽航旅波音747宣传视频文字脚本\n\n总时长：8秒 | 镜头数：4个 | 每镜时长：2秒\n\n---\n\n## 镜头1（0:00–0:02）\n- **画面**：机场跑道远景，波音747以侧面角度静立或缓缓滑行，机身线条在自然光下呈现。\n- **字幕/旁白**：蓝羽航旅 × 波音747\n- **节奏说明**：开场建立品牌与机型，画面沉稳，配乐渐入。\n\n## 镜头2（0:02–0:04）\n- **画面**：波音747机头或驾驶舱特写，突出其标志性的上层客舱轮廓。\n- **字幕/旁白**：经典轮廓，一眼可辨\n- **节奏说明**：以局部细节强化机型识别度。\n\n## 镜头3（0:04–0:06）\n- **画面**：波音747机身侧面或机翼在阳光下的画面，光影流动。\n- **字幕/旁白**：宽体空间，从容启程\n- **节奏说明**：切入乘坐感受联想，语气舒展。\n\n## 镜头4（0:06–0:08）\n- **画面**：波音747在蓝天中飞行或起飞爬升的远景，画面留白，品牌标识收尾。\n- **字幕/旁白**：蓝羽航旅，与747同行\n- **节奏说明**：收束全片，品牌落版，音乐收尾。\n\n---\n\n**脚本说明**：本脚本仅为文字分镜，未生成任何视频或图片；未涉及票价、具体运营航线及其他未提供信息。"
+    },
+    {
+      "id": "14-script-formal",
+      "dir": "14-script-formal",
+      "group": "脚本不是视频",
+      "tone": "正式、否定前置",
+      "query": "不调用图片或视频生成。请为远汀影像提交一份关于雨后街道的文字分镜：总时长8秒，4镜，每镜2秒；画面中不得有人物、字幕、Logo或水印。仅保存一份脚本文档。",
+      "expected": {
+        "texts": 1,
+        "shots": 4,
+        "duration": 8,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "1b48fa55-b286-44aa-8a83-63dd20475eb0",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "1b48fa55-b286-44aa-8a83-63dd20475eb0",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 1,
+            "actual": 1
+          }
+        },
+        {
+          "name": "completed",
+          "passed": true,
+          "evidence": "completed"
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "storyboard-one-shot-zh-v2",
+          "status": "completed",
+          "artifactId": "431bd429-0854-4c90-877d-5def119dbac1",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "429d04f1-54d1-44b9-b3f1-82b1ed95cc28",
+          "start": "2026-09-16T07:48:17.151Z",
+          "end": "2026-09-16T07:48:20.565Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24502,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7001,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 377,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7378
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "storyboard-one-shot-zh-v2",
+          "nodeId": "429d04f1-54d1-44b9-b3f1-82b1ed95cc28",
+          "characters": 5163,
+          "systemCharacters": 1415,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1932,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 539,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2471
+          }
+        }
+      ],
+      "final": "### 镜头\n1. 画面：镜头1（0-2秒）：低角度近景。积水的柏油路面，雨滴持续坠落砸出环形涟漪，水面倒映灰蓝天空与街边梧桐树冠；画面边缘可见湿漉漉的路缘石，无人物入镜。\n时长（秒）：2\n2. 画面：镜头2（2-4秒）：中景平摇。沿人行道缓缓移动，镜头扫过被雨水打湿的店铺玻璃门与悬挂的雨帘，霓虹灯牌在玻璃上留下晕开的光斑，屋檐持续滴水，路面水光反亮，店铺内外均无人物出现。\n时长（秒）：2\n3. 画面：镜头3（4-6秒）：特写。一片悬在枝叶尖端的积水叶，水珠沿叶脉缓慢聚拢、拉长、滴落；背景是虚化的湿街与灰白天空，焦点落在水珠与叶面雨痕，无字幕或标识。\n时长（秒）：2\n4. 画面：镜头4（6-8秒）：高角度俯瞰。整条雨后的街道向远处延伸，路面积水如镜面般铺开，倒映两侧路灯与树影；镜头缓缓拉远，雨势渐歇，最后呈现宁静、清透的雨后街景，画面中不出现任何人物、字幕、Logo或水印。\n时长（秒）：2\n\n### 总时长（秒）\n8\n\n### 规格说明\n- 出品方：远汀影像\n- 主题：雨后街道\n- 总时长：8秒\n- 镜头数：4个\n- 单镜时长：2秒\n- 交付形式：文字分镜脚本，不生成图片或视频\n- 硬性约束：画面中不得出现人物、字幕、Logo或水印\n\n### 影调与声音\n- 影调：冷灰蓝色调为主，保留湿润路面的反光与柔和漫射光，避免高饱和。\n- 氛围：安静、清透、略带余韵，雨后水汽感贯穿全片。\n- 声音建议（如后续有声版）：雨滴声由密渐疏，结尾收于环境底噪，无对白、无解说。\n\n### 创意细节假设\n以下为合理创意的非关键设定，非用户事实确认项：拍摄角度、景别、光线氛围与灯具样式为创意设计，实际拍摄可按现场条件调整；画面主体统一为雨后街道环境本身。"
+    },
+    {
+      "id": "15-image-casual",
+      "dir": "15-image-casual",
+      "group": "图片确认门禁",
+      "tone": "口语",
+      "query": "想给栖露乌龙出一张桂花乌龙海报，9比16竖着的，米白底，一个装浅金茶汤的杯子，少量桂花和枝叶，柔和自然光。别放人、文字、logo、水印。先把生图方案给我看，等我确认再真生成，这轮不要提交生成。",
+      "expected": {
+        "mediaType": "image",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "1242daa0-fbdb-4160-bb8f-d3f6bf2049c8",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "1242daa0-fbdb-4160-bb8f-d3f6bf2049c8",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": false,
+          "evidence": {
+            "status": "COMPLETED",
+            "approval": {
+              "required": false,
+              "status": "not_required",
+              "planHash": null
+            },
+            "nodes": [
+              {
+                "id": "159ea3b6-4076-4dd2-8c12-49e02ff6d85b",
+                "itemId": "159ea3b6-4076-4dd2-8c12-49e02ff6d85b",
+                "dependsOn": [],
+                "kind": "text",
+                "requiredMethods": [
+                  "image-prompt-gallery-director-v2"
+                ],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "ratio": "9:16"
+                  }
+                },
+                "skillId": null,
+                "tool": null,
+                "output": "text",
+                "count": 1,
+                "status": "completed",
+                "revision": 0,
+                "history": []
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": false,
+          "evidence": 0
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "image-prompt-gallery-director-v2",
+          "status": "completed",
+          "artifactId": "b8d6586c-1bc5-421b-bdd5-db985896d051",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "159ea3b6-4076-4dd2-8c12-49e02ff6d85b",
+          "start": "2026-09-16T07:48:21.075Z",
+          "end": "2026-09-16T07:48:23.123Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24521,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7018,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 332,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7350
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "image-prompt-gallery-director-v2",
+          "nodeId": "159ea3b6-4076-4dd2-8c12-49e02ff6d85b",
+          "characters": 7477,
+          "systemCharacters": 1098,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 3659,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 295,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 3954
+          }
+        }
+      ],
+      "final": "9:16竖版海报，米白纯色背景，画面中央一只陶瓷杯，杯中盛浅金色乌龙茶汤，茶汤透亮，杯口微微冒出热气；杯旁和杯沿少量点缀新鲜桂花与两三点绿叶枝，桂花数量克制、散落自然。柔和自然光从画面左上方照入，光线柔和散射，杯子在米白背景上投下淡而柔的阴影，整体色调温暖清透、安静克制。竖构图，杯子居中略偏下，四周保留充足米白留白，镜头平视微俯，浅景深，背景纯净。无人物、无文字、无logo、无水印。"
+    },
+    {
+      "id": "16-image-formal",
+      "dir": "16-image-formal",
+      "group": "图片确认门禁",
+      "tone": "正式规格",
+      "query": "为雾庭茶饮准备1张1440×2560的桂花乌龙海报生成方案。米白背景、单杯浅金色茶汤、少量桂花与枝叶、柔和自然光；禁止人物、文字、Logo和水印。请保存可供确认的图片方案，我批准后才能提交实际生成，本轮只准备。",
+      "expected": {
+        "mediaType": "image",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "721acc4e-5afa-4ba3-b1d8-b3d44695937a",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "721acc4e-5afa-4ba3-b1d8-b3d44695937a",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": false,
+          "evidence": {
+            "status": "COMPLETED",
+            "approval": {
+              "required": false,
+              "status": "not_required",
+              "planHash": null
+            },
+            "nodes": [
+              {
+                "id": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+                "itemId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+                "dependsOn": [],
+                "kind": "text",
+                "requiredMethods": [
+                  "image-prompt-gallery-director-v2"
+                ],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "ratio": "1440×2560",
+                    "directionCount": 1
+                  }
+                },
+                "skillId": null,
+                "tool": null,
+                "output": "text",
+                "count": 1,
+                "status": "completed",
+                "revision": 0,
+                "history": []
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": false,
+          "evidence": 0
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [
+        {
+          "slug": "image-prompt-gallery-director-v2",
+          "status": "completed",
+          "artifactId": "697652a9-bbfc-4fe7-8973-88c02ab26876",
+          "contractValidated": true
+        }
+      ],
+      "windows": [
+        {
+          "nodeId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+          "start": "2026-09-16T07:48:23.249Z",
+          "end": "2026-09-16T07:48:27.604Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24530,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7016,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 403,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7419
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "image-prompt-gallery-director-v2",
+          "nodeId": "d58613c1-2799-467c-a4cb-31e4a7f0e2b0",
+          "characters": 7743,
+          "systemCharacters": 1098,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods",
+            "methodBoundary"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 3731,
+            "input_tokens_details": {
+              "cached_tokens": 256
+            },
+            "output_tokens": 708,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 4439
+          }
+        }
+      ],
+      "final": "1440×2560竖版海报摄影方案。米白哑光背景，背景带轻微细腻纸张纹理，整体无杂色。画面中央偏下放置一只透明或浅白瓷质茶杯，单杯，杯内盛浅金色茶汤，茶汤透亮，液面平静，杯壁清澈，可见极少量细小茶毫或温润反光。杯口上方及杯侧散落少量干燥桂花：花瓣纤细、金橙色，约七八粒，分布稀疏，有聚有散，不堆叠成团；另配一两枝细弱枝叶，叶片小巧，颜色偏深绿，枝干自然弯曲，从画面上方或侧后方轻轻探入，叶片与桂花仅作点缀，不遮挡杯身。柔和自然光从画面左上方或正上方漫入，光线均匀，无强反差；茶杯底部在米白台面留下浅淡、边缘柔和的投影，桂花与枝叶投下细微软影。整体色调温暖安静，低饱和，浅金与米白为主，辅以少量叶绿；构图留足负空间，杯体清晰，画面边缘干净。摄影风格：静物产品摄影，俯拍或微侧俯视，50mm至85mm等效中焦，浅景深，背景轻微虚化，杯口与茶汤焦点清晰，自然光，无滤镜感。禁止：人物、人脸、手部；任何文字、字母、数字、标签；Logo、商标、品牌标识；水印、签名、印章；额外杯具或茶壶；浓艳色彩、戏剧化强光、人工硬光。"
+    },
+    {
+      "id": "17-video-casual",
+      "dir": "17-video-casual",
+      "group": "视频确认门禁",
+      "tone": "口语",
+      "query": "我想做个叫《浮灯街景》的5秒竖屏视频，一镜到底，雨后的空街，镜头缓慢往前走，没人、没字幕、没logo和水印。你先准备具体的视频生成方案让我确认，先别真的调用生成。",
+      "expected": {
+        "mediaType": "video",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "completed",
+      "sessionId": "d5d9cff5-88af-430d-843f-79c6fca1183f",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "d5d9cff5-88af-430d-843f-79c6fca1183f",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": false,
+          "evidence": {
+            "status": "COMPLETED",
+            "approval": {
+              "required": false,
+              "status": "not_required",
+              "planHash": null
+            },
+            "nodes": [
+              {
+                "id": "559886f9-c193-4631-bc4f-28b1cc9be658",
+                "itemId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+                "dependsOn": [],
+                "kind": "text",
+                "requiredMethods": [],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "durationSeconds": 5,
+                    "ratio": "9:16"
+                  }
+                },
+                "skillId": null,
+                "tool": null,
+                "output": "text",
+                "count": 1,
+                "status": "completed",
+                "revision": 0,
+                "history": []
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": false,
+          "evidence": 0
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "savedPendingMediaPlan",
+        "mediaQuantity"
+      ],
+      "taskStatus": [
+        "COMPLETED"
+      ],
+      "taskReason": [
+        null
+      ],
+      "artifactCount": 1,
+      "skills": [],
+      "windows": [
+        {
+          "nodeId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+          "start": "2026-09-16T07:48:25.857Z",
+          "end": "2026-09-16T07:48:27.803Z"
+        }
+      ],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24506,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7001,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 428,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7429
+          }
+        },
+        {
+          "index": 1,
+          "phase": "text_generation",
+          "methodId": "",
+          "nodeId": "559886f9-c193-4631-bc4f-28b1cc9be658",
+          "characters": 3422,
+          "systemCharacters": 778,
+          "payloadKeys": [
+            "item",
+            "deliveryContract",
+            "facts",
+            "globalConstraints",
+            "sources",
+            "supportingSources",
+            "evidenceContext",
+            "observations",
+            "feedback",
+            "methods"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1312,
+            "input_tokens_details": {
+              "cached_tokens": 128
+            },
+            "output_tokens": 276,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1588
+          }
+        }
+      ],
+      "final": "《浮灯街景》5秒竖屏视频生成方案\n\n【基础规格】\n- 时长：5秒\n- 画幅：竖屏 9:16\n- 结构：一镜到底，无剪辑、无转场\n\n【画面内容】\n- 场景：雨后夜晚的空街，路面湿润，积水映出街灯与店铺招牌的光。\n- 镜头：机位保持向前缓慢推进，速度均匀、无停顿、无变焦，全程单一镜头。\n- 主体：画面中不出现任何人物，无需表演。\n\n【画面风格（方案设计，待你确认）】\n- 色调偏冷，以青蓝夜色为主，暖黄灯光作为点缀。\n- 湿润路面产生明显反光与倒影，轻微雾气增加纵深感。\n- 街灯可带轻微光晕和雨后水滴感。\n\n【禁止元素】\n- 无人物、无字幕、无logo、无水印。\n- 不添加任何叠加文字或标识。\n\n【执行说明】\n- 本轮仅提供本方案供你确认，不调用视频生成。\n- 待你确认后再按此方案执行生成。"
+    },
+    {
+      "id": "18-video-formal",
+      "dir": "18-video-formal",
+      "group": "视频确认门禁",
+      "tone": "正式",
+      "query": "项目《望潮街景》：请准备1段5秒、9:16视频的生成方案，内容为雨后空街、单镜头缓慢推进，不含人物、字幕、Logo或水印。本次应保存待批准方案，收到我后续确认才可提交生成。",
+      "expected": {
+        "mediaType": "video",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "needs_input",
+      "sessionId": "6e80fef0-a161-470a-b9e4-5dfe8a14fce9",
+      "calls": 3,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "6e80fef0-a161-470a-b9e4-5dfe8a14fce9",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": true,
+          "evidence": {
+            "status": "WAIT_CONFIRM",
+            "approval": {
+              "required": true,
+              "status": "pending",
+              "planHash": "b8a9e7e69f2638e88cb5bf0f4ebc327fe293e5da21af28f8d259036dd8e53bbd",
+              "source": "explicit_control",
+              "revision": 1,
+              "contractHash": "30988a5f0b077f86f8e2d540f2a5f0cd46f5801a11e814bc0f7c90cfcd1bc652",
+              "payload": {
+                "batchId": "54ce4ab4-af51-4205-b1af-1e67abb4ee58",
+                "itemId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+                "tool": "generate_video",
+                "items": [
+                  {
+                    "prompt": "生成一段完整的5秒9:16竖屏视频《望潮街景》。全片为单镜头，画面主题是雨后空街。镜头以缓慢、平稳向前推进的方式移动，保持同一空间连续，不切镜、不拼接额外镜头。场景为雨后的城市街道，地面湿润并有积水反光，路面、人行道、店铺招牌轮廓、街灯或远处建筑可在不指向真实品牌与可识别标识的前提下作为环境元素；空气中有雨后清新、微凉的氛围，可使用柔和自然光、低饱和色调和细腻水汽感，强化潮意与安静空街的气质。画面中不得出现人物，不得出现字幕，不得出现Logo，不得出现水印。不要自动添加对白、旁白、音乐、音效字幕或任何文字信息；如生成系统默认包含声音，也应保持无对白、无旁白、无文字类音频。构图适合9:16竖屏，主体空间沿街道纵深展开，推进速度均匀缓慢，5秒内完整覆盖从起始视角到略微深入街景的过程，不出现突兀转场。分辨率按当前运行时要求输出720p。整体为可审查的创意视觉方案，不暗示任何未确认的产品功效或事实。",
+                    "duration": 5,
+                    "ratio": "9:16",
+                    "resolution": "720p"
+                  }
+                ]
+              }
+            },
+            "nodes": [
+              {
+                "id": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+                "itemId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+                "dependsOn": [],
+                "kind": "media",
+                "requiredMethods": [],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "durationSeconds": 5,
+                    "ratio": "9:16"
+                  }
+                },
+                "skillId": "video_creation_skill",
+                "tool": "generate_video",
+                "output": "video",
+                "count": 1,
+                "status": "prepared",
+                "revision": 1,
+                "history": [],
+                "batchId": "54ce4ab4-af51-4205-b1af-1e67abb4ee58",
+                "argsHash": "2039f22c75bb385dfa83bf2479de67f80d0c04cbc66c3348f05adb944d5d9d5d",
+                "skillArtifactId": "4950b4fe-1fef-4443-9514-ce4929dd45c8"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": true,
+          "evidence": 1
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "WAIT_CONFIRM"
+      ],
+      "taskReason": [
+        "请确认已展示的具体方案"
+      ],
+      "artifactCount": 0,
+      "skills": [
+        {
+          "slug": "video_creation_skill",
+          "status": "completed",
+          "artifactId": "4950b4fe-1fef-4443-9514-ce4929dd45c8",
+          "contractValidated": true
+        }
+      ],
+      "windows": [],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24511,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 7008,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 383,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7391
+          }
+        },
+        {
+          "index": 1,
+          "phase": "extract_confirmation_gate",
+          "characters": 525,
+          "systemCharacters": 218,
+          "payloadKeys": [
+            "query"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 186,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 24,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 210
+          }
+        },
+        {
+          "index": 2,
+          "phase": "media_plan",
+          "methodId": "video_creation_skill",
+          "nodeId": "a1f166f9-7053-4431-a0f0-1ae1dfdd450f",
+          "characters": 4047,
+          "systemCharacters": 1716,
+          "payloadKeys": [
+            "facts",
+            "globalConstraints",
+            "evidenceContext",
+            "supportingSources",
+            "executionPhase",
+            "authorization",
+            "loadedMethods",
+            "methodReferences",
+            "goal",
+            "sources",
+            "feedback"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1402,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 638,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2040
+          }
+        }
+      ],
+      "final": "本轮尚未全部完成。请确认已展示的具体方案"
+    },
+    {
+      "id": "19-empty-casual",
+      "dir": "19-empty-casual",
+      "group": "空会话引用",
+      "tone": "口语、假定历史",
+      "query": "就刚才第二个吧，弄年轻点，其他别动。",
+      "expected": {
+        "needsInput": true,
+        "texts": 0,
+        "noMedia": true
+      },
+      "status": "needs_input",
+      "sessionId": "75288508-ac8a-488b-9c5e-0e3afe9c390b",
+      "calls": 1,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "75288508-ac8a-488b-9c5e-0e3afe9c390b",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 0,
+            "actual": 0
+          }
+        },
+        {
+          "name": "clarifiesMissingReference",
+          "passed": true,
+          "evidence": {
+            "status": "needs_input",
+            "tasks": [
+              "NEEDS_INPUT"
+            ]
+          }
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "NEEDS_INPUT"
+      ],
+      "taskReason": [
+        "用户指代的\"刚才第二个\"在本次提供的会话与参考证据中未出现，无法确定被修改的对象及其版本。"
+      ],
+      "artifactCount": 0,
+      "skills": [],
+      "windows": [],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24443,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6963,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 264,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7227
+          }
+        }
+      ],
+      "final": "还需要补充：用户指代的\"刚才第二个\"在本次提供的会话与参考证据中未出现，无法确定被修改的对象及其版本。"
+    },
+    {
+      "id": "20-empty-formal",
+      "dir": "20-empty-formal",
+      "group": "空会话引用",
+      "tone": "正式、假定既有版本",
+      "query": "请在上一版已确认的第二个创意方向基础上，仅调整措辞使其更年轻，严格保留其余内容。",
+      "expected": {
+        "needsInput": true,
+        "texts": 0,
+        "noMedia": true
+      },
+      "status": "blocked",
+      "sessionId": "774be520-9ee1-4117-8e09-f1597fa361f8",
+      "calls": 1,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "774be520-9ee1-4117-8e09-f1597fa361f8",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "artifactCount",
+          "passed": true,
+          "evidence": {
+            "expected": 0,
+            "actual": 0
+          }
+        },
+        {
+          "name": "clarifiesMissingReference",
+          "passed": false,
+          "evidence": {
+            "status": "blocked",
+            "tasks": [
+              "BLOCKED"
+            ]
+          }
+        }
+      ],
+      "strictPassed": false,
+      "failedChecks": [
+        "clarifiesMissingReference"
+      ],
+      "taskStatus": [
+        "BLOCKED"
+      ],
+      "taskReason": [
+        "执行图缺少选定方向的前置生产节点，不能删除选择要求继续"
+      ],
+      "artifactCount": 0,
+      "skills": [],
+      "windows": [],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24465,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6973,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 292,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7265
+          }
+        }
+      ],
+      "final": "当前可执行内容已保存，后续等待：未提供上一版已确认的创意方向产物来源或版本，无法定位要修改的第二个创意方向。"
+    },
+    {
+      "id": "21-image-direct",
+      "dir": "media-controls/21-image-direct",
+      "group": "媒体直接生成对照",
+      "tone": "口语、直接生产请求",
+      "query": "给夏径茶饮生成一张桂花乌龙海报，米白底，9:16竖版，单杯浅金茶汤，少量桂花枝叶，自然光，不要人、文字、Logo和水印。",
+      "expected": {
+        "mediaType": "image",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "needs_input",
+      "sessionId": "6f3a329e-0c2b-4a9a-af57-c98df5902658",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "6f3a329e-0c2b-4a9a-af57-c98df5902658",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": true,
+          "evidence": {
+            "status": "WAIT_CONFIRM",
+            "approval": {
+              "required": true,
+              "status": "pending",
+              "planHash": "15fe276da59bb23840c738519827b88d4d882c1e317ea56e50ca673f5a7c19a5",
+              "source": "explicit_control",
+              "revision": 1,
+              "contractHash": "11ce564895f7a7d8dee67e5f83722aad8fa1dbd8e28aaa4fac72c1d3e4841102",
+              "payload": {
+                "batchId": "1f9be04d-f399-4406-af7b-7fbf5fa4149e",
+                "itemId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+                "tool": "generate_image",
+                "items": [
+                  {
+                    "prompt": "画布与布局：9:16竖版海报，米白色纯色背景，画面干净留白，无边框、无标题栏、无编号区域。主体及数量：仅一杯浅金茶汤，杯身与液面清晰可辨；少量桂花枝叶作为唯一配衬，数量克制，不堆叠成束。场景和空间关系：杯子居中偏下放置于平整台面，桂花枝叶自然散落于杯侧和台面少量位置，与杯子保持清晰前后关系，不遮挡茶汤主体。镜头构图：竖版居中构图，平视略高机位，杯体完整入画，四周留有充分米白呼吸空间，比例9:16。必要光影：自然光从侧上方进入，在米白背景与台面形成柔和方向性阴影，浅金茶汤呈现清透、温润不浑浊的观感，不添加人工彩色灯光。明确文字与排除项：画面中不出现人、文字、字母、数字、Logo、品牌标识、水印、标签、包装说明或任何可识别的成句文案；不添加未提供的产品功效、配料标注或促销信息；不出现多杯、多茶汤容器或额外食物。",
+                    "size": "1440x2560"
+                  }
+                ]
+              }
+            },
+            "nodes": [
+              {
+                "id": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+                "itemId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+                "dependsOn": [],
+                "kind": "media",
+                "requiredMethods": [],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "ratio": "9:16"
+                  }
+                },
+                "skillId": "image_creation_skill",
+                "tool": "generate_image",
+                "output": "image",
+                "count": 1,
+                "status": "prepared",
+                "revision": 1,
+                "history": [],
+                "batchId": "1f9be04d-f399-4406-af7b-7fbf5fa4149e",
+                "argsHash": "f89374ecf90d0ba2184866aa7ce4c3531895485ae48aec1c87e2fa4cb851b06f",
+                "skillArtifactId": "433bea1d-d1c0-4657-97e6-b4f8e19be2fe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": true,
+          "evidence": 1
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "WAIT_CONFIRM"
+      ],
+      "taskReason": [
+        "请确认已展示的具体方案"
+      ],
+      "artifactCount": 0,
+      "skills": [
+        {
+          "slug": "image_creation_skill",
+          "status": "completed",
+          "artifactId": "433bea1d-d1c0-4657-97e6-b4f8e19be2fe",
+          "contractValidated": true
+        }
+      ],
+      "windows": [],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24485,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6989,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 284,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7273
+          }
+        },
+        {
+          "index": 1,
+          "phase": "media_plan",
+          "methodId": "image_creation_skill",
+          "nodeId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+          "characters": 3340,
+          "systemCharacters": 1476,
+          "payloadKeys": [
+            "facts",
+            "globalConstraints",
+            "evidenceContext",
+            "supportingSources",
+            "executionPhase",
+            "authorization",
+            "loadedMethods",
+            "methodReferences",
+            "goal",
+            "sources",
+            "feedback"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1134,
+            "input_tokens_details": {
+              "cached_tokens": 384
+            },
+            "output_tokens": 429,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1563
+          }
+        }
+      ],
+      "final": "本轮尚未全部完成。请确认已展示的具体方案"
+    },
+    {
+      "id": "22-video-direct",
+      "dir": "media-controls/22-video-direct",
+      "group": "媒体直接生成对照",
+      "tone": "正式、直接生产请求",
+      "query": "请为《泊云空街》生成一段5秒、9:16竖版视频：雨后的空街，一镜到底缓慢向前推进，没有人物、字幕、Logo和水印。",
+      "expected": {
+        "mediaType": "video",
+        "quantity": 1,
+        "waitApproval": true,
+        "noMedia": true
+      },
+      "status": "needs_input",
+      "sessionId": "3fcf63e7-2627-4629-9598-9e8d85c065fa",
+      "calls": 2,
+      "checks": [
+        {
+          "name": "emptyInitial",
+          "passed": true,
+          "evidence": {
+            "sessionId": "3fcf63e7-2627-4629-9598-9e8d85c065fa",
+            "messages": 0,
+            "tasks": 0,
+            "artifacts": 0,
+            "inputs": 0
+          }
+        },
+        {
+          "name": "noForeignMarkers",
+          "passed": true,
+          "evidence": []
+        },
+        {
+          "name": "noPreviousResponseId",
+          "passed": true
+        },
+        {
+          "name": "emptyModelHistory",
+          "passed": true,
+          "evidence": {
+            "memory": [],
+            "activeTask": null,
+            "references": 0,
+            "documents": 0,
+            "relatedTasks": 0,
+            "recentMessages": 0
+          }
+        },
+        {
+          "name": "noMediaSubmission",
+          "passed": true,
+          "evidence": 0
+        },
+        {
+          "name": "savedPendingMediaPlan",
+          "passed": true,
+          "evidence": {
+            "status": "WAIT_CONFIRM",
+            "approval": {
+              "required": true,
+              "status": "pending",
+              "planHash": "1558fd3e755ff7c6d65b033a1c048d414ee929c5954a6e686017285c01c64d07",
+              "source": "explicit_control",
+              "revision": 1,
+              "contractHash": "0c7921f52534b4f5b656f6de4c610a56b4d36237faad0f15d7ebc138c4fde253",
+              "payload": {
+                "batchId": "5171b87c-1581-4013-b4c7-aa0f5ca09746",
+                "itemId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+                "tool": "generate_video",
+                "items": [
+                  {
+                    "prompt": "《泊云空街》单件成品视频。9:16竖版，5秒，一镜到底：镜头沿雨后的空街缓慢向前推进，画面自始至终为同一连续长镜头，不剪切、不转场。场景为雨后的空街，路面湿润并有浅浅积水，水面倒映周边建筑与天色，街边建筑、店铺外立面、行道树与路灯清晰可见，雨刚停、空气湿润，光线柔和偏冷，地面反光与轻微水汽增强雨后氛围。镜头运动：平稳、缓慢、持续向前推进，速度均匀，不起伏、不晃动、不后退、不横移、不变焦、不切换视角；推进过程中前景与中景元素自然进入画框并逐渐接近，背景缓慢收拢，透视关系随推进自然变化。画面要求：无人物出现，无字幕，无Logo，无水印，无文字标牌内容。音频要求：不添加音乐、旁白或对白。整体风格为真实场景质感、自然光照、安静无人氛围。",
+                    "duration": 5,
+                    "ratio": "9:16",
+                    "resolution": "720p"
+                  }
+                ]
+              }
+            },
+            "nodes": [
+              {
+                "id": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+                "itemId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+                "dependsOn": [],
+                "kind": "media",
+                "requiredMethods": [],
+                "outputContract": {
+                  "stages": [],
+                  "artifactCount": 1,
+                  "contentCardinality": 1,
+                  "spec": {
+                    "durationSeconds": 5,
+                    "ratio": "9:16"
+                  }
+                },
+                "skillId": "video_creation_skill",
+                "tool": "generate_video",
+                "output": "video",
+                "count": 1,
+                "status": "prepared",
+                "revision": 1,
+                "history": [],
+                "batchId": "5171b87c-1581-4013-b4c7-aa0f5ca09746",
+                "argsHash": "078ff45e4503689e5ac434c225479ac0c65b553efea3d3b25c24ee9f3a843723",
+                "skillArtifactId": "aaef737f-2203-4cdb-8260-5fd7791564f2"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mediaQuantity",
+          "passed": true,
+          "evidence": 1
+        }
+      ],
+      "strictPassed": true,
+      "failedChecks": [],
+      "taskStatus": [
+        "WAIT_CONFIRM"
+      ],
+      "taskReason": [
+        "请确认已展示的具体方案"
+      ],
+      "artifactCount": 0,
+      "skills": [
+        {
+          "slug": "video_creation_skill",
+          "status": "completed",
+          "artifactId": "aaef737f-2203-4cdb-8260-5fd7791564f2",
+          "contractValidated": true
+        }
+      ],
+      "windows": [],
+      "parallelOverlap": false,
+      "rounds": [
+        {
+          "index": 0,
+          "phase": "understand",
+          "characters": 24482,
+          "systemCharacters": 20742,
+          "payloadKeys": [
+            "query",
+            "currentMessageId",
+            "replyTo",
+            "userMemory",
+            "activeTaskState",
+            "relevantEvidence",
+            "contextPolicy"
+          ],
+          "wireValid": true,
+          "wireErrors": null,
+          "errors": [],
+          "usage": {
+            "input_tokens": 6989,
+            "input_tokens_details": {
+              "cached_tokens": 5376
+            },
+            "output_tokens": 233,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 7222
+          }
+        },
+        {
+          "index": 1,
+          "phase": "media_plan",
+          "methodId": "video_creation_skill",
+          "nodeId": "e9a9a934-c1f0-4113-be9a-ba2ac5738920",
+          "characters": 3808,
+          "systemCharacters": 1716,
+          "payloadKeys": [
+            "facts",
+            "globalConstraints",
+            "evidenceContext",
+            "supportingSources",
+            "executionPhase",
+            "authorization",
+            "loadedMethods",
+            "methodReferences",
+            "goal",
+            "sources",
+            "feedback"
+          ],
+          "errors": [],
+          "usage": {
+            "input_tokens": 1268,
+            "input_tokens_details": {
+              "cached_tokens": 384
+            },
+            "output_tokens": 369,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 1637
+          }
+        }
+      ],
+      "final": "本轮尚未全部完成。请确认已展示的具体方案"
+    }
+  ]
+}

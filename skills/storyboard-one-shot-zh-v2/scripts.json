@@ -1,0 +1,369 @@
+[
+  {
+    "name": "validate_storyboard_timeline",
+    "entrypoint": "scripts/validate-storyboard-timeline.py",
+    "description": "检查故事板分段、全片时间范围、镜头时码、镜号、字段完整性和段间连续性",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "boards"
+      ],
+      "properties": {
+        "boards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "boardId",
+              "fullStart",
+              "fullEnd",
+              "segmentDuration",
+              "startState",
+              "endState",
+              "shots"
+            ],
+            "properties": {
+              "shots": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "shotId",
+                    "start",
+                    "end",
+                    "function",
+                    "shotSize",
+                    "cameraPosition",
+                    "cameraState",
+                    "dialogue",
+                    "vo",
+                    "sound",
+                    "music"
+                  ],
+                  "properties": {
+                    "vo": {
+                      "type": "string",
+                      "maxLength": 5000,
+                      "minLength": 1
+                    },
+                    "end": {
+                      "type": "number",
+                      "maximum": 15,
+                      "exclusiveMinimum": 0
+                    },
+                    "music": {
+                      "type": "string",
+                      "maxLength": 2000,
+                      "minLength": 1
+                    },
+                    "sound": {
+                      "type": "string",
+                      "maxLength": 2000,
+                      "minLength": 1
+                    },
+                    "start": {
+                      "type": "number",
+                      "maximum": 15,
+                      "minimum": 0
+                    },
+                    "shotId": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "minLength": 1
+                    },
+                    "dialogue": {
+                      "type": "string",
+                      "maxLength": 5000,
+                      "minLength": 1
+                    },
+                    "function": {
+                      "type": "string",
+                      "maxLength": 1000,
+                      "minLength": 1
+                    },
+                    "shotSize": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "minLength": 1
+                    },
+                    "cameraState": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "minLength": 1
+                    },
+                    "cameraPosition": {
+                      "type": "string",
+                      "maxLength": 500,
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "maxItems": 9,
+                "minItems": 1
+              },
+              "boardId": {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              "fullEnd": {
+                "type": "number",
+                "maximum": 1000000,
+                "exclusiveMinimum": 0
+              },
+              "endState": {
+                "type": "string",
+                "maxLength": 10000
+              },
+              "fullStart": {
+                "type": "number",
+                "maximum": 1000000,
+                "minimum": 0
+              },
+              "startState": {
+                "type": "string",
+                "maxLength": 10000
+              },
+              "segmentDuration": {
+                "type": "number",
+                "maximum": 15,
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "maxItems": 100,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "boardId",
+              "shotId",
+              "message"
+            ],
+            "properties": {
+              "shotId": {
+                "type": "string"
+              },
+              "boardId": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "summaries"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "$ref": "#/$defs/issues"
+        },
+        "warnings": {
+          "$ref": "#/$defs/issues"
+        },
+        "summaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "boardId",
+              "fullStart",
+              "fullEnd",
+              "segmentDuration",
+              "shotCount"
+            ],
+            "properties": {
+              "boardId": {
+                "type": "string"
+              },
+              "fullEnd": {
+                "type": "number"
+              },
+              "fullStart": {
+                "type": "number"
+              },
+              "shotCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "segmentDuration": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "validate_storyboard_prompt_contract",
+    "entrypoint": "scripts/validate-storyboard-prompt-contract.py",
+    "description": "检查一次整图提示词的画格数、布局、画幅、镜号、逐字文本、必填制作字段和残留占位符",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "prompt",
+        "expectedPanelCount",
+        "layout",
+        "aspectRatio",
+        "shotIds"
+      ],
+      "properties": {
+        "layout": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "shotIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 30,
+            "minLength": 1
+          },
+          "maxItems": 9,
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "aspectRatio": {
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "requiredLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 200
+        },
+        "forbiddenLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 200
+        },
+        "expectedPanelCount": {
+          "type": "integer",
+          "maximum": 9,
+          "minimum": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "stringList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "checks"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "required": [
+            "promptLength",
+            "expectedPanelCount",
+            "missingShotIds",
+            "missingRequiredLiterals",
+            "foundForbiddenLiterals",
+            "missingProductionFields",
+            "unfilledPlaceholders",
+            "missingCameraStates"
+          ],
+          "properties": {
+            "promptLength": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missingShotIds": {
+              "$ref": "#/$defs/stringList"
+            },
+            "expectedPanelCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missingCameraStates": {
+              "$ref": "#/$defs/stringList"
+            },
+            "unfilledPlaceholders": {
+              "$ref": "#/$defs/stringList"
+            },
+            "foundForbiddenLiterals": {
+              "$ref": "#/$defs/stringList"
+            },
+            "missingProductionFields": {
+              "$ref": "#/$defs/stringList"
+            },
+            "missingRequiredLiterals": {
+              "$ref": "#/$defs/stringList"
+            }
+          },
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

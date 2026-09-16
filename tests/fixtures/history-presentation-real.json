@@ -1,0 +1,62 @@
+{
+  "query": "你上一轮的回答是什么",
+  "messages": [
+    {
+      "messageId": "msg_02dd56e20311c813a801",
+      "role": "user",
+      "turnIndex": 1,
+      "replyTo": null,
+      "content": "你是什么模型"
+    },
+    {
+      "messageId": "msg_4045865f70e0c9db9eb6",
+      "role": "assistant",
+      "turnIndex": 1,
+      "replyTo": "msg_02dd56e20311c813a801",
+      "content": "当前配置的模型标识为 deepseek-flash；没有可验证的底层版本信息。"
+    },
+    {
+      "messageId": "msg_fa175b784e3a27ef0000",
+      "role": "user",
+      "turnIndex": 2,
+      "replyTo": null,
+      "content": "你是什么模型"
+    },
+    {
+      "messageId": "msg_251d2d839b5fa033b0b4",
+      "role": "assistant",
+      "turnIndex": 2,
+      "replyTo": "msg_fa175b784e3a27ef0000",
+      "content": "我是当前对话中运行的 AI 模型。我无法从对话内部核验底层权重、参数规模、训练数据截止日期或精确的部署版本号；也无法独立确认当前对外呈现的具体模型标识（如模型名称与版本号）。这些信息需要由提供本服务的平台或运营方通过其官方文档、模型卡片或 API 响应中的 model 字段等可核验渠道确认。因此，我只能说明自己是一个在对话中运行的模型，无法对底层实现版本或确切模型标识作独立验证。"
+    }
+  ],
+  "originalError": "源素材引用ID不存在或引用句柄已过期：msg_251d2d839b5fa033b0b4",
+  "provenance": {
+    "mode": "saved_real_model_draft_replay_no_provider_call",
+    "sessionId": "3623325e-5682-48b7-935f-26b3c2a53fbc",
+    "runId": "2cf893d1-c78d-4b81-beaf-ca8931e94666"
+  },
+  "candidate": {
+    "summary": "用户要求复述上一轮的助手回答，属于对既有对话内容的纯展示/引用请求，不涉及新创作或修改。上一轮助手（turnIndex 2，msg_251d2d839b5fa033b0b4）的回答为模型身份说明。以present方式引用该历史回复内容。",
+    "turnOperation": {
+      "kind": "present",
+      "presentation": {
+        "targets": [
+          "msg_251d2d839b5fa033b0b4"
+        ],
+        "format": "inline",
+        "order": "as_listed"
+      }
+    },
+    "deliverables": [],
+    "safety": {
+      "disposition": "allow",
+      "untrustedInstructions": false,
+      "reason": ""
+    },
+    "approval": {
+      "required": false,
+      "reason": "仅展示历史对话内容，无需用户确认"
+    }
+  }
+}

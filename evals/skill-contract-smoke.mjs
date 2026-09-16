@@ -1,0 +1,17 @@
+import {writeFile} from 'node:fs/promises';
+import {Doubao} from '../server/adapters.mjs';
+import {loadCatalog} from '../server/catalog.mjs';
+import {ToolRuntime} from '../server/tools.mjs';
+import {TaskExecutor} from '../server/execution-engine.mjs';
+import {createTask,currentTask} from '../server/task-state.mjs';
+import {Verifier} from '../server/verification.mjs';
+const catalog=await loadCatalog(),calls=[];
+const base=new Doubao({key:process.env.DOUBAO_API_KEY,baseUrl:process.env.DOUBAO_BASE_URL,model:process.env.DOUBAO_CHAT_MODEL});
+const brain={respond:async(input,tools,signal,options)=>{const call={input,tools,options};calls.push(call);return call.output=await base.respond(input,tools,signal,options);}};
+const state={id:'skill-contract-smoke',messages:[],events:[]},description='将“咖啡好喝，赶快来买”改写为30字以内的温柔风格文案，保留咖啡主题。';
+createTask(state,{summary:description,tasks:[{operation:'rewrite',output:'text',count:1,dependsOn:[],references:[],constraints:['30字以内','温柔风格'],requiredEvidence:'none'}],skills:['creative-prompt-rewrite'],safety:{disposition:'allow'},semantic:{deliverables:[{description}] }},description);
+const runtime=new ToolRuntime({catalog,brain,media:{config:{}}});
+const executor=new TaskExecutor({state,runtime,catalog,brain,verifier:new Verifier(brain)});
+const result=await executor.execute('run_skill',{slug:'creative-prompt-rewrite'},currentTask(state).items[0],AbortSignal.timeout(120000));
+await writeFile(new URL('../data/task-loop-skill-contract.json',import.meta.url),JSON.stringify({result,state,calls},null,2),{flag:'wx'});
+console.log(JSON.stringify({passed:result.contractValidated&&state.status==='completed',status:state.status,modelCalls:calls.length,content:result.content,structure:result.structure}));

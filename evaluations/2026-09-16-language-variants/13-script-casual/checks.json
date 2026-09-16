@@ -1,0 +1,158 @@
+{
+  "id": "13-script-casual",
+  "dir": "13-script-casual",
+  "group": "脚本不是视频",
+  "tone": "口语、容易混淆词",
+  "query": "帮蓝羽航旅写个波音747的宣传视频脚本，8秒4个镜头，每镜2秒，存成一份文字。只要脚本，不是真的去生成视频，也别出图。别编航空公司、票价和运营航线。",
+  "expected": {
+    "texts": 1,
+    "shots": 4,
+    "duration": 8,
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "dfd243de-94dd-4570-8b30-8df1353061a4",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "dfd243de-94dd-4570-8b30-8df1353061a4",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [
+    {
+      "slug": "video-script-zh-v1",
+      "status": "completed",
+      "artifactId": "34b2095b-d845-4672-8a6a-ef203d0ac569",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "aa8075b9-5aff-4ee8-84f8-692effb190e8",
+      "start": "2026-09-16T07:48:15.464Z",
+      "end": "2026-09-16T07:48:18.811Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24499,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6997,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 350,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7347
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "video-script-zh-v1",
+      "nodeId": "aa8075b9-5aff-4ee8-84f8-692effb190e8",
+      "characters": 4758,
+      "systemCharacters": 1009,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1900,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 605,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2505
+      }
+    }
+  ],
+  "final": "# 蓝羽航旅波音747宣传视频文字脚本\n\n总时长：8秒 | 镜头数：4个 | 每镜时长：2秒\n\n---\n\n## 镜头1（0:00–0:02）\n- **画面**：机场跑道远景，波音747以侧面角度静立或缓缓滑行，机身线条在自然光下呈现。\n- **字幕/旁白**：蓝羽航旅 × 波音747\n- **节奏说明**：开场建立品牌与机型，画面沉稳，配乐渐入。\n\n## 镜头2（0:02–0:04）\n- **画面**：波音747机头或驾驶舱特写，突出其标志性的上层客舱轮廓。\n- **字幕/旁白**：经典轮廓，一眼可辨\n- **节奏说明**：以局部细节强化机型识别度。\n\n## 镜头3（0:04–0:06）\n- **画面**：波音747机身侧面或机翼在阳光下的画面，光影流动。\n- **字幕/旁白**：宽体空间，从容启程\n- **节奏说明**：切入乘坐感受联想，语气舒展。\n\n## 镜头4（0:06–0:08）\n- **画面**：波音747在蓝天中飞行或起飞爬升的远景，画面留白，品牌标识收尾。\n- **字幕/旁白**：蓝羽航旅，与747同行\n- **节奏说明**：收束全片，品牌落版，音乐收尾。\n\n---\n\n**脚本说明**：本脚本仅为文字分镜，未生成任何视频或图片；未涉及票价、具体运营航线及其他未提供信息。"
+}

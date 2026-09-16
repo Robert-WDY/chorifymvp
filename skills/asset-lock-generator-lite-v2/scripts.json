@@ -1,0 +1,276 @@
+[
+  {
+    "name": "plan_asset_lock_budget",
+    "entrypoint": "scripts/plan-asset-lock-budget.py",
+    "description": "按资产类型和产品证据确定正常生图次数、阶段、暂停节点及同一母图内的画格数量",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "assetType"
+      ],
+      "properties": {
+        "assetType": {
+          "enum": [
+            "person",
+            "environment",
+            "product"
+          ],
+          "type": "string"
+        },
+        "interactionKind": {
+          "enum": [
+            "none",
+            "single",
+            "two-step",
+            "complex"
+          ],
+          "type": "string",
+          "default": "none"
+        },
+        "stableStateCount": {
+          "type": "integer",
+          "default": 0,
+          "maximum": 20,
+          "minimum": 0
+        },
+        "interactionEvidenced": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "assetType",
+        "normalCallCount",
+        "phases",
+        "pauseAfterCall",
+        "panelPlan",
+        "warnings",
+        "errors"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "index",
+              "name",
+              "purpose",
+              "usesPreviousOutput"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "index": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "usesPreviousOutput": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "panelPlan": {
+          "type": "object",
+          "required": [
+            "baseViewPanels",
+            "stableStatePanels",
+            "interactionPanels",
+            "totalFinalPanels"
+          ],
+          "properties": {
+            "baseViewPanels": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "totalFinalPanels": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "interactionPanels": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stableStatePanels": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "pauseAfterCall": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "normalCallCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "validate_asset_lock_prompt",
+    "entrypoint": "scripts/validate-asset-lock-prompt.py",
+    "description": "检查资产锁提示词的阶段结构、预期画格数、必保留内容、禁止内容和未替换占位符",
+    "inputSchema": {
+      "type": "object",
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "phase",
+        "prompt",
+        "expectedPanelCount"
+      ],
+      "properties": {
+        "phase": {
+          "enum": [
+            "person-anchor",
+            "person-lock",
+            "environment-plan",
+            "environment-lock",
+            "product-lock"
+          ],
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 200000,
+          "minLength": 1
+        },
+        "requiredLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 500
+        },
+        "forbiddenLiterals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 5000,
+            "minLength": 1
+          },
+          "maxItems": 500
+        },
+        "expectedPanelCount": {
+          "type": "integer",
+          "maximum": 30,
+          "minimum": 1
+        },
+        "requiresNoAddedText": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "$defs": {
+        "stringList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "required": [
+        "valid",
+        "errors",
+        "warnings",
+        "checks"
+      ],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "object",
+          "required": [
+            "promptLength",
+            "expectedPanelCount",
+            "missingPhaseMarkers",
+            "missingRequiredLiterals",
+            "foundForbiddenLiterals",
+            "unfilledPlaceholders"
+          ],
+          "properties": {
+            "promptLength": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "expectedPanelCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "missingPhaseMarkers": {
+              "$ref": "#/$defs/stringList"
+            },
+            "unfilledPlaceholders": {
+              "$ref": "#/$defs/stringList"
+            },
+            "foundForbiddenLiterals": {
+              "$ref": "#/$defs/stringList"
+            },
+            "missingRequiredLiterals": {
+              "$ref": "#/$defs/stringList"
+            }
+          },
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+]

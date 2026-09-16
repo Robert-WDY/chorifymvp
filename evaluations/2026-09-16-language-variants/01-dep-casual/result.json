@@ -1,0 +1,799 @@
+{
+  "id": "01-dep-casual",
+  "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+  "group": "方向依赖",
+  "tone": "口语、省略",
+  "expected": {
+    "texts": 2,
+    "unitType": "directions",
+    "indexes": [
+      2
+    ],
+    "upstreamUnits": 2,
+    "shots": 4,
+    "duration": 8,
+    "noMedia": true
+  },
+  "initial": {
+    "sessionId": "c7855a1e-4c49-4756-abc5-5b451e349873",
+    "messages": 0,
+    "tasks": 0,
+    "artifacts": 0,
+    "inputs": 0
+  },
+  "status": "failed",
+  "durationMs": 4746,
+  "calls": 3,
+  "mediaAttempts": 0,
+  "actualMediaSubmissions": 0,
+  "final": "系统未能完成本轮请求整理，尚未执行生成。",
+  "tasks": [],
+  "artifacts": [],
+  "modelCalls": [
+    {
+      "id": "cd43934a-629c-42f4-9ad0-6b1e72b8e0d5",
+      "tracePhase": "understand",
+      "status": "returned",
+      "startedAt": "2026-09-16T07:47:30.958Z",
+      "finishedAt": "2026-09-16T07:47:33.851Z",
+      "usage": {
+        "input_tokens": 7034,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 574,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7608
+      },
+      "validations": [
+        {
+          "phase": "intent_draft",
+          "accepted": false,
+          "snapshot": {
+            "version": 1,
+            "origin": "unaccepted_draft",
+            "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+            "goal": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "parsedSummary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "operation": {
+              "kind": "create"
+            },
+            "globalConstraints": [],
+            "deliverables": [
+              {
+                "id": "r1",
+                "index": 0,
+                "goal": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "type": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "dependsOn": [],
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "spec": {},
+                "changeContract": null,
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ]
+              },
+              {
+                "id": "r2",
+                "index": 1,
+                "goal": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "type": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "dependsOn": [
+                  0
+                ],
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                },
+                "changeContract": null,
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ]
+              }
+            ],
+            "hash": "42b5f285c2e79b3289bdfd566f1681a5d0f019409619248c000223328b1f505b"
+          }
+        },
+        {
+          "phase": "understand",
+          "attempt": 0,
+          "parsed": {
+            "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "turnOperation": {
+              "kind": "create"
+            },
+            "deliverables": [
+              {
+                "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "kind": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "form": "directions",
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "purpose": "marketing",
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ]
+              },
+              {
+                "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "kind": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "form": "script",
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ],
+                "dependsOn": [
+                  0
+                ],
+                "references": [
+                  "task:0"
+                ],
+                "sourceSelection": {
+                  "source": "task:0",
+                  "unitType": "directions",
+                  "mode": "selected",
+                  "unitIndexes": [
+                    2
+                  ],
+                  "layout": "unspecified"
+                },
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "purpose": "marketing",
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                }
+              }
+            ],
+            "facts": [
+              "产品是晚风冷萃",
+              "产品只有透明无字杯、琥珀色咖啡和冰块",
+              "用户已选定后一个方向（方向2）",
+              "用户要求两份交付均为文字，不生成图片或视频"
+            ],
+            "assumptions": [],
+            "gaps": [],
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "approval": {
+              "required": false,
+              "reason": ""
+            }
+          },
+          "rejectedDraft": "{\"summary\":\"为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。\",\"turnOperation\":{\"kind\":\"create\"},\"deliverables\":[{\"description\":\"为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。\",\"kind\":\"text\",\"action\":\"create\",\"count\":2,\"artifactCount\":1,\"form\":\"directions\",\"requiredMethods\":[\"direction-designer-zh-v1\"],\"requestEvidence\":\"帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。\",\"purpose\":\"marketing\",\"constraints\":[\"两个方向编号1和2\",\"两个方向合为一份文档\",\"产品元素仅限透明无字杯、琥珀色咖啡、冰块\",\"不加其他元素\",\"不编价格、产地、功效\"]},{\"description\":\"基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。\",\"kind\":\"text\",\"action\":\"create\",\"count\":1,\"artifactCount\":1,\"form\":\"script\",\"requiredMethods\":[\"storyboard-one-shot-zh-v2\"],\"dependsOn\":[0],\"references\":[\"task:0\"],\"sourceSelection\":{\"source\":\"task:0\",\"unitType\":\"directions\",\"mode\":\"selected\",\"unitIndexes\":[2],\"layout\":\"unspecified\"},\"requestEvidence\":\"就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。\",\"purpose\":\"marketing\",\"constraints\":[\"总时长8秒\",\"共四镜\",\"每镜2秒\",\"脚本单独一份文档\",\"仅文字，不出图或视频\",\"产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素\",\"不编价格、产地、功效\"],\"spec\":{\"shotCount\":4,\"secondsPerShot\":2,\"durationSeconds\":8}}],\"facts\":[\"产品是晚风冷萃\",\"产品只有透明无字杯、琥珀色咖啡和冰块\",\"用户已选定后一个方向（方向2）\",\"用户要求两份交付均为文字，不生成图片或视频\"],\"assumptions\":[],\"gaps\":[],\"safety\":{\"disposition\":\"allow\",\"untrustedInstructions\":false,\"reason\":\"\"},\"approval\":{\"required\":false,\"reason\":\"\"}}",
+          "accepted": false,
+          "failureStage": "reference",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置"
+        }
+      ]
+    },
+    {
+      "id": "170f36ce-0d8a-44c8-8ea6-616a1a1af6e5",
+      "tracePhase": "understand",
+      "status": "returned",
+      "startedAt": "2026-09-16T07:47:33.983Z",
+      "finishedAt": "2026-09-16T07:47:34.731Z",
+      "usage": {
+        "input_tokens": 1080,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1117
+      },
+      "validations": [
+        {
+          "phase": "fill_missing_fields",
+          "patch": {
+            "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+          },
+          "paths": [
+            "/deliverables/1/requestEvidence"
+          ],
+          "merged": {
+            "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "turnOperation": {
+              "kind": "create"
+            },
+            "deliverables": [
+              {
+                "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "kind": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "form": "directions",
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "purpose": "marketing",
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ]
+              },
+              {
+                "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "kind": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "form": "script",
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ],
+                "dependsOn": [
+                  0
+                ],
+                "references": [
+                  "task:0"
+                ],
+                "sourceSelection": {
+                  "source": "task:0",
+                  "unitType": "directions",
+                  "mode": "selected",
+                  "unitIndexes": [
+                    2
+                  ],
+                  "layout": "unspecified"
+                },
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "purpose": "marketing",
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                }
+              }
+            ],
+            "facts": [
+              "产品是晚风冷萃",
+              "产品只有透明无字杯、琥珀色咖啡和冰块",
+              "用户已选定后一个方向（方向2）",
+              "用户要求两份交付均为文字，不生成图片或视频"
+            ],
+            "assumptions": [],
+            "gaps": [],
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "approval": {
+              "required": false,
+              "reason": ""
+            }
+          }
+        },
+        {
+          "phase": "intent_draft",
+          "accepted": false,
+          "snapshot": {
+            "version": 1,
+            "origin": "unaccepted_draft",
+            "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+            "goal": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "parsedSummary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "operation": {
+              "kind": "create"
+            },
+            "globalConstraints": [],
+            "deliverables": [
+              {
+                "id": "r1",
+                "index": 0,
+                "goal": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "type": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "dependsOn": [],
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "spec": {},
+                "changeContract": null,
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ]
+              },
+              {
+                "id": "r2",
+                "index": 1,
+                "goal": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "type": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "dependsOn": [
+                  0
+                ],
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                },
+                "changeContract": null,
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ]
+              }
+            ],
+            "hash": "42b5f285c2e79b3289bdfd566f1681a5d0f019409619248c000223328b1f505b"
+          }
+        },
+        {
+          "phase": "understand",
+          "attempt": 1,
+          "parsed": {
+            "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "turnOperation": {
+              "kind": "create"
+            },
+            "deliverables": [
+              {
+                "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "kind": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "form": "directions",
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "purpose": "marketing",
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ]
+              },
+              {
+                "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "kind": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "form": "script",
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ],
+                "dependsOn": [
+                  0
+                ],
+                "references": [
+                  "task:0"
+                ],
+                "sourceSelection": {
+                  "source": "task:0",
+                  "unitType": "directions",
+                  "mode": "selected",
+                  "unitIndexes": [
+                    2
+                  ],
+                  "layout": "unspecified"
+                },
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "purpose": "marketing",
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                }
+              }
+            ],
+            "facts": [
+              "产品是晚风冷萃",
+              "产品只有透明无字杯、琥珀色咖啡和冰块",
+              "用户已选定后一个方向（方向2）",
+              "用户要求两份交付均为文字，不生成图片或视频"
+            ],
+            "assumptions": [],
+            "gaps": [],
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "approval": {
+              "required": false,
+              "reason": ""
+            }
+          },
+          "rejectedDraft": "{\"field_0\":\"就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。\"}",
+          "accepted": false,
+          "failureStage": "reference",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置"
+        }
+      ]
+    },
+    {
+      "id": "5952d871-19d3-48da-9d32-ae353a0dbd38",
+      "tracePhase": "understand",
+      "status": "returned",
+      "startedAt": "2026-09-16T07:47:34.843Z",
+      "finishedAt": "2026-09-16T07:47:35.617Z",
+      "usage": {
+        "input_tokens": 1080,
+        "input_tokens_details": {
+          "cached_tokens": 896
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1117
+      },
+      "validations": [
+        {
+          "phase": "fill_missing_fields",
+          "patch": {
+            "field_0": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。"
+          },
+          "paths": [
+            "/deliverables/1/requestEvidence"
+          ],
+          "merged": {
+            "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "turnOperation": {
+              "kind": "create"
+            },
+            "deliverables": [
+              {
+                "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "kind": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "form": "directions",
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "purpose": "marketing",
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ]
+              },
+              {
+                "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "kind": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "form": "script",
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ],
+                "dependsOn": [
+                  0
+                ],
+                "references": [
+                  "task:0"
+                ],
+                "sourceSelection": {
+                  "source": "task:0",
+                  "unitType": "directions",
+                  "mode": "selected",
+                  "unitIndexes": [
+                    2
+                  ],
+                  "layout": "unspecified"
+                },
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "purpose": "marketing",
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                }
+              }
+            ],
+            "facts": [
+              "产品是晚风冷萃",
+              "产品只有透明无字杯、琥珀色咖啡和冰块",
+              "用户已选定后一个方向（方向2）",
+              "用户要求两份交付均为文字，不生成图片或视频"
+            ],
+            "assumptions": [],
+            "gaps": [],
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "approval": {
+              "required": false,
+              "reason": ""
+            }
+          }
+        },
+        {
+          "phase": "intent_draft",
+          "accepted": false,
+          "snapshot": {
+            "version": 1,
+            "origin": "unaccepted_draft",
+            "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+            "goal": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "parsedSummary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "operation": {
+              "kind": "create"
+            },
+            "globalConstraints": [],
+            "deliverables": [
+              {
+                "id": "r1",
+                "index": 0,
+                "goal": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "type": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "dependsOn": [],
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "spec": {},
+                "changeContract": null,
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ]
+              },
+              {
+                "id": "r2",
+                "index": 1,
+                "goal": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "type": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "dependsOn": [
+                  0
+                ],
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                },
+                "changeContract": null,
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ]
+              }
+            ],
+            "hash": "42b5f285c2e79b3289bdfd566f1681a5d0f019409619248c000223328b1f505b"
+          }
+        },
+        {
+          "phase": "understand",
+          "attempt": 2,
+          "parsed": {
+            "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+            "turnOperation": {
+              "kind": "create"
+            },
+            "deliverables": [
+              {
+                "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+                "kind": "text",
+                "action": "create",
+                "count": 2,
+                "artifactCount": 1,
+                "form": "directions",
+                "requiredMethods": [
+                  "direction-designer-zh-v1"
+                ],
+                "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+                "purpose": "marketing",
+                "constraints": [
+                  "两个方向编号1和2",
+                  "两个方向合为一份文档",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                  "不加其他元素",
+                  "不编价格、产地、功效"
+                ]
+              },
+              {
+                "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+                "kind": "text",
+                "action": "create",
+                "count": 1,
+                "artifactCount": 1,
+                "form": "script",
+                "requiredMethods": [
+                  "storyboard-one-shot-zh-v2"
+                ],
+                "dependsOn": [
+                  0
+                ],
+                "references": [
+                  "task:0"
+                ],
+                "sourceSelection": {
+                  "source": "task:0",
+                  "unitType": "directions",
+                  "mode": "selected",
+                  "unitIndexes": [
+                    2
+                  ],
+                  "layout": "unspecified"
+                },
+                "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+                "purpose": "marketing",
+                "constraints": [
+                  "总时长8秒",
+                  "共四镜",
+                  "每镜2秒",
+                  "脚本单独一份文档",
+                  "仅文字，不出图或视频",
+                  "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                  "不编价格、产地、功效"
+                ],
+                "spec": {
+                  "shotCount": 4,
+                  "secondsPerShot": 2,
+                  "durationSeconds": 8
+                }
+              }
+            ],
+            "facts": [
+              "产品是晚风冷萃",
+              "产品只有透明无字杯、琥珀色咖啡和冰块",
+              "用户已选定后一个方向（方向2）",
+              "用户要求两份交付均为文字，不生成图片或视频"
+            ],
+            "assumptions": [],
+            "gaps": [],
+            "safety": {
+              "disposition": "allow",
+              "untrustedInstructions": false,
+              "reason": ""
+            },
+            "approval": {
+              "required": false,
+              "reason": ""
+            }
+          },
+          "rejectedDraft": "{\"field_0\":\"就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。\"}",
+          "accepted": false,
+          "failureStage": "reference",
+          "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置"
+        },
+        {
+          "phase": "final_response",
+          "accepted": true,
+          "receipt": {
+            "status": "composed",
+            "source": "saved_artifact_projection",
+            "contractAccepted": false,
+            "artifactIds": [],
+            "stateMutationAllowed": false,
+            "toolCallsAllowed": false
+          }
+        }
+      ]
+    }
+  ]
+}

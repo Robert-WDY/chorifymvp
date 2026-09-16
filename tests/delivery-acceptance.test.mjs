@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {Verifier} from '../server/verification.mjs';
+import {deliveryVerdict,executionRecovery} from '../server/delivery-acceptance.mjs';
+import {acceptanceRecord} from '../server/document-contract.mjs';
+import {coverageStatus} from '../server/source-coverage.mjs';
+import {verifyArtifactOnce} from '../server/verification-attempt.mjs';
+const sig=()=>new AbortController().signal;
+const brain={respond:async()=>{throw Error('Quality model must not be called');}};
+test('delivery policy accepts returned text despite unmet exact wording',async()=>{const verdict=await new Verifier(brain,{policy:'delivery_only'}).verifyText({spec:{exactTexts:['必须出现']},constraints:['十字以内']},'另一份已生成的正文',{},sig());assert.equal(verdict.passed,true);assert.equal(acceptanceRecord(verdict,'另一份已生成的正文').quality.status,'not_evaluated');});
+test('empty text cannot satisfy delivery',()=>assert.equal(deliveryVerdict({content:'  '}).passed,false));
+test('returned image does not need visual model or exact ratio acceptance',async()=>{const v=await new Verifier(brain,{policy:'delivery_only'}).verifyArtifact({spec:{ratio:'3:4'}},{type:'image',url:'https://example.invalid/image',status:'completed',metadata:{provider:{size:'1024x1024'}}},{},sig());assert.equal(v.passed,true);assert.equal(v.checker.kind,'program');});
+test('missing result, incomplete receipt and simulation cannot count as production delivery',()=>{for(const a of [{type:'image'},{type:'image',url:'x',status:'running'},{type:'image',url:'x',metadata:{simulated:true}},{type:'image',url:'x',verification:{technical:'failed'}}])assert.equal(deliveryVerdict({artifact:a}).passed,false);});
+test('three source units still require three corresponding output receipts',()=>{const source={artifactId:'source',version:1,unitsHash:'h'},coverage={source,unitIds:['1','2','3'],layout:'separate_images'},item={output:'image',coverage};const artifact=id=>{const a={type:'image',url:'https://example.invalid/'+id,purpose:'deliverable',verification:{technical:'passed',semantic:'passed'},metadata:{coverage:{source,unitIds:[id]}}};a.acceptance=acceptanceRecord(deliveryVerdict({artifact:a}),a.url);return a;};assert.equal(coverageStatus(item,[artifact('1')]).complete,false);assert.equal(coverageStatus(item,['1','2','3'].map(artifact)).complete,true);});
+test('policy switch invalidates cached quality rejection and never calls model',async()=>{const a={type:'image',url:'https://example.invalid/a'},item={id:'i',references:[],dependsOn:[]},state={currentRunId:'r'};await verifyArtifactOnce({policy:'strict',verifyArtifact:async()=>({passed:false,uncertain:true,issues:['style unclear']})},item,a,state,sig());const verdict=await verifyArtifactOnce(new Verifier(brain,{policy:'delivery_only'}),item,a,state,sig());assert.equal(verdict.passed,true);assert.equal(a.verificationAttempts.length,2);});
+test('error routing preserves unknown submissions and distinguishes contract fixes',()=>{assert.equal(executionRecovery(new Error('timeout'),{kind:'media'},[{status:'unknown'}]).action,'reconcile_provider_receipt');assert.equal(executionRecovery({code:'reference_contract',message:'bad binding'},{kind:'media'}).action,'replan_affected_target');assert.equal(executionRecovery(new Error('failed'),{kind:'text'}).action,'retry_failed_step');});
+test('strict acceptance remains available explicitly',async()=>{const verdict=await new Verifier(brain,{policy:'strict'}).verifyText({spec:{exactTexts:['必须出现']}},'没写',{},sig());assert.equal(verdict.passed,false);});

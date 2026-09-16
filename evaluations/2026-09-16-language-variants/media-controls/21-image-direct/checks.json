@@ -1,0 +1,197 @@
+{
+  "id": "21-image-direct",
+  "dir": "media-controls/21-image-direct",
+  "group": "媒体直接生成对照",
+  "tone": "口语、直接生产请求",
+  "query": "给夏径茶饮生成一张桂花乌龙海报，米白底，9:16竖版，单杯浅金茶汤，少量桂花枝叶，自然光，不要人、文字、Logo和水印。",
+  "expected": {
+    "mediaType": "image",
+    "quantity": 1,
+    "waitApproval": true,
+    "noMedia": true
+  },
+  "status": "needs_input",
+  "sessionId": "6f3a329e-0c2b-4a9a-af57-c98df5902658",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "6f3a329e-0c2b-4a9a-af57-c98df5902658",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "savedPendingMediaPlan",
+      "passed": true,
+      "evidence": {
+        "status": "WAIT_CONFIRM",
+        "approval": {
+          "required": true,
+          "status": "pending",
+          "planHash": "15fe276da59bb23840c738519827b88d4d882c1e317ea56e50ca673f5a7c19a5",
+          "source": "explicit_control",
+          "revision": 1,
+          "contractHash": "11ce564895f7a7d8dee67e5f83722aad8fa1dbd8e28aaa4fac72c1d3e4841102",
+          "payload": {
+            "batchId": "1f9be04d-f399-4406-af7b-7fbf5fa4149e",
+            "itemId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+            "tool": "generate_image",
+            "items": [
+              {
+                "prompt": "画布与布局：9:16竖版海报，米白色纯色背景，画面干净留白，无边框、无标题栏、无编号区域。主体及数量：仅一杯浅金茶汤，杯身与液面清晰可辨；少量桂花枝叶作为唯一配衬，数量克制，不堆叠成束。场景和空间关系：杯子居中偏下放置于平整台面，桂花枝叶自然散落于杯侧和台面少量位置，与杯子保持清晰前后关系，不遮挡茶汤主体。镜头构图：竖版居中构图，平视略高机位，杯体完整入画，四周留有充分米白呼吸空间，比例9:16。必要光影：自然光从侧上方进入，在米白背景与台面形成柔和方向性阴影，浅金茶汤呈现清透、温润不浑浊的观感，不添加人工彩色灯光。明确文字与排除项：画面中不出现人、文字、字母、数字、Logo、品牌标识、水印、标签、包装说明或任何可识别的成句文案；不添加未提供的产品功效、配料标注或促销信息；不出现多杯、多茶汤容器或额外食物。",
+                "size": "1440x2560"
+              }
+            ]
+          }
+        },
+        "nodes": [
+          {
+            "id": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+            "itemId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+            "dependsOn": [],
+            "kind": "media",
+            "requiredMethods": [],
+            "outputContract": {
+              "stages": [],
+              "artifactCount": 1,
+              "contentCardinality": 1,
+              "spec": {
+                "ratio": "9:16"
+              }
+            },
+            "skillId": "image_creation_skill",
+            "tool": "generate_image",
+            "output": "image",
+            "count": 1,
+            "status": "prepared",
+            "revision": 1,
+            "history": [],
+            "batchId": "1f9be04d-f399-4406-af7b-7fbf5fa4149e",
+            "argsHash": "f89374ecf90d0ba2184866aa7ce4c3531895485ae48aec1c87e2fa4cb851b06f",
+            "skillArtifactId": "433bea1d-d1c0-4657-97e6-b4f8e19be2fe"
+          }
+        ]
+      }
+    },
+    {
+      "name": "mediaQuantity",
+      "passed": true,
+      "evidence": 1
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "WAIT_CONFIRM"
+  ],
+  "taskReason": [
+    "请确认已展示的具体方案"
+  ],
+  "artifactCount": 0,
+  "skills": [
+    {
+      "slug": "image_creation_skill",
+      "status": "completed",
+      "artifactId": "433bea1d-d1c0-4657-97e6-b4f8e19be2fe",
+      "contractValidated": true
+    }
+  ],
+  "windows": [],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24485,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6989,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 284,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7273
+      }
+    },
+    {
+      "index": 1,
+      "phase": "media_plan",
+      "methodId": "image_creation_skill",
+      "nodeId": "5b2979fd-622c-4399-9521-ba24fdd6009e",
+      "characters": 3340,
+      "systemCharacters": 1476,
+      "payloadKeys": [
+        "facts",
+        "globalConstraints",
+        "evidenceContext",
+        "supportingSources",
+        "executionPhase",
+        "authorization",
+        "loadedMethods",
+        "methodReferences",
+        "goal",
+        "sources",
+        "feedback"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1134,
+        "input_tokens_details": {
+          "cached_tokens": 384
+        },
+        "output_tokens": 429,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1563
+      }
+    }
+  ],
+  "final": "本轮尚未全部完成。请确认已展示的具体方案"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "20-empty-formal",
+  "dir": "20-empty-formal",
+  "group": "空会话引用",
+  "tone": "正式、假定既有版本",
+  "query": "请在上一版已确认的第二个创意方向基础上，仅调整措辞使其更年轻，严格保留其余内容。",
+  "expected": {
+    "needsInput": true,
+    "texts": 0,
+    "noMedia": true
+  },
+  "status": "blocked",
+  "sessionId": "774be520-9ee1-4117-8e09-f1597fa361f8",
+  "calls": 1,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "774be520-9ee1-4117-8e09-f1597fa361f8",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 0,
+        "actual": 0
+      }
+    },
+    {
+      "name": "clarifiesMissingReference",
+      "passed": false,
+      "evidence": {
+        "status": "blocked",
+        "tasks": [
+          "BLOCKED"
+        ]
+      }
+    }
+  ],
+  "strictPassed": false,
+  "failedChecks": [
+    "clarifiesMissingReference"
+  ],
+  "taskStatus": [
+    "BLOCKED"
+  ],
+  "taskReason": [
+    "执行图缺少选定方向的前置生产节点，不能删除选择要求继续"
+  ],
+  "artifactCount": 0,
+  "skills": [],
+  "windows": [],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24465,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 6973,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 292,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7265
+      }
+    }
+  ],
+  "final": "当前可执行内容已保存，后续等待：未提供上一版已确认的创意方向产物来源或版本，无法定位要修改的第二个创意方向。"
+}

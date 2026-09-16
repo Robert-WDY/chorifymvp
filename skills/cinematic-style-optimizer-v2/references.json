@@ -1,0 +1,268 @@
+[
+  {
+    "path": "references/core-contract.md",
+    "mimeType": "text/markdown",
+    "text": "# 核心契约\n\n1. 只优化影调、色彩、光线、肤色/主体可读性、对比、黑位、高光、颗粒和光学质感。\n2. 严格保留剧情事实、事件顺序、人物与动作、镜号/分段、时码、对白、构图、景别、运镜、音频、画幅和模型参数。\n3. 不自动拆分镜头，不新增事件、台词、运镜、时长、设备、年代、地点或生成参数。\n4. 一次选择 1 个主风格、0–2 个辅助特征和 1 套统一采集/色彩语言；不得堆叠多个互斥主风格。\n5. 技术名词必须落到可观察结果；“电影感、大片感、高级感、8K、HDR”等不能单独构成风格说明。\n6. 多镜头和多场景先保持全局视觉连续性，只在真实光源、昼夜、内外景或明确情绪转折处做局部变化。\n7. 统一母版的 22 个示例只用于比较风格变量，不得复制其中的人物、服装、公寓、雨夜、构图或物件。\n8. 用户只要求分析、推荐或文字优化时，不调用图片/视频生成工具。\n9. 不评价或修改剧本质量；分镜、表演、对白、音频和情节改写属于其他能力边界。\n\n## 输出优先级\n\n- 用户指定输出格式和长度时优先遵守。\n- 已有完整提示词：保持原结构并输出优化后的完整提示词。\n- 原始剧本/场景：默认只输出可追加风格块。\n- 纯风格咨询：输出推荐、依据和风格块，不补写不存在的内容。",
+    "headings": [
+      "references/core-contract.md > 核心契约",
+      "references/core-contract.md > 核心契约 > 输出优先级"
+    ]
+  },
+  {
+    "path": "references/examples.md",
+    "mimeType": "text/markdown",
+    "text": "# 输出示例与边界\n\n## 示例 1：修正混合术语\n\n### 输入\n\n`数字电影 Arri 色彩，S-Log 色调，低饱和冷调，画面四角暗角压暗。`\n\n### 诊断\n\n- `ARRI 色彩` 与 `S-Log` 属于不同采集/色彩体系，默认不并列使用。\n- 用户真正需要的是数字电影质感、低饱和冷调和边缘压暗。\n- 暗角应保持轻微，避免出现明显圆形滤镜感。\n\n### 优化\n\n`ARRI Alexa 风格的数字电影色彩科学，自然肤色与丰富中间调，柔和的高光滚降；克制的低饱和冷调，阴影轻微偏青蓝而亮部保持中性，黑位扎实但保留暗部层次，画面边缘自然、轻微压暗。`\n\n## 示例 2：已有视频提示词\n\n### 输入\n\n```text\n雨夜便利店，年轻女店员接起电话，镜头缓慢推近。冷色电影感，8K，大片质感，胶片感，ARRI，S-Log，强暗角。\n```\n\n### 优化原则\n\n- 保留场景、人物、动作和运镜。\n- 删除 `8K`、`大片质感` 等不能定义风格的词。\n- 选用 `cool-urban-thriller`，叠加 `skin-tone-protection` 与 `subtle-vignette`。\n\n### 优化结果\n\n```text\n雨夜便利店，年轻女店员接起电话，镜头缓慢推近。ARRI Alexa 风格的数字电影色彩科学，自然肤色与柔和高光滚降；克制的低饱和都市冷调，阴影轻微偏青蓝，便利店荧光灯保持略冷的真实质感，黑位扎实但保留货架与人物轮廓细节，画面边缘仅有轻微自然压暗。\n```\n\n## 示例 3：原始剧本\n\n### 输入摘要\n\n白天的家庭厨房，父亲给女儿做早餐，两人多年隔阂开始缓和。\n\n### 风格选择\n\n- 主风格：`golden-hour-humanist`\n- 辅助特征：`clean-spherical`、`skin-tone-protection`\n\n### 可追加风格块\n\n`温暖克制的人文电影影像，窗外低角度晨光自然进入厨房，暖高光与中性阴影保持平衡，父女肤色真实亲近，中等偏低对比，球面镜头质感自然，环境生活痕迹清晰，不做甜腻滤镜化处理。`\n\n不自动添加景别、运镜、时长或对白。\n\n## 示例 4：多场景连续性\n\n输入同时包含：\n\n- 白天室外寻找线索；\n- 夜间办公室调查；\n- 断电后的红色应急灯高潮。\n\n处理方式：\n\n1. 全局使用 `cool-urban-thriller`。\n2. 白天采用阴天低饱和自然光。\n3. 夜间保持青蓝阴影和中性肤色。\n4. 断电段落局部切换为 `red-emergency-dread`，但保留相同黑位、颗粒和肤色处理逻辑。\n\n不要为三个场景分别改成胶片、赛博霓虹和黑白风格。\n\n## 示例 5：只要求一句追加文本\n\n用户说“只给我一句能加到提示词末尾的话”时，直接输出：\n\n`ARRI Alexa 风格的数字电影色彩科学，自然肤色与柔和高光滚降，克制的低饱和冷调，阴影微偏青蓝、亮部保持中性，黑位扎实但保留细节，边缘轻微自然压暗。`\n\n不输出诊断表格。\n\n## 边界\n\n- 用户只要求画面风格时，不修改剧本。\n- 用户已有镜号和时码时，原样保留。\n- 用户已有音频、对白或音乐设计时，不进行音频优化。\n- 用户要求演员表演、情绪或微表情优化时，交给对应能力，不在此 Skill 中扩写。\n- 用户要求分镜拆解时，本 Skill 只提供全局风格规范或逐镜风格约束，不负责完整镜头设计。",
+    "headings": [
+      "references/examples.md > 输出示例与边界 > 示例 1：修正混合术语 > 输入",
+      "references/examples.md > 输出示例与边界 > 示例 1：修正混合术语 > 诊断",
+      "references/examples.md > 输出示例与边界 > 示例 1：修正混合术语 > 优化",
+      "references/examples.md > 输出示例与边界 > 示例 2：已有视频提示词 > 输入",
+      "references/examples.md > 输出示例与边界 > 示例 2：已有视频提示词 > 优化原则",
+      "references/examples.md > 输出示例与边界 > 示例 2：已有视频提示词 > 优化结果",
+      "references/examples.md > 输出示例与边界 > 示例 3：原始剧本 > 输入摘要",
+      "references/examples.md > 输出示例与边界 > 示例 3：原始剧本 > 风格选择",
+      "references/examples.md > 输出示例与边界 > 示例 3：原始剧本 > 可追加风格块",
+      "references/examples.md > 输出示例与边界 > 示例 4：多场景连续性",
+      "references/examples.md > 输出示例与边界 > 示例 5：只要求一句追加文本",
+      "references/examples.md > 输出示例与边界 > 边界"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/01-digital-cinema-natural.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: ARRI Alexa-inspired digital cinema color science; natural accurate skin tone; rich midtones; soft gradual highlight roll-off; medium contrast; restrained saturation; clean blacks with visible shadow detail; fine realistic digital texture.",
+    "headings": [
+      "references/style-example-prompts/01-digital-cinema-natural.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/02-documentary-observational.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Observational documentary realism using only believable apartment practical light and window ambience; naturally imperfect exposure; minimally processed color; honest skin texture; subtle on-location immediacy; preserve lived-in imperfections; no beauty lighting, no glamor, no strong vignette.",
+    "headings": [
+      "references/style-example-prompts/02-documentary-observational.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/03-cool-urban-thriller.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Restrained low-saturation urban thriller grade; shadows subtly cyan-blue while highlights stay neutral; clear separation between warm apartment practical light and cold rainy city outside; dense blacks retaining detail; very subtle natural edge darkening; protect readable natural skin tone; no commercial orange-teal look.",
+    "headings": [
+      "references/style-example-prompts/03-cool-urban-thriller.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/04-cold-clinical.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Cold clinical grade; cool white balance; low saturation; clean sharp mid-high contrast; whites and glass stay neutral; only a very slight cyan-green shift in shadows; sterile restrained clarity; no romantic softness, grain, warm nostalgia, or noticeable vignette.",
+    "headings": [
+      "references/style-example-prompts/04-cold-clinical.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/05-overcast-naturalism.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Overcast naturalism; transform exterior illumination into soft rainy overcast daylight while preserving the exact scene and rain; low contrast; low-saturation gray-green environment; skin retains a slight natural warmth; realistic wet air and material detail; quiet and restrained; no hard rim light or heavy blacks.",
+    "headings": [
+      "references/style-example-prompts/05-overcast-naturalism.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/06-neo-noir-controlled.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Controlled neo-noir; low-key lighting with a localized hard light cutting across the woman's profile; deep shadows and large areas of negative space; a limited precise palette; key facial features remain readable; tense, cool and morally ambiguous; never crush all shadow detail.",
+    "headings": [
+      "references/style-example-prompts/06-neo-noir-controlled.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/07-fluorescent-liminal-horror.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Fluorescent liminal horror; cold overhead fluorescent practicals create slightly sickly cool-white light with a very subtle green shift; flattened uncanny apartment space; minor uneven light intensity; skin remains readable; ordinary domestic reality feels quietly wrong; no supernatural entity and no dramatic blue wash.",
+    "headings": [
+      "references/style-example-prompts/07-fluorescent-liminal-horror.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/08-red-emergency-dread.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Power-outage emergency-red dread; the apartment is mostly dark and a low-intensity red emergency source illuminates only part of her side profile, headscarf and silhouette; background falls into layered deep black; simple oppressive red-black separation; do not flood every surface red; retain realistic low-light noise and only a few distant city lights.",
+    "headings": [
+      "references/style-example-prompts/08-red-emergency-dread.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/09-moonlit-blue-natural.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Natural moonlit blue-gray grade; soft low-level cool window light shapes the apartment and seated figure; low saturation without dead electric blue; give the woman's skin a very slight neutral recovery; quiet shadows retain curtain, furniture and fabric detail; believable night exposure.",
+    "headings": [
+      "references/style-example-prompts/09-moonlit-blue-natural.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/10-sodium-vapor-night.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Old sodium-vapor night look; dirty amber practical light from the rainy exterior contrasts with deep cyan-gray apartment shadows in a restricted palette; slightly gritty air; controlled reflections on rain glass and wood floor; skin adapts to the environment but remains readable; avoid luxurious golden advertising color.",
+    "headings": [
+      "references/style-example-prompts/10-sodium-vapor-night.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/11-warm-memory-film.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Warm memory-film character; warm midtones; gentle contrast; slightly lifted blacks; natural intimate skin; fine film grain; a restrained halation only around strong city highlights; nostalgic without sepia, excessive yellow, light leaks or overexposure.",
+    "headings": [
+      "references/style-example-prompts/11-warm-memory-film.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/12-romantic-soft-natural.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Natural romantic soft light; soft facial illumination that preserves bone structure and eye detail; low-to-medium contrast; naturally warm skin; restrained background color; smooth rainy-city bokeh; very gentle optical diffusion; intimate but not sugary; no skin smoothing or pink wash.",
+    "headings": [
+      "references/style-example-prompts/12-romantic-soft-natural.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/13-pastel-dream.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Low-contrast pastel dream; bright soft midtones; clean gentle separation of powder blue, pale lavender and warm cream across the rainy window and apartment; subtle optical diffusion; clean natural skin; light, subjective and at the edge of reality; no heavy blacks or coarse grain.",
+    "headings": [
+      "references/style-example-prompts/13-pastel-dream.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/14-golden-hour-humanist.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Golden-hour humanist cinema; low-angle warm light enters naturally through the rainy window after a shower; warm highlights balanced against near-neutral shadows; long soft shadows retain detail; healthy realistic skin; transparent air; do not make the whole frame uniformly orange or yellow.",
+    "headings": [
+      "references/style-example-prompts/14-golden-hour-humanist.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/15-clean-35mm-drama.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Refined 35mm drama-film character; natural skin; rich midtones; soft highlight roll-off; fine uniform grain matched to exposure; moderate color density; stable clean image; no scratches, frame jitter, light leaks, fake vintage filter or damaged-film artifacts.",
+    "headings": [
+      "references/style-example-prompts/15-clean-35mm-drama.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/16-raw-16mm-documentary.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Raw 16mm observational texture; clearly visible but natural grain that varies with exposure; slight exposure and color instability; higher contrast; limited resolving power; immediate handmade on-location feeling in shadows and rain glass; no fake scratches, torn frames, or exaggerated film damage.",
+    "headings": [
+      "references/style-example-prompts/16-raw-16mm-documentary.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/17-muted-period-drama.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Muted period-drama grade; controlled believable gamut; low saturation; accurate material color in fabric, wood floor, curtain and furniture; soft highlights; weighty midtones; fine grain; suggest period density through color and material only, without changing any modern apartment object or adding sepia.",
+    "headings": [
+      "references/style-example-prompts/17-muted-period-drama.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/18-bleach-bypass-austere.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Restrained bleach-bypass tendency; significantly reduced saturation; elevated local contrast; cool silvery density; subdued but readable skin; moderate grain; firm blacks retaining key texture; severe and unsentimental without crushing every shadow.",
+    "headings": [
+      "references/style-example-prompts/18-bleach-bypass-austere.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/19-premium-commercial-clean.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Premium commercial-clean cinema; precise clean color; exact controlled highlights on skin, fabric, wood, glass and raindrops; medium contrast; pure clean blacks; very low visible noise; crisp material detail; restrained modern finish; no coarse grain, exposure drift, dirty cast, or heavy vignette.",
+    "headings": [
+      "references/style-example-prompts/19-premium-commercial-clean.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/20-luxury-low-key.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Luxury low-key lighting; deep clean apartment background; precise edge light outlines her side profile, headscarf and shoulders; the dark red apron and a few city lights act as controlled saturated accents; high but controlled contrast; refined highlights on glass and wood; mysterious and polished, never flat or documentary-grimy.",
+    "headings": [
+      "references/style-example-prompts/20-luxury-low-key.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/21-neon-cyberpunk-disciplined.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Disciplined near-future neon cinema using ONLY cyan-blue and magenta as the two dominant neon colors; controlled reflections across the rain-covered window and wet city surfaces; deep dark apartment base retains spatial depth; protect the woman's readable skin from full color contamination; modern, cold and grounded, never rainbow neon.",
+    "headings": [
+      "references/style-example-prompts/21-neon-cyberpunk-disciplined.md"
+    ]
+  },
+  {
+    "path": "references/style-example-prompts/22-monochrome-noir.md",
+    "mimeType": "text/markdown",
+    "text": "NO TEXT, NO WATERMARK, NO LOGO, NO BORDER, NO COLLAGE. Image 1 is the exact edit target. Change ONLY the visible cinematographic style: color, lighting, contrast, highlight roll-off, black level, grain and optical texture. Preserve exactly the same woman, face, reddish-brown bob, bangs, red headscarf, pale yellow shirt, dark red apron, black straps, dark trousers and black shoes. Preserve exactly her seated pose on the same chair, both hands resting on her lap, side profile looking out the window. Preserve the apartment, sofa, floor lamp, curtain, side table, wood floor, window, rain, city view, every object position, camera position, 16:9 composition and crop. Exactly one woman. Add or remove nothing. Do not turn it into a shop or cafe. Photorealistic live-action cinematic still. STYLE: Pure monochrome black-and-white noir with absolutely no remaining color; articulate black, white and gray scale; localized hard light and deep shadows create strong graphic relationships; emphasize texture in her profile, hair, clothing, raindrops, wood and furniture; highlights do not clip; shadows retain necessary information.",
+    "headings": [
+      "references/style-example-prompts/22-monochrome-noir.md"
+    ]
+  },
+  {
+    "path": "references/style-image-examples.md",
+    "mimeType": "text/markdown",
+    "text": "# 统一母版与22种主风格效果示例\n\n## 目录\n\n1. 使用范围\n2. 总览和统一母版\n3. 风格索引\n4. 使用示例\n\n## 使用范围\n\n这些示例用于比较同一画面在不同电影画面风格下的可见差异。\n\n- 统一内容：同一名女子坐在公寓窗前望向窗外。\n- 固定条件：人物、服装、坐姿、房间、物件位置、机位和16:9构图。\n- 可变条件：色彩、光线、对比、黑位、高光、颗粒和光学质感。\n- 生成方式：`gpt-image-2` 垫图重绘。\n\n不要把示例场景内容复制到其他任务。应根据用户输入重写内容锁定段，只复用相应风格语言与约束结构。\n\n## 总览和统一母版\n\n- 统一母版：[00-unified-master.png](../assets/style-examples/00-unified-master.png)\n- 风格总览01—11：[overview-01-11.jpg](../assets/style-examples/overview-01-11.jpg)\n- 风格总览12—22：[overview-12-22.jpg](../assets/style-examples/overview-12-22.jpg)\n\n当需要观察图片内容时，使用可用的图片查看工具打开对应资产；不要仅依据文件名推断效果。\n\n## 风格索引\n\n| 编号 | 风格 ID／名称 | 实际生成提示词 | 实际效果图 |\n|---:|---|---|---|\n| 01 | `digital-cinema-natural`／自然数字电影 | [Prompt](style-example-prompts/01-digital-cinema-natural.md) | [Image](../assets/style-examples/01-digital-cinema-natural.png) |\n| 02 | `documentary-observational`／观察式纪录写实 | [Prompt](style-example-prompts/02-documentary-observational.md) | [Image](../assets/style-examples/02-documentary-observational.png) |\n| 03 | `cool-urban-thriller`／低饱和都市冷调 | [Prompt](style-example-prompts/03-cool-urban-thriller.md) | [Image](../assets/style-examples/03-cool-urban-thriller.png) |\n| 04 | `cold-clinical`／冷峻临床感 | [Prompt](style-example-prompts/04-cold-clinical.md) | [Image](../assets/style-examples/04-cold-clinical.png) |\n| 05 | `overcast-naturalism`／阴天自然主义 | [Prompt](style-example-prompts/05-overcast-naturalism.md) | [Image](../assets/style-examples/05-overcast-naturalism.png) |\n| 06 | `neo-noir-controlled`／克制新黑色电影 | [Prompt](style-example-prompts/06-neo-noir-controlled.md) | [Image](../assets/style-examples/06-neo-noir-controlled.png) |\n| 07 | `fluorescent-liminal-horror`／荧光灯临界恐怖 | [Prompt](style-example-prompts/07-fluorescent-liminal-horror.md) | [Image](../assets/style-examples/07-fluorescent-liminal-horror.png) |\n| 08 | `red-emergency-dread`／应急红光压迫 | [Prompt](style-example-prompts/08-red-emergency-dread.md) | [Image](../assets/style-examples/08-red-emergency-dread.png) |\n| 09 | `moonlit-blue-natural`／自然月夜蓝调 | [Prompt](style-example-prompts/09-moonlit-blue-natural.md) | [Image](../assets/style-examples/09-moonlit-blue-natural.png) |\n| 10 | `sodium-vapor-night`／钠灯夜色 | [Prompt](style-example-prompts/10-sodium-vapor-night.md) | [Image](../assets/style-examples/10-sodium-vapor-night.png) |\n| 11 | `warm-memory-film`／暖色记忆胶片 | [Prompt](style-example-prompts/11-warm-memory-film.md) | [Image](../assets/style-examples/11-warm-memory-film.png) |\n| 12 | `romantic-soft-natural`／自然柔光爱情 | [Prompt](style-example-prompts/12-romantic-soft-natural.md) | [Image](../assets/style-examples/12-romantic-soft-natural.png) |\n| 13 | `pastel-dream`／粉彩梦境 | [Prompt](style-example-prompts/13-pastel-dream.md) | [Image](../assets/style-examples/13-pastel-dream.png) |\n| 14 | `golden-hour-humanist`／黄金时刻人文暖调 | [Prompt](style-example-prompts/14-golden-hour-humanist.md) | [Image](../assets/style-examples/14-golden-hour-humanist.png) |\n| 15 | `clean-35mm-drama`／细腻35mm剧情片 | [Prompt](style-example-prompts/15-clean-35mm-drama.md) | [Image](../assets/style-examples/15-clean-35mm-drama.png) |\n| 16 | `raw-16mm-documentary`／粗粝16mm纪实 | [Prompt](style-example-prompts/16-raw-16mm-documentary.md) | [Image](../assets/style-examples/16-raw-16mm-documentary.png) |\n| 17 | `muted-period-drama`／低饱和年代剧情 | [Prompt](style-example-prompts/17-muted-period-drama.md) | [Image](../assets/style-examples/17-muted-period-drama.png) |\n| 18 | `bleach-bypass-austere`／克制漂白旁路 | [Prompt](style-example-prompts/18-bleach-bypass-austere.md) | [Image](../assets/style-examples/18-bleach-bypass-austere.png) |\n| 19 | `premium-commercial-clean`／高端商业洁净 | [Prompt](style-example-prompts/19-premium-commercial-clean.md) | [Image](../assets/style-examples/19-premium-commercial-clean.png) |\n| 20 | `luxury-low-key`／奢华低调光 | [Prompt](style-example-prompts/20-luxury-low-key.md) | [Image](../assets/style-examples/20-luxury-low-key.png) |\n| 21 | `neon-cyberpunk-disciplined`／克制赛博霓虹 | [Prompt](style-example-prompts/21-neon-cyberpunk-disciplined.md) | [Image](../assets/style-examples/21-neon-cyberpunk-disciplined.png) |\n| 22 | `monochrome-noir`／黑白黑色电影 | [Prompt](style-example-prompts/22-monochrome-noir.md) | [Image](../assets/style-examples/22-monochrome-noir.png) |\n\n## 使用示例\n\n用户要求“把这个场景做成应急红光压迫风格”时：\n\n1. 读取 `style-library.md` 中的 `red-emergency-dread` 风格卡。\n2. 需要观察实例时，打开本文件中编号08的效果图。\n3. 需要生成提示词结构参考时，读取编号08的实际生成提示词。\n4. 用用户的主体、动作、场景和构图替换示例内容锁定段。\n5. 保留低照度红光、局部面部可读、红黑分离和避免均匀染红等风格特征。",
+    "headings": [
+      "references/style-image-examples.md > 统一母版与22种主风格效果示例 > 目录",
+      "references/style-image-examples.md > 统一母版与22种主风格效果示例 > 使用范围",
+      "references/style-image-examples.md > 统一母版与22种主风格效果示例 > 总览和统一母版",
+      "references/style-image-examples.md > 统一母版与22种主风格效果示例 > 风格索引",
+      "references/style-image-examples.md > 统一母版与22种主风格效果示例 > 使用示例"
+    ]
+  },
+  {
+    "path": "references/style-library.md",
+    "mimeType": "text/markdown",
+    "text": "# 画面风格库\n\n## 目录\n\n1. 使用方法\n2. A. 数字电影与写实（01–05）\n3. B. 夜景、悬疑与恐怖（06–10）\n4. C. 温暖、爱情与记忆（11–14）\n5. D. 胶片、年代与粗粝质感（15–18）\n6. E. 商业、时尚与类型化（19–22）\n7. 辅助特征\n8. 扩展规则\n\n## 使用方法\n\n先选一个主风格，再从“辅助特征”中选 0–2 项。除非用户明确要求，不要混用两个主风格的采集语言、胶片体系或镜头体系。\n\n每个风格卡包含：\n\n- **适用**：推荐的叙事、情绪和场景。\n- **视觉特征**：判断与解释依据。\n- **提示词块**：可按输入语言取用并结合场景微调。\n- **避免**：容易发生的冲突或误用。\n\n## A. 数字电影与写实\n\n### `digital-cinema-natural`｜自然数字电影\n\n- **适用**：剧情片、人物对话、现实题材、需要自然肤色的通用场景。\n- **视觉特征**：自然肤色、中等对比、柔和高光滚降、干净黑位、饱和度克制。\n- **提示词块**：`ARRI Alexa 风格的数字电影色彩科学，自然准确的肤色，柔和的高光滚降，中等对比与克制饱和度，黑位干净但保留暗部层次，细腻真实的数字电影质感`\n- **避免**：与 S-Log、强烈漂白、重度霓虹染色同时使用。\n\n### `documentary-observational`｜观察式纪录写实\n\n- **适用**：纪实、街头、社会题材、日常生活、非摆拍感。\n- **视觉特征**：可用光、自然曝光变化、低修饰、真实肤色、轻微手持质感。\n- **提示词块**：`观察式纪录片画面，自然可用光与真实曝光变化，低修饰色彩，肤色真实，轻微手持摄影质感，保留环境中的不完美与生活痕迹`\n- **避免**：过度柔焦、奢华广告光、强烈电影暗角。\n\n### `cool-urban-thriller`｜低饱和都市冷调\n\n- **适用**：犯罪、悬疑、追踪、雨夜、孤独的城市空间。\n- **视觉特征**：低饱和、阴影微偏青蓝、亮部中性、冷暖光源分离、受控暗角。\n- **提示词块**：`克制的低饱和都市冷调，阴影轻微偏青蓝而亮部保持中性，冷暖实景光源清晰分离，黑位扎实但保留细节，边缘轻微压暗，紧张而写实的数字电影氛围`\n- **避免**：把肤色整体染蓝；同时使用浓烈橙青商业调色。\n\n### `cold-clinical`｜冷峻临床感\n\n- **适用**：医院、实验室、审讯、科技伦理、疏离感空间。\n- **视觉特征**：偏冷白平衡、低饱和、中高对比、干净锐利、绿色或青色极轻微偏移。\n- **提示词块**：`冷峻临床式影调，偏冷白平衡与低饱和色彩，干净锐利的中高对比，白色与金属表面保持中性，阴影仅有极轻微青绿色偏移，克制、疏离、无浪漫化修饰`\n- **避免**：厚重颗粒、暖色怀旧、明显暗角。\n\n### `overcast-naturalism`｜阴天自然主义\n\n- **适用**：阴雨、冬季、乡村、社会现实、内敛人物戏。\n- **视觉特征**：柔和天空光、低反差、灰绿色环境、肤色保留微暖。\n- **提示词块**：`阴天自然主义影像，柔和漫射天空光，低反差与低饱和灰绿色环境，肤色保留轻微暖意，湿润空气与材质细节真实，整体安静克制`\n- **避免**：强硬轮廓光、高饱和天空、厚重黑位。\n\n## B. 夜景、悬疑与恐怖\n\n### `neo-noir-controlled`｜克制新黑色电影\n\n- **适用**：犯罪、侦探、道德困境、夜间室内、权力关系。\n- **视觉特征**：低调布光、局部硬光、深阴影、有限色彩、负空间。\n- **提示词块**：`克制的新黑色电影风格，低调布光与局部硬光切割人物，深阴影和大面积负空间，有限而精确的色彩，面部关键区域仍保持可读，紧张、冷静、具有道德暧昧感`\n- **避免**：把所有暗部压成纯黑；每个光源都使用彩色霓虹。\n\n### `fluorescent-liminal-horror`｜荧光灯临界恐怖\n\n- **适用**：便利店、办公室、地下空间、走廊、空旷公共场所。\n- **视觉特征**：顶置荧光灯、轻微绿偏、平坦空间、局部曝光不稳、空无感。\n- **提示词块**：`临界空间式现实恐怖，顶置荧光灯形成略显病态的冷白光与极轻微绿色偏移，空间平坦空旷，局部灯管亮度不均，人物肤色仍可辨认，日常环境中潜藏不安`\n- **避免**：过早加入超自然视觉效果；强烈电影蓝调覆盖荧光灯特征。\n\n### `red-emergency-dread`｜应急红光压迫\n\n- **适用**：断电、警报、密闭空间、危险升级、惊悚高潮。\n- **视觉特征**：暗环境、低照度红光、局部面部可读、红黑分离、极少辅助色。\n- **提示词块**：`断电后的低照度应急红光，红色仅照亮人物局部轮廓和关键表情，背景沉入有层次的深黑，红黑关系简洁而压迫，避免大面积均匀染红，保留真实暗光噪点与呼吸感`\n- **避免**：红色铺满所有表面；同时加入蓝橙双主色。\n\n### `moonlit-blue-natural`｜自然月夜蓝调\n\n- **适用**：户外夜景、孤独、秘密会面、静谧惊悚。\n- **视觉特征**：深蓝灰环境、柔和冷光、低饱和、肤色轻微中性回补。\n- **提示词块**：`自然月夜蓝灰影调，柔和低照度冷光塑造空间层次，环境低饱和但不泛死蓝，人物肤色获得极轻微中性回补，暗部安静而保留细节`\n- **避免**：日景强行压暗的“假夜景”感；荧光蓝高饱和。\n\n### `sodium-vapor-night`｜钠灯夜色\n\n- **适用**：公路、工业区、旧城区、停车场、追逐与边缘空间。\n- **视觉特征**：脏橙钠灯、深青灰阴影、有限色域、粗粝空气。\n- **提示词块**：`旧式钠灯主导的夜景，脏橙色实景光与深青灰阴影形成有限色域，空气略显粗粝，路面和金属反射受控，人物肤色随环境变化但保持可辨`\n- **避免**：奢华金色广告感；高饱和橙青大片调色。\n\n## C. 温暖、爱情与记忆\n\n### `warm-memory-film`｜暖色记忆胶片\n\n- **适用**：回忆、家庭、成长、离别、怀旧但不甜腻的段落。\n- **视觉特征**：暖中间调、柔和对比、抬高少量黑位、细颗粒、轻微高光光晕。\n- **提示词块**：`温暖的记忆胶片质感，中间调偏暖，柔和对比与略微抬起的黑位，肤色自然亲近，细腻胶片颗粒和轻微高光光晕，怀旧但不过度泛黄`\n- **避免**：强烈棕褐滤镜、重度漏光、所有回忆统一过曝。\n\n### `romantic-soft-natural`｜自然柔光爱情\n\n- **适用**：亲密关系、初见、安静约会、人物近景。\n- **视觉特征**：柔和面部光、低至中等对比、自然暖肤色、背景色彩克制。\n- **提示词块**：`自然柔光的浪漫电影影像，面部光线柔和但保留五官结构，中低对比，自然微暖肤色，背景色彩克制，焦外平滑，亲密而不甜腻`\n- **避免**：过度磨皮、粉色泛滥、强烈梦幻光晕。\n\n### `pastel-dream`｜粉彩梦境\n\n- **适用**：青春、幻想、轻喜剧、主观梦境、音乐影像。\n- **视觉特征**：低对比粉彩、明亮中间调、柔和色彩分离、轻微扩散。\n- **提示词块**：`低对比粉彩梦境，明亮柔和的中间调，清晰但不刺眼的色彩分离，轻微光学扩散与干净肤色，轻盈、主观、带有现实边缘感`\n- **避免**：恐怖或高风险动作段落；重黑位和粗颗粒。\n\n### `golden-hour-humanist`｜黄金时刻人文暖调\n\n- **适用**：旅途、成长、家庭、乡野、希望与和解。\n- **视觉特征**：低角度暖光、长阴影、自然逆光、暖高光与中性阴影。\n- **提示词块**：`黄金时刻的人文电影影像，低角度暖光和自然逆光塑造人物，长阴影保留层次，高光温暖而阴影接近中性，肤色健康真实，空气通透`\n- **避免**：整幅画面统一橙黄；强烈暗角。\n\n## D. 胶片、年代与粗粝质感\n\n### `clean-35mm-drama`｜细腻 35mm 剧情片\n\n- **适用**：人物剧情、年代感轻微、希望兼顾胶片质感与清晰度。\n- **视觉特征**：细颗粒、柔和高光、自然肤色、轻微色彩密度、稳定画面。\n- **提示词块**：`细腻的 35mm 剧情片质感，自然肤色与丰富中间调，柔和高光滚降，细小均匀的胶片颗粒，色彩具有适度密度，画面稳定而不显复古滤镜化`\n- **避免**：强烈划痕、漏光、跳帧等损坏效果。\n\n### `raw-16mm-documentary`｜粗粝 16mm 纪实\n\n- **适用**：青年文化、地下音乐、抗议、街头、主观回忆。\n- **视觉特征**：明显颗粒、较高对比、轻微曝光波动、有限清晰度、即时感。\n- **提示词块**：`粗粝的 16mm 纪实质感，明显但自然的胶片颗粒，轻微曝光和色彩波动，较高对比与有限解析感，手工、即时、贴近现场`\n- **避免**：奢华产品广告、要求绝对干净锐利的画面。\n\n### `muted-period-drama`｜低饱和年代剧情\n\n- **适用**：历史、旧城、战后、家族年代戏。\n- **视觉特征**：受控色域、材质色准确、低饱和、柔和高光、年代环境色。\n- **提示词块**：`低饱和年代剧情片影调，受控而可信的色域，服装与建筑材质色准确，柔和高光与沉稳中间调，细腻颗粒，仅通过色彩密度和材质呈现年代感`\n- **避免**：用统一黄褐色替代年代美术；现代霓虹色。\n\n### `bleach-bypass-austere`｜克制漂白旁路\n\n- **适用**：战争、灾难、工业、严酷生存、极端压力。\n- **视觉特征**：低饱和、高对比、银质感、高颗粒感、冷硬肤色。\n- **提示词块**：`克制的漂白旁路视觉倾向，显著降低饱和度并提高局部对比，带有银质般冷硬密度，肤色压低但仍可辨认，颗粒适中，严峻而不做作`\n- **避免**：爱情、轻喜剧、奢华广告；压死全部暗部。\n\n## E. 商业、时尚与类型化\n\n### `premium-commercial-clean`｜高端商业洁净\n\n- **适用**：品牌、产品、汽车、美妆、科技发布。\n- **视觉特征**：高控制度、干净色彩、精准高光、低噪点、材质清楚。\n- **提示词块**：`高端商业电影画面，色彩干净准确，材质和轮廓高光控制精确，中等对比，黑位纯净，画面低噪点且细节清楚，整体克制、现代、具有高级感`\n- **避免**：粗颗粒、曝光漂移、重暗角、脏污色偏。\n\n### `luxury-low-key`｜奢华低调光\n\n- **适用**：珠宝、香水、时装、豪华汽车、夜间室内。\n- **视觉特征**：深色背景、精确边缘光、饱和色点缀、高对比但受控。\n- **提示词块**：`奢华低调布光，深色背景与精确边缘光勾勒轮廓，少量高饱和色作为点缀，黑位深而洁净，金属、玻璃与皮革高光受控，神秘而精致`\n- **避免**：纪录片式脏乱、自然曝光波动、大面积平光。\n\n### `neon-cyberpunk-disciplined`｜克制赛博霓虹\n\n- **适用**：近未来城市、科技犯罪、夜间街道、电子文化。\n- **视觉特征**：两种主霓虹色、湿表面反射、深色基底、肤色保护。\n- **提示词块**：`克制的近未来霓虹影像，以两种主霓虹色建立清晰色彩层级，湿润表面产生受控反射，深色基底保留空间，人物肤色不被完全染色，现代、冷峻、具有真实城市质感`\n- **避免**：红橙黄绿青蓝紫同时出现；无处不在的发光标识。\n\n### `monochrome-noir`｜黑白黑色电影\n\n- **适用**：侦探、心理、舞台化冲突、道德寓言。\n- **视觉特征**：黑白灰层次、硬光、深阴影、纹理突出、强图形关系。\n- **提示词块**：`黑白黑色电影影像，清晰的黑白灰层次，硬光与深阴影形成强烈图形关系，面部和材质纹理突出，高光不过曝，暗部保持必要信息`\n- **避免**：继续描述彩色调色；黑位完全无细节。\n\n## 辅助特征\n\n以下特征只能作为辅助，不应代替主风格：\n\n- `subtle-vignette`：轻微边缘压暗，中心不出现明显光圈感。\n- `fine-film-grain`：细小、均匀、与曝光匹配的胶片颗粒。\n- `soft-highlight-halation`：只在强高光边缘出现轻微光晕。\n- `gentle-diffusion`：轻微柔化高频细节，保留眼睛和材质结构。\n- `natural-lens-falloff`：自然镜头边缘亮度衰减，不做复古滤镜。\n- `restrained-anamorphic`：宽银幕变形镜头倾向，椭圆焦外与极轻微水平眩光。\n- `clean-spherical`：球面镜头，几何自然、焦外平滑、眩光受控。\n- `lifted-blacks`：黑位略抬高，适合记忆和柔和胶片，不用于要求深黑的风格。\n- `dense-blacks`：黑位扎实但仍保留暗部纹理。\n- `skin-tone-protection`：环境可偏色，人物肤色保持独立和可读。\n\n## 扩展规则\n\n新增风格卡时必须提供唯一 ID、适用条件、可观察视觉特征、可直接使用的提示词块和避免项。不得只添加导演姓名、电影片名或“高级、电影感”等不可验证标签。",
+    "headings": [
+      "references/style-library.md > 画面风格库 > 目录",
+      "references/style-library.md > 画面风格库 > 使用方法",
+      "references/style-library.md > 画面风格库 > A. 数字电影与写实 > `digital-cinema-natural`｜自然数字电影",
+      "references/style-library.md > 画面风格库 > A. 数字电影与写实 > `documentary-observational`｜观察式纪录写实",
+      "references/style-library.md > 画面风格库 > A. 数字电影与写实 > `cool-urban-thriller`｜低饱和都市冷调",
+      "references/style-library.md > 画面风格库 > A. 数字电影与写实 > `cold-clinical`｜冷峻临床感",
+      "references/style-library.md > 画面风格库 > A. 数字电影与写实 > `overcast-naturalism`｜阴天自然主义",
+      "references/style-library.md > 画面风格库 > B. 夜景、悬疑与恐怖 > `neo-noir-controlled`｜克制新黑色电影",
+      "references/style-library.md > 画面风格库 > B. 夜景、悬疑与恐怖 > `fluorescent-liminal-horror`｜荧光灯临界恐怖",
+      "references/style-library.md > 画面风格库 > B. 夜景、悬疑与恐怖 > `red-emergency-dread`｜应急红光压迫",
+      "references/style-library.md > 画面风格库 > B. 夜景、悬疑与恐怖 > `moonlit-blue-natural`｜自然月夜蓝调",
+      "references/style-library.md > 画面风格库 > B. 夜景、悬疑与恐怖 > `sodium-vapor-night`｜钠灯夜色",
+      "references/style-library.md > 画面风格库 > C. 温暖、爱情与记忆 > `warm-memory-film`｜暖色记忆胶片",
+      "references/style-library.md > 画面风格库 > C. 温暖、爱情与记忆 > `romantic-soft-natural`｜自然柔光爱情",
+      "references/style-library.md > 画面风格库 > C. 温暖、爱情与记忆 > `pastel-dream`｜粉彩梦境",
+      "references/style-library.md > 画面风格库 > C. 温暖、爱情与记忆 > `golden-hour-humanist`｜黄金时刻人文暖调",
+      "references/style-library.md > 画面风格库 > D. 胶片、年代与粗粝质感 > `clean-35mm-drama`｜细腻 35mm 剧情片",
+      "references/style-library.md > 画面风格库 > D. 胶片、年代与粗粝质感 > `raw-16mm-documentary`｜粗粝 16mm 纪实",
+      "references/style-library.md > 画面风格库 > D. 胶片、年代与粗粝质感 > `muted-period-drama`｜低饱和年代剧情",
+      "references/style-library.md > 画面风格库 > D. 胶片、年代与粗粝质感 > `bleach-bypass-austere`｜克制漂白旁路",
+      "references/style-library.md > 画面风格库 > E. 商业、时尚与类型化 > `premium-commercial-clean`｜高端商业洁净",
+      "references/style-library.md > 画面风格库 > E. 商业、时尚与类型化 > `luxury-low-key`｜奢华低调光",
+      "references/style-library.md > 画面风格库 > E. 商业、时尚与类型化 > `neon-cyberpunk-disciplined`｜克制赛博霓虹",
+      "references/style-library.md > 画面风格库 > E. 商业、时尚与类型化 > `monochrome-noir`｜黑白黑色电影",
+      "references/style-library.md > 画面风格库 > 辅助特征",
+      "references/style-library.md > 画面风格库 > 扩展规则"
+    ]
+  },
+  {
+    "path": "references/technical-terms.md",
+    "mimeType": "text/markdown",
+    "text": "# 摄影与调色术语规则\n\n## 目录\n\n1. 术语分层\n2. 常见体系\n3. 冲突矩阵\n4. 术语到可见特征的翻译\n5. 品牌与作品风格引用\n\n## 1. 术语分层\n\n不要把不同层级的词当成同一类风格：\n\n| 层级 | 例子 | 说明 |\n|---|---|---|\n| 采集设备/色彩科学 | ARRI Alexa、Sony CineAlta、RED | 影响传感器响应、色彩与高光处理 |\n| Log 编码/工作空间 | LogC、S-Log3、Log3G10、ACEScct | 用于保留和处理动态范围，不等于最终影调 |\n| 显示转换/调色 | 冷调、低饱和、漂白旁路、橙青 | 观众最终看见的色彩关系 |\n| 胶片模拟 | 35mm、16mm、负片/正片倾向 | 涉及颗粒、色彩密度、高光与对比 |\n| 镜头语言 | 球面、变形宽银幕、扩散滤镜 | 影响焦外、畸变、眩光与微对比 |\n| 后期效果 | 暗角、光晕、色差、漏光 | 应克制使用的局部效果 |\n\n生成提示词可以借用真实摄影术语，但最终必须落到可观察结果。\n\n## 2. 常见体系\n\n### ARRI / LogC 倾向\n\n常见可见意图：\n\n- 自然肤色；\n- 柔和、渐进的高光滚降；\n- 丰富中间调；\n- 色彩不过分电子化；\n- 暗部层次平顺。\n\n推荐表达：\n\n`ARRI Alexa 风格的数字电影色彩科学，自然肤色，丰富中间调，柔和高光滚降`\n\n如果只是生成式模拟，写“ARRI Alexa 风格”或“ARRI-inspired”，不要声称实际由该设备拍摄。\n\n### Sony S-Log3 倾向\n\nS-Log3 是采集曲线，不是“冷调滤镜”。若用户想表达 Sony 数字电影素材经冷调处理，应写：\n\n`Sony CineAlta / S-Log3 风格的宽动态范围采集倾向，经克制的低饱和冷调处理，阴影略偏青蓝，肤色保持中性`\n\n不要只写“S-Log 色调”，因为 Log 原始素材通常是低对比、低饱和的中间状态。\n\n### RED / Log3G10 倾向\n\n适合强调：\n\n- 清晰、现代的数字质感；\n- 较高微对比；\n- 鲜明但可控的色彩；\n- 细节密度。\n\n不要自动等同于过度锐化或高饱和。\n\n### ACES\n\nACES 是色彩管理工作流，不是单一视觉风格。只有用户询问工作流时才强调 ACES；普通生成提示词应直接写目标色彩和对比。\n\n### 胶片模拟\n\n“35mm/16mm”至少要配合 2–3 个可见特征：\n\n- 颗粒大小；\n- 高光滚降；\n- 色彩密度；\n- 黑位；\n- 光晕；\n- 曝光稳定性。\n\n不要同时使用“粗粝 16mm”和“绝对干净无噪点”。\n\n## 3. 冲突矩阵\n\n| 组合 | 默认判断 | 处理 |\n|---|---|---|\n| ARRI/LogC + Sony S-Log | 冲突 | 根据用户意图选一个采集体系 |\n| 球面镜头 + 变形宽银幕 | 冲突 | 选一个；无法判断时默认球面 |\n| 压死黑位 + 暗部细节完整 | 冲突 | 改为“黑位扎实，关键暗部保留纹理” |\n| 低饱和冷调 + 自然肤色 | 可兼容 | 环境冷调，增加肤色保护 |\n| 暖色记忆 + 临床冷白光 | 通常冲突 | 除非是明确的时空或情绪对照 |\n| 细腻 35mm + 轻微颗粒 | 可兼容 | 颗粒保持细小均匀 |\n| 高端洁净广告 + 粗粝 16mm | 通常冲突 | 根据品牌意图二选一 |\n| 新黑色电影 + 深阴影细节 | 可兼容 | 保留关键表情和叙事信息 |\n| 强暗角 + 广角环境交代 | 谨慎 | 将暗角降为轻微边缘衰减 |\n| HDR + 柔和低反差 | 可兼容但空泛 | 删除 HDR，直接描述高光和暗部 |\n| 低饱和 + 高色彩密度 | 可兼容 | 降低色彩数量，不把颜色洗灰 |\n\n## 4. 术语到可见特征的翻译\n\n把空泛词改写为可观察结果：\n\n| 空泛/易误用表达 | 推荐替换 |\n|---|---|\n| 电影感 | 中等对比、柔和高光滚降、自然肤色、受控色彩、真实镜头衰减 |\n| ARRI 色彩 | ARRI Alexa 风格色彩科学、自然肤色、丰富中间调、柔和高光 |\n| S-Log 色调 | S-Log3 风格宽动态采集，经指定冷暖与饱和度调色 |\n| 胶片感 | 指明颗粒、色彩密度、高光、黑位和光晕强度 |\n| 高级感 | 色彩数量受控、材质高光准确、黑位洁净、构图和光线克制 |\n| 暗黑风 | 低调布光、有限色域、深阴影、关键面部仍可读 |\n| 梦幻 | 低对比粉彩、明亮中间调、轻微扩散、柔和焦外 |\n| 复古 | 指明年代色域、材质、颗粒与曝光特征，不统一泛黄 |\n\n## 5. 品牌与作品风格引用\n\n- 将品牌设备名称写成“风格倾向”或“模拟”，除非用户明确提供真实设备信息。\n- 用户引用具体电影或摄影师时，提取可见特征后再写提示词，不只重复名称。\n- 不直接模仿在世创作者的独特风格；改为描述高层视觉特征，如色温、对比、光线、构图、颗粒和镜头质感。\n- 不声称某 LUT、胶片或摄影机必然产生固定风格。",
+    "headings": [
+      "references/technical-terms.md > 摄影与调色术语规则 > 目录",
+      "references/technical-terms.md > 摄影与调色术语规则 > 1. 术语分层",
+      "references/technical-terms.md > 摄影与调色术语规则 > 2. 常见体系 > ARRI / LogC 倾向",
+      "references/technical-terms.md > 摄影与调色术语规则 > 2. 常见体系 > Sony S-Log3 倾向",
+      "references/technical-terms.md > 摄影与调色术语规则 > 2. 常见体系 > RED / Log3G10 倾向",
+      "references/technical-terms.md > 摄影与调色术语规则 > 2. 常见体系 > ACES",
+      "references/technical-terms.md > 摄影与调色术语规则 > 2. 常见体系 > 胶片模拟",
+      "references/technical-terms.md > 摄影与调色术语规则 > 3. 冲突矩阵",
+      "references/technical-terms.md > 摄影与调色术语规则 > 4. 术语到可见特征的翻译",
+      "references/technical-terms.md > 摄影与调色术语规则 > 5. 品牌与作品风格引用"
+    ]
+  }
+]

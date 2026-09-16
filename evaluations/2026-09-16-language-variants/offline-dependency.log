@@ -1,0 +1,26 @@
+✔ future selection: captured converges without fabricated identity or extra model call (126.4273ms)
+✔ future selection: selection converges without fabricated identity or extra model call (98.7298ms)
+✔ future selection: selector converges without fabricated identity or extra model call (90.1243ms)
+✔ future selection: index converges without fabricated identity or extra model call (95.8554ms)
+✔ future selection: ordinal intent validates dependency, producer type, bounds and conflicts (0.6695ms)
+✔ future selection: wrong ordinal receives a field repair path rather than a missing history error (0.2645ms)
+✔ future selection: actual producing slot disambiguates multiple matching upstream documents (0.189ms)
+✔ future selection: runtime projection records the exact dependency index (0.5838ms)
+✔ future selection: missing, reordered, changed and forged bindings fail closed (0.3805ms)
+✔ future selection: directions, shots and products share ordinal binding and actual input filtering (0.4499ms)
+✔ future selection: existing source still requires real identity and correct version (0.1881ms)
+✔ future selection: original query completes both artifacts with selected-only actual input, skill=true (114.266ms)
+✔ future selection: original query completes both artifacts with selected-only actual input, skill=false (82.3578ms)
+✔ future selection: failed upstream never runs downstream with an imagined direction (72.7123ms)
+✔ future selection: media selected units keep count and reapproval gates (64.4211ms)
+✔ future selection: prepared media pins the binding and cannot submit after receipt removal (84.8658ms)
+✔ future selection: image target and a future supporting direction bind in separate namespaces (57.8162ms)
+✔ future selection: invalid joined quotation repairs only evidence and preserves dependency selection (123.7706ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1259.373

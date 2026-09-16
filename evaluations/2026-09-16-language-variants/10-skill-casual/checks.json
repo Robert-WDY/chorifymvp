@@ -1,0 +1,171 @@
+{
+  "id": "10-skill-casual",
+  "dir": "10-skill-casual",
+  "group": "指定Skill",
+  "tone": "口语、英文名嵌入",
+  "query": "苔光茶铺卖18元的无糖桂花乌龙，想面向中午出来买喝的上班族。用那个 marketing-brief-zh-v1 Skill 帮我写个营销Brief就行，一份文字。产地、效果、卖了多少都不知道，别替我编。不要再往下做创意和图片视频。",
+  "expected": {
+    "texts": 1,
+    "skills": [
+      "marketing-brief-zh-v1"
+    ],
+    "noMedia": true
+  },
+  "status": "completed",
+  "sessionId": "217551c4-9497-4419-a099-61b36ebc7998",
+  "calls": 2,
+  "checks": [
+    {
+      "name": "emptyInitial",
+      "passed": true,
+      "evidence": {
+        "sessionId": "217551c4-9497-4419-a099-61b36ebc7998",
+        "messages": 0,
+        "tasks": 0,
+        "artifacts": 0,
+        "inputs": 0
+      }
+    },
+    {
+      "name": "noForeignMarkers",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "noPreviousResponseId",
+      "passed": true
+    },
+    {
+      "name": "emptyModelHistory",
+      "passed": true,
+      "evidence": {
+        "memory": [],
+        "activeTask": null,
+        "references": 0,
+        "documents": 0,
+        "relatedTasks": 0,
+        "recentMessages": 0
+      }
+    },
+    {
+      "name": "noMediaSubmission",
+      "passed": true,
+      "evidence": 0
+    },
+    {
+      "name": "artifactCount",
+      "passed": true,
+      "evidence": {
+        "expected": 1,
+        "actual": 1
+      }
+    },
+    {
+      "name": "completed",
+      "passed": true,
+      "evidence": "completed"
+    },
+    {
+      "name": "skill:marketing-brief-zh-v1",
+      "passed": true,
+      "evidence": [
+        {
+          "slug": "marketing-brief-zh-v1",
+          "status": "completed",
+          "artifactId": "3bd5f476-65b1-42e9-a746-cdafd22f365b",
+          "contractValidated": true
+        }
+      ]
+    }
+  ],
+  "strictPassed": true,
+  "failedChecks": [],
+  "taskStatus": [
+    "COMPLETED"
+  ],
+  "taskReason": [
+    null
+  ],
+  "artifactCount": 1,
+  "skills": [
+    {
+      "slug": "marketing-brief-zh-v1",
+      "status": "completed",
+      "artifactId": "3bd5f476-65b1-42e9-a746-cdafd22f365b",
+      "contractValidated": true
+    }
+  ],
+  "windows": [
+    {
+      "nodeId": "27e43359-8175-419f-b4db-518f60ec750a",
+      "start": "2026-09-16T07:48:07.369Z",
+      "end": "2026-09-16T07:48:13.079Z"
+    }
+  ],
+  "parallelOverlap": false,
+  "rounds": [
+    {
+      "index": 0,
+      "phase": "understand",
+      "characters": 24540,
+      "systemCharacters": 20742,
+      "payloadKeys": [
+        "query",
+        "currentMessageId",
+        "replyTo",
+        "userMemory",
+        "activeTaskState",
+        "relevantEvidence",
+        "contextPolicy"
+      ],
+      "wireValid": true,
+      "wireErrors": null,
+      "errors": [],
+      "usage": {
+        "input_tokens": 7007,
+        "input_tokens_details": {
+          "cached_tokens": 5376
+        },
+        "output_tokens": 384,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 7391
+      }
+    },
+    {
+      "index": 1,
+      "phase": "text_generation",
+      "methodId": "marketing-brief-zh-v1",
+      "nodeId": "27e43359-8175-419f-b4db-518f60ec750a",
+      "characters": 4720,
+      "systemCharacters": 1021,
+      "payloadKeys": [
+        "item",
+        "deliveryContract",
+        "facts",
+        "globalConstraints",
+        "sources",
+        "supportingSources",
+        "evidenceContext",
+        "observations",
+        "feedback",
+        "methods",
+        "methodBoundary"
+      ],
+      "errors": [],
+      "usage": {
+        "input_tokens": 1885,
+        "input_tokens_details": {
+          "cached_tokens": 256
+        },
+        "output_tokens": 972,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2857
+      }
+    }
+  ],
+  "final": "# 营销Brief：苔光茶铺 · 无糖桂花乌龙\n\n## 一、主传播目标\n\n**建议目标：** 让午间外出买饮品的上班族在选品时，将「苔光茶铺无糖桂花乌龙（18元）」纳入即时可选项。\n\n- 本目标依据用户给定的受众与产品形成，属本阶段建议，非用户已确认的投放规格。\n- 不延伸为复购、口碑或转化率承诺；创意建议是否有效尚未验证。\n\n## 二、目标受众\n\n**人群：** 中午出来买喝的上班族。\n\n**场景与动机（依据用户给定受众展开，属描述性假设，非已证实调研结论）：**\n- 午休时间有限，购买决策快，倾向就近、快速、不用排长队。\n- 常同时兼顾午餐口味与下午状态，对「清爽、不腻、不沉重」有倾向。\n- 在无糖与有糖之间做选择时，会看配料、口感等信息是否清楚。\n\n**关注点：** 口味是否顺口、甜度与糖分信息是否明确、18元在午间饮品中的位置、拿到手的速度。\n\n## 三、核心卖点（按与主目标关联度排序）\n\n1. **无糖**：来自用户给定产品名称「无糖桂花乌龙」。（依据：用户提供事实）\n2. **桂花乌龙口味组合**：来自产品名称。（依据：用户提供事实）\n3. **18元售价**：来自用户给定。（依据：用户提供事实）\n4. **午间即时可得**：基于受众场景的表达方向，是否成立取决于门店实际出杯效率，须核实后再作为卖点使用。（依据：创作假设，待核验）\n\n> 以上卖点不作产地、功效或销量方面的展开表述。\n\n## 四、风格与表达约束\n\n**风格基调（建议）：** 清爽、直接、口语化；用午休间隙能一眼读完的短句，重点信息前置。\n\n**Do：**\n- 明确写出「无糖」「桂花乌龙」「18元」。\n- 结合午间买饮品的场景描述，语言具体、可感知。\n- 保持信息准确，不超出已确认事实范围。\n\n**Don't：**\n- 不编造产地、原料等级、工艺或认证。\n- 不声称任何饮用效果、健康功效或功能利益。\n- 不使用「销量第几」「最多人买」等未提供的销量或排名表述。\n- 不替用户确定投放平台、预算、条数或时长。\n\n## 五、待核验信息（不得作为事实写入传播物料）\n\n| 项目 | 状态 | 说明 |\n| --- | --- | --- |\n| 桂花乌龙的产地（茶叶与桂花来源） | 未知 | 未经确认，不写入任何文案 |\n| 产品功效或饮用效果 | 未知 | 未经确认，不写入任何文案 |\n| 销量数据 | 未知 | 未经确认，不写入任何文案 |\n| 甜度标识、规格容量、冷热饮形式 | 未提供 | 如需使用须另行核实 |\n| 门店出杯效率、供应时段 | 未提供 | 如需支撑「午间可得」表达须另行核实 |\n\n## 六、待确认项\n\n- 主传播目标是否沿用本Brief建议。\n- 是否限定投放平台或内容形式。\n- 是否需要补充门店、时段或规格等信息。\n\n以上未确认事项不擅自确定为已定规格。"
+}

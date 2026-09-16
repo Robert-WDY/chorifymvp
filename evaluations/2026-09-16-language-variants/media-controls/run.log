@@ -1,0 +1,6 @@
+{"case":"21-image-direct","call":1,"totalCalls":1,"time":"2026-09-16T07:48:53.707Z"}
+{"case":"22-video-direct","call":1,"totalCalls":2,"time":"2026-09-16T07:48:53.721Z"}
+{"case":"21-image-direct","call":2,"totalCalls":3,"time":"2026-09-16T07:48:55.560Z"}
+{"case":"22-video-direct","call":2,"totalCalls":4,"time":"2026-09-16T07:48:55.654Z"}
+{"case":"22-video-direct","done":true,"status":"needs_input","calls":2,"artifacts":0,"mediaAttempts":0,"reason":["请确认已展示的具体方案"]}
+{"case":"21-image-direct","done":true,"status":"needs_input","calls":2,"artifacts":0,"mediaAttempts":0,"reason":["请确认已展示的具体方案"]}

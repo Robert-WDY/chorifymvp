@@ -1,0 +1,20 @@
+{
+  "name": "doubao-creative-agent",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.mjs",
+    "test": "node --env-file-if-exists=.env --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "eval:intent": "node --env-file-if-exists=.env evals/run-intent.mjs all latest",
+    "eval:production": "node --env-file-if-exists=.env evals/production24/run.mjs",
+    "eval:production500": "node --env-file-if-exists=.env evals/production500/run.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.17.1"
+  }
+}

@@ -1,0 +1,1 @@
+{"provider":"doubao","keyConfigured":false,"actionMode":"core","acceptancePolicy":"delivery_only","protocol":"compiled","effectPolicy":"explicit_approval","entry":"direct Agent.run on current source; not HTTP/UI","caseCount":20,"maxCalls":80,"maxCallsPerCase":8,"caseTimeoutMs":420000,"independentWorkers":2,"actualMediaSubmissions":0,"baselineDrift":[]}

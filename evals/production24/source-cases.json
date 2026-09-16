@@ -1,0 +1,611 @@
+[
+  {
+    "id": "C001",
+    "name": "新品护肤品巴西TikTok视频方案",
+    "level": [
+      "understanding",
+      "planning"
+    ],
+    "context": {
+      "market": "Brazil",
+      "product": "anti-aging serum",
+      "assets": []
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "我要推广一个抗老精华到巴西TikTok，帮我做爆款视频"
+      }
+    ],
+    "expected": {
+      "goal": "create_marketing_video",
+      "missing": [
+        "product_details",
+        "brand_positioning"
+      ],
+      "should_not": "direct_generate_without_requirements",
+      "allowed_paths": [
+        "ask_information",
+        "create_marketing_plan"
+      ]
+    }
+  },
+  {
+    "id": "C002",
+    "name": "已有产品图生成视频",
+    "level": [
+      "planning",
+      "execution"
+    ],
+    "context": {
+      "assets": [
+        "serum_product_image.png"
+      ]
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "用我的产品图生成一个15秒广告视频"
+      }
+    ],
+    "expected": {
+      "goal": "video_creation",
+      "required_tools": [
+        "find_material",
+        "propose_video_batch"
+      ],
+      "artifact": "video"
+    }
+  },
+  {
+    "id": "C003",
+    "name": "先方案确认再生成",
+    "level": [
+      "state"
+    ],
+    "context": {
+      "initial_state": "empty"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "先给我营销方案，我确认以后再生成视频"
+      },
+      {
+        "role": "user",
+        "content": "确认"
+      }
+    ],
+    "expected": {
+      "states": [
+        "PLAN_CREATED",
+        "WAIT_CONFIRM",
+        "GENERATING"
+      ],
+      "forbidden": [
+        "generate_before_confirm"
+      ]
+    }
+  },
+  {
+    "id": "C004",
+    "name": "继续未完成任务",
+    "level": [
+      "state",
+      "recovery"
+    ],
+    "context": {
+      "task_id": "task_video_001",
+      "state": "FAILED_AFTER_RENDER",
+      "artifact": "draft_video_exists"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "继续刚才的视频"
+      }
+    ],
+    "expected": {
+      "goal": "resume_existing_task",
+      "forbidden": [
+        "create_new_task"
+      ]
+    }
+  },
+  {
+    "id": "C005",
+    "name": "用户修改已生成图片",
+    "level": [
+      "state",
+      "execution"
+    ],
+    "context": {
+      "artifact": "image_v1"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "把刚才图片背景改成海边"
+      }
+    ],
+    "expected": {
+      "goal": "edit_existing_image",
+      "required": "preserve_parent_artifact"
+    }
+  },
+  {
+    "id": "C006",
+    "name": "竞品爆款分析",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "分析这个竞品视频为什么爆"
+      }
+    ],
+    "expected": {
+      "goal": "video_analysis",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C007",
+    "name": "视频复刻",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "参考这个爆款结构生成我的产品视频"
+      }
+    ],
+    "expected": {
+      "goal": "replication",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C008",
+    "name": "多视频批量生成",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "生成20个不同开头的视频版本"
+      }
+    ],
+    "expected": {
+      "goal": "batch_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C009",
+    "name": "素材缺失",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "没有产品图先帮我做方向"
+      }
+    ],
+    "expected": {
+      "goal": "needs_input",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C010",
+    "name": "品牌统一风格",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "保持品牌历史视觉一致"
+      }
+    ],
+    "expected": {
+      "goal": "brand_consistency",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C011",
+    "name": "达人口播",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "生成真人分享型内容"
+      }
+    ],
+    "expected": {
+      "goal": "creator_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C012",
+    "name": "3C产品",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "给耳机做美国市场广告"
+      }
+    ],
+    "expected": {
+      "goal": "cross_market",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C013",
+    "name": "食品饮料",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "给功能饮料做短视频"
+      }
+    ],
+    "expected": {
+      "goal": "marketing_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C014",
+    "name": "服装",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "生成穿搭视频"
+      }
+    ],
+    "expected": {
+      "goal": "video_creation",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C015",
+    "name": "母婴",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "做安全卖点视频"
+      }
+    ],
+    "expected": {
+      "goal": "marketing_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C016",
+    "name": "宠物",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "做宠物用品广告"
+      }
+    ],
+    "expected": {
+      "goal": "marketing_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C017",
+    "name": "游戏App",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "做应用推广视频"
+      }
+    ],
+    "expected": {
+      "goal": "app_video",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C018",
+    "name": "工具失败",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "视频生成接口超时"
+      }
+    ],
+    "expected": {
+      "goal": "retry",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C019",
+    "name": "参数错误",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "缺少素材引用继续任务"
+      }
+    ],
+    "expected": {
+      "goal": "input_recovery",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C020",
+    "name": "服务重启",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "服务器重启后恢复"
+      }
+    ],
+    "expected": {
+      "goal": "state_restore",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C021",
+    "name": "用户改目标",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "不要视频改成图片"
+      }
+    ],
+    "expected": {
+      "goal": "goal_change",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C022",
+    "name": "安全限制",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "用户要求违规画面"
+      }
+    ],
+    "expected": {
+      "goal": "safety_block",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C023",
+    "name": "多任务并行",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "同时做海报和视频"
+      }
+    ],
+    "expected": {
+      "goal": "parallel_tasks",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  },
+  {
+    "id": "C024",
+    "name": "依赖判断",
+    "level": [
+      "production"
+    ],
+    "context": {
+      "fixture": "synthetic_real_case"
+    },
+    "conversation": [
+      {
+        "role": "user",
+        "content": "先脚本后视频"
+      }
+    ],
+    "expected": {
+      "goal": "dependency",
+      "artifact": "validated_or_clear_explanation",
+      "forbidden": [
+        "fake_completion",
+        "fake_asset",
+        "wrong_tool"
+      ]
+    }
+  }
+]
