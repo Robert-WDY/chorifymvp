@@ -91,6 +91,8 @@ async function executeSingleStage(executor,item,signal,feedback,boundSources){
  }else result=await withNode(item.stageId||item.id,methods.map(m=>m.slug).join(','),()=>structuredOutput(brain,textInstructions(schema),projectModelInput(input,renderStage),schema,signal,r=>executor.verifier?.policy==='delivery_only'?undefined:validateStageResult(item,r)));
  const deltaMetadata={deltaEvidence:result.deltaEvidence,noChange:result.noChange};const structuredDelta=!!result.deltaEvidence&&!!result.structure;if(structuredDelta)delete result.content;result=canonicalDocument(result,structuredDelta||!schema.properties.content?'structured':'content',renderStage);Object.assign(result,deltaMetadata);
  for(const record of methodRecords)Object.assign(record,{modelCallIds:(state.modelCalls||[]).slice(before).filter(c=>c.status==='returned').map(c=>c.id),contractValidated:true,status:'validated'});
+ result.factBoundary=input.evidenceContext.factBoundary;
+ result.verificationSources=[...sources,...input.supportingSources];
  return {result,methodRecords,sources};
  }catch(error){for(const record of methodRecords)Object.assign(record,{status:'failed',error:error.message,modelCallIds:(state.modelCalls||[]).slice(before).map(c=>c.id)});await executor.save?.(state);throw error;}
 }
@@ -100,6 +102,7 @@ export function publishTextCandidate(executor,item,result,methodRecords,verdict,
  if(result.noChange&&verdict.passed){recordChange(executor.state.taskStore.tasks[executor.state.taskStore.activeTaskId],item,{status:'no_change',artifactId:item.changeContract.source.id,verification:verdict});item.noChangeReceipt={source:item.changeContract.source,verification:verdict};return executor.state.taskStore.artifacts[item.changeContract.source.id];}
  const artifact=addArtifact(executor.state,{itemId:item.id,type:'text',content:result.content,metadata:{constraintChecks:result.stages?.length?aggregateConstraintChecks(result.stages.map(s=>({id:s.stageId,report:executor.state.taskStore.artifacts[s.artifactId]?.metadata?.constraintChecks}))):constraintChecks(item,result),deltaEvidence:result.deltaEvidence,stages:result.stages,deliverySlot:item.deliverySlot,unitCount:item.contentCardinality||item.count,structure:result.structure,document:result.document,conversion:result.conversion},parentId,verification:{technical:'passed',semantic:verdict.passed?'passed':verdict.uncertain?'unverified':'failed',issues:verdict.issues}});
  const selection=item.resolvedSelectorBinding||item.selectorBinding;if(selection)artifact.metadata.sourceSelectionBinding=structuredClone(selection);
+ if(result.factBoundary)artifact.metadata.factBoundary=structuredClone(result.factBoundary);
  if(artifact.metadata.structure?.directions)artifact.metadata.structure.directions=artifact.metadata.structure.directions.map((d,n)=>({...d,id:result.deltaEvidence&&d.id?d.id:artifact.id+':direction:'+(n+1),version:artifact.version}));
  for(const record of methodRecords){record.outputArtifactIds=[artifact.id];if(!item.methods.some(m=>m.id===record.id))item.methods.push(record);}
  artifact.acceptance={constraintChecks:artifact.metadata.constraintChecks,procedure:{passed:methodRecords.length===(item.requiredMethods||[]).length},...acceptanceRecord(verdict,result.content)};artifact.publication=verdict.passed?'current':'audit';
@@ -124,11 +127,12 @@ export async function executeTextStage(executor,item,signal,feedback){
   // Selection is consumed after the direction producer, never by that producer.
   const selectionRole=fields.directions?'producer':Object.keys(fields).some(f=>['body','shots','prompt'].includes(f))?'consumer':'upstream';
   const stageItem={...item,stageId:stage.id,deliveryDescription:item.description,description:contract.role+'；本阶段只交付字段：'+Object.keys(fields).join('、'),requiredMethods:[stage.skillId],selectionRole,spec,count:fields.directions?spec.directionCount:1,contentCardinality:fields.directions?spec.directionCount:1,artifactCount:1};
-  const sources=selectStageSources([...external,...outputs.map(a=>({id:a.id,version:a.version,type:'text',content:a.content,structure:a.metadata.document?.kind==='content'?undefined:a.metadata.structure,provenance:{origin:'model_artifact',factualSupport:'not_checked'},relation:'workflow_stage'}))],stageItem);
+  const sources=selectStageSources([...external,...outputs.map(a=>({id:a.id,version:a.version,type:'text',content:a.content,structure:a.metadata.document?.kind==='content'?undefined:a.metadata.structure,factBoundary:a.metadata.factBoundary,provenance:{origin:'model_artifact',factualSupport:'not_checked'},relation:'workflow_stage'}))],stageItem);
   const {result,methodRecords:records}=await executeSingleStage(executor,stageItem,signal,feedback,sources);
   const a=addArtifact(state,{itemId:item.id,type:'text',purpose:'support',content:result.content,metadata:{constraintChecks:constraintChecks(stageItem,result),stageId:stage.id,deliverySlot:(item.deliverySlot??0)+':'+stage.id,structure:result.structure,document:result.document,conversion:result.conversion},verification:{technical:'passed',semantic:'passed'}});
   if(a.metadata.structure?.directions)a.metadata.structure.directions=a.metadata.structure.directions.map((d,n)=>({...d,id:a.id+':direction:'+(n+1),version:a.version}));
   a.publication='internal';a.acceptance={constraintChecks:a.metadata.constraintChecks,procedure:{passed:true},quality:{status:'not_evaluated'}};
+  a.metadata.factBoundary=structuredClone(result.factBoundary);
   outputs.push(a);
   for(const record of records){record.stageIndex=stage.index;record.supportOutputArtifactIds=[a.id];methodRecords.push(record);}
   const node=task.executionPlan?.nodes.find(n=>n.itemId===item.id);
@@ -146,5 +150,7 @@ export async function executeTextStage(executor,item,signal,feedback){
   delete spec.exactTexts; // Exact strings are checked against the assembled delivery.
   return hardTextChecks({...item,spec},{content:a.content,structure}).checks.map(c=>({...c,stageArtifactId:a.id,stageVersion:a.version}));
  });
+ result.factBoundary=evidenceContext(state,item,[...external,...outputs.map(a=>({id:a.id,version:a.version,content:a.content,structure:a.metadata.structure,factBoundary:a.metadata.factBoundary,provenance:{origin:'model_artifact'}}))]).factBoundary;
+ result.verificationSources=selectStageSources(external,item);
  return {result,methodRecords,sources:external};
 }

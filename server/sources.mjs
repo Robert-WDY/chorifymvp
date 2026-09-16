@@ -42,6 +42,7 @@ export function resolveSources(state, item, {taskId, references = item.reference
       id, type: source.type || source.kind, content: source.content, url: source.url,
       version: source.version, taskId: source.taskId, structure:source.metadata?.document?.kind==='content'?undefined:source.metadata?.structure,provenance:{origin:source.taskId?'model_artifact':'user_input',factualSupport:source.acceptance?.factualSupport||'not_checked',sourceTaskId:source.taskId},relation:source.taskId?'accepted_artifact':'user_input',role:source.type||source.kind,
       ...(dependencyIndex!==undefined?{dependencyIndex}:{}),
+      ...(source.metadata?.factBoundary?{factBoundary:structuredClone(source.metadata.factBoundary)}:{}),
     });
   };
   const dependency = index => {

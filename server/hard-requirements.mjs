@@ -15,6 +15,9 @@ export function hardTextChecks(item,result){
  for(const text of spec.exactTexts||[])checks.push({field:'exactText',expected:text,actual:result.content?.includes(text)||false,status:result.content?.includes(text)?'passed':'failed'});
  if(spec.bodyLength){
   const units=result.structure?.textUnits;
+  // This representation renders body/title only. Hidden numeric metadata is
+  // not evidence of delivered shots/directions; mixed layouts need a renderer.
+  if(units&&(result.structure.shots||result.structure.directions))checks.push({field:'renderedStructuredUnits',expected:'visible numeric units',actual:null,status:'not_evaluated'});
   // Check the rendered delivery, never a second model-written body or a title.
   if(result.stageChecks?.some(c=>c.field.startsWith('bodyLength.'))){ /* measured against each actual stage body */ }
   else if(!Array.isArray(units)||!units.length||units.some(u=>typeof u.body!=='string')||renderTextUnits(units)!==result.content)missing('bodyLength',spec.bodyLength);

@@ -12,6 +12,6 @@ export function canonicalDocument(result,representation,render){
 }
 export function acceptanceRecord(verdict,content){
  const checker=verdict.checker||{kind:verdict.evaluationPolicy?'test_stub':'unrecorded'};
- const evaluated=checker.kind==='model'&&verdict.evaluationPolicy!=='procedure_only_not_quality';
- return {...(verdict.hardRequirements?{hardRequirements:structuredClone(verdict.hardRequirements)}:{}),...(verdict.constraintChecks?{constraintChecks:structuredClone(verdict.constraintChecks)}:{}),checker,inputHash:digest(content),...(verdict.evaluationPolicy==='delivery_only'?{delivery:{passed:verdict.passed,scope:'presence_and_receipts',policy:'delivery_only'}}:{}),quality:{...verdict,status:evaluated?(verdict.outcome||(verdict.passed?'passed':verdict.uncertain?'uncertain':'failed')):'not_evaluated'},factualSupport:evaluated?'model_checked':'not_checked'};
+ const evaluated=checker.kind==='model'&&checker.phase!=='facts'&&verdict.evaluationPolicy!=='procedure_only_not_quality';
+ return {...(verdict.factualAcceptance?{factualAcceptance:structuredClone(verdict.factualAcceptance)}:{}),...(verdict.hardRequirements?{hardRequirements:structuredClone(verdict.hardRequirements)}:{}),...(verdict.constraintChecks?{constraintChecks:structuredClone(verdict.constraintChecks)}:{}),checker,inputHash:digest(content),...(verdict.evaluationPolicy==='delivery_only'?{delivery:{passed:verdict.passed,scope:'presence_and_receipts',policy:'delivery_only'}}:{}),quality:{...verdict,status:evaluated?(verdict.outcome||(verdict.passed?'passed':verdict.uncertain?'uncertain':'failed')):'not_evaluated'},factualSupport:verdict.factualAcceptance?.status==='passed'?'fact_boundary_checked':evaluated?'model_checked':'not_checked'};
 }

@@ -55,7 +55,7 @@ export async function runCompiled(executor,signal,publish){
      for(let attempt=0;attempt<2;attempt++){
       const {result,methodRecords}=await executeTextStage(executor,stageItem,signal,previous);
       const hard=hardTextChecks(item,result);
-      const verdict=enforceHardChecks(hard.status==='passed'?await executor.verifier.verifyText(item,result.content,state,signal):{passed:false,uncertain:false,issues:[],checker:{kind:'program'}},hard);
+      const verdict=enforceHardChecks(hard.status==='passed'?await executor.verifier.verifyText(item,result.content,state,signal,result):{passed:false,uncertain:false,issues:[],checker:{kind:'program'}},hard);
       const artifact=publishTextCandidate(executor,stageItem,result,methodRecords,verdict,previous?.artifactId||executor.parentFor(item,'text'));
       for(const method of methodRecords)await executor.record('run_skill',{slug:method.skillId,nodeId:item.id},{artifactId:artifact.id,methodId:method.id,contractValidated:true});
       await executor.record('commit_text_deliverable',result,{...artifact,isError:!verdict.passed});await executor.save(state);

@@ -63,7 +63,8 @@ async function execute({mode='captured',noSkill=false,upstreamFails=false}={}){
  const candidate=draft(mode);if(noSkill)candidate.deliverables[1].requiredMethods=[];
  const state={id:'fresh-'+Math.random(),messages:[],events:[]},inputs=[];
  const brain={respond:async(input,_tools,_signal,opts)=>{
-  const payload=JSON.parse(input.find(m=>m.role==='user').content);inputs.push({phase:opts?.tracePhase,payload});
+  const part=input.find(m=>m.role==='user').content,payload=JSON.parse(typeof part==='string'?part:part.find(p=>p.type==='input_text').text);inputs.push({phase:opts?.tracePhase,payload});
+  if(opts?.tracePhase==='verify_facts'){assert.ok(payload.boundary.hash);assert.equal(typeof payload.content,'string');return reply({outcome:'passed',issues:[]});} // Binding-only fixture; factual rejection is exercised separately.
   if(opts?.tracePhase==='understand')return reply(candidate);
   if(payload.methods?.some(m=>m.slug==='direction-designer-zh-v1'))return reply(upstreamFails?{structure:{directions:[]}}:{structure:{directions:source().structure.directions,recommendation:'推荐第二方向',sections:source().structure.sections}});
   assert.ok(payload.sources?.[0]?.selectedDirection);assert.equal(payload.sources[0].selectedDirection.index,2);assert.ok(!JSON.stringify(payload).includes('不应传给下游的红色快切方向'));assert.ok(JSON.stringify(payload).includes('容量未知'));
@@ -97,6 +98,7 @@ test('future selection: prepared media pins the binding and cannot submit after 
  candidate.deliverables[1]={description:'按第二方向准备图片',kind:'image',action:'create',count:1,spec:{ratio:'9:16'},references:['task:0'],dependsOn:[0],requestEvidence:query,sourceSelection:{source:'task:0',unitType:'directions',mode:'selected',unitIndexes:[2],layout:'separate_images'}};
  let submissions=0;const state={id:'media-gate',messages:[],events:[]},brain={respond:async(input,_tools,_signal,opts)=>{
   if(opts.tracePhase==='understand')return reply(candidate);
+  if(opts.tracePhase==='verify_facts')return reply({outcome:'passed',issues:[]}); // Offline gate fixture, not a factual-quality claim.
   const p=JSON.parse(input.find(m=>m.role==='user').content);
   if(opts.tracePhase==='text_generation')return reply({structure:{directions:source().structure.directions,recommendation:'第二方向'}});
   if(opts.tracePhase==='media_plan')return reply({concept:'蓝色静物',preservedConstraints:['9:16'],safety:{passed:true,reason:'普通茶饮静物'},items:[{prompt:'蓝色静物',size:'1440x2560',sourceUnitIds:p.assignments[0].unitIds}]});

@@ -36,6 +36,7 @@ function runtimeFixture(){
   const p=JSON.parse(typeof input[1].content==='string'?input[1].content:'{}');calls.push({phase:options?.tracePhase,input:structuredClone(input)});
   if(options.tracePhase==='understand')return reply(typeof next==='function'?next(p):next);
   if(options.tracePhase==='verify_turn_operation')return reply({operation:controlDecision,evidence:p.query});
+  if(options.tracePhase==='verify_facts'){const actual=JSON.parse(input[1].content.find(x=>x.type==='input_text').text);assert.ok(actual.boundary.hash);assert.equal(typeof actual.content,'string');return reply({outcome:'passed',issues:[]});} // Explicit offline verdict; this fixture tests lineage, not semantic quality.
   if(options.tracePhase==='final_response')return reply(finalDraft||{artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)});
   if(options.tracePhase==='media_plan')return reply({concept:'产品图方案',preservedConstraints:[],safety:{passed:true,reason:'普通产品'},items:[{prompt:'产品图',size:'2048x2048'}]});
   assert.equal(options.tracePhase,'text_generation');

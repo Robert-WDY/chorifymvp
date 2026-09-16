@@ -37,6 +37,8 @@ export function acceptDecision(turn,goal,task){
 }
 export function assertContract(task){assertExecutionProjection(task);if(task.contract?.effectPolicy==='explicit_approval'&&(!task.approval.required||task.effectPolicy!=='explicit_approval')&&task.items.some(i=>['image','video','audio'].includes(i.output)&&!i.runtimeQuery))throw new Error('独立媒体授权策略被修改');assertIntentSnapshot(task.intentSnapshot);if(task.requirements&&task.requirementsHash!==hash(requirementDefinitions(task)))throw new Error('Requirement定义已改变，必须重新接受用户修订');if(task.contract&&task.contract.hash!==hash(task.goal))throw new Error('已接受的任务合同被修改，必须创建修订版本');if(task.supersededBy)throw new Error('旧执行义务已被修订取代，不能继续提交');if(task.cancelledByUser)throw new Error('用户已取消该任务，不能继续提交');}
 export function methodSatisfied(item,artifact){
+ const factual=artifact.acceptance?.factualAcceptance;
+ if(factual&&(factual.status!=='passed'||factual.inputHash!==digest(artifact.content)||artifact.metadata?.factBoundary&&factual.boundaryHash!==artifact.metadata.factBoundary.hash))return false;
  const hard=artifact.acceptance?.hardRequirements;
  if(hard&&(hard.checks.some(c=>c.status!=='passed')||hard.inputHash&&hard.inputHash!==digest(artifact.type==='text'?artifact.content:artifact.url||'')))return false;
  if(artifact.acceptance?.checks?.completionAllowed===false||artifact.acceptance?.checks?.topicMatched===false)return false;

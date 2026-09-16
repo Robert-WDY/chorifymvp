@@ -16,6 +16,10 @@ test('stage2 actual rendered content must match measured body; missing evidence 
  assert.equal(report.status,'not_evaluated');const v=enforceHardChecks({passed:true,issues:[]},report);assert.equal(v.passed,false);assert.equal(v.uncertain,true);
  assert.equal(hardTextChecks(item,{content:'无法确认标题边界的旧正文'}).status,'not_evaluated');
 });
+test('stage2 body-only rendering cannot conceal undelivered structured shots behind a passing numeric count',()=>{
+ const r=result('文'.repeat(90));r.structure.shots=[{content:'隐藏镜头',durationSeconds:2}];
+ assert.equal(hardTextChecks({...item,form:'script',spec:{...item.spec,shotCount:1,durationSeconds:2}},r).status,'not_evaluated');
+});
 test('stage2 historical short bodies fail under the new typed requirement; archive remains unchanged',()=>{
  for(const id of ['11-text-casual','12-text-terse']){const a=archived(id,'result').artifacts[0],parts=a.content.trim().split(/\n\s*\n/),body=parts.slice(0,-1).join('');
   const report=hardTextChecks(item,result(body));assert.equal(report.status,'failed');assert.ok(report.checks[0].actual<80);

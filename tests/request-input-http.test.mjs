@@ -12,14 +12,15 @@ import {redactDebug} from '../server/debug-trace.mjs';
 test('HTTP text inputs bind by candidate, persist revision lineage, and duplicate requests do not execute again',{timeout:20000},async t=>{
  const directory=await mkdtemp(join(tmpdir(),'request-input-http-'));let calls=0;
  const gateway=createServer(async(req,res)=>{try{
-  assert.equal(req.url,'/responses');calls++;let raw='';for await(const part of req)raw+=part;const body=JSON.parse(raw),system=body.input[0].content,p=JSON.parse(body.input[1].content);let value;
+  assert.equal(req.url,'/responses');calls++;let raw='';for await(const part of req)raw+=part;const body=JSON.parse(raw),system=body.input[0].content,part=body.input[1].content,p=JSON.parse(typeof part==='string'?part:part.find(p=>p.type==='input_text').text);let value;
   if(system.startsWith('你是创作助手的本轮需求理解器')){
    const source=p.relevantEvidence.references.find(r=>r.filename==='prompt1.txt');assert.ok(source);assert.equal(source.type,'text');
    value={summary:'优化已有提示词',turnOperation:{kind:'modify'},deliverables:[{description:'优化已有提示词',kind:'text',action:'modify',form:'prompt',references:[source.handle],requiredMethods:['creative-prompt-rewrite']}],safety:{disposition:'allow',untrustedInstructions:false,reason:''},approval:{required:false,reason:''}};
   }else if(system.startsWith('完成当前item或stage')){
    assert.equal((p.sources[0].contentRef?p.changeContract.original:p.sources[0].content),'白色咖啡杯，产品摄影');assert.equal(p.sources[0].version,1);
    value={content:'白色咖啡杯置于简洁背景，柔和侧光，突出杯身轮廓，适用于电商展示。',structure:{prompt:'白色咖啡杯置于简洁背景，柔和侧光，突出杯身轮廓，适用于电商展示。',preservedConstraints:[]}};
-  }else{assert.ok(system.startsWith('你是最终回答整理器'));value={artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)};}
+  }else if(system.startsWith('你是任务交付验证器')){assert.ok(p.boundary.hash);assert.ok(p.content.includes('白色咖啡杯'));value={outcome:'passed',issues:[]};} // Explicit local verifier response; no remote quality claim.
+  else{assert.ok(system.startsWith('你是最终回答整理器'));value={artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)};}
   res.setHeader('Content-Type','application/json');res.end(JSON.stringify({output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(value)}]}]}));
  }catch(error){res.statusCode=500;res.end(JSON.stringify({error:{message:error.message}}));}});
  gateway.listen(0,'127.0.0.1');await once(gateway,'listening');const endpoint='http://127.0.0.1:'+gateway.address().port;

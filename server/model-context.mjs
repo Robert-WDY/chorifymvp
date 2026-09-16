@@ -1,4 +1,5 @@
 import {revisionTarget} from './turn-operation.mjs';
+import {factBoundary} from './fact-boundary.mjs';
 import {createHash} from 'node:crypto';
 import {methodBoundary} from './prompt-text.mjs';
 import {selectIntakeDocuments,assertIntakePointers} from './intake-context.mjs';
@@ -25,6 +26,10 @@ export function projectModelInput(payload,renderStructure){
  }
  const fullSource=view.changeContract?.source;
  for(const source of [...(view.sources||[]),...(view.supportingSources||[])]){
+  const boundary=view.boundary||view.evidenceContext?.factBoundary;
+  if(source.factBoundary&&boundary&&source.factBoundary.entries.every(e=>boundary.entries.some(b=>b.id===e.id&&JSON.stringify(b)===JSON.stringify(e)))){
+   source.factIdentityIds=source.factBoundary.entries.map(e=>e.id);source.factBoundaryRef=view.boundary?'/boundary':'/evidenceContext/factBoundary';delete source.factBoundary;
+  }
   if(renderStructure&&source.structure&&source.content===renderStructure(source.structure)&&source.id!==fullSource?.id){delete source.content;source.contentSource='structure';}
  }
  if(view.sourceDocument){
@@ -113,6 +118,7 @@ export function evidenceContext(state,item,sources=[]){
  const requestEvidence=task?.goal?.semantic?.deliverables?.[item.index]?.requestEvidence||'';
  return {speakerRole:task?.goal?.semantic?.speakerRole,targetAudience:task?.goal?.semantic?.targetAudience,requestEvidenceSpans:item.requestEvidenceSpans||[],evidenceSegments:item.evidenceSegments||[],currentInstruction:task?.continuationEvidence?.at(-1),provenance:{taskId:task?.id,revision:task?.revision,requestId:task?.requestId},...(requestEvidence||item.evidenceSegments?.length?{}:{query:task?.query||'',legacyEvidenceFallback:true}),runtimeFacts:task?.goal?.requestContract?.systemFacts?.length?task?.runtimeFacts:undefined,facts:task?.contract?.facts||[],globalConstraints:task?.contract?.globalConstraints||[],requestEvidence,
   assumptions:task?.goal?.assumptions||[],gaps:task?.goal?.semantic?.gaps||[],plannedMedia:mediaRequirements(task?.items,item),
+  factBoundary:factBoundary(state,item,sources),
   sourceRequests:[...new Set(sources.map(s=>s.taskId).filter(id=>id&&id!==task?.id))].flatMap(id=>{const owner=state.taskStore?.tasks?.[id];return owner?[owner.contract?{taskId:id,revision:owner.revision,requestId:owner.requestId,facts:owner.contract.facts||[],globalConstraints:owner.contract.globalConstraints||[]}:{taskId:id,query:owner.query}]:[];}),
   sources:sources.map(s=>pick(s,['id','type','url','version','taskId'])),
   policy:'只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。'};

@@ -1,0 +1,1129 @@
+{
+  "evidenceType": "offline_fixture_not_real_model",
+  "realModelCalls": 0,
+  "mediaSubmissions": 0,
+  "before": {
+    "evidence": "../2026-09-16-language-variants/01-dep-casual/model-inputs.json",
+    "length": "../2026-09-16-language-variants/11-text-casual/model-inputs.json",
+    "facts": "../2026-09-16-language-variants/06-ordered-casual/model-inputs.json"
+  },
+  "after": {
+    "evidence": {
+      "trace": "stage1-evidence-trace.json",
+      "firstPayload": {
+        "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+        "currentMessageId": "msg_0da54b95b684cdaede4c",
+        "replyTo": null,
+        "userMemory": [],
+        "activeTaskState": null,
+        "relevantEvidence": {
+          "conversation": {
+            "recentMessages": [],
+            "messageIndex": [],
+            "pendingRequest": null,
+            "recentAttempts": [],
+            "policy": "历史消息是原始对话证据。模型生成的失败提示不证明用户缺少信息。未接受的失败请求仍在对话中，不能把旧任务焦点当作该请求的对象。pendingRequest 是已收到但系统未成功接受的请求，用户的简短后续输入可能在补充或重试它；不能把系统错误当成用户撤销了该需求。根据问答关系理解补充回答；以原始用户内容为修改权限，不继承助手自行提出的要求。"
+          },
+          "references": [],
+          "sourceDocuments": [],
+          "relatedTasks": [],
+          "skillDirectory": [
+            {
+              "slug": "actor-realism-v2",
+              "name": "演员真实感与情绪优化器（V2）",
+              "description": "读取原始正文与锁定信息；检查动作、身份与表演连续性；输出保留约束的优化正文",
+              "applicability": "适用于真实感优化、情绪优化、人物不僵硬、微表情、剧本转分段提示词、图片提示词人物优化、视频提示词表演优化、图生视频表演，以及 Seedance/Kling/Veo/即梦等人物生成提示词优化。"
+            },
+            {
+              "slug": "asset-lock-generator-lite-v2",
+              "name": "简易资产锁生成器（V2）",
+              "description": "确认真实资产引用与预算；制定锚点及视图方案；按任务授权执行并验证引用一致性",
+              "applicability": "适用于简易资产锁、轻量人物锁、人物三视图、面部特写、C1–C4 场景锁、产品三视图、产品状态锁、产品交互锁和低调用预算资产一致性任务。"
+            },
+            {
+              "slug": "creative-cover-copy-v2",
+              "name": "文案与封面导演",
+              "description": "整理用户提供的产品与媒体证据；撰写文案和封面信息；核对文案和画面约束",
+              "applicability": "适用于视频内容总结、抖音/快手/小红书/B站/电商文案、种草或广告文案、标题优化、封面策划、视频或图片转封面、参考图生封面、批量封面方案、历史样例风格学习，以及“读素材→写文案→做封面”的完整流程。"
+            },
+            {
+              "slug": "creative-prompt-rewrite",
+              "name": "提示词改写",
+              "description": "提取必须保留的信息；修正冲突和不可执行的描述；交付可执行提示词并检查保留项",
+              "applicability": "适用于用户要求保留原有剧情、人物冲突、产品使用过程和视觉冲击，同时提高 Seedance、Kling、Runway 等视频模型的生成稳定性；包括强 3 秒 Hook、分镜压缩、人物反应具体化、人物与产品连续性、连续变身、生成失败后的逐镜恢复，以及在尽量保留用户核心意图前提下进行必要的最小安全调整。"
+            },
+            {
+              "slug": "cinematic-shot-designer-zh-v5",
+              "name": "导演多宫格分镜设计师（V5）",
+              "description": "解析原场景；规划同一张画面内的多宫格镜头；核对整版构图与台词",
+              "applicability": "适用于“多宫格分镜、整版故事板、storyboard contact sheet、导演镜头设计、单张图容纳全部镜头、一次生成全部镜头”等需求。只生成一张整版图片，禁止逐镜生图、批量生图或生成后拼接。"
+            },
+            {
+              "slug": "cinematic-style-optimizer-v2",
+              "name": "电影画面风格优化器（V2）",
+              "description": "保留原事件与参数；选择兼容影调与光学风格；输出风格提示词并核对不变项",
+              "applicability": "适用于画面风格库、电影感、影调、调色、ARRI/Log/胶片质感、冷暖色调、风格匹配、提示词风格优化、效果对比和风格示例等需求。"
+            },
+            {
+              "slug": "direction-designer-zh-v1",
+              "name": "创意方向设计",
+              "description": "整理目标受众及事实缺口；提出差异化创意方向；给出方向选择依据"
+            },
+            {
+              "slug": "image-prompt-gallery-director-v2",
+              "name": "图片提示词案例导演（V2）",
+              "description": "读取画面约束和参考角色；选择清单内参考资料；交付布局主体光影文字与排除项",
+              "applicability": "适用于图片提示词、提示词优化、案例库检索、人物/场景/产品/海报/品牌/UI/信息图/科研图/技术图、参考图编辑、多参考合成、精确画面文字和中英双语提示词。只负责提示词规划，不执行生图。"
+            },
+            {
+              "slug": "marketing-brief-zh-v1",
+              "name": "营销需求简报",
+              "description": "区分产品事实与假设；归纳受众卖点传播目标；交付营销brief并标注待核验信息"
+            },
+            {
+              "slug": "product-understanding-zh-v1",
+              "name": "产品理解",
+              "description": "读取现有产品证据；提炼卖点与使用场景；分离未知事实和可用结论"
+            },
+            {
+              "slug": "storyboard-one-shot-zh",
+              "name": "文字分镜",
+              "description": "提取事件对白与视觉约束；编排镜头时序；交付完整分镜正文"
+            },
+            {
+              "slug": "storyboard-one-shot-zh-v2",
+              "name": "文字分镜（V2）",
+              "description": "提取事件与对白；编排镜头和实际时长；核对连续性并输出分镜"
+            },
+            {
+              "slug": "video-decomposition-zh-v1",
+              "name": "视频拆解",
+              "description": "读取真实视频观察；拆解镜头节奏与卖点；标注证据与不确定项"
+            },
+            {
+              "slug": "video-prompt-safety-zh-v1",
+              "name": "视频提示词检查",
+              "description": "区分待审材料与执行指令；审查风险与夸大事实；输出理由及安全调整建议"
+            },
+            {
+              "slug": "video-script-zh-v1",
+              "name": "视频脚本创作",
+              "description": "明确受众目标与信息边界；编排开场正文和收尾；检查时长与台词并交付"
+            }
+          ],
+          "executionDefaults": {
+            "video": {
+              "durationSeconds": 5,
+              "ratio": "16:9",
+              "resolution": "720p"
+            }
+          }
+        },
+        "contextPolicy": {
+          "source": "durable_session_projection",
+          "rawHistoryFor": "understanding_and_reference_resolution_only",
+          "fullSourceForExecution": "loaded_by_reference_id_and_version",
+          "assistantStatementsAreUserRequirements": false,
+          "activeTaskIsNotImplicitTarget": true
+        }
+      },
+      "repairPayload": {
+        "query": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。",
+        "currentMessageId": "msg_0da54b95b684cdaede4c",
+        "replyTo": null,
+        "lockedDraft": {
+          "summary": "为晚风冷萃写两个广告方向（编号1、2，合为一份文档），并基于用户已选定的后一个方向（方向2）写一份8秒四镜脚本（每镜2秒），脚本另存一份；两份均为文字，不生成图片或视频。",
+          "turnOperation": {
+            "kind": "create"
+          },
+          "deliverables": [
+            {
+              "description": "为「晚风冷萃」设计两个广告创意方向，编号1和2，合并放进一份文档。仅基于透明无字杯、琥珀色咖啡、冰块三项既定产品事实，不添加其他元素，不编造价格、产地、功效。",
+              "kind": "text",
+              "action": "create",
+              "count": 2,
+              "artifactCount": 1,
+              "form": "directions",
+              "requiredMethods": [
+                "direction-designer-zh-v1"
+              ],
+              "requestEvidence": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。",
+              "purpose": "marketing",
+              "constraints": [
+                "两个方向编号1和2",
+                "两个方向合为一份文档",
+                "产品元素仅限透明无字杯、琥珀色咖啡、冰块",
+                "不加其他元素",
+                "不编价格、产地、功效"
+              ]
+            },
+            {
+              "description": "基于已选定的后一个方向（方向2）接着写一份8秒四镜广告脚本，每镜2秒，单独保存为一份文字脚本，不生成媒体。",
+              "kind": "text",
+              "action": "create",
+              "count": 1,
+              "artifactCount": 1,
+              "form": "script",
+              "requiredMethods": [
+                "storyboard-one-shot-zh-v2"
+              ],
+              "dependsOn": [
+                0
+              ],
+              "references": [
+                "task:0"
+              ],
+              "sourceSelection": {
+                "source": "task:0",
+                "unitType": "directions",
+                "mode": "selected",
+                "unitIndexes": [
+                  2
+                ],
+                "layout": "unspecified"
+              },
+              "requestEvidence": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+              "purpose": "marketing",
+              "constraints": [
+                "总时长8秒",
+                "共四镜",
+                "每镜2秒",
+                "脚本单独一份文档",
+                "仅文字，不出图或视频",
+                "产品元素仅限透明无字杯、琥珀色咖啡、冰块，不加其他元素",
+                "不编价格、产地、功效"
+              ],
+              "spec": {
+                "shotCount": 4,
+                "secondsPerShot": 2,
+                "durationSeconds": 8
+              }
+            }
+          ],
+          "facts": [
+            "产品是晚风冷萃",
+            "产品只有透明无字杯、琥珀色咖啡和冰块",
+            "用户已选定后一个方向（方向2）",
+            "用户要求两份交付均为文字，不生成图片或视频"
+          ],
+          "assumptions": [],
+          "gaps": [],
+          "safety": {
+            "disposition": "allow",
+            "untrustedInstructions": false,
+            "reason": ""
+          },
+          "approval": {
+            "required": false,
+            "reason": ""
+          }
+        },
+        "error": "请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置",
+        "lockedFieldsPolicy": "Only listed fields may change; program revalidates the complete candidate.",
+        "paths": [
+          "/deliverables/1/requestEvidence"
+        ],
+        "missingPaths": [
+          "/deliverables/1/requestEvidence"
+        ],
+        "removePaths": [],
+        "fieldKeys": {
+          "/deliverables/1/requestEvidence": "field_0"
+        },
+        "conversation": {
+          "pendingRequest": null,
+          "recentMessages": [],
+          "messageIndex": [],
+          "recentAttempts": [],
+          "policy": "历史消息是原始对话证据。模型生成的失败提示不证明用户缺少信息。未接受的失败请求仍在对话中，不能把旧任务焦点当作该请求的对象。pendingRequest 是已收到但系统未成功接受的请求，用户的简短后续输入可能在补充或重试它；不能把系统错误当成用户撤销了该需求。根据问答关系理解补充回答；以原始用户内容为修改权限，不继承助手自行提出的要求。"
+        },
+        "evidenceRepair": {
+          "invalidQuote": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。我已经选后一个了，别再让我选。",
+          "candidates": [
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 0,
+              "end": 25,
+              "text": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。"
+            },
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 25,
+              "end": 53,
+              "text": "就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。"
+            },
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 53,
+              "end": 88,
+              "text": "产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。"
+            },
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 88,
+              "end": 103,
+              "text": "我已经选后一个了，别再让我选。"
+            },
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 103,
+              "end": 118,
+              "text": "两份都要文字，别真出图或视频。"
+            },
+            {
+              "messageId": "msg_0da54b95b684cdaede4c",
+              "start": 0,
+              "end": 118,
+              "text": "帮晚风冷萃想俩广告方向，编号1和2，放一份文档里。就用后一个接着写8秒的四镜脚本，每镜2秒，脚本另存一份。产品只有透明无字杯、琥珀色咖啡和冰块，不加别的东西，不编价格产地功效。我已经选后一个了，别再让我选。两份都要文字，别真出图或视频。"
+            }
+          ],
+          "policy": "选择一段真实连续原文。需要跨段证据时保留独立的requestEvidenceSpans；不可拼接成单段引文。原文存在不证明语义解释正确。"
+        }
+      }
+    },
+    "length": {
+      "trace": "stage2-completion-trace.json",
+      "generationInputs": [
+        {
+          "item": {
+            "id": "93a01627-72b8-4da4-97cd-d1525eddc5f4",
+            "index": 0,
+            "description": "正文",
+            "operation": "marketing_script",
+            "output": "text",
+            "count": 1,
+            "dependsOn": [],
+            "references": [],
+            "constraints": [],
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16,
+                "text": "正文80—120字，末尾加短标题"
+              }
+            ],
+            "spec": {
+              "bodyLength": {
+                "min": 80,
+                "max": 120,
+                "unit": "non_punctuation_characters"
+              }
+            },
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "selectionRole": "consumer",
+            "specOrigins": {
+              "bodyLength": {
+                "value": {
+                  "min": 80,
+                  "max": 120,
+                  "unit": "non_punctuation_characters"
+                },
+                "origin": "unattributed",
+                "sourceTurn": "current",
+                "evidence": "",
+                "adjustable": false
+              }
+            },
+            "form": "copy"
+          },
+          "deliveryContract": {
+            "description": "正文",
+            "output": "text"
+          },
+          "facts": [],
+          "globalConstraints": [],
+          "sources": [],
+          "supportingSources": [],
+          "evidenceContext": {
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16,
+                "text": "正文80—120字，末尾加短标题"
+              }
+            ],
+            "provenance": {
+              "taskId": "8a84d6c8-70df-4fe9-a4ca-308fa8502b74",
+              "revision": 1,
+              "requestId": "a6be9040-f862-44b1-b36a-301635623ca8"
+            },
+            "requestEvidence": "正文80—120字，末尾加短标题",
+            "assumptions": [],
+            "gaps": [],
+            "plannedMedia": [],
+            "factBoundary": {
+              "version": 1,
+              "entries": [],
+              "sources": [],
+              "required": false,
+              "hash": "851ae815d2355db844fde88bbc8c6ebede5d65f7f6b065a5e620350e637b627b"
+            },
+            "sourceRequests": [],
+            "sources": [],
+            "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。",
+            "valueSources": {
+              "facts": "/facts",
+              "globalConstraints": "/globalConstraints"
+            }
+          },
+          "observations": [],
+          "feedback": null,
+          "methods": []
+        },
+        {
+          "item": {
+            "id": "93a01627-72b8-4da4-97cd-d1525eddc5f4",
+            "index": 0,
+            "description": "正文",
+            "operation": "marketing_script",
+            "output": "text",
+            "count": 1,
+            "dependsOn": [],
+            "references": [],
+            "constraints": [],
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16,
+                "text": "正文80—120字，末尾加短标题"
+              }
+            ],
+            "spec": {
+              "bodyLength": {
+                "min": 80,
+                "max": 120,
+                "unit": "non_punctuation_characters"
+              }
+            },
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "selectionRole": "consumer",
+            "specOrigins": {
+              "bodyLength": {
+                "value": {
+                  "min": 80,
+                  "max": 120,
+                  "unit": "non_punctuation_characters"
+                },
+                "origin": "unattributed",
+                "sourceTurn": "current",
+                "evidence": "",
+                "adjustable": false
+              }
+            },
+            "form": "copy"
+          },
+          "deliveryContract": {
+            "description": "正文",
+            "output": "text"
+          },
+          "facts": [],
+          "globalConstraints": [],
+          "sources": [],
+          "supportingSources": [],
+          "evidenceContext": {
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_d10c7ffef29cdfeb5e65",
+                "start": 0,
+                "end": 16,
+                "text": "正文80—120字，末尾加短标题"
+              }
+            ],
+            "provenance": {
+              "taskId": "8a84d6c8-70df-4fe9-a4ca-308fa8502b74",
+              "revision": 1,
+              "requestId": "a6be9040-f862-44b1-b36a-301635623ca8"
+            },
+            "requestEvidence": "正文80—120字，末尾加短标题",
+            "assumptions": [],
+            "gaps": [],
+            "plannedMedia": [],
+            "factBoundary": {
+              "version": 1,
+              "entries": [],
+              "sources": [],
+              "required": false,
+              "hash": "851ae815d2355db844fde88bbc8c6ebede5d65f7f6b065a5e620350e637b627b"
+            },
+            "sourceRequests": [],
+            "sources": [],
+            "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。",
+            "valueSources": {
+              "facts": "/facts",
+              "globalConstraints": "/globalConstraints"
+            }
+          },
+          "observations": [],
+          "feedback": {
+            "artifactId": "aa394b45-b8d7-4a4d-802b-286f7547143d",
+            "content": "文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文文\n\n标题不计入正文",
+            "issues": [
+              "硬要求不满足：bodyLength.0，要求 {\"min\":80,\"max\":120,\"unit\":\"non_punctuation_characters\"}，实际 60"
+            ]
+          },
+          "methods": []
+        }
+      ]
+    },
+    "facts": {
+      "trace": "stage3-facts-trace.json",
+      "generationInputs": [
+        {
+          "item": {
+            "id": "a6744d8f-2376-4b49-aa7d-a66c96e9f556",
+            "index": 0,
+            "description": "Brief",
+            "operation": "marketing_script",
+            "output": "text",
+            "count": 1,
+            "dependsOn": [],
+            "references": [],
+            "constraints": [],
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "spec": {},
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "selectionRole": "consumer",
+            "form": "copy"
+          },
+          "deliveryContract": {
+            "description": "Brief",
+            "output": "text"
+          },
+          "facts": [
+            "周日10点，免费，限15人"
+          ],
+          "globalConstraints": [],
+          "sources": [],
+          "supportingSources": [],
+          "evidenceContext": {
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "provenance": {
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "revision": 1,
+              "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+            },
+            "requestEvidence": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+            "assumptions": [
+              "预约条件待确认：用户补充"
+            ],
+            "gaps": [
+              {
+                "description": "预约条件待确认",
+                "level": "factual",
+                "resolution": "用户补充"
+              }
+            ],
+            "plannedMedia": [],
+            "factBoundary": {
+              "version": 1,
+              "entries": [
+                {
+                  "id": "fact_7e5f6aa842bcb93c83f3",
+                  "status": "user_provided",
+                  "text": "周日10点，免费，限15人",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                },
+                {
+                  "id": "fact_01367d06e6724d4ab5a6",
+                  "status": "unknown",
+                  "text": "预约条件待确认",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                }
+              ],
+              "sources": [],
+              "required": true,
+              "hash": "35ec6e1cd5d449899f30463b5e9f321327bd3d96605e7c1f5da542989eb91614"
+            },
+            "sourceRequests": [],
+            "sources": [],
+            "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。",
+            "valueSources": {
+              "facts": "/facts",
+              "globalConstraints": "/globalConstraints"
+            }
+          },
+          "observations": [],
+          "feedback": null,
+          "methods": []
+        },
+        {
+          "item": {
+            "id": "65084fc0-4327-4d1c-aeae-787b784484f0",
+            "index": 1,
+            "description": "文案",
+            "operation": "marketing_script",
+            "output": "text",
+            "count": 1,
+            "dependsOn": [
+              0
+            ],
+            "references": [
+              "task:0"
+            ],
+            "constraints": [],
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "spec": {},
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "selectionRole": "consumer",
+            "form": "copy"
+          },
+          "deliveryContract": {
+            "description": "文案",
+            "output": "text"
+          },
+          "facts": [
+            "周日10点，免费，限15人"
+          ],
+          "globalConstraints": [],
+          "sources": [
+            {
+              "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+              "type": "text",
+              "content": "周日10点，免费，限15人。预约条件待确认。",
+              "version": 1,
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "provenance": {
+                "origin": "model_artifact",
+                "factualSupport": "fact_boundary_checked",
+                "sourceTaskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              },
+              "relation": "accepted_artifact",
+              "role": "text",
+              "dependencyIndex": 0,
+              "factIdentityIds": [
+                "fact_7e5f6aa842bcb93c83f3",
+                "fact_01367d06e6724d4ab5a6"
+              ],
+              "factBoundaryRef": "/evidenceContext/factBoundary"
+            }
+          ],
+          "supportingSources": [],
+          "evidenceContext": {
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "provenance": {
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "revision": 1,
+              "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+            },
+            "requestEvidence": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+            "assumptions": [
+              "预约条件待确认：用户补充"
+            ],
+            "gaps": [
+              {
+                "description": "预约条件待确认",
+                "level": "factual",
+                "resolution": "用户补充"
+              }
+            ],
+            "plannedMedia": [],
+            "factBoundary": {
+              "version": 1,
+              "entries": [
+                {
+                  "id": "fact_7e5f6aa842bcb93c83f3",
+                  "status": "user_provided",
+                  "text": "周日10点，免费，限15人",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                },
+                {
+                  "id": "fact_01367d06e6724d4ab5a6",
+                  "status": "unknown",
+                  "text": "预约条件待确认",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                }
+              ],
+              "sources": [
+                {
+                  "type": "model_artifact",
+                  "sourceId": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                  "version": 1,
+                  "contentHash": "16e4f2f825e286f255e2bbbf49af235f672eba9481115264861a714ee8abf02c",
+                  "status": "unverified_source"
+                }
+              ],
+              "required": true,
+              "hash": "cfd5601a4c7e2664ece0cc084f1c343c8b2499ab2d73d2120325c5a24f9e0d23"
+            },
+            "sourceRequests": [],
+            "sources": [
+              {
+                "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                "type": "text",
+                "version": 1,
+                "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              }
+            ],
+            "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。",
+            "valueSources": {
+              "facts": "/facts",
+              "globalConstraints": "/globalConstraints"
+            }
+          },
+          "observations": [],
+          "feedback": null,
+          "methods": []
+        },
+        {
+          "item": {
+            "id": "65084fc0-4327-4d1c-aeae-787b784484f0",
+            "index": 1,
+            "description": "文案",
+            "operation": "marketing_script",
+            "output": "text",
+            "count": 1,
+            "dependsOn": [
+              0
+            ],
+            "references": [
+              "task:0"
+            ],
+            "constraints": [],
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "spec": {},
+            "requiredEvidence": "none",
+            "requiredMethods": [],
+            "artifactCount": 1,
+            "contentCardinality": 1,
+            "selectionRole": "consumer",
+            "form": "copy"
+          },
+          "deliveryContract": {
+            "description": "文案",
+            "output": "text"
+          },
+          "facts": [
+            "周日10点，免费，限15人"
+          ],
+          "globalConstraints": [],
+          "sources": [
+            {
+              "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+              "type": "text",
+              "content": "周日10点，免费，限15人。预约条件待确认。",
+              "version": 1,
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "provenance": {
+                "origin": "model_artifact",
+                "factualSupport": "fact_boundary_checked",
+                "sourceTaskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              },
+              "relation": "accepted_artifact",
+              "role": "text",
+              "dependencyIndex": 0,
+              "factIdentityIds": [
+                "fact_7e5f6aa842bcb93c83f3",
+                "fact_01367d06e6724d4ab5a6"
+              ],
+              "factBoundaryRef": "/evidenceContext/factBoundary"
+            }
+          ],
+          "supportingSources": [],
+          "evidenceContext": {
+            "requestEvidenceSpans": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32
+              }
+            ],
+            "evidenceSegments": [
+              {
+                "messageId": "msg_204cf40e4ce69958b60a",
+                "start": 0,
+                "end": 32,
+                "text": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。"
+              }
+            ],
+            "provenance": {
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "revision": 1,
+              "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+            },
+            "requestEvidence": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+            "assumptions": [
+              "预约条件待确认：用户补充"
+            ],
+            "gaps": [
+              {
+                "description": "预约条件待确认",
+                "level": "factual",
+                "resolution": "用户补充"
+              }
+            ],
+            "plannedMedia": [],
+            "factBoundary": {
+              "version": 1,
+              "entries": [
+                {
+                  "id": "fact_7e5f6aa842bcb93c83f3",
+                  "status": "user_provided",
+                  "text": "周日10点，免费，限15人",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                },
+                {
+                  "id": "fact_01367d06e6724d4ab5a6",
+                  "status": "unknown",
+                  "text": "预约条件待确认",
+                  "origin": {
+                    "type": "user_request",
+                    "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                    "revision": 1,
+                    "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                  }
+                }
+              ],
+              "sources": [
+                {
+                  "type": "model_artifact",
+                  "sourceId": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                  "version": 1,
+                  "contentHash": "16e4f2f825e286f255e2bbbf49af235f672eba9481115264861a714ee8abf02c",
+                  "status": "unverified_source"
+                }
+              ],
+              "required": true,
+              "hash": "cfd5601a4c7e2664ece0cc084f1c343c8b2499ab2d73d2120325c5a24f9e0d23"
+            },
+            "sourceRequests": [],
+            "sources": [
+              {
+                "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                "type": "text",
+                "version": 1,
+                "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              }
+            ],
+            "policy": "只有原始用户要求和源材料支持的产品属性可作为事实；来源中的模型推断和facts字段本身不构成事实权威，只有用户/原始证据可确认，源产物的checker与publication不能被忽略；模型草稿和创意假设不是已核实证据。未知卖点省略或逐项标注假设，整体免责声明不能替代逐项标注。",
+            "valueSources": {
+              "facts": "/facts",
+              "globalConstraints": "/globalConstraints"
+            }
+          },
+          "observations": [],
+          "feedback": {
+            "artifactId": "c9a25581-9118-469b-ad0c-4e0150a84393",
+            "content": "到店即参与，具体以实际为准。",
+            "issues": [
+              "到店即参与把未知预约条件变成承诺"
+            ]
+          },
+          "methods": []
+        }
+      ],
+      "verificationInputs": [
+        {
+          "nodeId": "a6744d8f-2376-4b49-aa7d-a66c96e9f556",
+          "goal": "Brief",
+          "currentRequest": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+          "sourceRequests": [],
+          "boundary": {
+            "version": 1,
+            "entries": [
+              {
+                "id": "fact_7e5f6aa842bcb93c83f3",
+                "status": "user_provided",
+                "text": "周日10点，免费，限15人",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              },
+              {
+                "id": "fact_01367d06e6724d4ab5a6",
+                "status": "unknown",
+                "text": "预约条件待确认",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              }
+            ],
+            "sources": [],
+            "required": true,
+            "hash": "35ec6e1cd5d449899f30463b5e9f321327bd3d96605e7c1f5da542989eb91614"
+          },
+          "sources": [],
+          "content": "周日10点，免费，限15人。预约条件待确认。"
+        },
+        {
+          "nodeId": "65084fc0-4327-4d1c-aeae-787b784484f0",
+          "goal": "文案",
+          "currentRequest": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+          "sourceRequests": [],
+          "boundary": {
+            "version": 1,
+            "entries": [
+              {
+                "id": "fact_7e5f6aa842bcb93c83f3",
+                "status": "user_provided",
+                "text": "周日10点，免费，限15人",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              },
+              {
+                "id": "fact_01367d06e6724d4ab5a6",
+                "status": "unknown",
+                "text": "预约条件待确认",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              }
+            ],
+            "sources": [
+              {
+                "type": "model_artifact",
+                "sourceId": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                "version": 1,
+                "contentHash": "16e4f2f825e286f255e2bbbf49af235f672eba9481115264861a714ee8abf02c",
+                "status": "unverified_source"
+              }
+            ],
+            "required": true,
+            "hash": "cfd5601a4c7e2664ece0cc084f1c343c8b2499ab2d73d2120325c5a24f9e0d23"
+          },
+          "sources": [
+            {
+              "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+              "type": "text",
+              "content": "周日10点，免费，限15人。预约条件待确认。",
+              "version": 1,
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "provenance": {
+                "origin": "model_artifact",
+                "factualSupport": "fact_boundary_checked",
+                "sourceTaskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              },
+              "relation": "accepted_artifact",
+              "role": "text",
+              "dependencyIndex": 0,
+              "factIdentityIds": [
+                "fact_7e5f6aa842bcb93c83f3",
+                "fact_01367d06e6724d4ab5a6"
+              ],
+              "factBoundaryRef": "/boundary"
+            }
+          ],
+          "content": "到店即参与，具体以实际为准。"
+        },
+        {
+          "nodeId": "65084fc0-4327-4d1c-aeae-787b784484f0",
+          "goal": "文案",
+          "currentRequest": "先Brief再文案，活动周日10点免费限15人，预约条件不知道。",
+          "sourceRequests": [],
+          "boundary": {
+            "version": 1,
+            "entries": [
+              {
+                "id": "fact_7e5f6aa842bcb93c83f3",
+                "status": "user_provided",
+                "text": "周日10点，免费，限15人",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              },
+              {
+                "id": "fact_01367d06e6724d4ab5a6",
+                "status": "unknown",
+                "text": "预约条件待确认",
+                "origin": {
+                  "type": "user_request",
+                  "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+                  "revision": 1,
+                  "requestId": "d61c7661-3a1f-467d-8000-5b341a6ee679"
+                }
+              }
+            ],
+            "sources": [
+              {
+                "type": "model_artifact",
+                "sourceId": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+                "version": 1,
+                "contentHash": "16e4f2f825e286f255e2bbbf49af235f672eba9481115264861a714ee8abf02c",
+                "status": "unverified_source"
+              }
+            ],
+            "required": true,
+            "hash": "cfd5601a4c7e2664ece0cc084f1c343c8b2499ab2d73d2120325c5a24f9e0d23"
+          },
+          "sources": [
+            {
+              "id": "6a17d154-27dd-4e8b-986c-88d701a008b9",
+              "type": "text",
+              "content": "周日10点，免费，限15人。预约条件待确认。",
+              "version": 1,
+              "taskId": "8235a825-eda0-4a9a-9877-9dfad367aab8",
+              "provenance": {
+                "origin": "model_artifact",
+                "factualSupport": "fact_boundary_checked",
+                "sourceTaskId": "8235a825-eda0-4a9a-9877-9dfad367aab8"
+              },
+              "relation": "accepted_artifact",
+              "role": "text",
+              "dependencyIndex": 0,
+              "factIdentityIds": [
+                "fact_7e5f6aa842bcb93c83f3",
+                "fact_01367d06e6724d4ab5a6"
+              ],
+              "factBoundaryRef": "/boundary"
+            }
+          ],
+          "content": "周日10点，免费，限15人，预约条件待确认。"
+        }
+      ]
+    }
+  },
+  "note": "Before files are historical real-model requests; after files are actual runtime requests to deterministic offline fixtures. They are not a real-model A/B quality result."
+}
