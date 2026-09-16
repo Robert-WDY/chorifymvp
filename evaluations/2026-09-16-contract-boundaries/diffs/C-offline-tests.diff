@@ -1,0 +1,305 @@
+diff --git a/tests/business-action.test.mjs b/tests/business-action.test.mjs
+index 49a71e5..2f1023c 100644
+--- a/tests/business-action.test.mjs
++++ b/tests/business-action.test.mjs
+@@ -30,7 +30,7 @@ function runtimeFixture({mode='core',failEdit=false,approvalDecision='approve'}=
+   if(options?.tracePhase==='media_plan')return reply({concept:'当前画面',preservedConstraints:[],safety:{passed:true,reason:'普通产品图'},items:Array.from({length:payload.goal.count},()=>({prompt:'product picture',size:'2048x2048',...(payload.goal.references.length?{referenceImages:payload.goal.references}:{})}))});
+   throw Error('unexpected model phase '+options?.tracePhase);
+  }};
+- const media={config:{imageModel:'local-fixture'},image:async args=>{submissions.push(structuredClone(args));if(editFailure&&args.referenceImages?.length)return {isError:true,status:'failed',text:'known fixture failure'};return {status:'succeeded',images:[{url:'https://example.com/action-'+submissions.length+'.png'}]};}};
++ const media={config:{imageModel:'local-fixture'},image:async args=>{submissions.push(structuredClone(args));if(editFailure&&args.referenceImages?.length)return {isError:true,status:'failed',text:'known fixture failure'};return {status:'succeeded',images:[{url:'https://example.com/action-'+submissions.length+'.png',size:'2048x2048'}]};}};
+  const runtime=new ToolRuntime({catalog,brain,media}),agent=new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,actionMode:mode,verifier:new Verifier(brain,{policy:'delivery_only'})});
+  return {state,agent,calls,submissions,run:async(raw,query='当前用户要求',control={})=>{command=raw;await agent.run(state,query,()=>{},signal(),control);},allowEdit:()=>{editFailure=false;}};
+ }
+@@ -181,7 +181,7 @@ test('core: asynchronous video produces a real-shaped receipt and artifact with
+   if(options.tracePhase==='final_response')return reply('视频结果已返回。');
+   assert.equal(options.tracePhase,'media_plan');return reply({concept:'产品视频',preservedConstraints:[],safety:{passed:true,reason:'普通产品'},items:[{prompt:'product movie',duration:5,ratio:'16:9'}]});
+  }};
+- const media={config:{videoModel:'offline'},video:async args=>{submissions.push(args);return {taskId:'offline-job',status:'queued'};},getVideo:async id=>{polls.push(id);return {taskId:id,status:'succeeded',videoUrl:'https://example.com/offline-video.mp4'};}};
++ const media={config:{videoModel:'offline'},video:async args=>{submissions.push(args);return {taskId:'offline-job',status:'queued'};},getVideo:async id=>{polls.push(id);return {taskId:id,status:'succeeded',videoUrl:'https://example.com/offline-video.mp4',metadata:{duration:5,ratio:'16:9'}};}};
+  const runtime=new ToolRuntime({brain,catalog,media});
+  await new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,actionMode:'core',verifier:new Verifier(brain,{policy:'delivery_only'})}).run(state,'产品宣传视频',()=>{},signal());
+  assert.equal(submissions.length,1);assert.ok(polls.length>=1);assert.equal(currentTask(state).status,'COMPLETED');
+diff --git a/tests/contract-boundary-fixture.mjs b/tests/contract-boundary-fixture.mjs
+new file mode 100644
+index 0000000..dd22562
+--- /dev/null
++++ b/tests/contract-boundary-fixture.mjs
+@@ -0,0 +1,34 @@
++import fs from 'node:fs';
++import assert from 'node:assert/strict';
++import {Agent} from './runtime-model-fixture.mjs';
++import {loadCatalog} from '../server/catalog.mjs';
++import {ToolRuntime} from '../server/tools.mjs';
++import {Verifier} from '../server/verification.mjs';
++export const catalog=await loadCatalog();
++export const reply=v=>[{type:'message',content:[{type:'output_text',text:JSON.stringify(v)}]}];
++export const signal=()=>AbortSignal.timeout(15000);
++export const contract=(deliverables,extra={})=>({summary:'边界测试',turnOperation:{kind:'create'},deliverables,safety:{disposition:'allow',untrustedInstructions:false,reason:''},approval:{required:false,reason:''},...extra});
++export const textItem=(extra={})=>({description:'文字结果',kind:'text',action:'create',form:'copy',count:1,...extra});
++export const archived=(id,file)=>JSON.parse(fs.readFileSync(new URL('../evaluations/2026-09-16-language-variants/'+id+'/'+file+'.json',import.meta.url)));
++export const rawDraft=id=>JSON.parse(archived(id,'state').modelCalls[0].output[0].content[0].text);
++export function fixture({draft,generate=()=>({content:'完整文字'}),judge=()=>({outcome:'passed',issues:[]}),policy='delivery_only'}={}){
++ const state={id:'boundary-'+crypto.randomUUID(),messages:[],events:[],assets:[]},calls=[];let generation=0,submissions=0;
++ const brain={respond:async(input,_tools,_signal,options)=>{
++  const part=input[1].content,p=JSON.parse(typeof part==='string'?part:part.find(x=>x.type==='input_text').text);
++  calls.push({phase:options.tracePhase,input:structuredClone(input)});
++  const captured=value=>{const output=reply(value);calls.at(-1).output=structuredClone(output);return output;};
++  if(options.tracePhase==='understand')return captured(typeof draft==='function'?draft(p):draft);
++  if(options.tracePhase==='text_generation')return captured(generate(p,++generation));
++  if(options.tracePhase==='extract_confirmation_gate')return captured({required:true,evidence:p.query});
++  if(options.tracePhase==='verify_turn_operation')return captured({operation:'approve',evidence:p.query});
++  if(options.tracePhase.startsWith('verify_'))return captured(judge(p,options.tracePhase));
++  if(options.tracePhase==='media_plan'){
++   const schema=JSON.parse(input[0].content.split('Schema：').at(-1)),fields=schema.properties.items.items.properties;
++   return captured({concept:'已保存方案',preservedConstraints:[],safety:{passed:true,reason:'普通场景'},items:[{prompt:'测试用静物，无人物无文字',...(fields.size?{size:'1440x2560'}:{duration:5,ratio:'9:16'})}]});
++  }
++  assert.fail('unexpected phase '+options.tracePhase);
++ }};
++ const media={config:{imageModel:'offline-only',videoModel:'offline-only'},image:async()=>{submissions++;throw Error('No paid calls in offline tests');},video:async()=>{submissions++;throw Error('No paid calls in offline tests');}};
++ const runtime=new ToolRuntime({catalog,brain,media}),agent=new Agent({brain,runtime,catalog,actionMode:'core',effectPolicy:'explicit_approval',verifier:new Verifier(brain,{policy})});
++ return {state,calls,agent,submissions:()=>submissions,run:query=>agent.run(state,query,()=>{},signal())};
++}
+diff --git a/tests/contract-boundary-stage1.test.mjs b/tests/contract-boundary-stage1.test.mjs
+new file mode 100644
+index 0000000..22108b6
+--- /dev/null
++++ b/tests/contract-boundary-stage1.test.mjs
+@@ -0,0 +1,53 @@
++import test from 'node:test';import assert from 'node:assert/strict';
++import {understandGoal,semanticSchema} from '../server/intent.mjs';
++import {operationInputSchema} from '../server/turn-operation.mjs';
++import {bindRequestEvidence,evidenceCandidates} from '../server/request-input.mjs';
++import {assertWorkflow} from '../server/planning-boundary.mjs';
++import {applyStages} from '../server/stage-contract.mjs';
++import {currentTask,taskArtifacts} from '../server/task-state.mjs';
++import Ajv from 'ajv';
++import {catalog,reply,signal,contract,textItem,archived,rawDraft,fixture} from './contract-boundary-fixture.mjs';
++test('stage1 archived discontinuous quotation repairs only evidence and preserves selected dependency',async()=>{
++ const draft=rawDraft('01-dep-casual'),query=archived('01-dep-casual','result').query;let calls=0;
++ const g=await understandGoal({respond:async input=>{
++  if(++calls===1)return reply(draft);
++  const p=JSON.parse(input[1].content);assert.deepEqual(p.paths,['/deliverables/1/requestEvidence']);
++  assert.ok(p.evidenceRepair.candidates.every(c=>query.slice(c.start,c.end)===c.text));
++  assert.deepEqual(p.lockedDraft,draft);
++  return reply({[p.fieldKeys[p.paths[0]]]:p.evidenceRepair.candidates.find(c=>c.text.startsWith('就用后一个')).text});
++ }},catalog,{query,actionMode:'core',strictControl:true,auditContracts:true},signal());
++ assert.equal(calls,2);assert.deepEqual(g.tasks[1].sourceSelection,draft.deliverables[1].sourceSelection);assert.deepEqual(g.tasks[1].dependsOn,[0]);
++});
++test('stage1 evidence candidates are exact Unicode spans; separate excerpts remain separate',()=>{
++ const m={role:'user',messageId:'m',content:'第一条🌱。中间资料。最后一条！'};
++ for(const c of evidenceCandidates(m))assert.equal(m.content.slice(c.start,c.end),c.text);
++ const spans=[0,2].map(i=>{const {messageId,start,end}=evidenceCandidates(m)[i];return{messageId,start,end};});
++ const d=contract([textItem({requestEvidenceSpans:spans})]);bindRequestEvidence(d,{query:m.content,currentMessage:m});assert.equal(d.deliverables[0].requestEvidence,'');assert.equal(d.deliverables[0].evidenceSegments.length,2);
++ assert.throws(()=>bindRequestEvidence(contract([textItem({requestEvidence:'第一条🌱。最后一条！'})]),{query:m.content,currentMessage:m}),/不匹配/);
++});
++test('stage1 repeated unsupported evidence patch stops without changing the correct selection',async()=>{
++ const draft=rawDraft('01-dep-casual'),query=archived('01-dep-casual','result').query;let calls=0;
++ await assert.rejects(understandGoal({respond:async()=>reply(++calls===1?draft:{field_0:draft.deliverables[1].requestEvidence})},catalog,{query,actionMode:'core',strictControl:true},signal()),/证据|补丁|schema|Schema/);assert.ok(calls<=3);
++});
++test('stage1 archived missing original is valid but not executable and produces no artifact',async()=>{
++ const f=fixture({draft:rawDraft('20-empty-formal')});await f.run(archived('20-empty-formal','result').query);
++ assert.equal(currentTask(f.state).status,'NEEDS_INPUT');assert.equal(taskArtifacts(f.state).length,0);assert.ok(!f.calls.some(c=>c.phase==='text_generation'));assert.equal(f.submissions(),0);
++});
++test('stage1 deferred readiness does not hide invalid topology, methods or specifications',()=>{
++ const good={id:'i',operation:'rewrite',requiredMethods:[],references:[],dependsOn:[],spec:{selectedDirectionIndex:2},activation:{timing:'after_user_input',condition:'等待用户提供原文'}};
++ assert.doesNotThrow(()=>assertWorkflow(good,[good],catalog));
++ for(const delta of [{dependsOn:[0]},{references:['task:0']},{requiredMethods:['invented']},{spec:{selectedDirectionIndex:2,directionCount:1}},{spec:{shotCount:4,secondsPerShot:2,durationSeconds:5}},{activation:{timing:'after_user_input',condition:''}}]){const bad={...good,...delta};assert.throws(()=>assertWorkflow(bad,[bad],catalog));}
++ const missing={...good,activation:undefined};assert.throws(()=>assertWorkflow(missing,[missing],catalog),/前置生产/);
++});
++test('stage1 media obligations cannot silently become plain prompt review',()=>{
++ for(const id of ['15-image-casual','16-image-formal'])assert.throws(()=>applyStages(rawDraft(id)),e=>e.code==='media_obligation');
++ const review=contract([textItem({form:'prompt'})],{approval:{required:true,reason:'只审核文字',scope:'text_review'}});applyStages(review);assert.equal(review.approval.required,false);assert.equal(review.reviewIntent.required,true);
++});
++for(const kind of ['image','video'])test('stage1 '+kind+' executable plan is saved and waits for exact-plan approval with zero submissions',async()=>{
++ const query='先保存执行方案，批准后生成',draft=contract([{description:'静物媒体',kind,action:'create',count:1,spec:kind==='image'?{ratio:'9:16'}:{ratio:'9:16',durationSeconds:5}}],{approval:{required:true,reason:query,scope:'media_submission'}});
++ const validate=new Ajv({strict:false}).compile(operationInputSchema(semanticSchema));assert.ok(validate(draft),JSON.stringify(validate.errors));
++ const f=fixture({draft});await f.run(query);const task=currentTask(f.state);assert.equal(task.status,'WAIT_CONFIRM');assert.ok(task.approval.planHash);assert.ok(task.approval.payload);assert.equal(task.items.length,1);assert.equal(f.submissions(),0);
++});
++test('stage1 prompt-only completes without introducing media obligations',async()=>{
++ const f=fixture({draft:contract([textItem({form:'prompt'})])});await f.run('只写一段图片提示词');assert.equal(currentTask(f.state).status,'COMPLETED');assert.equal(f.submissions(),0);assert.equal(currentTask(f.state).items.length,1);
++});
+diff --git a/tests/contract-boundary-stage2.test.mjs b/tests/contract-boundary-stage2.test.mjs
+new file mode 100644
+index 0000000..98b6e1f
+--- /dev/null
++++ b/tests/contract-boundary-stage2.test.mjs
+@@ -0,0 +1,53 @@
++import test from 'node:test';import assert from 'node:assert/strict';import Ajv from 'ajv';
++import {hardTextChecks,enforceHardChecks,countBody,renderTextUnits} from '../server/hard-requirements.mjs';
++import {reconcileFixedSpec} from '../server/fixed-spec.mjs';
++import {semanticSchema} from '../server/intent.mjs';import {operationInputSchema} from '../server/turn-operation.mjs';
++import {Verifier} from '../server/verification.mjs';import {currentTask,taskArtifacts,reconcileTask} from '../server/task-state.mjs';
++import {fixture,contract,textItem,archived,signal} from './contract-boundary-fixture.mjs';
++const budget={min:80,max:120,unit:'non_punctuation_characters'};
++const item={output:'text',form:'copy',count:1,spec:{bodyLength:budget}};
++const result=body=>{const structure={textUnits:[{body,titleAfter:'短标题'}]};return{structure,content:renderTextUnits(structure.textUnits)};};
++test('stage2 body count excludes title, punctuation, whitespace and Markdown with exact inclusive boundaries',()=>{
++ for(const n of [79,80,120,121]){const r=result('文'.repeat(n)+'，。 **！');r.structure.textUnits[0].titleAfter='题'.repeat(80);r.content=renderTextUnits(r.structure.textUnits);assert.equal(hardTextChecks(item,r).status,n>=80&&n<=120?'passed':'failed');}
++ assert.equal(countBody('甲 🌱，乙','non_punctuation_characters'),3);assert.equal(countBody('甲 乙，','characters'),4);
++});
++test('stage2 actual rendered content must match measured body; missing evidence is uncertain, not false success',()=>{
++ const r=result('文'.repeat(90));r.content=r.content.slice(0,50);const report=hardTextChecks(item,r);
++ assert.equal(report.status,'not_evaluated');const v=enforceHardChecks({passed:true,issues:[]},report);assert.equal(v.passed,false);assert.equal(v.uncertain,true);
++ assert.equal(hardTextChecks(item,{content:'无法确认标题边界的旧正文'}).status,'not_evaluated');
++});
++test('stage2 body-only rendering cannot conceal undelivered structured shots behind a passing numeric count',()=>{
++ const r=result('文'.repeat(90));r.structure.shots=[{content:'隐藏镜头',durationSeconds:2}];
++ assert.equal(hardTextChecks({...item,form:'script',spec:{...item.spec,shotCount:1,durationSeconds:2}},r).status,'not_evaluated');
++});
++test('stage2 historical short bodies fail under the new typed requirement; archive remains unchanged',()=>{
++ for(const id of ['11-text-casual','12-text-terse']){const a=archived(id,'result').artifacts[0],parts=a.content.trim().split(/\n\s*\n/),body=parts.slice(0,-1).join('');
++  const report=hardTextChecks(item,result(body));assert.equal(report.status,'failed');assert.ok(report.checks[0].actual<80);
++ }
++});
++test('stage2 literal constraint normalization and wire schema use one length contract',()=>{
++ for(const text of ['正文80到120字','正文 80—120 字','正文80-120字。']){const d=textItem({constraints:[text]});reconcileFixedSpec(d);assert.deepEqual(d.spec.bodyLength,budget);const v=new Ajv({strict:false}).compile(operationInputSchema(semanticSchema));assert.ok(v(contract([d])),JSON.stringify(v.errors));}
++ assert.throws(()=>reconcileFixedSpec({spec:{bodyLength:{...budget,min:130}}}),/冲突/);
++ assert.throws(()=>reconcileFixedSpec({constraints:['正文80到120字'],spec:{bodyLength:{...budget,max:99}}}),/不一致/);
++});
++test('stage2 known shot mismatch fails; the two former summary-only fixture outputs remain unverified',()=>{
++ const i={operation:'storyboard',form:'script',spec:{shotCount:4,durationSeconds:8,secondsPerShot:2}};
++ for(const r of [{content:'蓝色静物，四镜各2秒。'},{content:'蓝色静物：镜1 0–2秒；镜2 2–4秒；镜3 4–6秒；镜4 6–8秒。',structure:{hook:'蓝色静物',body:'四镜各2秒',cta:'收尾'}}]){const v=enforceHardChecks({passed:true,issues:[]},hardTextChecks(i,r));assert.equal(v.passed,false);assert.equal(v.uncertain,true);}
++ const bad={structure:{shots:Array.from({length:4},()=>({content:'镜头',durationSeconds:1}))},content:'分镜'};assert.equal(hardTextChecks(i,bad).status,'failed');
++});
++test('stage2 delivery-only retries the failed candidate, records exact accepted body hash and preserves its sibling',async()=>{
++ const draft=contract([textItem({description:'第一份'}),textItem({description:'第二份',spec:{bodyLength:budget}})]),generated=[];
++ const f=fixture({draft,generate:(p)=>{generated.push(p.item.description);return p.item.description==='第一份'?{content:'已完成的第一份'}:{structure:{textUnits:[{body:'文'.repeat(generated.filter(x=>x==='第二份').length===1?60:90),titleAfter:'标题'}]}};}});
++ await f.run('两份独立文字，第二份正文80到120字');assert.equal(currentTask(f.state).status,'COMPLETED');assert.equal(generated.filter(x=>x==='第一份').length,1);
++ const artifacts=taskArtifacts(f.state),failed=artifacts.find(a=>a.publication==='audit'),passed=artifacts.find(a=>a.metadata.structure?.textUnits&&a.publication==='current');assert.ok(failed);assert.equal(failed.acceptance.hardRequirements.status,'failed');assert.equal(passed.acceptance.hardRequirements.status,'passed');assert.equal(passed.acceptance.hardRequirements.inputHash,passed.metadata.conversion.outputHash);
++ passed.content+='篡改';reconcileTask(f.state);assert.notEqual(currentTask(f.state).status,'COMPLETED');
++});
++test('stage2 repeated underlength output is retained for audit and never completes',async()=>{
++ const f=fixture({draft:contract([textItem({spec:{bodyLength:budget}})]),generate:()=>({structure:{textUnits:[{body:'短正文',titleAfter:'再长的标题也不是正文'}]}})});
++ await f.run('正文80到120字，标题放末尾');assert.notEqual(currentTask(f.state).status,'COMPLETED');assert.equal(taskArtifacts(f.state).filter(a=>a.publication==='current').length,0);assert.equal(taskArtifacts(f.state).length,1);assert.equal(f.calls.filter(c=>c.phase==='text_generation').length,2);
++});
++test('stage2 compiled media cannot complete on mismatched or absent metadata; no vision or regeneration is faked',async()=>{
++ const verifier=new Verifier({respond:()=>{throw Error('must not call model');}},{policy:'delivery_only'}),state={taskStore:{activeTaskId:'t',tasks:{t:{protocol:'compiled-v1'}}}};
++ for(const [i,a] of [[{spec:{ratio:'9:16'}},{type:'image',url:'https://example.invalid/a',metadata:{provider:{size:'1024x1024'}}}],[{spec:{durationSeconds:5,ratio:'16:9'}},{type:'video',url:'https://example.com/offline-video.mp4',metadata:{provider:{duration:3,ratio:'16:9'}}}]]){assert.equal((await verifier.verifyArtifact(i,a,state,signal())).passed,false);delete a.metadata.provider;const v=await verifier.verifyArtifact(i,a,state,signal());assert.equal(v.passed,false);assert.equal(v.uncertain,true);}
++ const originalEdit={type:'image',url:'https://example.com/action-2.png',metadata:{args:{size:'2048x2048'},provider:{}}};assert.equal((await verifier.verifyArtifact({operation:'edit_image',spec:{}},originalEdit,state,signal())).uncertain,true);
++});
+diff --git a/tests/contract-boundary-stage3.test.mjs b/tests/contract-boundary-stage3.test.mjs
+new file mode 100644
+index 0000000..e4f111f
+--- /dev/null
++++ b/tests/contract-boundary-stage3.test.mjs
+@@ -0,0 +1,42 @@
++import test from 'node:test';import assert from 'node:assert/strict';
++import {Verifier} from '../server/verification.mjs';import {factBoundary} from '../server/fact-boundary.mjs';
++import {evidenceContext,projectModelInput} from '../server/model-context.mjs';
++import {currentTask,taskArtifacts,reconcileTask} from '../server/task-state.mjs';
++import {resolveSources} from '../server/sources.mjs';
++import {digest,acceptanceRecord} from '../server/document-contract.mjs';
++import {fixture,contract,textItem,archived,reply,signal} from './contract-boundary-fixture.mjs';
++test('stage3 fact identities survive projection, inheritance, deduplication and source version changes',()=>{
++ const state={taskStore:{activeTaskId:'t',tasks:{t:{id:'t',revision:1,contract:{facts:['活动免费']},goal:{semantic:{assumptions:['暂按室内设计草案'],gaps:[{level:'factual',description:'预约条件待确认'}]}}}}}};
++ const first=factBoundary(state,{},[]);assert.deepEqual(first.entries.map(e=>e.status),['user_provided','assumption','unknown']);
++ const source={id:'a',version:2,type:'text',content:'是否预约待确认。',factBoundary:first,provenance:{origin:'model_artifact'}};
++ const second=factBoundary(state,{},[source]);assert.equal(second.entries.length,3);assert.equal(second.entries[2].id,first.entries[2].id);assert.notEqual(second.hash,factBoundary(state,{},[{...source,version:3}]).hash);
++ const projected=projectModelInput({sources:[source],evidenceContext:evidenceContext(state,{},[source])});assert.ok(JSON.stringify(projected).includes('预约条件待确认'));assert.ok(JSON.stringify(projected).includes('是否预约待确认'));assert.ok(!second.entries.some(e=>e.status==='verified'));
++ assert.equal(projected.sources[0].factBoundary,undefined);assert.equal(projected.sources[0].factBoundaryRef,'/evidenceContext/factBoundary');assert.ok(projected.sources[0].factIdentityIds.every(id=>projected.evidenceContext.factBoundary.entries.some(e=>e.id===id)));assert.equal(source.factBoundary.entries.length,3);
++});
++for(const id of ['05-ordered-formal','06-ordered-casual'])test('stage3 archived '+id+' actual downstream assertions reach the scoped checker and cannot pass a rejection',async()=>{
++ const state=archived(id,'state'),task=state.taskStore.tasks[state.taskStore.activeTaskId],item=task.items[1],a=Object.values(state.taskStore.artifacts).find(a=>a.itemId===item.id&&a.purpose==='deliverable');let calls=0;
++ const forbidden=id.startsWith('05')?'没有领读人':'到店即参与';
++ const verifier=new Verifier({respond:async input=>{calls++;const p=JSON.parse(input[1].content[0].text);assert.equal(p.content,a.content);assert.ok(p.content.includes(forbidden));assert.ok(p.sources.some(s=>s.content?.includes('确认')||s.content?.includes('核验')));assert.ok(p.boundary.required);return reply({outcome:'failed',issues:[forbidden+' 无依据，来源仍为待确认']});}},{policy:'delivery_only'});
++ const v=await verifier.verifyText(item,a.content,state,signal());assert.equal(v.passed,false);assert.equal(calls,1);assert.equal(v.factualAcceptance.inputHash,digest(a.content));assert.equal(v.factualAcceptance.status,'failed');
++});
++test('stage3 unknown may be omitted or explicitly pending, but a disclaimer cannot cancel a promise (mock semantic judge)',async()=>{
++ const state={taskStore:{activeTaskId:'t',tasks:{t:{id:'t',query:'预约方式未知',contract:{facts:[]},goal:{semantic:{gaps:[{level:'factual',description:'预约方式未知'}]}}}},artifacts:{}}};
++ const verifier=new Verifier({respond:async input=>{const p=JSON.parse(input[1].content[0].text);assert.ok(input[0].content.includes('免责声明'));assert.ok(p.boundary.entries.some(e=>e.status==='unknown'));return reply(p.content.includes('无需预约')?{outcome:'failed',issues:['无需预约缺依据']}:{outcome:'passed',issues:[]});}},{policy:'delivery_only'});
++ for(const [body,passed] of [['欢迎关注周末活动',true],['预约方式待确认',true],['无需预约，到店即可。具体以实际为准。',false]]){const v=await verifier.verifyText({references:[],dependsOn:[]},body,state,signal());assert.equal(v.passed,passed);const a=acceptanceRecord(v,body);assert.equal(a.quality.status,'not_evaluated');assert.equal(a.factualAcceptance.scope,'business_fact_boundary');}
++});
++test('stage3 no evidence check is reported as uncertain and never as content confirmed wrong',async()=>{
++ const state={taskStore:{activeTaskId:'t',tasks:{t:{contract:{facts:['用户提供12元']},goal:{semantic:{}}}},artifacts:{}}};
++ const verifier=new Verifier({respond:async()=>{throw Error('offline unavailable');}},{policy:'delivery_only'}),v=await verifier.verifyText({references:[]},'12元',state,signal());
++ assert.equal(v.passed,false);assert.equal(v.uncertain,true);assert.equal(v.factualAcceptance.status,'uncertain');assert.match(v.issues[0],/未完成核验/);
++});
++test('stage3 scoped factual failure repairs only the copy; Brief, identity and bound version survive',async()=>{
++ const draft=contract([textItem({description:'Brief',requiredMethods:['marketing-brief-zh-v1']}),textItem({description:'文案',requiredMethods:['creative-cover-copy-v2'],dependsOn:[0],references:['task:0']})],{facts:['周日10点，免费，限15人'],gaps:[{level:'factual',description:'是否预约待确认',resolution:'用户后续提供'}]});let copyCalls=0;const seen=[];
++ const f=fixture({draft,generate:p=>{if(p.item.description==='Brief')return {content:'周日10点，免费，限15人。是否预约待确认。',structure:{audience:'来店用户',hook:'周末试饮',brief:'免费试饮，预约条件未知'}};copyCalls++;assert.ok(p.sources[0].content.includes('是否预约待确认'));assert.ok(p.evidenceContext.factBoundary.entries.some(e=>e.status==='unknown'));return {content:copyCalls===1?'到店即参与，具体以实际为准。':'周日10点，免费试饮，限15人。预约方式待确认。',structure:{headline:'试饮',body:'活动文案',cta:''}};},judge:(p,phase)=>{assert.equal(phase,'verify_facts');seen.push(p);return p.content.includes('到店即参与')?{outcome:'failed',issues:['到店即参与将未知预约条件变成承诺']}:{outcome:'passed',issues:[]};}});
++ await f.run('先Brief，再基于Brief写文案。活动周日10点，免费，限15人；预约条件不知道。');const task=currentTask(f.state),artifacts=taskArtifacts(f.state);assert.equal(task.status,'COMPLETED');assert.equal(f.calls.filter(c=>c.phase==='text_generation').length,3);assert.equal(copyCalls,2);assert.equal(seen.length,3);
++ const brief=artifacts.find(a=>a.itemId===task.items[0].id&&a.purpose==='deliverable'),copies=artifacts.filter(a=>a.itemId===task.items[1].id&&a.purpose==='deliverable');assert.equal(copies.length,2);assert.equal(brief.publication,'current');assert.ok(copies.some(a=>a.publication==='audit'&&a.acceptance.factualAcceptance.status==='failed'));
++ const accepted=copies.find(a=>a.publication==='current');assert.equal(accepted.acceptance.factualAcceptance.sourceVersions[0].sourceId,brief.id);assert.equal(accepted.acceptance.factualAcceptance.sourceVersions[0].version,brief.version);assert.equal(accepted.acceptance.factualSupport,'fact_boundary_checked');assert.equal(accepted.acceptance.quality.status,'not_evaluated');
++ assert.equal(resolveSources(f.state,task.items[1])[0].factBoundary.entries.find(e=>e.status==='unknown').text,'是否预约待确认');accepted.acceptance.factualAcceptance.boundaryHash='changed';reconcileTask(f.state);assert.notEqual(task.status,'COMPLETED');
++});
++test('stage3 ordinary text with no factual material does not introduce a review call',async()=>{
++ const f=fixture({draft:contract([textItem()])});await f.run('写一句虚构的雨景');assert.equal(currentTask(f.state).status,'COMPLETED');assert.equal(f.calls.filter(c=>c.phase==='verify_facts').length,0);
++});
+diff --git a/tests/contract-foundations.test.mjs b/tests/contract-foundations.test.mjs
+index 4224efe..223328f 100644
+--- a/tests/contract-foundations.test.mjs
++++ b/tests/contract-foundations.test.mjs
+@@ -36,6 +36,7 @@ function runtimeFixture(){
+   const p=JSON.parse(typeof input[1].content==='string'?input[1].content:'{}');calls.push({phase:options?.tracePhase,input:structuredClone(input)});
+   if(options.tracePhase==='understand')return reply(typeof next==='function'?next(p):next);
+   if(options.tracePhase==='verify_turn_operation')return reply({operation:controlDecision,evidence:p.query});
++  if(options.tracePhase==='verify_facts'){const actual=JSON.parse(input[1].content.find(x=>x.type==='input_text').text);assert.ok(actual.boundary.hash);assert.equal(typeof actual.content,'string');return reply({outcome:'passed',issues:[]});} // Explicit offline verdict; this fixture tests lineage, not semantic quality.
+   if(options.tracePhase==='final_response')return reply(finalDraft||{artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)});
+   if(options.tracePhase==='media_plan')return reply({concept:'产品图方案',preservedConstraints:[],safety:{passed:true,reason:'普通产品'},items:[{prompt:'产品图',size:'2048x2048'}]});
+   assert.equal(options.tracePhase,'text_generation');
+diff --git a/tests/future-source-binding.test.mjs b/tests/future-source-binding.test.mjs
+index a14bc4e..66fc317 100644
+--- a/tests/future-source-binding.test.mjs
++++ b/tests/future-source-binding.test.mjs
+@@ -63,11 +63,15 @@ async function execute({mode='captured',noSkill=false,upstreamFails=false}={}){
+  const candidate=draft(mode);if(noSkill)candidate.deliverables[1].requiredMethods=[];
+  const state={id:'fresh-'+Math.random(),messages:[],events:[]},inputs=[];
+  const brain={respond:async(input,_tools,_signal,opts)=>{
+-  const payload=JSON.parse(input.find(m=>m.role==='user').content);inputs.push({phase:opts?.tracePhase,payload});
++  const part=input.find(m=>m.role==='user').content,payload=JSON.parse(typeof part==='string'?part:part.find(p=>p.type==='input_text').text);inputs.push({phase:opts?.tracePhase,payload});
++  if(opts?.tracePhase==='verify_facts'){assert.ok(payload.boundary.hash);assert.equal(typeof payload.content,'string');return reply({outcome:'passed',issues:[]});} // Binding-only fixture; factual rejection is exercised separately.
+   if(opts?.tracePhase==='understand')return reply(candidate);
+   if(payload.methods?.some(m=>m.slug==='direction-designer-zh-v1'))return reply(upstreamFails?{structure:{directions:[]}}:{structure:{directions:source().structure.directions,recommendation:'推荐第二方向',sections:source().structure.sections}});
+   assert.ok(payload.sources?.[0]?.selectedDirection);assert.equal(payload.sources[0].selectedDirection.index,2);assert.ok(!JSON.stringify(payload).includes('不应传给下游的红色快切方向'));assert.ok(JSON.stringify(payload).includes('容量未知'));
+-  return reply(noSkill?{content:'蓝色静物，四镜各2秒。'}:{content:'蓝色静物：镜1 0–2秒；镜2 2–4秒；镜3 4–6秒；镜4 6–8秒。',structure:{hook:'蓝色静物',body:'四镜各2秒',cta:'收尾'}});
++  // Selection integration needs an actual script; the former summary-only
++  // outputs remain negative acceptance fixtures in contract-boundary-stage2.
++  const shots=['蓝色静物全景','蓝色杯沿特写','蓝色桌面光影','蓝色静物收束'].map(content=>({content,durationSeconds:2}));
++  return reply({structure:{...(!noSkill?{hook:'蓝色静物',body:'四镜各2秒',cta:'收尾'}:{}),shots}});
+  }};
+  const runtime=new ToolRuntime({catalog,brain,media:{config:{},image:async()=>{throw Error('No media');}}}),verifier=new Verifier(brain,{policy:'delivery_only'}),agent=new Agent({catalog,brain,runtime,verifier,actionMode:'core'});
+  await agent.run(state,fixture.query,()=>{},signal());return {state,inputs};
+@@ -94,6 +98,7 @@ test('future selection: prepared media pins the binding and cannot submit after
+  candidate.deliverables[1]={description:'按第二方向准备图片',kind:'image',action:'create',count:1,spec:{ratio:'9:16'},references:['task:0'],dependsOn:[0],requestEvidence:query,sourceSelection:{source:'task:0',unitType:'directions',mode:'selected',unitIndexes:[2],layout:'separate_images'}};
+  let submissions=0;const state={id:'media-gate',messages:[],events:[]},brain={respond:async(input,_tools,_signal,opts)=>{
+   if(opts.tracePhase==='understand')return reply(candidate);
++  if(opts.tracePhase==='verify_facts')return reply({outcome:'passed',issues:[]}); // Offline gate fixture, not a factual-quality claim.
+   const p=JSON.parse(input.find(m=>m.role==='user').content);
+   if(opts.tracePhase==='text_generation')return reply({structure:{directions:source().structure.directions,recommendation:'第二方向'}});
+   if(opts.tracePhase==='media_plan')return reply({concept:'蓝色静物',preservedConstraints:['9:16'],safety:{passed:true,reason:'普通茶饮静物'},items:[{prompt:'蓝色静物',size:'1440x2560',sourceUnitIds:p.assignments[0].unitIds}]});
+diff --git a/tests/request-input-http.test.mjs b/tests/request-input-http.test.mjs
+index e420a1f..7c8b40a 100644
+--- a/tests/request-input-http.test.mjs
++++ b/tests/request-input-http.test.mjs
+@@ -12,14 +12,15 @@ import {redactDebug} from '../server/debug-trace.mjs';
+ test('HTTP text inputs bind by candidate, persist revision lineage, and duplicate requests do not execute again',{timeout:20000},async t=>{
+  const directory=await mkdtemp(join(tmpdir(),'request-input-http-'));let calls=0;
+  const gateway=createServer(async(req,res)=>{try{
+-  assert.equal(req.url,'/responses');calls++;let raw='';for await(const part of req)raw+=part;const body=JSON.parse(raw),system=body.input[0].content,p=JSON.parse(body.input[1].content);let value;
++  assert.equal(req.url,'/responses');calls++;let raw='';for await(const part of req)raw+=part;const body=JSON.parse(raw),system=body.input[0].content,part=body.input[1].content,p=JSON.parse(typeof part==='string'?part:part.find(p=>p.type==='input_text').text);let value;
+   if(system.startsWith('你是创作助手的本轮需求理解器')){
+    const source=p.relevantEvidence.references.find(r=>r.filename==='prompt1.txt');assert.ok(source);assert.equal(source.type,'text');
+    value={summary:'优化已有提示词',turnOperation:{kind:'modify'},deliverables:[{description:'优化已有提示词',kind:'text',action:'modify',form:'prompt',references:[source.handle],requiredMethods:['creative-prompt-rewrite']}],safety:{disposition:'allow',untrustedInstructions:false,reason:''},approval:{required:false,reason:''}};
+   }else if(system.startsWith('完成当前item或stage')){
+    assert.equal((p.sources[0].contentRef?p.changeContract.original:p.sources[0].content),'白色咖啡杯，产品摄影');assert.equal(p.sources[0].version,1);
+    value={content:'白色咖啡杯置于简洁背景，柔和侧光，突出杯身轮廓，适用于电商展示。',structure:{prompt:'白色咖啡杯置于简洁背景，柔和侧光，突出杯身轮廓，适用于电商展示。',preservedConstraints:[]}};
+-  }else{assert.ok(system.startsWith('你是最终回答整理器'));value={artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)};}
++  }else if(system.startsWith('你是任务交付验证器')){assert.ok(p.boundary.hash);assert.ok(p.content.includes('白色咖啡杯'));value={outcome:'passed',issues:[]};} // Explicit local verifier response; no remote quality claim.
++  else{assert.ok(system.startsWith('你是最终回答整理器'));value={artifactIds:p.artifacts.filter(a=>a.delivered).map(a=>a.id)};}
+   res.setHeader('Content-Type','application/json');res.end(JSON.stringify({output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(value)}]}]}));
+  }catch(error){res.statusCode=500;res.end(JSON.stringify({error:{message:error.message}}));}});
+  gateway.listen(0,'127.0.0.1');await once(gateway,'listening');const endpoint='http://127.0.0.1:'+gateway.address().port;
+diff --git a/tests/runtime-boundaries.test.mjs b/tests/runtime-boundaries.test.mjs
+index f22ee3a..b2d7c25 100644
+--- a/tests/runtime-boundaries.test.mjs
++++ b/tests/runtime-boundaries.test.mjs
+@@ -242,7 +242,7 @@ test('compiled creation then modification retains both deliveries and exact pare
+   const refs=JSON.parse(input[1].content).goal.references||[];
+   return reply({concept:'当前图片',preservedConstraints:[],safety:{passed:true,reason:'ordinary'},items:[{prompt:'product picture',size:'2048x2048',...(refs.length?{referenceImages:refs}:{})}]});
+  }};
+- const media={config:{imageModel:'fixture'},image:async args=>{submissions.push(args);return {status:'succeeded',images:[{url:'https://example.com/edit-'+submissions.length+'.png'}]};}};
++ const media={config:{imageModel:'fixture'},image:async args=>{submissions.push(args);return {status:'succeeded',images:[{url:'https://example.com/edit-'+submissions.length+'.png',size:'2048x2048'}]};}};
+  const runtime=new ToolRuntime({catalog,brain,media});
+  await new Agent({effectPolicy:'trusted_embedder',brain,runtime,catalog,verifier:new Verifier(brain,{policy:'delivery_only'})}).run(s,'先创建一张，再改背景，交付两张',()=>{},signal());
+  const task=s.taskStore.tasks[s.taskStore.activeTaskId],images=Object.values(s.taskStore.artifacts).filter(a=>a.type==='image');
