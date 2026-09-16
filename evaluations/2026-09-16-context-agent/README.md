@@ -4,6 +4,8 @@
 
 本轮根据用户提供的架构附件新增独立实现。旧入口、业务合同、调度和旧会话均未改动；现有文件中只为 `package.json` 增加独立启动和验证命令，其余为新增文件。本轮真实模型调用 0，真实媒体提交 0，没有运行 CLEAR。
 
+代码提交：`7684bbe`；语料、评测驱动与验收证据提交：`c5c4425`。相对基线的独立文件 diff 保存在 `diffs/runtime.diff` 与 `diffs/validation.diff`，完整历史语料和 Trace 随分支保存。
+
 ## 阶段一：主循环、真实记录和工具
 
 已实现并完成离线验收：一个原生工具循环，模型直接回复或提出当前调用；结果回到同一个 Agent。没有调用 `understandGoal/createTask/compileGoal/runCompiled/TaskExecutor/reconcileTask`，也没有把旧执行器包装成工具。
@@ -47,6 +49,7 @@
 | --- | --- | --- |
 | 新路径全部离线测试 | 73/73，0 skip | `context-tests.log` |
 | 旧版及新路径全量回归 | 824/824，0 skip | `full-regression.log` |
+| 独立性与语法检查 | 341 个文件通过 | `check.log` |
 | 原 23 条语料与业务 expected | 27 个文件 SHA-256 一致 | `fixture/manifest.json`、`semantic-status.json` |
 | 原 23 条真实模型测试 | 23 条全部 not_run | `semantic-status.json` |
 | 真实媒体/视觉验收 | not_run，真实媒体提交 0 | `TESTING.md` |
