@@ -2,6 +2,15 @@ import {createHash} from 'node:crypto';
 const hash=text=>createHash('sha256').update(text).digest('hex');
 export const requestMessageId=(query,sessionId='',runId='')=>'msg_'+hash(JSON.stringify([sessionId,runId,query])).slice(0,20);
 export const evidenceSpansSchema={type:'array',maxItems:20,items:{type:'object',additionalProperties:false,required:['messageId','start','end'],properties:{messageId:{type:'string',minLength:1},start:{type:'integer',minimum:0},end:{type:'integer',minimum:1}}}};
+// These are locatable quotations, never interpretations or authorization decisions.
+export function evidenceCandidates(message){
+ const content=message?.content||'',candidates=[];
+ for(const match of content.matchAll(/[^。！？\n]+[。！？\n]?/gu)){
+  const text=match[0];if(text.trim()&&text.length<=1600)candidates.push({messageId:message.messageId,start:match.index,end:match.index+text.length,text});
+ }
+ if(content&&content.length<=1600&&!candidates.some(c=>c.text===content))candidates.push({messageId:message.messageId,start:0,end:content.length,text:content});
+ return candidates;
+}
 export function validateTextInputs(inputs=[]){
  if(!Array.isArray(inputs)||inputs.length>12)throw new Error('文字输入最多 12 份');
  let size=0;for(const input of inputs){
@@ -37,7 +46,7 @@ export function bindRequestEvidence(semantic,{query,currentMessage,messages=[],p
    const current=currentMessage.content.indexOf(quote);
    let source=current>=0?currentMessage:null;
    if(!source&&semantic.continuation?.mode!=='new'&&previous)source=available.find(m=>m.content===previous.query&&m.content.includes(quote));
-   if(!source)throw Object.assign(new Error('请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置'),{code:'evidence_binding',issues:[{path:'/deliverables/'+semantic.deliverables.indexOf(d)+'/requestEvidence'}]});
+   if(!source)throw Object.assign(new Error('请求证据不匹配用户原文；模型引用错误，不能拼接省略号或虚构位置'),{code:'evidence_binding',issues:[{path:'/deliverables/'+semantic.deliverables.indexOf(d)+'/requestEvidence'}],evidenceRepair:{invalidQuote:quote,candidates:evidenceCandidates(currentMessage),policy:'选择一段真实连续原文。需要跨段证据时保留独立的requestEvidenceSpans；不可拼接成单段引文。原文存在不证明语义解释正确。'}});
    const start=source.content.indexOf(quote);
    if(source.content.indexOf(quote,start+1)>=0)throw Object.assign(new Error('请求引文在同一消息中不唯一；提供可唯一定位的更完整连续原话，不猜字符位置'),{code:'evidence_binding',issues:[{path:'/deliverables/'+semantic.deliverables.indexOf(d)+'/requestEvidence'}]});
    spans=[{messageId:source.messageId,start,end:start+quote.length}];

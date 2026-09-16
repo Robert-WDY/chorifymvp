@@ -73,7 +73,7 @@ semanticSchema.properties.requiredMethods=strings;
 semanticSchema.properties.globalConstraints=strings;
 semanticSchema.properties.deliverables.items.properties.artifactCount={type:'integer',minimum:1};
 semanticSchema.properties.deliverables.items.properties.contentCardinality={type:'integer',minimum:1};
-semanticSchema.properties.approval=object({required:{type:'boolean'},reason:text});
+semanticSchema.properties.approval=object({required:{type:'boolean'},reason:text,scope:{enum:['media_submission','text_review']}},['required','reason']);
 semanticSchema.properties.continuation=object({mode:{enum:['new','continue','approve','revise','clarify','cancel']},taskId:text});
 // Metadata checks the model-selected plan; no matching of user-query words occurs here.
 export const capabilities={
@@ -167,7 +167,7 @@ async function structured(brain,prompt,payload,validate,signal,trace,phase,repai
  const input=[{role:'system',content:prompt},{role:'user',content:JSON.stringify(payload)}];let patchPlan=null,lockedDraft=null,referenceRepair=null,snapshot=null,initialFailure=null,lastFailure=null;
  const preserve=phase==='understand'||phase==='repair_goal_contract'||phase==='repair_turn_operation';
  for(let attempt=0;attempt<3;attempt++){
-  const started=Date.now(),sentRequest=JSON.stringify(input);let raw,parsed,received;
+  const started=Date.now();let raw,parsed,received;
   try{
    const output=await brain.respond(input,[],signal,{json:true,tracePhase:phase,traceAttempt:attempt});
    raw=output.filter(x=>x.type==='message').flatMap(x=>x.content||[]).filter(x=>x.type==='output_text').map(x=>x.text).join('\n');
@@ -193,7 +193,7 @@ async function structured(brain,prompt,payload,validate,signal,trace,phase,repai
    validationTrace({phase,attempt,parsed,rejectedDraft:raw,accepted:false,failureStage:error.intakeStage,error:error.message});trace.push({phase,attempt,durationMs:Date.now()-started,ok:false,failureStage:error.intakeStage,error:error.message});
    if(isSchemaEcho(parsed)){parsed=null;lockedDraft=null;}else lockedDraft??=parsed;initialFailure??=error.message;const stop=()=>{if(initialFailure!==error.message)error.message='原始校验失败：'+initialFailure+'；最后补丁错误：'+error.message;error.intakeTrace=trace;error.intentSnapshot=snapshot;error.partialSemantic=lockedDraft||undefined;throw error;};
    if(attempt===2||signal.aborted||error.repairTarget==='transport')stop();
-   const failure=JSON.stringify([received??raw,error.code,error.message]);const retry=()=>{if(boundary.stopOnNoProgress!==false&&lastFailure===failure&&sentRequest===JSON.stringify(input)){error.repairStopReason='no_progress';validationTrace({phase:'repair_no_progress',accepted:false,error:error.message});stop();}lastFailure=failure;};
+   const failure=JSON.stringify([parsed??received??raw,error.code,error.message]);const retry=()=>{if(boundary.stopOnNoProgress!==false&&lastFailure===failure){error.repairStopReason='no_progress';validationTrace({phase:'repair_no_progress',accepted:false,error:error.message});stop();}lastFailure=failure;};
    // Invalid patches stay patches: never reinterpret their object as a new plan.
    if(patchPlan||referenceRepair){const view=JSON.parse(input[1].content);view.error=error.message;view.rejectedPatch=received??raw;input[1].content=JSON.stringify(view);input.splice(2);retry();continue;}
    if(error.code==='reference_selection'&&error.repair&&Array.isArray(parsed?.deliverables)){
@@ -201,7 +201,9 @@ async function structured(brain,prompt,payload,validate,signal,trace,phase,repai
    }
    const activeSchema=boundary.schemaFor?.(lockedDraft)||repairSchema;
    if(preserve&&(patchPlan=missingFieldPlan(lockedDraft,activeSchema)||(error.code!=='business_action'?semanticFieldPlan(lockedDraft,activeSchema,error.repairIssues||error.issues):null))){
-    input.splice(0,input.length,{role:'system',content:fieldRepairPrompt+'\nremovePaths中的字段返回null。输出Schema：'+JSON.stringify(patchPlan.schema)},{role:'user',content:JSON.stringify(repairInput(boundary.repairPayload?.()||payload,lockedDraft,patchPlan,{error:error.message}))});
+    const view=repairInput(boundary.repairPayload?.()||payload,lockedDraft,patchPlan,{error:error.message});
+    if(error.evidenceRepair){view.evidenceRepair=error.evidenceRepair;for(const path of patchPlan.paths.filter(p=>p.endsWith('/requestEvidence'))){const choices=error.evidenceRepair.candidates.map(c=>c.text);if(choices.length)patchPlan.schema.properties[patchPlan.keys[path]]={...patchPlan.schema.properties[patchPlan.keys[path]],enum:choices};}}
+    input.splice(0,input.length,{role:'system',content:fieldRepairPrompt+'\nremovePaths中的字段返回null。输出Schema：'+JSON.stringify(patchPlan.schema)},{role:'user',content:JSON.stringify(view)});
     retry();continue;
    }
    if(preserve&&(lockedDraft?.deliverables||lockedDraft?.businessActions)){
@@ -265,7 +267,7 @@ async function understandContractGoal(brain,catalog,{query,history=[],assets=[],
   normalizeTurnOperation(s,query);
   if(!legacyReplay&&actionMode!=='shadow')bindRequestEvidence(s,{query,currentMessage,messages,previous:taskSnapshot});
   if(legacyReplay)for(const gap of s.gaps||[])if(gap.level==='blocking'&&!gap.scope&&!gap.affectedDeliverables?.length)gap.scope='global';
-  applyStages(s);
+  applyStages(s,{legacyReplay});
   if(s.executionShape&&s.deliverables?.length===1&&!s.deliverables[0].executionShape){s.deliverables[0].executionShape=s.executionShape;validationTrace({phase:'relocate_representation',from:'/executionShape',to:'/deliverables/0/executionShape',value:s.executionShape});delete s.executionShape;}
   if(typeof s.globalConstraintsNote==='string'){s.globalConstraints=[...(s.globalConstraints||[]),s.globalConstraintsNote];validationTrace({phase:'relocate_representation',from:'/globalConstraintsNote',to:'/globalConstraints',value:s.globalConstraintsNote});delete s.globalConstraintsNote;}
   if(s.continuation?.mode&&!semanticSchema.properties.continuation.properties.mode.enum.includes(s.continuation.mode))check(repairSchema,s);
@@ -293,7 +295,7 @@ async function understandContractGoal(brain,catalog,{query,history=[],assets=[],
   if(strictControl&&taskSnapshot?.status==='NEEDS_INPUT'&&['continue','approve'].includes(s.continuation?.mode))throw new Error('当前任务仍缺输入，不能直接续跑或批准旧的空执行图。补充材料必须使用clarify并重建含原约束和新素材的完整目标。');
   inheritMediaObligations(s,taskSnapshot);
   if(auditContracts&&s.safety.disposition!=='refuse'){if(s.deferred.length)throw new Error('deferred不能承担用户要求。未来交付必须保留在deliverables，不能实现则列明gaps；未请求的建议不纳入任务');if(s.approval.required&&!s.deliverables.some(d=>d.kind!=='text')&&!s.gaps.some(g=>g.level==='blocking'))throw new Error('确认后的媒体义务缺失：保留未来媒体及依赖，不能只完成文字方案');}
-  applyStages(s);return validateSemantic(s,{taskSnapshot});
+  applyStages(s,{legacyReplay});return validateSemantic(s,{taskSnapshot});
  };
  // kind is optional descriptive metadata, exactly as advertised to the model.
  // Missing preferences never acquire a hidden blocking requirement here.

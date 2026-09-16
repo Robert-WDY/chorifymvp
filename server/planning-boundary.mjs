@@ -1,5 +1,6 @@
 import {discardImageDirectionSelector} from './turn-operation.mjs';
 import {validationTrace} from './trace-context.mjs';
+import {isDeferred} from './stage-contract.mjs';
 const machineFields=skill=>Object.keys(skill?.contract?.outputSchema?.properties?.structure?.properties||{});
 const inheritedDrafts=new WeakMap();
 export function normalizeMethodPlan(route,d,catalog){
@@ -63,8 +64,14 @@ export function assertWorkflow(item,items,catalog){
  const methods=(item.requiredMethods||[]).map(slug=>({slug,skill:catalog?.skills.find(s=>s.slug===slug)}));
  if(catalog&&methods.some(m=>!m.skill))throw Object.assign(new Error('所需Skill当前不可用：'+methods.filter(m=>!m.skill).map(m=>m.slug).join('、')),{code:'unsupported_method'});
  if(item.spec?.shotCount&&item.spec.secondsPerShot&&item.spec.durationSeconds&&Math.abs(item.spec.shotCount*item.spec.secondsPerShot-item.spec.durationSeconds)>0.001)throw Object.assign(new Error('执行前规格检查失败：镜头时长与总长冲突'),{code:'spec_conflict'});
+ const index=items.findIndex(i=>i===item||item.id&&i.id===item.id);
+ if((item.dependsOn||[]).some(n=>!Number.isInteger(n)||n<0||!items[n]||index<0||n>=index))throw Object.assign(new Error('执行图依赖无效'),{code:'missing_dependency'});
+ for(const ref of [...(item.references||[]),...(item.supportingSources||[])])if(/^task:\d+$/.test(ref)&&!(item.dependsOn||[]).includes(Number(ref.slice(5))))throw Object.assign(new Error('未来来源缺少对应前置依赖'),{code:'missing_dependency'});
+ if(item.spec?.directionCount&&item.spec.selectedDirectionIndex>item.spec.directionCount)throw new Error('选定方向超过计划方向数量');
+ if(isDeferred(item)&&!item.activation.condition?.trim())throw new Error('后续阶段必须声明真实等待条件');
+ // Only readiness is deferred. Invalid methods, specs and dependency edges above still fail.
+ if(isDeferred(item)&&!item.references?.length&&!item.dependsOn?.length)return;
  if(!item.spec?.selectedDirectionIndex)return;
- if(item.spec.directionCount&&item.spec.selectedDirectionIndex>item.spec.directionCount)throw new Error('选定方向超过计划方向数量');
  const fields=m=>catalog?machineFields(m.skill):m.slug==='direction-designer-zh-v1'?['directions']:['video-script-zh-v1','storyboard-one-shot-zh-v2','creative-prompt-rewrite'].includes(m.slug)?['body']:[];
  const producer=methods.findIndex(m=>fields(m).includes('directions'));
  const consumer=methods.findIndex(m=>fields(m).some(f=>['body','shots','prompt'].includes(f)));

@@ -2,7 +2,7 @@
 export const activationSchema={type:'object',additionalProperties:false,required:['timing','condition'],properties:{timing:{enum:['now','after_user_input']},condition:{type:'string'}}};
 export const authorizationSchema={type:'object',additionalProperties:false,properties:Object.fromEntries(['image','video','audio'].map(k=>[k,{type:'boolean'}]))};
 export const isDeferred=item=>item.activation?.timing==='after_user_input';
-export function applyStages(semantic){
+export function applyStages(semantic,{legacyReplay=false}={}){
  const ds=semantic.deliverables||[];
  for(const gap of semantic.gaps||[])if(gap.level==='blocking'){
   if(!gap.scope&&gap.affectedDeliverables?.length)gap.scope='deliverables';
@@ -22,7 +22,9 @@ export function applyStages(semantic){
   if(!isDeferred(d)&&semantic.executionAuthorization?.[d.kind]===false&&!['present','retain'].includes(d.action))throw Object.assign(new Error('当前交付与媒体授权范围冲突；应保留未授权阶段，不能提交媒体'),{code:'authorization_conflict'});
  }
  // approval is the saved media submission gate, not a requirement to invent media.
- if(semantic.approval?.required&&!ds.some(d=>d.kind!=='text')){
+ if(semantic.approval?.required&&ds.length&&!ds.some(d=>d.kind!=='text')){
+  const textOnlyReview=semantic.approval.scope==='text_review'||ds.every(d=>['directions','analysis'].includes(d.form))&&semantic.executionAuthorization?.image===false&&semantic.executionAuthorization?.video===false;
+  if(!legacyReplay&&!textOnlyReview)throw Object.assign(new Error('确认义务缺少可批准对象：媒体方案须用实际image/video交付保存执行参数，不以普通文字替代；如果用户仅审核文字，应明确approval.scope=text_review，不新增媒体'),{code:'media_obligation'});
   semantic.reviewIntent={required:true,reason:semantic.approval.reason};
   semantic.approval={required:false,reason:'当前仅交付文字；媒体操作未授权'};
  }

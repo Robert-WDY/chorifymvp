@@ -91,7 +91,7 @@ export async function composeFinalResponse(brain,state,turn,event,signal){
  const protectedDelivery=!!(turn.failureReceipt||event.taskId||turn.taskId)&&!turn.queryReceipt;
  const task=state.taskStore?.tasks?.[event.taskId||turn.taskId];
  const waiting=task?.items?.filter(i=>i.activation?.timing==='after_user_input').map(i=>i.activation.condition)||[];
- const notice=turn.failureReceipt?'系统未能完成本轮请求整理，尚未执行生成。':waiting.length?'当前可执行内容已保存，后续等待：'+waiting.join('；'):task?.status==='NEEDS_INPUT'?'还需要补充：'+(task.goal?.missingInputs||[]).join('；'):['completed','simulated'].includes(event.status)?'':'本轮尚未全部完成。'+(task?.reason||'已保留执行记录和已有成果。');
+ const notice=turn.failureReceipt?'系统未能完成本轮请求整理，尚未执行生成。':waiting.length?(context.artifacts.some(a=>a.delivered)?'已保存本轮完成的成果，后续等待：':'需求已保留，尚未产生成果，需要补充：')+waiting.join('；'):task?.status==='NEEDS_INPUT'?'还需要补充：'+(task.goal?.missingInputs||[]).join('；'):['completed','simulated'].includes(event.status)?'':'本轮尚未全部完成。'+(task?.reason||'已保留执行记录和已有成果。');
  const constraintNotice=context.acceptance.some(a=>a.constraintChecks?.status==='failed')?'成果已保存，但结构化数值约束存在差异，请查看任务详情。':'';
  const deliveryText=()=>[notice,constraintNotice,...(task?.items||[]).filter(i=>i.readReceipt).map(i=>i.readReceipt.text),...documents.map(a=>a.content),...context.artifacts.filter(a=>a.type!=='text'&&a.delivered&&a.url).map(a=>a.type+'：'+a.url)].filter(Boolean).join('\n\n')||'本轮没有可交付的已保存产物。';
  if(protectedDelivery){
