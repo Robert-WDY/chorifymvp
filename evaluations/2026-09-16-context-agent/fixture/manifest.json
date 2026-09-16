@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "selection": "Exact case IDs from the supplied 23-case input-to-state evidence; VIDEO_001 and VIDEO_002 were outside that run.",
+  "sourceEvidenceSha256": "fa45da26ccb6b0f5dbb133d80f466a4322bb65014f9f84fcd2a7709c3288441d",
+  "caseCount": 23,
+  "caseIds": [
+    "DEP_001",
+    "DEP_002",
+    "EDIT_001",
+    "FACT_001",
+    "IMG_EDIT_002",
+    "IMG_MULTI_001",
+    "MEDIA_001",
+    "MT_EDIT_001",
+    "MT_SWITCH_001",
+    "MT_TASK_001",
+    "PAR_001",
+    "QA_001",
+    "SKILL_001",
+    "SKILL_002",
+    "TOOL_001",
+    "USER_STYLE_01",
+    "USER_STYLE_02",
+    "USER_STYLE_03",
+    "USER_STYLE_04",
+    "USER_STYLE_05",
+    "USER_STYLE_06",
+    "USER_STYLE_07",
+    "USER_STYLE_08"
+  ],
+  "files": [
+    {
+      "path": "cases/DEP_001.json",
+      "sha256": "9cc9ad581eb8aab33b62402f338529aade9782d61eeb0b157ce6c23ae01d6d7f",
+      "bytes": 1139,
+      "caseId": "DEP_001",
+      "expectedSha256": "f275dc0f94ff4daa6aaeefae1b44547f24454e36748c3c3ff97f8c87fb592686",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/DEP_002.json",
+      "sha256": "7e8fd8b0793b43f324d4532dfa2943bd39b0d3553e7017edfa86f8379d96c576",
+      "bytes": 1298,
+      "caseId": "DEP_002",
+      "expectedSha256": "ba650aba17602834cdc8dda17be2abc273be10a33b66fb1b090ed83f5fd8a97a",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/EDIT_001.json",
+      "sha256": "2ad325bf5456e7e4b1db9d5eb12e34be977357f999ba13442bb4765224230549",
+      "bytes": 1906,
+      "caseId": "EDIT_001",
+      "expectedSha256": "132bec60e80832b03ed49b707eb077b57efb033135e8e8832c30ad00d32296f0",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/FACT_001.json",
+      "sha256": "cc08214e4797c8d611c0e7170e68e4fb28440f1d9210baf5949a80a50878e902",
+      "bytes": 1164,
+      "caseId": "FACT_001",
+      "expectedSha256": "a3aa9736e2829005a619505033ba7962ce1667d82b94f63ea6fe5139f0e319b3",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/IMG_EDIT_002.json",
+      "sha256": "4b61c79f612ab1e4386058a659ad425eeb84a8f6373f3aacb83aa8fb77aa122d",
+      "bytes": 1350,
+      "caseId": "IMG_EDIT_002",
+      "expectedSha256": "df6cfe142bb3db7653d4214181c0bfb7fd15121e1fe05528a4024bc83aca8ed6",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/IMG_MULTI_001.json",
+      "sha256": "e564df67d506229b79c2019b192c6943ba0a433483e1d7ab4eb9f76455072979",
+      "bytes": 1650,
+      "caseId": "IMG_MULTI_001",
+      "expectedSha256": "5e41e6644fc4d5af1fac69914ffa64980b3b6b9ea324330368985f405e572a9d",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/MEDIA_001.json",
+      "sha256": "e612b2dc810c852edcfc22ba624d099bc08f31cbfe93c9da66eb3bc1b433ae55",
+      "bytes": 1235,
+      "caseId": "MEDIA_001",
+      "expectedSha256": "bdd3dddc337b5486d2dcf5da964364785339b014ceac7786429eeb8e00873e75",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/MT_EDIT_001.json",
+      "sha256": "7ebd4f99d4697b3dafb2ce4d6b0a01ddb6d31315a08368229d9f360c63da0d82",
+      "bytes": 1729,
+      "caseId": "MT_EDIT_001",
+      "expectedSha256": "388b444eb983df3b16de49f363e4190b4d6874f6e4b478a7045eb5153914613a",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/MT_SWITCH_001.json",
+      "sha256": "fcec30cc41d47aa7d561f1256bf37fe053fd5df59e8a3c5f5666a7a811da7bb6",
+      "bytes": 1468,
+      "caseId": "MT_SWITCH_001",
+      "expectedSha256": "9132ef44933cc3115cd222bfb7e6cb4986df889b684015e3addf8a178d65bc3e",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/MT_TASK_001.json",
+      "sha256": "b5d5f376b0178f515502701e9de67ca6a8acfd454206030473520e258f22d83c",
+      "bytes": 1300,
+      "caseId": "MT_TASK_001",
+      "expectedSha256": "e6349517ffcb0d202f61ecc493585ad1e7ec4651818e42e936f2426fd5258daf",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/PAR_001.json",
+      "sha256": "5c1134e2924d89852155e777c477e108220ca925b8d3f6b4eefc2fc83e67b56e",
+      "bytes": 1382,
+      "caseId": "PAR_001",
+      "expectedSha256": "e1fd50efacc7fb0f637ddea59f211bb7a601534d6105d0de67bfb4e121f4e700",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/QA_001.json",
+      "sha256": "9e27297a24b52dbd860d94e68a67a9eaa6a3a0cd962672e3956c3bcabb65594d",
+      "bytes": 1255,
+      "caseId": "QA_001",
+      "expectedSha256": "91f029775e27093f801e5e56239a24084f3d58cb638232a0ab2a2d8301bf342a",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/SKILL_001.json",
+      "sha256": "75bc0f47535702d27eaf382f35862e71fc490e246c52f00668d2018dd4d5de63",
+      "bytes": 1268,
+      "caseId": "SKILL_001",
+      "expectedSha256": "21cda2eb9da434b23efa95b822b31e078a048c43c9579b18f1a237a15039bd8f",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/SKILL_002.json",
+      "sha256": "fbb5da7eaec8d4ed58f194d722efcbae01aa7688fa9643a20380ca041a71f6bf",
+      "bytes": 1165,
+      "caseId": "SKILL_002",
+      "expectedSha256": "d56c64120a3384987694ea9855131b2355a6ac930e58ae3d2a240ff79d5219a2",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/TOOL_001.json",
+      "sha256": "0758878648e46a5235a6fcd92996524cd72320bb55a364688398329be2a4019d",
+      "bytes": 1206,
+      "caseId": "TOOL_001",
+      "expectedSha256": "5c453cfd9d09aafe3ab05d6e6eaf31154545f25a6f9b6b21e936900dd7296006",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_01.json",
+      "sha256": "a1df01e632c7f7c9b30b39d2ee53427634a9bc9478e12953954946e3e963c443",
+      "bytes": 1258,
+      "caseId": "USER_STYLE_01",
+      "expectedSha256": "8689229a447e19eafe11d93a9618c872ece2f0514c2fb05ea415f9323017acb7",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_02.json",
+      "sha256": "63b45e99b049e7f2f328d312125dd9361adbf84bda3d630bba9cca656178d0d3",
+      "bytes": 1213,
+      "caseId": "USER_STYLE_02",
+      "expectedSha256": "dafd5a0e6247fb788f4158c1d2c0c68508ad2582f761bb6d56cc2ce1c6934ad2",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_03.json",
+      "sha256": "5cba2d2c36677a7aac68eeaa51306fa20052df18c5ccbf3076b52d975faaf602",
+      "bytes": 1252,
+      "caseId": "USER_STYLE_03",
+      "expectedSha256": "b02c617550afcfefc2db13abe08ab6700a2c0fe5464df2015f12189b2b7c8dfe",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_04.json",
+      "sha256": "ffc2dddbffc3c5eeab21c50d80356c850413c6ac00db90ffd76ef3ab1d8db54b",
+      "bytes": 1393,
+      "caseId": "USER_STYLE_04",
+      "expectedSha256": "31c70fdac6034a78b4e9fd784f3d8f9b2a58b7c66cd16e7109c628d1842e4e83",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_05.json",
+      "sha256": "311d2b07c8f7e54ced27c61620d6843a8cf81191dc30d1e96a973f971548ff14",
+      "bytes": 1389,
+      "caseId": "USER_STYLE_05",
+      "expectedSha256": "8d2b06e0adcce228c84bbd5e40825e8d410877401063b17febaff0c5a7c0c793",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_06.json",
+      "sha256": "8e418812abaf184db244d39bfc69a759c9f20561ff6eabf62f8ec543058519a1",
+      "bytes": 1517,
+      "caseId": "USER_STYLE_06",
+      "expectedSha256": "d084cdbab6890d91415d5977e23c90fcd1e1346a9907cf07e3ea5b2d7098e724",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_07.json",
+      "sha256": "dc75bfa1707c76333ffd8d5b9e787b74b507a06005d2c0899171db3649e2cc1b",
+      "bytes": 1548,
+      "caseId": "USER_STYLE_07",
+      "expectedSha256": "93974c27bb2b70dac1de56dabfa475bc921d1badf3fcc73df21dbb72ce6135ce",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "cases/USER_STYLE_08.json",
+      "sha256": "fb6bd66655db935da5ce53bd1cdde6fd075295e2e85999648a1c709ec072efd2",
+      "bytes": 1427,
+      "caseId": "USER_STYLE_08",
+      "expectedSha256": "e6b1afcae4d4258fbc9e7bdf4e2a05369dd319613833a26187f5ef847b6d1be0",
+      "semanticResult": "not_run"
+    },
+    {
+      "path": "inputs/images/product_a.png",
+      "sha256": "f23ff2a160c3b2f846f9b8943f757c9976eff92e10e70c8e89f70fb657c174d4",
+      "bytes": 444803
+    },
+    {
+      "path": "inputs/images/source_image.png",
+      "sha256": "94b860fc83710e7e572bfb89f13443314d0f87839b3bb0919e614b24714d0364",
+      "bytes": 515115
+    },
+    {
+      "path": "inputs/products/product_a.json",
+      "sha256": "87e09afc028a4a404eb0b886f717db079bc08af27443bec711d907498f0a8928",
+      "bytes": 175
+    },
+    {
+      "path": "inputs/prompts/prompt1.txt",
+      "sha256": "9e472399366b93b1eaf7713e0ac22f1629e6d14cebe91119d79c97e87606b6bf",
+      "bytes": 32
+    }
+  ],
+  "expectedPolicy": "Original case files and expected fields copied byte-for-byte. Equivalent tool names are interpreted using the original tool_policy; expected is never rewritten.",
+  "evidenceKinds": {
+    "scripted": "Protocol/capability fixtures, not model understanding evidence",
+    "realModel": "not_run",
+    "realMedia": "not_run",
+    "visualReview": "not_run"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "MT_EDIT_001",
+  "category": "multi_turn",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "生成一张白色瓶子广告图。"
+    },
+    {
+      "round": 2,
+      "user": "确认生成。",
+      "action": {
+        "type": "confirm_batch",
+        "kind": "IMAGE",
+        "from_round": 1,
+        "wait_for_media": true
+      }
+    },
+    {
+      "round": 3,
+      "user": "只把背景改成米白色，不改变瓶子。",
+      "wait_for_media": true
+    }
+  ],
+  "required_inputs": [],
+  "expected": {
+    "tools": [
+      "propose_image_batch",
+      "edit_image"
+    ],
+    "execution_steps": [
+      "reuse artifact",
+      "revision"
+    ],
+    "output": "new image version",
+    "confirmation_required": true,
+    "skill_capabilities": [],
+    "skill_policy": "能力语义提示，不是固定Skill ID或强制调用次数；以目标环境真实目录和可接受执行路径审查。",
+    "tool_policy": "工具名用于识别执行证据，不是只按名称判分；允许检索、控制和等价工具。确认是用户API动作。",
+    "review_criteria": [
+      "same_object_revision: true；审查完整证据并解释结论，不做字符串或布尔值自动判分。",
+      "第2轮通过指定批次确认API执行，等待真实产物v1成功归档；第3轮引用该产物进行修改。编辑可能直接创建任务，不要求虚构确认工具。",
+      "查看源图和结果图，检查主体是否保留；仅有来源ID不能证明视觉一致。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "end_to_end",
+    "requires_visual_review": true,
+    "requires_paid_media": true
+  }
+}

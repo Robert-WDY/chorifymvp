@@ -1,0 +1,36 @@
+{
+  "id": "USER_STYLE_02",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "我们准备上线新品，需要三个短视频创意。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "CREATE_TEXT",
+    "output": "三个不同的新品短视频创意",
+    "skill_capabilities": [
+      "创意方向设计"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "恰好三个可区分的创意，分别交代核心表达、情境和短视频呈现方式。",
+      "不能仅把同一个点子改标题；不把用户要创意理解成直接生成视频。",
+      "产品卖点不足时说明创意假设，不虚构成分、功效、市场数据。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  }
+}

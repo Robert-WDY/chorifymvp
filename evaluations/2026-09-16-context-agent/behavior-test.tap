@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+ok 1 - context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes
+  ---
+  duration_ms: 0.5455
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual finished feedback
+ok 2 - context behavior scripted: identical query branches on actual finished feedback
+  ---
+  duration_ms: 5.118
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual processing feedback
+ok 3 - context behavior scripted: identical query branches on actual processing feedback
+  ---
+  duration_ms: 2.3903
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: identical query branches on actual parameter_error feedback
+ok 4 - context behavior scripted: identical query branches on actual parameter_error feedback
+  ---
+  duration_ms: 1.5234
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: one direction and known facts can be delivered as text without creating media
+ok 5 - context behavior scripted: one direction and known facts can be delivered as text without creating media
+  ---
+  duration_ms: 27.6422
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+ok 6 - context behavior scripted: local edit retains the exact source image and creates a parent version after approval
+  ---
+  duration_ms: 13.761
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+ok 7 - context behavior scripted: second direction consumes stored original text and product image without regenerating directions
+  ---
+  duration_ms: 10.8198
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: observation receives actual image identity plus material and unknown status
+ok 8 - context behavior scripted: observation receives actual image identity plus material and unknown status
+  ---
+  duration_ms: 12.101
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+ok 9 - context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable
+  ---
+  duration_ms: 13.6356
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order a,b
+ok 10 - context behavior scripted: grouped independent reads return both call IDs for order a,b
+  ---
+  duration_ms: 9.0294
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: grouped independent reads return both call IDs for order b,a
+ok 11 - context behavior scripted: grouped independent reads return both call IDs for order b,a
+  ---
+  duration_ms: 8.4545
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+ok 12 - context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request
+  ---
+  duration_ms: 11.124
+  type: 'test'
+  ...
+# Subtest: context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+ok 13 - context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting
+  ---
+  duration_ms: 21.6487
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 258.7977

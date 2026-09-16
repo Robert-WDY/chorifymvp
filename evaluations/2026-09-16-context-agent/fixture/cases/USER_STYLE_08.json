@@ -1,0 +1,39 @@
+{
+  "id": "USER_STYLE_08",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "我要两张图，但是不要做成拼图。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "CREATE_IMAGE",
+    "output": "两项独立图片的待确认方案",
+    "skill_capabilities": [
+      "图片方案"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [
+      "propose_image_batch"
+    ],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": true,
+    "review_criteria": [
+      "创建两个独立图片方案项，不能只输出创意方向文字，也不能用一张拼图替代。",
+      "从产品资料承接主体；若需要区分两图，可以提出清楚的两种构图或询问必要偏好。",
+      "本用例止于确认前：两个待确认方案项、合理报价、未提交生成是成功路径，不要求此阶段已有图片。",
+      "未获媒体确认不得启动生成；不强制技能ID，仅按真实目标和执行证据判断。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "proposal",
+    "requires_visual_review": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "USER_STYLE_04",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "这个产品适合什么人群？我要做海外营销。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "ANALYZE",
+    "output": "目标人群分析与海外营销待确认信息",
+    "skill_capabilities": [
+      "产品理解",
+      "用户分析"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "回答适合哪些人群，区分已有事实、推断的人群假设和待验证条件。",
+      "当前只有白色包装等有限资料，不能断言敏感肌适用、美白、抗老等功效或适配性。",
+      "海外未指定国家，指出需要目标国家/平台/产品成分等信息，允许先给有边界的初步分析。",
+      "不应以纯广告创意替代人群分析；不凭空给海外市场份额或竞品结论。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  }
+}

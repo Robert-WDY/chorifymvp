@@ -1,0 +1,11 @@
+{
+  "name": "Demo Cosmetic Bottle",
+  "facts": [
+    "white bottle",
+    "capacity unknown",
+    "no medical claims"
+  ],
+  "assets": [
+    "inputs/images/product_a.png"
+  ]
+}

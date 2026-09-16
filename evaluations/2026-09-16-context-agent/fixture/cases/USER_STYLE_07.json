@@ -1,0 +1,43 @@
+{
+  "id": "USER_STYLE_07",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "之前那个方案继续，用第二个方向。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "CONTINUE",
+    "output": "基于历史第二个方向的15秒广告脚本",
+    "skill_capabilities": [
+      "历史衔接",
+      "视频脚本"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "从 setup_turns 的真实三个方向中选择第二个，延续其核心内容写15秒脚本。",
+      "不得重新生成三个方向、选第一个或混入其他版本。",
+      "检查镜头/节奏/文案在15秒内是否可执行，不仅检查出现15秒字样。",
+      "历史没有成功生成三个方向时，应澄清或说明阻塞，而不是编造第二个方向。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  },
+  "setup_turns": [
+    {
+      "user": "请根据所附产品资料给三个明确编号的短视频广告方向，先不写脚本。等我选好后，再把选中的方向写成15秒脚本，不生成视频。"
+    }
+  ]
+}

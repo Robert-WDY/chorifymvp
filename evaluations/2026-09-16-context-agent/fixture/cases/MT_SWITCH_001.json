@@ -1,0 +1,47 @@
+{
+  "id": "MT_SWITCH_001",
+  "category": "multi_turn",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "生成一张产品图。"
+    },
+    {
+      "round": 2,
+      "user": "先不要继续图片，我想写一句广告文案。"
+    },
+    {
+      "round": 3,
+      "user": "继续刚才图片任务。"
+    }
+  ],
+  "required_inputs": [],
+  "expected": {
+    "tools": [
+      "propose_image_batch"
+    ],
+    "execution_steps": [
+      "pause old task",
+      "execute text task",
+      "resume image task"
+    ],
+    "output": "separate task states",
+    "confirmation_required": true,
+    "skill_capabilities": [
+      "prompt_rewrite"
+    ],
+    "skill_policy": "能力语义提示，不是固定Skill ID或强制调用次数；以目标环境真实目录和可接受执行路径审查。",
+    "tool_policy": "工具名用于识别执行证据，不是只按名称判分；允许检索、控制和等价工具。确认是用户API动作。",
+    "review_criteria": [
+      "task_isolation: true；审查完整证据并解释结论，不做字符串或布尔值自动判分。",
+      "继续任务不自动等于媒体付费确认；保留原方案身份，文字任务不得覆盖它，不重复创建或扣费。缺少产品/文案信息时允许合理澄清。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "proposal",
+    "requires_visual_review": false
+  }
+}

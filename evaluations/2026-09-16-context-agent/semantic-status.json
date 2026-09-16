@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "engine": "context-agent",
+  "validation": "corpus_integrity_only",
+  "caseCount": 23,
+  "results": [
+    {
+      "caseId": "DEP_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "f275dc0f94ff4daa6aaeefae1b44547f24454e36748c3c3ff97f8c87fb592686",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "DEP_002",
+      "queryCount": 2,
+      "originalExpectedSha256": "ba650aba17602834cdc8dda17be2abc273be10a33b66fb1b090ed83f5fd8a97a",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "EDIT_001",
+      "queryCount": 3,
+      "originalExpectedSha256": "132bec60e80832b03ed49b707eb077b57efb033135e8e8832c30ad00d32296f0",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "FACT_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "a3aa9736e2829005a619505033ba7962ce1667d82b94f63ea6fe5139f0e319b3",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "IMG_EDIT_002",
+      "queryCount": 1,
+      "originalExpectedSha256": "df6cfe142bb3db7653d4214181c0bfb7fd15121e1fe05528a4024bc83aca8ed6",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "IMG_MULTI_001",
+      "queryCount": 2,
+      "originalExpectedSha256": "5e41e6644fc4d5af1fac69914ffa64980b3b6b9ea324330368985f405e572a9d",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "MEDIA_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "bdd3dddc337b5486d2dcf5da964364785339b014ceac7786429eeb8e00873e75",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "MT_EDIT_001",
+      "queryCount": 3,
+      "originalExpectedSha256": "388b444eb983df3b16de49f363e4190b4d6874f6e4b478a7045eb5153914613a",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "MT_SWITCH_001",
+      "queryCount": 3,
+      "originalExpectedSha256": "9132ef44933cc3115cd222bfb7e6cb4986df889b684015e3addf8a178d65bc3e",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "MT_TASK_001",
+      "queryCount": 3,
+      "originalExpectedSha256": "e6349517ffcb0d202f61ecc493585ad1e7ec4651818e42e936f2426fd5258daf",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "PAR_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "e1fd50efacc7fb0f637ddea59f211bb7a601534d6105d0de67bfb4e121f4e700",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "QA_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "91f029775e27093f801e5e56239a24084f3d58cb638232a0ab2a2d8301bf342a",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "SKILL_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "21cda2eb9da434b23efa95b822b31e078a048c43c9579b18f1a237a15039bd8f",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "SKILL_002",
+      "queryCount": 1,
+      "originalExpectedSha256": "d56c64120a3384987694ea9855131b2355a6ac930e58ae3d2a240ff79d5219a2",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "TOOL_001",
+      "queryCount": 1,
+      "originalExpectedSha256": "5c453cfd9d09aafe3ab05d6e6eaf31154545f25a6f9b6b21e936900dd7296006",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_01",
+      "queryCount": 1,
+      "originalExpectedSha256": "8689229a447e19eafe11d93a9618c872ece2f0514c2fb05ea415f9323017acb7",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_02",
+      "queryCount": 1,
+      "originalExpectedSha256": "dafd5a0e6247fb788f4158c1d2c0c68508ad2582f761bb6d56cc2ce1c6934ad2",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_03",
+      "queryCount": 1,
+      "originalExpectedSha256": "b02c617550afcfefc2db13abe08ab6700a2c0fe5464df2015f12189b2b7c8dfe",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_04",
+      "queryCount": 1,
+      "originalExpectedSha256": "31c70fdac6034a78b4e9fd784f3d8f9b2a58b7c66cd16e7109c628d1842e4e83",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_05",
+      "queryCount": 1,
+      "originalExpectedSha256": "8d2b06e0adcce228c84bbd5e40825e8d410877401063b17febaff0c5a7c0c793",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_06",
+      "queryCount": 2,
+      "originalExpectedSha256": "d084cdbab6890d91415d5977e23c90fcd1e1346a9907cf07e3ea5b2d7098e724",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_07",
+      "queryCount": 2,
+      "originalExpectedSha256": "93974c27bb2b70dac1de56dabfa475bc921d1badf3fcc73df21dbb72ce6135ce",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    },
+    {
+      "caseId": "USER_STYLE_08",
+      "queryCount": 1,
+      "originalExpectedSha256": "e6b1afcae4d4258fbc9e7bdf4e2a05369dd319613833a26187f5ef847b6d1be0",
+      "realModel": "not_run",
+      "realMedia": "not_run",
+      "visualReview": "not_run",
+      "businessAcceptance": "not_run",
+      "reason": "No newly authorized real model/media evaluation. Scripted protocol tests cannot determine this case's semantic acceptance."
+    }
+  ],
+  "caveat": "A normal loop return, valid tool arguments, and successful simulated receipts are not business or visual acceptance."
+}

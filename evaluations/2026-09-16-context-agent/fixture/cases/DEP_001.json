@@ -1,0 +1,38 @@
+{
+  "id": "DEP_001",
+  "category": "dependency",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "分析产品，然后生成营销Brief。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "tools": [],
+    "execution_steps": [
+      "product skill completes",
+      "brief consumes ProductProfile"
+    ],
+    "output": "Brief",
+    "confirmation_required": false,
+    "skill_capabilities": [
+      "product_understanding",
+      "marketing_brief"
+    ],
+    "skill_policy": "能力语义提示，不是固定Skill ID或强制调用次数；以目标环境真实目录和可接受执行路径审查。",
+    "tool_policy": "工具名用于识别执行证据，不是只按名称判分；允许检索、控制和等价工具。确认是用户API动作。",
+    "review_criteria": [
+      "dependency: \"product->brief\"；审查完整证据并解释结论，不做字符串或布尔值自动判分。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "USER_STYLE_05",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "帮我看看这张图怎么改更像品牌广告。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/images/source_image.png"
+  ],
+  "expected": {
+    "intent": "ANALYZE_IMAGE",
+    "output": "基于所附图片的品牌广告改进建议",
+    "skill_capabilities": [
+      "视觉分析",
+      "广告视觉建议"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "实际观察 source_image.png，指出图中可见的主体、背景、构图等，再提出具体调整建议。",
+      "主模型具备视觉能力时允许原生看图，否则应使用可用图片分析能力；不强制唯一工具路径。",
+      "用户问怎么改，默认只分析并给建议，不直接编辑、生成或收费。",
+      "若附件读取失败，应说明并请求可用图片，不得编造图像内容。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "USER_STYLE_01",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "我是电商运营，帮我做一个产品广告方向。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "CREATE_TEXT",
+    "output": "一个面向电商使用场景的产品广告方向",
+    "skill_capabilities": [
+      "创意方向设计"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "交付一个可执行方向，说明核心表达、画面或内容构思及电商使用方式。",
+      "利用现有产品事实；容量、成分、功效、人群适配无依据时标为未知或假设。",
+      "允许先检索技能再创作，也允许合理的等价方法；不得创建付费媒体任务。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  }
+}

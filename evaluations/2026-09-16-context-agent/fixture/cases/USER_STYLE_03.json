@@ -1,0 +1,36 @@
+{
+  "id": "USER_STYLE_03",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "老板让我今天出一个广告图方案，先给方案不要生成。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "CREATE_TEXT",
+    "output": "一份广告图片文字方案",
+    "skill_capabilities": [
+      "广告图方案设计"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "方案能指导后续出图，包含主体、背景、构图、文案位置等有用信息。",
+      "遵守先给方案不要生成，不提交媒体任务或扣除媒体费用。",
+      "文字方案或未执行的方案卡均可接受；若生成卡片，应明确仍待确认，不能把方案当成成品。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  }
+}

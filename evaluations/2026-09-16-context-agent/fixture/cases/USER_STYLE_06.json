@@ -1,0 +1,43 @@
+{
+  "id": "USER_STYLE_06",
+  "category": "user_style",
+  "conversation": [
+    {
+      "round": 1,
+      "user": "我只想修改上一版，不要重新开始。"
+    }
+  ],
+  "required_inputs": [
+    "inputs/products/product_a.json"
+  ],
+  "expected": {
+    "intent": "MODIFY_OR_CLARIFY",
+    "output": "承接已存在的广告文案版本，澄清具体修改要求",
+    "skill_capabilities": [
+      "上下文理解",
+      "局部修改澄清"
+    ],
+    "skill_policy": "仅语义能力建议，真实Skill须由find_skill返回；允许合理等价路径。",
+    "tools": [],
+    "tool_policy": "允许只读能力查询、技能发现与必要分析工具；不把空数组解释成禁止全部辅助工具。",
+    "confirmation_required": false,
+    "review_criteria": [
+      "识别 setup_turns 中已创建的上一版，保持同一内容对象。",
+      "本轮只说修改上一版，没有说改什么，应询问需要修改的部分或目标。",
+      "可以简短复述现有版本帮助定位，不应擅自重做创意方向、覆盖原稿或提交媒体任务。",
+      "如果历史结果不可用，应如实指出；不能虚构上一版。"
+    ]
+  },
+  "schema_version": 3,
+  "evaluation": {
+    "method": "semantic_trace_review",
+    "scope": "agent_chat",
+    "stage": "text",
+    "requires_visual_review": false
+  },
+  "setup_turns": [
+    {
+      "user": "请为所附产品写一版简短广告文案，命名为文案v1；只用已知事实，不生成图片。"
+    }
+  ]
+}

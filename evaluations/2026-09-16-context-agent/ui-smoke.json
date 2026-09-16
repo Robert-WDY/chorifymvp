@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-16",
+  "entry": "http://127.0.0.1:3212/",
+  "browser": "Codex In-app Browser",
+  "mode": {"modelEnabled": false, "media": "simulation"},
+  "checks": [
+    {"action": "open independent page", "observed": "Chorify 上下文 Agent; 模型调用未启用; 媒体模拟模式"},
+    {"action": "submit 只写一句产品文案，不生成图片。", "observed": "真实模型调用默认关闭; explicit configuration instruction shown; no model call"},
+    {"action": "click 新对话", "observed": "previous message cleared; 已开始独立的新对话"}
+  ],
+  "limits": "Browser checks cover only disabled-model entry and fresh dialogue. Media approval and streaming are exercised by HTTP tests with an injected offline model, not by paid providers."
+}

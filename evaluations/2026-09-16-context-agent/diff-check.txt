@@ -1,0 +1,2 @@
+git diff --cached --check: passed
+Generated report line endings are normalized to LF; frozen corpus bytes are unchanged.
