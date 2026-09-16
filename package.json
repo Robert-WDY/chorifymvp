@@ -8,6 +8,9 @@
   },
   "scripts": {
     "start": "node --env-file-if-exists=.env server/index.mjs",
+    "start:context": "node --env-file-if-exists=.env server/context-agent/index.mjs",
+    "test:context": "node --test tests/context-agent-*.test.mjs",
+    "eval:context": "node evals/context-agent-evaluate.mjs",
     "test": "node --env-file-if-exists=.env --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
     "eval:intent": "node --env-file-if-exists=.env evals/run-intent.mjs all latest",

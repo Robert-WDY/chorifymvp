@@ -1,0 +1,134 @@
+import {readFile} from 'node:fs/promises';
+import {randomUUID} from 'node:crypto';
+import {appendRecord} from './history.mjs';
+import {buildContext} from './context.mjs';
+import {publicMediaUrl} from '../media.mjs';
+
+const prompt = await readFile(new URL('./prompt.md', import.meta.url), 'utf8');
+const errorResult = (error, code = 'tool_error') => ({isError:true, code:error.code || code, message:error.message || String(error), submitted:false});
+const contentText = content => typeof content === 'string' ? content : (content || []).map(p => p.text || '').join('\n');
+
+function protocolOutput(output) {
+  if (!Array.isArray(output) || !output.length) throw Object.assign(new Error('模型未返回消息或工具调用'), {code:'model_protocol'});
+  const ids = new Set();
+  for (const part of output) {
+    if (!part || (part.status !== undefined && part.status !== 'completed')) throw Object.assign(new Error('模型输出不完整，不能作为完成'), {code:'model_incomplete'});
+    if (part.type === 'function_call') {
+      if (typeof part.call_id !== 'string' || !part.call_id || ids.has(part.call_id) || typeof part.name !== 'string' || typeof part.arguments !== 'string') throw Object.assign(new Error('工具调用协议无效或调用 ID 重复'), {code:'model_protocol'});
+      ids.add(part.call_id);
+    } else if (part.type !== 'message' || part.role !== 'assistant' || !contentText(part.content).trim() || (Array.isArray(part.content) && part.content.some(p => !['output_text','text'].includes(p.type)))) {
+      throw Object.assign(new Error('模型返回了不支持的消息协议'), {code:'model_protocol'});
+    }
+  }
+  return output;
+}
+
+function stageInputs(inputs) {
+  if (!Array.isArray(inputs) || inputs.length > 12) throw new Error('每次最多添加 12 份素材');
+  if (Buffer.byteLength(JSON.stringify(inputs)) > 128 * 1024) throw new Error('附件内容超过 128 KiB');
+  return inputs.map(a => {
+    if (!a || !['text','image','video'].includes(a.type) || typeof a.name !== 'string' || !a.name.trim() || a.name.length > 240) throw new Error('附件需要 type 与有效 name');
+    if (a.type === 'text' && (typeof a.content !== 'string' || !a.content.trim())) throw new Error('文字附件需要真实正文');
+    if (a.type !== 'text') publicMediaUrl(a.url);
+    return {id:randomUUID(),type:a.type,name:a.name,...(a.type==='text'?{content:a.content}:{url:a.url}),version:1,createdAt:new Date().toISOString(),origin:'user_input'};
+  });
+}
+
+/** Native tool loop only. Runtime outcomes below describe this HTTP/model run, never business progress. */
+export class ContextAgent {
+  constructor({brain,tools,save=async()=>{},catalog={skills:[]},maxSteps=16,maxModelCalls=maxSteps,maxToolCalls=48,contextTokenBudget=24000,maxMediaCalls=0,systemPrompt=prompt}={}) {
+    if (!brain?.respond || !tools?.execute || !Array.isArray(tools.definitions)) throw new Error('需要模型接入与真实工具注册表');
+    for (const [name,value] of Object.entries({maxSteps,maxModelCalls,maxToolCalls,contextTokenBudget,maxMediaCalls})) if (!Number.isInteger(value) || value < (name==='maxMediaCalls'?0:1)) throw new Error('运行预算无效：'+name);
+    Object.assign(this,{brain,tools,save,catalog,maxSteps,maxModelCalls,maxToolCalls,contextTokenBudget,maxMediaCalls,systemPrompt});
+    this.active = new Set();
+  }
+
+  async run(state,message,emit=()=>{},signal=new AbortController().signal,{inputs=[],requestId=randomUUID()}={}) {
+    if (state?.engine !== 'context-agent' || !Array.isArray(state.records)) throw new Error('新入口只接受独立 context-agent 会话');
+    if (typeof message !== 'string' || !message.trim() || message.length > 30000 || typeof requestId !== 'string' || !requestId || requestId.length>128) throw new Error('请求正文或请求标识无效');
+    if (this.active.has(state.id)) throw Object.assign(new Error('会话正在运行'), {code:'session_busy'});
+    const previous = state.records.find(r=>r.kind==='run_event' && r.event==='start' && r.requestId===requestId);
+    if (previous) {
+      if (previous.message !== message || JSON.stringify(previous.inputs||[]) !== JSON.stringify(inputs)) throw Object.assign(new Error('相同请求标识不能更改正文或附件'), {code:'request_identity_conflict'});
+      const end=state.records.find(r=>r.kind==='run_event' && r.event==='end' && r.turnId===previous.turnId);
+      const result=end ? {...end.result,replayed:true} : {status:'interrupted',turnId:previous.turnId,replayed:true,message:'先前运行没有结束回执；不会自动重放可能已提交的调用。可在新请求中读取原调用回执。'};
+      emit({type:'end',...result});return result;
+    }
+    const assets=stageInputs(inputs),turnId=randomUUID();
+    let steps=0,callsUsed=0,modelCalls=0;
+    const persist = () => this.save(state);
+    const record = value => appendRecord(state,{turnId,...value});
+    const modelRespond=async(brain,input,definitions,metadata={})=>{
+      signal.throwIfAborted();
+      if(modelCalls>=this.maxModelCalls)throw Object.assign(new Error('达到本轮模型总调用上限（含视觉观察）'),{code:'budget_exceeded'});
+      const traceId=randomUUID();
+      record({kind:'run_event',event:'model_request',traceId,step:steps,phase:metadata.phase||'agent',input,tools:definitions,metrics:metadata.metrics,startedAt:new Date().toISOString()});
+      await persist();signal.throwIfAborted();modelCalls++;
+      try{
+        const raw=await brain.respond(input,definitions,signal);
+        record({kind:'run_event',event:'model_response',traceId,output:structuredClone(raw),usage:brain.lastCall?.usage||null});await persist();return raw;
+      }catch(error){record({kind:'run_event',event:'model_error',traceId,code:error.code||'model_error',message:error.message});await persist();throw error;}
+    };
+    this.active.add(state.id);
+    try {
+      // Complete interrupted protocol groups without retrying their side effects.
+      for (const call of state.records.filter(r=>r.kind==='tool_call'&&!state.records.some(x=>x.kind==='tool_result'&&x.callId===r.callId))) {
+        const invocation=Object.values(state.invocations).find(r=>r.callId===call.callId&&r.turnId===call.turnId);
+        const proposal=Object.values(state.approvals).find(r=>r.kind==='proposal'&&r.callId===call.callId&&r.turnId===call.turnId);
+        const recovered=invocation?.result?{...structuredClone(invocation.result),receiptId:invocation.receiptId,recoveredFromReceipt:true}
+          :invocation?.kind==='document'&&state.assets[invocation.assetId]?{ok:true,asset:state.assets[invocation.assetId],recoveredFromReceipt:true}
+          :proposal&&!invocation?{ok:true,status:'approval_required',submitted:false,proposalId:proposal.proposalId,name:proposal.name,args:proposal.args,recoveredFromReceipt:true}
+          :{isError:true,code:'interrupted_call',submitted:invocation?.attempted?'unknown':false,receiptId:invocation?.receiptId,providerReceiptId:invocation?.providerReceiptId,message:invocation?'此前调用结果未进入历史；先查询此回执，不自动重新提交。':'没有持久提交记录，此调用未自动重试。',callId:call.callId};
+        appendRecord(state,{kind:'tool_result',turnId:call.turnId,groupId:call.groupId,callId:call.callId,output:JSON.stringify(recovered)});
+      }
+      record({kind:'run_event',event:'start',requestId,message,inputs});
+      for(const a of assets) state.assets[a.id]=a;
+      record({kind:'message',role:'user',groupId:turnId,content:message,attachments:assets.map(a=>({id:a.id,type:a.type,name:a.name,version:a.version}))});
+      await persist();
+      emit({type:'user_recorded',turnId,assets});
+      for (;steps<this.maxSteps;steps++) {
+        signal.throwIfAborted();
+        const context=buildContext(state,{systemPrompt:this.systemPrompt,skillDirectory:(this.catalog.skills||[]).map(({slug,name,description})=>({slug,name,description})),toolDefinitions:this.tools.definitions,tokenBudget:this.contextTokenBudget,reservedTokens:6000,currentTurnId:turnId});
+        // Persist the exact request, not a reconstructed approximation of its model view.
+        const raw=await modelRespond(this.brain,context.input,this.tools.definitions,{metrics:context.metrics});
+        signal.throwIfAborted();
+        const output=protocolOutput(raw),calls=output.filter(x=>x.type==='function_call'),groupId=randomUUID();
+        if(calls.some(c=>state.records.some(r=>r.kind==='tool_call'&&r.callId===c.call_id))) throw Object.assign(new Error('模型重复使用已记录的调用 ID；不会再次提交'),{code:'duplicate_call_id'});
+        if(callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
+        const text=output.filter(x=>x.type==='message').map(x=>contentText(x.content)).join('\n');
+        for(const part of output) {
+          if(part.type==='message') record({kind:'message',role:'assistant',groupId,content:contentText(part.content)});
+          else record({kind:'tool_call',groupId,callId:part.call_id,name:part.name,arguments:part.arguments});
+        }
+        await persist();
+        if(text) emit({type:calls.length?'assistant_progress':'assistant',text,turnId});
+        if(!calls.length) {
+          const result={status:'completed',turnId,text,modelCalls,toolCalls:callsUsed};
+          record({kind:'run_event',event:'end',result});await persist();emit({type:'end',...result});return result;
+        }
+        callsUsed+=calls.length;
+        // Same-response calls contain no future references. Serial execution bounds resource use;
+        // only the next model response decides what depends on the returned results.
+        for(const call of calls) {
+          let result,started=false;
+          try {
+            signal.throwIfAborted();
+            let args;try{args=JSON.parse(call.arguments);}catch{throw Object.assign(new Error('工具参数不是合法 JSON；此调用未执行，请修正参数'),{code:'invalid_arguments'});}
+            if(!args||typeof args!=='object'||Array.isArray(args)) throw Object.assign(new Error('工具参数必须是 JSON 对象'),{code:'invalid_arguments'});
+            started=true;
+            result=await this.tools.execute(call.name,args,{state,signal,callId:call.call_id,turnId,ownerId:state.ownerId,save:persist,maxMediaCalls:this.maxMediaCalls,modelRespond});
+            if(result===undefined) throw new Error('工具未提供结果');
+          } catch(error) {
+            result=signal.aborted?{isError:true,code:'cancelled',submitted:started?'unknown':false,message:started?'运行已取消；已经开始的调用可能已提交，请查调用回执。':'运行已取消；此调用尚未开始。'}:errorResult(error);
+          }
+          record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
+          await persist();emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+        }
+      }
+      throw Object.assign(new Error('达到本轮模型调用上限，未收到正常结束回答'),{code:'budget_exceeded'});
+    } catch(error) {
+      const result={status:signal.aborted?'cancelled':error.code==='budget_exceeded'||error.code==='CONTEXT_BUDGET_EXCEEDED'?'budget_exceeded':'error',turnId,code:error.code||'run_error',message:error.message,modelCalls,toolCalls:callsUsed};
+      record({kind:'run_event',event:'end',result});await persist();emit({type:'end',...result});return result;
+    } finally {this.active.delete(state.id);}
+  }
+}
