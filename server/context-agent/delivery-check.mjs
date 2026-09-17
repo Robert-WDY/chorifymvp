@@ -11,6 +11,7 @@ function measurements(state,turnId){
 }
 export function checkedDocument(state,turnId,callId,content){
  const entry=measurements(state,turnId).find(r=>r.call.callId===callId);
+ if(entry?.result.ok&&!entry.result.deliveryCheck)throw new GuardError('document_check_failed','该回执只是普通计数，没有requirements验收。普通保存不需要measurementCallId；若作品有明确字数或项数要求，先传requirements验收，再绑定通过的回执。');
  if(!entry?.result.ok||entry.result.deliveryCheck?.status!=='passed'||entry.result.deliveryCheck.textIdentity!==fingerprint(content))throw new GuardError('document_check_failed','测量没有通过或待保存正文已变化；对这份正文重测后再保存');
  return {callId,textIdentity:entry.result.deliveryCheck.textIdentity};
 }
@@ -19,7 +20,7 @@ export function checkedDocument(state,turnId,callId,content){
 // checks the entire declared draft, never infers a contract from keywords.
 export function measureDelivery(args,{state,turnId}={}){
  const {text,unit,requirements,items,bodyText}=args;
- if(bodyText!==undefined)selectOriginal(text,bodyText);
+ if(bodyText!==undefined){try{selectOriginal(text,bodyText);}catch(error){throw new GuardError(error.code,'bodyText必须是text中唯一的准确连续片段，保留原来的Markdown和标点；只选择需要计数的正文，不重写或去格式。无需分离正文时省略bodyText。');}}
  const count=countBody(bodyText??text,unit),issues=[];
  if(!requirements)return {count,unit};
  if(requirements.min!==undefined&&requirements.max!==undefined&&requirements.min>requirements.max)throw new GuardError('invalid_requirements','字数下限不能超过上限');

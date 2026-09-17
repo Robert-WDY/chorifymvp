@@ -1,0 +1,39 @@
+✔ stage1 separate reply parts do not inherit other objects counts; omitted part still rejected (41.3931ms)
+✔ stage1 explicit correction replaces mistaken constraints using current original, not historic or invented quotes (18.8698ms)
+✔ stage1 checked document can be saved and followed by normal status; changed or failed draft cannot use receipt (16.4749ms)
+✔ stage1 failed document/asset checks cannot be bypassed by a final status message (12.2175ms)
+✔ stage1 feedback distinguishes ordinary counting from checked saving and body selection from parent selection (11.9734ms)
+✔ stage1 measuring a saved version reads its actual body and rejects a different supplied text/version (10.598ms)
+✖ stage2 long source revision uses exact version without copying source and reaches final feedback (13.4789ms)
+✔ stage2 summary thresholds account for irreducible prompt/catalog/tool cost (27.8316ms)
+✔ stage3 observation asks for deliberate material selection, passes actual originals and never auto-adds another product (14.8878ms)
+✔ stage3 visual lineage alone is rejected; explicit image binding appears in proposal input evidence (11.4221ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287.8492
+
+✖ failing tests:
+
+test at tests\context-agent-staged-closure.test.mjs:83:1
+✖ stage2 long source revision uses exact version without copying source and reaches final feedback (13.4789ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'budget_exceeded'
+  - 'completed'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-staged-closure.test.mjs:86:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'budget_exceeded',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

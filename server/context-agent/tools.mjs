@@ -56,8 +56,11 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     correction:schema({callId:id,messageId:id,quote:string(30000),reason:string(1000)},['callId','messageId','quote','reason'])
   });
   measurement.parameters.required=['unit'];measurement.parameters.anyOf=[{required:['text']},{required:['assetId','assetVersion']}];
+  measurement.parameters.properties.text.description='完整待交付文字。新稿必传text，bodyText不能代替它；已保存作品可改传assetId和assetVersion。';
+  measurement.parameters.properties.bodyText.description='可选：text中的准确连续正文片段，用于排除标题和状态说明；必须保留原格式。无需分开计数时省略。';
+  documentSchema.properties.measurementCallId={...id,description:'仅绑定deliveryCheck.status=passed的验收回执，content必须等于该次完整text。普通计数不属于验收，不需要本字段；保存动作本身不要求先测字数。'};
   measurement.description='测量具体成果。普通测量只返回数字；requirements检查字数/项数。target默认完整reply；多个回复部分用各自稳定id，独立文稿用document及稳定id。已保存作品用assetId+assetVersion直接读取。bodyText指定正文，items以双换行拼接覆盖该成果text。重测沿用同一target，不偷偷放宽要求；误声明用correction指向最新测量callId、当前用户messageId及准确quote并说明reason。通过后交付对应正文或用measurementCallId保存，状态说明不是文稿正文。项的语义与原话含义仍由Agent判断。';
-  definitions.find(d=>d.name==='save_document').description='需要独立文稿或版本才保存。新稿传content；已有资产修订用parentId+parentVersion，不重抄父稿，但先确认完整原文可用；聊天原稿用parentMessageId+sourceText准确作品片段。sourceMessageId仅存档。测过的作品传measurementCallId绑定实际正文；改正文后重测。核对回执parentEvidence实际父稿，不只信标题。';
+  definitions.find(d=>d.name==='save_document').description='需要独立文稿或版本才保存，不要求先测字数。新稿传content；已有资产修订用parentId+parentVersion，不重抄父稿，但先确认完整原文可用；聊天原稿用parentMessageId+sourceText准确作品片段。sourceMessageId仅存档。通过requirements验收的作品传measurementCallId，content等于该次完整text；普通计数没有验收凭证。核对回执parentEvidence实际父稿，不只信标题。';
   if (typeof observeImages === 'function') {
     definitions.push(tool('analyze_image', '仅观察明确选择的imageIds与materials，不自动加父图或同次上传资料。materials.sourceId只接受文字ID，图片放imageIds。必要产品事实和未知项通过materials传入；大段资料指定offset/limit。比较保持用compare_images。', { imageIds: { ...ids, minItems: 1 }, question: string(12000), materials }, ['imageIds','question']));
     definitions.push(tool('compare_images', '读取明确指定的真实原图与成品双图，比较结构、颜色、位置和用户保持要求，报告差异与无法判断项。不自行扩展来源，不用文字替代原图；看不清、缺图或模拟产物不能声称通过，差异不能擅称为更好的创意。', { sourceImageId:id, resultImageId:id, question:string(12000), materials }, ['sourceImageId','resultImageId','question']));

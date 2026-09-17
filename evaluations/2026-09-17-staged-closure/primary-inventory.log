@@ -1,0 +1,200 @@
+{
+  "total": {
+    "planned": 41,
+    "executed": 38,
+    "notRun": 0,
+    "notReached": 3,
+    "calls": 93,
+    "http200": 93,
+    "inputTokens": 661230,
+    "outputTokens": 30763,
+    "proposals": 8,
+    "mediaReceipts": 5
+  },
+  "items": [
+    {
+      "id": "CHAT_VERSION",
+      "executed": 3,
+      "errors": 5,
+      "summaries": 1,
+      "summaryFailures": 0,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 11,
+          "durationMs": 19331
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 2411
+        }
+      }
+    },
+    {
+      "id": "DIRECTION_SKILL",
+      "executed": 4,
+      "errors": 6,
+      "summaries": 2,
+      "summaryFailures": 0,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 14,
+          "durationMs": 43036
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 2,
+          "durationMs": 8921
+        }
+      }
+    },
+    {
+      "id": "CONFIRM_LANGUAGE",
+      "executed": 8,
+      "errors": 5,
+      "summaries": 5,
+      "summaryFailures": 0,
+      "proposals": 3,
+      "mediaReceipts": 2,
+      "phases": {
+        "agent": {
+          "calls": 18,
+          "durationMs": 38354
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 5,
+          "durationMs": 20911
+        }
+      }
+    },
+    {
+      "id": "SWITCH_FACTS",
+      "executed": 4,
+      "errors": 0,
+      "summaries": 0,
+      "summaryFailures": 0,
+      "proposals": 1,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 5,
+          "durationMs": 10602
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      }
+    },
+    {
+      "id": "ISOLATION",
+      "executed": 2,
+      "errors": 2,
+      "summaries": 0,
+      "summaryFailures": 0,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 6,
+          "durationMs": 9293
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      }
+    },
+    {
+      "id": "LONG_MEMORY",
+      "executed": 12,
+      "errors": 0,
+      "summaries": 6,
+      "summaryFailures": 0,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 14,
+          "durationMs": 20902
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 6,
+          "durationMs": 22878
+        }
+      }
+    },
+    {
+      "id": "ORIGINAL_IMG_MULTI_001",
+      "executed": 2,
+      "errors": 0,
+      "summaries": 0,
+      "summaryFailures": 0,
+      "proposals": 2,
+      "mediaReceipts": 2,
+      "phases": {
+        "agent": {
+          "calls": 4,
+          "durationMs": 7914
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      }
+    },
+    {
+      "id": "ORIGINAL_EDIT_001",
+      "executed": 3,
+      "errors": 0,
+      "summaries": 1,
+      "summaryFailures": 0,
+      "proposals": 2,
+      "mediaReceipts": 1,
+      "phases": {
+        "agent": {
+          "calls": 6,
+          "durationMs": 13110
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 4448
+        }
+      }
+    }
+  ]
+}

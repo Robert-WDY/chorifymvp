@@ -62,6 +62,17 @@ test('stage1 failed document/asset checks cannot be bypassed by a final status m
  assert.equal(finalDeliveryCheck(s,'turn','全部完成。')?.ok,false);
 });
 
+test('stage1 feedback distinguishes ordinary counting from checked saving and body selection from parent selection',async()=>{
+ const s=createSession(),tools=createTools();
+ await perform(s,tools,'measure_text',{text:'普通文稿',unit:'characters'},'count');
+ const wrongReceipt=await perform(s,tools,'save_document',{content:'普通文稿',measurementCallId:'count'},'invalid');
+ assert.equal(wrongReceipt.error.code,'document_check_failed');assert.match(wrongReceipt.error.message,/普通计数/);
+ assert.equal((await perform(s,tools,'save_document',{content:'普通文稿'},'plain-save')).ok,true);
+ const badBody=await perform(s,tools,'measure_text',{text:'**完整正文**',bodyText:'完整 正文',unit:'characters'},'body');
+ assert.match(badBody.error.message,/bodyText/);assert.doesNotMatch(badBody.error.message,/资产ID/);
+ assert.equal((await perform(s,tools,'measure_text',{bodyText:'不能代替text',unit:'characters'},'missing')).ok,false);
+});
+
 test('stage1 measuring a saved version reads its actual body and rejects a different supplied text/version',async()=>{
  const s=createSession(),tools=createTools();s.assets.a={id:'a',type:'text',version:2,content:'实际正文'};
  const args={assetId:'a',assetVersion:2,unit:'characters',requirements:{min:4}};

@@ -69,6 +69,8 @@ if(args.includes('--diagnostic'))cases.splice(0,cases.length,
  t('使用当前图片方案工具保存1张虚构咖啡杯广告图的待批准方案：白色陶瓷杯、米白背景、1024x1024、无字无人。只准备，不提交。',{round:1}),
  t('确认生成。',{round:2,action:{type:'confirm_batch',from_round:1}}),
  t('我又点了一次确认，还是同一张，请返回原回执，不要重新提交。',{restart:true}) ]});
+const selected=args.find(x=>x.startsWith('--cases='))?.slice(8).split(',');
+if(selected){if(selected.some(id=>!cases.some(c=>c.id===id)))throw new Error('Unknown evaluation case');cases.splice(0,cases.length,...cases.filter(c=>selected.includes(c.id)));}
 if(!args.includes('--run')){console.log(JSON.stringify({provider:config.provider,model:config.model,keyConfigured:!!config.key,budget,cases:cases.map(c=>({id:c.id,turns:c.turns.length})),media:'simulation',vision:false,output:root},null,2));process.exit(0);}
 if(config.model!=='deepseek-flash'||!config.key)throw new Error('Expected authorized configured deepseek-flash');
 await mkdir(dirname(root),{recursive:true});await mkdir(root,{recursive:false});
