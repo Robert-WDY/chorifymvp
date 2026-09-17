@@ -1,0 +1,30 @@
+✔ baseline proposal presentation is recovered only from its matched real tool result (32.8462ms)
+✔ T01/T02 single-call feedback rejects every unexpected call before side effects and repairs next decision (3.2124ms)
+✔ T01 outcome projection preserves receipt, critical error, source and simulation under truncation (0.1698ms)
+✔ T05/T06/T07 automatic pre-trim summary is bounded, persisted and retains exact early originals after restart (78.8104ms)
+✔ T05 short conversation and reserved model quota never pay for summary (24.9069ms)
+✔ T08 summary invalid_reference preserves all originals and does not advance coverage (12.1091ms)
+✔ T08 summary timeout preserves all originals and does not advance coverage (12.2364ms)
+✔ T08 summary oversize preserves all originals and does not advance coverage (13.1409ms)
+✔ T08 summary save preserves all originals and does not advance coverage (12.9275ms)
+✔ T09 stable early cursor and total neighbor budget keep exact original accessible (12.0447ms)
+✔ T11 current-user confirmation is IDs-only; forged authority and old-message source cannot approve (14.1167ms)
+✔ T11 negative/quoted/conditional/ambiguous confirmations permit clarification without side effects (scripted) (46.563ms)
+✔ T12 frozen proposals reject changed source version, provider model and superseded old selection (16.505ms)
+✔ T13/T14 batch failed stops unsubmitted members and repeated channels do not resubmit (44.0603ms)
+✔ T13/T14 batch unknown stops unsubmitted members and repeated channels do not resubmit (39.0611ms)
+✔ T13/T14 batch cancelled stops unsubmitted members and repeated channels do not resubmit (37.3433ms)
+✔ T13/T14 batch budget stops unsubmitted members and repeated channels do not resubmit (38.5965ms)
+✔ T15/T16/T18 related hints do not consume materials; explicit comparison and frozen product image reach actual mock requests (10.9785ms)
+✔ T10/T19 button submits before any Agent call; reply failure still exposes durable assets and observations (118.3949ms)
+✔ T20 same budget meters summary, vision and main model; provider call policy only uses declared capability (15.9382ms)
+✔ T05/T08 summaries preserve interleaved tool groups and respect one summary quota across the whole turn (13.5552ms)
+✔ T17 all active methods retain substantive professional concepts, examples and license references (46.9397ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 767.3961

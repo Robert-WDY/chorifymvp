@@ -1,0 +1,199 @@
+{
+  "total": {
+    "planned": 51,
+    "executed": 48,
+    "blocked": 2,
+    "notReached": 1,
+    "calls": 88,
+    "http200": 88,
+    "inputTokens": 514605,
+    "outputTokens": 33980,
+    "summaries": 10,
+    "proposals": 4,
+    "mediaReceipts": 3,
+    "duplicateInputItems": 0
+  },
+  "phases": [
+    {
+      "id": "CHAT_VERSION",
+      "phases": {
+        "agent": {
+          "calls": 8,
+          "durationMs": 10045
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 2,
+          "durationMs": 5989
+        }
+      },
+      "failedSummaries": 0
+    },
+    {
+      "id": "DIRECTION_SKILL",
+      "phases": {
+        "agent": {
+          "calls": 7,
+          "durationMs": 24305
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 3,
+          "durationMs": 15287
+        }
+      },
+      "failedSummaries": 2
+    },
+    {
+      "id": "CONFIRM_LANGUAGE",
+      "phases": {
+        "agent": {
+          "calls": 8,
+          "durationMs": 14356
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 2,
+          "durationMs": 8275
+        }
+      },
+      "failedSummaries": 1
+    },
+    {
+      "id": "SWITCH_FACTS",
+      "phases": {
+        "agent": {
+          "calls": 7,
+          "durationMs": 10167
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 4364
+        }
+      },
+      "failedSummaries": 0
+    },
+    {
+      "id": "ISOLATION",
+      "phases": {
+        "agent": {
+          "calls": 5,
+          "durationMs": 5666
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "failedSummaries": 0
+    },
+    {
+      "id": "LONG_MEMORY",
+      "phases": {
+        "agent": {
+          "calls": 14,
+          "durationMs": 12049
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 6,
+          "durationMs": 26898
+        }
+      },
+      "failedSummaries": 4
+    },
+    {
+      "id": "ORIGINAL_IMG_MULTI_001",
+      "phases": {
+        "agent": {
+          "calls": 2,
+          "durationMs": 2970
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "failedSummaries": 0
+    },
+    {
+      "id": "ORIGINAL_EDIT_001",
+      "phases": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 2257
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "failedSummaries": 0
+    },
+    {
+      "id": "DIAG_SAVED_CONFIRM",
+      "phases": {
+        "agent": {
+          "calls": 12,
+          "durationMs": 16083
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 4,
+          "durationMs": 17769
+        }
+      },
+      "failedSummaries": 2
+    },
+    {
+      "id": "DIAG_BUTTON",
+      "phases": {
+        "agent": {
+          "calls": 5,
+          "durationMs": 9044
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 2460
+        }
+      },
+      "failedSummaries": 0
+    }
+  ],
+  "assertions": "Wire completeness, tool pairing, wrong-parent visibility, frozen media args, replacement identity, receipt counts, button observation before Agent request verified offline. No model or media calls."
+}

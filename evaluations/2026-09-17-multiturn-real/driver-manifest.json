@@ -1,0 +1,8 @@
+{
+  "testedCodeSha": "59ee2ae18330c81a778f98ccdae197fa3bb6aabd",
+  "driverFiles": {
+    "evals/context-agent-multiturn.mjs": "ffe2da2137b3279ec2f41136cf8c592e44cb6da0f9aeb79c30d5ecf1d2c5aebb",
+    "evals/context-agent-multiturn-inspect.mjs": "e5c7b6aa2f63e48e6a24970a97514cc15eaf4328e124196d79d270d8d9f5bd44"
+  },
+  "correction": "Primary terminal not_run rows reconstructed without rerun; originals preserved as rounds.executed-only.json. Driver now persists final ledger."
+}

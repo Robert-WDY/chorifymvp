@@ -1,0 +1,54 @@
+[
+  {
+    "id": "DIAG_SAVED_CONFIRM",
+    "diagnostic": true,
+    "expected": "Saved proposals allow current-text partial confirmation, duplicate receipt reuse and changed-plan confirmation. This explicit tool cue is not a natural-query pass.",
+    "turns": [
+      {
+        "user": "这是模拟媒体测试。请用当前可用的图片方案工具实际保存两份待批准方案，不要只写文字建议。虚构香水，第一张白瓶白背景，第二张红瓶灰背景，均1024x1024，无字无人，独立两张。只准备，先不提交。"
+      },
+      {
+        "user": "第二张不错，但先别生成。"
+      },
+      {
+        "user": "同事说“确认生成”，我只是转述，不是授权。"
+      },
+      {
+        "user": "只确认第二张红瓶灰背景，按已经保存的参数执行，第一张先不要。"
+      },
+      {
+        "user": "这是同一次确认，再给我第二张的原回执，不要再提交。",
+        "restart": true
+      },
+      {
+        "user": "第一张也确认，但背景改蓝色。请先实际保存并展示修改后的新方案，旧白背景方案作废。"
+      },
+      {
+        "user": "按刚保存的白瓶蓝背景新方案执行，红瓶不要重做。"
+      }
+    ]
+  },
+  {
+    "id": "DIAG_BUTTON",
+    "diagnostic": true,
+    "expected": "Explicit saved plan; real button path with simulated media; repetition must reuse receipt.",
+    "turns": [
+      {
+        "user": "使用当前图片方案工具保存1张虚构咖啡杯广告图的待批准方案：白色陶瓷杯、米白背景、1024x1024、无字无人。只准备，不提交。",
+        "round": 1
+      },
+      {
+        "user": "确认生成。",
+        "round": 2,
+        "action": {
+          "type": "confirm_batch",
+          "from_round": 1
+        }
+      },
+      {
+        "user": "我又点了一次确认，还是同一张，请返回原回执，不要重新提交。",
+        "restart": true
+      }
+    ]
+  }
+]

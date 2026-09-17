@@ -1,0 +1,2761 @@
+[
+  {
+    "id": "CHAT_VERSION",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1769,
+            "usage": [
+              {
+                "input_tokens": 4953,
+                "input_tokens_details": {
+                  "cached_tokens": 3072
+                },
+                "output_tokens": 137,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5090
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 991,
+            "usage": [
+              {
+                "input_tokens": 5308,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 101,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5409
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 3,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 2259,
+            "usage": [
+              {
+                "input_tokens": 5547,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 166,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5713
+              },
+              {
+                "input_tokens": 6275,
+                "input_tokens_details": {
+                  "cached_tokens": 4608
+                },
+                "output_tokens": 151,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6426
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 4,
+        "status": "completed",
+        "modelCalls": 3,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 2064,
+            "usage": [
+              {
+                "input_tokens": 6571,
+                "input_tokens_details": {
+                  "cached_tokens": 5120
+                },
+                "output_tokens": 167,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6738
+              },
+              {
+                "input_tokens": 7235,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 168,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7403
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 2051,
+            "usage": [
+              {
+                "input_tokens": 1088,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 340,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 1428
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 5,
+        "status": "completed",
+        "modelCalls": 3,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 2962,
+            "usage": [
+              {
+                "input_tokens": 7229,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 202,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7431
+              },
+              {
+                "input_tokens": 7903,
+                "input_tokens_details": {
+                  "cached_tokens": 5760
+                },
+                "output_tokens": 295,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8198
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 3938,
+            "usage": [
+              {
+                "input_tokens": 1818,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 892,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 2710
+              }
+            ],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:42.383Z",
+        "finishedAt": "2026-09-17T04:04:44.142Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12386,
+        "outputTokens": 137,
+        "inputTokens": 4953,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:44.185Z",
+        "finishedAt": "2026-09-17T04:04:45.157Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 13330,
+        "outputTokens": 101,
+        "inputTokens": 5308,
+        "inputItems": 6
+      },
+      {
+        "call": 3,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:45.199Z",
+        "finishedAt": "2026-09-17T04:04:46.171Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 13794,
+        "outputTokens": 166,
+        "inputTokens": 5547,
+        "inputItems": 8
+      },
+      {
+        "call": 4,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:46.209Z",
+        "finishedAt": "2026-09-17T04:04:47.464Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15552,
+        "outputTokens": 151,
+        "inputTokens": 6275,
+        "inputItems": 10
+      },
+      {
+        "call": 5,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:47.551Z",
+        "finishedAt": "2026-09-17T04:04:48.443Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16107,
+        "outputTokens": 167,
+        "inputTokens": 6571,
+        "inputItems": 12
+      },
+      {
+        "call": 6,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:48.478Z",
+        "finishedAt": "2026-09-17T04:04:50.502Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 2401,
+        "outputTokens": 340,
+        "inputTokens": 1088,
+        "inputItems": 2
+      },
+      {
+        "call": 7,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:50.540Z",
+        "finishedAt": "2026-09-17T04:04:51.665Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 18090,
+        "outputTokens": 168,
+        "inputTokens": 7235,
+        "inputItems": 11
+      },
+      {
+        "call": 8,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:51.758Z",
+        "finishedAt": "2026-09-17T04:04:55.670Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 4058,
+        "outputTokens": 892,
+        "inputTokens": 1818,
+        "inputItems": 2
+      },
+      {
+        "call": 9,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:55.704Z",
+        "finishedAt": "2026-09-17T04:04:56.760Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 17794,
+        "outputTokens": 202,
+        "inputTokens": 7229,
+        "inputItems": 9
+      },
+      {
+        "call": 10,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:56.801Z",
+        "finishedAt": "2026-09-17T04:04:58.667Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 19816,
+        "outputTokens": 295,
+        "inputTokens": 7903,
+        "inputItems": 11
+      }
+    ],
+    "summaryCount": 2,
+    "summaryFailures": [],
+    "assets": [
+      {
+        "id": "doc_533eeda6-9fdc-4328-a2f3-69223a81cefa",
+        "type": "text",
+        "title": "原始聊天文稿",
+        "version": 1,
+        "sourceMessageId": "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+        "sourceIds": []
+      },
+      {
+        "id": "doc_bcd36871-a5e9-40ec-a6bb-7d372621b286",
+        "type": "text",
+        "title": "青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本二·店员口吻）",
+        "version": 2,
+        "parentId": "doc_533eeda6-9fdc-4328-a2f3-69223a81cefa",
+        "sourceIds": [
+          "doc_533eeda6-9fdc-4328-a2f3-69223a81cefa"
+        ]
+      },
+      {
+        "id": "doc_a6482c1c-6f17-4594-b452-ee961acf3409",
+        "type": "text",
+        "title": "青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本三·店员口吻·20元）",
+        "version": 3,
+        "parentId": "doc_bcd36871-a5e9-40ec-a6bb-7d372621b286",
+        "sourceIds": [
+          "doc_bcd36871-a5e9-40ec-a6bb-7d372621b286"
+        ]
+      },
+      {
+        "id": "doc_913e236e-0c03-4e6b-a2cc-f8753913d783",
+        "type": "text",
+        "title": "青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本三·英文）",
+        "version": 1,
+        "sourceIds": [
+          "doc_a6482c1c-6f17-4594-b452-ee961acf3409"
+        ]
+      }
+    ],
+    "mediaReceipts": []
+  },
+  {
+    "id": "CONFIRM_LANGUAGE",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 2920,
+            "usage": [
+              {
+                "input_tokens": 4942,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 444,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5386
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1507,
+            "usage": [
+              {
+                "input_tokens": 5588,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 153,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5741
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 3,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1524,
+            "usage": [
+              {
+                "input_tokens": 5867,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 153,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6020
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 4,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1012,
+            "usage": [
+              {
+                "input_tokens": 6133,
+                "input_tokens_details": {
+                  "cached_tokens": 4992
+                },
+                "output_tokens": 128,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6261
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 5,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1276,
+            "usage": [
+              {
+                "input_tokens": 6394,
+                "input_tokens_details": {
+                  "cached_tokens": 5120
+                },
+                "output_tokens": 195,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6589
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 6,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1977,
+            "usage": [
+              {
+                "input_tokens": 6725,
+                "input_tokens_details": {
+                  "cached_tokens": 5120
+                },
+                "output_tokens": 306,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7031
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 7,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 2239,
+            "usage": [
+              {
+                "input_tokens": 6437,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 318,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6755
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 3613,
+            "usage": [
+              {
+                "input_tokens": 2660,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 822,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3482
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 8,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1901,
+            "usage": [
+              {
+                "input_tokens": 6889,
+                "input_tokens_details": {
+                  "cached_tokens": 5888
+                },
+                "output_tokens": 248,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7137
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 4662,
+            "usage": [
+              {
+                "input_tokens": 1832,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 1202,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3034
+              }
+            ],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:38.745Z",
+        "finishedAt": "2026-09-17T04:05:41.648Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12367,
+        "outputTokens": 444,
+        "inputTokens": 4942,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:41.709Z",
+        "finishedAt": "2026-09-17T04:05:43.199Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 13713,
+        "outputTokens": 153,
+        "inputTokens": 5588,
+        "inputItems": 6
+      },
+      {
+        "call": 3,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:43.256Z",
+        "finishedAt": "2026-09-17T04:05:44.765Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14254,
+        "outputTokens": 153,
+        "inputTokens": 5867,
+        "inputItems": 8
+      },
+      {
+        "call": 4,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:44.820Z",
+        "finishedAt": "2026-09-17T04:05:45.813Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14773,
+        "outputTokens": 128,
+        "inputTokens": 6133,
+        "inputItems": 10
+      },
+      {
+        "call": 5,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:45.879Z",
+        "finishedAt": "2026-09-17T04:05:47.132Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15268,
+        "outputTokens": 195,
+        "inputTokens": 6394,
+        "inputItems": 12
+      },
+      {
+        "call": 6,
+        "round": 6,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:47.209Z",
+        "finishedAt": "2026-09-17T04:05:49.169Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15862,
+        "outputTokens": 306,
+        "inputTokens": 6725,
+        "inputItems": 14
+      },
+      {
+        "call": 7,
+        "round": 7,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:49.247Z",
+        "finishedAt": "2026-09-17T04:05:52.846Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 5255,
+        "outputTokens": 822,
+        "inputTokens": 2660,
+        "inputItems": 2
+      },
+      {
+        "call": 8,
+        "round": 7,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:52.868Z",
+        "finishedAt": "2026-09-17T04:05:55.081Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15721,
+        "outputTokens": 318,
+        "inputTokens": 6437,
+        "inputItems": 7
+      },
+      {
+        "call": 9,
+        "round": 8,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:55.171Z",
+        "finishedAt": "2026-09-17T04:05:59.815Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 3720,
+        "outputTokens": 1202,
+        "inputTokens": 1832,
+        "inputItems": 2
+      },
+      {
+        "call": 10,
+        "round": 8,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:59.838Z",
+        "finishedAt": "2026-09-17T04:06:01.720Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16511,
+        "outputTokens": 248,
+        "inputTokens": 6889,
+        "inputItems": 9
+      }
+    ],
+    "summaryCount": 1,
+    "summaryFailures": [
+      {
+        "id": "93c394b1-8a1d-4fc7-93be-4c949af6c4de",
+        "message": "Summary exceeds its complete payload budget"
+      }
+    ],
+    "assets": [],
+    "mediaReceipts": []
+  },
+  {
+    "id": "DIRECTION_SKILL",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 4315,
+            "usage": [
+              {
+                "input_tokens": 4950,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 57,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5007
+              },
+              {
+                "input_tokens": 5740,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 471,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6211
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 6624,
+            "usage": [
+              {
+                "input_tokens": 6351,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 1011,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7362
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 3,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 4703,
+            "usage": [
+              {
+                "input_tokens": 7018,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 686,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7704
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 3718,
+            "usage": [
+              {
+                "input_tokens": 1969,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 680,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 2649
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 4,
+        "status": "completed",
+        "modelCalls": 3,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 6757,
+            "usage": [
+              {
+                "input_tokens": 7844,
+                "input_tokens_details": {
+                  "cached_tokens": 5760
+                },
+                "output_tokens": 1347,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9191
+              },
+              {
+                "input_tokens": 8689,
+                "input_tokens_details": {
+                  "cached_tokens": 5504
+                },
+                "output_tokens": 286,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8975
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 4385,
+            "usage": [
+              {
+                "input_tokens": 2451,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 1006,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3457
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 5,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1906,
+            "usage": [
+              {
+                "input_tokens": 9114,
+                "input_tokens_details": {
+                  "cached_tokens": 5888
+                },
+                "output_tokens": 235,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9349
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 7184,
+            "usage": [
+              {
+                "input_tokens": 3453,
+                "input_tokens_details": {
+                  "cached_tokens": 2432
+                },
+                "output_tokens": 1578,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5031
+              }
+            ],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:58.778Z",
+        "finishedAt": "2026-09-17T04:04:59.335Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12394,
+        "outputTokens": 57,
+        "inputTokens": 4950,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:04:59.361Z",
+        "finishedAt": "2026-09-17T04:05:03.089Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14570,
+        "outputTokens": 471,
+        "inputTokens": 5740,
+        "inputItems": 7
+      },
+      {
+        "call": 3,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:03.147Z",
+        "finishedAt": "2026-09-17T04:05:09.754Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15635,
+        "outputTokens": 1011,
+        "inputTokens": 6351,
+        "inputItems": 9
+      },
+      {
+        "call": 4,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:09.831Z",
+        "finishedAt": "2026-09-17T04:05:13.530Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 4125,
+        "outputTokens": 680,
+        "inputTokens": 1969,
+        "inputItems": 2
+      },
+      {
+        "call": 5,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:13.554Z",
+        "finishedAt": "2026-09-17T04:05:18.236Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16678,
+        "outputTokens": 686,
+        "inputTokens": 7018,
+        "inputItems": 7
+      },
+      {
+        "call": 6,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:18.313Z",
+        "finishedAt": "2026-09-17T04:05:22.679Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 4741,
+        "outputTokens": 1006,
+        "inputTokens": 2451,
+        "inputItems": 2
+      },
+      {
+        "call": 7,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:22.707Z",
+        "finishedAt": "2026-09-17T04:05:27.850Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 18059,
+        "outputTokens": 1347,
+        "inputTokens": 7844,
+        "inputItems": 9
+      },
+      {
+        "call": 8,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:27.891Z",
+        "finishedAt": "2026-09-17T04:05:29.458Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 20240,
+        "outputTokens": 286,
+        "inputTokens": 8689,
+        "inputItems": 11
+      },
+      {
+        "call": 9,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:29.555Z",
+        "finishedAt": "2026-09-17T04:05:36.720Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 6426,
+        "outputTokens": 1578,
+        "inputTokens": 3453,
+        "inputItems": 2
+      },
+      {
+        "call": 10,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:05:36.748Z",
+        "finishedAt": "2026-09-17T04:05:38.631Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 21001,
+        "outputTokens": 235,
+        "inputTokens": 9114,
+        "inputItems": 13
+      }
+    ],
+    "summaryCount": 1,
+    "summaryFailures": [
+      {
+        "id": "3d03838e-8b9a-4651-8bbb-d9189e5237ff",
+        "message": "Summary exceeds its complete payload budget"
+      },
+      {
+        "id": "cda2dd8d-e4a2-4d05-bc7d-4114cd4da22a",
+        "message": "Summary exceeds its complete payload budget"
+      }
+    ],
+    "assets": [
+      {
+        "id": "doc_c96a4191-f1c2-43b6-b4d4-2c4579f473c4",
+        "type": "text",
+        "title": "原始聊天文稿",
+        "version": 1,
+        "sourceMessageId": "aa9ba3b8-d4e4-4ca8-a473-67bfdec42510",
+        "sourceIds": []
+      },
+      {
+        "id": "doc_eceee275-c7cf-4fce-9941-543cb37bc05d",
+        "type": "text",
+        "title": "霁白护手霜 · 10 秒文字脚本（《柜台上的第二十支》）",
+        "version": 2,
+        "parentId": "doc_c96a4191-f1c2-43b6-b4d4-2c4579f473c4",
+        "sourceIds": [
+          "doc_c96a4191-f1c2-43b6-b4d4-2c4579f473c4"
+        ]
+      }
+    ],
+    "mediaReceipts": []
+  },
+  {
+    "id": "ISOLATION",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 4,
+        "toolCalls": 3,
+        "accounting": {
+          "agent": {
+            "calls": 4,
+            "durationMs": 4482,
+            "usage": [
+              {
+                "input_tokens": 4911,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 92,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5003
+              },
+              {
+                "input_tokens": 5681,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 53,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5734
+              },
+              {
+                "input_tokens": 6267,
+                "input_tokens_details": {
+                  "cached_tokens": 5632
+                },
+                "output_tokens": 38,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6305
+              },
+              {
+                "input_tokens": 6476,
+                "input_tokens_details": {
+                  "cached_tokens": 6272
+                },
+                "output_tokens": 244,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6720
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1184,
+            "usage": [
+              {
+                "input_tokens": 6854,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 105,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6959
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:16.616Z",
+        "finishedAt": "2026-09-17T04:06:17.446Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12329,
+        "outputTokens": 92,
+        "inputTokens": 4911,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:17.473Z",
+        "finishedAt": "2026-09-17T04:06:17.979Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14484,
+        "outputTokens": 53,
+        "inputTokens": 5681,
+        "inputItems": 7
+      },
+      {
+        "call": 3,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:18.007Z",
+        "finishedAt": "2026-09-17T04:06:18.837Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15989,
+        "outputTokens": 38,
+        "inputTokens": 6267,
+        "inputItems": 9
+      },
+      {
+        "call": 4,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:18.865Z",
+        "finishedAt": "2026-09-17T04:06:21.118Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16678,
+        "outputTokens": 244,
+        "inputTokens": 6476,
+        "inputItems": 11
+      },
+      {
+        "call": 5,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:21.186Z",
+        "finishedAt": "2026-09-17T04:06:22.350Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 17408,
+        "outputTokens": 105,
+        "inputTokens": 6854,
+        "inputItems": 13
+      }
+    ],
+    "summaryCount": 0,
+    "summaryFailures": [],
+    "assets": [],
+    "mediaReceipts": []
+  },
+  {
+    "id": "LONG_MEMORY",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 823,
+            "usage": [
+              {
+                "input_tokens": 4977,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 89,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5066
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 934,
+            "usage": [
+              {
+                "input_tokens": 5619,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 33,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5652
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 3,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 592,
+            "usage": [
+              {
+                "input_tokens": 6109,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 33,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6142
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 4,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 729,
+            "usage": [
+              {
+                "input_tokens": 6707,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 46,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6753
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 3350,
+            "usage": [
+              {
+                "input_tokens": 1343,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 665,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 2008
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 5,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 800,
+            "usage": [
+              {
+                "input_tokens": 6985,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 33,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7018
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 4065,
+            "usage": [
+              {
+                "input_tokens": 1759,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 898,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 2657
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 6,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 797,
+            "usage": [
+              {
+                "input_tokens": 7494,
+                "input_tokens_details": {
+                  "cached_tokens": 6016
+                },
+                "output_tokens": 49,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7543
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 3925,
+            "usage": [
+              {
+                "input_tokens": 2032,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 1082,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3114
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 7,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 959,
+            "usage": [
+              {
+                "input_tokens": 8015,
+                "input_tokens_details": {
+                  "cached_tokens": 6016
+                },
+                "output_tokens": 33,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8048
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 5292,
+            "usage": [
+              {
+                "input_tokens": 2674,
+                "input_tokens_details": {
+                  "cached_tokens": 1920
+                },
+                "output_tokens": 1292,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3966
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 8,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 789,
+            "usage": [
+              {
+                "input_tokens": 8526,
+                "input_tokens_details": {
+                  "cached_tokens": 6144
+                },
+                "output_tokens": 48,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8574
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 5632,
+            "usage": [
+              {
+                "input_tokens": 3351,
+                "input_tokens_details": {
+                  "cached_tokens": 2560
+                },
+                "output_tokens": 1571,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 4922
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 9,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 560,
+            "usage": [
+              {
+                "input_tokens": 8778,
+                "input_tokens_details": {
+                  "cached_tokens": 6272
+                },
+                "output_tokens": 33,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8811
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 4634,
+            "usage": [
+              {
+                "input_tokens": 3996,
+                "input_tokens_details": {
+                  "cached_tokens": 3328
+                },
+                "output_tokens": 1207,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5203
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 10,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1765,
+            "usage": [
+              {
+                "input_tokens": 8926,
+                "input_tokens_details": {
+                  "cached_tokens": 6400
+                },
+                "output_tokens": 239,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9165
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 11,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 1453,
+            "usage": [
+              {
+                "input_tokens": 8950,
+                "input_tokens_details": {
+                  "cached_tokens": 6400
+                },
+                "output_tokens": 61,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9011
+              },
+              {
+                "input_tokens": 9107,
+                "input_tokens_details": {
+                  "cached_tokens": 6656
+                },
+                "output_tokens": 72,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9179
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 12,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 1848,
+            "usage": [
+              {
+                "input_tokens": 9054,
+                "input_tokens_details": {
+                  "cached_tokens": 5888
+                },
+                "output_tokens": 146,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9200
+              },
+              {
+                "input_tokens": 9212,
+                "input_tokens_details": {
+                  "cached_tokens": 5760
+                },
+                "output_tokens": 168,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 9380
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:22.437Z",
+        "finishedAt": "2026-09-17T04:06:23.246Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12415,
+        "outputTokens": 89,
+        "inputTokens": 4977,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:23.299Z",
+        "finishedAt": "2026-09-17T04:06:24.217Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 13776,
+        "outputTokens": 33,
+        "inputTokens": 5619,
+        "inputItems": 6
+      },
+      {
+        "call": 3,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:24.278Z",
+        "finishedAt": "2026-09-17T04:06:24.849Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14609,
+        "outputTokens": 33,
+        "inputTokens": 6109,
+        "inputItems": 8
+      },
+      {
+        "call": 4,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:24.922Z",
+        "finishedAt": "2026-09-17T04:06:28.251Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 2741,
+        "outputTokens": 665,
+        "inputTokens": 1343,
+        "inputItems": 2
+      },
+      {
+        "call": 5,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:28.279Z",
+        "finishedAt": "2026-09-17T04:06:28.991Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 15946,
+        "outputTokens": 46,
+        "inputTokens": 6707,
+        "inputItems": 7
+      },
+      {
+        "call": 6,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:29.057Z",
+        "finishedAt": "2026-09-17T04:06:33.108Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 3420,
+        "outputTokens": 898,
+        "inputTokens": 1759,
+        "inputItems": 2
+      },
+      {
+        "call": 7,
+        "round": 5,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:33.130Z",
+        "finishedAt": "2026-09-17T04:06:33.913Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16404,
+        "outputTokens": 33,
+        "inputTokens": 6985,
+        "inputItems": 7
+      },
+      {
+        "call": 8,
+        "round": 6,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:33.980Z",
+        "finishedAt": "2026-09-17T04:06:37.889Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 3884,
+        "outputTokens": 1082,
+        "inputTokens": 2032,
+        "inputItems": 2
+      },
+      {
+        "call": 9,
+        "round": 6,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:37.913Z",
+        "finishedAt": "2026-09-17T04:06:38.693Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 17263,
+        "outputTokens": 49,
+        "inputTokens": 7494,
+        "inputItems": 9
+      },
+      {
+        "call": 10,
+        "round": 7,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:38.768Z",
+        "finishedAt": "2026-09-17T04:06:44.041Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 5012,
+        "outputTokens": 1292,
+        "inputTokens": 2674,
+        "inputItems": 2
+      },
+      {
+        "call": 11,
+        "round": 7,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:44.069Z",
+        "finishedAt": "2026-09-17T04:06:45.008Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 18132,
+        "outputTokens": 33,
+        "inputTokens": 8015,
+        "inputItems": 11
+      },
+      {
+        "call": 12,
+        "round": 8,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:45.090Z",
+        "finishedAt": "2026-09-17T04:06:50.705Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 6184,
+        "outputTokens": 1571,
+        "inputTokens": 3351,
+        "inputItems": 2
+      },
+      {
+        "call": 13,
+        "round": 8,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:50.729Z",
+        "finishedAt": "2026-09-17T04:06:51.500Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 18993,
+        "outputTokens": 48,
+        "inputTokens": 8526,
+        "inputItems": 13
+      },
+      {
+        "call": 14,
+        "round": 9,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:51.583Z",
+        "finishedAt": "2026-09-17T04:06:56.196Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 7312,
+        "outputTokens": 1207,
+        "inputTokens": 3996,
+        "inputItems": 2
+      },
+      {
+        "call": 15,
+        "round": 9,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:56.225Z",
+        "finishedAt": "2026-09-17T04:06:56.765Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 19771,
+        "outputTokens": 33,
+        "inputTokens": 8778,
+        "inputItems": 15
+      },
+      {
+        "call": 16,
+        "round": 10,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:56.848Z",
+        "finishedAt": "2026-09-17T04:06:58.591Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 20087,
+        "outputTokens": 239,
+        "inputTokens": 8926,
+        "inputItems": 17
+      },
+      {
+        "call": 17,
+        "round": 11,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:58.678Z",
+        "finishedAt": "2026-09-17T04:06:59.115Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 20195,
+        "outputTokens": 61,
+        "inputTokens": 8950,
+        "inputItems": 18
+      },
+      {
+        "call": 18,
+        "round": 11,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:59.158Z",
+        "finishedAt": "2026-09-17T04:07:00.121Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 21085,
+        "outputTokens": 72,
+        "inputTokens": 9107,
+        "inputItems": 19
+      },
+      {
+        "call": 19,
+        "round": 12,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:07:00.213Z",
+        "finishedAt": "2026-09-17T04:07:01.153Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 20964,
+        "outputTokens": 146,
+        "inputTokens": 9054,
+        "inputItems": 19
+      },
+      {
+        "call": 20,
+        "round": 12,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:07:01.198Z",
+        "finishedAt": "2026-09-17T04:07:02.064Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 21743,
+        "outputTokens": 168,
+        "inputTokens": 9212,
+        "inputItems": 19
+      }
+    ],
+    "summaryCount": 2,
+    "summaryFailures": [
+      {
+        "id": "91b7c0e1-963f-4f15-82bd-86e52953d531",
+        "message": "Summary exceeds its complete payload budget"
+      },
+      {
+        "id": "7d76ba86-ba81-4365-91ff-c1f05701709e",
+        "message": "Summary exceeds its complete payload budget"
+      },
+      {
+        "id": "7adebc4c-548c-41d5-bf67-d46f58ca468c",
+        "message": "Summary exceeds its complete payload budget"
+      },
+      {
+        "id": "8309c400-501f-4446-b9e4-bb3aea04af18",
+        "message": "Summary exceeds its complete payload budget"
+      }
+    ],
+    "assets": [
+      {
+        "id": "doc_5d1e37ec-dc74-48c1-ae3e-79f651246cf0",
+        "type": "text",
+        "title": "原始聊天文稿",
+        "version": 1,
+        "sourceMessageId": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+        "sourceIds": []
+      },
+      {
+        "id": "doc_3502f592-ee5f-4247-b1d7-3097ff077183",
+        "type": "text",
+        "title": "青禾初稿",
+        "version": 2,
+        "parentId": "doc_5d1e37ec-dc74-48c1-ae3e-79f651246cf0",
+        "sourceIds": [
+          "doc_5d1e37ec-dc74-48c1-ae3e-79f651246cf0"
+        ]
+      }
+    ],
+    "mediaReceipts": []
+  },
+  {
+    "id": "ORIGINAL_EDIT_001",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 2257,
+            "usage": [
+              {
+                "input_tokens": 4905,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 294,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5199
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:07:05.240Z",
+        "finishedAt": "2026-09-17T04:07:07.483Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12316,
+        "outputTokens": 294,
+        "inputTokens": 4905,
+        "inputItems": 3
+      }
+    ],
+    "summaryCount": 0,
+    "summaryFailures": [],
+    "assets": [],
+    "mediaReceipts": []
+  },
+  {
+    "id": "ORIGINAL_IMG_MULTI_001",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 1,
+        "accounting": {
+          "agent": {
+            "calls": 2,
+            "durationMs": 2970,
+            "usage": [
+              {
+                "input_tokens": 4919,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 43,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 4962
+              },
+              {
+                "input_tokens": 5288,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 176,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5464
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:07:02.183Z",
+        "finishedAt": "2026-09-17T04:07:02.859Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12334,
+        "outputTokens": 43,
+        "inputTokens": 4919,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:07:02.887Z",
+        "finishedAt": "2026-09-17T04:07:05.147Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 13647,
+        "outputTokens": 176,
+        "inputTokens": 5288,
+        "inputItems": 7
+      }
+    ],
+    "summaryCount": 0,
+    "summaryFailures": [],
+    "assets": [],
+    "mediaReceipts": []
+  },
+  {
+    "id": "SWITCH_FACTS",
+    "rounds": [
+      {
+        "round": 1,
+        "status": "completed",
+        "modelCalls": 4,
+        "toolCalls": 4,
+        "accounting": {
+          "agent": {
+            "calls": 4,
+            "durationMs": 5963,
+            "usage": [
+              {
+                "input_tokens": 4934,
+                "input_tokens_details": {
+                  "cached_tokens": 4736
+                },
+                "output_tokens": 82,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5016
+              },
+              {
+                "input_tokens": 5696,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 127,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 5823
+              },
+              {
+                "input_tokens": 6296,
+                "input_tokens_details": {
+                  "cached_tokens": 5760
+                },
+                "output_tokens": 77,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6373
+              },
+              {
+                "input_tokens": 7309,
+                "input_tokens_details": {
+                  "cached_tokens": 6272
+                },
+                "output_tokens": 544,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 7853
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 2,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1809,
+            "usage": [
+              {
+                "input_tokens": 8010,
+                "input_tokens_details": {
+                  "cached_tokens": 4864
+                },
+                "output_tokens": 189,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 8199
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 3,
+        "status": "completed",
+        "modelCalls": 2,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1432,
+            "usage": [
+              {
+                "input_tokens": 6516,
+                "input_tokens_details": {
+                  "cached_tokens": 3968
+                },
+                "output_tokens": 126,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6642
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 1,
+            "durationMs": 4364,
+            "usage": [
+              {
+                "input_tokens": 3875,
+                "input_tokens_details": {
+                  "cached_tokens": 128
+                },
+                "output_tokens": 991,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 4866
+              }
+            ],
+            "cost": null
+          }
+        }
+      },
+      {
+        "round": 4,
+        "status": "completed",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "accounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 963,
+            "usage": [
+              {
+                "input_tokens": 6786,
+                "input_tokens_details": {
+                  "cached_tokens": 6016
+                },
+                "output_tokens": 94,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 6880
+              }
+            ],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      }
+    ],
+    "requests": [
+      {
+        "call": 1,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:01.810Z",
+        "finishedAt": "2026-09-17T04:06:02.623Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 12354,
+        "outputTokens": 82,
+        "inputTokens": 4934,
+        "inputItems": 3
+      },
+      {
+        "call": 2,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:02.649Z",
+        "finishedAt": "2026-09-17T04:06:03.383Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 14716,
+        "outputTokens": 127,
+        "inputTokens": 5696,
+        "inputItems": 7
+      },
+      {
+        "call": 3,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:03.413Z",
+        "finishedAt": "2026-09-17T04:06:04.167Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16606,
+        "outputTokens": 77,
+        "inputTokens": 6296,
+        "inputItems": 11
+      },
+      {
+        "call": 4,
+        "round": 1,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:04.195Z",
+        "finishedAt": "2026-09-17T04:06:07.799Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 19281,
+        "outputTokens": 544,
+        "inputTokens": 7309,
+        "inputItems": 13
+      },
+      {
+        "call": 5,
+        "round": 2,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:07.860Z",
+        "finishedAt": "2026-09-17T04:06:09.653Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 20493,
+        "outputTokens": 189,
+        "inputTokens": 8010,
+        "inputItems": 15
+      },
+      {
+        "call": 6,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:09.721Z",
+        "finishedAt": "2026-09-17T04:06:14.067Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 9032,
+        "outputTokens": 991,
+        "inputTokens": 3875,
+        "inputItems": 2
+      },
+      {
+        "call": 7,
+        "round": 3,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:14.092Z",
+        "finishedAt": "2026-09-17T04:06:15.505Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16010,
+        "outputTokens": 126,
+        "inputTokens": 6516,
+        "inputItems": 7
+      },
+      {
+        "call": 8,
+        "round": 4,
+        "httpStatus": 200,
+        "startedAt": "2026-09-17T04:06:15.578Z",
+        "finishedAt": "2026-09-17T04:06:16.522Z",
+        "exactDuplicateItems": 0,
+        "requestCharacters": 16543,
+        "outputTokens": 94,
+        "inputTokens": 6786,
+        "inputItems": 9
+      }
+    ],
+    "summaryCount": 1,
+    "summaryFailures": [],
+    "assets": [],
+    "mediaReceipts": []
+  }
+]

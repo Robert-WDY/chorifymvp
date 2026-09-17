@@ -1,0 +1,100 @@
+{
+  "startedAt": "2026-09-17T04:04:42.311Z",
+  "codeSha": "59ee2ae18330c81a778f98ccdae197fa3bb6aabd",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "budget": 120,
+  "media": "simulation",
+  "vision": false,
+  "contextTokenBudget": 24000,
+  "summary": {
+    "enabled": true,
+    "triggerRatio": 0.75,
+    "targetRatio": 0.55,
+    "summaryMaxTokens": 1800,
+    "inputMaxTokens": 8000,
+    "maxCallsPerTurn": 2,
+    "reserveMainCalls": 2,
+    "safetyTokens": 500
+  },
+  "casesSha256": "8a0895dbff7ed71dedf0a29a59f708dd4ae080b5612b967b24967e66c7689572",
+  "entry": "actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI",
+  "authorization": "User requested one multi-turn evaluation and full trace analysis; no live media",
+  "calls": 66,
+  "results": [
+    {
+      "id": "CHAT_VERSION",
+      "sessionId": "6252b8a7-e7d5-4e76-8f36-ba9f0299be11",
+      "turns": 5,
+      "planned": 5,
+      "calls": 10,
+      "summaries": 2,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "DIRECTION_SKILL",
+      "sessionId": "0cc89dda-b994-4712-93fe-c348c7dac49d",
+      "turns": 5,
+      "planned": 5,
+      "calls": 10,
+      "summaries": 1,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "CONFIRM_LANGUAGE",
+      "sessionId": "143ed8fe-a5bc-4b23-8300-5a4131b98228",
+      "turns": 8,
+      "planned": 8,
+      "calls": 10,
+      "summaries": 1,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "SWITCH_FACTS",
+      "sessionId": "90aa6f8e-f687-4f93-a8dd-f4653949b456",
+      "turns": 4,
+      "planned": 4,
+      "calls": 8,
+      "summaries": 1,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "ISOLATION",
+      "sessionId": "21afc42a-1ba6-45b4-a099-70881e8191f6",
+      "turns": 2,
+      "planned": 2,
+      "calls": 5,
+      "summaries": 0,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "LONG_MEMORY",
+      "sessionId": "323915be-0888-4a4e-b225-f5c0f5c4e8ec",
+      "turns": 12,
+      "planned": 12,
+      "calls": 20,
+      "summaries": 2,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "ORIGINAL_IMG_MULTI_001",
+      "sessionId": "640cf4d2-57d2-491e-8274-615cfd420cb5",
+      "turns": 2,
+      "planned": 2,
+      "calls": 2,
+      "summaries": 0,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "ORIGINAL_EDIT_001",
+      "sessionId": "fc690d37-23c7-47b2-b0ea-bec998aeac97",
+      "turns": 2,
+      "planned": 3,
+      "calls": 1,
+      "summaries": 0,
+      "acceptance": "requires_full_trace_review"
+    }
+  ],
+  "realMediaCalls": 0,
+  "finishedAt": "2026-09-17T04:07:07.522Z"
+}

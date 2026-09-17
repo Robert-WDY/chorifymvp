@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-09-17T04:07:53.228Z",
+  "codeSha": "59ee2ae18330c81a778f98ccdae197fa3bb6aabd",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "budget": 54,
+  "media": "simulation",
+  "vision": false,
+  "contextTokenBudget": 24000,
+  "summary": {
+    "enabled": true,
+    "triggerRatio": 0.75,
+    "targetRatio": 0.55,
+    "summaryMaxTokens": 1800,
+    "inputMaxTokens": 8000,
+    "maxCallsPerTurn": 2,
+    "reserveMainCalls": 2,
+    "safetyTokens": 500
+  },
+  "casesSha256": "9ce659a67dcc5cda784d9219153d120b92cab202ef8ce460a9f5f8cc0b66de62",
+  "entry": "actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI",
+  "authorization": "User requested one multi-turn evaluation and full trace analysis; no live media",
+  "calls": 22,
+  "results": [
+    {
+      "id": "DIAG_SAVED_CONFIRM",
+      "sessionId": "98350fe3-8dc2-46a7-b3f6-1ae7d6137e4c",
+      "turns": 7,
+      "planned": 7,
+      "calls": 16,
+      "summaries": 2,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "DIAG_BUTTON",
+      "sessionId": "a90fea93-b0aa-45c2-9f6f-2fc33635c3d5",
+      "turns": 3,
+      "planned": 3,
+      "calls": 6,
+      "summaries": 1,
+      "acceptance": "requires_full_trace_review"
+    }
+  ],
+  "realMediaCalls": 0,
+  "finishedAt": "2026-09-17T04:08:39.688Z"
+}

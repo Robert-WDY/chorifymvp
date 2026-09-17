@@ -1,0 +1,809 @@
+{
+  "cases": [
+    {
+      "batch": "primary",
+      "id": "CHAT_VERSION",
+      "planned": 5,
+      "executed": 5,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 8,
+          "durationMs": 10045
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 2,
+          "durationMs": 5989
+        }
+      },
+      "calls": 10,
+      "http200": 10,
+      "inputTokens": 53927,
+      "outputTokens": 2619,
+      "toolCalls": 3,
+      "toolErrors": [],
+      "summaries": 2,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "819dbb07bb0593aa5e3c424ea8a2ed724d4203531f82f182e655c4012da17a8d",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 12,
+          "turnId": "3a1ff0bb-f69b-4f53-9797-7f819683cd85",
+          "id": "efc0e530-c95c-4dcf-a0ee-1bc3e2ccd344",
+          "at": "2026-09-17T04:04:48.469Z",
+          "groupId": "efc0e530-c95c-4dcf-a0ee-1bc3e2ccd344"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "766faf33ef746d1982e4fae86c24b42ff0b362315680ff031b0a1837c1575671",
+          "coveredFromSeq": 13,
+          "coveredToSeq": 22,
+          "turnId": "6dd55471-97c8-44ab-82f5-80044b0ff4a8",
+          "id": "ba5a72d3-0e6d-441b-ab88-6ca9f6ac552d",
+          "at": "2026-09-17T04:04:51.746Z",
+          "groupId": "ba5a72d3-0e6d-441b-ab88-6ca9f6ac552d"
+        }
+      ],
+      "summaryFailures": [],
+      "summaryCalls": [
+        {
+          "requestId": "5523c39e-573d-4494-bf4a-49cc6b0acae8",
+          "round": 4,
+          "estimatedGeneratedPayload": 590,
+          "providerOutputTokens": 340
+        },
+        {
+          "requestId": "85d54c89-9417-4420-b6c1-fe48acbdbce1",
+          "round": 5,
+          "estimatedGeneratedPayload": 1389,
+          "providerOutputTokens": 892
+        }
+      ],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "DIRECTION_SKILL",
+      "planned": 5,
+      "executed": 5,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 7,
+          "durationMs": 24305
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 3,
+          "durationMs": 15287
+        }
+      },
+      "calls": 10,
+      "http200": 10,
+      "inputTokens": 57579,
+      "outputTokens": 7357,
+      "toolCalls": 2,
+      "toolErrors": [],
+      "summaries": 1,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "61afcc86ab32085783f5dc9cc2a3602a3e63e9e1978c90cd22760ec43d6a1e99",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 11,
+          "turnId": "7276c4e1-5ff1-4ae1-816f-7abcad82eb6c",
+          "id": "8b142e06-8e20-4f87-a738-7320338e6d83",
+          "at": "2026-09-17T04:05:09.814Z",
+          "groupId": "8b142e06-8e20-4f87-a738-7320338e6d83"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "5df31fdf4fa8983c3094ed76d4fb33398cee39c9bd9003ffaa923ed40dc26bcc",
+          "coveredFromSeq": 12,
+          "coveredToSeq": 17,
+          "turnId": "c81db1eb-86a2-4497-95df-2f382d43b40d",
+          "id": "996651eb-dcdc-42ce-a04e-13eefa4ab21d",
+          "at": "2026-09-17T04:05:18.301Z",
+          "groupId": "996651eb-dcdc-42ce-a04e-13eefa4ab21d"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "d6974fd2e07819698f58863ecbb1aaa80d8bf478a78b3870235b98cc9fec717d",
+          "coveredFromSeq": 12,
+          "coveredToSeq": 26,
+          "turnId": "e5032fcd-2964-41d5-8a49-d3106ad06315",
+          "id": "e9008181-9b71-4d26-9a74-b312b94c48ed",
+          "at": "2026-09-17T04:05:29.539Z",
+          "groupId": "e9008181-9b71-4d26-9a74-b312b94c48ed"
+        }
+      ],
+      "summaryFailures": [
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "5df31fdf4fa8983c3094ed76d4fb33398cee39c9bd9003ffaa923ed40dc26bcc",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "c81db1eb-86a2-4497-95df-2f382d43b40d",
+          "id": "3d03838e-8b9a-4651-8bbb-d9189e5237ff",
+          "at": "2026-09-17T04:05:22.692Z",
+          "groupId": "3d03838e-8b9a-4651-8bbb-d9189e5237ff"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "d6974fd2e07819698f58863ecbb1aaa80d8bf478a78b3870235b98cc9fec717d",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "e5032fcd-2964-41d5-8a49-d3106ad06315",
+          "id": "cda2dd8d-e4a2-4d05-bc7d-4114cd4da22a",
+          "at": "2026-09-17T04:05:36.733Z",
+          "groupId": "cda2dd8d-e4a2-4d05-bc7d-4114cd4da22a"
+        }
+      ],
+      "summaryCalls": [
+        {
+          "requestId": "586fd83c-19be-4210-a8b2-368d92dfc112",
+          "round": 3,
+          "estimatedGeneratedPayload": 1318,
+          "providerOutputTokens": 680
+        },
+        {
+          "requestId": "8b237b69-94d5-438e-9ee7-9190ae7c5743",
+          "round": 4,
+          "estimatedGeneratedPayload": 1841,
+          "providerOutputTokens": 1006
+        },
+        {
+          "requestId": "4196dada-cf90-4f3f-920b-ec15a62e89ed",
+          "round": 5,
+          "estimatedGeneratedPayload": 2876,
+          "providerOutputTokens": 1578
+        }
+      ],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "CONFIRM_LANGUAGE",
+      "planned": 8,
+      "executed": 8,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 8,
+          "durationMs": 14356
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 2,
+          "durationMs": 8275
+        }
+      },
+      "calls": 10,
+      "http200": 10,
+      "inputTokens": 53467,
+      "outputTokens": 3969,
+      "toolCalls": 0,
+      "toolErrors": [],
+      "summaries": 1,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "6848ad3b6e67a886f08d339a73330de4d547f7ed15cca048faf24802691ca5bf",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 30,
+          "turnId": "02e4750f-4491-4422-9d93-9e8701595870",
+          "id": "11d0dfd8-dec2-490e-a6f7-37da0af17ed1",
+          "at": "2026-09-17T04:05:49.236Z",
+          "groupId": "11d0dfd8-dec2-490e-a6f7-37da0af17ed1"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "65913dc233de902b5abc0132c6d4f283486f89de211c7850f7a142b0c0db58ca",
+          "coveredFromSeq": 31,
+          "coveredToSeq": 36,
+          "turnId": "0945d72a-b799-44a7-84ed-af6594ecca3b",
+          "id": "e846f254-f38f-4ecb-aeeb-f2e93b39f3c5",
+          "at": "2026-09-17T04:05:55.157Z",
+          "groupId": "e846f254-f38f-4ecb-aeeb-f2e93b39f3c5"
+        }
+      ],
+      "summaryFailures": [
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "65913dc233de902b5abc0132c6d4f283486f89de211c7850f7a142b0c0db58ca",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "0945d72a-b799-44a7-84ed-af6594ecca3b",
+          "id": "93c394b1-8a1d-4fc7-93be-4c949af6c4de",
+          "at": "2026-09-17T04:05:59.826Z",
+          "groupId": "93c394b1-8a1d-4fc7-93be-4c949af6c4de"
+        }
+      ],
+      "summaryCalls": [
+        {
+          "requestId": "96eacaa2-cce3-4307-b161-4eb5f7cf3be8",
+          "round": 7,
+          "estimatedGeneratedPayload": 1323,
+          "providerOutputTokens": 822
+        },
+        {
+          "requestId": "7e42d057-df4f-4b07-b3f3-685addf0bd0e",
+          "round": 8,
+          "estimatedGeneratedPayload": 2035,
+          "providerOutputTokens": 1202
+        }
+      ],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "SWITCH_FACTS",
+      "planned": 4,
+      "executed": 4,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 7,
+          "durationMs": 10167
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 4364
+        }
+      },
+      "calls": 8,
+      "http200": 8,
+      "inputTokens": 49422,
+      "outputTokens": 2230,
+      "toolCalls": 4,
+      "toolErrors": [
+        {
+          "id": "5d5d217d-7496-463d-9906-3ea98eeb4d5f",
+          "output": "{\"ok\":false,\"status\":\"not_executed\",\"submitted\":false,\"error\":{\"code\":\"single_tool_call_required\",\"message\":\"每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。\"}}"
+        },
+        {
+          "id": "910cdd5e-5fdb-49c7-8a34-ce0be27e2ddb",
+          "output": "{\"ok\":false,\"status\":\"not_executed\",\"submitted\":false,\"error\":{\"code\":\"single_tool_call_required\",\"message\":\"每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。\"}}"
+        }
+      ],
+      "summaries": 1,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "3a882e86d12e6deef25ffbacd144300580efd9c8dc071cf199aa4dd44299a26e",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 21,
+          "turnId": "f5013241-d032-48a5-8673-39c5c9f73296",
+          "id": "ae92a76f-ac81-4b67-8a49-f323075ce7c8",
+          "at": "2026-09-17T04:06:09.708Z",
+          "groupId": "ae92a76f-ac81-4b67-8a49-f323075ce7c8"
+        }
+      ],
+      "summaryFailures": [],
+      "summaryCalls": [
+        {
+          "requestId": "ed04cfac-92e5-45d2-a715-c99415c309d0",
+          "round": 3,
+          "estimatedGeneratedPayload": 1545,
+          "providerOutputTokens": 991
+        }
+      ],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "ISOLATION",
+      "planned": 2,
+      "executed": 2,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 5,
+          "durationMs": 5666
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "calls": 5,
+      "http200": 5,
+      "inputTokens": 30189,
+      "outputTokens": 532,
+      "toolCalls": 3,
+      "toolErrors": [],
+      "summaries": 0,
+      "summaryAttempts": [],
+      "summaryFailures": [],
+      "summaryCalls": [],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "LONG_MEMORY",
+      "planned": 12,
+      "executed": 12,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 14,
+          "durationMs": 12049
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 6,
+          "durationMs": 26898
+        }
+      },
+      "calls": 20,
+      "http200": 20,
+      "inputTokens": 123614,
+      "outputTokens": 7798,
+      "toolCalls": 2,
+      "toolErrors": [],
+      "summaries": 2,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "f557834e9b62c8d294fd2f3e6019bcf7856f93f60abd46267d1052c2265d4ab8",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 12,
+          "turnId": "d90124ce-6444-4e2a-ad06-e96eeba170f3",
+          "id": "396aa4ed-c9e2-4d91-9fa7-676cbe2822ed",
+          "at": "2026-09-17T04:06:24.906Z",
+          "groupId": "396aa4ed-c9e2-4d91-9fa7-676cbe2822ed"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "df0f39acdc399f3a0e8e835cbea1dadb933e8e24bd5346f643b75fb78a2d72c3",
+          "coveredFromSeq": 13,
+          "coveredToSeq": 18,
+          "turnId": "9e2d6334-789e-4fbd-8984-ee3924dc9320",
+          "id": "08e40bd1-1cb4-4e6b-bb86-fc6b7806d95c",
+          "at": "2026-09-17T04:06:29.045Z",
+          "groupId": "08e40bd1-1cb4-4e6b-bb86-fc6b7806d95c"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "24b2cb03cc5e25f98c1836cc8b3b0c46d08e56de3d3dcd73cdfe2e3d119e0b25",
+          "coveredFromSeq": 19,
+          "coveredToSeq": 27,
+          "turnId": "4793502d-c96c-46c5-a59c-9a9b27e4a8fd",
+          "id": "67f9341e-fbec-4ddb-a687-0f1e4b7f2e36",
+          "at": "2026-09-17T04:06:33.970Z",
+          "groupId": "67f9341e-fbec-4ddb-a687-0f1e4b7f2e36"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "9247645722f83acd0f2e76acffb701ba2c074559e8ac2c28e0b3acf2df4d25b4",
+          "coveredFromSeq": 19,
+          "coveredToSeq": 36,
+          "turnId": "8109725b-ca85-484e-8e2d-a7c4cd23a50b",
+          "id": "2c105d47-a40e-4c58-9a9d-71544eb954a8",
+          "at": "2026-09-17T04:06:38.756Z",
+          "groupId": "2c105d47-a40e-4c58-9a9d-71544eb954a8"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "1630f7722b5f73ef34a653cb01a760f8348b1207f8ad4508994cb34e1916c12b",
+          "coveredFromSeq": 19,
+          "coveredToSeq": 46,
+          "turnId": "6825430c-6215-4009-98c8-37c545fccae2",
+          "id": "cc4ba647-bbdd-40e7-8c37-9258db5e1c46",
+          "at": "2026-09-17T04:06:45.077Z",
+          "groupId": "cc4ba647-bbdd-40e7-8c37-9258db5e1c46"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "94f8548e841e880311716c49e3a69b24e6c48ce3ff6174da74a378120b45b5b3",
+          "coveredFromSeq": 19,
+          "coveredToSeq": 56,
+          "turnId": "9f0d3fe0-e131-421e-9311-797895bec03b",
+          "id": "6e52dd41-a439-4d82-8c5c-1c15ceab5ec8",
+          "at": "2026-09-17T04:06:51.569Z",
+          "groupId": "6e52dd41-a439-4d82-8c5c-1c15ceab5ec8"
+        }
+      ],
+      "summaryFailures": [
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "24b2cb03cc5e25f98c1836cc8b3b0c46d08e56de3d3dcd73cdfe2e3d119e0b25",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "4793502d-c96c-46c5-a59c-9a9b27e4a8fd",
+          "id": "91b7c0e1-963f-4f15-82bd-86e52953d531",
+          "at": "2026-09-17T04:06:37.900Z",
+          "groupId": "91b7c0e1-963f-4f15-82bd-86e52953d531"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "9247645722f83acd0f2e76acffb701ba2c074559e8ac2c28e0b3acf2df4d25b4",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "8109725b-ca85-484e-8e2d-a7c4cd23a50b",
+          "id": "7d76ba86-ba81-4365-91ff-c1f05701709e",
+          "at": "2026-09-17T04:06:44.055Z",
+          "groupId": "7d76ba86-ba81-4365-91ff-c1f05701709e"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "1630f7722b5f73ef34a653cb01a760f8348b1207f8ad4508994cb34e1916c12b",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "6825430c-6215-4009-98c8-37c545fccae2",
+          "id": "7adebc4c-548c-41d5-bf67-d46f58ca468c",
+          "at": "2026-09-17T04:06:50.716Z",
+          "groupId": "7adebc4c-548c-41d5-bf67-d46f58ca468c"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "94f8548e841e880311716c49e3a69b24e6c48ce3ff6174da74a378120b45b5b3",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "9f0d3fe0-e131-421e-9311-797895bec03b",
+          "id": "8309c400-501f-4446-b9e4-bb3aea04af18",
+          "at": "2026-09-17T04:06:56.212Z",
+          "groupId": "8309c400-501f-4446-b9e4-bb3aea04af18"
+        }
+      ],
+      "summaryCalls": [
+        {
+          "requestId": "fd8f4037-0562-4e4a-ade1-c749d01c3485",
+          "round": 4,
+          "estimatedGeneratedPayload": 1185,
+          "providerOutputTokens": 665
+        },
+        {
+          "requestId": "3e3b7d6f-4ef5-409d-8f7e-90be461ed86e",
+          "round": 5,
+          "estimatedGeneratedPayload": 1558,
+          "providerOutputTokens": 898
+        },
+        {
+          "requestId": "16e6d6d0-e773-4041-8588-9dc461ecd434",
+          "round": 6,
+          "estimatedGeneratedPayload": 1850,
+          "providerOutputTokens": 1082
+        },
+        {
+          "requestId": "62574a9d-b573-4afe-a38a-0b206be51973",
+          "round": 7,
+          "estimatedGeneratedPayload": 2134,
+          "providerOutputTokens": 1292
+        },
+        {
+          "requestId": "6be85b9e-e226-44ff-991a-3f00e85ee144",
+          "round": 8,
+          "estimatedGeneratedPayload": 2681,
+          "providerOutputTokens": 1571
+        },
+        {
+          "requestId": "08d070e0-a7a0-4750-873b-3fd3b99942ab",
+          "round": 9,
+          "estimatedGeneratedPayload": 1858,
+          "providerOutputTokens": 1207
+        }
+      ],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "ORIGINAL_IMG_MULTI_001",
+      "planned": 2,
+      "executed": 1,
+      "blocked": 1,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 2,
+          "durationMs": 2970
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "calls": 2,
+      "http200": 2,
+      "inputTokens": 10207,
+      "outputTokens": 219,
+      "toolCalls": 1,
+      "toolErrors": [],
+      "summaries": 0,
+      "summaryAttempts": [],
+      "summaryFailures": [],
+      "summaryCalls": [],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "primary",
+      "id": "ORIGINAL_EDIT_001",
+      "planned": 3,
+      "executed": 1,
+      "blocked": 1,
+      "notReached": 1,
+      "phases": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 2257
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0
+        }
+      },
+      "calls": 1,
+      "http200": 1,
+      "inputTokens": 4905,
+      "outputTokens": 294,
+      "toolCalls": 0,
+      "toolErrors": [],
+      "summaries": 0,
+      "summaryAttempts": [],
+      "summaryFailures": [],
+      "summaryCalls": [],
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "diagnostic",
+      "id": "DIAG_SAVED_CONFIRM",
+      "planned": 7,
+      "executed": 7,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 12,
+          "durationMs": 16083
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 4,
+          "durationMs": 17769
+        }
+      },
+      "calls": 16,
+      "http200": 16,
+      "inputTokens": 96692,
+      "outputTokens": 6959,
+      "toolCalls": 5,
+      "toolErrors": [],
+      "summaries": 2,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "12883e947797a00aa7ad6a634c41585b64ceeda21c3a040283504e5dd00c9f01",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 22,
+          "turnId": "2bd2a7c5-1e43-425c-b5e2-263e63f051f8",
+          "id": "1fcd6ba0-4ff7-4030-b72c-33a0eae463fb",
+          "at": "2026-09-17T04:08:00.039Z",
+          "groupId": "1fcd6ba0-4ff7-4030-b72c-33a0eae463fb"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "6200ec00be825d6af4ea50361a32c999e351f16d9b8b30fca911256ea401084f",
+          "coveredFromSeq": 23,
+          "coveredToSeq": 28,
+          "turnId": "1003a92b-8337-4a35-ad2c-f28efb8e6897",
+          "id": "12bf82b1-6a7e-4b63-ab02-31c5935e372f",
+          "at": "2026-09-17T04:08:05.281Z",
+          "groupId": "12bf82b1-6a7e-4b63-ab02-31c5935e372f"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "c8146cf73c21db7297eb0d2ee6bce21ae613fc9018eedbf2d3f3e9ff4f64d74e",
+          "coveredFromSeq": 29,
+          "coveredToSeq": 41,
+          "turnId": "483ed38b-68ab-4140-8897-031df77e58f6",
+          "id": "92efad08-16d2-46d3-9e3a-3ff9014e8cf3",
+          "at": "2026-09-17T04:08:10.349Z",
+          "groupId": "92efad08-16d2-46d3-9e3a-3ff9014e8cf3"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "6abb8c8f8fcca47574c08a5689703ceca0ea9707bb3534f8ac7df8d16935d1e1",
+          "coveredFromSeq": 29,
+          "coveredToSeq": 50,
+          "turnId": "4a9c49ea-0623-4e86-ac0b-704225708fd1",
+          "id": "2caadb88-02db-445a-ae6c-c11048c15418",
+          "at": "2026-09-17T04:08:19.081Z",
+          "groupId": "2caadb88-02db-445a-ae6c-c11048c15418"
+        }
+      ],
+      "summaryFailures": [
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "c8146cf73c21db7297eb0d2ee6bce21ae613fc9018eedbf2d3f3e9ff4f64d74e",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "483ed38b-68ab-4140-8897-031df77e58f6",
+          "id": "b17a2da0-7dd1-456d-9287-12d6eb234062",
+          "at": "2026-09-17T04:08:15.144Z",
+          "groupId": "b17a2da0-7dd1-456d-9287-12d6eb234062"
+        },
+        {
+          "kind": "run_event",
+          "event": "summary_failed",
+          "sourceHash": "6abb8c8f8fcca47574c08a5689703ceca0ea9707bb3534f8ac7df8d16935d1e1",
+          "message": "Summary exceeds its complete payload budget",
+          "turnId": "4a9c49ea-0623-4e86-ac0b-704225708fd1",
+          "id": "bb097638-4edb-4e0c-ac9c-c541f8168cad",
+          "at": "2026-09-17T04:08:24.786Z",
+          "groupId": "bb097638-4edb-4e0c-ac9c-c541f8168cad"
+        }
+      ],
+      "summaryCalls": [
+        {
+          "requestId": "22d5f798-e07d-4a31-b64e-5c20b51f85c2",
+          "round": 4,
+          "estimatedGeneratedPayload": 1211,
+          "providerOutputTokens": 765
+        },
+        {
+          "requestId": "fb98e5ef-1a92-4c08-994f-c23ced354759",
+          "round": 5,
+          "estimatedGeneratedPayload": 1522,
+          "providerOutputTokens": 977
+        },
+        {
+          "requestId": "26efd5c7-7389-438d-bbfb-ad375d46fda9",
+          "round": 6,
+          "estimatedGeneratedPayload": 1652,
+          "providerOutputTokens": 1264
+        },
+        {
+          "requestId": "52c87124-a5d6-4f9b-b071-b85e6623e90a",
+          "round": 7,
+          "estimatedGeneratedPayload": 1979,
+          "providerOutputTokens": 1394
+        }
+      ],
+      "proposals": 3,
+      "mediaReceipts": 2,
+      "duplicateInputItems": 0
+    },
+    {
+      "batch": "diagnostic",
+      "id": "DIAG_BUTTON",
+      "planned": 3,
+      "executed": 3,
+      "blocked": 0,
+      "notReached": 0,
+      "phases": {
+        "agent": {
+          "calls": 5,
+          "durationMs": 9044
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 2460
+        }
+      },
+      "calls": 6,
+      "http200": 6,
+      "inputTokens": 34603,
+      "outputTokens": 2003,
+      "toolCalls": 2,
+      "toolErrors": [],
+      "summaries": 1,
+      "summaryAttempts": [
+        {
+          "kind": "run_event",
+          "event": "summary_attempt",
+          "sourceHash": "e559e09803cfb1a212f0ed3ea34ce916ce95547b39c7943fff16717c9076a61f",
+          "coveredFromSeq": 0,
+          "coveredToSeq": 12,
+          "turnId": "5a424c7f-5387-4999-83f4-4926a4be9e94",
+          "id": "4144dbd9-014a-4d04-849e-05edc03e05c1",
+          "at": "2026-09-17T04:08:34.141Z",
+          "groupId": "4144dbd9-014a-4d04-849e-05edc03e05c1"
+        }
+      ],
+      "summaryFailures": [],
+      "summaryCalls": [
+        {
+          "requestId": "bb616fb6-e82c-445d-914e-866e8a292fdb",
+          "round": 3,
+          "estimatedGeneratedPayload": 861,
+          "providerOutputTokens": 510
+        }
+      ],
+      "proposals": 1,
+      "mediaReceipts": 1,
+      "duplicateInputItems": 0
+    }
+  ],
+  "total": {
+    "planned": 51,
+    "executed": 48,
+    "blocked": 2,
+    "notReached": 1,
+    "calls": 88,
+    "http200": 88,
+    "inputTokens": 514605,
+    "outputTokens": 33980,
+    "summaries": 10,
+    "proposals": 4,
+    "mediaReceipts": 3,
+    "duplicateInputItems": 0
+  },
+  "assertions": "Wire completeness, tool pairing, wrong-parent visibility, frozen media args, replacement identity, receipt counts, button observation before Agent request verified offline. No model or media calls."
+}

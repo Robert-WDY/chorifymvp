@@ -1,0 +1,342 @@
+[
+  {
+    "round": 1,
+    "user": "给青禾茶铺写一份朋友圈文案。桂花乌龙冷泡茶，无糖，每杯18元，每天11点营业，是否需要预约还没确定。正文80到120字，另给一个短标题。只要一版文字，不生成图片。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "76f67163-fc4f-4791-97f7-f4f6a30c0823",
+      "text": "**短标题：** 一杯桂花乌龙，等秋风来\n\n**正文：**\n\n桂花乌龙冷泡茶，青禾茶铺上新了。\n\n冷水慢慢泡开，桂花的甜先落在鼻尖，乌龙的香跟着上来，清清爽爽，一点糖都没加。喝下去不腻，也不会在嘴里留一层黏。\n\n每杯18元，每天11点开门。要不要提前预约，这边还没定下来，确定了我第一时间说。\n\n路过的话，进来坐坐。\n\n（正文共约110字，仅一版文字，未生成图片。若预约规则后续确定，可在“确定了我第一时间说”处替换为具体说明。）",
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "modelAccounting": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 1769,
+          "usage": [
+            {
+              "input_tokens": 4953,
+              "input_tokens_details": {
+                "cached_tokens": 3072
+              },
+              "output_tokens": 137,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 5090
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 1782,
+    "recordIds": [
+      "8aeeaae0-4501-45e3-8859-d11bb87d4833",
+      "d71adb9b-a671-420f-b930-33e446496a12",
+      "c1a08d3b-566d-4a0c-846f-1ff8fd506657",
+      "6d18a84c-a28a-4a5d-9007-09b9abca1759",
+      "46a959b4-c317-4721-bfd2-b5b5ef088513",
+      "e030f010-a3dc-476e-8090-8f53e75112aa"
+    ]
+  },
+  {
+    "round": 2,
+    "user": "太正式了，改得像店员说话。正文缩成40到60字，事实不变，先在聊天里给我。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "217fd443-c0ae-4ec7-a79b-6db59d75ef29",
+      "text": "短标题：一杯桂花乌龙，等秋风来\n\n正文：\n\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。\n\n（正文52字。事实与前一版一致：无糖、18元/杯、11点营业、预约待定；语气改为店员口吻。仅在聊天里给你，未保存文稿、未生成图片。）",
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "modelAccounting": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 991,
+          "usage": [
+            {
+              "input_tokens": 5308,
+              "input_tokens_details": {
+                "cached_tokens": 4864
+              },
+              "output_tokens": 101,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 5409
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 1000,
+    "recordIds": [
+      "ff98698b-cda0-4d0b-9033-0b221583dd30",
+      "ed8f80af-e12d-4836-8401-ac2e4623225f",
+      "a9a620c3-ddd7-402b-8d12-7d79ece55a65",
+      "dd896775-c08f-40fe-a8a1-34e1d4398a6f",
+      "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+      "3864c249-90e3-4651-bf51-3e1ecebe3355"
+    ]
+  },
+  {
+    "round": 3,
+    "user": "这版可以，保存成独立文稿，原来的长版也保留，两个版本要能追溯。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "f80f5f69-01dd-4316-a260-7c7afacd2e23",
+      "text": "已保存，两个版本可追溯。\n\n- **版本一（长版·原稿）**：`doc_533eeda6-9fdc-4328-a2f3-69223a81cefa`（原始聊天文稿，约110字）\n- **版本二（店员口吻·52字）**：`doc_bcd36871-a5e9-40ec-a6bb-7d372621b286`，parentId 指向版本一\n\n保存内容与聊天中的版本完全一致：短标题《一杯桂花乌龙，等秋风来》，正文52字，事实未变（无糖、18元/杯、11点营业、预约待定）。未生成任何图片。",
+      "modelCalls": 2,
+      "toolCalls": 1,
+      "modelAccounting": {
+        "agent": {
+          "calls": 2,
+          "durationMs": 2259,
+          "usage": [
+            {
+              "input_tokens": 5547,
+              "input_tokens_details": {
+                "cached_tokens": 4864
+              },
+              "output_tokens": 166,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 5713
+            },
+            {
+              "input_tokens": 6275,
+              "input_tokens_details": {
+                "cached_tokens": 4608
+              },
+              "output_tokens": 151,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 6426
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 2296,
+    "recordIds": [
+      "795b0106-4e4b-45ff-9e3f-24d6ec6e2cc4",
+      "cc99a551-927a-4148-bcb2-a61236018a1b",
+      "c15c33ff-b1a3-424f-898f-f3994a9f3531",
+      "9ac1c20c-d528-492d-a512-82bdd085131d",
+      "525522bc-89f8-4917-b9db-dcf0377d9183",
+      "365e9310-7452-4f3f-82f5-ef6c49f297f0",
+      "c7e75274-4de9-4847-ba1a-aea6c93c3aaf",
+      "3c03e138-ae63-4bb1-93cd-0700743f1a34",
+      "f5de1afe-4720-46e2-a95d-3761cb8e56eb",
+      "507a3dad-cc5b-48a4-8032-75860cac9e08"
+    ]
+  },
+  {
+    "round": 4,
+    "user": "价格说错了，是20元，不是18元。只改已保存的短版，其他不动，存为新版本。",
+    "restarted": true,
+    "result": {
+      "status": "completed",
+      "turnId": "3a1ff0bb-f69b-4f53-9797-7f819683cd85",
+      "text": "已存为版本三，只改了价格。\n\n- **版本一（长版·原稿）**：`doc_533eeda6-9fdc-4328-a2f3-69223a81cefa`\n- **版本二（店员口吻·18元）**：`doc_bcd36871-a5e9-40ec-a6bb-7d372621b286`\n- **版本三（店员口吻·20元）**：`doc_a6482c1c-6f17-4594-b452-ee961acf3409`，parentId 指向版本二\n\n改动仅一处：18元 → 20元。标题、正文其余部分、预约说明均未动；版本一、版本二保持原样可追溯。",
+      "modelCalls": 3,
+      "toolCalls": 1,
+      "modelAccounting": {
+        "agent": {
+          "calls": 2,
+          "durationMs": 2064,
+          "usage": [
+            {
+              "input_tokens": 6571,
+              "input_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "output_tokens": 167,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 6738
+            },
+            {
+              "input_tokens": 7235,
+              "input_tokens_details": {
+                "cached_tokens": 3968
+              },
+              "output_tokens": 168,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 7403
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 2051,
+          "usage": [
+            {
+              "input_tokens": 1088,
+              "input_tokens_details": {
+                "cached_tokens": 128
+              },
+              "output_tokens": 340,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1428
+            }
+          ],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 4174,
+    "recordIds": [
+      "bde3691f-408d-46df-8848-e0771c24f9b1",
+      "dc65b059-2826-47ec-b701-e743c298cf6a",
+      "f0a4890a-0786-4155-9de9-61d8384f7584",
+      "e6aa240b-ed8e-4be6-bcc0-de3ef4d2cc14",
+      "3bea6ba1-4e2c-4d37-83b2-8beb85fff2bd",
+      "d8b8ebf7-f4ad-402a-9386-84ed346b68dd",
+      "efc0e530-c95c-4dcf-a0ee-1bc3e2ccd344",
+      "5523c39e-573d-4494-bf4a-49cc6b0acae8",
+      "58f0231b-0588-452c-bb1f-508457e417e6",
+      "7c9dc3d3-905b-417a-91cb-b89bc05a827c",
+      "19fdf17e-986b-4ff4-8655-5190b97d813d",
+      "692ac9d5-3a71-440f-91f0-dfc9f07a5887",
+      "f07ce08f-de30-4782-8974-193f50a5ea08"
+    ]
+  },
+  {
+    "round": 5,
+    "user": "把最新这一版翻译成英文，另存一份，别覆盖中文，也别把预约说成不需要。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "6dd55471-97c8-44ab-82f5-80044b0ff4a8",
+      "text": "英文版已另存，未动中文原版。\n\n- **英文版（版本三翻译）**：`doc_913e236e-0c03-4e6b-a2cc-f8753913d783`，sourceIds 指向中文版本三 `doc_a6482c1c-6f17-4594-b452-ee961acf3409`，是独立新文档，不覆盖任何中文版本。\n\n内容如下：\n\n**Short title:** A cup of osmanthus oolong, waiting for the autumn wind\n\n**Body:**\n\n> Our osmanthus oolong cold brew is here. Steeped slowly in cold water, so the floral and tea notes both come through fresh, with no sugar added. 20 yuan a cup, we open at 11 every day. Whether reservations will be needed isn't decided yet — as soon as it is, I'll say so right away.\n\n几点说明：\n- 预约一句译为“Whether reservations will be needed isn't decided yet — as soon as it is, I'll say so right away”，保留“待定、定了马上说”，没有写成不需要预约。\n- “yuan”按原文保留，未换算成美元或写成 RMB 以外的币种；如需改成“RMB 20”或“$”请说。\n- 中文三个版本（长版、版本二、版本三）均保持原样可追溯。",
+      "modelCalls": 3,
+      "toolCalls": 1,
+      "modelAccounting": {
+        "agent": {
+          "calls": 2,
+          "durationMs": 2962,
+          "usage": [
+            {
+              "input_tokens": 7229,
+              "input_tokens_details": {
+                "cached_tokens": 3968
+              },
+              "output_tokens": 202,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 7431
+            },
+            {
+              "input_tokens": 7903,
+              "input_tokens_details": {
+                "cached_tokens": 5760
+              },
+              "output_tokens": 295,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 8198
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 3938,
+          "usage": [
+            {
+              "input_tokens": 1818,
+              "input_tokens_details": {
+                "cached_tokens": 128
+              },
+              "output_tokens": 892,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2710
+            }
+          ],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 6959,
+    "recordIds": [
+      "4c3c3bb2-a1b6-4552-8cc6-57754556fd9f",
+      "6997d8bb-fe13-4791-87bc-c50dd23a1e51",
+      "ba5a72d3-0e6d-441b-ab88-6ca9f6ac552d",
+      "85d54c89-9417-4420-b6c1-fe48acbdbce1",
+      "abeb89fc-0409-4ac9-a273-50fa89c2ab1b",
+      "5738d202-6b2b-4a9c-aea8-46ff6ac0033b",
+      "e4a31c32-0db6-4502-8f50-be59cc377f1c",
+      "0ca14940-a3b9-4f78-9d7e-37f9b0b53398",
+      "cfa16e5a-4a97-42d3-a1dc-bfbae5b2d084",
+      "7c76e9ca-5e77-426d-8bd8-523f7b1ca3e2",
+      "7f137009-112c-4c6f-b10b-3d446529daf6",
+      "0d196484-d693-4ec7-9d6c-a880953bd04f",
+      "e198fbd6-1da4-42a2-a46b-115c7dda4967"
+    ]
+  }
+]
