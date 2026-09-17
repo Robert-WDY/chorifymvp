@@ -1,0 +1,129 @@
+{
+  "mode": "offline",
+  "modelCalls": 0,
+  "mediaCalls": 0,
+  "directoryGrowth": [
+    {
+      "assets": 0,
+      "estimatedInputTokens": 38,
+      "projectedAssets": 0,
+      "status": "passed"
+    },
+    {
+      "assets": 100,
+      "estimatedInputTokens": 2238,
+      "projectedAssets": 11,
+      "status": "passed"
+    },
+    {
+      "assets": 200,
+      "estimatedInputTokens": 2244,
+      "projectedAssets": 11,
+      "status": "passed"
+    },
+    {
+      "assets": 300,
+      "estimatedInputTokens": 2244,
+      "projectedAssets": 11,
+      "status": "passed"
+    },
+    {
+      "assets": 1000,
+      "estimatedInputTokens": 2244,
+      "projectedAssets": 11,
+      "status": "passed"
+    }
+  ],
+  "methods": [
+    {
+      "slug": "actor-realism-v2",
+      "version": "context-methods-v1",
+      "characters": 2725,
+      "references": 7
+    },
+    {
+      "slug": "asset-lock-generator-lite-v2",
+      "version": "context-methods-v1",
+      "characters": 1522,
+      "references": 2
+    },
+    {
+      "slug": "creative-cover-copy-v2",
+      "version": "context-methods-v1",
+      "characters": 1959,
+      "references": 4
+    },
+    {
+      "slug": "creative-prompt-rewrite",
+      "version": "context-methods-v1",
+      "characters": 7149,
+      "references": 1
+    },
+    {
+      "slug": "cinematic-shot-designer-zh-v5",
+      "version": "context-methods-v1",
+      "characters": 927,
+      "references": 4
+    },
+    {
+      "slug": "cinematic-style-optimizer-v2",
+      "version": "context-methods-v1",
+      "characters": 2079,
+      "references": 27
+    },
+    {
+      "slug": "direction-designer-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 527,
+      "references": 0
+    },
+    {
+      "slug": "image-prompt-gallery-director-v2",
+      "version": "context-methods-v1",
+      "characters": 3125,
+      "references": 35
+    },
+    {
+      "slug": "marketing-brief-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 595,
+      "references": 0
+    },
+    {
+      "slug": "product-understanding-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 606,
+      "references": 0
+    },
+    {
+      "slug": "storyboard-one-shot-zh",
+      "version": "context-methods-v1",
+      "characters": 443,
+      "references": 8
+    },
+    {
+      "slug": "storyboard-one-shot-zh-v2",
+      "version": "context-methods-v1",
+      "characters": 443,
+      "references": 7
+    },
+    {
+      "slug": "video-decomposition-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 5178,
+      "references": 0
+    },
+    {
+      "slug": "video-prompt-safety-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 602,
+      "references": 0
+    },
+    {
+      "slug": "video-script-zh-v1",
+      "version": "context-methods-v1",
+      "characters": 564,
+      "references": 0
+    }
+  ]
+}

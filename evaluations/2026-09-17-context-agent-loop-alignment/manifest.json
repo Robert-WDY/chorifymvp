@@ -1,0 +1,22 @@
+{
+  "baseline": "a82bf5f27b0ce780089b42954541fd241f7a0b5e",
+  "precedingPatch": "../2026-09-16-context-agent-simplification/implementation.patch",
+  "incrementalPatch": "alignment.patch",
+  "patchReverseCheck": "passed",
+  "changedFiles": [
+    "server/context-agent/prompt.md",
+    "server/context-agent/tools.mjs",
+    "tests/context-agent-chat-boundary.test.mjs"
+  ],
+  "hashes": {
+    "server/context-agent/prompt.md": "b33b8b6340702acb416badb0f01e1c85571ce77caeb64c2de143105dc35ba9b5",
+    "server/context-agent/tools.mjs": "8943a77fd23a6f866e4b1b41980ca2e4aab5a19f77bb474d9494f65b646d869a",
+    "tests/context-agent-chat-boundary.test.mjs": "521d1046d95198910571bd5033c25d210291d329e62ca4dd9f6b8697d984e13b"
+  },
+  "paidCalls": 0,
+  "realModelVerified": false,
+  "coreUnchanged": [
+    "server/context-agent/loop.mjs",
+    "server/context-agent/io-guard.mjs"
+  ]
+}

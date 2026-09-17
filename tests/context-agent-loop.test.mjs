@@ -125,7 +125,7 @@ test('context HTTP approval: displayed group authorizes exactly two calls; repla
   const brain={respond:async input=>{
     if(step++===0)return [call('prepare-one','generate_image',{prompt:'第一张白瓶',size:'2K'}),call('prepare-two','generate_image',{prompt:'第二张白瓶',size:'2K'})];
     if(step===2)return [say('已准备两张独立图片的方案，请批准。')];
-    if(step===3){const message=[...input].reverse().find(m=>m.role==='user'&&typeof m.content==='string'&&m.content.startsWith('我批准'));const receipt=JSON.parse(message.content.split('\n').slice(1).join('\n'));return receipt.proposals.map((p,i)=>call('submit-'+i,p.name,{...p.args,proposalId:p.proposalId,approvalId:receipt.approvalId}));}
+    if(step===3){const message=[...input].reverse().find(m=>m.role==='user'&&typeof m.content==='string'&&m.content.startsWith('我批准'));const receipt=JSON.parse(message.content.split('\n').slice(1).join('\n'));return receipt.proposals.map((p,i)=>call('submit-'+i,'execute_approved',{proposalId:p.proposalId,approvalId:receipt.approvalId}));}
     return [say('两项模拟调用已返回；未实际生成图片。')];
   }};
   const app=createContextServer({directory,brain,tools:createTools(),modelEnabled:true,agentOptions:{maxMediaCalls:2}});

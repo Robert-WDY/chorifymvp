@@ -52,7 +52,7 @@ test('history persistence is owner scoped, append only, atomic and traversal res
   assert.deepEqual((await store.load(state.id, 'alice')).records, state.records);
   const ownerDirectories = await readdir(directory);
   assert.equal(ownerDirectories.length, 1);
-  assert.deepEqual(await readdir(path.join(directory, ownerDirectories[0])), [`${state.id}.json`]);
+  assert.deepEqual(await readdir(path.join(directory, ownerDirectories[0])), [`${state.id}.sqlite`]);
 });
 
 test('queued saves preserve the complete append order', async t => {
@@ -158,7 +158,8 @@ test('latest user and tool arguments cannot be silently truncated to fit a budge
   const another = createSession();
   message(another, 'change background');
   exchange(another, 'large-args', '{}');
-  another.records.find(record => record.kind === 'tool_call').arguments = JSON.stringify({ preserve: 'Keep '.repeat(3000) });
+  const callIndex=another.records.findIndex(record=>record.kind==='tool_call');
+  another.records[callIndex]={...another.records[callIndex],arguments:JSON.stringify({preserve:'Keep '.repeat(3000)})};
   assert.throws(() => buildContext(another, { tokenBudget: 1000 }), { code: 'CONTEXT_BUDGET_EXCEEDED' });
 });
 
@@ -233,7 +234,7 @@ test('runtime request traces stay available without duplicating original convers
   assert.ok(!input.some(item => typeof item.content === 'string' && item.content.includes('historyWindow')));
 });
 
-test('only actual server approvals expose exact unsubmitted media parameters to the model', async () => {
+test('only actual server approvals expose bounded identities while exact parameters stay stored', async () => {
   const state = createSession();
   message(state, '我已经确认，请执行。');
   assert.ok(!JSON.stringify(buildContext(state).input).includes('toolApprovals'));
@@ -247,7 +248,8 @@ test('only actual server approvals expose exact unsubmitted media parameters to 
   const projected = JSON.parse(block.content.split('\n')[1]).toolApprovals[0];
   assert.equal(projected.source, 'server_receipt');
   assert.equal(projected.approvalId, approval.approvalId);
-  assert.deepEqual(projected.proposals[0].args, args);
+  assert.equal(projected.proposals[0].args, undefined);
+  assert.deepEqual(state.approvals[projected.proposals[0].proposalId].args,args);
   assert.equal(context.input.filter(item => item.role === 'system').length, 1);
   assert.equal(state.records[0].content, '我已经确认，请执行。');
   state.invocations.receipt1 = { kind: 'media', proposalId: proposal.proposalId, attempted: true, status: 'unknown' };

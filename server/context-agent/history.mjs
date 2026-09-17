@@ -1,11 +1,35 @@
 import { randomUUID, createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises';
+import { mkdir, readFile, stat, chmod } from 'node:fs/promises';
+import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 
 const clone = value => structuredClone(value);
 const kinds = new Set(['message', 'tool_call', 'tool_result', 'run_event']);
 const idPattern = /^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/;
 const fileQueues = new Map();
+const immutable = new WeakSet(), serialized = new WeakMap();
+const serializedAssets = new WeakMap();
+function freeze(value) {
+  if (value && typeof value === 'object' && !immutable.has(value)) {
+    for (const child of Object.values(value)) freeze(child);
+    Object.freeze(value); immutable.add(value);
+  }
+  return value;
+}
+const digest = text => createHash('sha256').update(text).digest('hex');
+function pack(record) {
+  if (immutable.has(record) && serialized.has(record)) return serialized.get(record);
+  validateRecord(record);
+  let body=record, trace;
+  if (record.kind==='run_event' && ['model_request','model_response'].includes(record.event) && !record.traceRef) {
+    trace=JSON.stringify(record);
+    body=Object.fromEntries(['id','at','turnId','groupId','kind','event','traceId','phase'].filter(k=>record[k]!==undefined).map(k=>[k,record[k]]));
+    body.traceRef={recordId:record.id};
+  }
+  const json=JSON.stringify(body), result={id:record.id,json,hash:digest(json),trace};
+  if(immutable.has(record))serialized.set(record,result);
+  return result;
+}
 
 function fail(code, message) {
   const error = new Error(message);
@@ -54,70 +78,131 @@ export function appendRecord(state, record) {
   const value = clone({ ...record, id, at: record.at ?? new Date().toISOString(), turnId: record.turnId ?? id, groupId: record.groupId ?? id });
   validateRecord(value);
   if (state.records.some(entry => entry.id === id)) fail('DUPLICATE_HISTORY_RECORD', 'This history record already exists.');
-  state.records.push(value);
+  state.records.push(freeze(value));
   return clone(value);
 }
 
-/** Session files are partitioned by trusted owner identity; IDs never form arbitrary paths. */
+/** SQLite is a storage adapter only: no business tasks or scheduling state.
+ * Separate append-only record/trace rows and stable asset rows replace snapshot rewrites.
+ * Every save is a FULL synchronous transaction before a provider may be submitted.
+ */
 export class HistoryStore {
   #directory;
-
+  #versions=new WeakMap();
   constructor(directory) {
     if (typeof directory !== 'string' || !directory) throw new TypeError('History directory is required.');
     this.#directory = path.resolve(directory);
   }
-
   #file(id, ownerId) {
     checkId(id);
-    const owner = createHash('sha256').update(checkOwner(ownerId)).digest('hex');
-    return path.join(this.#directory, owner, `${id}.json`);
+    const owner=createHash('sha256').update(checkOwner(ownerId)).digest('hex');
+    return path.join(this.#directory,owner,`${id}.sqlite`);
   }
-
-  async create(ownerId = 'local') {
-    const state = createSession({ ownerId });
-    await this.save(state, ownerId);
+  #open(file, create=false) {
+    const db=new DatabaseSync(file,{readOnly:!create});
+    if(create)db.exec(`PRAGMA synchronous=FULL;
+      CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS records (seq INTEGER PRIMARY KEY, id TEXT UNIQUE NOT NULL, hash TEXT NOT NULL, json TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS traces (id TEXT PRIMARY KEY, json TEXT NOT NULL);
+      CREATE TABLE IF NOT EXISTS objects (kind TEXT NOT NULL, id TEXT NOT NULL, hash TEXT NOT NULL, json TEXT NOT NULL, PRIMARY KEY(kind,id));`);
+    return db;
+  }
+  #attach(state) {
+    Object.defineProperty(state,'readTrace',{enumerable:false,value:recordId=>this.readTrace(state.id,state.ownerId,recordId)});
     return state;
   }
-
-  async load(id, ownerId = 'local') {
-    const file = this.#file(id, ownerId);
-    let state;
-    try { state = JSON.parse(await readFile(file, 'utf8')); }
-    catch (error) {
-      if (error.code === 'ENOENT') fail('SESSION_NOT_FOUND', 'Session was not found for the current owner.');
-      throw error;
+  async create(ownerId='local') {
+    const state=this.#attach(createSession({ownerId}));
+    await this.save(state,ownerId);return state;
+  }
+  async load(id,ownerId='local') {
+    const file=this.#file(id,ownerId);
+    let db;
+    try { await stat(file); }
+    catch(error) {
+      if(error.code!=='ENOENT')throw error;
+      // Non-destructive migration: the legacy JSON remains available as a backup.
+      let state;
+      try { state=JSON.parse(await readFile(file.replace(/\.sqlite$/,'.json'),'utf8')); }
+      catch(legacyError) { if(legacyError.code==='ENOENT')fail('SESSION_NOT_FOUND','Session was not found for the current owner.');throw legacyError; }
+      validateSession(state,ownerId);await this.save(state,ownerId);return this.load(id,ownerId);
     }
-    validateSession(state, ownerId);
-    return state;
+    db=this.#open(file);
+    try {
+      const identity=JSON.parse(db.prepare('SELECT value FROM meta WHERE key=?').get('identity')?.value || 'null');
+      if(!identity||identity.id!==id||identity.ownerId!==ownerId)fail('SESSION_ACCESS_DENIED','Stored session identity does not match');
+      const state=createSession({id,ownerId});
+      state.records=db.prepare('SELECT json FROM records ORDER BY seq').all().map(r=>freeze(JSON.parse(r.json)));
+      for(const row of db.prepare('SELECT kind,id,json FROM objects').all())state[row.kind][row.id]=row.kind==='assets'?freeze(JSON.parse(row.json)):JSON.parse(row.json);
+      validateSession(state,ownerId);this.#versions.set(state,Number(db.prepare('SELECT value FROM meta WHERE key=?').get('revision')?.value||0));return this.#attach(state);
+    } finally { db.close(); }
   }
-
-  async save(state, ownerId = 'local') {
-    // Snapshot at invocation time so caller mutation cannot affect the atomic write.
-    const snapshot = clone(state);
-    validateSession(snapshot, ownerId);
-    const file = this.#file(snapshot.id, ownerId);
-    const prior = fileQueues.get(file) ?? Promise.resolve();
-    const pending = prior.catch(() => {}).then(async () => {
-      await mkdir(path.dirname(file), { recursive: true });
-      let existing;
-      try { existing = JSON.parse(await readFile(file, 'utf8')); }
-      catch (error) { if (error.code !== 'ENOENT') throw error; }
-      if (existing) {
-        validateSession(existing, ownerId);
-        if (snapshot.records.length < existing.records.length || existing.records.some((record, index) => JSON.stringify(record) !== JSON.stringify(snapshot.records[index]))) fail('HISTORY_REWRITE_FORBIDDEN', 'Existing raw history cannot be changed or removed; reload the latest session before appending.');
-      }
-      const temporary = `${file}.${randomUUID()}.tmp`;
+  async readTrace(id,ownerId,recordId) {
+    const db=this.#open(this.#file(id,ownerId));
+    try {
+      const identity=JSON.parse(db.prepare('SELECT value FROM meta WHERE key=?').get('identity')?.value || 'null');
+      if(identity?.ownerId!==ownerId||identity?.id!==id)fail('SESSION_ACCESS_DENIED','Trace owner mismatch');
+      const row=db.prepare('SELECT json FROM traces WHERE id=?').get(recordId);
+      if(!row)fail('HISTORY_NOT_FOUND','Trace not found in this session');
+      return JSON.parse(row.json);
+    } finally { db.close(); }
+  }
+  async exportSession(id,ownerId='local') {
+    const state=await this.load(id,ownerId);
+    const records=[];
+    for(const record of state.records)records.push(record.traceRef?await this.readTrace(id,ownerId,record.id):clone(record));
+    return {...state,records};
+  }
+  async save(state,ownerId='local') {
+    checkOwner(ownerId);checkId(state?.id);
+    if(state?.engine!=='context-agent'||state.schemaVersion!==1||!Array.isArray(state.records))fail('INVALID_SESSION','Expected context-agent session');
+    if(state.ownerId!==ownerId)fail('SESSION_ACCESS_DENIED','Session does not belong to current owner');
+    // Capture only append candidates + object values. Immutable record serialization
+    // is cached; large trace payloads are never repeatedly cloned or rewritten.
+    const rows=state.records.map(pack);
+    const ids=new Set(rows.map(r=>r.id));
+    if(ids.size!==rows.length)fail('INVALID_HISTORY_RECORD','Duplicate record identities');
+    const objects=[];
+    for(const kind of ['assets','invocations','approvals'])for(const [id,value]of Object.entries(state[kind]||{})) {
+      let packed=kind==='assets'&&serializedAssets.get(value);
+      if(!packed){const json=JSON.stringify(value);packed={json,hash:digest(json)};if(kind==='assets'){freeze(value);serializedAssets.set(value,packed);}}
+      objects.push({kind,id,...packed});
+    }
+    const file=this.#file(state.id,ownerId), identity=JSON.stringify({id:state.id,ownerId});
+    const previous=fileQueues.get(file)||Promise.resolve();
+    const pending=previous.catch(()=>{}).then(async()=>{
+      await mkdir(path.dirname(file),{recursive:true,mode:0o700});
+      const db=this.#open(file,true);
       try {
-        await writeFile(temporary, `${JSON.stringify(snapshot, null, 2)}\n`, { encoding: 'utf8', flag: 'wx', mode: 0o600 });
-        await rename(temporary, file);
-      } finally {
-        await unlink(temporary).catch(error => { if (error.code !== 'ENOENT') throw error; });
-      }
-      return clone(snapshot);
+        await chmod(file,0o600);
+        db.exec('BEGIN IMMEDIATE');
+        const stored=db.prepare('SELECT value FROM meta WHERE key=?').get('identity');
+        if(stored&&stored.value!==identity)fail('SESSION_ACCESS_DENIED','Stored identity mismatch');
+        const prior=db.prepare('SELECT seq,id,hash FROM records ORDER BY seq').all();
+        if(prior.length>rows.length||prior.some((r,i)=>r.id!==rows[i].id||r.hash!==rows[i].hash))fail('HISTORY_REWRITE_FORBIDDEN','Existing history cannot be changed or removed');
+        const revision=Number(db.prepare('SELECT value FROM meta WHERE key=?').get('revision')?.value||0);
+        if(revision && this.#versions.get(state)!==revision)fail('STALE_SESSION','Reload the session before modifying stored execution records');
+        const insert=db.prepare('INSERT INTO records(seq,id,hash,json) VALUES(?,?,?,?)');
+        const trace=db.prepare('INSERT INTO traces(id,json) VALUES(?,?)');
+        let bytesWritten=0;
+        for(let i=prior.length;i<rows.length;i++){
+          const r=rows[i];if(r.trace){trace.run(r.id,r.trace);bytesWritten+=Buffer.byteLength(r.trace);}
+          insert.run(i,r.id,r.hash,r.json);bytesWritten+=Buffer.byteLength(r.json);
+        }
+        const old=new Map(db.prepare('SELECT kind,id,hash FROM objects').all().map(r=>[`${r.kind}:${r.id}`,r.hash]));
+        const upsert=db.prepare('INSERT INTO objects(kind,id,hash,json) VALUES(?,?,?,?) ON CONFLICT(kind,id) DO UPDATE SET hash=excluded.hash,json=excluded.json');
+        for(const o of objects){const key=`${o.kind}:${o.id}`;if(old.has(key)&&old.get(key)!==o.hash&&o.kind!=='invocations')fail('IMMUTABLE_OBJECT','Saved assets and approvals cannot be rewritten');if(old.get(key)!==o.hash){upsert.run(o.kind,o.id,o.hash,o.json);bytesWritten+=Buffer.byteLength(o.json);}old.delete(key);}
+        // Durable execution/approval/asset evidence must not disappear in stale snapshots.
+        if(old.size)fail('HISTORY_REWRITE_FORBIDDEN','Stored objects cannot be removed');
+        db.prepare('INSERT OR IGNORE INTO meta(key,value) VALUES(?,?)').run('identity',identity);
+        db.prepare('INSERT INTO meta(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value').run('revision',String(revision+1));
+        db.exec('COMMIT');this.#versions.set(state,revision+1);
+        return {id:state.id,records:rows.length,appendedRecords:rows.length-prior.length,payloadBytesWritten:bytesWritten};
+      }catch(error){try{db.exec('ROLLBACK');}catch{}throw error;}
+      finally{db.close();}
     });
-    fileQueues.set(file, pending);
-    try { return await pending; }
-    finally { if (fileQueues.get(file) === pending) fileQueues.delete(file); }
+    fileQueues.set(file,pending);
+    try{return await pending;}finally{if(fileQueues.get(file)===pending)fileQueues.delete(file);}
   }
 }
 

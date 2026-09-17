@@ -1,0 +1,119 @@
+diff --git a/server/context-agent/prompt.md b/server/context-agent/prompt.md
+index 457c0f0..2785e5c 100644
+--- a/server/context-agent/prompt.md
++++ b/server/context-agent/prompt.md
+@@ -4,7 +4,7 @@
+ 
+ 记忆中的原话和真实资产是上下文。近期消息保留原始顺序；指代不清或原稿不在窗口时，用search_history定位、read_history分页读原文、read_asset读取资产。检索命中不等于已读完原稿；不能凭摘要重建。originalMessages是聊天原文索引，不代表已保存文稿；assetDirectory仅列出有限的当前与近期对象；更多历史资产用list_assets搜索或分页，再按ID读取。先锁定已有对象，只问仍缺少的改动。消息ID、资产ID、方案ID和回执ID各用于对应工具，文件名和URL文字不代表实际读取。
+ 
+-交付可继续修改的文案、方向、脚本或提示词时，用save_document保存准确正文，再基于该正文回复并标出真实资产ID；普通答疑、澄清和进度说明无需存为作品。修改时原稿正文必须可用；若完整原文已在当前上下文，不必重复读取。已有资产用parentId保存修订；原稿只有聊天记录时，save_document传parentMessageId和新正文，一次原子保存原稿及修订，不必先搬运中间资产ID。翻译或另写新作品用sourceIds保留来源，不覆盖原稿。不要只在回答里承诺稍后保存。
++简单聊天创作或改稿可以直接交付正文，系统保存实际对话，不必为了以后可能修改而先创建文稿资产。修改时原稿正文必须可用；若完整原文已在当前上下文，不必重复读取，也不必先检索历史、读Skill或保存原稿。需要独立文稿、明确版本管理或修改已有文稿资产时，用save_document保存准确正文，再基于该正文回复并标出真实资产ID。已有资产用parentId保存修订；原稿只有聊天记录且本次需要保存修订时，传parentMessageId和新正文，一次原子保存原稿及修订。翻译或另写新作品需要保存时，用sourceIds保留已有资产来源，不覆盖原稿。聊天回答不是已保存的资产版本；需要保存时不能只口头承诺，保存失败应如实说明。
+ 
+ 区分自由创作与真实商品保持：用户从零设计或未指定真实商品时，可以合理设计瓶型、场景、风格、构图和尺寸，在提案中明确创意设定；没有原图不自动阻塞自由创作。用户要求保留已有商品、图像或品牌外观时，必须读取并使用对应真实图片。未知品类、功效等不得编造为事实，但可以省略这些宣称并继续可完成的创意。普通风格和用途偏好缺失可合理选择，不把可选偏好变成所有方案的阻塞条件。必要来源缺失、对象有歧义、关键约束冲突或改动不明时才询问。
+ 
+diff --git a/server/context-agent/tools.mjs b/server/context-agent/tools.mjs
+index 25780b4..3c00424 100644
+--- a/server/context-agent/tools.mjs
++++ b/server/context-agent/tools.mjs
+@@ -35,7 +35,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+     tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: string(2000), limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }, ['query']),
+     tool('read_history', '按ID读取原记录及去除检索回声、调试Trace的前后文；按offset/limit分页，原文不变。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit }, ['messageId']),
+     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
+-    tool('save_document', '保存交付正文为不可变文稿。新稿传content；修改传content和原稿parentId。修改聊天原稿传parentMessageId和修改后的content，一次原子保存原稿及修订；sourceMessageId仅用于原样存档。普通答疑无需保存。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceIds: ids }),
++    tool('save_document', '需要独立文稿、版本管理或修改已有文稿资产时保存准确正文。简单聊天创作和改稿可直接回复，由对话历史保存。新稿传content；已有资产修订传content和原稿parentId。聊天稿需要保存修订时传parentMessageId和新content，一次原子保存原稿及修订；sourceMessageId仅原样存档。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceIds: ids }),
+     tool('measure_text', '按现有统一口径测量传入正文，不含未传入的标题或说明；不替代内容判断。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] } }, ['text', 'unit']),
+   ];
+   definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
+diff --git a/tests/context-agent-chat-boundary.test.mjs b/tests/context-agent-chat-boundary.test.mjs
+new file mode 100644
+index 0000000..c92d837
+--- /dev/null
++++ b/tests/context-agent-chat-boundary.test.mjs
+@@ -0,0 +1,87 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtemp, rm} from 'node:fs/promises';
++import {tmpdir} from 'node:os';
++import {join} from 'node:path';
++import {HistoryStore, appendRecord} from '../server/context-agent/history.mjs';
++import {ContextAgent} from '../server/context-agent/loop.mjs';
++import {createTools} from '../server/context-agent/tools.mjs';
++
++// Scripted Agent decisions exercise real context, tools and persistence only.
++// These tests do not measure whether a live model chooses the right path.
++const say = text => [{type:'message', role:'assistant', content:[{type:'output_text', text}]}];
++const call = (id, args) => [{type:'function_call', call_id:id, name:'save_document', arguments:JSON.stringify(args)}];
++const feedback = input => JSON.parse(input.filter(x => x.type === 'function_call_output').at(-1).output);
++async function fixture(t) {
++  const directory = await mkdtemp(join(tmpdir(), 'chorify-chat-boundary-'));
++  t.after(() => rm(directory, {recursive:true, force:true}));
++  const store = new HistoryStore(directory);
++  const state = await store.create('offline-owner');
++  return {store, state, save: s => store.save(s, 'offline-owner'), reload: () => store.load(state.id, 'offline-owner')};
++}
++
++test('chat-only editing: complete original survives restart and supports a direct reply without tools or assets', async t => {
++  const f = await fixture(t);
++  const original = '这款茶呈现桂花香与乌龙茶香，适合午后慢慢品饮。';
++  const revised = '桂花与乌龙双香，午后慢饮。';
++  const tools = {definitions:createTools().definitions, execute:async () => assert.fail('chat-only turn must not force tools')};
++  await new ContextAgent({tools, save:f.save, brain:{respond:async () => say(original)}}).run(f.state, '写一句桂花乌龙文案');
++  const loaded = await f.reload();
++  let decisions = 0;
++  const result = await new ContextAgent({tools, save:f.save, brain:{respond:async input => {
++    decisions++;
++    assert.ok(input.some(m => m.role === 'assistant' && m.content === original));
++    assert.ok(input.some(m => m.role === 'user' && m.content === '把刚才的文案缩短，不改变卖点'));
++    return say(revised);
++  }}}).run(loaded, '把刚才的文案缩短，不改变卖点');
++  assert.equal(result.text, revised);
++  assert.equal(result.status, 'completed');
++  assert.equal(decisions, 1);
++  assert.equal(result.toolCalls, 0);
++  const after = await f.reload();
++  assert.deepEqual(after.records.filter(r => r.kind === 'message' && r.role === 'assistant').map(r => r.content), [original, revised]);
++  assert.equal(Object.keys(after.assets).length, 0);
++  const request = after.records.filter(r => r.event === 'model_request').at(-1);
++  const trace = await after.readTrace(request.id);
++  assert.ok(trace.input.some(m => m.role === 'assistant' && m.content === original));
++});
++
++test('versioned editing: one atomic chat revision, then one asset revision, preserve actual parents across reloads', async t => {
++  const f = await fixture(t), tools = createTools();
++  const original = appendRecord(f.state, {kind:'message', role:'assistant', content:'桂花与乌龙双香，午后慢饮。', turnId:'earlier', groupId:'earlier'});
++  await f.save(f.state);
++  let step = 0, saved;
++  const result = await new ContextAgent({tools, save:f.save, brain:{respond:async input => {
++    if (step++ === 0) {
++      assert.ok(input.some(m => m.role === 'assistant' && m.content === original.content));
++      return call('archive-and-revise', {parentMessageId:original.id, content:'桂花乌龙，双香慢饮。', title:'茶文案修订'});
++    }
++    saved = feedback(input);
++    assert.equal(saved.ok, true);
++    return say(saved.asset.content);
++  }}}).run(f.state, '把刚才聊天中的文案再缩短，保存成有原稿版本关系的文稿');
++  assert.equal(result.toolCalls, 1);
++  const loaded = await f.reload();
++  const child = loaded.assets[saved.asset.id], parent = loaded.assets[child.parentId];
++  assert.equal(parent.content, original.content);
++  assert.equal(parent.sourceMessageId, original.id);
++  assert.equal(child.version, 2);
++  assert.equal(Object.keys(loaded.assets).length, 2);
++  step = 0;
++  const next = await new ContextAgent({tools, save:f.save, brain:{respond:async input => {
++    if (step++ === 0) {
++      assert.equal(feedback(input).asset.content, child.content);
++      return call('asset-revise', {parentId:child.id, content:'双香桂花乌龙，悠然慢饮。'});
++    }
++    saved = feedback(input);
++    assert.equal(saved.ok, true);
++    return say(saved.asset.content);
++  }}}).run(loaded, `修改文稿 ${child.id}，语气放松一些，保存下一版`);
++  assert.equal(next.toolCalls, 1);
++  const after = await f.reload();
++  assert.equal(after.assets[saved.asset.id].parentId, child.id);
++  assert.equal(after.assets[saved.asset.id].version, 3);
++  assert.equal(after.assets[parent.id].content, original.content);
++  assert.equal(after.assets[child.id].content, child.content);
++  assert.deepEqual(after.records.filter(r => r.kind === 'tool_call').map(r => r.name), ['save_document', 'save_document']);
++});

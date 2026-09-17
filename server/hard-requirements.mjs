@@ -4,7 +4,8 @@ import {constraintChecks} from './constraint-checks.mjs';
 export const bodyLengthSchema={type:'object',additionalProperties:false,required:['min','max','unit'],properties:{min:{type:'integer',minimum:0},max:{type:'integer',minimum:1},unit:{enum:['non_punctuation_characters','characters']}}};
 export const textUnitsSchema={type:'array',minItems:1,items:{type:'object',additionalProperties:false,required:['body'],properties:{body:{type:'string',minLength:1},titleBefore:{type:'string'},titleAfter:{type:'string'}}}};
 export const renderTextUnits=units=>units.map(u=>[u.titleBefore,u.body,u.titleAfter].filter(Boolean).join('\n\n')).join('\n\n');
-export const countBody=(body,unit)=>[...body.replace(/[*`#]/g,'').replace(unit==='characters'?/$^/u:/[\p{P}\p{Z}\s]/gu,'')].length;
+import { countBody } from './text-measure.mjs';
+export { countBody } from './text-measure.mjs';
 export function hardTextChecks(item,result){
  const checks=[...(result.stageChecks||constraintChecks(item,result).checks)],spec=item.spec||{};
  const missing=(field,expected)=>{if(!checks.some(c=>c.field===field))checks.push({field,expected,actual:null,status:'not_evaluated'});};

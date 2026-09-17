@@ -105,7 +105,7 @@ test('identical prompt with new call identity can legitimately create another im
 
 test('all proposals in a tool batch can be approved as one concrete group', async () => {
   const f = fixture();
-  const results = await f.tools.executeBatch([{ name: 'generate_image', args: imageArgs, callId: 'one' }, { name: 'generate_image', args: imageArgs, callId: 'two' }], f.ctx);
+  const results = await Promise.all(['one','two'].map(callId=>f.tools.execute('generate_image',imageArgs,{...f.ctx,callId})));
   assert.equal(results.length, 2); assert.ok(results.every(x => x.status === 'approval_required'));
   const approval = await approveProposals(f.state, { proposalIds: results.map(x => x.proposalId), ownerId: 'alice' }, f.ctx.save);
   assert.equal(approval.proposals.length, 2);

@@ -1,0 +1,83 @@
+{
+  "kind": "offline_input_and_schema_replay",
+  "realModelRuns": 0,
+  "providerCalls": 0,
+  "sessions": 23,
+  "wireCalls": 57,
+  "wirePassed": 57,
+  "wireFailures": [],
+  "projections": [
+    {
+      "case": "IMG_MULTI_001",
+      "file": "IMG_MULTI_001-input-projection.json",
+      "beforeEstimatedInputTokens": 5664,
+      "afterEstimatedInputTokens": 4666,
+      "beforeFixedCountInCatalog": true,
+      "afterFixedCountInCatalog": false,
+      "afterOmittedRecords": 0
+    },
+    {
+      "case": "MT_TASK_001",
+      "file": "MT_TASK_001-input-projection.json",
+      "beforeEstimatedInputTokens": 13602,
+      "afterEstimatedInputTokens": 13338,
+      "beforeFixedCountInCatalog": true,
+      "afterFixedCountInCatalog": false,
+      "afterOmittedRecords": 0
+    },
+    {
+      "case": "QA_001",
+      "file": "QA_001-input-projection.json",
+      "beforeEstimatedInputTokens": 5646,
+      "afterEstimatedInputTokens": 4648,
+      "beforeFixedCountInCatalog": true,
+      "afterFixedCountInCatalog": false,
+      "afterOmittedRecords": 0
+    },
+    {
+      "case": "USER_STYLE_01",
+      "file": "USER_STYLE_01-input-projection.json",
+      "beforeEstimatedInputTokens": 5985,
+      "afterEstimatedInputTokens": 5001,
+      "beforeFixedCountInCatalog": true,
+      "afterFixedCountInCatalog": false,
+      "afterOmittedRecords": 0
+    },
+    {
+      "case": "USER_STYLE_06",
+      "file": "USER_STYLE_06-input-projection.json",
+      "beforeEstimatedInputTokens": 10808,
+      "afterEstimatedInputTokens": 10234,
+      "beforeFixedCountInCatalog": true,
+      "afterFixedCountInCatalog": false,
+      "afterOmittedRecords": 0
+    }
+  ],
+  "memoryReads": [
+    {
+      "case": "IMG_MULTI_001",
+      "beforeCharacters": 33084,
+      "afterCharacters": 713,
+      "beforeKinds": [
+        "start",
+        "message",
+        "model_request",
+        "model_response",
+        "message",
+        "tool_call",
+        "tool_call",
+        "tool_result",
+        "tool_result",
+        "model_request",
+        "model_response",
+        "tool_call"
+      ],
+      "afterKinds": [
+        "message",
+        "message"
+      ],
+      "targetRetained": true,
+      "originalRecordsUnchanged": true
+    }
+  ]
+}

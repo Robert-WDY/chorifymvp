@@ -7,7 +7,7 @@ import { createTools } from '../server/context-agent/tools.mjs';
 import { createImageObserver } from '../server/context-agent/providers.mjs';
 import { ContextAgent } from '../server/context-agent/loop.mjs';
 import { loadCatalog, readSkill } from '../server/catalog.mjs';
-import { readAgentSkill, projectSkills } from '../server/context-agent/skills.mjs';
+import { loadAgentCatalog, readAgentSkill, projectSkills } from '../server/context-agent/skills.mjs';
 
 const prompt = await readFile(new URL('../server/context-agent/prompt.md', import.meta.url), 'utf8');
 const say = text => [{ type: 'message', role: 'assistant', content: [{ type: 'output_text', text }] }];
@@ -56,7 +56,7 @@ test('repair: surrounding memory cannot reintroduce nested model requests or ret
 });
 
 test('repair: actual catalog projection removes fixed direction count without changing legacy catalog', async () => {
-  const catalog = await loadCatalog(), before = JSON.stringify(catalog);
+  const catalog = await loadAgentCatalog(), before = JSON.stringify(catalog);
   const { state, tools } = fixture({ catalog, mode: 'live' });
   message(state, '给我一个方向，别加备选');
   const { input } = buildContext(state, { systemPrompt: prompt, skillDirectory: catalog.skills, toolDefinitions: tools.definitions });
@@ -65,7 +65,7 @@ test('repair: actual catalog projection removes fixed direction count without ch
   const method = await readAgentSkill(catalog, 'direction-designer-zh-v1');
   assert.doesNotMatch(method.content, /structure\.directions|compiled|当前节点/);
   assert.equal(JSON.stringify(catalog), before);
-  assert.match((await readSkill(catalog, 'direction-designer-zh-v1')).content, /structure\.directions/);
+  assert.match((await readSkill(await loadCatalog(), 'direction-designer-zh-v1')).content, /structure\.directions/);
   assert.match(projectSkills(catalog.skills).find(s => s.slug === 'video-decomposition-zh-v1').description, /不代表已接通/);
 });
 
@@ -75,7 +75,8 @@ test('repair: long adapted methods page without losing original professional con
   do { const p = await readAgentSkill(catalog, 'actor-realism-v2', undefined, next); adapted += p.content; next = p.nextOffset; } while (next !== null);
   let raw = ''; next = 0;
   do { const p = await readSkill(catalog, 'actor-realism-v2', undefined, next); raw += p.content; next = p.nextOffset; } while (next !== null);
-  assert.ok(adapted.endsWith(raw.slice(raw.indexOf('\n# ', 1) + 1)));
+  assert.equal(adapted,await readFile(new URL('../server/context-agent/methods/v1/actor-realism-v2/method.md',import.meta.url),'utf8'));
+  assert.ok(adapted.length>raw.length*0.85,'professional method must remain substantial');
   assert.doesNotMatch(adapted, /# 当前阶段边界/);
 });
 
@@ -148,33 +149,32 @@ test('repair: archival and revision keep existing persistence rollback and call 
   assert.equal((await f.tools.execute('save_document', { content: 'changed' }, f.ctx)).error.code, 'call_identity_conflict');
 });
 
-test('repair: observation fills exact linked material and co-uploaded unknowns, excludes unrelated documents', async () => {
+test('repair: observation reads explicitly selected material and does not expand to co-uploaded documents', async () => {
   let received;
   const f = fixture({ observeImages: async args => { received = args; return { text: '实际容量和开盖结构无法判断。' }; } });
   img(f.state, 'product', { sourceIds: ['facts'] });
   doc(f.state, 'facts', '用户提供：白色；容量未知。');
   doc(f.state, 'more', '开盖机制待确认'); doc(f.state, 'unrelated', '另一个商品容量500ml');
   message(f.state, '看附件', 'user', { attachments: [{ id: 'product' }, { id: 'more' }] });
-  const out = await f.tools.execute('analyze_image', { imageIds: ['product'], question: '哪些卖点有依据？' }, f.ctx);
+  const out = await f.tools.execute('analyze_image', { imageIds: ['product'], question: '哪些卖点有依据？',materials:[{sourceId:'facts'}] }, f.ctx);
   assert.equal(out.ok, true);
-  assert.deepEqual(received.materials.map(m => m.sourceId).sort(), ['facts', 'more']);
+  assert.deepEqual(received.materials.map(m => m.sourceId).sort(), ['facts']);
   assert.equal(received.materials.find(m => m.sourceId === 'facts').content, f.state.assets.facts.content);
-  assert.equal(received.materials.find(m => m.sourceId === 'facts').association, 'source_lineage');
-  assert.equal(received.materials.find(m => m.sourceId === 'more').association, 'co_upload_candidate');
+  assert.ok(!received.materials.some(m=>m.sourceId==='more'));
   assert.ok(received.materials.every(m => m.provenance === 'stored_original'));
   assert.ok(!JSON.stringify(received).includes('500ml'));
 });
 
-test('repair: image type error recovery retains automatic source/result comparison', async () => {
+test('repair: image type error recovery uses explicit source/result comparison', async () => {
   let received, calls = 0;
   const f = fixture({ observeImages: async args => { received = args; calls++; return { text: '瓶身颜色变化，保持要求未满足。' }; } });
   img(f.state, 'original'); img(f.state, 'result', { parentId: 'original', version: 2 });
   const bad = await f.tools.execute('analyze_image', { imageIds: ['result'], question: '是否保持？', materials: [{ sourceId: 'original', content: '原图' }] }, f.ctx);
   assert.equal(bad.error.code, 'asset_type_mismatch'); assert.equal(calls, 0);
   assert.match(bad.error.message, /imageIds/);
-  const repaired = await f.tools.execute('analyze_image', { imageIds: ['result'], question: '是否保持？' }, f.ctx);
+  const repaired = await f.tools.execute('compare_images', { sourceImageId:'original',resultImageId:'result',question:'是否保持？' }, f.ctx);
   assert.equal(repaired.ok, true);
-  assert.deepEqual(received.images.map(i => i.id), ['result', 'original']);
+  assert.deepEqual(received.images.map(i => i.id), ['original', 'result']);
   assert.deepEqual(received.comparisons, [{ sourceId: 'original', resultId: 'result' }]);
   assert.match(repaired.observation.text, /未满足/);
   assert.equal(repaired.passed, undefined);
@@ -187,7 +187,7 @@ test('repair: explicit dual images are deduplicated and impossible source cannot
   const pair = await f.tools.execute('analyze_image', { imageIds: ['original', 'result'], question: 'compare' }, f.ctx);
   assert.deepEqual(pair.imageIds, ['original', 'result']);
   f.state.assets.original.simulated = true;
-  const failed = await f.tools.execute('analyze_image', { imageIds: ['result'], question: 'compare' }, f.ctx);
+  const failed = await f.tools.execute('compare_images', { sourceImageId:'original',resultImageId:'result',question:'compare' }, f.ctx);
   assert.equal(failed.error.code, 'real_image_required'); assert.equal(calls, 1);
 });
 

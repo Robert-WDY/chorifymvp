@@ -56,7 +56,7 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
                 message=previous.message;
               }else{
                 const approval=await approveProposals(state,{proposalIds:data.proposalIds,ownerId},()=>store.save(state,ownerId));
-                message='我批准以下已展示的具体工具调用，仅限这些参数：\n'+JSON.stringify(approval);
+                message='我批准以下已展示的具体工具调用，仅限这些参数：\n'+JSON.stringify({approvalId:approval.approvalId,proposalIds:approval.proposalIds,proposals:approval.proposals.map(({proposalId,name})=>({proposalId,name}))});
               }
             }
             if(typeof message!=='string'||!message.trim())throw new Error('请输入正文');

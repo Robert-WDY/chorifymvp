@@ -6,6 +6,7 @@ import {loadCorpus,pendingReport} from './context-agent-corpus.mjs';
 const reportRoot=fileURLToPath(new URL('../evaluations/2026-09-16-context-agent/',import.meta.url));
 const corpus=await loadCorpus(),args=process.argv.slice(2),real=args.includes('--real');
 const report=pendingReport(corpus);
+if(!real&&(args.includes('--vision')||args.includes('--media-live')))throw new Error('Vision/media evaluation also requires explicit --real authorization');
 if(!real){
   await mkdir(reportRoot,{recursive:true});await writeFile(join(reportRoot,'semantic-status.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({mode:'offline_corpus_integrity',caseCount:23,filesVerified:corpus.manifest.files.length,realModelCalls:0,mediaCalls:0,semanticResults:'23 not_run',report:join(reportRoot,'semantic-status.json')}));
@@ -16,15 +17,27 @@ if(!real){
   const requested=args.find(x=>x.startsWith('--cases='))?.slice(8).split(',');
   if(!requested&&!args.includes('--all'))throw new Error('Choose explicit --cases=ID,ID or --all');
   if(requested?.some(id=>!corpus.manifest.caseIds.includes(id)))throw new Error('Unknown case ID');
-  const [{ContextAgent},{createSession},{createTools},{createBrain},{loadCatalog},{runCaseTurns}]=await Promise.all([
-    import('../server/context-agent/loop.mjs'),import('../server/context-agent/history.mjs'),import('../server/context-agent/tools.mjs'),import('../server/adapters.mjs'),import('../server/catalog.mjs'),import('./context-agent-driver.mjs')]);
+  const [{ContextAgent},{createSession,HistoryStore},{assembleAgentTools},{createBrain},{loadAgentCatalog:loadCatalog},{runCaseTurns}]=await Promise.all([
+    import('../server/context-agent/loop.mjs'),import('../server/context-agent/history.mjs'),import('../server/context-agent/runtime.mjs'),import('../server/adapters.mjs'),import('../server/context-agent/skills.mjs'),import('./context-agent-driver.mjs')]);
+  const mediaEnabled=args.includes('--media-live'),mediaMode=mediaEnabled?'live':'simulation';
+  const mediaBudget=Number(process.env.CHORIFY_CONTEXT_MEDIA_MAX_CALLS||0);
+  if(mediaEnabled&&(process.env.CHORIFY_CONTEXT_REAL_MEDIA_AUTHORIZED!=='1'||!Number.isInteger(mediaBudget)||mediaBudget<1))throw new Error('Paid corpus submissions require CHORIFY_CONTEXT_REAL_MEDIA_AUTHORIZED=1 and a positive CHORIFY_CONTEXT_MEDIA_MAX_CALLS; explicit corpus approval actions are the approval boundary');
+  const visionEnabled=args.includes('--vision');
+  if(visionEnabled&&process.env.CHORIFY_CONTEXT_VISION_AUTHORIZED!=='1')throw new Error('Vision calls require explicit CHORIFY_CONTEXT_VISION_AUTHORIZED=1 and share the total model budget');
   const brain=createBrain(),catalog=await loadCatalog();
   if(!brain.config.key||!brain.config.model)throw new Error('Model configuration is incomplete');
   const expectedModel=process.env.CHORIFY_CONTEXT_EXPECTED_MODEL;
   if(!expectedModel||expectedModel!==brain.config.model)throw new Error('CHORIFY_CONTEXT_EXPECTED_MODEL must exactly match the configured model');
   const mapping=process.env.CHORIFY_CONTEXT_INPUT_URLS?JSON.parse(await readFile(process.env.CHORIFY_CONTEXT_INPUT_URLS,'utf8')):{};
   const runRoot=join(reportRoot,'runs',new Date().toISOString().replace(/[:.]/g,'-'));await mkdir(runRoot,{recursive:true});
-  let modelCalls=0;
+  let modelCalls=0,mediaCalls=0;
+  let media;
+  if(mediaEnabled){
+    const {createMediaProvider}=await import('../server/context-agent/providers.mjs');
+    const provider=createMediaProvider({key:process.env.DOUBAO_API_KEY,baseUrl:process.env.DOUBAO_BASE_URL||'https://ark.cn-beijing.volces.com',imageModel:process.env.DOUBAO_IMAGE_MODEL,videoModel:process.env.DOUBAO_VIDEO_MODEL});
+    if(!provider.image&&!provider.video)throw new Error('Paid media provider configuration is incomplete');
+    media={...provider};for(const name of ['image','video'])if(provider[name])media[name]=async(...parameters)=>{if(mediaCalls>=mediaBudget)throw Object.assign(new Error('Evaluation media submission budget exhausted'),{submitted:false});mediaCalls++;return provider[name](...parameters);};
+  }
   const meteredBrain={get lastCall(){return brain.lastCall;},async respond(...parameters){if(modelCalls>=budget)throw Object.assign(new Error('Evaluation total model call budget reached'),{code:'budget_exceeded'});modelCalls++;return brain.respond(...parameters);}};
   for(const c of corpus.cases){
     const row=report.results.find(r=>r.caseId===c.id);
@@ -45,14 +58,17 @@ if(!real){
       }else inputs.push({type:'text',name:path,content:await readFile(join(corpus.root,path),'utf8')});
     }
     const state=createSession({ownerId:`evaluation:${c.id}`}),caseRoot=join(runRoot,c.id);await mkdir(caseRoot,{recursive:true});
-    const save=async()=>writeFile(join(caseRoot,'session.json'),JSON.stringify(state,null,2)+'\n');
-    const tools=createTools({catalog,mode:'simulation'});
-    const agent=new ContextAgent({brain:meteredBrain,tools,catalog,save,maxSteps:Math.min(16,budget),maxMediaCalls:8});
+    const store=new HistoryStore(join(caseRoot,'storage'));
+    const save=async()=>store.save(state,state.ownerId);
+    const tools=assembleAgentTools({catalog,mode:mediaMode,media,visionEnabled,visionBrain:meteredBrain});
+    const agent=new ContextAgent({brain:meteredBrain,tools,catalog,save,maxSteps:Math.min(16,budget),maxMediaCalls:mediaEnabled?mediaBudget:8});
+    const mediaBefore=mediaCalls;
     const {rounds}=await runCaseTurns({caseData:c,agent,state,inputs,save,canCall:()=>modelCalls<budget});
-    await save();await writeFile(join(caseRoot,'original-case.json'),JSON.stringify(c,null,2)+'\n');
-    Object.assign(row,{realModel:'executed_requires_review',realMedia:'not_run',visualReview:'not_run',businessAcceptance:'unreviewed',reason:'Review actual trace against unchanged expected; media is simulation, observation service is not injected',inputUrlIdentity:'operator-declared hash only; remote bytes not independently checked',rounds,trace:`${c.id}/session.json`});
-    await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaMode:'simulation'},null,2)+'\n');
+    await save();await writeFile(join(caseRoot,'session.json'),JSON.stringify(state,null,2)+'\n');await writeFile(join(caseRoot,'original-case.json'),JSON.stringify(c,null,2)+'\n');
+    const observationCalls=state.records.filter(r=>r.event==='model_request'&&r.phase==='image_observation').length;
+    Object.assign(row,{observationCalls,realObservation:observationCalls?'executed_requires_review':'not_run',realModel:'executed_requires_review',realMedia:mediaCalls>mediaBefore?'executed_requires_review':'not_run',visualReview:'not_run',businessAcceptance:'unreviewed',reason:`Review unchanged expected manually; media mode ${mediaMode}; vision ${visionEnabled?'enabled':'disabled'}, actual observation calls: ${observationCalls}`,inputUrlIdentity:'operator-declared hash only; remote bytes not independently checked',rounds,trace:`${c.id}/session.json`});
+    await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaCalls,mediaBudget,mediaMode},null,2)+'\n');
   }
-  await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaMode:'simulation'},null,2)+'\n');
-  console.log(JSON.stringify({runRoot,modelCalls,budget,mediaMode:'simulation',acceptance:'manual review required; no automatic semantic pass'}));
+  await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaCalls,mediaBudget,mediaMode},null,2)+'\n');
+  console.log(JSON.stringify({runRoot,modelCalls,budget,mediaCalls,mediaBudget,mediaMode,acceptance:'manual review required; no automatic semantic pass'}));
 }

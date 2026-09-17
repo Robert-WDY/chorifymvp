@@ -65,3 +65,9 @@ node --test tests/future-source-binding.test.mjs
 | `validation/` | Git 导入后的实际离线验证结果 |
 
 [IMPORT-MANIFEST.json](IMPORT-MANIFEST.json) 记录导入指纹和发布调整；[原始 README](README-HISTORICAL-20260916.md) 与旧日期报告是历史记录，不代表当前端到端验收结论。Skill 完整性及部分 trace 依赖字节哈希，仓库关闭自动换行转换。
+
+## 上下文 Agent 与长期工作规范
+
+本分支另有独立的 [上下文 Agent 入口](server/context-agent/README.md)，使用 `npm run start:context` 启动。上文 `npm start` 和 compiled 说明仍对应旧入口。新版要求 Node >=22.13；当前简化与离线验收见 [2026-09-17 验收报告](evaluations/2026-09-17-context-agent-loop-alignment/README.md)。
+
+[AGENTS.md](AGENTS.md) 是项目长期工作规范入口，补充且保留以上约定与历史报告。每轮修复必须填写四列“修复总结表”，追加到 [统一修复记录 FIXES.md](FIXES.md)，并在最终回复展示；不能只列修改文件或测试总数。

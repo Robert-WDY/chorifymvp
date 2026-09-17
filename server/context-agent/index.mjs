@@ -1,9 +1,9 @@
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {createBrain} from '../adapters.mjs';
-import {loadCatalog} from '../catalog.mjs';
-import {createTools} from './tools.mjs';
-import {createMediaProvider,createImageObserver} from './providers.mjs';
+import {loadAgentCatalog as loadCatalog} from './skills.mjs';
+import {assembleAgentTools} from './runtime.mjs';
+import {createMediaProvider} from './providers.mjs';
 import {createContextServer} from './http.mjs';
 
 const modelEnabled=process.env.CONTEXT_AGENT_ALLOW_MODEL==='1';
@@ -19,8 +19,9 @@ const brain=modelEnabled?createBrain():{config:{model:'未启用'},respond:async
 const catalog=await loadCatalog();
 const media=mediaEnabled?createMediaProvider({key:process.env.DOUBAO_API_KEY,baseUrl:process.env.DOUBAO_BASE_URL||'https://ark.cn-beijing.volces.com',imageModel:process.env.DOUBAO_IMAGE_MODEL,videoModel:process.env.DOUBAO_VIDEO_MODEL}):undefined;
 // Vision is a separately declared provider capability. Never assume a text model sees URL strings.
-const observeImages=modelEnabled&&process.env.CONTEXT_AGENT_VISION_ENABLED==='1'?createImageObserver(createBrain()):undefined;
-const tools=createTools({catalog,media,observeImages,mode});
+const visionEnabled=modelEnabled&&process.env.CONTEXT_AGENT_VISION_ENABLED==='1';
+const tools=assembleAgentTools({catalog,media,visionEnabled,visionBrain:visionEnabled?createBrain():undefined,mode,
+  observationTokenBudget:integer('CONTEXT_AGENT_OBSERVATION_TOKENS',16000,1000,128000)});
 const directory=resolve(process.env.CONTEXT_AGENT_DATA_DIR||fileURLToPath(new URL('../../data/context-agent/',import.meta.url)));
 const port=integer('CONTEXT_AGENT_PORT',3212,1024,65535);
 const {server,active}=createContextServer({brain,tools,catalog,directory,modelEnabled,mode,agentOptions:{maxSteps:integer('CONTEXT_AGENT_MAX_STEPS',16,1,32),maxModelCalls:integer('CONTEXT_AGENT_MAX_MODEL_CALLS',16,1,64),maxToolCalls:integer('CONTEXT_AGENT_MAX_TOOL_CALLS',48,1,96),contextTokenBudget:integer('CONTEXT_AGENT_CONTEXT_TOKENS',24000,8000,128000),maxMediaCalls}});

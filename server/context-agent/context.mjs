@@ -70,7 +70,7 @@ function projectRecord(record, toolResultChars = Infinity) {
 }
 
 function projectGroup(group, toolResultChars = Infinity) {
-  return { ...group, toolResultChars, input: group.records.map(record => projectRecord(record, toolResultChars)).filter(Boolean) };
+  return { ...group, toolResultChars };
 }
 
 function dataMessage(data) {
@@ -89,35 +89,54 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
   if (latestFeedback) mandatory.add(latestFeedback.id);
   if (latestUser && !usable.some(group => group.records.some(record => record.id === latestUser.id))) contextError('The latest user message shares an incomplete tool group; repair the protocol history before building context.', { incompleteGroups: [...incomplete] });
 
-  const assetDirectory = includeAssetDirectory ? Object.entries(state.assets ?? {}).map(([id, asset]) => ({ id, kind: asset.kind ?? asset.type, title: asset.title ?? asset.name, version: asset.version, sourceIds: asset.sourceIds, sourceMessageId: asset.sourceMessageId, ...(asset.parentId ? { parentId: asset.parentId } : {}) })) : [];
+  const available = tokenBudget - reservedTokens - estimateTokens(toolDefinitions);
   const registeredTools = toolDefinitions.map(tool => tool.name);
   const capabilities = registeredTools.length ? { registeredTools, imageObservation: registeredTools.includes('analyze_image'), videoObservation: registeredTools.includes('analyze_video'),
-    note: 'Capabilities describe the current registry, not the Skill catalog. Text scripts and prompts do not require media execution. A registered media tool may be simulation-only; follow its description and actual result.' } : null;
-  // Expose exact server-issued authorization receipts, never inferred chat approval.
-  // The tool guard independently checks the durable receipt and parameter digest.
-  const toolApprovals = Object.values(state.approvals ?? {}).filter(receipt => receipt.kind === 'approval' && receipt.ownerId === state.ownerId && receipt.sessionId === state.id).map(receipt => {
-    const proposals = (receipt.proposalIds ?? []).map(id => state.approvals[id]).filter(proposal => proposal?.kind === 'proposal' && proposal.ownerId === state.ownerId && proposal.sessionId === state.id && receipt.digests?.[proposal.proposalId] === proposal.digest && !Object.values(state.invocations ?? {}).some(invocation => invocation.kind === 'media' && invocation.proposalId === proposal.proposalId && invocation.attempted)).map(proposal => ({ proposalId: proposal.proposalId, name: proposal.name, args: structuredClone(proposal.args), mode: proposal.mode }));
-    return { source: 'server_receipt', approvalId: receipt.approvalId, approvedAt: receipt.approvedAt, proposals };
-  }).filter(receipt => receipt.proposals.length);
+    note: 'Tools define current capabilities. Methods do not enable media. Follow the mode in each actual tool definition.' } : null;
+  const currentText = JSON.stringify(latestUser?.content ?? '');
+  const explicitIds = new Set(latestUser?.attachments?.map(a => a.id) ?? []);
+  const allAssets = Object.entries(state.assets ?? {});
+  for (const [id] of allAssets) if (currentText.includes(id)) explicitIds.add(id);
+  const candidates = [...allAssets.filter(([id]) => explicitIds.has(id)), ...allAssets.filter(([id]) => !explicitIds.has(id)).reverse()];
+  const assetDirectory = [];
+  const directoryBudget = Math.max(0, Math.min(2000, Math.floor(available / 5)));
+  if (includeAssetDirectory) for (const [id, asset] of candidates) {
+    const row = { id, kind: asset.kind ?? asset.type, title: (asset.title ?? asset.name ?? '').slice(0, 100), version: asset.version,
+      ...(asset.parentId ? { parentId: asset.parentId } : {}) };
+    if (assetDirectory.length >= 24 || estimateTokens([...assetDirectory, row]) > directoryBudget) continue;
+    assetDirectory.push(row);
+  }
+  // Only bounded identities enter the default view. Full approved arguments stay
+  // durable and are fetched/executed by ID, not retyped by the model.
+  const toolApprovals = Object.values(state.approvals ?? {}).filter(r => r.kind === 'approval' && r.ownerId === state.ownerId && r.sessionId === state.id).reverse().slice(0, 2).map(receipt => ({
+    source: 'server_receipt', approvalId: receipt.approvalId,
+    proposals: (receipt.proposalIds ?? []).filter(id => {
+      const p = state.approvals[id];
+      return p?.ownerId === state.ownerId && p.sessionId === state.id && receipt.digests?.[id] === p.digest && !Object.values(state.invocations ?? {}).some(i => i.proposalId === id && i.attempted);
+    }).slice(0, 8).map(proposalId => ({ proposalId, name: state.approvals[proposalId].name }))
+  })).filter(r => r.proposals.length);
   const prefix = [{ role: 'system', content: systemPrompt }];
-  if (skillDirectory.length || assetDirectory.length || toolApprovals.length || capabilities) prefix.push(dataMessage({ skillDirectory: projectSkills(skillDirectory), assetDirectory, ...(capabilities ? { capabilities } : {}), ...(toolApprovals.length ? { toolApprovals } : {}) }));
-  const available = tokenBudget - reservedTokens - estimateTokens(toolDefinitions);
+  if (skillDirectory.length || assetDirectory.length || toolApprovals.length || capabilities || (includeAssetDirectory && allAssets.length)) prefix.push(dataMessage({
+    skillDirectory: projectSkills(skillDirectory).slice(0, 20), assetDirectory,
+    ...(includeAssetDirectory && allAssets.length > assetDirectory.length ? { assetWindow: { total: allAssets.length, shown: assetDirectory.length, readMore: 'list_assets: query or offset/limit; read_asset: exact ID' } } : {}),
+    ...(capabilities ? { capabilities } : {}), ...(toolApprovals.length ? { toolApprovals, approvalWindow: 'Recent IDs only. read_approval retrieves exact parameters or pages older approvals; execute_approved submits the saved call.' } : {}) }));
   const projections = new Map(usable.map(group => [group.id, projectGroup(group)]));
   const groupForRecord = new Map(usable.flatMap(group => group.records.map(record => [record.id, group.id])));
   const selected = new Set(mandatory);
   const compose = () => {
     const omitted = groups.filter(group => !selected.has(group.id) && group.records.some(record => record.kind !== 'run_event'));
-    const omittedSkills = omitted.flatMap(group => group.records.filter(record => record.kind === 'tool_call' && record.name === 'read_skill').map(call => {
+    const allOmittedSkills = omitted.flatMap(group => group.records.filter(record => record.kind === 'tool_call' && record.name === 'read_skill').map(call => {
       const result = group.records.find(record => record.kind === 'tool_result' && record.callId === call.callId);
       let argumentsValue;
       try { argumentsValue = JSON.parse(call.arguments); } catch { argumentsValue = {}; }
       return { callId: call.callId, slug: argumentsValue.slug, reference: argumentsValue.reference, recordId: result?.id ?? call.id, read: { tool: 'read_history', arguments: { messageId: result?.id ?? call.id, offset: 0, limit: 12000 } } };
     }));
+    const omittedSkills = [...new Map(allOmittedSkills.map(s => [JSON.stringify([s.slug, s.reference]), s])).values()].slice(-6);
     const notice = omitted.length ? [dataMessage({ historyWindow: { omittedGroups: omitted.length, incompleteGroups: incomplete.size, notice: 'Earlier records remain stored. Use search_history to locate original wording and read_history to recover it. Incomplete tool records do not prove execution succeeded.', firstRetainedRecordId: usable.find(group => selected.has(group.id))?.records[0]?.id ?? null, omittedSkillReads: omittedSkills } })] : [];
     const history = state.records.filter(record => selected.has(groupForRecord.get(record.id))).map(record => projectRecord(record, projections.get(groupForRecord.get(record.id)).toolResultChars)).filter(Boolean);
     // Short identities for retained originals; content is already present in history.
     // Only expose when the real tool can materialize an original message.
-    const originals = registeredTools.includes('save_document') ? state.records.filter(record => record.kind === 'message' && record.role === 'assistant' && selected.has(groupForRecord.get(record.id))).map(record => ({ messageId: record.id, turnId: record.turnId, excerpt: (typeof record.content === 'string' ? record.content : JSON.stringify(record.content)).slice(0, 80) })) : [];
+    const originals = registeredTools.includes('save_document') ? state.records.filter(record => record.kind === 'message' && record.role === 'assistant' && selected.has(groupForRecord.get(record.id))).slice(-8).map(record => ({ messageId: record.id, turnId: record.turnId, excerpt: (typeof record.content === 'string' ? record.content : JSON.stringify(record.content)).slice(0, 80) })) : [];
     return [...prefix, ...(originals.length ? [dataMessage({ originalMessages: originals, note: 'Original chat messages, not saved documents. Read by messageId when needed; save_document can preserve an exact original with sourceMessageId.' })] : []), ...notice, ...history];
   };
   let input = compose();

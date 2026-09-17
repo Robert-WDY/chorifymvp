@@ -2,7 +2,7 @@
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import Ajv from 'ajv';
-import { loadCatalog } from '../server/catalog.mjs';
+import { loadAgentCatalog as loadCatalog } from '../server/context-agent/skills.mjs';
 import { createTools } from '../server/context-agent/tools.mjs';
 import { createSession, readHistory } from '../server/context-agent/history.mjs';
 import { buildContext, estimateTokens } from '../server/context-agent/context.mjs';
