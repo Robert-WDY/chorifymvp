@@ -1,0 +1,49 @@
+# 六主题验收扩展
+
+基线：0cf6401c196ce742d734ee08e10b8ec357d63ceb。新增10组48轮自然语言对话，不修改冻结的23条原始用例。此批是测试设施与案例补充，没有运行真实模型或生成媒体，也不表示业务问题已修复。
+
+## 运行
+
+在仓库根目录预览（不调用模型）：
+
+```powershell
+node evals/context-agent-multiturn.mjs --acceptance
+```
+
+授权的真实文字模型运行（沿用 runner 的 deepseek-flash 配置限制，媒体始终模拟，禁用视觉）：
+
+```powershell
+node evals/context-agent-multiturn.mjs --acceptance --run --env=C:\path\to\local.env --budget=120
+```
+
+可用 `--cases=AC_MEMORY` 或逗号分隔的ID分批运行，避免总预算用尽导致后续案例未运行。默认输出到独立 `evaluation-runs/multiturn-<time>`，禁止复用既有目录。
+
+| ID | 覆盖 |
+| -- | -- |
+| AC_SOURCE | 同名长短稿、聊天原稿、局部修改、保存后的连续版本 |
+| AC_SCOPE | 一改三、一个标题加三个方向、仅原文且禁止多余输出 |
+| AC_MEMORY | 两客户、价格更正、撤销方向、未知项、长上下文挤出 |
+| AC_FACTS | 已知/未知/假设经过分析、文案、文字脚本的传播 |
+| AC_MEDIA | 自由创作、先方案、转述、部分批准、重复确认、修改后确认 |
+| AC_PROMPT_ONLY | 只提示词与随后准备方案的边界 |
+| AC_PRODUCT | 原图分析及真实商品保持；本入口明确not_run |
+| AC_RECOVERY_READ_ASSET | 指定轮首次读取失败，重试消费真实错误反馈 |
+| AC_RECOVERY_SAVE_DOCUMENT | 指定轮首次保存被拒，未执行不能当成功 |
+| AC_UNKNOWN | 上一步未知不能在下游补成承诺 |
+
+## 完整证据与审阅
+
+每例记录 `transport.json`（模型实际请求与响应）、`session.json`（完整会话导出）、`rounds.json`（逐轮结果和事件）、`before-N.json` / `after-N.json`（每轮state）、`faults.json`（明确标记注入的失败）。原始证据可能包含输入全文，应本地保存和审核后再分享。
+
+`review.json` 默认pending。交给GPT/Codex阅读全部证据，填写审阅者/模型、结论、首个失败阶段、具体文件及轮次或recordId、用户要求、实际行为和修复建议。按首个失败阶段汇总数量：上下文组装、原稿选择、请求范围、事实传播、规划/工具参数、工具反馈消费、媒体批准、最终交付；下游连带错误另记，避免重复计算根因。不能用HTTP200、completed、count或items声明替代语义判断。
+
+记忆案例只有在trace证明纠正原文离开近期窗口、摘要覆盖对应纠正消息后才算覆盖；否则标not_exercised，不能因最终答对而通过。失败注入若未命中指定工具，faultCoverage为not_exercised。注入错误是评测设施产生，不归因于产品自然失败。
+
+真实商品案例需另外接入有效原图、真实视觉和经具体方案批准的图片生成，再对照实际产物审阅；当前runner不支持这条真实画面验收，保持not_run。模拟媒体只能检查批准与提交协议，不能证明真实供应商回执或商品外观正确。视频不生成。
+
+## 本批验证
+
+- 新增离线测试2/2：六主题/案例证据完整性、失败注入无副作用/轮次及工具隔离/重试回到原工具。
+- 全量 `npm test`：927/927。
+- `npm run check`：404文件通过。
+- 预览列出10组48轮，没有调用模型。

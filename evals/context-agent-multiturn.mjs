@@ -8,6 +8,7 @@ import {ContextAgent} from '../server/context-agent/loop.mjs';
 import {HistoryStore} from '../server/context-agent/history.mjs';
 import {assembleAgentTools,assembleMemoryOptions} from '../server/context-agent/runtime.mjs';
 import {loadAgentCatalog} from '../server/context-agent/skills.mjs';
+import {acceptanceCases,withAcceptanceFault} from './context-agent-acceptance-cases.mjs';
 import {loadCorpus} from './context-agent-corpus.mjs';
 
 const args=process.argv.slice(2),envPath=args.find(x=>x.startsWith('--env='))?.slice(6);
@@ -69,9 +70,10 @@ if(args.includes('--diagnostic'))cases.splice(0,cases.length,
  t('使用当前图片方案工具保存1张虚构咖啡杯广告图的待批准方案：白色陶瓷杯、米白背景、1024x1024、无字无人。只准备，不提交。',{round:1}),
  t('确认生成。',{round:2,action:{type:'confirm_batch',from_round:1}}),
  t('我又点了一次确认，还是同一张，请返回原回执，不要重新提交。',{restart:true}) ]});
+if(args.includes('--acceptance'))cases.splice(0,cases.length,...acceptanceCases);
 const selected=args.find(x=>x.startsWith('--cases='))?.slice(8).split(',');
 if(selected){if(selected.some(id=>!cases.some(c=>c.id===id)))throw new Error('Unknown evaluation case');cases.splice(0,cases.length,...cases.filter(c=>selected.includes(c.id)));}
-if(!args.includes('--run')){console.log(JSON.stringify({provider:config.provider,model:config.model,keyConfigured:!!config.key,budget,cases:cases.map(c=>({id:c.id,turns:c.turns.length})),media:'simulation',vision:false,output:root},null,2));process.exit(0);}
+if(!args.includes('--run')){console.log(JSON.stringify({provider:config.provider,model:config.model,keyConfigured:!!config.key,budget,cases:cases.map(c=>({id:c.id,turns:c.turns.length,theme:c.theme,blockedReason:c.blockedReason})),media:'simulation',vision:false,output:root},null,2));process.exit(0);}
 if(config.model!=='deepseek-flash'||!config.key)throw new Error('Expected authorized configured deepseek-flash');
 await mkdir(dirname(root),{recursive:true});await mkdir(root,{recursive:false});
 const write=(path,value)=>writeFile(path,JSON.stringify(value,null,2)+'\n');
@@ -80,30 +82,37 @@ const catalog=await loadAgentCatalog();let calls=0,currentCase,currentRound,tran
 const wireFetch=async(url,options)=>{const entry={caseId:currentCase,round:currentRound,startedAt:new Date().toISOString(),request:JSON.parse(options.body)};transport.push(entry);try{const response=await fetch(url,options);entry.httpStatus=response.status;entry.response=await response.clone().json();return response;}catch(error){entry.error=error.message;throw error;}finally{entry.finishedAt=new Date().toISOString();await write(join(root,currentCase,'transport.json'),transport);}};
 const brain=createBrain(process.env,wireFetch);
 const metered={get lastCall(){return brain.lastCall;},respond:async(...parameters)=>{if(calls>=budget)throw Object.assign(new Error('Global evaluation budget exhausted'),{code:'budget_exceeded'});calls++;console.log(JSON.stringify({case:currentCase,round:currentRound,call:calls}));return brain.respond(...parameters);}};
-const metadata={startedAt:new Date().toISOString(),codeSha:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),provider:config.provider,model:config.model,budget,media:'simulation',vision:false,contextTokenBudget:24000,summary:assembleMemoryOptions({}),casesSha256:createHash('sha256').update(JSON.stringify(cases)).digest('hex'),entry:'actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI',authorization:'User requested one multi-turn evaluation and full trace analysis; no live media'};
+const metadata={startedAt:new Date().toISOString(),codeSha:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),provider:config.provider,model:config.model,budget,media:'simulation',vision:false,contextTokenBudget:24000,summary:assembleMemoryOptions({}),casesSha256:createHash('sha256').update(JSON.stringify(cases)).digest('hex'),entry:'actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI',authorization:'Explicit --run invocation required; real text model only, no live media'};
 await write(join(root,'manifest.json'),metadata);const results=[];
 for(const c of cases){
- if(calls>=budget)break;currentCase=c.id;transport=[];await mkdir(join(root,c.id));
+ if(calls>=budget){results.push({id:c.id,status:'not_run',reason:'Global model-call budget exhausted',acceptance:'not_run'});continue;}
+ if(c.blockedReason){results.push({id:c.id,status:'not_run',reason:c.blockedReason,acceptance:'not_run'});continue;}
+ currentCase=c.id;transport=[];await mkdir(join(root,c.id));
  let store=new HistoryStore(join(root,c.id,'storage'));let state=await store.create('evaluation:'+c.id);
- const startCalls=calls,rounds=[],byRound=new Map();
+ const startCalls=calls,rounds=[],byRound=new Map(),faultLog=[];
  for(const [i,turn]of c.turns.entries()){
   if(calls>=budget)break;currentRound=i+1;
   if(turn.restart){store=new HistoryStore(join(root,c.id,'storage'));state=await store.load(state.id,state.ownerId);}
-  const tools=assembleAgentTools({catalog,mode:'simulation',visionEnabled:false});
+  const tools=withAcceptanceFault(assembleAgentTools({catalog,mode:'simulation',visionEnabled:false}),c.fault,i+1,faultLog);
   const agent=new ContextAgent({brain:metered,tools,catalog,save:()=>store.save(state,state.ownerId),maxSteps:10,maxModelCalls:10,maxMediaCalls:8,memory:assembleMemoryOptions({})});
   let confirmation;
   if(turn.action){const previous=byRound.get(turn.action.from_round)||[];const ids=previous.filter(r=>r.kind==='tool_result').map(r=>{try{return JSON.parse(r.output);}catch{return {};}}).filter(r=>r.status==='approval_required').map(r=>r.proposalId);if(ids.length)confirmation={proposalIds:ids};else{rounds.push({round:i+1,user:turn.user,status:'not_run',reason:'Original button action has no displayed proposals'});break;}}
-  const before=state.records.length,started=Date.now();
-  const result=await agent.run(state,turn.user,()=>{},AbortSignal.timeout(300000),{requestId:c.id+':'+i,confirmation});
+  const before=state.records.length,started=Date.now(),events=[];
+  await write(join(root,c.id,`before-${i+1}.json`),state);
+  const result=await agent.run(state,turn.user,event=>events.push(event),AbortSignal.timeout(300000),{requestId:c.id+':'+i,confirmation});
   const records=state.records.slice(before);byRound.set(turn.round||i+1,records);
-  rounds.push({round:i+1,user:turn.user,restarted:!!turn.restart,result,elapsedMs:Date.now()-started,recordIds:records.map(r=>r.id)});
+  rounds.push({round:i+1,user:turn.user,restarted:!!turn.restart,result,elapsedMs:Date.now()-started,recordIds:records.map(r=>r.id),events});
+  await write(join(root,c.id,`after-${i+1}.json`),state);
+  await write(join(root,c.id,'faults.json'),faultLog);
   await write(join(root,c.id,'rounds.json'),rounds);
   await write(join(root,c.id,'session.json'),await store.exportSession(state.id,state.ownerId));
   console.log(JSON.stringify({case:c.id,round:i+1,status:result.status,modelCalls:result.modelCalls,text:result.text?.slice(0,100)}));
   if(result.status!=='completed')break;
  }
  await write(join(root,c.id,'rounds.json'),rounds);
- results.push({id:c.id,sessionId:state.id,turns:rounds.length,planned:c.turns.length,calls:calls-startCalls,summaries:Object.keys(state.summaries).length,acceptance:'requires_full_trace_review'});
+ results.push({id:c.id,sessionId:state.id,turns:rounds.length,planned:c.turns.length,calls:calls-startCalls,summaries:Object.keys(state.summaries).length,acceptance:'requires_full_trace_review',faultCoverage:c.fault?(faultLog.length?'injected':'not_exercised'):null});
+ await write(join(root,c.id,'review.json'),{status:'pending',reviewer:null,evidenceRequirements:c.evidence||[],expected:c.expected,coverageChecks:c.requires||[],earliestFailureStage:null,evidencePointers:[],reason:null});
  await write(join(root,'run.json'),{...metadata,calls,results,realMediaCalls:0,finishedAt:new Date().toISOString()});
 }
+await write(join(root,'run.json'),{...metadata,calls,results,realMediaCalls:0,finishedAt:new Date().toISOString()});
 console.log(JSON.stringify({root,calls,results,realMediaCalls:0}));
