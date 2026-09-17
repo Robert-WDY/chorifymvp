@@ -4,6 +4,8 @@
 
 ## 启动
 
+**本机隔离部署入口**：双击仓库根目录 `start-context-local.cmd`，访问 `http://127.0.0.1:3217`。它固定读取本仓库 `.env.local` 和 `data/isolated-local`，独立管理本实例进程，不使用下面通用入口的 `.env`、3212 或默认数据目录。[部署状态与验证](../../evaluations/2026-09-17-local-deployment/README.md)记录本次实际配置；以下通用启动说明仍保留。
+
 在仓库根目录执行 `npm run start:context`，浏览器打开 `http://127.0.0.1:3212`。旧版仍通过 `npm start` 启动，默认端口 3210。两者不互相回退。
 
 当前要求 Node >=22.13。新记录默认保存在 `data/context-agent/<owner-hash>/<session-id>.sqlite`，该目录被 Git 忽略。已有 JSON 在首次读取时迁移并保留原文件；完整 Trace 独立存储、按需读取，可导出完整会话。可以用 `CONTEXT_AGENT_DATA_DIR` 指定其他独立目录。当前 HTTP 是仅绑定本机的单用户开发入口，不是多租户公开部署服务；底层存取接口检查服务端 owner 身份。

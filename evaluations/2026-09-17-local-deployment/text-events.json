@@ -1,0 +1,109 @@
+[
+  {
+    "type": "public_event",
+    "eventId": "f1f7ee72-9ea7-4288-a5e7-c85164fc3c67",
+    "seq": 2,
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "at": "2026-09-17T08:40:35.929Z",
+    "kind": "message",
+    "messageId": "bb22ea6d-6956-4a6f-9c4b-2791aead19e4",
+    "role": "user",
+    "text": "只回复“本地独立实例正常”，不要调用工具。"
+  },
+  {
+    "type": "user_recorded",
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "assets": []
+  },
+  {
+    "type": "public_event",
+    "eventId": "72cd135e-a0c6-454e-b563-ca67f08742aa",
+    "seq": 4,
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "at": "2026-09-17T08:40:35.945Z",
+    "kind": "activity",
+    "activityId": "bd1524a6-e0cb-497f-8397-b82110b30946",
+    "category": "model",
+    "name": "agent",
+    "status": "running"
+  },
+  {
+    "type": "public_event",
+    "eventId": "eb3e40e3-c2c5-4c4a-8c7b-20d55ea23912",
+    "seq": 6,
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "at": "2026-09-17T08:40:36.956Z",
+    "kind": "activity",
+    "activityId": "bd1524a6-e0cb-497f-8397-b82110b30946",
+    "category": "model",
+    "name": "agent",
+    "status": "succeeded",
+    "durationMs": 1019
+  },
+  {
+    "type": "public_event",
+    "eventId": "457f6a1a-2a5e-4570-9225-bc6403e4c43b",
+    "seq": 8,
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "at": "2026-09-17T08:40:36.960Z",
+    "kind": "message",
+    "messageId": "289be791-762f-4f3a-abf9-3e31be640cd7",
+    "streamId": "bd1524a6-e0cb-497f-8397-b82110b30946",
+    "role": "assistant",
+    "text": "本地独立实例正常"
+  },
+  {
+    "type": "assistant",
+    "text": "本地独立实例正常",
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe"
+  },
+  {
+    "type": "public_event",
+    "eventId": "0b3ba9d8-ac28-4671-ab0c-102a711600c9",
+    "seq": 10,
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "at": "2026-09-17T08:40:36.966Z",
+    "kind": "turn_end",
+    "status": "completed"
+  },
+  {
+    "type": "end",
+    "status": "completed",
+    "turnId": "128801cc-ec01-4378-80c1-451512033dfe",
+    "text": "本地独立实例正常",
+    "modelCalls": 1,
+    "toolCalls": 0,
+    "modelAccounting": {
+      "agent": {
+        "calls": 1,
+        "durationMs": 1023,
+        "usage": [
+          {
+            "input_tokens": 6238,
+            "input_tokens_details": {
+              "cached_tokens": 3712
+            },
+            "output_tokens": 4,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 6242
+          }
+        ],
+        "cost": null
+      },
+      "image_observation": {
+        "calls": 0,
+        "durationMs": 0,
+        "usage": [],
+        "cost": null
+      },
+      "summary": {
+        "calls": 0,
+        "durationMs": 0,
+        "usage": [],
+        "cost": null
+      }
+    }
+  }
+]

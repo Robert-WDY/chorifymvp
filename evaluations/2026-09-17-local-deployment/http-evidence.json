@@ -1,0 +1,66 @@
+{
+  "at": "2026-09-17T08:40:36.989Z",
+  "engine": "context-agent",
+  "model": "deepseek-flash",
+  "modelEnabled": true,
+  "mediaMode": "simulation",
+  "limits": {
+    "maxSteps": 16,
+    "maxModelCalls": 16,
+    "maxToolCalls": 48,
+    "maxMediaCalls": 4
+  },
+  "checks": {
+    "index.html": {
+      "status": 200,
+      "sha256": "4d6890540ca2edd8e819a83feb0d2822f24f378f2c0cf1cdd81430f56ed4640a",
+      "matchesCheckout": true
+    },
+    "app.js": {
+      "status": 200,
+      "sha256": "87c04cd07aadbb0122b5aa650d105262e92a44c4438b4ea5fc6d274d14de4148",
+      "matchesCheckout": true
+    },
+    "style.css": {
+      "status": 200,
+      "sha256": "07ca67e9e12734d56a5a787753a421346f63b2bb5ccf908e902f73b8f5bfe49d",
+      "matchesCheckout": true
+    },
+    "liveText": {
+      "actualModelCalls": 1,
+      "toolCalls": 0,
+      "reply": "本地独立实例正常",
+      "usage": [
+        {
+          "input_tokens": 6238,
+          "input_tokens_details": {
+            "cached_tokens": 3712
+          },
+          "output_tokens": 4,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 6242
+        }
+      ]
+    }
+  },
+  "foreignOriginStatus": 403,
+  "missingTokenStatus": 403,
+  "oldEndpointStatus": 404,
+  "sessionInitiallyEmpty": true,
+  "sessionId": "53d0f49b-9eaf-4c82-972a-f9d862519f99",
+  "messages": [
+    {
+      "id": "bb22ea6d-6956-4a6f-9c4b-2791aead19e4",
+      "role": "user",
+      "content": "只回复“本地独立实例正常”，不要调用工具。",
+      "attachments": []
+    },
+    {
+      "id": "289be791-762f-4f3a-abf9-3e31be640cd7",
+      "role": "assistant",
+      "content": "本地独立实例正常"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" \"C:\\Users\\asus\\Desktop\\codex-workspace\\chorifymvp-git\\scripts\\context-local.mjs\" ",
+  "repeatStartSamePid": true,
+  "created": "2026-09-17T08:41:13.415594Z",
+  "entry": "C:\\Users\\asus\\Desktop\\codex-workspace\\chorifymvp-git\\scripts\\context-local.mjs",
+  "afterPid": 41680,
+  "listenerMatchesRecordedPid": true,
+  "port": 3217,
+  "localAddress": "127.0.0.1",
+  "repository": "C:\\Users\\asus\\Desktop\\codex-workspace\\chorifymvp-git",
+  "nodeVersion": "v24.19.0",
+  "beforePid": 40488
+}

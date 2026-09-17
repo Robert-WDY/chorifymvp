@@ -6,6 +6,21 @@
 
 ## 快速启动
 
+### 当前本机独立实例（2026-09-17）
+
+本机已部署的新 Agent 地址为 **http://127.0.0.1:3217**。在本仓库双击 `start-context-local.cmd` 启动；重复点击不会重复启动。停止或查看状态：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Status
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Stop
+```
+
+该启动器只读取本仓库私有 `.env.local`，固定使用 `data/isolated-local` 保存会话、`data/local-service` 保存进程标识与逐次启动日志，不读取其他 Chorify 的配置、会话或服务。使用同一 API 账号会共享供应商额度；凭据文件、数据及日志不进 Git。文字模型已启用，媒体为明确标记的模拟模式，真实媒体和视觉未开启，线上文字流关闭。具体方案批准门禁保留。
+
+这是本机后台进程，电脑重启后需再次双击启动，不是开机自启服务。首次在新 checkout 安装时将 `scripts/context-local.env.example` 复制为 `.env.local` 并配置凭据；不要覆盖已有配置。部署证据、验证范围及回滚见 [本地部署报告](evaluations/2026-09-17-local-deployment/README.md)。
+
+### 原有通用入口
+
 需要 Node.js 22+（建议当前 LTS）及 npm。历史 Python Skill 测试还需要 Python 3，可通过 `PYTHON_BIN` 指定解释器；默认执行链不依赖打包的 Python 运行时。
 
 ```sh
