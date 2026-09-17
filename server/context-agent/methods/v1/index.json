@@ -4,77 +4,77 @@
     {
       "slug": "actor-realism-v2",
       "name": "演员真实感与情绪优化器（V2）",
-      "description": "优化已有文字中的人物表演、动作、情绪和连续性；不授予媒体工具能力。"
+      "description": "优化人物表演、动作、情绪和连续性。"
     },
     {
       "slug": "asset-lock-generator-lite-v2",
       "name": "简易资产锁生成器（V2）",
-      "description": "人物、场景、商品多视角参考的设计方法；数量服从用户需求，实际生成取决于当前工具和批准。"
+      "description": "设计人物、场景、商品多视角参考。"
     },
     {
       "slug": "creative-cover-copy-v2",
       "name": "文案与封面导演",
-      "description": "基于实际读取的资料创作文案、标题和封面方案；媒体分析与生成取决于当前工具。"
+      "description": "根据资料创作文案、标题和封面方案。"
     },
     {
       "slug": "creative-prompt-rewrite",
       "name": "提示词改写",
-      "description": "保留用户指定的剧情、镜头和产品边界，优化视频生成提示词文字。"
+      "description": "保持剧情、镜头及产品边界，改写视频提示词。"
     },
     {
       "slug": "cinematic-shot-designer-zh-v5",
       "name": "导演多宫格分镜设计师（V5）",
-      "description": "用户明确需要整版多宫格故事板时使用的镜头设计方法；不替代普通文字脚本。"
+      "description": "明确需要整版多宫格故事板时使用。"
     },
     {
       "slug": "cinematic-style-optimizer-v2",
       "name": "电影画面风格优化器（V2）",
-      "description": "优化影调、色彩、光线和电影风格，保留已有内容与参数。"
+      "description": "保持内容与参数，优化影调、色彩和光线。"
     },
     {
       "slug": "direction-designer-zh-v1",
       "name": "创意方向设计",
-      "description": "按用户要求的数量创作方向，推荐从这些方向中选择，不增加备选数量。"
+      "description": "按用户总数创作方向，推荐不增加备选数量。"
     },
     {
       "slug": "image-prompt-gallery-director-v2",
       "name": "图片提示词案例导演（V2）",
-      "description": "按需检索图片案例，撰写图片生成或编辑提示词；读取案例不等于生成图片。"
+      "description": "检索图片案例，撰写生成或编辑提示词。"
     },
     {
       "slug": "marketing-brief-zh-v1",
       "name": "营销需求简报",
-      "description": "需要简报时整理营销目标、受众、已知卖点与未知项，不强制作为创作前置步骤。"
+      "description": "用户需要简报时整理目标、受众、事实和未知。"
     },
     {
       "slug": "product-understanding-zh-v1",
       "name": "产品理解",
-      "description": "整理已读取商品资料与观察的证据、推断和未知项；不替用户确认未知事实。"
+      "description": "区分商品资料、观察、推断和未知项。"
     },
     {
       "slug": "storyboard-one-shot-zh",
       "name": "文字分镜",
-      "description": "从用户要求或选定方向编写完整文字分镜，不要求先生成媒体。"
+      "description": "文字分镜兼容入口；当前正文与V2相同，已有引用可继续使用。"
     },
     {
       "slug": "storyboard-one-shot-zh-v2",
       "name": "文字分镜（V2）",
-      "description": "从用户要求或选定方向编写完整文字分镜，不要求先生成媒体。"
+      "description": "文字分镜当前入口；镜头、时长、旁白和字幕，与兼容入口正文相同。"
     },
     {
       "slug": "video-decomposition-zh-v1",
       "name": "视频拆解",
-      "description": "视频分析方法资料；需实际视频观察能力才能分析原视频，目录存在不代表已接通。"
+      "description": "视频拆解方法；目录不代表已接通视频观察。"
     },
     {
       "slug": "video-prompt-safety-zh-v1",
       "name": "视频提示词检查",
-      "description": "审查视频提示词文字并说明具体问题，不代表已生成或观看视频。"
+      "description": "审查视频提示词文字，说明问题及替代写法。"
     },
     {
       "slug": "video-script-zh-v1",
       "name": "视频脚本创作",
-      "description": "按用户时长、格式和选定内容写完整视频文字脚本，不生成媒体。"
+      "description": "按时长、格式和选定内容创作文字脚本。"
     }
   ]
 }

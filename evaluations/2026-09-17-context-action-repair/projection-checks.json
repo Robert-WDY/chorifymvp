@@ -1,0 +1,92 @@
+{
+  "schemaAndOriginalQueryUnchanged": true,
+  "allFourQueriesRetained": true,
+  "shortSourceBodyAdded": true,
+  "rows": [
+    {
+      "case": "ONE_IMAGE",
+      "arm": "baseline",
+      "input": 5476,
+      "tools": 4696,
+      "total": 10172
+    },
+    {
+      "case": "ONE_IMAGE",
+      "arm": "actions",
+      "input": 4216,
+      "tools": 5146,
+      "total": 9362
+    },
+    {
+      "case": "ONE_IMAGE",
+      "arm": "context",
+      "input": 3969,
+      "tools": 5146,
+      "total": 9115
+    },
+    {
+      "case": "TWO_IMAGES",
+      "arm": "baseline",
+      "input": 5489,
+      "tools": 4696,
+      "total": 10185
+    },
+    {
+      "case": "TWO_IMAGES",
+      "arm": "actions",
+      "input": 4229,
+      "tools": 5146,
+      "total": 9375
+    },
+    {
+      "case": "TWO_IMAGES",
+      "arm": "context",
+      "input": 3982,
+      "tools": 5146,
+      "total": 9128
+    },
+    {
+      "case": "PROMPT_ONLY",
+      "arm": "baseline",
+      "input": 5489,
+      "tools": 4696,
+      "total": 10185
+    },
+    {
+      "case": "PROMPT_ONLY",
+      "arm": "actions",
+      "input": 4229,
+      "tools": 5146,
+      "total": 9375
+    },
+    {
+      "case": "PROMPT_ONLY",
+      "arm": "context",
+      "input": 3982,
+      "tools": 5146,
+      "total": 9128
+    },
+    {
+      "case": "SHORT_FACTS",
+      "arm": "baseline",
+      "input": 5643,
+      "tools": 4696,
+      "total": 10339
+    },
+    {
+      "case": "SHORT_FACTS",
+      "arm": "actions",
+      "input": 4383,
+      "tools": 5146,
+      "total": 9529
+    },
+    {
+      "case": "SHORT_FACTS",
+      "arm": "context",
+      "input": 4460,
+      "tools": 5146,
+      "total": 9606
+    }
+  ],
+  "realCalls": 0
+}

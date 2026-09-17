@@ -1,0 +1,14 @@
+✔ short attachment original reaches actual Agent input once with source identity; no persistence mutation (31.7872ms)
+✔ attachment projection respects type, owner, version and complete body budget; no file fetching (0.5333ms)
+✔ many small attachments share a total cap and never truncate originals or add authority (0.9293ms)
+✔ full visible asset result removes repeated inline text; partial result does not hide necessary body (0.6621ms)
+✔ new turn does not automatically inline prior attachments; all method identities remain available (2.9424ms)
+✔ preparing proposals never submits even with live provider, and public schemas cannot inject approval (14.667ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154.1157

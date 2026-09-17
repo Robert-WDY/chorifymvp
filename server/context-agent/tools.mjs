@@ -35,29 +35,29 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     tool('execute_approved', '提交已批准的具体媒体调用；服务端恢复保存参数并检查用户、会话、模式、摘要和幂等。无需重抄参数，不允许新增参数。', { proposalId:id, approvalId:id }, ['proposalId','approvalId']),
     tool('read_asset', '读取本会话准确素材原文或文件元数据。图片URL不是视觉观察；长文用nextOffset继续读取。', { id, offset, limit }, ['id']),
     tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: {type:'string',maxLength:2000}, cursor:offset, order:{enum:['oldest','latest']}, maxChars:{type:'integer',minimum:2000,maximum:50000}, limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }),
-    tool('read_history', '按ID读取原记录及去除检索回声、调试Trace的前后文；按offset/limit分页，原文不变。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit, maxChars:{type:'integer',minimum:2000,maximum:50000} }, ['messageId']),
+    tool('read_history', '按准确记录ID读取原文及前后文；当前完整原文已可见时不重复读取。按nextOffset继续offset/limit分页，检索命中和摘要不等于完整原稿；排除检索回声及调试Trace。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit, maxChars:{type:'integer',minimum:2000,maximum:50000} }, ['messageId']),
     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
     tool('save_document', '需要独立文稿、版本管理或修改已有文稿资产时保存准确正文。简单聊天创作和改稿可直接回复，由对话历史保存。新稿传content；已有资产修订传content和原稿parentId。聊天稿需要保存修订时传parentMessageId和新content，一次原子保存原稿及修订；sourceMessageId仅原样存档。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceIds: ids }),
     tool('measure_text', '按现有统一口径测量传入正文，不含未传入的标题或说明；不替代内容判断。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] } }, ['text', 'unit']),
   ];
   definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
   if (typeof observeImages === 'function') {
-    definitions.push(tool('analyze_image', '仅观察明确选择的imageIds与materials，不自动加父图或其他资料。比较保持请用compare_images。大段资料请显式指定offset/limit。', { imageIds: { ...ids, minItems: 1 }, question: string(12000), materials }, ['imageIds','question']));
-    definitions.push(tool('compare_images', '比较明确指定的真实原图与成品，逐项报告差异和无法判断项，不自行扩展来源。', { sourceImageId:id, resultImageId:id, question:string(12000), materials }, ['sourceImageId','resultImageId','question']));
+    definitions.push(tool('analyze_image', '仅观察明确选择的imageIds与materials，不自动加父图或同次上传资料。materials.sourceId只接受文字ID，图片放imageIds。必要产品事实和未知项通过materials传入；大段资料指定offset/limit。比较保持用compare_images。', { imageIds: { ...ids, minItems: 1 }, question: string(12000), materials }, ['imageIds','question']));
+    definitions.push(tool('compare_images', '读取明确指定的真实原图与成品双图，比较结构、颜色、位置和用户保持要求，报告差异与无法判断项。不自行扩展来源，不用文字替代原图；看不清、缺图或模拟产物不能声称通过，差异不能擅称为更好的创意。', { sourceImageId:id, resultImageId:id, question:string(12000), materials }, ['sourceImageId','resultImageId','question']));
   }
   if (mode === 'simulation' || typeof media?.image === 'function') {
-    definitions.push(tool('generate_image', '每次仅准备一张图片的具体参数并请求批准；文字确认用confirm_media，已有批准恢复用execute_approved。referenceImages必须是本会话图片ID。', {
+    definitions.push(tool('generate_image', '准备图片方案：本次调用只保存一张图片的具体参数，不提交生成，无需预先批准。用户要图片或先看方案时可直接调用；普通风格缺失可合理设定。多张独立图分别准备后一起展示。实际生成须批准后用confirm_media，已有批准恢复用execute_approved。referenceImages只能用本会话图片ID。', {
       prompt: string(16000), size, referenceImages: ids, sourceIds: ids, replacesProposalId:id,
     }, ['prompt', 'size']));
-    definitions.push(tool('edit_image', '编辑一张准确原图，自动记录父版本。首次调用准备方案；文字确认用confirm_media，已有批准恢复用execute_approved。', {
+    definitions.push(tool('edit_image', '准备图片修改方案：绑定准确imageId与修改/保持要求，本次只保存参数，无需预先批准，不提交生成。批准后执行自动记录原图父版本。文字批准用confirm_media；改已有方案用replacesProposalId并重新展示。', {
       imageId: id, instruction: string(16000), size, sourceIds: ids, replacesProposalId:id,
     }, ['imageId', 'instruction']));
   }
-  if (mode === 'simulation' || typeof media?.video === 'function') definitions.push(tool('generate_video', '准备一段视频的具体参数；取得对应方案批准后才提交。处理中返回可查询回执，不自动建立后台业务任务。', {
+  if (mode === 'simulation' || typeof media?.video === 'function') definitions.push(tool('generate_video', '准备视频方案：本次只保存一段视频的具体参数，无需预先批准，不提交生成；展示后须取得对应方案批准才提交。处理中按已有回执查询，不自动建立后台业务任务。', {
     prompt: string(16000), duration: { type: 'integer', minimum: 1, maximum: 20 }, ratio: { enum: ['16:9', '9:16', '1:1', '4:3', '3:4', '21:9'] },
     resolution: { enum: ['480p', '720p', '1080p'] }, firstFrameId: id, sourceIds: ids, replacesProposalId:id,
   }, ['prompt', 'duration', 'ratio', 'resolution']));
-  definitions.push(tool('read_media_result', '查询本会话已提交调用的receiptId；不会再次生成。没有供应商查询能力时如实返回unknown。', { receiptId: id }, ['receiptId']));
+  definitions.push(tool('read_media_result', '按本会话receiptId查询已有提交，处理中或提交未知都先查回执，不重新生成代替查询。无供应商查询能力时返回unknown。outcome是操作结果，submission是提交状态；truncated时按rawResultRef回读，resultRefs是产物入口。批次not_executed尚未提交，成功项保留。', { receiptId: id }, ['receiptId']));
   if (mode === 'simulation') for (const definition of definitions.filter(def => mediaNames.has(def.name))) definition.description = '当前仅模拟，不会生成真实媒体。' + definition.description;
   const ajv = new Ajv({ allErrors: true, strict: false });
   const publicValidators = new Map(definitions.map(def => [def.name, ajv.compile(def.parameters)]));

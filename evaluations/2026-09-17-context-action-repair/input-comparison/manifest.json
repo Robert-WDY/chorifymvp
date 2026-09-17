@@ -1,0 +1,272 @@
+{
+  "baseline": "46a80b0a75fccbe01c293fe54aa7b3b76f53e355",
+  "mode": "offline",
+  "cases": [
+    {
+      "id": "ONE_IMAGE",
+      "user": "生成一张白色护肤瓶广告图，纯白背景，1:1。"
+    },
+    {
+      "id": "TWO_IMAGES",
+      "user": "生成两张独立产品广告图。第一张白瓶，第二张红瓶，不要拼图。"
+    },
+    {
+      "id": "PROMPT_ONLY",
+      "user": "只写一条白瓶广告图提示词，不要保存媒体方案，不要生成图片。"
+    },
+    {
+      "id": "SHORT_FACTS",
+      "user": "我是电商运营，帮我做一个产品广告方向。",
+      "facts": "{\"产品\":\"白色护肤瓶\",\"价格\":\"30元\",\"容量\":\"未知\",\"功效\":\"未知\"}"
+    }
+  ],
+  "variants": [
+    "baseline",
+    "actions",
+    "context"
+  ],
+  "projections": [
+    {
+      "caseId": "ONE_IMAGE",
+      "arm": "baseline",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 5476,
+        "estimatedToolDefinitionTokens": 4696,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-ONE_IMAGE"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "426056ab35ee9f4fab6da80f44069f304be01aa9c902a27274b4aca10cb3417c"
+    },
+    {
+      "caseId": "ONE_IMAGE",
+      "arm": "actions",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 4216,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-ONE_IMAGE"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "279f1699556e793646e8bb0fb9c234d15f98297d285c196e8b0d601ab3eb2287"
+    },
+    {
+      "caseId": "ONE_IMAGE",
+      "arm": "context",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 3969,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-ONE_IMAGE"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "22ad76ca45d56377fa6bb977f7ad9b2c8482b5d6696c6546fd0644c2136ae256"
+    },
+    {
+      "caseId": "TWO_IMAGES",
+      "arm": "baseline",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 5489,
+        "estimatedToolDefinitionTokens": 4696,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-TWO_IMAGES"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "84600c67d4456469dfe421b2de1d90af45e99cadce21d31d297dc2a7b62ce23e"
+    },
+    {
+      "caseId": "TWO_IMAGES",
+      "arm": "actions",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 4229,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-TWO_IMAGES"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "0c7b8568f111b0ccc7233c6a841fe9b0bdbd852a8ce0867f6c65e25ade5dc647"
+    },
+    {
+      "caseId": "TWO_IMAGES",
+      "arm": "context",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 3982,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-TWO_IMAGES"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "da9f4e4fa468bba38735f0b4854d5a1868f34b1c81ff099d12f42891e147c0ed"
+    },
+    {
+      "caseId": "PROMPT_ONLY",
+      "arm": "baseline",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 5489,
+        "estimatedToolDefinitionTokens": 4696,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-PROMPT_ONLY"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "3d69e6bb02721d9b31f04f4b970318d188191c02738d9233c4e78b253717c825"
+    },
+    {
+      "caseId": "PROMPT_ONLY",
+      "arm": "actions",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 4229,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-PROMPT_ONLY"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "527ce29a32613c76812926d54b8a106432bb28adf38a35f2aff0b18673395e61"
+    },
+    {
+      "caseId": "PROMPT_ONLY",
+      "arm": "context",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 3982,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-PROMPT_ONLY"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "c61be7c22aac0c1bc69b8742fb7fe4d31b4131f7d165bb671445d5d32a288406"
+    },
+    {
+      "caseId": "SHORT_FACTS",
+      "arm": "baseline",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 5643,
+        "estimatedToolDefinitionTokens": 4696,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-SHORT_FACTS"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "d35c855950869e9f493ba32bc058ecb6527be34a4f2741ca823eb7b40033f7ff"
+    },
+    {
+      "caseId": "SHORT_FACTS",
+      "arm": "actions",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 4383,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-SHORT_FACTS"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "92767657dc4c608c49d889096231b59d74b61cbae4d37d0532c41404c4af6246"
+    },
+    {
+      "caseId": "SHORT_FACTS",
+      "arm": "context",
+      "metrics": {
+        "tokenBudget": 24000,
+        "reservedTokens": 6500,
+        "estimatedInputTokens": 4460,
+        "estimatedToolDefinitionTokens": 5146,
+        "totalRecords": 1,
+        "retainedRecords": 1,
+        "retainedRecordIds": [
+          "query-SHORT_FACTS"
+        ],
+        "omittedRecords": 0,
+        "excludedRuntimeRecords": 0,
+        "incompleteGroupIds": [],
+        "projectedRecordIds": []
+      },
+      "sha256": "52dcbaea25f025a0fe34819749055c4d1c6be95c28e6cc3729832973b967627b"
+    }
+  ],
+  "limit": 24,
+  "note": "First-decision probe only; no tool execution, no actual proposal persistence or media/vision. Synthetic facts case is a fixture, not original external product file."
+}
