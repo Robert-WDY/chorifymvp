@@ -26,5 +26,6 @@ export function resultView(record, {tool, maxDataChars = Infinity} = {}) {
     resultRefs,rawResultRef:{kind:'record',id:record.id,tool:'read_history',arguments:{messageId:record.id,offset:0,limit:12000}},
     ...(raw?.parentEvidence?{parentEvidence:{...raw.parentEvidence,content:raw.parentEvidence.content.slice(0,240),contentTruncated:raw.parentEvidence.content.length>240}}:{}),
     ...(raw?.deliveryCheck?{deliveryCheck:raw.deliveryCheck}:{}),
+    ...(raw?.changeEvidence?{changeEvidence:{changed:raw.changeEvidence.changed,baseProposalId:raw.changeEvidence.baseProposalId,changedFields:raw.changeEvidence.changedFields,changes:raw.changeEvidence.changes?.slice(0,8).map(c=>({...c,before:c.before.slice(0,160),after:c.after.slice(0,160),truncated:c.before.length>160||c.after.length>160})),...(raw.changeEvidence.text?{text:{changed:raw.changeEvidence.text.changed,readMore:'rawResultRef'}}:{}),meaningVerified:false}}:{}),
     truncated,data:truncated?{excerpt:body.slice(0,maxDataChars),totalCharacters:body.length,nextOffset:maxDataChars}:raw};
 }

@@ -1,0 +1,23 @@
+✔ retained original identities cover early long text and mixed messages in exact history order (44.7134ms)
+✔ patches resolve simultaneously against original and preserve every unmentioned byte (0.6733ms)
+✔ revision read pairs actual current user request with original and preserves pagination (25.4895ms)
+✔ versioned document edits preserve parent, bind measured reconstructed body, and replay once (21.1991ms)
+✔ invalid and stale edits have no document or invocation side effects (26.8504ms)
+✔ reconstructed document and revision history envelope obey existing size limits (42.4918ms)
+✔ chat originals archive separately; mismatch gives actual identity and incremental child keeps correct lineage (16.5391ms)
+✔ failed persistence rolls back both archived original and incremental child (15.7972ms)
+✔ long original local edit reaches Agent feedback within unchanged context budget (21.3549ms)
+✔ image proposal changes only selected background; inherits sources and waits for new approval (16.953ms)
+✔ video scalar revision and image editing proposal retain unrelated original parameters (14.7517ms)
+✔ incremental media rejects incomplete new proposals, invalid merged values and foreign identities (13.9404ms)
+✔ stored document display and changes survive restart independently of an incorrect Agent reply (83.8487ms)
+✔ failed proposal replacement persistence does not withdraw its original (14.3876ms)
+✔ document card renders persisted text safely and deduplicates event replay in DOM harness (1.5462ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 470.6691

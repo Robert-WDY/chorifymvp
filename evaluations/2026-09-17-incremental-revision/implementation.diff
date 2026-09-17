@@ -1,0 +1,257 @@
+diff --git a/server/context-agent/context.mjs b/server/context-agent/context.mjs
+index 2b10ac8..94574f2 100644
+--- a/server/context-agent/context.mjs
++++ b/server/context-agent/context.mjs
+@@ -160,13 +160,12 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
+     // Short identities for retained originals; content is already present in history.
+     // Only expose when the real tool can materialize an original message.
+     const originals=[];
+-    if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id))).slice(-8).reverse()){
+-      let body;try{body=originalMessageText(record.content);}catch{continue;}
+-      const row={messageId:record.id,role:record.role,characters:body.length,excerpt:body.slice(0,80),tail:body.length>80?body.slice(-40):undefined};
+-      if(estimateTokens([...originals,row])<=Math.min(600,available/8))originals.unshift(row);
++    if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id)))){
++      let body;try{body=originalMessageText(record.content);}catch{}
++      originals.push({messageId:record.id,role:record.role,...(body!==undefined?{characters:body.length}:{textOriginal:false})});
+     }
+-    const originalIndex=originals.length?[dataMessage({originalMessages:originals,note:'Chat identities, not saved works. Match actual body and ID. sourceText selects exact work within a message; read_history retrieves omitted identities/bodies.'})]:[];
+-    const head=[...prefix,...(estimateTokens([...prefix,...originalIndex,...notice,...history])<=available?originalIndex:[]),...notice];
++    const originalIndex=originals.length?[dataMessage({originalMessages:originals,note:'One identity per original history message below, in the same order (exclude server reference blocks and tool entries). These are chat sources, not saved works. Identity and body are retained together.'})]:[];
++    const head=[...prefix,...originalIndex,...notice];
+     // Only whole, accessible text attached to the current original message. Never
+     // fetch files or promote attachment instructions into system authority.
+     const inline = [], seen = new Set();
+diff --git a/server/context-agent/document-source.mjs b/server/context-agent/document-source.mjs
+index 668e3d1..ee52dc3 100644
+--- a/server/context-agent/document-source.mjs
++++ b/server/context-agent/document-source.mjs
+@@ -1,4 +1,5 @@
+ import {GuardError} from './io-guard.mjs';
++import {actualTextChange} from './incremental-edit.mjs';
+ 
+ // Same supported message representation for both archival and revision.
+ // Mixed media must not be flattened into an apparently complete text original.
+@@ -21,6 +22,6 @@ export function selectOriginal(original,sourceText){
+ 
+ export function documentReceipt(state,asset){
+  const parent=asset.parentId?state.assets[asset.parentId]:null;
+- return {ok:true,asset:structuredClone(asset),...(parent?{parentEvidence:{id:parent.id,version:parent.version,sourceMessageId:parent.sourceMessageId,sourceRange:parent.sourceRange,
++ return {ok:true,asset:structuredClone(asset),...(parent?{changeEvidence:actualTextChange(parent.content,asset.content),parentEvidence:{id:parent.id,version:parent.version,sourceMessageId:parent.sourceMessageId,sourceRange:parent.sourceRange,
+   characters:parent.content.length,content:parent.content,readMore:{tool:'read_asset',arguments:{id:parent.id}}}}:{})};
+ }
+diff --git a/server/context-agent/incremental-edit.mjs b/server/context-agent/incremental-edit.mjs
+new file mode 100644
+index 0000000..60c8acd
+--- /dev/null
++++ b/server/context-agent/incremental-edit.mjs
+@@ -0,0 +1,26 @@
++import {GuardError,fingerprint} from './io-guard.mjs';
++
++// Every location is resolved against the same immutable original, never against
++// the output of an earlier replacement. Unmentioned bytes remain unchanged.
++export function applyEdits(original,edits){
++ if(typeof original!=='string'||!Array.isArray(edits)||!edits.length)throw new GuardError('invalid_edits','增量修改需要原文和至少一项替换');
++ const ranges=edits.map(({before,after})=>{
++  if(typeof before!=='string'||!before.length||typeof after!=='string')throw new GuardError('invalid_edits','before须为非空原文，after为替换文字');
++  const start=original.indexOf(before);
++  if(start<0)throw new GuardError('edit_source_mismatch','替换片段不在原文中；回读准确原稿，不改为重建整篇');
++  if(original.indexOf(before,start+1)>=0)throw new GuardError('ambiguous_edit','替换片段命中多处；提供更长的准确片段定位');
++  if(before===after)throw new GuardError('unchanged_edit','替换前后相同，没有实际改动');
++  return {start,end:start+before.length,before,after};
++ }).sort((a,b)=>a.start-b.start);
++ for(let i=1;i<ranges.length;i++)if(ranges[i].start<ranges[i-1].end)throw new GuardError('overlapping_edits','替换片段重叠；合并为一个准确原文片段');
++ let content=original;for(const r of [...ranges].reverse())content=content.slice(0,r.start)+r.after+content.slice(r.end);
++ if(content===original)throw new GuardError('unchanged_edit','合并修改后正文没有变化，不创建假修订');
++ return {content,evidence:{mode:'incremental',changed:content!==original,changes:ranges,baseHash:fingerprint(original),resultHash:fingerprint(content)}};
++}
++
++// An actual difference, not an interpretation of the user's requested change.
++export function actualTextChange(before,after){
++ let start=0,end=0;while(start<Math.min(before.length,after.length)&&before[start]===after[start])start++;
++ while(end<Math.min(before.length-start,after.length-start)&&before[before.length-1-end]===after[after.length-1-end])end++;
++ return {changed:before!==after,changes:before===after?[]:[{start,end:before.length-end,before:before.slice(start,before.length-end),after:after.slice(start,after.length-end)}],baseHash:fingerprint(before),resultHash:fingerprint(after)};
++}
+diff --git a/server/context-agent/loop.mjs b/server/context-agent/loop.mjs
+index 8539f59..75556d0 100644
+--- a/server/context-agent/loop.mjs
++++ b/server/context-agent/loop.mjs
+@@ -189,6 +189,7 @@ export class ContextAgent {
+           record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
+           await persist();emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+           await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,...resultSummary(result),durationMs:Date.now()-toolStartedAt});
++          if(call.name==='save_document'&&result.ok&&result.asset){const a=state.assets[result.asset.id];if(a)await publish({kind:'document',asset:{id:a.id,title:a.title,version:a.version,parentId:a.parentId,content:a.content},changed:result.changeEvidence?.changed});}
+           if(result.status==='approval_required'&&result.proposalId){record({kind:'run_event',event:'proposal_published',proposalIds:[result.proposalId]});await publish({kind:'proposal',proposal:{proposalId:result.proposalId,turnId,name:result.name,args:result.args,status:'prepared'}});}
+           if(call.name==='request_user_input'&&result.ok&&result.interaction){
+             await publish({kind:'interaction',interaction:{...result.interaction,answers:{},status:'pending'}});
+diff --git a/server/context-agent/result-view.mjs b/server/context-agent/result-view.mjs
+index fcb5a95..95dba03 100644
+--- a/server/context-agent/result-view.mjs
++++ b/server/context-agent/result-view.mjs
+@@ -26,5 +26,6 @@ export function resultView(record, {tool, maxDataChars = Infinity} = {}) {
+     resultRefs,rawResultRef:{kind:'record',id:record.id,tool:'read_history',arguments:{messageId:record.id,offset:0,limit:12000}},
+     ...(raw?.parentEvidence?{parentEvidence:{...raw.parentEvidence,content:raw.parentEvidence.content.slice(0,240),contentTruncated:raw.parentEvidence.content.length>240}}:{}),
+     ...(raw?.deliveryCheck?{deliveryCheck:raw.deliveryCheck}:{}),
++    ...(raw?.changeEvidence?{changeEvidence:{changed:raw.changeEvidence.changed,baseProposalId:raw.changeEvidence.baseProposalId,changedFields:raw.changeEvidence.changedFields,changes:raw.changeEvidence.changes?.slice(0,8).map(c=>({...c,before:c.before.slice(0,160),after:c.after.slice(0,160),truncated:c.before.length>160||c.after.length>160})),...(raw.changeEvidence.text?{text:{changed:raw.changeEvidence.text.changed,readMore:'rawResultRef'}}:{}),meaningVerified:false}}:{}),
+     truncated,data:truncated?{excerpt:body.slice(0,maxDataChars),totalCharacters:body.length,nextOffset:maxDataChars}:raw};
+ }
+diff --git a/server/context-agent/tools.mjs b/server/context-agent/tools.mjs
+index 8bbd312..701e102 100644
+--- a/server/context-agent/tools.mjs
++++ b/server/context-agent/tools.mjs
+@@ -7,6 +7,7 @@ import { searchHistory, readHistory } from './history.mjs';
+ import {interactions,prepareInteraction} from './interactions.mjs';
+ import {selectOriginal,documentReceipt,originalMessageText} from './document-source.mjs';
+ import {measureDelivery,checkedDocument} from './delivery-check.mjs';
++import {applyEdits} from './incremental-edit.mjs';
+ import { GuardError, assertOwner, assetFor, withSessionLock, fingerprint, newId, now, persist,
+   assertNotCancelled, assertMediaBudget, createProposal, approvedProposal, approveProposals } from './io-guard.mjs';
+ export { approveProposals };
+@@ -46,9 +47,11 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+     tool('save_document', '独立文稿或版本管理才保存。新稿传content；修订传原稿parentId或parentMessageId、新content，并用sourceText给出准确原稿正文供核对。聊天消息混有指令/解释时，sourceText只选连续作品正文，原消息仍完整保留。sourceMessageId仅存档，sourceText可指定准确片段；省略时兼容整条消息归档。保存后核对parentEvidence实际正文，不能只按标题宣称保留了原稿。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceText:string(500000), sourceIds: ids }),
+     tool('measure_text', 'requirements用于声明本轮最终交付要求，重测不能放宽已有要求；临时片段只作普通测量。明确字数/数量时传requirements及完整text；字数只算正文可用bodyText指定text中的准确连续正文。数量用items划分所有交付项，必须items以两个换行拼接后等于完整text，备选也计入。通过后最终回答原样输出text，修改或追加需重测。语义项如何划分仍由Agent负责；没有requirements时仅测量。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] },bodyText:string(500000),items:{type:'array',minItems:1,maxItems:100,items:string(500000)},requirements:{...schema({min:{type:'integer',minimum:0},max:{type:'integer',minimum:0},itemCount:{type:'integer',minimum:1,maximum:100}},[]),minProperties:1} }, ['text', 'unit']),
+   ];
+-  definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
++  definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] },{required:['edits']}];
+   const documentSchema=definitions.find(d=>d.name==='save_document').parameters;
+   Object.assign(documentSchema.properties,{parentVersion:{type:'integer',minimum:1},measurementCallId:id});
++  const edits={type:'array',minItems:1,maxItems:50,items:schema({before:{type:'string',minLength:1,maxLength:500000},after:{type:'string',maxLength:500000}},['before','after'])};
++  documentSchema.properties.edits=edits;
+   const measurement=definitions.find(d=>d.name==='measure_text');
+   Object.assign(measurement.parameters.properties,{
+     target:schema({kind:{enum:['reply','document']},id:string(120)},['kind']),
+@@ -79,16 +82,36 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+   }, ['prompt', 'duration', 'ratio', 'resolution']));
+   definitions.push(tool('read_media_result', '按本会话receiptId查询已有提交，处理中或提交未知都先查回执，不重新生成代替查询。无供应商查询能力时返回unknown。outcome是操作结果，submission是提交状态；truncated时按rawResultRef回读，resultRefs是产物入口。批次not_executed尚未提交，成功项保留。', { receiptId: id }, ['receiptId']));
+   if (mode === 'simulation') for (const definition of definitions.filter(def => mediaNames.has(def.name))) definition.description = '当前仅模拟，不会生成真实媒体。' + definition.description;
++  const ajv = new Ajv({ allErrors: true, strict: false });
++  const documentContentValidator=ajv.compile(documentSchema.properties.content);
++  const completeMediaValidators=new Map(definitions.filter(d=>mediaNames.has(d.name)).map(d=>[d.name,ajv.compile(clone(d.parameters))]));
++  for(const d of definitions.filter(d=>mediaNames.has(d.name))){
++    d.parameters.properties.edits=edits;
++    d.parameters.anyOf=[{required:d.parameters.required},{required:['replacesProposalId']}];d.parameters.required=[];
++    d.description+=' 局部改方案：先read_approval，再replacesProposalId+edits；未传参数继承。';
++  }
++  definitions.find(d=>d.name==='save_document').description+=' 局部修改用edits替代content，绑定父版本；先读取原文，不重写未改部分。';
++  for(const name of ['read_asset','read_approval','read_history'])definitions.find(d=>d.name===name).parameters.properties.forRevision={type:'boolean',description:'附本轮修改原话。'};
+   for(const d of definitions.filter(d=>['analyze_image','compare_images'].includes(d.name))){
+     d.parameters.properties.contextNote=string(1000);
+     d.description+=' 关联文字资料是候选而非默认事实；明确选materials，无相关材料时用空数组及contextNote说明。';
+   }
+-  const ajv = new Ajv({ allErrors: true, strict: false });
+   const publicValidators = new Map(definitions.map(def => [def.name, ajv.compile(def.parameters)]));
+   const validators = new Map(definitions.map(def => [def.name, ajv.compile(mediaNames.has(def.name)?{...def.parameters,properties:{...def.parameters.properties,...approvalFields}}:def.parameters)]));
+ 
+   function normalizedMedia(name, args, state) {
+-    const out = clone(stripApproval(args));
++    let out = clone(stripApproval(args));
++    if(args.edits&&!args.replacesProposalId)throw new GuardError('revision_source_required','增量方案必须指定replacesProposalId');
++    if(args.replacesProposalId){
++      const prior=state.approvals[args.replacesProposalId];
++      if(!prior||prior.kind!=='proposal'||prior.ownerId!==state.ownerId||prior.sessionId!==state.id||prior.mode!==mode||prior.name!==name)throw new GuardError('invalid_replacement','原方案身份、工具或模式不匹配；读取准确原方案');
++      const field=name==='edit_image'?'instruction':'prompt';
++      if(args.edits&&args[field]!==undefined)throw new GuardError('invalid_edits','增量替换与完整重写不能同时传入');
++      out={...clone(prior.args),...out};delete out.edits;
++      if(args.edits)out[field]=applyEdits(prior.args[field],args.edits).content;
++      if(fingerprint(out)===fingerprint(prior.args))throw new GuardError('unchanged_edit','方案参数未发生变化，不创建假修订');
++    }
++    const complete=completeMediaValidators.get(name);if(!complete(out))throw new GuardError('invalid_arguments',ajv.errorsText(complete.errors));
+     if (name === 'edit_image') out.size ||= assetFor(state, out.imageId, 'image').size || '2K';
+     for (const sourceId of out.sourceIds || []) assetFor(state, sourceId);
+     const imageIds = name === 'edit_image' ? [out.imageId] : name === 'generate_video' ? (out.firstFrameId ? [out.firstFrameId] : []) : (out.referenceImages || []);
+@@ -135,9 +158,11 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+       const visualIds=name==='edit_image'?[normalized.imageId]:name==='generate_video'?[normalized.firstFrameId].filter(Boolean):normalized.referenceImages||[];
+       if(ctx.fromModel&&(normalized.sourceIds||[]).some(id=>assetFor(state,id).type==='image'&&!visualIds.includes(id)))throw new GuardError('visual_source_not_bound','sourceIds只记录来源。选中的图片未作为视觉输入；请明确放入referenceImages、imageId或firstFrameId，不能仅登记来源后生成');
+       if (!args.proposalId && !args.approvalId) {
++        const previousIds=new Set(Object.keys(state.approvals));
+         const proposal = createProposal(state, { name, args: normalized, mode, callId, turnId,executionIdentity:media?.executionIdentity||null,sourceBindings:Object.fromEntries(sourcesFor(name,normalized).map(id=>[id,sourceIdentity(assetFor(state,id))])),replacesProposalId:args.replacesProposalId });
+-        await persist(state, save);
++        try{await persist(state, save);}catch(error){if(!previousIds.has(proposal.proposalId))delete state.approvals[proposal.proposalId];throw error;}
+         return { ok: true, status: 'approval_required', submitted: false, proposalId: proposal.proposalId, turnId: proposal.turnId, name, args: clone(proposal.args), simulated: mode === 'simulation',
++          ...(args.replacesProposalId?{changeEvidence:{baseProposalId:args.replacesProposalId,changedFields:Object.keys(normalized).filter(k=>fingerprint([normalized[k]])!==fingerprint([state.approvals[args.replacesProposalId].args[k]])),...(args.edits?{text:applyEdits(state.approvals[args.replacesProposalId].args[name==='edit_image'?'instruction':'prompt'],args.edits).evidence}:{})}}:{}),
+           inputEvidence:{visualSources:visualIds.map(id=>({id,version:state.assets[id].version})),textSources:(normalized.sourceIds||[]).filter(id=>state.assets[id].type==='text'),textSourceMeaning:'provenance_only; necessary facts and constraints must be expressed in prompt/instruction'},
+           message: '具体方案已保存，尚未生成。请向用户展示同组全部方案；收到服务端批准后才可提交。' };
+       }
+@@ -244,6 +269,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+       if (!validate) throw new GuardError('unknown_tool', `工具 ${name} 不可用；请使用实际注册的工具。`);
+       if (!validate(args)) throw new GuardError('invalid_arguments', ajv.errorsText(validate.errors, { separator: '; ' }));
+       assertNotCancelled(ctx.signal);
++      const request=()=>{const m=[...state.records].reverse().find(r=>r.kind==='message'&&r.role==='user'&&r.turnId===ctx.turnId);return args.forRevision&&m?{revisionRequest:{messageId:m.id,content:clone(m.content),note:'Current user request. Apply the smallest requested change to the returned original; do not infer missing facts.'}}:{};};
+       if(name==='inspect_workspace'){
+         const latest=[...state.records].reverse().find(r=>r.kind==='message'&&r.role==='user');
+         const refs=ids=>ids.map(id=>{const a=assetFor(state,id);return {id:a.id,type:a.type,version:a.version,name:a.name||a.title,read:{tool:'read_asset',id:a.id}};});
+@@ -261,7 +287,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+           const proposal = records.find(a => a.kind === 'proposal' && a.proposalId === args.proposalId);
+           if (!proposal) throw new GuardError('approval_not_found','方案不在当前会话');
+           if (args.approvalId && !records.some(a => a.approvalId === args.approvalId && a.proposalIds?.includes(proposal.proposalId))) throw new GuardError('approval_not_found','批准不包含指定方案');
+-          return { ok:true, proposal:clone(proposal),...proposalDisplay(state,proposal.proposalId) };
++          return { ok:true, proposal:clone(proposal),...proposalDisplay(state,proposal.proposalId),...request() };
+         }
+         const receipts = records.filter(a => a.kind === 'approval' && (!args.approvalId || a.approvalId === args.approvalId));
+         if (args.approvalId && !receipts.length) throw new GuardError('approval_not_found','批准不在当前会话');
+@@ -283,7 +309,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         const content = typeof asset.content === 'string' ? asset.content : null;
+         const related=[...(asset.parentId?[{id:asset.parentId,relation:'parent'}]:[]),...(asset.sourceIds||[]).filter(id=>id!==asset.parentId).map(id=>({id,relation:'source'}))];
+         const relatedAvailable=related.filter(r=>state.assets[r.id]&&(!state.assets[r.id].ownerId||state.assets[r.id].ownerId===state.ownerId)).slice(0,8).map(r=>({...r,type:state.assets[r.id].type,version:state.assets[r.id].version,read:false}));
+-        return { ok: true,relatedAvailable,relatedTotal:related.length, asset: { ...clone(asset), ...(content !== null ? { content: content.slice(start, start + width) } : {}) },
++        return { ok: true,...request(),relatedAvailable,relatedTotal:related.length, asset: { ...clone(asset), ...(content !== null ? { content: content.slice(start, start + width) } : {}) },
+           offset: start, totalLength: content?.length || 0, nextOffset: content !== null && start + width < content.length ? start + width : null,
+           ...(asset.type === 'image' ? { observed: false, note: '这里只读取了图片身份和地址，未进行视觉观察。' } : {}) };
+       }
+@@ -292,7 +318,9 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         const record=state.records.find(r=>r.id===args.messageId);
+         const view=record?.traceRef&&typeof state.readTrace==='function'?{...state,records:state.records.slice()}:state;
+         if(view!==state)view.records[state.records.indexOf(record)]=await state.readTrace(record.id);
+-        return {ok:true,...readHistory(view,{limit:12000,...args})};
++        const requestData=request(),budget=(args.maxChars??24000)-JSON.stringify({ok:true,...requestData}).length;
++        if(args.forRevision&&budget<2000)throw new GuardError('HISTORY_BUDGET_EXCEEDED','本轮修改原话占满读取预算；提高maxChars或使用当前已可见原话，不能裁掉修改要求');
++        return {ok:true,...readHistory(view,{limit:12000,...args,...(args.forRevision?{maxChars:budget}:{})}),...requestData};
+       }
+       if (name === 'read_skill') {
+         const result = await readAgentSkill(catalog, args.slug, args.reference, args.offset || 0);
+@@ -349,7 +377,9 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         }
+         if(args.parentVersion!==undefined&&(!args.parentId||assetFor(state,args.parentId,'text').version!==args.parentVersion))throw new GuardError('asset_version_mismatch','父版本不一致；回读准确对象后修订');
+         if(ctx.fromModel&&(args.parentId||args.parentMessageId)&&args.sourceText===undefined&&!(args.parentId&&args.parentVersion!==undefined))throw new GuardError('source_text_required','已有资产修订须parentId+parentVersion；聊天修订须parentMessageId+sourceText准确片段。先确认原文可用，不按标签猜父稿');
+-        if (args.parentMessageId && (args.parentId || args.sourceMessageId || !args.content)) throw new GuardError('invalid_arguments','聊天修订只传parentMessageId和修改正文，不混用其他原稿入口');
++        if(args.edits&&(args.content!==undefined||args.sourceMessageId||(!args.parentId&&!args.parentMessageId)))throw new GuardError('invalid_edits','增量修改须绑定父稿，不能混用完整content或存档入口');
++        if(args.edits&&args.parentId&&args.parentVersion===undefined)throw new GuardError('asset_version_mismatch','增量修改须指定准确parentVersion');
++        if (args.parentMessageId && (args.parentId || args.sourceMessageId || (!args.content&&!args.edits))) throw new GuardError('invalid_arguments','聊天修订只传parentMessageId和修改正文，不混用其他原稿入口');
+         if(args.sourceText!==undefined&&!args.parentMessageId&&!args.sourceMessageId&&!args.parentId)throw new GuardError('invalid_arguments','sourceText必须绑定原始消息或父资产');
+         let archivedParent;
+         if (args.parentMessageId) {
+@@ -370,6 +400,8 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+           if (args.content !== undefined && args.content !== content) throw new GuardError('original_content_mismatch', 'sourceMessageId存档必须与原文一致；修改请另存带parentId的修订。');
+         }
+         const parent = archivedParent || (args.parentId ? assetFor(state, args.parentId, 'text') : null);
++        if(args.edits)content=applyEdits(parent.content,args.edits).content;
++        if(args.edits&&!documentContentValidator(content))throw new GuardError('invalid_edits','修改后正文仍须符合原有非空及长度限制');
+         if(args.measurementCallId)checkedDocument(state,ctx.turnId,args.measurementCallId,content);
+         if(args.parentId&&args.sourceText!==undefined&&selectOriginal(parent.content,args.sourceText).content!==parent.content)throw new GuardError('original_content_mismatch','已有资产修订需核对完整父稿正文；局部修改范围写在新正文中，不裁掉父版本');
+         const sourceIds = [...new Set([...(args.sourceIds || []), ...(parent ? [parent.id] : [])])];
+@@ -390,7 +422,11 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         return documentReceipt(state,asset);
+       });
+       throw new GuardError('unknown_tool', '工具没有实现。');
+-    } catch (error) { return safeError(error, error.submitted ?? false); }
++    } catch (error) {
++      const source=ctx?.state?.records?.find(r=>r.kind==='message'&&r.id===(args?.parentMessageId||args?.sourceMessageId));
++      let excerpt;try{if(source)excerpt=originalMessageText(source.content).slice(0,240);}catch{}
++      return {...safeError(error,error.submitted??false),...(error.code==='original_content_mismatch'&&source?{sourceEvidence:{messageId:source.id,role:source.role,excerpt,read:{tool:'read_history',arguments:{messageId:source.id,forRevision:true}}},recovery:'核对所选原文身份；存档片段用sourceText，不能改挂其他父稿来绕过来源错误。'}:{})};
++    }
+   }
+   return { definitions, execute, approveAndExecute:confirm };
+ }
+diff --git a/server/context-agent/web/app.js b/server/context-agent/web/app.js
+index d19423b..29d6c94 100644
+--- a/server/context-agent/web/app.js
++++ b/server/context-agent/web/app.js
+@@ -34,6 +34,9 @@ function ingest(e){
+  if(e.kind==='text_incomplete'){const id=e.streamId+':text',old=cards.get(id);if(old)message(id,'assistant',(old.text||'')+'\n（'+(e.note||'连接中断，文字未完成')+'）',e.seq);}
+  if(e.kind==='activity')activity(e);
+  if(e.kind==='proposal'){pending.set(e.proposal.proposalId,e.proposal);proposals();}
++ if(e.kind==='document'){
++  const a=e.asset,id='saved:'+a.id,old=cards.get(id);if(!old){const box=el('article',undefined,'message assistant');box.dataset.assetId=a.id;box.append(el('strong','已保存：'+(a.title||'文稿')+' · v'+a.version),el('p',e.changed===false?'正文与上一版相同。':'以下为已保存的版本。'),el('pre',a.content));$('messages').append(box);cards.set(id,{node:box,seq:e.seq});}
++ }
+  if(e.kind==='interaction'){questions.set(e.interaction.interactionId,e.interaction);renderQuestions();}
+  if(e.kind==='turn_end')status(e.status==='waiting_user'?'等待你的回答；没有自动继续调用。':e.status==='completed'?'本轮回复结束；交付状态以实际结果为准。':e.message||states[e.status]||e.status);
+ }

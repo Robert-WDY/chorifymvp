@@ -189,6 +189,7 @@ export class ContextAgent {
           record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
           await persist();emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
           await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,...resultSummary(result),durationMs:Date.now()-toolStartedAt});
+          if(call.name==='save_document'&&result.ok&&result.asset){const a=state.assets[result.asset.id];if(a)await publish({kind:'document',asset:{id:a.id,title:a.title,version:a.version,parentId:a.parentId,content:a.content},changed:result.changeEvidence?.changed});}
           if(result.status==='approval_required'&&result.proposalId){record({kind:'run_event',event:'proposal_published',proposalIds:[result.proposalId]});await publish({kind:'proposal',proposal:{proposalId:result.proposalId,turnId,name:result.name,args:result.args,status:'prepared'}});}
           if(call.name==='request_user_input'&&result.ok&&result.interaction){
             await publish({kind:'interaction',interaction:{...result.interaction,answers:{},status:'pending'}});

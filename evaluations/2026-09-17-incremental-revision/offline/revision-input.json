@@ -1,0 +1,90 @@
+{
+  "validation": {
+    "model": "scripted",
+    "media": "local_mock_or_simulation",
+    "networkCalls": 0
+  },
+  "asset": {
+    "ok": true,
+    "revisionRequest": {
+      "messageId": "be708494-cba7-4bd1-8bfc-70f1d109e785",
+      "content": "仅将价格改为18元，预约条件不动。",
+      "note": "Current user request. Apply the smallest requested change to the returned original; do not infer missing facts."
+    },
+    "relatedAvailable": [],
+    "relatedTotal": 0,
+    "asset": {
+      "id": "a",
+      "type": "text",
+      "content": "价格20",
+      "version": 3
+    },
+    "offset": 0,
+    "totalLength": 14,
+    "nextOffset": 4
+  },
+  "history": {
+    "ok": true,
+    "messageId": "cda13e56-ca14-4ff2-a015-1a5460e4807e",
+    "seq": 1,
+    "records": [
+      {
+        "kind": "message",
+        "role": "assistant",
+        "turnId": "older",
+        "content": "原稿价格20元。",
+        "id": "cda13e56-ca14-4ff2-a015-1a5460e4807e",
+        "at": "2026-09-17T07:57:25.906Z",
+        "groupId": "cda13e56-ca14-4ff2-a015-1a5460e4807e"
+      }
+    ],
+    "pagination": {
+      "field": "content",
+      "offset": 0,
+      "limit": 12000,
+      "totalLength": 8,
+      "hasMore": false,
+      "nextOffset": null
+    },
+    "omittedSurrounding": [],
+    "revisionRequest": {
+      "messageId": "be708494-cba7-4bd1-8bfc-70f1d109e785",
+      "content": "仅将价格改为18元，预约条件不动。",
+      "note": "Current user request. Apply the smallest requested change to the returned original; do not infer missing facts."
+    }
+  },
+  "proposal": {
+    "ok": true,
+    "proposal": {
+      "kind": "proposal",
+      "proposalId": "proposal_7542a04878582b5fbdf17f618785cd5a",
+      "sessionId": "dad7b93c-84ef-4fdb-a795-e5ecfa6c393b",
+      "ownerId": "local",
+      "name": "generate_image",
+      "args": {
+        "prompt": "白瓶米白背景",
+        "size": "1K"
+      },
+      "digest": "a1f0e13517f5b294d5033706bb25696c108c847e8bc2f79a9a7d3505bab4ba0b",
+      "mode": "simulation",
+      "callId": "p",
+      "turnId": "turn",
+      "createdAt": "2026-09-17T07:57:25.908Z",
+      "executionIdentity": null,
+      "sourceBindings": {}
+    },
+    "displayed": false,
+    "published": false,
+    "clientRendered": false,
+    "displayedMeaning": "published_legacy_alias_not_human_read",
+    "displayedTurnId": "turn",
+    "displayOrder": -1,
+    "displayOrderWithinTurn": -1,
+    "unavailable": false,
+    "revisionRequest": {
+      "messageId": "be708494-cba7-4bd1-8bfc-70f1d109e785",
+      "content": "仅将价格改为18元，预约条件不动。",
+      "note": "Current user request. Apply the smallest requested change to the returned original; do not infer missing facts."
+    }
+  }
+}

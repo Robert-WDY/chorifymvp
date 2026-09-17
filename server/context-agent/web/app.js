@@ -34,6 +34,9 @@ function ingest(e){
  if(e.kind==='text_incomplete'){const id=e.streamId+':text',old=cards.get(id);if(old)message(id,'assistant',(old.text||'')+'\n（'+(e.note||'连接中断，文字未完成')+'）',e.seq);}
  if(e.kind==='activity')activity(e);
  if(e.kind==='proposal'){pending.set(e.proposal.proposalId,e.proposal);proposals();}
+ if(e.kind==='document'){
+  const a=e.asset,id='saved:'+a.id,old=cards.get(id);if(!old){const box=el('article',undefined,'message assistant');box.dataset.assetId=a.id;box.append(el('strong','已保存：'+(a.title||'文稿')+' · v'+a.version),el('p',e.changed===false?'正文与上一版相同。':'以下为已保存的版本。'),el('pre',a.content));$('messages').append(box);cards.set(id,{node:box,seq:e.seq});}
+ }
  if(e.kind==='interaction'){questions.set(e.interaction.interactionId,e.interaction);renderQuestions();}
  if(e.kind==='turn_end')status(e.status==='waiting_user'?'等待你的回答；没有自动继续调用。':e.status==='completed'?'本轮回复结束；交付状态以实际结果为准。':e.message||states[e.status]||e.status);
 }

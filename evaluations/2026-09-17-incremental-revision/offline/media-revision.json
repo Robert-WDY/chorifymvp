@@ -1,0 +1,300 @@
+{
+  "validation": {
+    "model": "scripted",
+    "media": "local_mock_or_simulation",
+    "networkCalls": 0
+  },
+  "first": {
+    "ok": true,
+    "status": "approval_required",
+    "submitted": false,
+    "proposalId": "proposal_84a6a15cb203cb5fa586c1f8a9b11545",
+    "turnId": "turn",
+    "name": "generate_image",
+    "args": {
+      "prompt": "透明方瓶、白色瓶盖。米白背景，柔和光。无文字。",
+      "size": "1440x2560",
+      "referenceImages": [
+        "img"
+      ],
+      "sourceIds": [
+        "img"
+      ]
+    },
+    "simulated": false,
+    "inputEvidence": {
+      "visualSources": [
+        {
+          "id": "img",
+          "version": 2
+        }
+      ],
+      "textSources": [],
+      "textSourceMeaning": "provenance_only; necessary facts and constraints must be expressed in prompt/instruction"
+    },
+    "message": "具体方案已保存，尚未生成。请向用户展示同组全部方案；收到服务端批准后才可提交。"
+  },
+  "r": {
+    "ok": true,
+    "status": "approval_required",
+    "submitted": false,
+    "proposalId": "proposal_9761a444fb3a0257825e1d131e928148",
+    "turnId": "turn",
+    "name": "generate_image",
+    "args": {
+      "prompt": "透明方瓶、白色瓶盖。浅蓝背景，柔和光。无文字。",
+      "size": "1440x2560",
+      "referenceImages": [
+        "img"
+      ],
+      "sourceIds": [
+        "img"
+      ]
+    },
+    "simulated": false,
+    "changeEvidence": {
+      "baseProposalId": "proposal_84a6a15cb203cb5fa586c1f8a9b11545",
+      "changedFields": [
+        "prompt"
+      ],
+      "text": {
+        "mode": "incremental",
+        "changed": true,
+        "changes": [
+          {
+            "start": 10,
+            "end": 14,
+            "before": "米白背景",
+            "after": "浅蓝背景"
+          }
+        ],
+        "baseHash": "b5feda642793af53f5cf1570959042c3828f6eb55cee75d35a37a9a2d7879766",
+        "resultHash": "ece8022021f62dc26eb75d47833ed28e54adeff63c370233503a91f8deec7619"
+      }
+    },
+    "inputEvidence": {
+      "visualSources": [
+        {
+          "id": "img",
+          "version": 2
+        }
+      ],
+      "textSources": [],
+      "textSourceMeaning": "provenance_only; necessary facts and constraints must be expressed in prompt/instruction"
+    },
+    "message": "具体方案已保存，尚未生成。请向用户展示同组全部方案；收到服务端批准后才可提交。"
+  },
+  "denied": {
+    "ok": false,
+    "error": {
+      "code": "approval_required",
+      "message": "没有匹配当前会话具体方案的用户批准；请展示已保存方案并取得批准。"
+    },
+    "submitted": false
+  },
+  "done": {
+    "ok": true,
+    "status": "succeeded",
+    "submitted": true,
+    "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+    "providerReceiptId": null,
+    "simulated": false,
+    "assets": [
+      {
+        "id": "img_86441368-c81c-4fe7-8422-b3bb9c753173",
+        "type": "image",
+        "url": "https://example.com/mock-result.png",
+        "ownerId": "local",
+        "version": 1,
+        "sourceIds": [
+          "img"
+        ],
+        "createdAt": "2026-09-17T07:57:26.069Z",
+        "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+        "requestedSize": "1440x2560"
+      }
+    ]
+  },
+  "sent": [
+    {
+      "prompt": "透明方瓶、白色瓶盖。浅蓝背景，柔和光。无文字。",
+      "size": "1440x2560",
+      "referenceImages": [
+        "https://example.com/source.png"
+      ]
+    }
+  ],
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+    "ownerId": "local",
+    "records": [],
+    "assets": {
+      "img": {
+        "id": "img",
+        "type": "image",
+        "version": 2,
+        "url": "https://example.com/source.png"
+      },
+      "img_86441368-c81c-4fe7-8422-b3bb9c753173": {
+        "id": "img_86441368-c81c-4fe7-8422-b3bb9c753173",
+        "type": "image",
+        "url": "https://example.com/mock-result.png",
+        "ownerId": "local",
+        "version": 1,
+        "sourceIds": [
+          "img"
+        ],
+        "createdAt": "2026-09-17T07:57:26.069Z",
+        "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+        "requestedSize": "1440x2560"
+      }
+    },
+    "invocations": {
+      "receipt_bb333b6ba45f9d684e544890c896065c": {
+        "kind": "media",
+        "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+        "proposalId": "proposal_9761a444fb3a0257825e1d131e928148",
+        "approvalId": "approval_a01796e7-93ce-490c-90c8-c5b956dc78ff",
+        "sessionId": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+        "ownerId": "local",
+        "name": "generate_image",
+        "args": {
+          "prompt": "透明方瓶、白色瓶盖。浅蓝背景，柔和光。无文字。",
+          "size": "1440x2560",
+          "referenceImages": [
+            "img"
+          ],
+          "sourceIds": [
+            "img"
+          ]
+        },
+        "mode": "live",
+        "callId": "submit",
+        "turnId": "turn",
+        "status": "succeeded",
+        "attempted": true,
+        "createdAt": "2026-09-17T07:57:26.069Z",
+        "providerResult": {
+          "status": "succeeded",
+          "images": [
+            {
+              "url": "https://example.com/mock-result.png"
+            }
+          ]
+        },
+        "providerReceiptId": null,
+        "assetIds": [
+          "img_86441368-c81c-4fe7-8422-b3bb9c753173"
+        ],
+        "result": {
+          "ok": true,
+          "status": "succeeded",
+          "submitted": true,
+          "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+          "providerReceiptId": null,
+          "simulated": false,
+          "assets": [
+            {
+              "id": "img_86441368-c81c-4fe7-8422-b3bb9c753173",
+              "type": "image",
+              "url": "https://example.com/mock-result.png",
+              "ownerId": "local",
+              "version": 1,
+              "sourceIds": [
+                "img"
+              ],
+              "createdAt": "2026-09-17T07:57:26.069Z",
+              "receiptId": "receipt_bb333b6ba45f9d684e544890c896065c",
+              "requestedSize": "1440x2560"
+            }
+          ]
+        },
+        "updatedAt": "2026-09-17T07:57:26.070Z"
+      }
+    },
+    "approvals": {
+      "proposal_84a6a15cb203cb5fa586c1f8a9b11545": {
+        "kind": "proposal",
+        "proposalId": "proposal_84a6a15cb203cb5fa586c1f8a9b11545",
+        "sessionId": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+        "ownerId": "local",
+        "name": "generate_image",
+        "args": {
+          "prompt": "透明方瓶、白色瓶盖。米白背景，柔和光。无文字。",
+          "size": "1440x2560",
+          "referenceImages": [
+            "img"
+          ],
+          "sourceIds": [
+            "img"
+          ]
+        },
+        "digest": "204b91680782504ff97d5496c31b17e8de6ce7d7457c8bffcc7ae998a2771439",
+        "mode": "live",
+        "callId": "first",
+        "turnId": "turn",
+        "createdAt": "2026-09-17T07:57:26.068Z",
+        "executionIdentity": null,
+        "sourceBindings": {
+          "img": "68695122be87be049825b87da00af61d757b814a41d05da57b6527c3108febcb"
+        }
+      },
+      "approval_e61df24a-55a1-4f8b-b5c4-ee1a5abdcec6": {
+        "kind": "approval",
+        "approvalId": "approval_e61df24a-55a1-4f8b-b5c4-ee1a5abdcec6",
+        "sessionId": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+        "ownerId": "local",
+        "proposalIds": [
+          "proposal_84a6a15cb203cb5fa586c1f8a9b11545"
+        ],
+        "digests": {
+          "proposal_84a6a15cb203cb5fa586c1f8a9b11545": "204b91680782504ff97d5496c31b17e8de6ce7d7457c8bffcc7ae998a2771439"
+        },
+        "approvedAt": "2026-09-17T07:57:26.069Z"
+      },
+      "proposal_9761a444fb3a0257825e1d131e928148": {
+        "kind": "proposal",
+        "proposalId": "proposal_9761a444fb3a0257825e1d131e928148",
+        "sessionId": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+        "ownerId": "local",
+        "name": "generate_image",
+        "args": {
+          "prompt": "透明方瓶、白色瓶盖。浅蓝背景，柔和光。无文字。",
+          "size": "1440x2560",
+          "referenceImages": [
+            "img"
+          ],
+          "sourceIds": [
+            "img"
+          ]
+        },
+        "digest": "a0dc299c5c0de0e1b9ad6383bb574a9c2fae76eca4b33c035b67cab8adc13477",
+        "mode": "live",
+        "callId": "patch",
+        "turnId": "turn",
+        "createdAt": "2026-09-17T07:57:26.069Z",
+        "executionIdentity": null,
+        "sourceBindings": {
+          "img": "68695122be87be049825b87da00af61d757b814a41d05da57b6527c3108febcb"
+        },
+        "replacesProposalId": "proposal_84a6a15cb203cb5fa586c1f8a9b11545"
+      },
+      "approval_a01796e7-93ce-490c-90c8-c5b956dc78ff": {
+        "kind": "approval",
+        "approvalId": "approval_a01796e7-93ce-490c-90c8-c5b956dc78ff",
+        "sessionId": "4fb426db-ae1e-4c90-bab5-befddb915c1c",
+        "ownerId": "local",
+        "proposalIds": [
+          "proposal_9761a444fb3a0257825e1d131e928148"
+        ],
+        "digests": {
+          "proposal_9761a444fb3a0257825e1d131e928148": "a0dc299c5c0de0e1b9ad6383bb574a9c2fae76eca4b33c035b67cab8adc13477"
+        },
+        "approvedAt": "2026-09-17T07:57:26.069Z"
+      }
+    },
+    "summaries": {}
+  }
+}

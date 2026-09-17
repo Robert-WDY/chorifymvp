@@ -1,0 +1,143 @@
+{
+  "validation": {
+    "model": "scripted",
+    "media": "local_mock_or_simulation",
+    "networkCalls": 0
+  },
+  "result": {
+    "ok": true,
+    "asset": {
+      "id": "doc_ac8c87da-64a9-401f-86ec-ffaafa830f83",
+      "type": "text",
+      "content": "价格18元。\r\n预约待确认。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 4,
+      "parentId": "a",
+      "sourceIds": [
+        "a"
+      ],
+      "createdAt": "2026-09-17T07:57:25.929Z"
+    },
+    "changeEvidence": {
+      "changed": true,
+      "changes": [
+        {
+          "start": 2,
+          "end": 4,
+          "before": "20",
+          "after": "18"
+        }
+      ],
+      "baseHash": "aa798c77dda88ea99be5843a756d7d3016d3de54e9be2a9ce44cae00faf204d7",
+      "resultHash": "65a0d08a4a050956a2561b3b91848e8828f982c53bb1d6d6c6a1a235bb4d3110"
+    },
+    "parentEvidence": {
+      "id": "a",
+      "version": 3,
+      "characters": 14,
+      "content": "价格20元。\r\n预约待确认。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "a"
+        }
+      }
+    }
+  },
+  "measured": {
+    "ok": true,
+    "count": 14,
+    "unit": "characters",
+    "deliveryCheck": {
+      "status": "passed",
+      "issues": [],
+      "requirements": {
+        "min": 4
+      },
+      "target": {
+        "kind": "document",
+        "id": "d"
+      },
+      "effectiveChecks": {
+        "text": [
+          {
+            "unit": "characters",
+            "bodyOnly": false,
+            "min": 4,
+            "count": 14
+          }
+        ],
+        "itemCounts": []
+      },
+      "bodyOnly": false,
+      "textIdentity": "65a0d08a4a050956a2561b3b91848e8828f982c53bb1d6d6c6a1a235bb4d3110",
+      "scope": "declared_constraints_on_exact_draft",
+      "semanticMeaningVerified": false
+    },
+    "scope": "exact_supplied_body",
+    "convention": "去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。"
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "e7c48011-9753-494f-ad1a-e0df3e151a6c",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "tool_call",
+        "turnId": "turn",
+        "callId": "m",
+        "name": "measure_text",
+        "arguments": "{\"text\":\"价格18元。\\r\\n预约待确认。\",\"unit\":\"characters\",\"requirements\":{\"min\":4},\"target\":{\"kind\":\"document\",\"id\":\"d\"}}",
+        "id": "ec33d3cb-fbe8-4565-b0fd-dcedc2ae0d9c",
+        "at": "2026-09-17T07:57:25.927Z",
+        "groupId": "ec33d3cb-fbe8-4565-b0fd-dcedc2ae0d9c"
+      },
+      {
+        "kind": "tool_result",
+        "turnId": "turn",
+        "callId": "m",
+        "output": "{\"ok\":true,\"count\":14,\"unit\":\"characters\",\"deliveryCheck\":{\"status\":\"passed\",\"issues\":[],\"requirements\":{\"min\":4},\"target\":{\"kind\":\"document\",\"id\":\"d\"},\"effectiveChecks\":{\"text\":[{\"unit\":\"characters\",\"bodyOnly\":false,\"min\":4,\"count\":14}],\"itemCounts\":[]},\"bodyOnly\":false,\"textIdentity\":\"65a0d08a4a050956a2561b3b91848e8828f982c53bb1d6d6c6a1a235bb4d3110\",\"scope\":\"declared_constraints_on_exact_draft\",\"semanticMeaningVerified\":false},\"scope\":\"exact_supplied_body\",\"convention\":\"去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。\"}",
+        "id": "f5ef7867-5ec4-4eb3-a720-601e56446570",
+        "at": "2026-09-17T07:57:25.928Z",
+        "groupId": "f5ef7867-5ec4-4eb3-a720-601e56446570"
+      }
+    ],
+    "assets": {
+      "a": {
+        "id": "a",
+        "type": "text",
+        "content": "价格20元。\r\n预约待确认。",
+        "version": 3
+      },
+      "doc_ac8c87da-64a9-401f-86ec-ffaafa830f83": {
+        "id": "doc_ac8c87da-64a9-401f-86ec-ffaafa830f83",
+        "type": "text",
+        "content": "价格18元。\r\n预约待确认。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 4,
+        "parentId": "a",
+        "sourceIds": [
+          "a"
+        ],
+        "createdAt": "2026-09-17T07:57:25.929Z"
+      }
+    },
+    "invocations": {
+      "document_b276e06f898b6e0e592125ac0e860e00": {
+        "kind": "document",
+        "assetId": "doc_ac8c87da-64a9-401f-86ec-ffaafa830f83",
+        "digest": "687dad4c6e12f10ac5390112692132b50c4345136a1e0cebda0d859edfe290e5",
+        "turnId": "turn",
+        "callId": "c",
+        "createdAt": "2026-09-17T07:57:25.929Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

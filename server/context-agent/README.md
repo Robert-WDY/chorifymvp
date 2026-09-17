@@ -43,6 +43,10 @@ npm run start:context
 
 简单聊天创作、改稿可直接回复并保留原始对话，不强制存稿或重读当前完整原文。需要独立文稿、版本管理或修改已有资产时保存；聊天稿以 `parentMessageId` 和新正文一次保存原稿及修订。Skill 直接读取 `methods/v1` 专业正文，不使用旧节点执行协议。详见 [统一修复记录](../../FIXES.md)。
 
+局部修订使用已有工具的 `edits:[{before,after}]`：文稿绑定 `parentId+parentVersion`，聊天稿绑定 `parentMessageId+sourceText`，在该原稿上应用唯一、不重叠的准确片段替换，未涉及部分逐字保留。`after` 可为空以删除片段，合成正文仍满足原有非空及长度限制。完整重写的 `content` 入口保留，仅在用户要求整体改写时使用。读取原稿/方案可带 `forRevision:true`，返回当前轮真实修改原话；长稿仍显式分页，不把片段当全文。
+
+已有媒体方案通过 `read_approval` 读取，使用同名准备工具和 `replacesProposalId` 加 `edits` 或需改参数做增量修订；未传参数继承，合成结果再通过完整 Schema。新方案重新展示批准，旧参数及来源保留；修改真实图片仍用 `edit_image`。保存文稿卡直接取持久资产正文，回执提供实际差异供 Agent 判断。程序不代替 Agent 判断父稿语义、改动范围或全部用户要求；详见 [增量修改证据](../../evaluations/2026-09-17-incremental-revision/README.md)。
+
 编辑关系来自真实 `edit_image.imageId` / `save_document.parentId`，新文件记录父 ID 和版本；派生文件使用 `sourceIds`。图片生成的 `referenceImages` 是本会话图片 ID，创意文档可另用 `sourceIds`。原稿、未知项和原图不会因为上游文字存在而被自动替代。
 
 每次主 Agent 响应最多执行一个工具，真实反馈进入下一次决策。意外多调用在副作用前整组拒绝，各调用均返回 `not_executed`，重试计入现有预算。只有明确确认的冻结媒体批次可以在一个工具内部逐项提交；一项失败、未知、取消或预算不足就停止余项。原子保存仍是一次操作。供应商声明支持时可设置 `LLM_PARALLEL_TOOL_CALLS_SUPPORTED=1` 发送真实 Responses 协议的 `parallel_tool_calls:false`；本批未核验线上供应商支持，默认不发送此选项。

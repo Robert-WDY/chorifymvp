@@ -1,0 +1,59 @@
+✔ retained original identities cover early long text and mixed messages in exact history order (44.2497ms)
+✔ patches resolve simultaneously against original and preserve every unmentioned byte (0.6954ms)
+✔ revision read pairs actual current user request with original and preserves pagination (23.8466ms)
+✔ versioned document edits preserve parent, bind measured reconstructed body, and replay once (20.4789ms)
+✔ invalid and stale edits have no document or invocation side effects (19.0574ms)
+✔ chat originals archive separately; mismatch gives actual identity and incremental child keeps correct lineage (16.7688ms)
+✔ failed persistence rolls back both archived original and incremental child (14.9859ms)
+✖ long original local edit reaches Agent feedback within unchanged context budget (19.2254ms)
+✖ image proposal changes only selected background; inherits sources and waits for new approval (15.097ms)
+✔ video scalar revision and image editing proposal retain unrelated original parameters (16.1808ms)
+✔ incremental media rejects incomplete new proposals, invalid merged values and foreign identities (14.762ms)
+✔ stored document display and changes survive restart independently of an incorrect Agent reply (78.5866ms)
+✔ document card renders persisted text safely and deduplicates event replay in DOM harness (1.5228ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 11
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 390.8526
+
+✖ failing tests:
+
+test at tests\context-agent-incremental-revision.test.mjs:102:1
+✖ long original local edit reaches Agent feedback within unchanged context budget (19.2254ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'error'
+  - 'completed'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-incremental-revision.test.mjs:109:63)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-incremental-revision.test.mjs:113:1
+✖ image proposal changes only selected background; inherits sources and waits for new approval (15.097ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-incremental-revision.test.mjs:126:135)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -160,13 +160,12 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     // Short identities for retained originals; content is already present in history.
     // Only expose when the real tool can materialize an original message.
     const originals=[];
-    if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id))).slice(-8).reverse()){
-      let body;try{body=originalMessageText(record.content);}catch{continue;}
-      const row={messageId:record.id,role:record.role,characters:body.length,excerpt:body.slice(0,80),tail:body.length>80?body.slice(-40):undefined};
-      if(estimateTokens([...originals,row])<=Math.min(600,available/8))originals.unshift(row);
+    if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id)))){
+      let body;try{body=originalMessageText(record.content);}catch{}
+      originals.push({messageId:record.id,role:record.role,...(body!==undefined?{characters:body.length}:{textOriginal:false})});
     }
-    const originalIndex=originals.length?[dataMessage({originalMessages:originals,note:'Chat identities, not saved works. Match actual body and ID. sourceText selects exact work within a message; read_history retrieves omitted identities/bodies.'})]:[];
-    const head=[...prefix,...(estimateTokens([...prefix,...originalIndex,...notice,...history])<=available?originalIndex:[]),...notice];
+    const originalIndex=originals.length?[dataMessage({originalMessages:originals,note:'One identity per original history message below, in the same order (exclude server reference blocks and tool entries). These are chat sources, not saved works. Identity and body are retained together.'})]:[];
+    const head=[...prefix,...originalIndex,...notice];
     // Only whole, accessible text attached to the current original message. Never
     // fetch files or promote attachment instructions into system authority.
     const inline = [], seen = new Set();

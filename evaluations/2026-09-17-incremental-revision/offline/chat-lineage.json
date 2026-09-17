@@ -1,0 +1,172 @@
+{
+  "validation": {
+    "model": "scripted",
+    "media": "local_mock_or_simulation",
+    "networkCalls": 0
+  },
+  "wrong": {
+    "ok": false,
+    "error": {
+      "code": "original_content_mismatch",
+      "message": "sourceText不是所选对象的连续原文；核对消息/资产ID与实际正文，不能用修改稿冒充原稿"
+    },
+    "submitted": false,
+    "sourceEvidence": {
+      "messageId": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0",
+      "role": "assistant",
+      "excerpt": "短稿价格20元。",
+      "read": {
+        "tool": "read_history",
+        "arguments": {
+          "messageId": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0",
+          "forRevision": true
+        }
+      }
+    },
+    "recovery": "核对所选原文身份；存档片段用sourceText，不能改挂其他父稿来绕过来源错误。"
+  },
+  "revised": {
+    "ok": true,
+    "asset": {
+      "id": "doc_9824893a-6c9c-41da-ae1d-beda7a234f5b",
+      "type": "text",
+      "content": "原长稿价格18元。其余内容保留。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_733962f9-2fac-48f0-a186-67ff612a935a",
+      "sourceIds": [
+        "doc_733962f9-2fac-48f0-a186-67ff612a935a"
+      ],
+      "createdAt": "2026-09-17T07:57:26.016Z"
+    },
+    "changeEvidence": {
+      "changed": true,
+      "changes": [
+        {
+          "start": 5,
+          "end": 7,
+          "before": "20",
+          "after": "18"
+        }
+      ],
+      "baseHash": "25ac0318cf9dfd4b84b505f12a5efb9801358fef364be5d305ccb1c166356f62",
+      "resultHash": "c391935d6e111c5abf1bac5f45979a9f72cfd8d80fa64553d238f2a742a830fa"
+    },
+    "parentEvidence": {
+      "id": "doc_733962f9-2fac-48f0-a186-67ff612a935a",
+      "version": 1,
+      "sourceMessageId": "b616ba71-5848-4b73-b3c7-c7249862bfb9",
+      "sourceRange": {
+        "start": 6,
+        "end": 22,
+        "unit": "utf16"
+      },
+      "characters": 16,
+      "content": "原长稿价格20元。其余内容保留。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_733962f9-2fac-48f0-a186-67ff612a935a"
+        }
+      }
+    }
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "a025396c-4677-49ec-9a45-292d4f6b3afe",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "message",
+        "role": "assistant",
+        "content": "长稿如下：\n原长稿价格20元。其余内容保留。\n以上是长稿。",
+        "id": "b616ba71-5848-4b73-b3c7-c7249862bfb9",
+        "at": "2026-09-17T07:57:26.015Z",
+        "turnId": "b616ba71-5848-4b73-b3c7-c7249862bfb9",
+        "groupId": "b616ba71-5848-4b73-b3c7-c7249862bfb9"
+      },
+      {
+        "kind": "message",
+        "role": "assistant",
+        "content": "短稿价格20元。",
+        "id": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0",
+        "at": "2026-09-17T07:57:26.015Z",
+        "turnId": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0",
+        "groupId": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0"
+      }
+    ],
+    "assets": {
+      "doc_a5803d6b-d862-438b-af86-d6a4f4818c36": {
+        "id": "doc_a5803d6b-d862-438b-af86-d6a4f4818c36",
+        "type": "text",
+        "content": "短稿价格20元。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "98c2facd-aa9e-4ca6-895c-c590d50d5ea0",
+        "sourceRange": {
+          "start": 0,
+          "end": 8,
+          "unit": "utf16"
+        },
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T07:57:26.016Z"
+      },
+      "doc_733962f9-2fac-48f0-a186-67ff612a935a": {
+        "id": "doc_733962f9-2fac-48f0-a186-67ff612a935a",
+        "type": "text",
+        "content": "原长稿价格20元。其余内容保留。",
+        "sourceRange": {
+          "start": 6,
+          "end": 22,
+          "unit": "utf16"
+        },
+        "title": "原始聊天文稿",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "b616ba71-5848-4b73-b3c7-c7249862bfb9",
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T07:57:26.016Z"
+      },
+      "doc_9824893a-6c9c-41da-ae1d-beda7a234f5b": {
+        "id": "doc_9824893a-6c9c-41da-ae1d-beda7a234f5b",
+        "type": "text",
+        "content": "原长稿价格18元。其余内容保留。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 2,
+        "parentId": "doc_733962f9-2fac-48f0-a186-67ff612a935a",
+        "sourceIds": [
+          "doc_733962f9-2fac-48f0-a186-67ff612a935a"
+        ],
+        "createdAt": "2026-09-17T07:57:26.016Z"
+      }
+    },
+    "invocations": {
+      "document_b61bd51228d8d26066eb736581a08b66": {
+        "kind": "document",
+        "assetId": "doc_a5803d6b-d862-438b-af86-d6a4f4818c36",
+        "digest": "97537b0bb6835b91128b8f26ab2d293e305a86d19fa8f9d385357e1ca9f88058",
+        "turnId": "turn",
+        "callId": "short",
+        "createdAt": "2026-09-17T07:57:26.016Z"
+      },
+      "document_edb574f04590f30df4246960df4fd9a2": {
+        "kind": "document",
+        "assetId": "doc_9824893a-6c9c-41da-ae1d-beda7a234f5b",
+        "digest": "cd195678c616bd8e39652cf6d0e71d0bcee9fce375a3906df84c683ebc8e03bd",
+        "turnId": "turn",
+        "callId": "rev",
+        "createdAt": "2026-09-17T07:57:26.016Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

@@ -1,4 +1,5 @@
 import {GuardError} from './io-guard.mjs';
+import {actualTextChange} from './incremental-edit.mjs';
 
 // Same supported message representation for both archival and revision.
 // Mixed media must not be flattened into an apparently complete text original.
@@ -21,6 +22,6 @@ export function selectOriginal(original,sourceText){
 
 export function documentReceipt(state,asset){
  const parent=asset.parentId?state.assets[asset.parentId]:null;
- return {ok:true,asset:structuredClone(asset),...(parent?{parentEvidence:{id:parent.id,version:parent.version,sourceMessageId:parent.sourceMessageId,sourceRange:parent.sourceRange,
+ return {ok:true,asset:structuredClone(asset),...(parent?{changeEvidence:actualTextChange(parent.content,asset.content),parentEvidence:{id:parent.id,version:parent.version,sourceMessageId:parent.sourceMessageId,sourceRange:parent.sourceRange,
   characters:parent.content.length,content:parent.content,readMore:{tool:'read_asset',arguments:{id:parent.id}}}}:{})};
 }

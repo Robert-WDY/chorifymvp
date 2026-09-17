@@ -1,0 +1,261 @@
+{
+  "validation": {
+    "model": "scripted",
+    "media": "local_mock_or_simulation",
+    "networkCalls": 0
+  },
+  "result": {
+    "status": "completed",
+    "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+    "text": "已保存20元。",
+    "modelCalls": 2,
+    "toolCalls": 1,
+    "modelAccounting": {
+      "agent": {
+        "calls": 2,
+        "durationMs": 24,
+        "usage": [],
+        "cost": null
+      },
+      "image_observation": {
+        "calls": 0,
+        "durationMs": 0,
+        "usage": [],
+        "cost": null
+      },
+      "summary": {
+        "calls": 0,
+        "durationMs": 0,
+        "usage": [],
+        "cost": null
+      }
+    }
+  },
+  "events": [
+    {
+      "type": "public_event",
+      "eventId": "290ebcf4-3c40-4526-92ab-ff23bdd8f7e6",
+      "seq": 2,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.128Z",
+      "kind": "message",
+      "messageId": "93a40de6-d5ef-46e4-8a5d-66fa35dd1910",
+      "role": "user",
+      "text": "仅改为18元并保存。"
+    },
+    {
+      "type": "public_event",
+      "eventId": "dd901d8a-3a58-4246-88c3-4709960edff4",
+      "seq": 4,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.135Z",
+      "kind": "activity",
+      "activityId": "14c4ceee-9141-490f-8ee9-5a8eaf1c977b",
+      "category": "model",
+      "name": "agent",
+      "status": "running"
+    },
+    {
+      "type": "public_event",
+      "eventId": "5bb799ab-2143-4915-b7e0-878d3d599177",
+      "seq": 6,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.141Z",
+      "kind": "activity",
+      "activityId": "14c4ceee-9141-490f-8ee9-5a8eaf1c977b",
+      "category": "model",
+      "name": "agent",
+      "status": "succeeded",
+      "durationMs": 10
+    },
+    {
+      "type": "public_event",
+      "eventId": "2e87d6d3-a6a1-497f-818a-b5b21ef264d6",
+      "seq": 8,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.146Z",
+      "kind": "activity",
+      "activityId": "save",
+      "category": "tool",
+      "name": "save_document",
+      "status": "running"
+    },
+    {
+      "type": "public_event",
+      "eventId": "8322d75b-af51-4ad8-a920-753c5052ad91",
+      "seq": 10,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.154Z",
+      "kind": "activity",
+      "activityId": "save",
+      "category": "tool",
+      "name": "save_document",
+      "status": "succeeded",
+      "simulated": false,
+      "submission": "not_applicable",
+      "submitted": false,
+      "resultRefs": [
+        {
+          "id": "doc_5213b6bb-8554-4cd4-8654-cc492a8a6236",
+          "type": "text",
+          "version": 4
+        }
+      ],
+      "receipts": [],
+      "durationMs": 8
+    },
+    {
+      "type": "public_event",
+      "eventId": "d656ac05-51ee-4d00-88b2-f3da500b07c0",
+      "seq": 11,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.157Z",
+      "kind": "document",
+      "asset": {
+        "id": "doc_5213b6bb-8554-4cd4-8654-cc492a8a6236",
+        "title": "",
+        "version": 4,
+        "parentId": "a",
+        "content": "价格18元。\r\n预约待确认。"
+      },
+      "changed": true
+    },
+    {
+      "type": "public_event",
+      "eventId": "f5c0b3cb-a0fa-4126-bc22-8f2d8c026730",
+      "seq": 13,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.164Z",
+      "kind": "activity",
+      "activityId": "26e872b4-2f5a-4a6f-90c9-34be8c6cf1ba",
+      "category": "model",
+      "name": "agent",
+      "status": "running"
+    },
+    {
+      "type": "public_event",
+      "eventId": "a08738bb-c756-4a5a-9180-9bea6f7de9fd",
+      "seq": 15,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.169Z",
+      "kind": "activity",
+      "activityId": "26e872b4-2f5a-4a6f-90c9-34be8c6cf1ba",
+      "category": "model",
+      "name": "agent",
+      "status": "succeeded",
+      "durationMs": 9
+    },
+    {
+      "type": "public_event",
+      "eventId": "f00590bf-f713-4bb1-98c2-d522b0329662",
+      "seq": 17,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.172Z",
+      "kind": "message",
+      "messageId": "d593b50d-0332-4a6a-b651-959bf1160470",
+      "streamId": "26e872b4-2f5a-4a6f-90c9-34be8c6cf1ba",
+      "role": "assistant",
+      "text": "已保存20元。"
+    },
+    {
+      "type": "public_event",
+      "eventId": "089a8422-8a64-4f82-bae8-7344278e8bf2",
+      "seq": 19,
+      "turnId": "9483d2ca-b8ba-46d8-892c-6b8bb4d6d0e8",
+      "at": "2026-09-17T07:57:26.177Z",
+      "kind": "turn_end",
+      "status": "completed"
+    }
+  ],
+  "projected": {
+    "kind": "tool_result",
+    "callId": "save",
+    "outcome": "succeeded",
+    "submission": "not_applicable",
+    "resultRefs": [
+      {
+        "id": "doc_5213b6bb-8554-4cd4-8654-cc492a8a6236",
+        "type": "text",
+        "version": 4,
+        "parentId": "a"
+      }
+    ],
+    "rawResultRef": {
+      "kind": "record",
+      "id": "89a63a22-fd57-44f3-9f6f-21151175566b",
+      "tool": "read_history",
+      "arguments": {
+        "messageId": "89a63a22-fd57-44f3-9f6f-21151175566b",
+        "offset": 0,
+        "limit": 12000
+      }
+    },
+    "parentEvidence": {
+      "id": "a",
+      "version": 3,
+      "characters": 14,
+      "content": "价格20元。\r\n预约待确认。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "a"
+        }
+      },
+      "contentTruncated": false
+    },
+    "changeEvidence": {
+      "changed": true,
+      "changes": [
+        {
+          "start": 2,
+          "end": 4,
+          "before": "20",
+          "after": "18",
+          "truncated": false
+        }
+      ],
+      "meaningVerified": false
+    },
+    "truncated": true,
+    "data": {
+      "excerpt": "{\"ok\":true",
+      "totalCharacters": 641,
+      "nextOffset": 10
+    }
+  },
+  "noop": {
+    "ok": true,
+    "asset": {
+      "id": "doc_52edb596-68e1-4f52-b166-c68f3e097aa1",
+      "type": "text",
+      "content": "价格20元。\r\n预约待确认。",
+      "title": "",
+      "ownerId": "owner",
+      "origin": "agent_output",
+      "version": 4,
+      "parentId": "a",
+      "sourceIds": [
+        "a"
+      ],
+      "createdAt": "2026-09-17T07:57:26.182Z"
+    },
+    "changeEvidence": {
+      "changed": false,
+      "changes": [],
+      "baseHash": "aa798c77dda88ea99be5843a756d7d3016d3de54e9be2a9ce44cae00faf204d7",
+      "resultHash": "aa798c77dda88ea99be5843a756d7d3016d3de54e9be2a9ce44cae00faf204d7"
+    },
+    "parentEvidence": {
+      "id": "a",
+      "version": 3,
+      "characters": 14,
+      "content": "价格20元。\r\n预约待确认。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "a"
+        }
+      }
+    }
+  }
+}
