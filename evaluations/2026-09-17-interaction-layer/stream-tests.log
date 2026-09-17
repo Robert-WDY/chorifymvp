@@ -1,0 +1,13 @@
+✔ SSE decoder survives byte fragmentation, exposes only public text and waits for full completed output (14.1555ms)
+✔ truncated argument stream cannot execute a tool; partial text is marked incomplete (35.2444ms)
+✔ both adapters require declared streaming capability and callback; JSON summaries remain nonstreaming (3.3367ms)
+✔ failed/incomplete and wrong content-type streams fail closed (0.6517ms)
+✔ stream previews settle when completed response lacks text; invalid output is not a successful model activity (31.2007ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 202.9598

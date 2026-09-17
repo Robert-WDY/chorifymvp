@@ -1,0 +1,16 @@
+✔ public activity preserves pending, unknown and actual batch submission semantics (0.9098ms)
+✔ question pauses with one paired result; partial answer persists across restart with zero model calls; complete answer resumes (133.4333ms)
+✔ invalid answers, foreign interactions, sensitive forms and forged selections do not call models or media (18.0982ms)
+✔ free text answer is a new original user message, not a second tool result or media approval (13.6998ms)
+✔ even a model misrouting a form answer into confirm_media cannot approve generation (16.477ms)
+✔ workspace consumes server validated selection and registered mode; cannot fabricate provider health (7.8245ms)
+✔ real public start precedes slow tool completion and paged replay contains no model payload (1.5657ms)
+✔ HTTP recovery errors keep proper status; public events and client rendering ack do not create approval (171.7887ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 490.1291

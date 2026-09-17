@@ -5,6 +5,7 @@ import { estimateTokens } from './context.mjs';
 import { countBody } from '../text-measure.mjs';
 import { publicMediaUrl } from '../media.mjs';
 import { searchHistory, readHistory } from './history.mjs';
+import {interactions,prepareInteraction} from './interactions.mjs';
 import { GuardError, assertOwner, assetFor, withSessionLock, fingerprint, newId, now, persist,
   assertNotCancelled, assertMediaBudget, createProposal, approvedProposal, approveProposals } from './io-guard.mjs';
 export { approveProposals };
@@ -29,6 +30,10 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
   const materials = { type: 'array', maxItems: 20, items: schema({ content: string(100000), sourceId: id, status: { enum: ['user_provided','verified','unknown','assumption','creative_hypothesis'] }, offset, limit }, []) };
   materials.items.anyOf = [{ required: ['content'] }, { required: ['sourceId'] }];
   const definitions = [
+    tool('inspect_workspace', '查询本会话真实选中素材、本轮附件、注册工具及媒体模式，返回可读入口；不观察图片，不查询供应商余额或健康。能查到的资料先查，不把未知配置猜成余额不足。', {}),
+    tool('request_user_input', '仅在必要的配置选择或多字段回答时发布问题并暂停；普通偏好可合理设计，不必提问。返回只表示发布成功，用户未回答；内容选择绝不批准媒体。不得收集密码、密钥或支付凭据。已有对象选项须绑定resource真实ID。', {
+      message:string(1000),questions:{type:'array',minItems:1,maxItems:3,items:schema({key:{type:'string',pattern:'^[A-Za-z][A-Za-z0-9_]{0,39}$'},label:string(300),allowFreeText:{type:'boolean'},options:{type:'array',maxItems:8,items:schema({id:string(80),label:string(200),resource:schema({kind:{enum:['asset','proposal']},id,version:{type:'integer',minimum:1}},['kind','id'])},['id','label'])}},['key','label','allowFreeText'])}
+    },['message','questions']),
     tool('list_assets', '分页检索当前会话资产目录；不读取正文。query可按名称或准确ID查找历史资产。', { query: { type: 'string', maxLength: 500 }, type: { enum: ['text','image','video'] }, offset, limit: { type:'integer',minimum:1,maximum:50 } }),
     tool('read_approval', '分页读取本会话真实批准记录；指定proposalId可读取保存的完整参数，指定approvalId可查看该批准下的方案。', { approvalId:id, proposalId:id, offset, limit:{type:'integer',minimum:1,maximum:20} }),
     tool('confirm_media', '仅根据本轮真实用户明确授权选择已展示的方案ID，一次确认并提交。否定、引用、仅选创意、附带修改或候选不明确时不要调用；不得默认批准全部。', {proposalIds:{...ids,minItems:1}}, ['proposalIds']),
@@ -190,6 +195,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       if (!invocation.providerReceiptId || typeof query !== 'function') return { ...receiptResult(ctx.state, invocation), status: 'unknown',
         message: '没有可用的供应商查询接口或回执；目前无法确认结果，不会重复提交。' };
       assertNotCancelled(ctx.signal);
+
       try {
         const result = await query.call(media, invocation.providerReceiptId, ctx.signal || new AbortController().signal);
         invocation.queries ||= [];
@@ -216,6 +222,12 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       if (!validate) throw new GuardError('unknown_tool', `工具 ${name} 不可用；请使用实际注册的工具。`);
       if (!validate(args)) throw new GuardError('invalid_arguments', ajv.errorsText(validate.errors, { separator: '; ' }));
       assertNotCancelled(ctx.signal);
+      if(name==='inspect_workspace'){
+        const latest=[...state.records].reverse().find(r=>r.kind==='message'&&r.role==='user');
+        const refs=ids=>ids.map(id=>{const a=assetFor(state,id);return {id:a.id,type:a.type,version:a.version,name:a.name||a.title,read:{tool:'read_asset',id:a.id}};});
+        return {ok:true,selectedAssets:refs((latest?.workspace?.selectedAssets||[]).map(a=>a.id)),attachments:refs((latest?.attachments||[]).map(a=>a.id)),registeredTools:definitions.map(t=>t.name),mediaMode:mode,providerHealth:'unknown',providerBalance:'unknown',pendingQuestions:interactions(state).filter(i=>i.status==='pending'),resources:{assets:'list_assets',proposals:'read_approval',receipts:'read_media_result'},note:'注册及配置不保证供应商可用；本返回不是视觉观察或媒体批准。'};
+      }
+      if(name==='request_user_input')return {ok:true,status:'awaiting_user',submitted:false,interaction:prepareInteraction(state,args)};
       if (name === 'list_assets') {
         const query = (args.query || '').toLocaleLowerCase(), start = args.offset || 0, width = args.limit || 20;
         const assets = Object.values(state.assets).filter(a => (!a.ownerId || a.ownerId === state.ownerId) && (!args.type || a.type === args.type) && (!query || [a.id,a.title,a.name].some(v => String(v || '').toLocaleLowerCase().includes(query))));

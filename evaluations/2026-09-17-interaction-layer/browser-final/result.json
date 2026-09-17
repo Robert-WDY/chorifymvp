@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "browser": "Microsoft Edge headless via Playwright",
+  "events": [
+    "slow-tool-visible-before-result",
+    "question-pauses-model",
+    "partial-answer-restored",
+    "proposal-visible-before-final-model-response",
+    "reload-recovers-running-request-without-new-model-call",
+    "button-proposal-id-equals-receipt-frozen-args",
+    "duplicate-confirmation-no-second-media",
+    "edit-binds-actual-result",
+    "duplicate-out-of-order-replay-does-not-duplicate-cards",
+    "failed-restore-keeps-session-no-create"
+  ],
+  "pageErrors": [],
+  "mainModel": "scripted",
+  "scriptedModelCalls": 12,
+  "firstVisibleActivityIncludingBrowserStartupMs": 706,
+  "realModelCalls": 0,
+  "realMediaCalls": 0,
+  "media": "simulation",
+  "sessionId": "998cb871-0c5d-4ac4-87f6-5b3ffc2cd5ae"
+}

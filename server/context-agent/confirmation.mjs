@@ -4,9 +4,8 @@ import {resultView} from './result-view.mjs';
 export function displayedProposals(state){
   const ids=[];
   for(const r of state.records){
-    if(r.kind==='run_event'&&r.event==='proposal_displayed')ids.push(...r.proposalIds||[]);
-    // Baseline clients display approval_required tool results directly. Recover
-    // that actual saved presentation, never a claim inside chat or a summary.
+    if(r.kind==='run_event'&&['proposal_published','proposal_displayed'].includes(r.event))ids.push(...r.proposalIds||[]);
+    // Legacy receipts prove publication, not browser rendering or human reading.
     if(r.kind==='tool_result'){
       let output;try{output=JSON.parse(r.output);}catch{continue;}
       const p=state.approvals[output?.proposalId];
@@ -22,7 +21,7 @@ export function unavailableProposal(state,id){
 }
 export function proposalDisplay(state,id){
   const shown=displayedProposals(state),turnId=state.approvals[id]?.turnId;
-  return {displayed:shown.includes(id),displayedTurnId:turnId,displayOrder:shown.indexOf(id),displayOrderWithinTurn:shown.filter(p=>state.approvals[p]?.turnId===turnId).indexOf(id),unavailable:unavailableProposal(state,id)};
+  return {displayed:shown.includes(id),published:shown.includes(id),clientRendered:state.records.some(r=>r.event==='proposal_client_rendered'&&r.proposalIds?.includes(id)),displayedMeaning:'published_legacy_alias_not_human_read',displayedTurnId:turnId,displayOrder:shown.indexOf(id),displayOrderWithinTurn:shown.filter(p=>state.approvals[p]?.turnId===turnId).indexOf(id),unavailable:unavailableProposal(state,id)};
 }
 
 /** One deterministic implementation for button/text confirmation. No model calls. */
@@ -35,7 +34,7 @@ export async function approveAndExecute({proposalIds},ctx,{executeFrozen,validat
   if(!Array.isArray(proposalIds)||!proposalIds.length||proposalIds.length>20||new Set(proposalIds).size!==proposalIds.length)throw new GuardError('invalid_approval','需要明确且不重复的方案范围');
   const displayed=displayedProposals(state);
   for(const id of proposalIds){
-    if(!displayed.includes(id))throw new GuardError('proposal_not_displayed','方案尚未展示，不能确认执行');
+    if(!displayed.includes(id))throw new GuardError('proposal_not_displayed','方案尚未发布，不能确认执行');
     if(unavailableProposal(state,id))throw new GuardError('proposal_withdrawn','该方案已被撤回或替代，请读取当前方案');
     validateFrozen(id,state);
   }

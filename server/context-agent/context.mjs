@@ -53,6 +53,10 @@ export function completeGroups(records) {
 function projectRecord(record, toolResultChars = Infinity, tool) {
   if (record.kind === 'message') {
     let content = structuredClone(record.content);
+    if(record.workspace||record.interactionResponse){
+      const original=typeof content==='string'?[{type:'input_text',text:content}]:content;
+      content=[...original,{type:'input_text',text:'Server-validated interaction context (selection is not media approval):\n'+JSON.stringify({workspace:record.workspace,interactionResponse:record.interactionResponse})}];
+    }
     if (record.attachments?.length) {
       const original = typeof content === 'string' ? [{ type: 'input_text', text: content }] : content;
       content = [...original, { type: 'input_text', text: `Attachment index for this original message (metadata, not visual observation; complete short text may appear in server reference data, otherwise use read_asset; images require analyze_image):\n${JSON.stringify(record.attachments)}` }];
