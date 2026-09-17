@@ -1,0 +1,348 @@
+[
+  {
+    "round": 1,
+    "user": "给青禾茶铺写一份朋友圈文案。桂花乌龙冷泡茶，无糖，每杯18元，每天11点营业，是否需要预约还没确定。正文80到120字，另给一个短标题。只要一版文字，不生成图片。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "c65a0bd9-5122-4c5c-b255-6a4da92a142b",
+      "text": "**标题：** 桂花乌龙，冷泡一杯清甜\n\n**正文：**\n\n青禾茶铺的桂花乌龙冷泡茶，来了。\n\n无糖，只留茶香与桂花的清甜，冰镇入口，凉得干净。每杯18元，每天11点开门，路过就能带一杯走。要不要预约，还在商量——想喝的朋友先来，来了就有。\n\n一杯慢泡的工夫，换半日清爽。\n\n---\n\n正文共 100 字（含标点），在 80–120 字区间内；标题为短标题。是否需要预约仍按\"未确定\"表述，未写成承诺；不含图片或视频方案。",
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "modelAccounting": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 2195,
+          "usage": [
+            {
+              "input_tokens": 6160,
+              "input_tokens_details": {
+                "cached_tokens": 0
+              },
+              "output_tokens": 141,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 6301
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 2212,
+    "recordIds": [
+      "8dd5d939-1775-4c3f-acbd-755a86d68a51",
+      "daf858c8-c7a1-40b3-bbb3-ef7c45255dac",
+      "02cb4e7c-a134-47e1-a98d-a78995864c29",
+      "2eeef44f-0f00-4626-ba8a-3a551e713a98",
+      "4aab162f-9f5e-4648-88e7-182732be0e5e",
+      "18070f45-5f2d-4380-8b30-972c0f1d6a49",
+      "c4e2c594-8cc1-4afa-ad1c-9f02c60c2e26",
+      "b2ca29b7-8f28-4318-befc-c6786eaf7e3e",
+      "b3904157-5a68-437f-b412-9053c563d962",
+      "63bfc9b3-c0a1-4c2b-8181-d8b6d3af2b37",
+      "3cc9f772-9e24-4348-8aac-38e9389eeda1"
+    ]
+  },
+  {
+    "round": 2,
+    "user": "太正式了，改得像店员说话。正文缩成40到60字，事实不变，先在聊天里给我。",
+    "restarted": false,
+    "result": {
+      "status": "completed",
+      "turnId": "8b68e516-c63a-476d-a10a-dcf6a2283acb",
+      "text": "**标题：** 桂花乌龙，冷泡一杯\n\n**正文：**\n\n桂花乌龙冷泡茶，无糖，喝着就是茶香带点桂花甜。一杯18，11点开门。要不要预约还没定，先来先喝～\n\n---\n\n正文 44 字（含标点），落在 40–60 字区间；标题为短标题。事实照旧：无糖、18 元、11 点营业、预约未定，未写成承诺。",
+      "modelCalls": 1,
+      "toolCalls": 0,
+      "modelAccounting": {
+        "agent": {
+          "calls": 1,
+          "durationMs": 1728,
+          "usage": [
+            {
+              "input_tokens": 6531,
+              "input_tokens_details": {
+                "cached_tokens": 5888
+              },
+              "output_tokens": 100,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 6631
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 1763,
+    "recordIds": [
+      "8956040c-45c8-4513-8538-a28f6c974ec0",
+      "cb2275de-f134-4a71-83b7-e405f80a5cf4",
+      "6a13d6c5-8710-4280-a7bf-a31b3c02371c",
+      "08bdaf7e-e523-4b0b-92a4-443d87a35e37",
+      "0daf3f69-99c3-4a57-ba63-8d8918673205",
+      "31a4e7b8-0e57-4ddb-848e-8083c5d90e4e",
+      "ace65ce1-e560-4649-be2d-78f0a840066f",
+      "9887d4d2-66f5-4f34-861d-dd9f05e1c74b",
+      "2ca6764c-4a71-41f2-9ab7-ebd847938554",
+      "e189465a-915b-41a0-98b7-273dd0e624d9",
+      "0aabfe97-6976-4520-8d4d-e3568c4d40a6"
+    ]
+  },
+  {
+    "round": 3,
+    "user": "这版可以，保存成独立文稿，原来的长版也保留，两个版本要能追溯。",
+    "restarted": false,
+    "result": {
+      "status": "budget_exceeded",
+      "turnId": "e1b97a95-3b7f-4858-b058-dbab5b812799",
+      "code": "budget_exceeded",
+      "message": "达到本轮模型总调用上限（含视觉观察）",
+      "modelCalls": 10,
+      "toolCalls": 9,
+      "modelAccounting": {
+        "agent": {
+          "calls": 9,
+          "durationMs": 15408,
+          "usage": [
+            {
+              "input_tokens": 6594,
+              "input_tokens_details": {
+                "cached_tokens": 5760
+              },
+              "output_tokens": 165,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 6759
+            },
+            {
+              "input_tokens": 7005,
+              "input_tokens_details": {
+                "cached_tokens": 6656
+              },
+              "output_tokens": 149,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 7154
+            },
+            {
+              "input_tokens": 7409,
+              "input_tokens_details": {
+                "cached_tokens": 7040
+              },
+              "output_tokens": 199,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 7608
+            },
+            {
+              "input_tokens": 8102,
+              "input_tokens_details": {
+                "cached_tokens": 7552
+              },
+              "output_tokens": 305,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 8407
+            },
+            {
+              "input_tokens": 8632,
+              "input_tokens_details": {
+                "cached_tokens": 8320
+              },
+              "output_tokens": 78,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 8710
+            },
+            {
+              "input_tokens": 9747,
+              "input_tokens_details": {
+                "cached_tokens": 5120
+              },
+              "output_tokens": 399,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 10146
+            },
+            {
+              "input_tokens": 9672,
+              "input_tokens_details": {
+                "cached_tokens": 6400
+              },
+              "output_tokens": 251,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 9923
+            },
+            {
+              "input_tokens": 9664,
+              "input_tokens_details": {
+                "cached_tokens": 6400
+              },
+              "output_tokens": 401,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 10065
+            },
+            {
+              "input_tokens": 9363,
+              "input_tokens_details": {
+                "cached_tokens": 6528
+              },
+              "output_tokens": 233,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 9596
+            }
+          ],
+          "cost": null
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0,
+          "usage": [],
+          "cost": null
+        },
+        "summary": {
+          "calls": 1,
+          "durationMs": 2411,
+          "usage": [
+            {
+              "input_tokens": 971,
+              "input_tokens_details": {
+                "cached_tokens": 0
+              },
+              "output_tokens": 400,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 1371
+            }
+          ],
+          "cost": null
+        }
+      }
+    },
+    "elapsedMs": 18213,
+    "recordIds": [
+      "ba265cd2-17a2-496d-84be-f9068182af58",
+      "1186715e-0503-42ce-9f4f-7185c88be5d1",
+      "fd0bea43-0c2a-4bf0-8fe1-d328a115f040",
+      "8c8e7472-1b77-4210-8258-4b93ecb4f052",
+      "cde82525-32ee-4ad0-b81d-6b3c0ed17281",
+      "4290e0bd-6de1-4afb-b2c3-61ee6af70abc",
+      "01a65393-26b4-43b0-90b6-fd4c80848637",
+      "abbe5240-06e9-4985-b3ef-c18b6ec9fa0a",
+      "62c582d0-e186-4c29-af13-47e4acefcf89",
+      "5d67722b-8678-40e4-95ef-da788da6ba77",
+      "9aab654b-7079-419a-b33d-287922e767ab",
+      "6bdd8cda-a03b-408f-9caf-c52b7a13739c",
+      "e97b4a5d-5e63-40e7-a9c8-2993fa8fb6ff",
+      "6ee10017-1f28-46c0-9fe0-cf6260e042bf",
+      "fc67b3a5-b538-4f21-97f5-b89a27b83123",
+      "78dd7eec-1061-4d13-9580-0a1fcf9dc5dd",
+      "6effddf6-a5a5-465d-8f78-b111e4904032",
+      "939e4ddb-4b72-4cc8-8ae8-f37e5f75bd7a",
+      "f34c87f7-8886-46b6-ac41-bd7d3a3c3774",
+      "7b4f54e4-2a08-488e-92ec-2b014e62844b",
+      "fbbbfccd-fd4a-4f9b-b3e4-5453195ab1a1",
+      "cda70429-9291-4684-b6d0-dc5fe82158d8",
+      "0d1d3e4a-0ed9-461a-8e60-e54154143bb1",
+      "f3649d5a-6f71-4adb-83f0-f6bcd1248ba5",
+      "209d6a04-0397-4654-994a-633442bc33a4",
+      "4bec0a71-c58b-4540-83c9-195d7a271972",
+      "654c5cb7-90da-4137-aa4c-f62326904612",
+      "8fb4741c-39bd-4030-96c8-472d772287d0",
+      "a8101aea-4339-4089-907c-ecbed51b3751",
+      "d2854520-e73d-456a-b066-28460832172c",
+      "8730538b-f06b-4e6c-a530-5c9536fcd9fa",
+      "7364cbf4-c9ea-43f6-9220-3391cd83e8ab",
+      "10c4a9f9-e285-4caf-8b57-cbec4e6bd3f9",
+      "244693f0-b958-41fd-8386-936a83e14b09",
+      "6f4df2fc-0f93-4f3a-9557-1d14ed199362",
+      "65e6bc77-25c8-4c01-b315-dcd67b64655d",
+      "e536036d-d3ab-4a63-8fd0-42819d016a74",
+      "809dc63c-d076-4fa1-97b4-eba1fea3470b",
+      "68cc5477-42a4-48c0-9fae-21f20deec2a3",
+      "d5a7c850-739a-45f1-8d7b-21add886134d",
+      "e702a7d8-0525-48c3-ab75-7759835b0073",
+      "f850bbd8-a8c6-4da0-be7f-e082c227e4c8",
+      "ae2a73fa-a6cc-4fe9-b31c-45ba4edaad01",
+      "a5ed5c24-d0b9-474f-bc2c-7159efbc9ee4",
+      "85bf55b0-e614-43fe-8c26-2f1470471978",
+      "37b01724-dd07-415b-83d4-763d58b286ed",
+      "610e3ca0-636f-4a8e-9abf-48fadc4180da",
+      "02a7779a-d733-4aed-bd00-da374fdd1695",
+      "7a72303d-89b2-4200-9ffc-cbf52aeb2e9f",
+      "083fc0b0-4325-4009-90e4-c149dcbab3f1",
+      "b8b62807-d892-474a-84d5-d0933eb7af54",
+      "fee3e4b1-d315-4753-a69d-4d67362d2e5a",
+      "86a2333b-9b0d-4876-b49a-d4ee52779c60",
+      "75e4942f-5617-4198-ba69-a6660520be4f",
+      "106951c8-5479-4be6-87b7-1afce9668e41",
+      "5078e014-81c8-40ba-a412-f50546526c76",
+      "bae6502e-0a7c-4562-85c8-e1752f38e823",
+      "eeaf6ebc-e7f0-4d8e-9b82-1c44bf27a9d5",
+      "f411a843-a203-48d8-9bc0-6907e39f2328",
+      "6f10a503-31cb-4af6-b964-aa7eaf8fc784",
+      "e5b7d171-61f5-4241-bc57-696fb93bf8cc",
+      "e3fa2fda-92f8-4c54-865d-1eb2a05fb456",
+      "b89c65f5-d403-42b6-8bff-91d070df7909",
+      "3229c7db-f2da-4532-96ae-74c1f470b1f8",
+      "91ac6a18-b4de-4d55-b241-32088e96b37b",
+      "682a3212-cfce-48d7-8445-37b1bd063955",
+      "d7768779-f9b0-4da8-b1ac-4d2c7f1afdf5",
+      "a4be6c68-5c89-4660-a8d9-cb36e2bbeaf5",
+      "faa63627-bdec-4a10-a9ae-958b291529d7",
+      "786d135b-eaca-4141-a43d-d7a94391e09d",
+      "86776e05-2c27-425f-9905-2f627221f592",
+      "92531863-8795-4cff-90ed-e10bea0a3cbb",
+      "5e22bb0a-7868-4a5a-abaa-b124238bdd4d",
+      "a3140ee8-a721-40b8-b993-0d32424fb712",
+      "17d2489c-e0a7-43c5-9b8b-360411db2114",
+      "4b7679ea-4291-42b7-8937-d533f684e9bc",
+      "1465dc9e-ce66-417c-83bc-8dec2b12a49a",
+      "39a8aed5-2e80-4188-8000-0830170ae21a",
+      "bc06cf4f-ba3f-4854-b888-f17b41323d6b",
+      "9f718f93-70b3-4856-bbe7-6dbb1ee53805",
+      "9c381cd7-bf9c-4743-97dd-7b18aa4c1041",
+      "a7d2d046-b3b3-47ec-a66e-f2084314f6f7"
+    ]
+  }
+]

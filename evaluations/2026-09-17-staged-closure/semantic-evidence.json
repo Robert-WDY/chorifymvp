@@ -1,0 +1,189 @@
+{
+  "missingLongIdentity": {
+    "wireIndex": 3,
+    "longMessageId": "c035e031-9359-47b9-92ef-e27c7a027a0d",
+    "shortMessageId": "8d435411-3038-44d4-8f74-f5fd13efd1b1",
+    "longBodyFullyVisible": true,
+    "longIdVisible": false,
+    "shortIdVisible": true,
+    "firstSave": [
+      {
+        "type": "function_call",
+        "id": "daa7c69b-b693-49d2-9300-d043a7319749",
+        "status": "completed",
+        "arguments": "{\"title\": \"青禾茶铺·朋友圈文案（长版）\", \"content\": \"**标题：** 桂花乌龙，冷泡上线\\n\\n**正文：**\\n\\n青禾茶铺的桂花乌龙冷泡茶，今天开始陪你过每一天。\\n\\n无糖，只留桂花香和乌龙的清甘，冰镇过后入口更顺。每杯 18 元，每天 11 点开门，欢迎顺路来坐坐。\\n\\n要不要提前预约还没定下来，等确定了第一时间告诉大家。想喝的话，先来店里碰个面吧。\", \"sourceMessageId\": \"8d435411-3038-44d4-8f74-f5fd13efd1b1\"}",
+        "call_id": "call_00_7yxsfYmpqp6E8oJ9hhRh9027",
+        "name": "save_document"
+      }
+    ]
+  },
+  "reverseParent": {
+    "child": {
+      "id": "doc_ea59a849-55e0-4add-b372-335b395c1eb8",
+      "type": "text",
+      "content": "**标题：** 桂花乌龙，冷泡上线\n\n**正文：**\n\n青禾茶铺的桂花乌龙冷泡茶，今天开始陪你过每一天。\n\n无糖，只留桂花香和乌龙的清甘，冰镇过后入口更顺。每杯 18 元，每天 11 点开门，欢迎顺路来坐坐。\n\n要不要提前预约还没定下来，等确定了第一时间告诉大家。想喝的话，先来店里碰个面吧。",
+      "title": "青禾茶铺·朋友圈文案（正式长版）",
+      "ownerId": "evaluation:CHAT_VERSION",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_a9344452-8642-4dfa-8692-184d1f59f391",
+      "sourceIds": [
+        "doc_a9344452-8642-4dfa-8692-184d1f59f391"
+      ],
+      "createdAt": "2026-09-17T07:10:17.889Z"
+    },
+    "parent": {
+      "id": "doc_a9344452-8642-4dfa-8692-184d1f59f391",
+      "type": "text",
+      "content": "青禾茶铺桂花乌龙冷泡茶，无糖的，冰过更顺口。一杯18元，每天11点开门，来就行～要不要预约还没定，定了马上喊你们。",
+      "sourceRange": {
+        "start": 28,
+        "end": 85,
+        "unit": "utf16"
+      },
+      "title": "原始聊天文稿",
+      "ownerId": "evaluation:CHAT_VERSION",
+      "origin": "history_original",
+      "sourceMessageId": "8d435411-3038-44d4-8f74-f5fd13efd1b1",
+      "version": 1,
+      "sourceIds": [],
+      "createdAt": "2026-09-17T07:10:17.889Z"
+    }
+  },
+  "savedReplyDisagreement": {
+    "storedRevision": {
+      "id": "doc_c1508f32-c4ae-4f59-aeab-cf37cb809b50",
+      "type": "text",
+      "content": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+      "title": "青禾初稿",
+      "ownerId": "evaluation:LONG_MEMORY",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_076dcbcd-dc4f-489e-af46-edfe04b036e8",
+      "sourceIds": [
+        "doc_076dcbcd-dc4f-489e-af46-edfe04b036e8"
+      ],
+      "createdAt": "2026-09-17T07:04:08.416Z"
+    },
+    "actualFinal": {
+      "turnId": "6d8fcfbf-d7b4-4675-b11f-34431bcf2926",
+      "kind": "message",
+      "role": "assistant",
+      "groupId": "85635681-fde6-4831-9223-250fdfa0180b",
+      "content": "已把原稿存为独立资产「青禾初稿」v1（doc_076dcbcd-dc4f-489e-af46-edfe04b036e8），父本逐字为：青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。\n\n修订版 v2（doc_c1508f32-c4ae-4f59-aeab-cf37cb809b50，父版本 v1）已生成：\n\n青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯20元。预约规则仍待确认，暂不作到店直接参与的承诺。\n\n仅“18元”改为“20元”，其余逐字与原稿一致；原稿 v1 保留未覆盖。",
+      "id": "19950ef1-83d0-4853-8712-c6604c25f1f2",
+      "at": "2026-09-17T07:04:13.495Z"
+    }
+  },
+  "longMemory": {
+    "summaries": 6,
+    "summaryFailures": 0,
+    "lastSummary": {
+      "kind": "session_summary",
+      "schemaVersion": 1,
+      "summaryId": "summary_78211cd5-8d06-442c-8f46-e1e98e0def87",
+      "sessionId": "ba11eef5-7246-47a9-b1a4-511a6a13c521",
+      "coveredFromSeq": 120,
+      "coveredToSeq": 130,
+      "sourceHash": "8b12e2aee3dd1a0004179a5521caf7c9f823aa8c443d65d75fa283f505cf85be",
+      "previousSummaryId": "summary_bde95a27-4bef-4320-ae85-c8e6fc2c24c5",
+      "generatorVersion": "session-summary-v1",
+      "summaryText": "已并入第9轮。用户（264cf164-c73a-4d56-accc-e5fb0f69b3d0）要求总结两家客户最终价格、未确定项、青禾已确定背景，并明确“别复活旧选择”；助手（d8a0078f-036b-4e74-9157-636d80423d9e）按此给出汇总。\n\n青禾茶铺：最终价格无糖桂花乌龙每杯20元，用户第3轮已纠正、18元作废；已确认背景为桂花+乌龙、冷泡、11点开门；浅金茶汤仅为创意设定，非成分证明。未确定：预约规则仍未确认，暂不承诺到店直接参与。\n\n松岚蜡烛：价格79元（用户提供），燃烧时长未知；与青禾资料分开、不混用。\n\n视觉沟通以第7轮为准：红背景作废、保留米白纸纹；单杯，左右留白均衡，杯子完整、不裁杯口，不加第二杯；杯沿保留细微反光；不出现文字、Logo、水印或人物；不加功效或促销机制。用户新指令重申不复活18元旧价与红背景两项旧选择。\n\n保留原话入口：青禾初稿原稿 message c1a39fb9-b604-425f-936e-07b78ae84c0a（其18元为旧值，当前20元）；用户要求先别改、不保存为独立资产，助手 c31e9d24-45e2-4118-bbb7-4765bb690516 确认原样留存，尚未修改、未保存。第1至第8轮用户均要求只用一句话确认已记下、不整理成长稿、不用工具存文档。以上均为记录，不代表批准或已执行；未来修改须回读原文。",
+      "sourceRefs": [
+        {
+          "kind": "message",
+          "id": "264cf164-c73a-4d56-accc-e5fb0f69b3d0"
+        },
+        {
+          "kind": "message",
+          "id": "d8a0078f-036b-4e74-9157-636d80423d9e"
+        },
+        {
+          "kind": "message",
+          "id": "c1a39fb9-b604-425f-936e-07b78ae84c0a"
+        },
+        {
+          "kind": "message",
+          "id": "c31e9d24-45e2-4118-bbb7-4765bb690516"
+        },
+        {
+          "kind": "message",
+          "id": "a25c832d-befc-470f-8d22-ac07700ec524"
+        },
+        {
+          "kind": "message",
+          "id": "5f0d5e48-1499-4c5e-8996-3a769d931351"
+        }
+      ]
+    }
+  },
+  "bodyCounts": [
+    {
+      "batch": "primary",
+      "messageId": "b2ca29b7-8f28-4318-befc-c6786eaf7e3e",
+      "body": "青禾茶铺的桂花乌龙冷泡茶，来了。\n\n无糖，只留茶香与桂花的清甜，冰镇入口，凉得干净。每杯18元，每天11点开门，路过就能带一杯走。要不要预约，还在商量——想喝的朋友先来，来了就有。\n\n一杯慢泡的工夫，换半日清爽。",
+      "characters": 106,
+      "nonPunctuation": 86
+    },
+    {
+      "batch": "primary",
+      "messageId": "9887d4d2-66f5-4f34-861d-dd9f05e1c74b",
+      "body": "桂花乌龙冷泡茶，无糖，喝着就是茶香带点桂花甜。一杯18，11点开门。要不要预约还没定，先来先喝～",
+      "characters": 48,
+      "nonPunctuation": 42
+    },
+    {
+      "batch": "retest",
+      "messageId": "c035e031-9359-47b9-92ef-e27c7a027a0d",
+      "body": "青禾茶铺的桂花乌龙冷泡茶，今天开始陪你过每一天。\n\n无糖，只留桂花香和乌龙的清甘，冰镇过后入口更顺。每杯 18 元，每天 11 点开门，欢迎顺路来坐坐。\n\n要不要提前预约还没定下来，等确定了第一时间告诉大家。想喝的话，先来店里碰个面吧。",
+      "characters": 118,
+      "nonPunctuation": 98
+    },
+    {
+      "batch": "retest",
+      "messageId": "8d435411-3038-44d4-8f74-f5fd13efd1b1",
+      "body": "青禾茶铺桂花乌龙冷泡茶，无糖的，冰过更顺口。一杯18元，每天11点开门，来就行～要不要预约还没定，定了马上喊你们。",
+      "characters": 57,
+      "nonPunctuation": 50
+    }
+  ],
+  "proposalPreserveReview": {
+    "original": {
+      "kind": "proposal",
+      "proposalId": "proposal_f2816ed181fcd951723485536c115718",
+      "sessionId": "af6de267-61c4-4f04-9cbd-c3daf1b48f86",
+      "ownerId": "evaluation:CONFIRM_LANGUAGE",
+      "name": "generate_image",
+      "args": {
+        "prompt": "Fictional perfume advertising still life, single hero product. A tall rectangular clear glass perfume bottle with a matte white lacquered cap and a plain white label area, filled with pale clear liquid. The bottle stands centered on a seamless pure white studio background, white surface with a soft reflective sheen beneath it. Bright high-key commercial lighting: large softbox from the front-left, subtle gradient shadow falling to the right, gentle rim highlight along the bottle's shoulder and edges, crisp specular reflections on the glass. Minimal luxury cosmetics campaign look, clean negative space around the product, sharp focus, fine glass and label texture detail, editorial product photography. Absolutely no text, no letters, no numbers, no logos, no brand marks, no watermark, no people, no hands, no human figures or body parts. Single product only, one bottle, not a collage, not a grid, not a split or diptych composition, no multiple frames.",
+        "size": "1K"
+      },
+      "digest": "435bc740148404d5aa9b2a033ee3ecfe353d82da42f2c1cf4938e114a8a486d8",
+      "mode": "simulation",
+      "callId": "call_00_8D8PjGtpPrlghJ53s90r0683",
+      "turnId": "ea99b8bd-a01b-43db-8fbc-03c71f885de6",
+      "createdAt": "2026-09-17T07:02:14.481Z",
+      "executionIdentity": null,
+      "sourceBindings": {}
+    },
+    "replacement": {
+      "kind": "proposal",
+      "proposalId": "proposal_0fd2947eb24dd17f27fc20d5d99624c6",
+      "sessionId": "af6de267-61c4-4f04-9cbd-c3daf1b48f86",
+      "ownerId": "evaluation:CONFIRM_LANGUAGE",
+      "name": "generate_image",
+      "args": {
+        "prompt": "广告级静物摄影：一瓶虚构香水，白色不透明玻璃瓶身，圆柱形简洁瓶型，配银色金属瓶盖，瓶身正面无任何文字、无logo、无标签。背景为纯净的蓝色（中等饱和度的皇家蓝/钴蓝，纯净均匀），无缝背景布，瓶身立于背景前方的平面上。柔和的大面积侧光从画面左上方打来，玻璃与金属上有细长的高光反射，瓶底投出淡淡的柔和阴影。整体干净、高级、极简，居中构图，主体完整清晰。避免：任何文字、字母、数字、logo、水印；人物或人手；多个瓶子或拼图式多画面；背景杂物。正方形构图，画面比例 1:1。",
+        "size": "1024x1024"
+      },
+      "digest": "180c80e745512cc1b72a202ac22f33e784d3ec8ff6911293783d3da62f07b8ed",
+      "mode": "simulation",
+      "callId": "call_00_B6mPGKljJ6PbXw4dwQe20461",
+      "turnId": "79993796-2b20-4836-ac5c-7601498255c2",
+      "createdAt": "2026-09-17T07:02:58.293Z",
+      "executionIdentity": null,
+      "sourceBindings": {},
+      "replacesProposalId": "proposal_f2816ed181fcd951723485536c115718"
+    }
+  }
+}

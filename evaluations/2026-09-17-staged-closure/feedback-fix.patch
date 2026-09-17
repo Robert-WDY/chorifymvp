@@ -1,0 +1,44 @@
+diff --git a/server/context-agent/delivery-check.mjs b/server/context-agent/delivery-check.mjs
+index 28e6fd5..8ef5885 100644
+--- a/server/context-agent/delivery-check.mjs
++++ b/server/context-agent/delivery-check.mjs
+@@ -13,0 +14 @@ export function checkedDocument(state,turnId,callId,content){
++ if(entry?.result.ok&&!entry.result.deliveryCheck)throw new GuardError('document_check_failed','该回执只是普通计数，没有requirements验收。普通保存不需要measurementCallId；若作品有明确字数或项数要求，先传requirements验收，再绑定通过的回执。');
+@@ -22 +23 @@ export function measureDelivery(args,{state,turnId}={}){
+- if(bodyText!==undefined)selectOriginal(text,bodyText);
++ if(bodyText!==undefined){try{selectOriginal(text,bodyText);}catch(error){throw new GuardError(error.code,'bodyText必须是text中唯一的准确连续片段，保留原来的Markdown和标点；只选择需要计数的正文，不重写或去格式。无需分离正文时省略bodyText。');}}
+diff --git a/server/context-agent/prompt.md b/server/context-agent/prompt.md
+index bda629a..fef77bc 100644
+--- a/server/context-agent/prompt.md
++++ b/server/context-agent/prompt.md
+@@ -21 +21 @@
+-最终根据实际成果逐项验收：明确字数/数量用measure_text检查text及requirements；正文用bodyText，items包含该成果全部备选，以双换行拼接覆盖text。先判断每项确为用户要的一个单位，不把多个方向塞进一项规避数量。不同成果用不同稳定target.id，聊天部分用reply、独立文稿用document；一个成果重测沿用同一target。若自己误声明要求，用correction指向最新测量callId、本轮用户messageId、准确quote及reason明确纠正，不将模型误解当用户冲突。保存测过的文稿传measurementCallId，保存后可正常说明结果；已有资产用assetId+assetVersion测实际版本，不重抄正文。完整回复测量后不添加备选；片段验收仅覆盖该片段，仍检查整份回答的总范围。用户仅要原文时不加说明。核对父版本和未知项未变承诺；图片保持用compare_images读取源图与成品双图。没有真实视觉或只有模拟产物不得声称画面合格。未满足时只修对应部分或如实说明；工具成功、completed不等于用户目标完成。
++最终按用户要求检查实际成果。明确字数/数量才用measure_text的requirements验收，保存本身不要求先计数。text是完整交付，bodyText仅取准确连续正文、保留格式；标题和状态说明不凑字数。items包含全部备选，以双换行拼接覆盖text，不能把多个方向塞进一项。不同成果用不同稳定target，同一成果重测沿用；误声明用correction依据本轮原话纠正。只将通过验收的完整text与measurementCallId一起保存；普通计数没有验收凭证。已有资产按实际版本测量。检查过的完整回复不追加备选；片段检查不代表整份回复合格。只要原文时不加说明。按真实回执核对父版本、保存正文与最终声明；未知项不变承诺。图片保持须双图比较，无真实视觉或模拟产物不称画面合格。未满足则修对应部分或如实说明；工具成功、completed不等于用户目标完成。
+diff --git a/server/context-agent/tools.mjs b/server/context-agent/tools.mjs
+index 09dfa97..8bbd312 100644
+--- a/server/context-agent/tools.mjs
++++ b/server/context-agent/tools.mjs
+@@ -59,2 +59,5 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+-  measurement.description='测量具体成果。普通测量只返回数字；requirements检查字数/项数。target默认完整reply；多个回复部分用各自稳定id，独立文稿用document及稳定id。已保存作品用assetId+assetVersion直接读取。bodyText指定正文，items以双换行拼接覆盖该成果text。重测沿用同一target，不偷偷放宽要求；误声明用correction指向最新测量callId、当前用户messageId及准确quote并说明reason。通过后交付对应正文或用measurementCallId保存，状态说明不是文稿正文。项的语义与原话含义仍由Agent判断。';
+-  definitions.find(d=>d.name==='save_document').description='需要独立文稿或版本才保存。新稿传content；已有资产修订用parentId+parentVersion，不重抄父稿，但先确认完整原文可用；聊天原稿用parentMessageId+sourceText准确作品片段。sourceMessageId仅存档。测过的作品传measurementCallId绑定实际正文；改正文后重测。核对回执parentEvidence实际父稿，不只信标题。';
++  measurement.parameters.properties.text.description='完整交付文字；新稿必传，bodyText不能代替。';
++  measurement.parameters.properties.bodyText.description='text中唯一的连续正文，保留格式，排除标题/说明；可省略。';
++  documentSchema.properties.measurementCallId={...id,description:'仅绑定deliveryCheck.status=passed的验收回执，content必须等于该次完整text。普通计数不属于验收，不需要本字段；保存动作本身不要求先测字数。'};
++  measurement.description='requirements检查字数/项数，省略则仅计数。target默认完整reply，多份成果各用稳定id；文稿用document。已存稿可用assetId+assetVersion。items双换行拼接须覆盖text。重测沿用target；误声明用correction引用最新测量callId、本轮用户messageId、原话quote及reason。Agent仍负责语义划分。';
++  definitions.find(d=>d.name==='save_document').description='需要独立文稿或版本才保存，不要求先测字数。新稿传content；已有资产修订用parentId+parentVersion，不重抄父稿，但先确认完整原文可用；聊天原稿用parentMessageId+sourceText准确作品片段。sourceMessageId仅存档。通过requirements验收的作品传measurementCallId，content等于该次完整text；普通计数没有验收凭证。核对回执parentEvidence实际父稿，不只信标题。';
+diff --git a/tests/context-agent-staged-closure.test.mjs b/tests/context-agent-staged-closure.test.mjs
+index 9bef763..9061f5b 100644
+--- a/tests/context-agent-staged-closure.test.mjs
++++ b/tests/context-agent-staged-closure.test.mjs
+@@ -64,0 +65,11 @@ test('stage1 failed document/asset checks cannot be bypassed by a final status m
++test('stage1 feedback distinguishes ordinary counting from checked saving and body selection from parent selection',async()=>{
++ const s=createSession(),tools=createTools();
++ await perform(s,tools,'measure_text',{text:'普通文稿',unit:'characters'},'count');
++ const wrongReceipt=await perform(s,tools,'save_document',{content:'普通文稿',measurementCallId:'count'},'invalid');
++ assert.equal(wrongReceipt.error.code,'document_check_failed');assert.match(wrongReceipt.error.message,/普通计数/);
++ assert.equal((await perform(s,tools,'save_document',{content:'普通文稿'},'plain-save')).ok,true);
++ const badBody=await perform(s,tools,'measure_text',{text:'**完整正文**',bodyText:'完整 正文',unit:'characters'},'body');
++ assert.match(badBody.error.message,/bodyText/);assert.doesNotMatch(badBody.error.message,/资产ID/);
++ assert.equal((await perform(s,tools,'measure_text',{bodyText:'不能代替text',unit:'characters'},'missing')).ok,false);
++});
++

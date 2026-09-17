@@ -1,0 +1,23 @@
+{
+  "startedAt": "2026-09-17T07:00:54.120Z",
+  "codeSha": "d050b286d11639f4024e53c790ee29ef9d68ce7f",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "budget": 120,
+  "media": "simulation",
+  "vision": false,
+  "contextTokenBudget": 24000,
+  "summary": {
+    "enabled": true,
+    "triggerRatio": 0.75,
+    "targetRatio": 0.55,
+    "summaryMaxTokens": 1800,
+    "inputMaxTokens": 8000,
+    "maxCallsPerTurn": 2,
+    "reserveMainCalls": 2,
+    "safetyTokens": 500
+  },
+  "casesSha256": "8a0895dbff7ed71dedf0a29a59f708dd4ae080b5612b967b24967e66c7689572",
+  "entry": "actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI",
+  "authorization": "User requested one multi-turn evaluation and full trace analysis; no live media"
+}

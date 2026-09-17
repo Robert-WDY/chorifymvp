@@ -1,0 +1,46 @@
+[
+  {
+    "id": "CHAT_VERSION",
+    "expected": "One draft; shorten without tools; atomic original/revision; correct price only; preserve parents and translation source.",
+    "turns": [
+      {
+        "user": "给青禾茶铺写一份朋友圈文案。桂花乌龙冷泡茶，无糖，每杯18元，每天11点营业，是否需要预约还没确定。正文80到120字，另给一个短标题。只要一版文字，不生成图片。"
+      },
+      {
+        "user": "太正式了，改得像店员说话。正文缩成40到60字，事实不变，先在聊天里给我。"
+      },
+      {
+        "user": "这版可以，保存成独立文稿，原来的长版也保留，两个版本要能追溯。"
+      },
+      {
+        "user": "价格说错了，是20元，不是18元。只改已保存的短版，其他不动，存为新版本。",
+        "restart": true
+      },
+      {
+        "user": "把最新这一版翻译成英文，另存一份，别覆盖中文，也别把预约说成不需要。"
+      }
+    ]
+  },
+  {
+    "id": "DIRECTION_SKILL",
+    "expected": "Exactly one then three directions; consume second; 15 then 10 seconds; unknown properties stay unknown; actual requested Skill read.",
+    "turns": [
+      {
+        "user": "用 direction-designer-zh-v1 的方法，帮霁白护手霜做一个广告方向。已知：白色软管、30元。容量、成分和功效都未提供。静物风格，只要一个，不要顺手给我三套。"
+      },
+      {
+        "user": "我现在想比较三个方向，总共三个就好，先不写脚本。已知信息不变。"
+      },
+      {
+        "user": "选第二个，展开成15秒文字脚本。不要重新设计方向，不生图也不生视频。"
+      },
+      {
+        "user": "继续刚才的脚本，压到10秒，主体和创意不变，保存一份完整文稿。",
+        "restart": true
+      },
+      {
+        "user": "最后给我一句可以直接放广告里的卖点。不能把未知容量说成小巧便携，也不能编成滋润功效。"
+      }
+    ]
+  }
+]

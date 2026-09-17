@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "name": "cases.json",
+      "sha256": "8ea108da2beadfd597a9a232bb1028d3fec5c1353715caa4096c5a3cc21e7c84"
+    },
+    {
+      "name": "CHAT_VERSION\\full-transcript.txt",
+      "sha256": "88d1eaca4e5bd77705352e8a10fe01af246fea90eb526ba17e90bb88f35b4c48"
+    },
+    {
+      "name": "CHAT_VERSION\\review-records.json",
+      "sha256": "ac0581c02bb4bb70e48f27ac9e8070bb62d8651091127da769f681ce12d4ad3f"
+    },
+    {
+      "name": "CHAT_VERSION\\rounds.json",
+      "sha256": "a86a5736ddbbd8e148062efe15d5c1771b91296eae292426e3c8bcf6117710ea"
+    },
+    {
+      "name": "CHAT_VERSION\\session.json",
+      "sha256": "e58d1fe270268ed9287cc80d9daddea488f751805b0e646a170b38d9c877568c"
+    },
+    {
+      "name": "CHAT_VERSION\\transport.json",
+      "sha256": "382f0275035349315dc372751d8df6c4acafc7610ea34ef3135b9541ff7631a7"
+    },
+    {
+      "name": "DIRECTION_SKILL\\full-transcript.txt",
+      "sha256": "1f20545f232c333cbde3cf26ed4156ae0fad97ce25b3d08bf232e0b7d98a75ce"
+    },
+    {
+      "name": "DIRECTION_SKILL\\review-records.json",
+      "sha256": "02a177f792f9dce7720d8b329cf8588d95915674b54c4097d02a260f94e8b0e6"
+    },
+    {
+      "name": "DIRECTION_SKILL\\rounds.json",
+      "sha256": "70f64a7aaf924558ccf8f9b2652d058dc22497a587a54e7b53db9e9d0e054f47"
+    },
+    {
+      "name": "DIRECTION_SKILL\\session.json",
+      "sha256": "adeed689dd6fdc3df9fc06588038fad52b95615a08366444e884a8912ec6a99e"
+    },
+    {
+      "name": "DIRECTION_SKILL\\transport.json",
+      "sha256": "98e23bdbaa9d2563c98dce9fd5cf08d803541fa4a599a7f3648b4435fa6a49e7"
+    },
+    {
+      "name": "inventory.json",
+      "sha256": "c71b53f6b2bb5729737f245555dedb3825998bd8aece3258f426f38dc90d8210"
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "e1ffb0cb64dadf724d92770be46fba4453ff4239b7cfc28a52c04c7232a09ac1"
+    },
+    {
+      "name": "run.json",
+      "sha256": "16805a21200c50ae7e75d20492402968723a7afc7590800df2cfe5567ded7baa"
+    }
+  ],
+  "credentialScan": "configured key/token/password values absent; transport contains bodies without authorization headers",
+  "excluded": "Private SQLite storage; complete exported state and trace preserved"
+}

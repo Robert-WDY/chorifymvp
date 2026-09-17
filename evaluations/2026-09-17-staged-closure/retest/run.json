@@ -1,0 +1,46 @@
+{
+  "startedAt": "2026-09-17T07:10:06.054Z",
+  "codeSha": "44a69436cc4d5660366e4d627a7d7bf141543deb",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "budget": 27,
+  "media": "simulation",
+  "vision": false,
+  "contextTokenBudget": 24000,
+  "summary": {
+    "enabled": true,
+    "triggerRatio": 0.75,
+    "targetRatio": 0.55,
+    "summaryMaxTokens": 1800,
+    "inputMaxTokens": 8000,
+    "maxCallsPerTurn": 2,
+    "reserveMainCalls": 2,
+    "safetyTokens": 500
+  },
+  "casesSha256": "abaff94d1346a967dc9ef646ce3ad52b4265b6250abd43c31c257f18602f7cea",
+  "entry": "actual ContextAgent + shared assembleAgentTools; direct runner, not browser UI",
+  "authorization": "User requested one multi-turn evaluation and full trace analysis; no live media",
+  "calls": 27,
+  "results": [
+    {
+      "id": "CHAT_VERSION",
+      "sessionId": "8c26739b-d7aa-4904-8d07-4a9c58d29dfd",
+      "turns": 5,
+      "planned": 5,
+      "calls": 16,
+      "summaries": 3,
+      "acceptance": "requires_full_trace_review"
+    },
+    {
+      "id": "DIRECTION_SKILL",
+      "sessionId": "acda6b3b-9aff-42e0-843e-6f53dc47b11e",
+      "turns": 4,
+      "planned": 5,
+      "calls": 11,
+      "summaries": 1,
+      "acceptance": "requires_full_trace_review"
+    }
+  ],
+  "realMediaCalls": 0,
+  "finishedAt": "2026-09-17T07:11:21.332Z"
+}

@@ -1,0 +1,37 @@
+{"case":"CHAT_VERSION","round":1,"call":1}
+{"case":"CHAT_VERSION","round":1,"status":"completed","modelCalls":1,"text":"**标题：** 桂花乌龙，冷泡上线\n\n**正文：**\n\n青禾茶铺的桂花乌龙冷泡茶，今天开始陪你过每一天。\n\n无糖，只留桂花香和乌龙的清甘，冰镇过后入口更顺。每杯 18 元，每天 11 点开门，欢迎顺路"}
+{"case":"CHAT_VERSION","round":2,"call":2}
+{"case":"CHAT_VERSION","round":2,"status":"completed","modelCalls":1,"text":"**标题：** 桂花乌龙，冷泡好了\n\n**正文：**\n\n青禾茶铺桂花乌龙冷泡茶，无糖的，冰过更顺口。一杯18元，每天11点开门，来就行～要不要预约还没定，定了马上喊你们。\n\n---\n\n正文 54 字。"}
+{"case":"CHAT_VERSION","round":3,"call":3}
+{"case":"CHAT_VERSION","round":3,"call":4}
+{"case":"CHAT_VERSION","round":3,"call":5}
+{"case":"CHAT_VERSION","round":3,"call":6}
+{"case":"CHAT_VERSION","round":3,"call":7}
+{"case":"CHAT_VERSION","round":3,"call":8}
+{"case":"CHAT_VERSION","round":3,"call":9}
+{"case":"CHAT_VERSION","round":3,"status":"completed","modelCalls":7,"text":"已保存，两个版本各自独立、可追溯：\n\n**1. 青禾茶铺·朋友圈文案（店员口吻短版）** — `doc_44944528-0fe6-4a43-bf8d-8e824408498a`，version 1，"}
+{"case":"CHAT_VERSION","round":4,"call":10}
+{"case":"CHAT_VERSION","round":4,"call":11}
+{"case":"CHAT_VERSION","round":4,"call":12}
+{"case":"CHAT_VERSION","round":4,"status":"completed","modelCalls":3,"text":"已按你说的改好，只动了短版。\n\n**青禾茶铺·朋友圈文案（店员口吻短版）** — `doc_bf15de8c-0212-43f6-bc0d-058efc502120`，version 2，parent"}
+{"case":"CHAT_VERSION","round":5,"call":13}
+{"case":"CHAT_VERSION","round":5,"call":14}
+{"case":"CHAT_VERSION","round":5,"call":15}
+{"case":"CHAT_VERSION","round":5,"call":16}
+{"case":"CHAT_VERSION","round":5,"status":"completed","modelCalls":4,"text":"英文版已另存为新文稿，中文各版本未改动。\n\n**Qinghe Tea Shop · Moments Post (Staff-Tone Short Version, EN)** — `doc_e61b8"}
+{"case":"DIRECTION_SKILL","round":1,"call":17}
+{"case":"DIRECTION_SKILL","round":1,"call":18}
+{"case":"DIRECTION_SKILL","round":1,"status":"completed","modelCalls":2,"text":"按 direction-designer-zh-v1，一个方向，静物风格。\n\n---\n\n## 广告方向：《桌角的三十块》\n\n**切入角度**\n不讲成分、不讲功效，只讲\"价格透明\"这件事本身——把30元"}
+{"case":"DIRECTION_SKILL","round":2,"call":19}
+{"case":"DIRECTION_SKILL","round":2,"status":"completed","modelCalls":1,"text":"按 direction-designer-zh-v1，三个方向，静物风格，已知信息不变（白色软管、30元；容量、成分、功效未知，不写脚本）。\n\n---\n\n## 方向一：《桌角的三十块》\n\n**切入角度"}
+{"case":"DIRECTION_SKILL","round":3,"call":20}
+{"case":"DIRECTION_SKILL","round":3,"call":21}
+{"case":"DIRECTION_SKILL","round":3,"call":22}
+{"case":"DIRECTION_SKILL","round":3,"status":"completed","modelCalls":3,"text":"按 storyboard-one-shot-zh-v2，沿用你选定的方向二《洗手台前的三分钟》，不重新设计方向，不生图不生视频。\n\n---\n\n# 霁白护手霜 · 15秒文字脚本\n**方向**：方向二《"}
+{"case":"DIRECTION_SKILL","round":4,"call":23}
+{"case":"DIRECTION_SKILL","round":4,"call":24}
+{"case":"DIRECTION_SKILL","round":4,"call":25}
+{"case":"DIRECTION_SKILL","round":4,"call":26}
+{"case":"DIRECTION_SKILL","round":4,"call":27}
+{"case":"DIRECTION_SKILL","round":4,"status":"budget_exceeded","modelCalls":6}
+{"root":"C:\\Users\\asus\\Desktop\\codex-workspace\\chorifymvp-git\\evaluation-runs\\staged-closure-retest","calls":27,"results":[{"id":"CHAT_VERSION","sessionId":"8c26739b-d7aa-4904-8d07-4a9c58d29dfd","turns":5,"planned":5,"calls":16,"summaries":3,"acceptance":"requires_full_trace_review"},{"id":"DIRECTION_SKILL","sessionId":"acda6b3b-9aff-42e0-843e-6f53dc47b11e","turns":4,"planned":5,"calls":11,"summaries":1,"acceptance":"requires_full_trace_review"}],"realMediaCalls":0}

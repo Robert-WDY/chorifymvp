@@ -1,0 +1,62 @@
+{
+  "total": {
+    "planned": 10,
+    "executed": 9,
+    "notRun": 0,
+    "notReached": 1,
+    "calls": 27,
+    "http200": 27,
+    "inputTokens": 180859,
+    "outputTokens": 10937,
+    "proposals": 0,
+    "mediaReceipts": 0
+  },
+  "items": [
+    {
+      "id": "CHAT_VERSION",
+      "executed": 5,
+      "errors": 2,
+      "summaries": 3,
+      "summaryFailures": 1,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 12,
+          "durationMs": 22065
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 4,
+          "durationMs": 12718
+        }
+      }
+    },
+    {
+      "id": "DIRECTION_SKILL",
+      "executed": 4,
+      "errors": 1,
+      "summaries": 1,
+      "summaryFailures": 2,
+      "proposals": 0,
+      "mediaReceipts": 0,
+      "phases": {
+        "agent": {
+          "calls": 9,
+          "durationMs": 27135
+        },
+        "image_observation": {
+          "calls": 0,
+          "durationMs": 0
+        },
+        "summary": {
+          "calls": 3,
+          "durationMs": 11981
+        }
+      }
+    }
+  ]
+}

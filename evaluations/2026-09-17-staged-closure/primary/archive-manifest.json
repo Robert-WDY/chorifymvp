@@ -1,0 +1,182 @@
+{
+  "files": [
+    {
+      "name": "cases.json",
+      "sha256": "6e9c0688be033eb43c79ccef7ace5949bf7fb96b67fd6b0fa7708e8ccca1ce72"
+    },
+    {
+      "name": "CHAT_VERSION\\full-transcript.txt",
+      "sha256": "85622a7018657f05d484f36735ae9f25e200bd58a09d06a80dfb0b2713cfda2e"
+    },
+    {
+      "name": "CHAT_VERSION\\review-records.json",
+      "sha256": "e55325c0d49404747d3d2b1931f04cb7dda9a15329ef267bb83223bf39f34b26"
+    },
+    {
+      "name": "CHAT_VERSION\\rounds.json",
+      "sha256": "1f501230f378a7eed4ad1b22b6db6bcad86e08079c1e81e3cf8c3b37ad403954"
+    },
+    {
+      "name": "CHAT_VERSION\\session.json",
+      "sha256": "536ad58823df0e36d253ff38653b4e6b19035ff38994edb43a76a038758938ed"
+    },
+    {
+      "name": "CHAT_VERSION\\transport.json",
+      "sha256": "027447e83c81662b947beee0fb4aca482b8a818fc89f1cdf9e0b9324a6687358"
+    },
+    {
+      "name": "CONFIRM_LANGUAGE\\full-transcript.txt",
+      "sha256": "c6023bbd8f3a5b2042f95650239731be69dc2edf13899a35f0594ecd24d1255d"
+    },
+    {
+      "name": "CONFIRM_LANGUAGE\\review-records.json",
+      "sha256": "96dca8a6da2c746d93feba386f93d5147443d3149d58e9d0086d192a99adb9f4"
+    },
+    {
+      "name": "CONFIRM_LANGUAGE\\rounds.json",
+      "sha256": "8209ee94591ad31a222f8602c609c6cc8bb43e9aa4b27142f309a3525e3e33ee"
+    },
+    {
+      "name": "CONFIRM_LANGUAGE\\session.json",
+      "sha256": "e629490ec5dc990feffeded88a501206ab993f7a07968604f9012b8d9b09e5a7"
+    },
+    {
+      "name": "CONFIRM_LANGUAGE\\transport.json",
+      "sha256": "9e55378a9676aaac40438fee9eeaf25ffe32bec81b9bf37f49b30d8211e2ca8d"
+    },
+    {
+      "name": "DIRECTION_SKILL\\full-transcript.txt",
+      "sha256": "34eb7aa7d88ef5714f16f95f36f478f6766e50a2e714dd52de1989c0c625c562"
+    },
+    {
+      "name": "DIRECTION_SKILL\\review-records.json",
+      "sha256": "3ee065f444791f90bc808564afafdb4252c4d176c44a68b0166c443b8e4aa53e"
+    },
+    {
+      "name": "DIRECTION_SKILL\\rounds.json",
+      "sha256": "44d1debfac4ffc962954a1fd3e8816ad929ba3cd8a1d3db6cb55fa6d2dae62be"
+    },
+    {
+      "name": "DIRECTION_SKILL\\session.json",
+      "sha256": "bfb9360ea4d93c1fbcce42184bcae2602aa094449dac1bd0bc4e42b1d834fb38"
+    },
+    {
+      "name": "DIRECTION_SKILL\\transport.json",
+      "sha256": "74318151d022a572f9ed211519fd5ad7a8c96d211239d6ddc37ea585164d6544"
+    },
+    {
+      "name": "inventory.json",
+      "sha256": "170e87f11b5f5c3cd4fcab0e818d362febf34fc7afcf0d9267d5df66d1e1a153"
+    },
+    {
+      "name": "ISOLATION\\full-transcript.txt",
+      "sha256": "573e8e275a3c0e07b093e4210861f3c124db6249287efbcc313231506b5ed0ba"
+    },
+    {
+      "name": "ISOLATION\\review-records.json",
+      "sha256": "bb0a8b46c820b1f59162813ca7b528374416ae3def4f471dbfe3ba38df3f029e"
+    },
+    {
+      "name": "ISOLATION\\rounds.json",
+      "sha256": "4b5433b88b03bef7e24ba46d282d7bfe4d435d879e8fb929c5f60677b541de3c"
+    },
+    {
+      "name": "ISOLATION\\session.json",
+      "sha256": "2a99dc6856556f032612c0fd5e6a5d5dc369634fdad3334ecba87acc9a932ee1"
+    },
+    {
+      "name": "ISOLATION\\transport.json",
+      "sha256": "a59e967c8c8ccce34282b4848f71bbe2ddb2566ea698a1cc512b4b2b3c915997"
+    },
+    {
+      "name": "LONG_MEMORY\\full-transcript.txt",
+      "sha256": "7f91476d23c0bb6736ccfdc359c0bd1e7a5e266b5651f6bb24abc23bbebbf819"
+    },
+    {
+      "name": "LONG_MEMORY\\review-records.json",
+      "sha256": "151a3b15a922d6389fcc383d984afa4eab8b35ffbb7f0955db9847d51767bcc2"
+    },
+    {
+      "name": "LONG_MEMORY\\rounds.json",
+      "sha256": "f721f3f9f411be6066805303a079f561985760b931df5677bfa227891b5834b0"
+    },
+    {
+      "name": "LONG_MEMORY\\session.json",
+      "sha256": "c50205fd00fa49c277f308402f7413e72f777f2bb66017dc5211c6369d98dd6c"
+    },
+    {
+      "name": "LONG_MEMORY\\transport.json",
+      "sha256": "ffc3e3eb54d33e34aedca34714ff8c6e1efbdf792c639cdaba4d922069e49676"
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "92b5bfc008d63b260188d03ebd9401cc5e8a31b93e60ef355b3bf0ece3c2b4ac"
+    },
+    {
+      "name": "ORIGINAL_EDIT_001\\full-transcript.txt",
+      "sha256": "49b01e31bbea69dc313221f6196470ffec0bc7f5888c6bcd58571b298a71a84c"
+    },
+    {
+      "name": "ORIGINAL_EDIT_001\\review-records.json",
+      "sha256": "c639ec92e9008a9a32d811e2f2a845123ff66cc25610d63ceb59ca6a3994dd50"
+    },
+    {
+      "name": "ORIGINAL_EDIT_001\\rounds.json",
+      "sha256": "89976be57af32637d68378fff5085d3be5d35670a8a5d1a3475f25abe3d46f6a"
+    },
+    {
+      "name": "ORIGINAL_EDIT_001\\session.json",
+      "sha256": "5e70d10f0cbd0879e34b03b348b653c65ca310b8db359b4d676727e0a868fc4f"
+    },
+    {
+      "name": "ORIGINAL_EDIT_001\\transport.json",
+      "sha256": "2ebabbf39000573edf699768f1463924e2eb9df3936c746d074d678bb076da6b"
+    },
+    {
+      "name": "ORIGINAL_IMG_MULTI_001\\full-transcript.txt",
+      "sha256": "6eab3b4de70ae51b3f657379349b2f1d74aa1b6d2d6b16e54b0df6e60e9fbbbd"
+    },
+    {
+      "name": "ORIGINAL_IMG_MULTI_001\\review-records.json",
+      "sha256": "079ee3eb9d430bbe24149c5e265d767fbe941c3028bf2b41aa226113414909c1"
+    },
+    {
+      "name": "ORIGINAL_IMG_MULTI_001\\rounds.json",
+      "sha256": "ff601296006ee44161c279a39af9e1790e80b6c1a498bbf1ad36f35bef41b98d"
+    },
+    {
+      "name": "ORIGINAL_IMG_MULTI_001\\session.json",
+      "sha256": "2686e7537f036191e6cd8d2bd7675aad3e5694fd79151d3862d83c5ddec4dcba"
+    },
+    {
+      "name": "ORIGINAL_IMG_MULTI_001\\transport.json",
+      "sha256": "f40b7a70c69d7a369cb8dd77744942dfa8faf63f30d274cce1c868cb4b616a67"
+    },
+    {
+      "name": "run.json",
+      "sha256": "631928b0525710e2ed140d0d0b54825dc6c46926463f908b8afef8adc96a6779"
+    },
+    {
+      "name": "SWITCH_FACTS\\full-transcript.txt",
+      "sha256": "6ff000b90c08a0e93056d09c0399b19c4f74f7a452b5f04d3f812e8a20b105bd"
+    },
+    {
+      "name": "SWITCH_FACTS\\review-records.json",
+      "sha256": "42eb30aa7f190b2beca3507fa5ff220ada9572221214393800e848befd520ac7"
+    },
+    {
+      "name": "SWITCH_FACTS\\rounds.json",
+      "sha256": "f402dd83e925b4e80a66869775bc39277d444755ae7f4667f67dd7ea5dede0f0"
+    },
+    {
+      "name": "SWITCH_FACTS\\session.json",
+      "sha256": "2afd5e5aff6ce8baf6dafd0172b81ce54e1224e5b18e45d2e78d78e25cb4e5ce"
+    },
+    {
+      "name": "SWITCH_FACTS\\transport.json",
+      "sha256": "2c941567157495e295f2f404846171eade4fdcb1ad304b5026bdc0992d6a7592"
+    }
+  ],
+  "credentialScan": "configured key/token/password values absent; transport contains bodies without authorization headers",
+  "excluded": "Private SQLite storage; complete exported state and trace preserved"
+}
