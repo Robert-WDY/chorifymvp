@@ -1,40 +1,18 @@
 # Chorify MVP
 
-独立运行的创作助手，包含请求理解、需求合同、来源与版本绑定、Skill、文字生成、媒体方案确认、执行与 trace。此仓库导入的是实际 compiled Chorify MVP，包含截至 2026-09-16 的依赖选择修复；不是占位骨架。
+Chorify MVP 是持续升级的同一个本地产品。当前使用已修复的单 Agent 处理会话记忆、工具选择、结果判断及回答，保留文字修订、素材和版本、媒体方案确认等能力。旧 compiled 代码与评测作为历史保留，日常不再选择两套运行版本。
 
-旧 compiled 入口为 `server/index.mjs` → `Agent` → compiled runtime，保留现有合同与回归。当前独立上下文 Agent 入口为 `server/context-agent/index.mjs`（`npm run start:context`，本机 3212），由同一个 Agent 消费会话记忆与每一步真实反馈，选择工具并回答；程序负责存取、冻结参数确认、预算与幂等。两者不互相回退，启动与授权见 [上下文 Agent 说明](server/context-agent/README.md)。本批证据见 [统一修复验收](evaluations/2026-09-17-unified-repair/README.md)，没有部署或真实付费调用。
+## 统一启动与历史（2026-09-17）
 
-## 快速启动
+当前唯一日常入口是本仓库的 Chorify MVP，地址 **http://127.0.0.1:3217**。在 Windows 双击 `start-mvp.cmd` 或运行 `npm start`。旧 `start-context-local.cmd`、`npm run start:context` 是同一服务的兼容入口；不会创建第二个实例。旧 `server/index.mjs` compiled 实现仅保留作历史代码与回归参考，不再作为日常启动选项。
 
-### 当前本机独立实例（2026-09-17）
+模型继续使用已修复的上下文 Agent。配置统一为本仓库私有 `.env.local`，会话沿用 `data/isolated-local`（目录名保留，避免再次搬动现有数据），日志为 `data/local-service`。共享现有API账号额度，不在运行时读取其他项目目录。
 
-本机已部署的新 Agent 地址为 **http://127.0.0.1:3217**。在本仓库双击 `start-context-local.cmd` 启动；重复点击不会重复启动。停止或查看状态：
+页面的“历史对话”支持搜索、分页、切换原会话及导出完整记录。原MVP默认数据目录和manual-fixed-server已一次性导入，共59份旧会话；本仓库另有2份早期空会话也已导入，当前会话继续保留。旧原始Trace、任务、批准和回执存档于 `data/legacy-archive`，不进入Git。旧批准不会转成新执行授权；旧媒体链接保留但未逐一验证远端仍可用。
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Status
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Stop
-```
+`powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Status` 查看；将Action改为Stop可停止。电脑重启后需手动启动，没有开机自启。首次在新机器使用时安装Node >=22.13并运行npm ci，再从 `scripts/context-local.env.example` 创建 `.env.local` 填写凭据；已有配置不覆盖。
 
-该启动器只读取本仓库私有 `.env.local`，固定使用 `data/isolated-local` 保存会话、`data/local-service` 保存进程标识与逐次启动日志，不读取其他 Chorify 的配置、会话或服务。使用同一 API 账号会共享供应商额度；凭据文件、数据及日志不进 Git。文字模型已启用，媒体为明确标记的模拟模式，真实媒体和视觉未开启，线上文字流关闭。具体方案批准门禁保留。
-
-这是本机后台进程，电脑重启后需再次双击启动，不是开机自启服务。首次在新 checkout 安装时将 `scripts/context-local.env.example` 复制为 `.env.local` 并配置凭据；不要覆盖已有配置。部署证据、验证范围及回滚见 [本地部署报告](evaluations/2026-09-17-local-deployment/README.md)。
-
-### 原有通用入口
-
-需要 Node.js 22+（建议当前 LTS）及 npm。历史 Python Skill 测试还需要 Python 3，可通过 `PYTHON_BIN` 指定解释器；默认执行链不依赖打包的 Python 运行时。
-
-```sh
-npm ci
-cp .env.example .env
-# 编辑 .env，配置自己的模型与媒体凭据
-npm start
-```
-
-Windows PowerShell 首次创建配置使用 `Copy-Item .env.example .env`。已有 `.env` 时不要覆盖。
-
-默认界面：`http://127.0.0.1:3210`。主模型示例为 `deepseek-flash`；媒体使用火山方舟。图片、视频需先保存方案，经用户批准后才能提交。真实模型和媒体调用会消耗账户额度。
-
-默认 `BUSINESS_ACTION_MODE=core`。当前 compiled 路径在 `RESULT_ACCEPTANCE=delivery_only` 下仍检查可计算的硬要求，并对有事实或派生文字资料的候选调用现有验证器做限定范围的业务事实核对；后者会增加模型用量。**这不等于全部内容质量或实际画面通过**。`strict` 沿用完整文字/媒体验收，不另加一次事实审查。具体检查及未验证项见[三阶段修复验收](evaluations/2026-09-16-contract-boundaries/README.md)。
+当前真实文字开启，真实媒体与视觉关闭，媒体仍为模拟模式。历史合并不代表真实图片或旧未完成任务自动恢复执行。验收及回滚见[统一版本报告](evaluations/2026-09-17-unified-mvp/README.md)。
 
 ## 离线测试
 
@@ -57,7 +35,7 @@ node --test tests/future-source-binding.test.mjs
 
 真实模型重跑需另外配置凭据及新输出目录，详见测试说明。没有把任何账号密钥、`.env`、生产用户会话、旧媒体文件、依赖目录或完整历史运行数据上传。
 
-## 修复进度与当前限制
+## 旧 compiled 阶段的修复记录（历史，非当前运行状态）
 
 1. 证据局部修复、缺来源等待、可批准媒体方案已补充合同边界及离线回归；错误语义仍可能需要模型纠正，引用有效不证明理解正确。
 2. 下游正文的事实边界拒绝会阻止完成；真实模型的误报和漏报尚未复测。

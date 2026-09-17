@@ -2,27 +2,13 @@
 
 这是独立的新入口。旧 `server/index.mjs`、compiled 执行器、旧会话和回归保持原样。新入口默认不调用真实模型，媒体默认 simulation。
 
-## 启动
+## 当前统一入口
 
-**本机隔离部署入口**：双击仓库根目录 `start-context-local.cmd`，访问 `http://127.0.0.1:3217`。它固定读取本仓库 `.env.local` 和 `data/isolated-local`，独立管理本实例进程，不使用下面通用入口的 `.env`、3212 或默认数据目录。[部署状态与验证](../../evaluations/2026-09-17-local-deployment/README.md)记录本次实际配置；以下通用启动说明仍保留。
+运行 `npm start` 或双击根目录 `start-mvp.cmd`，访问 http://127.0.0.1:3217。`start:context`只是同一启动命令的兼容别名。当前MVP统一使用本仓库私有 `.env.local` 与 `data/isolated-local`，保留现有会话。旧compiled入口仅保留历史实现，不是第二个日常产品版本。
 
-在仓库根目录执行 `npm run start:context`，浏览器打开 `http://127.0.0.1:3212`。旧版仍通过 `npm start` 启动，默认端口 3210。两者不互相回退。
+历史列表、一次性旧资料迁移与记录导出见[统一版本报告](../../evaluations/2026-09-17-unified-mvp/README.md)。旧原文及批准记录完整归档，旧任务不会自动重提。API额度由同一供应商账号共享；目录和会话与其他Chorify项目独立。
 
-当前要求 Node >=22.13。新记录默认保存在 `data/context-agent/<owner-hash>/<session-id>.sqlite`，该目录被 Git 忽略。已有 JSON 在首次读取时迁移并保留原文件；完整 Trace 独立存储、按需读取，可导出完整会话。可以用 `CONTEXT_AGENT_DATA_DIR` 指定其他独立目录。当前 HTTP 是仅绑定本机的单用户开发入口，不是多租户公开部署服务；底层存取接口检查服务端 owner 身份。
-
-真实模型需先取得授权、核对既有 `.env` 中的模型与额度，再显式设置：
-
-```powershell
-$env:CONTEXT_AGENT_ALLOW_MODEL = '1'
-$env:CONTEXT_AGENT_MAX_MODEL_CALLS = '16'
-npm run start:context
-```
-
-这只是启用说明，本轮没有执行这些授权设置。原模型 API 配置由 `createBrain` 读取，不另存一份凭据。`CONTEXT_AGENT_MAX_MODEL_CALLS` 是每轮请求上限，主循环、自动摘要及视觉观察共同计数，分别记录耗时、供应商返回的 usage 与费用（未返回则为未知）；它不是货币费用估算。重复真实评测另有跨用例共享总预算。
-
-只有确认当前模型支持真实图像输入后，才可设置 `CONTEXT_AGENT_VISION_ENABLED=1`。这会注册实际图片观察通道；默认未注册时模型只能读取图片身份，不能声称看过图片。
-
-真实媒体还需要显式 `CONTEXT_AGENT_ALLOW_MEDIA=1` 和正整数 `CONTEXT_AGENT_MAX_MEDIA_CALLS`；供应商配置存在时才注册对应能力。即使开启真实媒体，仍须在页面批准已展示的具体参数。首版没有自动后台推进；已有视频通过 `read_media_result` 查询。没有结果或无查询能力时保持未知，不自动重提。
+文字模型已启用；真实媒体、视觉及供应商文字流当前关闭。模型每轮预算仍由现有主循环、摘要及观察共同计数。开启真实媒体仍需具体方案批准；本次统一不启用媒体或补做未验证的视觉能力。
 
 ## 模块职责
 

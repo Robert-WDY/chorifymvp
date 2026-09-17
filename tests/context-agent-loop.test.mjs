@@ -101,7 +101,7 @@ test('context entry: separate HTTP serves UI and uses only context sessions; CSR
   const app=createContextServer({directory,brain:{respond:async()=>{modelCalls++;return [say('你好')];}},tools:createTools(),modelEnabled:false});
   await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+app.server.address().port;
   try{
-    assert.match(await(await fetch(base)).text(),/上下文 Agent/);
+    assert.match(await(await fetch(base)).text(),/<title>Chorify MVP<\/title>/);
     const config=await(await fetch(base+'/api/config')).json();const headers={'Content-Type':'application/json','x-context-token':config.csrf};
     assert.equal((await fetch(base+'/api/session',{method:'POST',body:'{}'})).status,403);
     const session=await(await fetch(base+'/api/session',{method:'POST',headers,body:'{}'})).json();

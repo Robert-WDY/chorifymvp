@@ -1,5 +1,5 @@
 import { randomUUID, createHash } from 'node:crypto';
-import { mkdir, readFile, stat, chmod } from 'node:fs/promises';
+import { mkdir, readFile, stat, chmod, readdir } from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 
@@ -115,6 +115,24 @@ export class HistoryStore {
   async create(ownerId='local') {
     const state=this.#attach(createSession({ownerId}));
     await this.save(state,ownerId);return state;
+  }
+  async list(ownerId='local',{query='',offset=0,limit=30}={}) {
+    checkOwner(ownerId);
+    if(typeof query!=='string'||!Number.isInteger(offset)||offset<0||!Number.isInteger(limit)||limit<1||limit>100)throw new Error('Invalid history page');
+    const directory=path.dirname(this.#file('history',ownerId));
+    let files;try{files=await readdir(directory);}catch(error){if(error.code==='ENOENT')return {sessions:[],total:0,hasMore:false,unavailable:0};throw error;}
+    const sessions=[];let unavailable=0;
+    for(const name of files.filter(f=>f.endsWith('.sqlite'))){let db;try{
+      const id=name.slice(0,-7);checkId(id);db=this.#open(this.#file(id,ownerId));
+      const identity=JSON.parse(db.prepare('SELECT value FROM meta WHERE key=?').get('identity')?.value||'null');
+      if(identity?.id!==id||identity.ownerId!==ownerId)throw new Error('Session identity mismatch');
+      const messages=db.prepare("SELECT json FROM records WHERE json_extract(json,'$.kind')='message' ORDER BY seq").all().map(r=>JSON.parse(r.json));
+      const users=messages.filter(r=>r.role==='user'),first=users[0],last=messages.at(-1);
+      const text=r=>typeof r?.content==='string'?r.content:JSON.stringify(r?.content||'');
+      sessions.push({id,title:text(first).replace(/\s+/g,' ').slice(0,80)||'空白对话',preview:text(last).replace(/\s+/g,' ').slice(0,120),updatedAt:last?.at||'1970-01-01T00:00:00.000Z',turnCount:users.length});
+    }catch{unavailable++;}finally{db?.close();}}
+    const needle=query.trim().toLocaleLowerCase(),matches=sessions.filter(s=>!needle||(s.title+' '+s.preview).toLocaleLowerCase().includes(needle)).sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt)||a.id.localeCompare(b.id));
+    return {sessions:matches.slice(offset,offset+limit),total:matches.length,hasMore:offset+limit<matches.length,unavailable};
   }
   async load(id,ownerId='local') {
     const file=this.#file(id,ownerId);

@@ -1,0 +1,15 @@
+✔ Enter and click share submission including attachments (4.0351ms)
+✔ newline, IME composition and modified keys do not send; held Enter does not repeat (1.2157ms)
+✔ running or empty composer cannot submit or clear the draft (1.5195ms)
+✔ attachment read locks submission before awaiting, and failures release the lock (1.2263ms)
+✔ migration keeps original identities, bodies and versions but never replays old approvals (2.2231ms)
+✔ history search, paging and owner isolation survive persistent reload, with damage reported (28.4146ms)
+✔ one HTTP service lists and continues an imported conversation and exports its full old archive (117.5666ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 247.9389

@@ -1,6 +1,7 @@
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
+import {resolve} from 'node:path';
 import {HistoryStore,appendRecord} from './history.mjs';
 import {ContextAgent} from './loop.mjs';
 import {publicEvents,resultSummary,safeText} from './public-events.mjs';
@@ -25,6 +26,18 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
     if(req.headers.origin&&!allowed.some(host=>req.headers.origin===`http://${host}`))return json(res,403,{error:'不允许跨站请求'});
     try{
       const url=new URL(req.url,`http://${req.headers.host}`);
+      if(req.method==='GET'&&url.pathname==='/api/sessions'){
+        const page=await store.list(ownerId,{query:url.searchParams.get('query')||'',offset:Number(url.searchParams.get('offset')||0),limit:Number(url.searchParams.get('limit')||30)});
+        return json(res,200,{...page,sessions:page.sessions.map(s=>({...s,running:active.has(s.id)}))});
+      }
+      const exported=url.pathname.match(/^\/api\/session\/([^/]+)\/export$/);
+      if(req.method==='GET'&&exported){
+        const state=await store.exportSession(exported[1],ownerId);
+        let legacyArchive;
+        if(state.records.some(r=>r.event==='legacy_import'))legacyArchive=JSON.parse(await readFile(resolve(directory,'..','legacy-archive',state.id+'.json'),'utf8'));
+        res.setHeader('Content-Disposition','attachment; filename="'+state.id+'.json"');
+        return json(res,200,{...state,...(legacyArchive?{legacyArchive}:{})});
+      }
       if(req.method==='GET'&&url.pathname==='/api/config')return json(res,200,{engine:'context-agent',csrf:secret,modelEnabled,mediaMode:mode,model:brain.config?.model||'未配置',tools:tools.definitions.map(t=>t.name),limits:{maxSteps:agent.maxSteps,maxModelCalls:agent.maxModelCalls,maxToolCalls:agent.maxToolCalls,maxMediaCalls:agent.maxMediaCalls},summary:agent.memory});
       if(req.method==='GET'&&url.pathname.startsWith('/api/session/')){
         const state=await load(url.pathname.slice('/api/session/'.length));

@@ -1,0 +1,5 @@
+
+> doubao-creative-agent@0.3.0 check
+> node scripts/check.mjs
+
+独立性与语法检查通过：419 个文件

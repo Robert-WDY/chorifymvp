@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-17T09:09:40.548Z",
+  "legacySessions": 59,
+  "messages": 251,
+  "assets": 158,
+  "legacyHashesVerified": true,
+  "legacyMessageAndAssetBodiesVerified": true,
+  "oldApprovalReplay": false,
+  "totalSessions": 97,
+  "unavailable": 0,
+  "recentConversationPreserved": true,
+  "oldArchiveHttpExportMatches": true,
+  "frontendMatches": true,
+  "realModelCalls": 0,
+  "realMediaCalls": 0,
+  "sourceFilesStillMatchArchives": 60,
+  "afterRestartSessionCount": 97,
+  "afterRestartUnavailable": 0,
+  "afterRestartOldSessionPresent": true
+}

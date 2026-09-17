@@ -7,8 +7,8 @@
     "node": ">=22.13"
   },
   "scripts": {
-    "start": "node --env-file-if-exists=.env server/index.mjs",
-    "start:context": "node --env-file-if-exists=.env server/context-agent/index.mjs",
+    "start": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/context-local.ps1 -Action Start",
+    "start:context": "npm start",
     "test:context": "node --test tests/context-agent-*.test.mjs",
     "eval:context": "node evals/context-agent-evaluate.mjs",
     "test": "node --env-file-if-exists=.env --test tests/*.test.mjs",

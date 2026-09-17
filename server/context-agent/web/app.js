@@ -80,7 +80,7 @@ function renderQuestions(){
 }
 function recovery(error){status((error.status===404?'原会话不存在。':error.status===403?'无权访问原会话。':'恢复会话失败：'+error.message)+' 已保留原会话标识，可重试或明确新建。');$('retry').hidden=false;}
 async function refresh(){
- if(!sessionId)return;const target=sessionId,s=await get('/api/session/'+encodeURIComponent(target));if(target!==sessionId)return;
+ if(!sessionId)return;$('history-export').href='/api/session/'+encodeURIComponent(sessionId)+'/export';const target=sessionId,s=await get('/api/session/'+encodeURIComponent(target));if(target!==sessionId)return;
  let events=[...s.events],next=s;while(next.hasMore){next=await get('/api/events/'+encodeURIComponent(target)+'?after='+next.cursor);events.push(...next.events);}cursor=next.cursor;
  $('messages').replaceChildren();cards.clear();seen.clear();const eventMessages=new Set(events.filter(e=>e.kind==='message').map(e=>e.messageId));for(const m of s.messages)if(!eventMessages.has(m.id))message(m.id,m.role,m.content);
  pending.clear();questions.clear();for(const e of events.sort((a,b)=>a.seq-b.seq))ingest(e);
@@ -91,18 +91,29 @@ async function refresh(){
  controls();$('retry').hidden=true;if(running&&!streaming)schedulePoll();
 }
 function schedulePoll(){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{if(streaming||!sessionId)return;try{const e=await get('/api/events/'+encodeURIComponent(sessionId)+'?after='+cursor);for(const item of e.events)ingest(item);cursor=e.cursor;if(e.running||e.hasMore)schedulePoll();else{running=false;await refresh();}}catch(error){recovery(error);}},700);}
-async function newSession(){if(running)return;const s=await(await post('/api/session',{})).json();sessionId=s.id;localStorage.setItem(key,sessionId);selected.clear();rendered.clear();cursor=-1;await refresh();status('已开始独立的新对话。');}
+async function newSession(){if(running||submitting)return;const s=await(await post('/api/session',{})).json();sessionId=s.id;localStorage.setItem(key,sessionId);selected.clear();rendered.clear();cursor=-1;await refresh();await loadHistory();status('已开始新对话，旧对话保留在历史列表。');}
+let historyOffset=0;
+async function loadHistory(reset=true){
+ if(reset)historyOffset=0;
+ const page=await get('/api/sessions?query='+encodeURIComponent($('history-query').value||'')+'&offset='+historyOffset);
+ if(reset)$('history-list').replaceChildren();
+ for(const item of page.sessions){const button=el('button',item.title+' · '+item.turnCount+'轮'+(item.id===sessionId?' · 当前':''));button.type='button';button.disabled=running||submitting;button.onclick=async()=>{if(running||submitting)return;try{await get('/api/session/'+encodeURIComponent(item.id));sessionId=item.id;localStorage.setItem(key,sessionId);selected.clear();rendered.clear();cursor=-1;clearTimeout(pollTimer);try{selected=new Set(JSON.parse(localStorage.getItem(key+'.selection.'+sessionId)||'[]'));}catch{}await refresh();await loadHistory();}catch(error){recovery(error);}};$('history-list').append(button);}
+ historyOffset+=page.sessions.length;$('history-more').hidden=!page.hasMore;$('history-count').textContent=page.total+'个会话'+(page.unavailable?'；'+page.unavailable+'份记录暂不可读':'');
+}
+$('history-refresh').onclick=()=>loadHistory().catch(recovery);
+$('history-more').onclick=()=>loadHistory(false).catch(recovery);
+$('history-query').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();loadHistory().catch(recovery);}};
 async function run(path,data){
  if(running||!sessionId)return;streaming=running=true;controls();status('正在处理…');
  try{const response=await post(path,{sessionId,requestId:crypto.randomUUID(),selectedAssetIds:[...selected],...data});const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='';
   while(true){const {done,value}=await reader.read();buffer+=decoder.decode(value||new Uint8Array(),{stream:!done});let end;while((end=buffer.indexOf('\n'))!==-1){const line=buffer.slice(0,end);buffer=buffer.slice(end+1);if(!line.trim())continue;const e=JSON.parse(line);ingest(e);if(e.type==='end'&&e.status==='error')status(e.message||'运行失败');}if(done){if(buffer.trim())ingest(JSON.parse(buffer));break;}}
  }catch(error){status('连接或运行失败：'+error.message+'。将保留当前会话并恢复实际进度。');}
- finally{streaming=running=false;try{await refresh();}catch(error){recovery(error);}controls();}
+ finally{streaming=running=false;try{await refresh();await loadHistory();}catch(error){recovery(error);}controls();}
 }
 $('message').onkeydown=e=>{if(e.key!=='Enter'||e.shiftKey||e.ctrlKey||e.altKey||e.metaKey||e.isComposing||e.keyCode===229)return;e.preventDefault();if(!e.repeat&&!running&&!submitting)$('chat').requestSubmit($('send'));};
 $('chat').onsubmit=async e=>{e.preventDefault();if(running||submitting||!sessionId||!$('message').value.trim())return;submitting=true;try{const text=$('message').value,inputs=[];for(const f of $('files').files){if(f.size>128*1024)throw new Error('文字文件超过128 KiB');inputs.push({type:'text',name:f.name,content:await f.text()});}if($('image').value.trim())inputs.push({type:'image',name:'产品参考图',url:$('image').value.trim()});$('message').value='';$('files').value='';$('image').value='';await run('/api/chat',{message:text,inputs});}catch(error){status(error.message);}finally{submitting=false;}};
 $('new').onclick=()=>newSession().catch(recovery);
 $('retry').onclick=()=>initialize();
 $('cancel').onclick=()=>post('/api/cancel',{sessionId}).then(()=>status('已请求停止；已提交的调用保留原回执。')).catch(e=>status(e.message));
-async function initialize(){try{config=await get('/api/config');$('config').textContent=`独立会话 · ${config.model} · ${config.modelEnabled?'模型调用已启用':'模型调用未启用'} · ${config.mediaMode==='simulation'?'媒体模拟模式（不生成真实图片或视频）':'真实媒体需逐次批准'}`;try{selected=new Set(JSON.parse(localStorage.getItem(key+'.selection.'+sessionId)||'[]'));}catch{selected.clear();}if(sessionId)await refresh();else await newSession();}catch(error){recovery(error);}}
+async function initialize(){try{config=await get('/api/config');$('config').textContent=`Chorify MVP · ${config.model} · ${config.modelEnabled?'模型调用已启用':'模型调用未启用'} · ${config.mediaMode==='simulation'?'媒体模拟模式（不生成真实图片或视频）':'真实媒体需逐次批准'}`;try{selected=new Set(JSON.parse(localStorage.getItem(key+'.selection.'+sessionId)||'[]'));}catch{selected.clear();}if(sessionId){await refresh();await loadHistory();}else await newSession();}catch(error){recovery(error);}}
 await initialize();
