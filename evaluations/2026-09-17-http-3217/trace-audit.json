@@ -1,0 +1,894 @@
+{
+  "kind": "evidence_integrity_not_semantic_score",
+  "cases": [
+    {
+      "id": "AC_NEW_COPY",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_ANALYSIS",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_REWRITE_PERFUME",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_REWRITE_HEADPHONES",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_SAFETY_BICYCLE",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_SAFETY_NORMAL",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "ee0c9f90-15fb-446f-a462-561bb2e6cb66",
+          "turnId": "2fe75dfc-ac90-4e77-96c1-b0aabda4db66",
+          "callId": "call_00_RiQ8AorQkGkEnJyLrdRg3896",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "2ae10359-f3ee-491d-93ca-f0c4fac6ff25",
+          "turnId": "2fe75dfc-ac90-4e77-96c1-b0aabda4db66",
+          "callId": "call_01_vtxIsGQcgyLwHTrG455u1109",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_BRIEF_VACUUM",
+      "requests": 6,
+      "responses": 6,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "c311295e-9ffe-4ea8-af67-1ccb09ddea21",
+          "turnId": "69400b3f-a2da-45fb-b686-b80f94fdf924",
+          "callId": "call_00_Co3e8gWhS5YkfMxkoiue1927",
+          "error": {
+            "code": "original_content_mismatch",
+            "message": "sourceMessageId存档必须与原文一致；修改请另存带parentId的修订。"
+          }
+        },
+        {
+          "recordId": "e65ab0d5-6d68-41d3-b1af-9a0710bc8057",
+          "turnId": "69400b3f-a2da-45fb-b686-b80f94fdf924",
+          "callId": "call_00_aobiQsmMweeYZRV93TkK7333",
+          "error": {
+            "code": "document_check_failed",
+            "message": "该回执只是普通计数，没有requirements验收。普通保存不需要measurementCallId；若作品有明确字数或项数要求，先传requirements验收，再绑定通过的回执。"
+          }
+        }
+      ],
+      "phases": {
+        "agent": 6
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_COPY_BREAD",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MISSING_PROMPT",
+      "requests": 6,
+      "responses": 6,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "71c66004-78a6-4e92-b4aa-49801dfd25a7",
+          "turnId": "ad8c5b02-fa45-4c24-a67b-9f8aa15ada56",
+          "callId": "call_00_sXnhi95HzFOAvNgdrQMo6802",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "6207c14f-f649-4519-a709-e89edba80759",
+          "turnId": "ad8c5b02-fa45-4c24-a67b-9f8aa15ada56",
+          "callId": "call_01_dHSl41oRPhoigLmFpmep0322",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 6
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_UNKNOWN_SALES",
+      "requests": 5,
+      "responses": 5,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "ba63e909-0494-4415-8d59-11e919225441",
+          "turnId": "75ab91fa-787e-450d-bd69-40e8955cadf4",
+          "callId": "call_00_KbhoeqxspEa8FdS1ARUM8341",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "64bc1833-2c33-4be6-93c3-b70c8c8afade",
+          "turnId": "75ab91fa-787e-450d-bd69-40e8955cadf4",
+          "callId": "call_01_ZRJN5mWPM57KeaPheQhS3315",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 5
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_SOURCE",
+      "requests": 10,
+      "responses": 10,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "59717f7e-e045-4e65-af46-2c28147b7a86",
+          "turnId": "f0505558-7850-4f13-bc3e-a5c2af015ba1",
+          "callId": "call_00_bIHxifnT1YChJTKBbCJy0072",
+          "error": {
+            "code": "asset_not_found",
+            "message": "素材 8135fd2e-b134-4c1b-89fc-e4c2dbdbca4d 不在当前会话可访问范围；请读取历史确认标识。"
+          }
+        },
+        {
+          "recordId": "921e2127-7455-4c0d-8927-480590b690b3",
+          "turnId": "72c3cb2f-e556-4cef-ac6d-aebb1190c32f",
+          "callId": "call_00_2yRXaLf2QfFOjYsbLWqG7980",
+          "error": {
+            "code": "invalid_edits",
+            "message": "增量修改须绑定父稿，不能混用完整content或存档入口"
+          }
+        }
+      ],
+      "phases": {
+        "agent": 8,
+        "summary": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        },
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 2
+    },
+    {
+      "id": "AC_SCOPE",
+      "requests": 6,
+      "responses": 6,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 5,
+        "summary": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 1
+    },
+    {
+      "id": "AC_FACTS",
+      "requests": 9,
+      "responses": 9,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 8,
+        "summary": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_RECOVERY_READ_ASSET",
+      "requests": 9,
+      "responses": 9,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "16f02331-196d-4afd-8bb9-3b7ecea5592a",
+          "turnId": "ae21a595-0815-430c-b4f2-26383c4d1f4c",
+          "callId": "call_00_AdWaH84kAMVZBe8hIkpg4019",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "f43b5153-43bb-4dff-8a29-b78e542c851c",
+          "turnId": "ae21a595-0815-430c-b4f2-26383c4d1f4c",
+          "callId": "call_01_XMrbT7vSAc78PXTXtihI0978",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 9
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        },
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_RECOVERY_SAVE_DOCUMENT",
+      "requests": 8,
+      "responses": 8,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "90a7683b-a363-49f6-bc92-49aeb8aa364c",
+          "turnId": "5bc5ca77-8946-4e6f-a762-990fe9118714",
+          "callId": "call_00_Hy4xb7Fov9BxpcwfSpl96803",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "d3feac30-985b-429f-8216-d227646d0478",
+          "turnId": "5bc5ca77-8946-4e6f-a762-990fe9118714",
+          "callId": "call_01_12l10BKsofktluU4EnnE3563",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 8
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        },
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_UNKNOWN",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MULTI_PET",
+      "requests": 4,
+      "responses": 4,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 4
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MULTI_MISSING_DRAFT",
+      "requests": 8,
+      "responses": 8,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "139d6c33-f731-4da4-9af8-1ab141338c56",
+          "turnId": "5b9cc487-45e5-48ca-991c-b576dd718bcb",
+          "callId": "call_00_tTYYfbkXPxNXkIiNJTvL7856",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "6ff4e1e3-4f17-4320-9939-10e35e30f6db",
+          "turnId": "5b9cc487-45e5-48ca-991c-b576dd718bcb",
+          "callId": "call_01_C3LhoLiTegdw1X02myS82125",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 8
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        },
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_IMAGE",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "40920685-0f77-4d46-9575-fa772fe07b8d",
+          "turnId": "f5586790-21e2-4222-bdd2-a3cc57548216",
+          "callId": "call_00_A5KwJtb5NF9QN09HT0i00763",
+          "error": {
+            "code": "invalid_arguments",
+            "message": "data/size must match pattern \"^(1K|2K|4K|[1-9][0-9]{2,4}x[1-9][0-9]{2,4})$\""
+          }
+        }
+      ],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_LAMP",
+      "requests": 4,
+      "responses": 4,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "7a3be5f2-d6ab-4a3d-9a78-94c6fa18e291",
+          "turnId": "f212ab52-fd97-4635-a8f0-4ac73f398486",
+          "callId": "call_00_LH4EcStSmqisP0tgdVYw0593",
+          "error": {
+            "code": "invalid_arguments",
+            "message": "data/size must match pattern \"^(1K|2K|4K|[1-9][0-9]{2,4}x[1-9][0-9]{2,4})$\""
+          }
+        }
+      ],
+      "phases": {
+        "agent": 4
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_SHOES",
+      "requests": 5,
+      "responses": 5,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "170ff32e-df2f-4da7-80ad-a2205d66d208",
+          "turnId": "8ed4743a-8468-4283-a1f5-6c52cc8bdbfd",
+          "callId": "call_00_m2DRma8WDzrqpr9ENw6u2794",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "fe69e103-22e5-48c7-9014-423ba188e1f9",
+          "turnId": "8ed4743a-8468-4283-a1f5-6c52cc8bdbfd",
+          "callId": "call_01_tLBOyCXDZOrPXmoo32IB6171",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 5
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MISSING_IMAGE",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MISSING_COMPARE",
+      "requests": 4,
+      "responses": 4,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 4
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MEDIA",
+      "requests": 17,
+      "responses": 17,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "761fec3c-3989-4b53-b41c-59d9c6aac54e",
+          "turnId": "705e166b-02f0-4d5a-bbd0-d5975d01db6d",
+          "callId": "call_00_eHe1xtfGCvl5ZNkESAvF4126",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "6bf14ef1-f728-4469-aeba-7f4b69063b85",
+          "turnId": "705e166b-02f0-4d5a-bbd0-d5975d01db6d",
+          "callId": "call_01_Najbk1pcQKQP2vphn2um6717",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 14,
+        "summary": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "media",
+          "status": "succeeded",
+          "name": "generate_image",
+          "mode": "simulation"
+        },
+        {
+          "kind": "media",
+          "status": "succeeded",
+          "name": "generate_image",
+          "mode": "simulation"
+        }
+      ],
+      "summaryCount": 3
+    },
+    {
+      "id": "AC_PROMPT_ONLY",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MULTI_BAG",
+      "requests": 9,
+      "responses": 9,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "7dd4b915-35bd-4cf6-8f49-d3efe0576e3f",
+          "turnId": "be12c78a-795c-405d-8f73-51302260c079",
+          "callId": "call_00_Rr81MCnTmH7cjzSSf2KO4242",
+          "error": {
+            "code": "invalid_arguments",
+            "message": "data must NOT have additional properties"
+          }
+        }
+      ],
+      "phases": {
+        "agent": 8,
+        "summary": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "media",
+          "status": "succeeded",
+          "name": "generate_image",
+          "mode": "simulation"
+        }
+      ],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MULTI_NO_IMAGE",
+      "requests": 9,
+      "responses": 9,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 8,
+        "summary": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 1
+    },
+    {
+      "id": "AC_REF_MISSING",
+      "requests": 5,
+      "responses": 5,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 5
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_TEXT_IMAGE",
+      "requests": 4,
+      "responses": 4,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "11be5056-392c-4a4f-827a-dedeffc2015c",
+          "turnId": "cf670b06-d5e4-48cc-93db-b442634cb9f8",
+          "callId": "call_00_VkcmhmyOmiwKKNwUdCuH0530",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "32fee9bd-463a-4c59-b39a-da607fec3ed4",
+          "turnId": "cf670b06-d5e4-48cc-93db-b442634cb9f8",
+          "callId": "call_01_xdJ8QMufG3amvQiGt2OX2876",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 4
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_MIXED_BAKERY",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_MIXED_APP",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_MIXED_MISSING",
+      "requests": 4,
+      "responses": 4,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "557acebb-e3c9-4291-81ae-aa5af4953aa1",
+          "turnId": "e1d052b2-c56d-4f2b-a428-7956c51539d0",
+          "callId": "call_00_HVlYfJBimywEulvpFTx37041",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "c9abc55a-1e50-4212-88a8-b522b5a32542",
+          "turnId": "e1d052b2-c56d-4f2b-a428-7956c51539d0",
+          "callId": "call_01_YMyvgQNyThYUhlgOVj244229",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 4
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MIXED_MISSING",
+      "requests": 12,
+      "responses": 12,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "293fd63a-0638-4229-bc17-2bcd4d8e256f",
+          "turnId": "de7ded76-6eda-48e0-ba9a-3de2ec27def3",
+          "callId": "call_00_MM4ZYXREp9FkvTzYMk103966",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "22896214-60e9-47c9-894e-67ae144f5a62",
+          "turnId": "de7ded76-6eda-48e0-ba9a-3de2ec27def3",
+          "callId": "call_01_AlSIDgCcgy4qFaDRKUVj5305",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "e6059e84-7a3c-48f4-95f6-c9ec108af2b3",
+          "turnId": "4af7276b-62ff-4521-b9df-3b2bb4628a8d",
+          "callId": "call_00_ObBqJDJ1SPNz0wizvAA79760",
+          "error": {
+            "code": "invalid_arguments",
+            "message": "data/size must match pattern \"^(1K|2K|4K|[1-9][0-9]{2,4}x[1-9][0-9]{2,4})$\""
+          }
+        }
+      ],
+      "phases": {
+        "agent": 11,
+        "summary": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 1
+    },
+    {
+      "id": "AC_MEMORY",
+      "requests": 29,
+      "responses": 29,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 24,
+        "summary": 5
+      },
+      "videoToolCalls": 0,
+      "invocations": [
+        {
+          "kind": "document"
+        },
+        {
+          "kind": "document"
+        }
+      ],
+      "summaryCount": 4
+    }
+  ],
+  "requestCount": 201,
+  "inputBlobCount": 610,
+  "missingPairs": 0,
+  "unexpandedTraceRefs": 0
+}

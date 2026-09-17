@@ -77,3 +77,7 @@ node evaluations/2026-09-16-language-variants/run.mjs
 [10组48轮案例与执行说明](2026-09-17-acceptance-extension/README.md)：独立扩展、完整trace、人工语义审阅、受控失败注入；本批只验证离线设施，真实评测未运行。
 
 [七类测试集目录](2026-09-17-acceptance-extension/CATEGORIES.md)：当前扩展集42组105轮，含5组Skill与9组故意缺失输入案例；支持按类别执行，原冻结23条保持原样。
+
+## 3217实际HTTP服务评测
+
+[2026-09-17运行与语义结论](2026-09-17-http-3217/README.md)：34组81轮、201次真实模型调用，8组能力受限未运行；3组核心满足、16组有缺陷、15组未满足。完整trace本地打包。

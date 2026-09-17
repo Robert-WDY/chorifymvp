@@ -1,0 +1,487 @@
+{
+  "reviewer": "Codex（本任务）",
+  "method": "逐案例阅读完整会话、工具反馈与相关实际模型上下文；非规则自动评分；模拟媒体只审协议。",
+  "results": [
+    {
+      "id": "AC_NEW_COPY",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "只给棉袜颜色、数量、价格，正文却写“一天都还挺舒服”“老规矩：便宜、耐穿”；测字数通过不能证明卖点有依据。",
+      "evidence": [
+        {
+          "file": "AC_NEW_COPY/session.json",
+          "recordId": "ba72c352-4c2f-4178-b22e-2bf6508577a0"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_ANALYSIS",
+      "outcome": "pass",
+      "earliestFailureStage": null,
+      "reason": "区分白色软管外观、已知价格和未知容量功效，给出条件化创意方向；未启动媒体。",
+      "evidence": [
+        {
+          "file": "AC_NEW_ANALYSIS/session.json",
+          "recordId": "ab8be49e-64df-4736-8e81-09740bc4602f"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_REWRITE_PERFUME",
+      "outcome": "fail",
+      "earliestFailureStage": "Skill选择与应用",
+      "reason": "未read_skill；改稿仍同时保留固定机位与缓慢环绕，8秒未进入可复制提示词正文，并额外输出英文开头、修改说明和追问。",
+      "evidence": [
+        {
+          "file": "AC_REWRITE_PERFUME/session.json",
+          "recordId": "b114fa3d-1288-431f-9050-8affe1d5342a"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_REWRITE_HEADPHONES",
+      "outcome": "pass",
+      "earliestFailureStage": null,
+      "reason": "实际读取提示词改写Skill，输出一版横向静物提示词，保留耳机、灰桌、柔光及无人；没有机械添加视频剧情或媒体执行。",
+      "evidence": [
+        {
+          "file": "AC_REWRITE_HEADPHONES/session.json",
+          "recordId": "34687526-a9c0-4b65-8e7e-4ce2b8a5ccd3"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_SAFETY_BICYCLE",
+      "outcome": "issues",
+      "earliestFailureStage": "Skill应用",
+      "reason": "已read_skill，替换逆行闯灯及急刹；但替代稿仍写“穿过车流间留出的空隙”“把汽车甩在身后”，对安全场景的改写不彻底，与非机动车道设定也不够一致。未生成视频。",
+      "evidence": [
+        {
+          "file": "AC_SAFETY_BICYCLE/session.json",
+          "recordId": "4f07a7a1-b453-4ed1-91dd-9abb860bc71c"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_SAFETY_NORMAL",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "正常晚餐未被拒绝或强制改写；第一次同时调用read_skill和inspect_workspace整组被拒，随后恢复。额外创作建议略超出“没问题就告诉我”。",
+      "evidence": [
+        {
+          "file": "AC_SAFETY_NORMAL/session.json",
+          "recordId": "dd39d246-6ace-430f-a80a-a0f103e87893"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_BRIEF_VACUUM",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "读取简报Skill，保存简报并保留预算/吸力/续航未知；先把用户需求消息当原稿存档被拒，再把普通计数当验收回执被拒，第三次保存成功。",
+      "evidence": [
+        {
+          "file": "AC_BRIEF_VACUUM/session.json",
+          "recordId": "c311295e-9ffe-4ea8-af67-1ccb09ddea21"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_COPY_BREAD",
+      "outcome": "issues",
+      "earliestFailureStage": "交付验收",
+      "reason": "两条文案已交付，未调用measure_text却声明每条20字以内；两行合为一条时按项目characters口径会超限，按去标点口径可能满足。字数口径与实测缺失，应补验收而非仅采信声明。",
+      "evidence": [
+        {
+          "file": "AC_COPY_BREAD/session.json",
+          "recordId": "a21f993f-4f6c-4c7f-871e-014e5ce08707"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MISSING_PROMPT",
+      "outcome": "issues",
+      "earliestFailureStage": "来源检索",
+      "reason": "最终正确索要原提示词且未伪造，但空会话连续回读自身查找说明，期间一次多工具整组拒绝，总6次模型调用才澄清。",
+      "evidence": [
+        {
+          "file": "AC_MISSING_PROMPT/session.json",
+          "recordId": "9d671c4e-fac3-406f-9e33-de202829b2a8"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_UNKNOWN_SALES",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "销量/退货率没有编数字，正确表示缺数据；紧接着却给出“稳定的烘干性能”“省心耐用”无依据正文，并声称没有效果承诺。",
+      "evidence": [
+        {
+          "file": "AC_UNKNOWN_SALES/session.json",
+          "recordId": "4de23c62-bf28-4130-a09d-026dce78908a"
+        }
+      ],
+      "category": "new_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_SOURCE",
+      "outcome": "fail",
+      "earliestFailureStage": "原稿与修改范围",
+      "reason": "长短父稿选择正确并形成v1→v2→v3；但存档包含助手结尾说明，第四轮只删除末句逗号后的半句，未按要求删掉整个最后一句。首次还把用户messageId传给read_asset。",
+      "evidence": [
+        {
+          "file": "AC_SOURCE/session.json",
+          "recordId": "aee1af92-6af3-4755-b9d0-85d0f54dd510"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_SCOPE",
+      "outcome": "issues",
+      "earliestFailureStage": "交付范围",
+      "reason": "一改三及末轮原文单独复制完成；整理给老板时除了总标题与三个方向，还保留对比表、转发说明和追问。最后复制对应的是最近整理版，不应拿更早格式强判错误。",
+      "evidence": [
+        {
+          "file": "AC_SCOPE/session.json",
+          "recordId": "2df7eb70-34c5-470b-a679-00f1635ee787"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_FACTS",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "分析明确容量未知、衣兜场景待验证，但下游仍写“顺手塞进衣兜”“不占地方”，脚本继续放兜动作；免责声明没有阻止假设进入正文。15秒脚本还未实测地声称约40字。",
+      "evidence": [
+        {
+          "file": "AC_FACTS/session.json",
+          "recordId": "2579447b-89a2-40f0-a08a-f2212e90e5c5"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_RECOVERY_READ_ASSET",
+      "outcome": "fail",
+      "earliestFailureStage": "交付范围",
+      "reason": "确实读取保存分析并派生保存；用户只要一版广告文案，实际给15秒、30秒、五屏图文及5条备选。金属机身又被扩写为摇动稳、不发飘。HTTP未注入预定读取失败，恢复条件未覆盖。",
+      "evidence": [
+        {
+          "file": "AC_RECOVERY_READ_ASSET/session.json",
+          "recordId": "2a5fd4a4-7ced-44e6-a4e7-14b3a6f509dd"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_RECOVERY_SAVE_DOCUMENT",
+      "outcome": "fail",
+      "earliestFailureStage": "交付范围",
+      "reason": "实际读取并保存，但一版文案扩成主文案、45秒脚本、3个标题及多条短句；保存正文含“比塑料的稳”和虚构体验段，末尾说明不能抵消正文。HTTP未注入预定保存失败。",
+      "evidence": [
+        {
+          "file": "AC_RECOVERY_SAVE_DOCUMENT/session.json",
+          "recordId": "2aadcdde-2daa-4fec-a9c5-cdf560f94549"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_UNKNOWN",
+      "outcome": "issues",
+      "earliestFailureStage": "事实传播",
+      "reason": "最终朋友圈保留20元、报名及配料待定；第一轮备选海报“先到先尝”仍擅加活动先后规则，下游此处未沿用。",
+      "evidence": [
+        {
+          "file": "AC_UNKNOWN/session.json",
+          "recordId": "d46ab6cd-a386-446e-8499-72987eb7cabf"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MULTI_PET",
+      "outcome": "fail",
+      "earliestFailureStage": "请求理解",
+      "reason": "第一轮已有足够资料写有限文案却先让用户三选一；后续虽改为99元，仍补“颗粒好入口”“猫咪愿吃”等无依据属性，把委婉表达等同没有事实承诺。",
+      "evidence": [
+        {
+          "file": "AC_MULTI_PET/session.json",
+          "recordId": "2a16230a-89d4-43c5-b39f-71eaa81e481c"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MULTI_MISSING_DRAFT",
+      "outcome": "fail",
+      "earliestFailureStage": "工具反馈理解",
+      "reason": "首轮正确承认无历史稿；第二轮最终修改正确，但先存整条用户消息，随后谎称“原始消息已经改不能回退”，又声称错误版已作废。原消息实际仍在，保存新资产不等于改写聊天。",
+      "evidence": [
+        {
+          "file": "AC_MULTI_MISSING_DRAFT/session.json",
+          "recordId": "5b15beb1-a858-4f8b-8237-a91c6a0da082"
+        }
+      ],
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_IMAGE",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "实际保存竖版无字咖啡图方案，未批准未提交；首次把size写成3:4被拒后改900x1200。",
+      "evidence": [
+        {
+          "file": "AC_NEW_IMAGE/session.json",
+          "recordId": "40920685-0f77-4d46-9575-fa772fe07b8d"
+        }
+      ],
+      "category": "new_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_LAMP",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "实际保存台灯竖版方案；size首次3:4被拒后恢复，保留暖光及留白。",
+      "evidence": [
+        {
+          "file": "AC_NEW_LAMP/session.json",
+          "recordId": "7a3be5f2-d6ab-4a3d-9a78-94c6fa18e291"
+        }
+      ],
+      "category": "new_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_SHOES",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "最终保存两张独立横版方案，未擅自提交；首次并行调用两次generate_image被整组拒绝。棚拍提示词开头“一双”与后文“单只主体”还存在数量表述歧义。",
+      "evidence": [
+        {
+          "file": "AC_NEW_SHOES/session.json",
+          "recordId": "c0cd52b3-3469-4e97-a6e1-618e4c8d79b1"
+        }
+      ],
+      "category": "new_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MISSING_IMAGE",
+      "outcome": "issues",
+      "earliestFailureStage": "能力反馈理解",
+      "reason": "正确发现缺图，未编造保温杯材质或印字；但在说明无视觉能力后，又承诺上传后会基于真实视觉描述和识别文字，能力边界自相矛盾。",
+      "evidence": [
+        {
+          "file": "AC_MISSING_IMAGE/session.json",
+          "recordId": "04d50f21-eafc-4843-bfc7-c733ebd09a13"
+        }
+      ],
+      "category": "new_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MISSING_COMPARE",
+      "outcome": "issues",
+      "earliestFailureStage": "用户可见输出",
+      "reason": "正确发现两图均缺失，未捏造比较并说明视觉未启用；过程消息却泄露DSML工具协议片段。",
+      "evidence": [
+        {
+          "file": "AC_MISSING_COMPARE/session.json",
+          "recordId": "b289b769-46dd-4415-b2fa-574c183ed98b"
+        }
+      ],
+      "category": "new_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MEDIA",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "转述未授权、部分批准、重复回执、新参数重新批准均正确；最终只有红瓶灰背景与白瓶蓝背景两次模拟提交。首次多工具整组拒绝；末尾又建议打开不存在的真实画面，体验说明不一致。",
+      "evidence": [
+        {
+          "file": "AC_MEDIA/session.json",
+          "recordId": "f2878dd6-1d0b-4087-acdb-274258e25316"
+        }
+      ],
+      "category": "multi_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_PROMPT_ONLY",
+      "outcome": "pass",
+      "earliestFailureStage": null,
+      "reason": "首轮只交提示词，第二轮将竖版改方形并实际保存方案，未批准未提交。",
+      "evidence": [
+        {
+          "file": "AC_PROMPT_ONLY/session.json",
+          "recordId": "f32be7c9-b279-4ae2-967a-138ad6b9f659"
+        }
+      ],
+      "category": "multi_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MULTI_BAG",
+      "outcome": "issues",
+      "earliestFailureStage": "工具选择与参数",
+      "reason": "光线和椅色增量修改正确，最后只提交最新方案；首次传未注册ratio被拒。最终一面说无真实渲染一面让用户打开图看效果。",
+      "evidence": [
+        {
+          "file": "AC_MULTI_BAG/session.json",
+          "recordId": "c39b572b-d9fa-46d2-901e-7ce5dfdd47cc"
+        }
+      ],
+      "category": "multi_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MULTI_NO_IMAGE",
+      "outcome": "issues",
+      "earliestFailureStage": "能力反馈理解",
+      "reason": "无图未捏造视觉观察；用户改为文字概念图后正常准备并标明设定。前两轮却在无视觉能力时承诺来图能读图，且读自身说明无助于定位素材。",
+      "evidence": [
+        {
+          "file": "AC_MULTI_NO_IMAGE/session.json",
+          "recordId": "8a403646-20f6-436e-9907-c020ebe40041"
+        }
+      ],
+      "category": "multi_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_REF_MISSING",
+      "outcome": "fail",
+      "earliestFailureStage": "请求理解",
+      "reason": "首轮只要求摆拍提示词，却调用generate_image保存方案；第二轮把所谓“刚才那张图”解释为改方案，没有先澄清图尚不存在。未伪造imageId或提交，但首轮已经偏离纯文字任务。",
+      "evidence": [
+        {
+          "file": "AC_REF_MISSING/session.json",
+          "recordId": "18d0381d-3ca8-412c-961e-6a9a26cd9880"
+        }
+      ],
+      "category": "multi_image_reference",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_TEXT_IMAGE",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "文字和图方案都有，但陶瓷材质被扩写为“端着有分量”“清洗不费劲”；最后承认是常规推断并让用户纠正，仍作为可用广告正文交付。",
+      "evidence": [
+        {
+          "file": "AC_NEW_TEXT_IMAGE/session.json",
+          "recordId": "07726dc6-ee61-413c-baf5-271bc6d134ec"
+        }
+      ],
+      "category": "new_text_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_MIXED_BAKERY",
+      "outcome": "fail",
+      "earliestFailureStage": "交付范围",
+      "reason": "用户要一句标题，实际给主标题加一个备选，备选还擅加“周末限定”。无字方形图片方案已保存。",
+      "evidence": [
+        {
+          "file": "AC_NEW_MIXED_BAKERY/session.json",
+          "recordId": "6607f050-bacd-4a03-be1c-adeee3b5799d"
+        }
+      ],
+      "category": "new_text_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_MIXED_APP",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "只有记账App品类与名称，却写自动归拢、分类汇总、不占空间、不打扰、无学习成本；随后声称未编造功能，又让用户核对功能。抽象蓝绿方案已保存。",
+      "evidence": [
+        {
+          "file": "AC_NEW_MIXED_APP/session.json",
+          "recordId": "7d623af3-99e2-4c06-85f2-84720826b794"
+        }
+      ],
+      "category": "new_text_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_NEW_MIXED_MISSING",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "缺图时未假造机器外观并暂停海报是正确的；可用文字却编造现磨、打奶泡、不占地、无需凑单等，末尾“通用体验”声明不能抵消功能承诺。",
+      "evidence": [
+        {
+          "file": "AC_NEW_MIXED_MISSING/session.json",
+          "recordId": "32f4e1b8-8795-4b01-93f5-40ca723b1e63"
+        }
+      ],
+      "category": "new_text_image",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MIXED_MISSING",
+      "outcome": "fail",
+      "earliestFailureStage": "事实传播",
+      "reason": "缺图引用被阻止、后续撤销原图要求后准备无产品浴室方案正确；但洗发水文案无依据增加清爽、蓬松及耐用时长暗示，并逐轮沿用。",
+      "evidence": [
+        {
+          "file": "AC_MIXED_MISSING/session.json",
+          "recordId": "1ddb4196-f1c6-443d-8fa0-2b36734c3e0e"
+        }
+      ],
+      "category": "multi_text_image_reference",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    },
+    {
+      "id": "AC_MEMORY",
+      "outcome": "issues",
+      "earliestFailureStage": "交付范围",
+      "reason": "纠正已离开近期原文窗口且摘要实际覆盖。最终正确使用20元、米白背景、松岚79元及两处待定，没有串客户；但用户只要一句文案，最终额外给第二句备选。4份摘要保存成功，另一次摘要输出缺sourceRefs未保存，事实保留仍成功。",
+      "evidence": [
+        {
+          "file": "AC_MEMORY/session.json",
+          "recordId": "153fed05-ed87-4d79-9a41-4abd2839695a"
+        },
+        {
+          "file": "memory-coverage.json",
+          "recordId": "e4d8d7c4-5146-47e4-b64f-3b5957ce0ebc"
+        }
+      ],
+      "memoryCoverage": "passed_with_asset_evidence_also_available",
+      "category": "multi_text",
+      "reviewScope": "runtime_trace_and_deliverables; media_protocol_only"
+    }
+  ]
+}
