@@ -1,0 +1,27 @@
+✔ retained original identities cover early long text and mixed messages in exact history order (42.5965ms)
+✔ patches resolve simultaneously against original and preserve every unmentioned byte (0.6842ms)
+✔ revision read pairs actual current user request with original and preserves pagination (24.4674ms)
+✔ versioned document edits preserve parent, bind measured reconstructed body, and replay once (19.3722ms)
+✔ invalid and stale edits have no document or invocation side effects (16.7182ms)
+✔ reconstructed document and revision history envelope obey existing size limits (27.4681ms)
+✔ chat originals archive separately; mismatch gives actual identity and incremental child keeps correct lineage (15.3924ms)
+✔ failed persistence rolls back both archived original and incremental child (15.0328ms)
+✔ long original local edit reaches Agent feedback within unchanged context budget (20.3513ms)
+✔ image proposal changes only selected background; inherits sources and waits for new approval (20.008ms)
+✔ video scalar revision and image editing proposal retain unrelated original parameters (16.1161ms)
+✔ incremental media rejects incomplete new proposals, invalid merged values and foreign identities (14.466ms)
+✔ stored document display and changes survive restart independently of an incorrect Agent reply (87.3703ms)
+✔ failed proposal replacement persistence does not withdraw its original (15.2301ms)
+✔ document card renders persisted text safely and deduplicates event replay in DOM harness (1.587ms)
+✔ Enter and click share submission including attachments (3.7234ms)
+✔ newline, IME composition and modified keys do not send; held Enter does not repeat (1.124ms)
+✔ running or empty composer cannot submit or clear the draft (1.5731ms)
+✔ attachment read locks submission before awaiting, and failures release the lock (1.1947ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 448.1599

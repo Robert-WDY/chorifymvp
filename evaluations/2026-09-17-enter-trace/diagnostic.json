@@ -1,0 +1,145 @@
+{
+  "snapshotSha256": "1bae858a2f2d939ed1000c949272692234609fd51e277c8b26af7a33df6bd5a6",
+  "recordCount": 206,
+  "summaryCount": 3,
+  "originalCoverage": 28,
+  "coverageAfter": 28,
+  "firstUncoveredGroupTokens": 9231,
+  "summaryInputLimit": 8000,
+  "memoryResult": {
+    "calls": 0
+  },
+  "modelCallbacks": 0,
+  "lastTurn": "cancelled",
+  "decisions": [
+    {
+      "step": 0,
+      "omitted": 11,
+      "estimatedInputTokens": 10123,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "creative-prompt-rewrite",
+          "reference": null
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 1,
+      "omitted": 8,
+      "estimatedInputTokens": 10252,
+      "retainedSuccessfulSkills": [],
+      "currentUserRetained": true
+    },
+    {
+      "step": 2,
+      "omitted": 11,
+      "estimatedInputTokens": 9945,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": null
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 3,
+      "omitted": 17,
+      "estimatedInputTokens": 10232,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/output-template.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 4,
+      "omitted": 17,
+      "estimatedInputTokens": 10129,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": null
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 5,
+      "omitted": 18,
+      "estimatedInputTokens": 10291,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/core-contract.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 6,
+      "omitted": 26,
+      "estimatedInputTokens": 10258,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/output-template.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 7,
+      "omitted": 25,
+      "estimatedInputTokens": 10275,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/core-contract.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 8,
+      "omitted": 32,
+      "estimatedInputTokens": 10259,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/output-template.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 9,
+      "omitted": 28,
+      "estimatedInputTokens": 10112,
+      "retainedSuccessfulSkills": [],
+      "currentUserRetained": true
+    },
+    {
+      "step": 10,
+      "omitted": 37,
+      "estimatedInputTokens": 10285,
+      "retainedSuccessfulSkills": [
+        {
+          "slug": "cinematic-shot-designer-zh-v5",
+          "reference": "references/director-rules.md"
+        }
+      ],
+      "currentUserRetained": true
+    },
+    {
+      "step": 11,
+      "omitted": 37,
+      "estimatedInputTokens": 10272,
+      "retainedSuccessfulSkills": [],
+      "currentUserRetained": true
+    }
+  ]
+}

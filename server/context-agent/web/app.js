@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const key='chorify.context-agent.session';
-let config,sessionId=localStorage.getItem(key),running=false,streaming=false,cursor=-1,pollTimer;
+let config,sessionId=localStorage.getItem(key),running=false,submitting=false,streaming=false,cursor=-1,pollTimer;
 let pending=new Map(),questions=new Map(),cards=new Map(),seen=new Set(),selected=new Set(),rendered=new Set();
 const labels={agent:'Agent 决策',summary:'整理较早会话',image_observation:'观察图片',read_asset:'读取素材',read_history:'读取历史',search_history:'查找历史',read_skill:'读取专业方法',inspect_workspace:'查询工作区',request_user_input:'发布问题',generate_image:'准备图片方案',edit_image:'准备图片修改',generate_video:'准备视频方案',confirm_media:'确认并执行方案',execute_approved:'执行已批准方案',save_document:'保存文稿',analyze_image:'观察图片',compare_images:'比较原图与成品',read_media_result:'读取媒体回执'};
 const states={running:'进行中',succeeded:'已完成',failed:'失败',unknown:'结果未知',pending:'已提交，处理中',partial:'部分完成',prepared:'方案已准备',waiting_user:'等待回答',not_executed:'未执行',cancelled:'已取消'};
@@ -99,7 +99,8 @@ async function run(path,data){
  }catch(error){status('连接或运行失败：'+error.message+'。将保留当前会话并恢复实际进度。');}
  finally{streaming=running=false;try{await refresh();}catch(error){recovery(error);}controls();}
 }
-$('chat').onsubmit=async e=>{e.preventDefault();if(running)return;try{const text=$('message').value,inputs=[];for(const f of $('files').files){if(f.size>128*1024)throw new Error('文字文件超过128 KiB');inputs.push({type:'text',name:f.name,content:await f.text()});}if($('image').value.trim())inputs.push({type:'image',name:'产品参考图',url:$('image').value.trim()});$('message').value='';$('files').value='';$('image').value='';await run('/api/chat',{message:text,inputs});}catch(error){status(error.message);}};
+$('message').onkeydown=e=>{if(e.key!=='Enter'||e.shiftKey||e.ctrlKey||e.altKey||e.metaKey||e.isComposing||e.keyCode===229)return;e.preventDefault();if(!e.repeat&&!running&&!submitting)$('chat').requestSubmit($('send'));};
+$('chat').onsubmit=async e=>{e.preventDefault();if(running||submitting||!sessionId||!$('message').value.trim())return;submitting=true;try{const text=$('message').value,inputs=[];for(const f of $('files').files){if(f.size>128*1024)throw new Error('文字文件超过128 KiB');inputs.push({type:'text',name:f.name,content:await f.text()});}if($('image').value.trim())inputs.push({type:'image',name:'产品参考图',url:$('image').value.trim()});$('message').value='';$('files').value='';$('image').value='';await run('/api/chat',{message:text,inputs});}catch(error){status(error.message);}finally{submitting=false;}};
 $('new').onclick=()=>newSession().catch(recovery);
 $('retry').onclick=()=>initialize();
 $('cancel').onclick=()=>post('/api/cancel',{sessionId}).then(()=>status('已请求停止；已提交的调用保留原回执。')).catch(e=>status(e.message));
