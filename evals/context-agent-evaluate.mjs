@@ -17,7 +17,7 @@ if(!real){
   const requested=args.find(x=>x.startsWith('--cases='))?.slice(8).split(',');
   if(!requested&&!args.includes('--all'))throw new Error('Choose explicit --cases=ID,ID or --all');
   if(requested?.some(id=>!corpus.manifest.caseIds.includes(id)))throw new Error('Unknown case ID');
-  const [{ContextAgent},{createSession,HistoryStore},{assembleAgentTools},{createBrain},{loadAgentCatalog:loadCatalog},{runCaseTurns}]=await Promise.all([
+  const [{ContextAgent},{createSession,HistoryStore},{assembleAgentTools,assembleMemoryOptions},{createBrain},{loadAgentCatalog:loadCatalog},{runCaseTurns}]=await Promise.all([
     import('../server/context-agent/loop.mjs'),import('../server/context-agent/history.mjs'),import('../server/context-agent/runtime.mjs'),import('../server/adapters.mjs'),import('../server/context-agent/skills.mjs'),import('./context-agent-driver.mjs')]);
   const mediaEnabled=args.includes('--media-live'),mediaMode=mediaEnabled?'live':'simulation';
   const mediaBudget=Number(process.env.CHORIFY_CONTEXT_MEDIA_MAX_CALLS||0);
@@ -61,12 +61,13 @@ if(!real){
     const store=new HistoryStore(join(caseRoot,'storage'));
     const save=async()=>store.save(state,state.ownerId);
     const tools=assembleAgentTools({catalog,mode:mediaMode,media,visionEnabled,visionBrain:meteredBrain});
-    const agent=new ContextAgent({brain:meteredBrain,tools,catalog,save,maxSteps:Math.min(16,budget),maxMediaCalls:mediaEnabled?mediaBudget:8});
+    const agent=new ContextAgent({memory:assembleMemoryOptions(process.env),brain:meteredBrain,tools,catalog,save,maxSteps:Math.min(16,budget),maxMediaCalls:mediaEnabled?mediaBudget:8});
     const mediaBefore=mediaCalls;
     const {rounds}=await runCaseTurns({caseData:c,agent,state,inputs,save,canCall:()=>modelCalls<budget});
     await save();await writeFile(join(caseRoot,'session.json'),JSON.stringify(state,null,2)+'\n');await writeFile(join(caseRoot,'original-case.json'),JSON.stringify(c,null,2)+'\n');
     const observationCalls=state.records.filter(r=>r.event==='model_request'&&r.phase==='image_observation').length;
-    Object.assign(row,{observationCalls,realObservation:observationCalls?'executed_requires_review':'not_run',realModel:'executed_requires_review',realMedia:mediaCalls>mediaBefore?'executed_requires_review':'not_run',visualReview:'not_run',businessAcceptance:'unreviewed',reason:`Review unchanged expected manually; media mode ${mediaMode}; vision ${visionEnabled?'enabled':'disabled'}, actual observation calls: ${observationCalls}`,inputUrlIdentity:'operator-declared hash only; remote bytes not independently checked',rounds,trace:`${c.id}/session.json`});
+    const summaryCalls=state.records.filter(r=>r.event==='model_request'&&r.phase==='summary').length;
+    Object.assign(row,{summaryCalls,summaryConfiguration:agent.memory,modelAccounting:rounds.map(r=>r.result?.modelAccounting||null),observationCalls,realObservation:observationCalls?'executed_requires_review':'not_run',realModel:'executed_requires_review',realMedia:mediaCalls>mediaBefore?'executed_requires_review':'not_run',visualReview:'not_run',businessAcceptance:'unreviewed',reason:`Review unchanged expected manually; media mode ${mediaMode}; vision ${visionEnabled?'enabled':'disabled'}, actual observation calls: ${observationCalls}`,inputUrlIdentity:'operator-declared hash only; remote bytes not independently checked',rounds,trace:`${c.id}/session.json`});
     await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaCalls,mediaBudget,mediaMode},null,2)+'\n');
   }
   await writeFile(join(runRoot,'report.json'),JSON.stringify({...report,model:{provider:brain.config.provider,name:brain.config.model},modelCalls,budget,mediaCalls,mediaBudget,mediaMode},null,2)+'\n');

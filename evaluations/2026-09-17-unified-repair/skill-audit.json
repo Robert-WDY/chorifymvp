@@ -1,0 +1,2236 @@
+{
+  "verification": "structural inventory and reference hashes; use manual mapping for professional-content judgment; no real creative output tested",
+  "baseline": "a4220e12f89f0c4c060b5724aebfb5adef274160",
+  "methods": [
+    {
+      "slug": "actor-realism-v2",
+      "legacy": {
+        "path": "skills/actor-realism-v2/instructions.md",
+        "sha256": "b532e4daabf62ca3e4008a175d67d500ac4816f0e40a5069a17281119c79c751",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 演员真实感与情绪优化工作流"
+          },
+          {
+            "line": 15,
+            "text": "## 1. 输入路由"
+          },
+          {
+            "line": 24,
+            "text": "## 2. 建立保真边界"
+          },
+          {
+            "line": 32,
+            "text": "## 3. 按需检索参考"
+          },
+          {
+            "line": 41,
+            "text": "## 4. 原始剧本路线"
+          },
+          {
+            "line": 53,
+            "text": "## 5. 已有图片提示词路线"
+          },
+          {
+            "line": 59,
+            "text": "## 6. 已有视频提示词路线"
+          },
+          {
+            "line": 67,
+            "text": "## 7. 共用表演引擎"
+          },
+          {
+            "line": 77,
+            "text": "## 8. 输出与模型适配"
+          },
+          {
+            "line": 85,
+            "text": "## 9. 媒体边界"
+          },
+          {
+            "line": 88,
+            "text": "## 交付自检"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/actor-realism-v2/method.md",
+        "sha256": "1b77bdb4e289ca8c0e39f6a353fc24a51b06fa39cf1dd9cb9d66775ebcb01279",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 演员真实感与情绪优化工作流"
+          },
+          {
+            "line": 7,
+            "text": "## 1. 输入路由"
+          },
+          {
+            "line": 16,
+            "text": "## 2. 建立保真边界"
+          },
+          {
+            "line": 24,
+            "text": "## 3. 按需检索参考"
+          },
+          {
+            "line": 33,
+            "text": "## 4. 原始剧本路线"
+          },
+          {
+            "line": 45,
+            "text": "## 5. 已有图片提示词路线"
+          },
+          {
+            "line": 51,
+            "text": "## 6. 已有视频提示词路线"
+          },
+          {
+            "line": 59,
+            "text": "## 7. 共用表演引擎"
+          },
+          {
+            "line": 69,
+            "text": "## 8. 输出与模型适配"
+          },
+          {
+            "line": 77,
+            "text": "## 9. 媒体边界"
+          },
+          {
+            "line": 80,
+            "text": "## 交付自检"
+          }
+        ],
+        "changedSinceBaseline": false
+      },
+      "references": [
+        {
+          "path": "references/core-contract.md",
+          "characters": 421,
+          "sha256": "926fd4f565a89084cd423480f2c4669fd203c854959072a6c4f78fbe09973afb",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/emotion-lexicon.md",
+          "characters": 5270,
+          "sha256": "84e56f19a14b309518140b446aad1249b4fea1375e3e895e1708694571ad188b",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/emotion-performance.md",
+          "characters": 3045,
+          "sha256": "ee41a56236c7f165f8fe51b8095da40a5213be6978eaa4c2f32d3222696ffc5a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/facs-reference.md",
+          "characters": 4106,
+          "sha256": "8b88894b9c6a9e0b38b45ad36942ae87b3fe4c766324ce7471fa14867f181916",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/output-templates.md",
+          "characters": 1813,
+          "sha256": "009113b967ab29196829e53034ca7e0709e0d0fcb829770c65e2409afb9cb440",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/realism-framework.md",
+          "characters": 2047,
+          "sha256": "851effd53305f4130d624426582d9a8431e3aa2dfb58ca546e559ca432c79603",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/script-segmentation.md",
+          "characters": 1905,
+          "sha256": "3e4f8558be6c424468819a2a35e88144bdf149396b9fc4b5eb8f3bdf1b7d209c",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "asset-lock-generator-lite-v2",
+      "legacy": {
+        "path": "skills/asset-lock-generator-lite-v2/instructions.md",
+        "sha256": "9d90664112b1a181cea229f5561c44cd60861c0d4cda16c08dcdca6572f302c6",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 简易资产锁生成器"
+          },
+          {
+            "line": 13,
+            "text": "## 1. 输入与输出"
+          },
+          {
+            "line": 16,
+            "text": "## 2. 布局参考"
+          },
+          {
+            "line": 20,
+            "text": "## 4. 通用图像合同"
+          },
+          {
+            "line": 31,
+            "text": "## 5. 人物资产"
+          },
+          {
+            "line": 35,
+            "text": "## 6. 环境锁"
+          },
+          {
+            "line": 44,
+            "text": "## 7. 产品锁"
+          },
+          {
+            "line": 58,
+            "text": "## 8. 质检与交付"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/asset-lock-generator-lite-v2/method.md",
+        "sha256": "c7910ec4278fba6125f5b2c370da130cb5f95b1cd1702500f30014f15b255357",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 简易资产锁生成器"
+          },
+          {
+            "line": 5,
+            "text": "## 1. 输入与输出"
+          },
+          {
+            "line": 8,
+            "text": "## 2. 布局参考"
+          },
+          {
+            "line": 12,
+            "text": "## 4. 通用图像要求"
+          },
+          {
+            "line": 23,
+            "text": "## 5. 人物资产"
+          },
+          {
+            "line": 27,
+            "text": "## 6. 环境锁"
+          },
+          {
+            "line": 36,
+            "text": "## 7. 产品锁"
+          },
+          {
+            "line": 50,
+            "text": "## 8. 质检与交付"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/core-contract.md",
+          "characters": 263,
+          "sha256": "b12a04d073e23ece2682db190babcd507a25f42900269e8329c3ee5d0ca32e0a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/prompt-templates.md",
+          "characters": 4050,
+          "sha256": "000adf5948365aeb41471cf08d5d15468560853d7350a40df39d84aeb001fda9",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "creative-cover-copy-v2",
+      "legacy": {
+        "path": "skills/creative-cover-copy-v2/instructions.md",
+        "sha256": "98f2058613da2d898af92f94b56678726242d0af0370713ff5e5bb66b94ae7ea",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# creative 文案与封面导演"
+          },
+          {
+            "line": 13,
+            "text": "## 1. 当前交付范围"
+          },
+          {
+            "line": 16,
+            "text": "## 2. 使用已绑定素材"
+          },
+          {
+            "line": 19,
+            "text": "## 3. 建立证据表"
+          },
+          {
+            "line": 34,
+            "text": "## 4. 学习样例风格"
+          },
+          {
+            "line": 38,
+            "text": "## 5. 选择传播主张"
+          },
+          {
+            "line": 44,
+            "text": "## 6. 编写文案"
+          },
+          {
+            "line": 57,
+            "text": "## 7. 规划封面"
+          },
+          {
+            "line": 75,
+            "text": "## 8. 封面候选与检查"
+          },
+          {
+            "line": 78,
+            "text": "## 9. 交付"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/creative-cover-copy-v2/method.md",
+        "sha256": "2dcdf54a5da063bebc29d133c0ded22d7916f6925eba3a78ec2a255f6fff0cd0",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# creative 文案与封面导演"
+          },
+          {
+            "line": 5,
+            "text": "## 1. 当前交付范围"
+          },
+          {
+            "line": 8,
+            "text": "## 2. 使用已绑定素材"
+          },
+          {
+            "line": 11,
+            "text": "## 3. 建立证据表"
+          },
+          {
+            "line": 26,
+            "text": "## 4. 学习样例风格"
+          },
+          {
+            "line": 30,
+            "text": "## 5. 选择传播主张"
+          },
+          {
+            "line": 36,
+            "text": "## 6. 编写文案"
+          },
+          {
+            "line": 49,
+            "text": "## 7. 规划封面"
+          },
+          {
+            "line": 67,
+            "text": "## 8. 封面候选与检查"
+          },
+          {
+            "line": 70,
+            "text": "## 9. 交付"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/creative-tools.md",
+          "characters": 173,
+          "sha256": "ff3219066e33f3661482956b82d684ca9288cbd9e321a37f4fb74533c178f84b",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/copy-cover-workflow.md",
+          "characters": 1343,
+          "sha256": "1f8a2ee926d2ab416fb06768fda88e8f0cf1a4e2c5fd1c46fa2803ecbb8651cf",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/core-contract.md",
+          "characters": 356,
+          "sha256": "bb858b6fe864658bc61b02b0585993cb3201472a28507606ad29df4767a9ae8a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-corpus.md",
+          "characters": 1236,
+          "sha256": "cfbc8dcc47e923c720599cac6672f7aefa0cff0f3afaaf306652ad6ca822034b",
+          "unchangedSinceBaseline": false
+        }
+      ]
+    },
+    {
+      "slug": "creative-prompt-rewrite",
+      "legacy": {
+        "path": "skills/creative-prompt-rewrite/instructions.md",
+        "sha256": "992cbf78b346ef065ff2f59a6f5c6478d60c97552eed78c9a2b92ec352c09d2a",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# creative Prompt Rewrite V2"
+          },
+          {
+            "line": 11,
+            "text": "## 核心定位"
+          },
+          {
+            "line": 16,
+            "text": "# 0. 总原则"
+          },
+          {
+            "line": 18,
+            "text": "## 开场模块的适用条件"
+          },
+          {
+            "line": 22,
+            "text": "## 0.2 反差模块"
+          },
+          {
+            "line": 27,
+            "text": "## 0.3 产品角色"
+          },
+          {
+            "line": 32,
+            "text": "## 0.4 第四优先级：变化必须可见"
+          },
+          {
+            "line": 38,
+            "text": "# 1. 创意契约"
+          },
+          {
+            "line": 42,
+            "text": "## 1.1 商业目标"
+          },
+          {
+            "line": 49,
+            "text": "## 1.2 核心Hook"
+          },
+          {
+            "line": 57,
+            "text": "## 1.3 剧情机制"
+          },
+          {
+            "line": 76,
+            "text": "## 1.4 情绪机制"
+          },
+          {
+            "line": 80,
+            "text": "## 1.5 产品角色"
+          },
+          {
+            "line": 84,
+            "text": "## 1.6 最终回报"
+          },
+          {
+            "line": 92,
+            "text": "# 2. 三秒Hook引擎"
+          },
+          {
+            "line": 96,
+            "text": "## 2.1 Hook不是固定剧情，而是动态生成"
+          },
+          {
+            "line": 100,
+            "text": "### A. 极端状态Hook"
+          },
+          {
+            "line": 110,
+            "text": "### B. 冲突Hook"
+          },
+          {
+            "line": 120,
+            "text": "### C. 认知违和Hook"
+          },
+          {
+            "line": 130,
+            "text": "### D. 第三方反应Hook"
+          },
+          {
+            "line": 139,
+            "text": "### E. 问题暴露Hook"
+          },
+          {
+            "line": 149,
+            "text": "## 2.2 Hook必须具体到动作"
+          },
+          {
+            "line": 171,
+            "text": "## 2.3 三秒Hook预算"
+          },
+          {
+            "line": 185,
+            "text": "# 3. 强反差引擎"
+          },
+          {
+            "line": 189,
+            "text": "## 3.1 先写Before / After"
+          },
+          {
+            "line": 205,
+            "text": "## 3.2 允许巨大变化"
+          },
+          {
+            "line": 219,
+            "text": "# 4. Transformation Arc：连续变化链"
+          },
+          {
+            "line": 234,
+            "text": "## 美容产品"
+          },
+          {
+            "line": 245,
+            "text": "## 身体护理"
+          },
+          {
+            "line": 256,
+            "text": "## 清洁类"
+          },
+          {
+            "line": 266,
+            "text": "## 4.1 变化顺序必须具体"
+          },
+          {
+            "line": 281,
+            "text": "## 4.2 固定身份锚点"
+          },
+          {
+            "line": 289,
+            "text": "# 5. 动态分镜，而不是固定模板"
+          },
+          {
+            "line": 305,
+            "text": "## 5.1 5秒"
+          },
+          {
+            "line": 315,
+            "text": "## 5.2 10秒"
+          },
+          {
+            "line": 326,
+            "text": "## 5.3 15秒"
+          },
+          {
+            "line": 330,
+            "text": "### 结构A：变身型"
+          },
+          {
+            "line": 340,
+            "text": "### 结构B：冲突型"
+          },
+          {
+            "line": 350,
+            "text": "### 结构C：悬念型"
+          },
+          {
+            "line": 360,
+            "text": "### 结构D：功能型"
+          },
+          {
+            "line": 372,
+            "text": "# 6. 镜头预算与取舍"
+          },
+          {
+            "line": 376,
+            "text": "## 6.1 一个镜头只承担一个主要事件"
+          },
+          {
+            "line": 393,
+            "text": "## 6.2 P0数量限制"
+          },
+          {
+            "line": 410,
+            "text": "## 6.3 信息超载时的删除顺序"
+          },
+          {
+            "line": 422,
+            "text": "# 7. 人物反应动作库"
+          },
+          {
+            "line": 428,
+            "text": "## 震惊"
+          },
+          {
+            "line": 438,
+            "text": "## 嫌弃"
+          },
+          {
+            "line": 448,
+            "text": "## 愤怒"
+          },
+          {
+            "line": 458,
+            "text": "## 痛苦"
+          },
+          {
+            "line": 467,
+            "text": "## 得意"
+          },
+          {
+            "line": 479,
+            "text": "# 8. 第三方反应与搞笑反转"
+          },
+          {
+            "line": 500,
+            "text": "# 9. 产品锁定与参考图"
+          },
+          {
+            "line": 518,
+            "text": "## 9.1 Logo规则"
+          },
+          {
+            "line": 537,
+            "text": "## 9.2 产品特写不能和复杂剧情竞争"
+          },
+          {
+            "line": 545,
+            "text": "# 10. Prompt密度控制"
+          },
+          {
+            "line": 549,
+            "text": "## 10.1 每项核心要求只写一次"
+          },
+          {
+            "line": 553,
+            "text": "## 10.2 分层表达"
+          },
+          {
+            "line": 557,
+            "text": "### Layer 1：最重要"
+          },
+          {
+            "line": 564,
+            "text": "### Layer 2：执行"
+          },
+          {
+            "line": 571,
+            "text": "### Layer 3：稳定性"
+          },
+          {
+            "line": 578,
+            "text": "# 11. 最小安全调整"
+          },
+          {
+            "line": 595,
+            "text": "# 12. 六轴边界参考"
+          },
+          {
+            "line": 614,
+            "text": "# 13. 生成失败后的逐镜头恢复"
+          },
+          {
+            "line": 620,
+            "text": "## Hook不够强"
+          },
+          {
+            "line": 628,
+            "text": "## 产品没看清"
+          },
+          {
+            "line": 635,
+            "text": "## 变化太突兀"
+          },
+          {
+            "line": 643,
+            "text": "## 反差不够"
+          },
+          {
+            "line": 650,
+            "text": "## 剧情太满"
+          },
+          {
+            "line": 660,
+            "text": "# 14. 输出格式"
+          },
+          {
+            "line": 666,
+            "text": "# 15. Hook / Contrast / Execution 自检"
+          },
+          {
+            "line": 672,
+            "text": "## Hook"
+          },
+          {
+            "line": 677,
+            "text": "## Contrast"
+          },
+          {
+            "line": 682,
+            "text": "## Product"
+          },
+          {
+            "line": 687,
+            "text": "## Transformation"
+          },
+          {
+            "line": 692,
+            "text": "## Story"
+          },
+          {
+            "line": 697,
+            "text": "## Prompt Density"
+          },
+          {
+            "line": 705,
+            "text": "# 16. 合同检查"
+          },
+          {
+            "line": 709,
+            "text": "# 最终标准"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/creative-prompt-rewrite/method.md",
+        "sha256": "04462d67eb46a4fed7b175dab70f9ce412e65df06ee0d90455d5ebe1f1fe1902",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# creative Prompt Rewrite V2"
+          },
+          {
+            "line": 3,
+            "text": "## 核心定位"
+          },
+          {
+            "line": 8,
+            "text": "# 0. 总原则"
+          },
+          {
+            "line": 10,
+            "text": "## 开场模块的适用条件"
+          },
+          {
+            "line": 14,
+            "text": "## 0.2 反差模块"
+          },
+          {
+            "line": 19,
+            "text": "## 0.3 产品角色"
+          },
+          {
+            "line": 24,
+            "text": "## 0.4 第四优先级：变化必须可见"
+          },
+          {
+            "line": 30,
+            "text": "# 1. 创意契约"
+          },
+          {
+            "line": 34,
+            "text": "## 1.1 商业目标"
+          },
+          {
+            "line": 41,
+            "text": "## 1.2 核心Hook"
+          },
+          {
+            "line": 49,
+            "text": "## 1.3 剧情机制"
+          },
+          {
+            "line": 68,
+            "text": "## 1.4 情绪机制"
+          },
+          {
+            "line": 72,
+            "text": "## 1.5 产品角色"
+          },
+          {
+            "line": 76,
+            "text": "## 1.6 最终回报"
+          },
+          {
+            "line": 84,
+            "text": "# 2. 三秒Hook引擎"
+          },
+          {
+            "line": 88,
+            "text": "## 2.1 Hook不是固定剧情，而是动态生成"
+          },
+          {
+            "line": 92,
+            "text": "### A. 极端状态Hook"
+          },
+          {
+            "line": 102,
+            "text": "### B. 冲突Hook"
+          },
+          {
+            "line": 112,
+            "text": "### C. 认知违和Hook"
+          },
+          {
+            "line": 122,
+            "text": "### D. 第三方反应Hook"
+          },
+          {
+            "line": 131,
+            "text": "### E. 问题暴露Hook"
+          },
+          {
+            "line": 141,
+            "text": "## 2.2 Hook必须具体到动作"
+          },
+          {
+            "line": 163,
+            "text": "## 2.3 三秒Hook预算"
+          },
+          {
+            "line": 177,
+            "text": "# 3. 强反差引擎"
+          },
+          {
+            "line": 181,
+            "text": "## 3.1 先写Before / After"
+          },
+          {
+            "line": 197,
+            "text": "## 3.2 允许巨大变化"
+          },
+          {
+            "line": 211,
+            "text": "# 4. Transformation Arc：连续变化链"
+          },
+          {
+            "line": 226,
+            "text": "## 美容产品"
+          },
+          {
+            "line": 237,
+            "text": "## 身体护理"
+          },
+          {
+            "line": 248,
+            "text": "## 清洁类"
+          },
+          {
+            "line": 258,
+            "text": "## 4.1 变化顺序必须具体"
+          },
+          {
+            "line": 273,
+            "text": "## 4.2 固定身份锚点"
+          },
+          {
+            "line": 281,
+            "text": "# 5. 动态分镜，而不是固定模板"
+          },
+          {
+            "line": 297,
+            "text": "## 5.1 5秒"
+          },
+          {
+            "line": 307,
+            "text": "## 5.2 10秒"
+          },
+          {
+            "line": 318,
+            "text": "## 5.3 15秒"
+          },
+          {
+            "line": 322,
+            "text": "### 结构A：变身型"
+          },
+          {
+            "line": 332,
+            "text": "### 结构B：冲突型"
+          },
+          {
+            "line": 342,
+            "text": "### 结构C：悬念型"
+          },
+          {
+            "line": 352,
+            "text": "### 结构D：功能型"
+          },
+          {
+            "line": 364,
+            "text": "# 6. 镜头预算与取舍"
+          },
+          {
+            "line": 368,
+            "text": "## 6.1 一个镜头只承担一个主要事件"
+          },
+          {
+            "line": 385,
+            "text": "## 6.2 P0数量限制"
+          },
+          {
+            "line": 402,
+            "text": "## 6.3 信息超载时的删除顺序"
+          },
+          {
+            "line": 414,
+            "text": "# 7. 人物反应动作库"
+          },
+          {
+            "line": 420,
+            "text": "## 震惊"
+          },
+          {
+            "line": 430,
+            "text": "## 嫌弃"
+          },
+          {
+            "line": 440,
+            "text": "## 愤怒"
+          },
+          {
+            "line": 450,
+            "text": "## 痛苦"
+          },
+          {
+            "line": 459,
+            "text": "## 得意"
+          },
+          {
+            "line": 471,
+            "text": "# 8. 第三方反应与搞笑反转"
+          },
+          {
+            "line": 492,
+            "text": "# 9. 产品锁定与参考图"
+          },
+          {
+            "line": 510,
+            "text": "## 9.1 Logo规则"
+          },
+          {
+            "line": 529,
+            "text": "## 9.2 产品特写不能和复杂剧情竞争"
+          },
+          {
+            "line": 537,
+            "text": "# 10. Prompt密度控制"
+          },
+          {
+            "line": 541,
+            "text": "## 10.1 每项核心要求只写一次"
+          },
+          {
+            "line": 545,
+            "text": "## 10.2 分层表达"
+          },
+          {
+            "line": 549,
+            "text": "### Layer 1：最重要"
+          },
+          {
+            "line": 556,
+            "text": "### Layer 2：执行"
+          },
+          {
+            "line": 563,
+            "text": "### Layer 3：稳定性"
+          },
+          {
+            "line": 570,
+            "text": "# 11. 最小安全调整"
+          },
+          {
+            "line": 587,
+            "text": "# 12. 六轴边界参考"
+          },
+          {
+            "line": 606,
+            "text": "# 13. 生成失败后的逐镜头恢复"
+          },
+          {
+            "line": 612,
+            "text": "## Hook不够强"
+          },
+          {
+            "line": 620,
+            "text": "## 产品没看清"
+          },
+          {
+            "line": 627,
+            "text": "## 变化太突兀"
+          },
+          {
+            "line": 635,
+            "text": "## 反差不够"
+          },
+          {
+            "line": 642,
+            "text": "## 剧情太满"
+          },
+          {
+            "line": 652,
+            "text": "# 14. 输出格式"
+          },
+          {
+            "line": 658,
+            "text": "# 15. Hook / Contrast / Execution 自检"
+          },
+          {
+            "line": 664,
+            "text": "## Hook"
+          },
+          {
+            "line": 669,
+            "text": "## Contrast"
+          },
+          {
+            "line": 674,
+            "text": "## Product"
+          },
+          {
+            "line": 679,
+            "text": "## Transformation"
+          },
+          {
+            "line": 684,
+            "text": "## Story"
+          },
+          {
+            "line": 689,
+            "text": "## Prompt Density"
+          },
+          {
+            "line": 697,
+            "text": "# 16. 需求与作品检查"
+          },
+          {
+            "line": 701,
+            "text": "# 最终标准"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/boundary-observations.md",
+          "characters": 3052,
+          "sha256": "946cb28e8c4ed16fa74abc5ef4b35638aec4a9c29d6594da248c4a9f9ae1c8d2",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "cinematic-shot-designer-zh-v5",
+      "legacy": {
+        "path": "skills/cinematic-shot-designer-zh-v5/instructions.md",
+        "sha256": "b36e3f5f40c7bc1bec062826884fff37c99b62202eb665681ae9f4eb42e60639",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 导演多宫格分镜方法（合同版本 3）"
+          },
+          {
+            "line": 15,
+            "text": "## 输入和来源"
+          },
+          {
+            "line": 22,
+            "text": "## 导演设计"
+          },
+          {
+            "line": 30,
+            "text": "## 整版布局"
+          },
+          {
+            "line": 37,
+            "text": "## 输出"
+          },
+          {
+            "line": 44,
+            "text": "## 校验"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/cinematic-shot-designer-zh-v5/method.md",
+        "sha256": "1d08291cd8838082e203b027cb3b8e09b096bd8beb9150c1612a6556cd077ad0",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 导演多宫格分镜方法"
+          },
+          {
+            "line": 7,
+            "text": "## 输入和来源"
+          },
+          {
+            "line": 14,
+            "text": "## 导演设计"
+          },
+          {
+            "line": 22,
+            "text": "## 整版布局"
+          },
+          {
+            "line": 29,
+            "text": "## 输出"
+          },
+          {
+            "line": 36,
+            "text": "## 校验"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/core-contract.md",
+          "characters": 529,
+          "sha256": "e454d733abddaa0a66e85fe8d70656a37d5a6e6b1b252ac82afbfb9f272c88bf",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/director-rules.md",
+          "characters": 1114,
+          "sha256": "d3c791004c9fc096b2c05b3c8295e0ef99dee1249c40ce28dc4c69d849ba0e42",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/output-template.md",
+          "characters": 1486,
+          "sha256": "5f8df674842cd2a1551e7e3c5c015862c0aa497d750dfb272aa6c25f359029aa",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/visual-grammar.md",
+          "characters": 1077,
+          "sha256": "080b7c094a7ef1fafccf5918c3f66f48ff439b39ecfa9c84913353f40a15ccfe",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "cinematic-style-optimizer-v2",
+      "legacy": {
+        "path": "skills/cinematic-style-optimizer-v2/instructions.md",
+        "sha256": "c35491e1b2c7f4005388eedfd4f0c3eb08612a39f915b6db28d769738aecd346",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 电影画面风格优化工作流"
+          },
+          {
+            "line": 13,
+            "text": "## 1. 识别输入和目标"
+          },
+          {
+            "line": 24,
+            "text": "## 2. 建立内容锁"
+          },
+          {
+            "line": 30,
+            "text": "## 3. 检索风格资料"
+          },
+          {
+            "line": 39,
+            "text": "## 4. 选择和消解冲突"
+          },
+          {
+            "line": 49,
+            "text": "## 5. 优化文本"
+          },
+          {
+            "line": 57,
+            "text": "## 6. 校验结构保持"
+          },
+          {
+            "line": 70,
+            "text": "## 7. 输出"
+          },
+          {
+            "line": 75,
+            "text": "### 风格诊断"
+          },
+          {
+            "line": 82,
+            "text": "### 风格选择"
+          },
+          {
+            "line": 87,
+            "text": "### 可追加风格块"
+          },
+          {
+            "line": 90,
+            "text": "### 优化后的完整提示词"
+          },
+          {
+            "line": 93,
+            "text": "### 冲突说明"
+          },
+          {
+            "line": 99,
+            "text": "## 8. creative 媒体工具边界"
+          },
+          {
+            "line": 103,
+            "text": "## 质量自检"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/cinematic-style-optimizer-v2/method.md",
+        "sha256": "8d61fc377a04266fac8f5fbd9174e9616c9013ab98cf501e5a3634d3a95f9962",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 电影画面风格优化工作流"
+          },
+          {
+            "line": 5,
+            "text": "## 1. 识别输入和目标"
+          },
+          {
+            "line": 16,
+            "text": "## 2. 建立内容锁"
+          },
+          {
+            "line": 22,
+            "text": "## 3. 检索风格资料"
+          },
+          {
+            "line": 31,
+            "text": "## 4. 选择和消解冲突"
+          },
+          {
+            "line": 41,
+            "text": "## 5. 优化文本"
+          },
+          {
+            "line": 49,
+            "text": "## 6. 校验结构保持"
+          },
+          {
+            "line": 62,
+            "text": "## 7. 输出"
+          },
+          {
+            "line": 67,
+            "text": "### 风格诊断"
+          },
+          {
+            "line": 74,
+            "text": "### 风格选择"
+          },
+          {
+            "line": 79,
+            "text": "### 可追加风格块"
+          },
+          {
+            "line": 82,
+            "text": "### 优化后的完整提示词"
+          },
+          {
+            "line": 85,
+            "text": "### 冲突说明"
+          },
+          {
+            "line": 91,
+            "text": "## 8. creative 媒体工具边界"
+          },
+          {
+            "line": 95,
+            "text": "## 质量自检"
+          }
+        ],
+        "changedSinceBaseline": false
+      },
+      "references": [
+        {
+          "path": "references/core-contract.md",
+          "characters": 536,
+          "sha256": "82dbc813b6a0fe860f31e936c340f2bd1656c357cbb0aa5b36f973a0a21b5949",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/examples.md",
+          "characters": 1434,
+          "sha256": "278484494ebcf1e1683d09e4aa3af15f4ac06103336493dddca69022964a30f9",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/01-digital-cinema-natural.md",
+          "characters": 1037,
+          "sha256": "3365d54c7c86514d32fb78aedd3a6e7e59fc227d28d2f8722afe16c704797d28",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/02-documentary-observational.md",
+          "characters": 1093,
+          "sha256": "747034fbf6c0ab680a781c45e18fdf6f0fd16554db5dfc7758fb086c83a15b9f",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/03-cool-urban-thriller.md",
+          "characters": 1122,
+          "sha256": "ae73b0650a92aff0d17be08ebf76e8e23bc434ad2b335d705b56ca791d017ef5",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/04-cold-clinical.md",
+          "characters": 1062,
+          "sha256": "1e2d94b6cd40ab8f95382c72b7155c3f6bcd8004c7305a281bdf3cf67282b4a9",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/05-overcast-naturalism.md",
+          "characters": 1115,
+          "sha256": "08aadfc7cb0aaf959c58c54e5889ca0c6782b08745bf8e6fb2802ede61eef13d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/06-neo-noir-controlled.md",
+          "characters": 1078,
+          "sha256": "4517e54116441f187b60c68015ed3c0bafee5742453eb85f58e49c988526de4e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/07-fluorescent-liminal-horror.md",
+          "characters": 1120,
+          "sha256": "4abdd846e2910118c530a3be59960bf28ea0906a92d54217ac2ade4255ec6b5e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/08-red-emergency-dread.md",
+          "characters": 1154,
+          "sha256": "b51368d03114a0d1d2ded7a8440286f624120579273ffb496935eba821162e19",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/09-moonlit-blue-natural.md",
+          "characters": 1087,
+          "sha256": "5cc3499916ce0b43ad75283ad4da2272849ae8a0fd0b09bc34b269fac8331594",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/10-sodium-vapor-night.md",
+          "characters": 1121,
+          "sha256": "d8c521b336f85bc02eef8dafc00c91c50c08cb665950e79bcf7c60189aa61b30",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/11-warm-memory-film.md",
+          "characters": 1052,
+          "sha256": "4b270482e8408df3d9eebdd427bd1b314006ec7fb32fc8c296a389651ba6973b",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/12-romantic-soft-natural.md",
+          "characters": 1085,
+          "sha256": "4628c715b2aef13b49b290a8255a259c2e0720dff45228898edf160b5e68739d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/13-pastel-dream.md",
+          "characters": 1080,
+          "sha256": "dfa29ea3a2497c21b5548d90f8777ac798b6898249d98351507a6e8908029a1c",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/14-golden-hour-humanist.md",
+          "characters": 1091,
+          "sha256": "12c5583ff67c81ed8c28bd225d98043df42d6d8001ab30f5cca90630a613c4de",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/15-clean-35mm-drama.md",
+          "characters": 1059,
+          "sha256": "94a66f86e4ce78537834647c315b948568a228dd006a89e7829fda31a6d3de0a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/16-raw-16mm-documentary.md",
+          "characters": 1098,
+          "sha256": "67fa5440d5652310009f0e54cd65d11faca33351aef746f48610263f2599b1ef",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/17-muted-period-drama.md",
+          "characters": 1104,
+          "sha256": "0efa64ca0db9c58c5d7c1f625cff2e78e5bdc1308cd88f4c331747b31d3f96ad",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/18-bleach-bypass-austere.md",
+          "characters": 1048,
+          "sha256": "cfa95a2ce952c134d36a75f941a2aa2188949f8d53a0548fbb1565a4032dc301",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/19-premium-commercial-clean.md",
+          "characters": 1097,
+          "sha256": "08d6995809ee6ab4825522147dd987edd0cd020ff839566142802140a17b6628",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/20-luxury-low-key.md",
+          "characters": 1131,
+          "sha256": "5e9ccc740f8d77cd58f26463d7116575c7858c444202c31b1af0737d70d8711b",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/21-neon-cyberpunk-disciplined.md",
+          "characters": 1137,
+          "sha256": "807fc299d568688c6d9c5445be691e8cdf6332d7790d3f241a54bf101926a5e3",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-example-prompts/22-monochrome-noir.md",
+          "characters": 1129,
+          "sha256": "1d7f4b2febe3b6e26e80ec5f7e0e82ac6432ebf4f1d4680bf6a59d7b6ff61b82",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-image-examples.md",
+          "characters": 4400,
+          "sha256": "996f5aaf6fdb3f89403bf7aac0e1d85d050355575cdc80303deb9bb7e43746e7",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/style-library.md",
+          "characters": 5522,
+          "sha256": "e5b8010541e5c0d5101fee0c3205e1adc95691b5fb5f716fd85dc41cb0a735e2",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/technical-terms.md",
+          "characters": 2137,
+          "sha256": "0e5668208951d7a6473ab31a1eda5d7c7b226152abdbbe198cf3a36578e0c3b6",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "direction-designer-zh-v1",
+      "legacy": {
+        "path": "skills/direction-designer-zh-v1/instructions.md",
+        "sha256": "24ff00cbb9aff6172e060a595bacf30ac0caebdeb8b484a48788ce99f389a476",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 创意方向设计"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/direction-designer-zh-v1/method.md",
+        "sha256": "83695d02b043ef0d6fc05e5397bd008c79b7b7353958ca8acc739ca79a8d06b9",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 创意方向设计"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": []
+    },
+    {
+      "slug": "image-prompt-gallery-director-v2",
+      "legacy": {
+        "path": "skills/image-prompt-gallery-director-v2/instructions.md",
+        "sha256": "d5859025564acf4b6f3bccbe994f00262932ff41f75f24e2fff49dddbdcb474c",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 图片提示词案例导演"
+          },
+          {
+            "line": 13,
+            "text": "## 1. 确认任务边界"
+          },
+          {
+            "line": 21,
+            "text": "## 2. 建立视觉简报"
+          },
+          {
+            "line": 35,
+            "text": "## 3. 判断任务模式"
+          },
+          {
+            "line": 46,
+            "text": "## 4. 处理参考图片"
+          },
+          {
+            "line": 54,
+            "text": "## 5. 使用已提供的案例资料"
+          },
+          {
+            "line": 59,
+            "text": "## 6. 编写提示词"
+          },
+          {
+            "line": 81,
+            "text": "## 7. 专项约束"
+          },
+          {
+            "line": 83,
+            "text": "### 人物"
+          },
+          {
+            "line": 89,
+            "text": "### 产品与机构"
+          },
+          {
+            "line": 95,
+            "text": "### 精确文字"
+          },
+          {
+            "line": 101,
+            "text": "### UI、图表与多面板"
+          },
+          {
+            "line": 107,
+            "text": "## 8. 质检与脚本"
+          },
+          {
+            "line": 118,
+            "text": "## 输出"
+          },
+          {
+            "line": 127,
+            "text": "## 10. 来源与许可"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/image-prompt-gallery-director-v2/method.md",
+        "sha256": "439221720ebddbee7a1a7aacc1576e9fd70e9eb146a88a9e689e64a0c8ec2687",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 图片提示词案例导演"
+          },
+          {
+            "line": 5,
+            "text": "## 1. 确认任务边界"
+          },
+          {
+            "line": 13,
+            "text": "## 2. 建立视觉简报"
+          },
+          {
+            "line": 27,
+            "text": "## 3. 判断任务模式"
+          },
+          {
+            "line": 38,
+            "text": "## 4. 处理参考图片"
+          },
+          {
+            "line": 46,
+            "text": "## 5. 使用已提供的案例资料"
+          },
+          {
+            "line": 51,
+            "text": "## 6. 编写提示词"
+          },
+          {
+            "line": 73,
+            "text": "## 7. 专项约束"
+          },
+          {
+            "line": 75,
+            "text": "### 人物"
+          },
+          {
+            "line": 81,
+            "text": "### 产品与机构"
+          },
+          {
+            "line": 87,
+            "text": "### 精确文字"
+          },
+          {
+            "line": 93,
+            "text": "### UI、图表与多面板"
+          },
+          {
+            "line": 99,
+            "text": "## 8. 质检与脚本"
+          },
+          {
+            "line": 110,
+            "text": "## 输出"
+          },
+          {
+            "line": 119,
+            "text": "## 10. 来源与许可"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/gallery-fashion-editorial.md",
+          "characters": 7531,
+          "sha256": "3aab47ac51a3a1d7213a4fdd39285087e050ac185b6af1e7d95547cf9e73792d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-fine-art-painting.md",
+          "characters": 5043,
+          "sha256": "820a9e47746ecc19886bc7b3cf26f7d20dea3aff1bd52484b022b31fc91bb641",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-data-visualization.md",
+          "characters": 5512,
+          "sha256": "ae495ea79cbb28d9f83c2fb59e43a1939262f662123ea56c7112f3d503611885",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/core-contract.md",
+          "characters": 506,
+          "sha256": "a2d8328bca9c3e6b1ef05b74e15b6d0662795dae2c15d7fa7dfd74907f358e08",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/craft.md",
+          "characters": 20009,
+          "sha256": "a777abcb8873d8f918f127ff586c9ae2c6c83ce2bb14021c22abcb8ff9b70fad",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-events-and-experience.md",
+          "characters": 1998,
+          "sha256": "ccd6230cf660130bf9b3428501182853074418605980564f0ec49ce67634822a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-anime-and-manga.md",
+          "characters": 13445,
+          "sha256": "69f750b70676ec1e09f23ef7a4544f881ad21a51477858f4efef5b547bc839ea",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-architecture-and-interior.md",
+          "characters": 5588,
+          "sha256": "8f170bdff4dc4f4dc29cac1c77a5a134ebdf65c478a5cbdcd9bb59f869afe49d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-beauty-and-lifestyle.md",
+          "characters": 2052,
+          "sha256": "ca484f50dddfe813131769df37dab7e2e47651ed64dc693e6ec7d6729a67ed12",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-brand-systems-and-identity.md",
+          "characters": 2751,
+          "sha256": "6a63f9cae2b1e42ab053376884bbf2e511ca6a0262a28d12c355df969fd05143",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-character-design.md",
+          "characters": 1662,
+          "sha256": "217ac8bee2374e8c16d74211ed0ce37b256d7833a7382d673e8aa5163d2bc84c",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-cinematic-and-animation.md",
+          "characters": 5209,
+          "sha256": "8d5fbdc85a1d6a0a30dfef813141433307f36f4e7f1d55e751cae69002a77cfc",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-cinematic-film-references.md",
+          "characters": 6207,
+          "sha256": "ec675c4a0cf8e44ac3c0b5ce8308a8846520d33e42c5a4bf45504eb172560815",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-curated-cookbook-examples.md",
+          "characters": 3222,
+          "sha256": "a1e045e12505a09e9d506093b5312de0ab464a46e43041edb2e197d315d6e897",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-gaming.md",
+          "characters": 7145,
+          "sha256": "5de99d7bafe23d7fa06b50c8b67cc8220cea4e01e59418684480e64cb627fcde",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-illustration.md",
+          "characters": 1981,
+          "sha256": "517274823e00a9e4ae13e9ee047690afd4f185af778caaed3b832bb493fd3ddf",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-infographics-and-field-guides.md",
+          "characters": 9493,
+          "sha256": "b29a4f231de18631cb87d960655078adcb3170c97ca52a587edfadbd92f39521",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-ink-and-chinese.md",
+          "characters": 2219,
+          "sha256": "ac3bcb7e76313f64c1badba0cd3b50889f15c90d050aae6a0ad3a11b4ecb0809",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-isometric.md",
+          "characters": 2140,
+          "sha256": "ad796d8b30b40ffa085d2a3ae20cfef576766be4086698de8edc82e8d102ac27",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-more-illustration-styles.md",
+          "characters": 5508,
+          "sha256": "f6ae51b274f77ae848190dd3cd9cacd453dc810217ed3e55168fb0bff1069749",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-photography.md",
+          "characters": 3076,
+          "sha256": "8ab46e98ec29521e5b03c2d56edb4fdb0713843a17e851225a983f56ab545ce0",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-pixel-art.md",
+          "characters": 1573,
+          "sha256": "7147bd6182075bf9d29c90def0fd7452b27954896938e1faa5aef84767d69c5e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-product-and-food.md",
+          "characters": 4681,
+          "sha256": "5241a8eb5b7aa834e9d2686f62554914f507744dadd986bd95858aa1cc09421b",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-reference-image-editing.md",
+          "characters": 1446,
+          "sha256": "5d42c14f077132e28281fb9f3d941370b2344f4981625ee77d2b65d075f7043c",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-research-paper-figures.md",
+          "characters": 24884,
+          "sha256": "666537c17e72071a80813193e73a5739273ab2d6161b1c9f4bef885fe765f73c",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-retro-and-cyberpunk.md",
+          "characters": 4353,
+          "sha256": "8bf196e8ca8dbb20f8e77c4ad92e66b969d3c61e48e2fc9c5c3c49b6bb98b181",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-scientific-and-educational.md",
+          "characters": 7312,
+          "sha256": "379e0e08be19ba59e788fb75e6d0cd3cc7e82bdbbf2198a2e08af3a8796a5b42",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-screen-photography.md",
+          "characters": 2841,
+          "sha256": "79cec7f9515c07e4899c728a883bfaa71158961999cd52f15c23ae60eb81e4ac",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-tattoo-design.md",
+          "characters": 3635,
+          "sha256": "78bb710c70ddeed608a7522839337923bee73028da68d86a8de165ac05b98b4e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-technical-illustration.md",
+          "characters": 5443,
+          "sha256": "7b32fc9489b1ed2303a218a7d41c628b43a28f99fe7e8fe25fef609af313648a",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-typography-and-posters.md",
+          "characters": 11473,
+          "sha256": "f82f2f7ea5fc8fb3e794a80750b083087f8795f429fe8e55e8c3e8c4ce28156c",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-ui-ux-mockups.md",
+          "characters": 5460,
+          "sha256": "e1909a9043dba96650286aa87cff1ce0acd8e994075be23f3cbf4d5814f30a54",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery-watercolor.md",
+          "characters": 1965,
+          "sha256": "4c4f143f932180ffecc7c28113ef57ad5cb1e55894e377772fa4515d35175dc0",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/gallery.md",
+          "characters": 4550,
+          "sha256": "97c1f72fd0a4663b1e6f6d10038fcc6db00e0a7122ffb829e0366cedad0b0d82",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/license.md",
+          "characters": 1066,
+          "sha256": "f4c3e2e49f021a1120fa0fdc22d391dd056f887b44ddb97bd028039c44e6866c",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "marketing-brief-zh-v1",
+      "legacy": {
+        "path": "skills/marketing-brief-zh-v1/instructions.md",
+        "sha256": "35c5c74954171f7ea6780bceb614beb28ecc628d96080248605ac7f9f0efb409",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 营销Brief"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/marketing-brief-zh-v1/method.md",
+        "sha256": "b51a3800b05f9ea004bd3d0b9d68bb17361490686282fce17b31f7525a7e56ce",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 营销Brief"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": []
+    },
+    {
+      "slug": "product-understanding-zh-v1",
+      "legacy": {
+        "path": "skills/product-understanding-zh-v1/instructions.md",
+        "sha256": "86c8a80e686f4924dbbb11b84c5c3bf496b680e5c231c3f0db833e81f1acbce2",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 商品理解"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/product-understanding-zh-v1/method.md",
+        "sha256": "da413b76a9f8bf2bd0dcd34370850238ec8472e28f17b1009f4e34598f007beb",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 商品理解"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": []
+    },
+    {
+      "slug": "storyboard-one-shot-zh",
+      "legacy": {
+        "path": "skills/storyboard-one-shot-zh/instructions.md",
+        "sha256": "f11cef36b202760d86d3a549b694e040f79d71c4ba8c62fefa2f18e7015275c3",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 文字分镜"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/storyboard-one-shot-zh/method.md",
+        "sha256": "a02cd8260f8a10ac030a86448b7fa6a0e2c97f6002d31fac5b8cc349dab085aa",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 文字分镜"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/arrow-grammar.md",
+          "characters": 2828,
+          "sha256": "0592f5438648408f24951bb1175ac224b0e9067bc38c8277d06a75c32640d31d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/core-contract.md",
+          "characters": 555,
+          "sha256": "94c698e8ab31c52d4850c93056ff34ab40696d5379624681086467b86d5c1a59",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/director-selection.md",
+          "characters": 1433,
+          "sha256": "5f2b4b2b95be90ae24c328d02689b5c6cedc7a518704cb637f37c88b52caa47d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/faceless-line-style.md",
+          "characters": 2126,
+          "sha256": "1eb949964d415a659c7dcc07d48ac125e0a74f2b77907d0ac20c3eb1de71cf12",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/one-shot-prompt-template.md",
+          "characters": 4307,
+          "sha256": "488dba127a28c63864e8d59dca5f133704678c74acf506e4d6723e53750b54fa",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/panel-layout.md",
+          "characters": 2663,
+          "sha256": "1b92d4f604c643bc124e763d5fa417f63e316f06e950daa500cb9c002afb9925",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/segmentation.md",
+          "characters": 1239,
+          "sha256": "0e3e327f45b7d977f1a5cd720ae4730164a3a501946c3ac290e9943b228f5f14",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/visual-grammar.md",
+          "characters": 4218,
+          "sha256": "b4294b37755f7de51f926bd7acf8ba7265eccc04a3796589456f71717dc8fa24",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "storyboard-one-shot-zh-v2",
+      "legacy": {
+        "path": "skills/storyboard-one-shot-zh-v2/instructions.md",
+        "sha256": "f11cef36b202760d86d3a549b694e040f79d71c4ba8c62fefa2f18e7015275c3",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 文字分镜"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/storyboard-one-shot-zh-v2/method.md",
+        "sha256": "a02cd8260f8a10ac030a86448b7fa6a0e2c97f6002d31fac5b8cc349dab085aa",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 文字分镜"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": [
+        {
+          "path": "references/arrow-grammar.md",
+          "characters": 2768,
+          "sha256": "bb4c5bd5fe4d8fee5c508715e377e169bbfb17da401e7cf442d608547bf85fba",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/core-contract.md",
+          "characters": 478,
+          "sha256": "679ff1b783454f562e5da40d8e96af9e84ff2476874dffbf8c97b891af0fc05e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/director-selection.md",
+          "characters": 1433,
+          "sha256": "5f2b4b2b95be90ae24c328d02689b5c6cedc7a518704cb637f37c88b52caa47d",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/one-shot-prompt-template.md",
+          "characters": 3490,
+          "sha256": "509438d6e2cf08b10a5f583f4161fe79c7325c4681d6acaae04ccee1c946631e",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/panel-layout.md",
+          "characters": 1986,
+          "sha256": "d6b23ace1e71f422d1b5673e014346ddf757f317ca1047d03fbd3c7e93331c79",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/segmentation.md",
+          "characters": 1239,
+          "sha256": "0e3e327f45b7d977f1a5cd720ae4730164a3a501946c3ac290e9943b228f5f14",
+          "unchangedSinceBaseline": true
+        },
+        {
+          "path": "references/visual-grammar.md",
+          "characters": 4218,
+          "sha256": "b4294b37755f7de51f926bd7acf8ba7265eccc04a3796589456f71717dc8fa24",
+          "unchangedSinceBaseline": true
+        }
+      ]
+    },
+    {
+      "slug": "video-decomposition-zh-v1",
+      "legacy": {
+        "path": "skills/video-decomposition-zh-v1/instructions.md",
+        "sha256": "fda27b15e8d37a2b11dbd3c4ffe4fcd264422d012a7d79d448ac4efe47370fc3",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 视频拆解 ZH v1"
+          },
+          {
+            "line": 15,
+            "text": "## 铁律(Non-Negotiables)"
+          },
+          {
+            "line": 26,
+            "text": "## 输出模板(章节结构照此)"
+          },
+          {
+            "line": 40,
+            "text": "# 参考资料（references）"
+          },
+          {
+            "line": 43,
+            "text": "# 拆解框架:维度、词表与判定标准"
+          },
+          {
+            "line": 47,
+            "text": "## 1. 段落职责词表(结构时间轴用,只许用这七个)"
+          },
+          {
+            "line": 61,
+            "text": "## 2. 钩子类型学(钩子拆解用)"
+          },
+          {
+            "line": 76,
+            "text": "## 3. 受众推断方法"
+          },
+          {
+            "line": 80,
+            "text": "## 4. 视听语言检查清单"
+          },
+          {
+            "line": 88,
+            "text": "## 5. 爆点判定"
+          },
+          {
+            "line": 94,
+            "text": "# 可复刻分镜模板规范 + 结构化数据 Schema"
+          },
+          {
+            "line": 96,
+            "text": "## 1. 模板的定位"
+          },
+          {
+            "line": 100,
+            "text": "## 2. 表格列(与系统分镜表对齐,列名一字不差)"
+          },
+          {
+            "line": 110,
+            "text": "## 3. 使用说明(表格后必写)"
+          },
+          {
+            "line": 116,
+            "text": "## 4. 结构化数据 Schema(报告末尾唯一的 ```json 块)"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/video-decomposition-zh-v1/method.md",
+        "sha256": "1176c1752fb9f09ffb68989ff6a1b41c24020847967727e1a648a228eebeb94a",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 视频拆解 ZH v1"
+          },
+          {
+            "line": 7,
+            "text": "## 铁律(Non-Negotiables)"
+          },
+          {
+            "line": 18,
+            "text": "## 输出模板(章节结构照此)"
+          },
+          {
+            "line": 32,
+            "text": "# 参考资料（references）"
+          },
+          {
+            "line": 35,
+            "text": "# 拆解框架:维度、词表与判定标准"
+          },
+          {
+            "line": 39,
+            "text": "## 1. 段落职责词表(结构时间轴用,只许用这七个)"
+          },
+          {
+            "line": 53,
+            "text": "## 2. 钩子类型学(钩子拆解用)"
+          },
+          {
+            "line": 68,
+            "text": "## 3. 受众推断方法"
+          },
+          {
+            "line": 72,
+            "text": "## 4. 视听语言检查清单"
+          },
+          {
+            "line": 80,
+            "text": "## 5. 爆点判定"
+          },
+          {
+            "line": 86,
+            "text": "# 可复刻分镜模板规范 + 结构化数据 Schema"
+          },
+          {
+            "line": 88,
+            "text": "## 1. 模板的定位"
+          },
+          {
+            "line": 92,
+            "text": "## 2. 建议表格列（可按用户要求调整）"
+          },
+          {
+            "line": 102,
+            "text": "## 3. 使用说明(表格后必写)"
+          },
+          {
+            "line": 108,
+            "text": "## 4. 结构化数据 Schema(仅在用户需要机器可读报告时使用)"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": []
+    },
+    {
+      "slug": "video-prompt-safety-zh-v1",
+      "legacy": {
+        "path": "skills/video-prompt-safety-zh-v1/instructions.md",
+        "sha256": "43fe6f69ab5fa91de82e1cfb549be5c1765c63d2785847fda669c34e24f125a6",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 11,
+            "text": "# 审查原则"
+          },
+          {
+            "line": 22,
+            "text": "# 改写要求"
+          },
+          {
+            "line": 31,
+            "text": "# 输出格式"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/video-prompt-safety-zh-v1/method.md",
+        "sha256": "254febf775f0433236ca7eda91e1f03716ea419647cdd05b18c697cd392934e3",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 审查原则"
+          },
+          {
+            "line": 12,
+            "text": "# 改写要求"
+          },
+          {
+            "line": 21,
+            "text": "# 输出格式"
+          }
+        ],
+        "changedSinceBaseline": false
+      },
+      "references": []
+    },
+    {
+      "slug": "video-script-zh-v1",
+      "legacy": {
+        "path": "skills/video-script-zh-v1/instructions.md",
+        "sha256": "54e52383d62334d9e5f4e5d094047ddc6de75f96d8acf142100204bed40435ee",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 当前阶段边界"
+          },
+          {
+            "line": 9,
+            "text": "# 宣传视频文字脚本"
+          }
+        ]
+      },
+      "current": {
+        "path": "server/context-agent/methods/v1/video-script-zh-v1/method.md",
+        "sha256": "0aa4d3b3302494f93aeda3bf4e9e15fbf3397c6e896df05b606a9590f97c4b26",
+        "headings": [
+          {
+            "line": 1,
+            "text": "# 宣传视频文字脚本"
+          }
+        ],
+        "changedSinceBaseline": true
+      },
+      "references": []
+    }
+  ]
+}

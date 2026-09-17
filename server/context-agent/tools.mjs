@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import { readAgentSkill } from './skills.mjs';
+import {approveAndExecute,proposalDisplay,unavailableProposal} from './confirmation.mjs';
 import { estimateTokens } from './context.mjs';
 import { countBody } from '../text-measure.mjs';
 import { publicMediaUrl } from '../media.mjs';
@@ -18,7 +19,7 @@ const tool = (name, description, properties, required = []) => ({ type: 'functio
   parameters: schema(properties, required), strict: false });
 const mediaNames = new Set(['generate_image', 'edit_image', 'generate_video']);
 const safeError = (error, submitted = false) => ({ ok: false, error: { code: error.code || 'tool_error', message: error.message || '工具未能完成；请检查输入。' }, submitted });
-const stripApproval = args => Object.fromEntries(Object.entries(args).filter(([key]) => !['proposalId', 'approvalId'].includes(key)));
+const stripApproval = args => Object.fromEntries(Object.entries(args).filter(([key]) => !['proposalId', 'approvalId','replacesProposalId'].includes(key)));
 const immutableAsset = asset => Object.freeze({ ...asset, sourceIds: Object.freeze([...(asset.sourceIds || [])]) });
 const clone = value => structuredClone(value);
 
@@ -30,10 +31,11 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
   const definitions = [
     tool('list_assets', '分页检索当前会话资产目录；不读取正文。query可按名称或准确ID查找历史资产。', { query: { type: 'string', maxLength: 500 }, type: { enum: ['text','image','video'] }, offset, limit: { type:'integer',minimum:1,maximum:50 } }),
     tool('read_approval', '分页读取本会话真实批准记录；指定proposalId可读取保存的完整参数，指定approvalId可查看该批准下的方案。', { approvalId:id, proposalId:id, offset, limit:{type:'integer',minimum:1,maximum:20} }),
+    tool('confirm_media', '仅根据本轮真实用户明确授权选择已展示的方案ID，一次确认并提交。否定、引用、仅选创意、附带修改或候选不明确时不要调用；不得默认批准全部。', {proposalIds:{...ids,minItems:1}}, ['proposalIds']),
     tool('execute_approved', '提交已批准的具体媒体调用；服务端恢复保存参数并检查用户、会话、模式、摘要和幂等。无需重抄参数，不允许新增参数。', { proposalId:id, approvalId:id }, ['proposalId','approvalId']),
     tool('read_asset', '读取本会话准确素材原文或文件元数据。图片URL不是视觉观察；长文用nextOffset继续读取。', { id, offset, limit }, ['id']),
-    tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: string(2000), limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }, ['query']),
-    tool('read_history', '按ID读取原记录及去除检索回声、调试Trace的前后文；按offset/limit分页，原文不变。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit }, ['messageId']),
+    tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: {type:'string',maxLength:2000}, cursor:offset, order:{enum:['oldest','latest']}, maxChars:{type:'integer',minimum:2000,maximum:50000}, limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }),
+    tool('read_history', '按ID读取原记录及去除检索回声、调试Trace的前后文；按offset/limit分页，原文不变。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit, maxChars:{type:'integer',minimum:2000,maximum:50000} }, ['messageId']),
     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
     tool('save_document', '需要独立文稿、版本管理或修改已有文稿资产时保存准确正文。简单聊天创作和改稿可直接回复，由对话历史保存。新稿传content；已有资产修订传content和原稿parentId。聊天稿需要保存修订时传parentMessageId和新content，一次原子保存原稿及修订；sourceMessageId仅原样存档。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceIds: ids }),
     tool('measure_text', '按现有统一口径测量传入正文，不含未传入的标题或说明；不替代内容判断。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] } }, ['text', 'unit']),
@@ -44,21 +46,22 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     definitions.push(tool('compare_images', '比较明确指定的真实原图与成品，逐项报告差异和无法判断项，不自行扩展来源。', { sourceImageId:id, resultImageId:id, question:string(12000), materials }, ['sourceImageId','resultImageId','question']));
   }
   if (mode === 'simulation' || typeof media?.image === 'function') {
-    definitions.push(tool('generate_image', '每次仅准备一张图片的具体参数并请求批准；批准后使用execute_approved按保存的ID提交。referenceImages必须是本会话图片ID。', {
-      prompt: string(16000), size, referenceImages: ids, sourceIds: ids, ...approvalFields,
+    definitions.push(tool('generate_image', '每次仅准备一张图片的具体参数并请求批准；文字确认用confirm_media，已有批准恢复用execute_approved。referenceImages必须是本会话图片ID。', {
+      prompt: string(16000), size, referenceImages: ids, sourceIds: ids, replacesProposalId:id,
     }, ['prompt', 'size']));
-    definitions.push(tool('edit_image', '编辑一张准确原图，自动记录父版本。首次调用准备方案；批准后用execute_approved按ID提交。', {
-      imageId: id, instruction: string(16000), size, sourceIds: ids, ...approvalFields,
+    definitions.push(tool('edit_image', '编辑一张准确原图，自动记录父版本。首次调用准备方案；文字确认用confirm_media，已有批准恢复用execute_approved。', {
+      imageId: id, instruction: string(16000), size, sourceIds: ids, replacesProposalId:id,
     }, ['imageId', 'instruction']));
   }
   if (mode === 'simulation' || typeof media?.video === 'function') definitions.push(tool('generate_video', '准备一段视频的具体参数；取得对应方案批准后才提交。处理中返回可查询回执，不自动建立后台业务任务。', {
     prompt: string(16000), duration: { type: 'integer', minimum: 1, maximum: 20 }, ratio: { enum: ['16:9', '9:16', '1:1', '4:3', '3:4', '21:9'] },
-    resolution: { enum: ['480p', '720p', '1080p'] }, firstFrameId: id, sourceIds: ids, ...approvalFields,
+    resolution: { enum: ['480p', '720p', '1080p'] }, firstFrameId: id, sourceIds: ids, replacesProposalId:id,
   }, ['prompt', 'duration', 'ratio', 'resolution']));
   definitions.push(tool('read_media_result', '查询本会话已提交调用的receiptId；不会再次生成。没有供应商查询能力时如实返回unknown。', { receiptId: id }, ['receiptId']));
   if (mode === 'simulation') for (const definition of definitions.filter(def => mediaNames.has(def.name))) definition.description = '当前仅模拟，不会生成真实媒体。' + definition.description;
   const ajv = new Ajv({ allErrors: true, strict: false });
-  const validators = new Map(definitions.map(def => [def.name, ajv.compile(def.parameters)]));
+  const publicValidators = new Map(definitions.map(def => [def.name, ajv.compile(def.parameters)]));
+  const validators = new Map(definitions.map(def => [def.name, ajv.compile(mediaNames.has(def.name)?{...def.parameters,properties:{...def.parameters.properties,...approvalFields}}:def.parameters)]));
 
   function normalizedMedia(name, args, state) {
     const out = clone(stripApproval(args));
@@ -106,11 +109,12 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       assertNotCancelled(signal);
       const normalized = normalizedMedia(name, args, state);
       if (!args.proposalId && !args.approvalId) {
-        const proposal = createProposal(state, { name, args: normalized, mode, callId, turnId });
+        const proposal = createProposal(state, { name, args: normalized, mode, callId, turnId,executionIdentity:media?.executionIdentity||null,sourceBindings:Object.fromEntries(sourcesFor(name,normalized).map(id=>[id,sourceIdentity(assetFor(state,id))])),replacesProposalId:args.replacesProposalId });
         await persist(state, save);
         return { ok: true, status: 'approval_required', submitted: false, proposalId: proposal.proposalId, turnId: proposal.turnId, name, args: clone(proposal.args), simulated: mode === 'simulation',
           message: '具体方案已保存，尚未生成。请向用户展示同组全部方案；收到服务端批准后才可提交。' };
       }
+      validateFrozen(args.proposalId,state);
       const proposal = approvedProposal(state, { ...args, name, args: normalized, mode });
       const receiptId = `receipt_${fingerprint([state.id, state.ownerId, proposal.proposalId]).slice(0, 32)}`;
       if (state.invocations[receiptId]) return receiptResult(state, state.invocations[receiptId]);
@@ -164,6 +168,18 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       return clone(invocation.result);
     });
   }
+  function sourceIdentity(asset){return fingerprint({id:asset.id,type:asset.type,version:asset.version,content:asset.content,identity:asset.sha256||asset.contentHash||asset.url||null,simulated:asset.simulated||false});}
+  function validateFrozen(id,state){
+    const proposal=state.approvals[id];
+    if(!proposal||proposal.kind!=='proposal'||proposal.ownerId!==state.ownerId||proposal.sessionId!==state.id||!validators.has(proposal.name))throw new GuardError('approval_required','没有可执行方案');
+    if(unavailableProposal(state,id))throw new GuardError('proposal_withdrawn','方案已撤回或被替代');
+    if(proposal.mode!==mode||fingerprint(proposal.executionIdentity||null)!==fingerprint(media?.executionIdentity||null))throw new GuardError('approval_parameters_changed','模式或模型配置变化，需要重新展示方案');
+    for(const [id,binding]of Object.entries(proposal.sourceBindings||{}))if(sourceIdentity(assetFor(state,id))!==binding)throw new GuardError('approval_parameters_changed','参考素材内容或版本已变化，需要新方案');
+    if(proposal.digest!==fingerprint({name:proposal.name,args:proposal.args,mode}))throw new GuardError('approval_parameters_changed','保存参数已变化');
+    return proposal;
+  }
+  async function executeFrozen(args,ctx){const p=validateFrozen(args.proposalId,ctx.state);return executeMedia(p.name,{...clone(p.args),...args},ctx);}
+  const confirm=(args,ctx)=>approveAndExecute(args,ctx,{executeFrozen,validateFrozen});
   async function queryMedia(args, ctx) {
     return withSessionLock(ctx.state, async () => {
       const invocation = ctx.state.invocations[args.receiptId];
@@ -196,7 +212,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       assertOwner(ctx?.state, ctx?.ownerId);
       const { state } = ctx;
       state.assets ||= {}; state.invocations ||= {}; state.approvals ||= {};
-      const validate = validators.get(name);
+      const validate = (ctx.fromModel?publicValidators:validators).get(name);
       if (!validate) throw new GuardError('unknown_tool', `工具 ${name} 不可用；请使用实际注册的工具。`);
       if (!validate(args)) throw new GuardError('invalid_arguments', ajv.errorsText(validate.errors, { separator: '; ' }));
       assertNotCancelled(ctx.signal);
@@ -211,14 +227,16 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
           const proposal = records.find(a => a.kind === 'proposal' && a.proposalId === args.proposalId);
           if (!proposal) throw new GuardError('approval_not_found','方案不在当前会话');
           if (args.approvalId && !records.some(a => a.approvalId === args.approvalId && a.proposalIds?.includes(proposal.proposalId))) throw new GuardError('approval_not_found','批准不包含指定方案');
-          return { ok:true, proposal:clone(proposal) };
+          return { ok:true, proposal:clone(proposal),...proposalDisplay(state,proposal.proposalId) };
         }
         const receipts = records.filter(a => a.kind === 'approval' && (!args.approvalId || a.approvalId === args.approvalId));
         if (args.approvalId && !receipts.length) throw new GuardError('approval_not_found','批准不在当前会话');
-        const entries = receipts.flatMap(a => a.proposalIds.map(proposalId => ({approvalId:a.approvalId,proposalId,name:state.approvals[proposalId]?.name})));
+        const entries = receipts.flatMap(a => a.proposalIds.map(proposalId => ({approvalId:a.approvalId,proposalId,name:state.approvals[proposalId]?.name,...proposalDisplay(state,proposalId)})));
+        if(!args.approvalId)entries.push(...records.filter(p=>p.kind==='proposal'&&!receipts.some(a=>a.proposalIds.includes(p.proposalId))).map(p=>({proposalId:p.proposalId,name:p.name,...proposalDisplay(state,p.proposalId)})));
         const start=args.offset||0,width=args.limit||20;
         return {ok:true,entries:entries.slice(start,start+width),total:entries.length,nextOffset:start+width<entries.length?start+width:null};
       }
+      if (name === 'confirm_media') return await confirm(args,ctx);
       if (name === 'execute_approved') {
         const proposal = state.approvals[args.proposalId];
         if (!proposal || proposal.ownerId !== state.ownerId || proposal.sessionId !== state.id || !mediaNames.has(proposal.name) || !validators.has(proposal.name)) throw new GuardError('approval_required','当前会话没有可执行的对应方案');
@@ -229,7 +247,9 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       if (name === 'read_asset') {
         const asset = assetFor(state, args.id), start = args.offset || 0, width = args.limit || 12000;
         const content = typeof asset.content === 'string' ? asset.content : null;
-        return { ok: true, asset: { ...clone(asset), ...(content !== null ? { content: content.slice(start, start + width) } : {}) },
+        const related=[...(asset.parentId?[{id:asset.parentId,relation:'parent'}]:[]),...(asset.sourceIds||[]).filter(id=>id!==asset.parentId).map(id=>({id,relation:'source'}))];
+        const relatedAvailable=related.filter(r=>state.assets[r.id]&&(!state.assets[r.id].ownerId||state.assets[r.id].ownerId===state.ownerId)).slice(0,8).map(r=>({...r,type:state.assets[r.id].type,version:state.assets[r.id].version,read:false}));
+        return { ok: true,relatedAvailable,relatedTotal:related.length, asset: { ...clone(asset), ...(content !== null ? { content: content.slice(start, start + width) } : {}) },
           offset: start, totalLength: content?.length || 0, nextOffset: content !== null && start + width < content.length ? start + width : null,
           ...(asset.type === 'image' ? { observed: false, note: '这里只读取了图片身份和地址，未进行视觉观察。' } : {}) };
       }
@@ -322,5 +342,5 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
       throw new GuardError('unknown_tool', '工具没有实现。');
     } catch (error) { return safeError(error, error.submitted ?? false); }
   }
-  return { definitions, execute };
+  return { definitions, execute, approveAndExecute:confirm };
 }

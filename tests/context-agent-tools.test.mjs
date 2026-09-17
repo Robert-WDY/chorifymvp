@@ -29,7 +29,7 @@ test('context tools register real capabilities only; simulation is explicit', ()
   const live = createTools({ mode: 'live' }).definitions.map(x => x.name);
   assert.ok(!live.includes('generate_image')); assert.ok(!live.includes('generate_video'));
   assert.ok(createTools({ mode: 'live', media: { image: async () => {} } }).definitions.some(x => x.name === 'edit_image'));
-  assert.deepEqual(Object.keys(createMediaProvider({})), []);
+  assert.deepEqual(Object.entries(createMediaProvider({})).filter(([,v])=>typeof v==='function'), []);
 });
 
 test('media always prepares exact proposal before any provider call', async () => {

@@ -2,7 +2,7 @@
 
 独立运行的创作助手，包含请求理解、需求合同、来源与版本绑定、Skill、文字生成、媒体方案确认、执行与 trace。此仓库导入的是实际 compiled Chorify MVP，包含截至 2026-09-16 的依赖选择修复；不是占位骨架。
 
-当前业务入口为 `server/index.mjs` → `Agent` → compiled runtime。模型解释用户需求、生成文字或媒体计划，程序负责依赖、对象版本、状态、审批和提交。已有 ReAct 代码及旧日期报告作为历史资料保留。
+旧 compiled 入口为 `server/index.mjs` → `Agent` → compiled runtime，保留现有合同与回归。当前独立上下文 Agent 入口为 `server/context-agent/index.mjs`（`npm run start:context`，本机 3212），由同一个 Agent 消费会话记忆与每一步真实反馈，选择工具并回答；程序负责存取、冻结参数确认、预算与幂等。两者不互相回退，启动与授权见 [上下文 Agent 说明](server/context-agent/README.md)。本批证据见 [统一修复验收](evaluations/2026-09-17-unified-repair/README.md)，没有部署或真实付费调用。
 
 ## 快速启动
 

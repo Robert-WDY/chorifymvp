@@ -44,7 +44,7 @@ export function assetFor(state, id, type) {
   if (type && asset.type !== type) throw new GuardError('asset_type_mismatch', `素材 ${id} 是 ${asset.type}，本次需要 ${type}；没有提交媒体请求。`);
   return asset;
 }
-export function createProposal(state, { name, args, callId, turnId, mode }) {
+export function createProposal(state, { name, args, callId, turnId, mode, executionIdentity=null, sourceBindings={}, replacesProposalId }) {
   if (!callId || !turnId) throw new GuardError('call_identity_required', '准备媒体方案需要 callId 和 turnId。');
   const proposalId = `proposal_${fingerprint([state.id, state.ownerId, turnId, callId]).slice(0, 32)}`;
   const digest = fingerprint({ name, args, mode });
@@ -53,7 +53,8 @@ export function createProposal(state, { name, args, callId, turnId, mode }) {
     if (existing.digest !== digest) throw new GuardError('call_identity_conflict', '同一次调用身份不能改换参数；修改方案请使用新调用。');
     return existing;
   }
-  const proposal = { kind: 'proposal', proposalId, sessionId: state.id, ownerId: state.ownerId, name, args: structuredClone(args), digest, mode, callId, turnId, createdAt: now() };
+  if(replacesProposalId){const prior=state.approvals[replacesProposalId];if(!prior||prior.kind!=='proposal'||prior.ownerId!==state.ownerId||prior.sessionId!==state.id)throw new GuardError('invalid_replacement','被替代的方案不在当前会话');}
+  const proposal = { kind: 'proposal', proposalId, sessionId: state.id, ownerId: state.ownerId, name, args: structuredClone(args), digest, mode, callId, turnId, createdAt: now(),executionIdentity,sourceBindings,...(replacesProposalId?{replacesProposalId}:{}) };
   state.approvals[proposalId] = proposal;
   return proposal;
 }
@@ -66,7 +67,7 @@ export function approvedProposal(state, { proposalId, approvalId, name, args, mo
     throw new GuardError('approval_parameters_changed', '参数、工具或执行模式已改变；旧批准不能复用，请重新准备并展示方案。');
   return proposal;
 }
-export async function approveProposals(state, { proposalIds, ownerId }, save) {
+export async function approveProposals(state, { proposalIds, ownerId, source }, save) {
   assertOwner(state, ownerId);
   return withSessionLock(state, async () => {
     if (!Array.isArray(proposalIds) || !proposalIds.length || new Set(proposalIds).size !== proposalIds.length)
@@ -77,10 +78,11 @@ export async function approveProposals(state, { proposalIds, ownerId }, save) {
         throw new GuardError('invalid_approval', '待批准方案不属于当前用户会话。');
       return proposal;
     });
-    const approval = { kind: 'approval', approvalId: newId('approval'), sessionId: state.id, ownerId,
+    const reused=source&&Object.values(state.approvals).find(a=>a.kind==='approval'&&JSON.stringify(a.source)===JSON.stringify(source)&&JSON.stringify(a.proposalIds)===JSON.stringify(proposalIds));
+    const approval = reused || { kind: 'approval', approvalId: newId('approval'), sessionId: state.id, ownerId,...(source?{source:structuredClone(source)}:{}),
       proposalIds: [...proposalIds], digests: Object.fromEntries(proposals.map(p => [p.proposalId, p.digest])), approvedAt: now() };
-    state.approvals[approval.approvalId] = approval;
-    try { await persist(state, save); } catch (error) { delete state.approvals[approval.approvalId]; throw error; }
+    if(!reused){state.approvals[approval.approvalId] = approval;
+    try { await persist(state, save); } catch (error) { delete state.approvals[approval.approvalId]; throw error; }}
     return { approvalId: approval.approvalId, proposalIds: approval.proposalIds,
       proposals: proposals.map(({ proposalId, name, args }) => ({ proposalId, name, args: structuredClone(args) })), approvedAt: approval.approvedAt };
   });

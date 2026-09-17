@@ -3,7 +3,6 @@ import {readFile} from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
 import {HistoryStore} from './history.mjs';
 import {ContextAgent} from './loop.mjs';
-import {approveProposals} from './io-guard.mjs';
 
 const json=(res,status,data)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));};
 async function readBody(req){let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>256*1024)throw new Error('请求超过 256 KiB');chunks.push(chunk);}return JSON.parse(Buffer.concat(chunks).toString('utf8')||'{}');}
@@ -22,10 +21,10 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
     if(req.headers.origin&&!allowed.some(host=>req.headers.origin===`http://${host}`))return json(res,403,{error:'不允许跨站请求'});
     try{
       const url=new URL(req.url,`http://${req.headers.host}`);
-      if(req.method==='GET'&&url.pathname==='/api/config')return json(res,200,{engine:'context-agent',csrf:secret,modelEnabled,mediaMode:mode,model:brain.config?.model||'未配置',tools:tools.definitions.map(t=>t.name),limits:{maxSteps:agent.maxSteps,maxModelCalls:agent.maxModelCalls,maxToolCalls:agent.maxToolCalls,maxMediaCalls:agent.maxMediaCalls}});
+      if(req.method==='GET'&&url.pathname==='/api/config')return json(res,200,{engine:'context-agent',csrf:secret,modelEnabled,mediaMode:mode,model:brain.config?.model||'未配置',tools:tools.definitions.map(t=>t.name),limits:{maxSteps:agent.maxSteps,maxModelCalls:agent.maxModelCalls,maxToolCalls:agent.maxToolCalls,maxMediaCalls:agent.maxMediaCalls},summary:agent.memory});
       if(req.method==='GET'&&url.pathname.startsWith('/api/session/')){
         const state=await store.load(url.pathname.slice('/api/session/'.length),ownerId);
-        return json(res,200,{id:state.id,engine:state.engine,running:active.has(state.id),messages:state.records.filter(r=>r.kind==='message').map(r=>({id:r.id,role:r.role,content:r.content,attachments:r.attachments})),assets:Object.values(state.assets).map(publicAsset),proposals:state.approvals,invocations:state.invocations});
+        return json(res,200,{id:state.id,engine:state.engine,running:active.has(state.id),messages:state.records.filter(r=>r.kind==='message').map(r=>({id:r.id,role:r.role,content:r.content,attachments:r.attachments})),assets:Object.values(state.assets).map(publicAsset),proposals:state.approvals,invocations:state.invocations,observations:state.records.filter(r=>r.kind==='system_observation'),summaries:Object.values(state.summaries||{})});
       }
       if(req.method==='POST'){
         if(req.headers['x-context-token']!==secret)return json(res,403,{error:'请刷新独立 Agent 页面'});
@@ -47,23 +46,13 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
             let message=data.message;
             if(url.pathname==='/api/approve'){
               if(!Array.isArray(data.proposalIds)||!data.proposalIds.length)throw new Error('请选定已展示的具体调用');
-              const previous=data.requestId&&state.records.find(r=>r.kind==='run_event'&&r.event==='start'&&r.requestId===data.requestId);
-              if(previous){
-                const prefix='我批准以下已展示的具体工具调用，仅限这些参数：\n';
-                if(!previous.message.startsWith(prefix))throw new Error('请求标识已用于其他操作');
-                const receipt=JSON.parse(previous.message.slice(prefix.length));
-                if(JSON.stringify([...receipt.proposalIds].sort())!==JSON.stringify([...data.proposalIds].sort()))throw new Error('相同请求标识不能改换批准对象');
-                message=previous.message;
-              }else{
-                const approval=await approveProposals(state,{proposalIds:data.proposalIds,ownerId},()=>store.save(state,ownerId));
-                message='我批准以下已展示的具体工具调用，仅限这些参数：\n'+JSON.stringify({approvalId:approval.approvalId,proposalIds:approval.proposalIds,proposals:approval.proposals.map(({proposalId,name})=>({proposalId,name}))});
-              }
+              message='通过按钮确认以下已展示的方案：'+JSON.stringify(data.proposalIds);
             }
             if(typeof message!=='string'||!message.trim())throw new Error('请输入正文');
             if(res.destroyed||controller.signal.aborted)return;
             res.writeHead(200,{'Content-Type':'application/x-ndjson; charset=utf-8','Cache-Control':'no-store'});
             const heartbeat=setInterval(()=>{if(!res.destroyed)res.write('\n');},15000);
-            try{await agent.run(state,message,event=>{if(!res.destroyed)res.write(JSON.stringify(event)+'\n');},controller.signal,{inputs:data.inputs||[],requestId:data.requestId});}
+            try{await agent.run(state,message,event=>{if(!res.destroyed)res.write(JSON.stringify(event)+'\n');},controller.signal,{inputs:data.inputs||[],requestId:data.requestId,...(url.pathname==='/api/approve'?{confirmation:{proposalIds:data.proposalIds}}:{})});}
             catch(error){if(!res.destroyed&&!res.writableEnded)res.write(JSON.stringify({type:'end',status:'error',code:error.code||'invalid_request',message:error.message})+'\n');}
             finally{clearInterval(heartbeat);res.removeListener('close',close);res.end();}
           }finally{res.removeListener('close',close);active.delete(state.id);}

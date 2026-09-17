@@ -3,6 +3,7 @@ import {randomUUID} from 'node:crypto';
 import {appendRecord} from './history.mjs';
 import {buildContext} from './context.mjs';
 import {publicMediaUrl} from '../media.mjs';
+import {maintainMemory,memoryOptions} from './memory.mjs';
 
 const prompt = await readFile(new URL('./prompt.md', import.meta.url), 'utf8');
 const errorResult = (error, code = 'tool_error') => ({isError:true, code:error.code || code, message:error.message || String(error), submitted:false});
@@ -36,38 +37,46 @@ function stageInputs(inputs) {
 
 /** Native tool loop only. Runtime outcomes below describe this HTTP/model run, never business progress. */
 export class ContextAgent {
-  constructor({brain,tools,save=async()=>{},catalog={skills:[]},maxSteps=16,maxModelCalls=maxSteps,maxToolCalls=48,contextTokenBudget=24000,maxMediaCalls=0,systemPrompt=prompt}={}) {
+  constructor({brain,tools,save=async()=>{},catalog={skills:[]},maxSteps=16,maxModelCalls=maxSteps,maxToolCalls=48,contextTokenBudget=24000,maxMediaCalls=0,systemPrompt=prompt,memory={}}={}) {
     if (!brain?.respond || !tools?.execute || !Array.isArray(tools.definitions)) throw new Error('需要模型接入与真实工具注册表');
     for (const [name,value] of Object.entries({maxSteps,maxModelCalls,maxToolCalls,contextTokenBudget,maxMediaCalls})) if (!Number.isInteger(value) || value < (name==='maxMediaCalls'?0:1)) throw new Error('运行预算无效：'+name);
     Object.assign(this,{brain,tools,save,catalog,maxSteps,maxModelCalls,maxToolCalls,contextTokenBudget,maxMediaCalls,systemPrompt});
+    this.memory=memoryOptions(memory);
     this.active = new Set();
   }
 
-  async run(state,message,emit=()=>{},signal=new AbortController().signal,{inputs=[],requestId=randomUUID()}={}) {
+  async run(state,message,emit=()=>{},signal=new AbortController().signal,{inputs=[],requestId=randomUUID(),confirmation}={}) {
     if (state?.engine !== 'context-agent' || !Array.isArray(state.records)) throw new Error('新入口只接受独立 context-agent 会话');
     if (typeof message !== 'string' || !message.trim() || message.length > 30000 || typeof requestId !== 'string' || !requestId || requestId.length>128) throw new Error('请求正文或请求标识无效');
     if (this.active.has(state.id)) throw Object.assign(new Error('会话正在运行'), {code:'session_busy'});
     const previous = state.records.find(r=>r.kind==='run_event' && r.event==='start' && r.requestId===requestId);
     if (previous) {
-      if (previous.message !== message || JSON.stringify(previous.inputs||[]) !== JSON.stringify(inputs)) throw Object.assign(new Error('相同请求标识不能更改正文或附件'), {code:'request_identity_conflict'});
+      if (previous.message !== message || JSON.stringify(previous.inputs||[]) !== JSON.stringify(inputs)||JSON.stringify(previous.confirmation)!==JSON.stringify(confirmation)) throw Object.assign(new Error('相同请求标识不能更改正文、附件或批准对象'), {code:'request_identity_conflict'});
       const end=state.records.find(r=>r.kind==='run_event' && r.event==='end' && r.turnId===previous.turnId);
       const result=end ? {...end.result,replayed:true} : {status:'interrupted',turnId:previous.turnId,replayed:true,message:'先前运行没有结束回执；不会自动重放可能已提交的调用。可在新请求中读取原调用回执。'};
       emit({type:'end',...result});return result;
     }
     const assets=stageInputs(inputs),turnId=randomUUID();
     let steps=0,callsUsed=0,modelCalls=0;
+    const accounting=Object.fromEntries(['agent','image_observation','summary'].map(p=>[p,{calls:0,durationMs:0,usage:[],cost:null}]));
     const persist = () => this.save(state);
     const record = value => appendRecord(state,{turnId,...value});
     const modelRespond=async(brain,input,definitions,metadata={})=>{
       signal.throwIfAborted();
       if(modelCalls>=this.maxModelCalls)throw Object.assign(new Error('达到本轮模型总调用上限（含视觉观察）'),{code:'budget_exceeded'});
-      const traceId=randomUUID();
+      const traceId=randomUUID(),phase=metadata.phase||'agent',startedAt=Date.now();
       record({kind:'run_event',event:'model_request',traceId,step:steps,phase:metadata.phase||'agent',input,tools:definitions,metrics:metadata.metrics,startedAt:new Date().toISOString()});
       await persist();signal.throwIfAborted();modelCalls++;
+      accounting[phase].calls++;
       try{
-        const raw=await brain.respond(input,definitions,signal);
-        record({kind:'run_event',event:'model_response',traceId,output:structuredClone(raw),usage:brain.lastCall?.usage||null});await persist();return raw;
+        const requestSignal=phase==='summary'?AbortSignal.any([signal,AbortSignal.timeout(30000)]):signal;
+        const raw=await brain.respond(input,definitions,requestSignal,{singleToolCall:phase==='agent',json:phase==='summary',...(phase==='summary'?{maxOutputTokens:Math.min(6000,this.memory.summaryMaxTokens)}:{})});
+        const usage=brain.lastCall?.usage||null;
+        if(usage)accounting[phase].usage.push(structuredClone(usage));
+        if(brain.lastCall?.cost!==undefined){accounting[phase].cost||=[];accounting[phase].cost.push(structuredClone(brain.lastCall.cost));}
+        record({kind:'run_event',event:'model_response',traceId,phase,output:structuredClone(raw),usage});await persist();return raw;
       }catch(error){record({kind:'run_event',event:'model_error',traceId,code:error.code||'model_error',message:error.message});await persist();throw error;}
+      finally{accounting[phase].durationMs+=Date.now()-startedAt;}
     };
     this.active.add(state.id);
     try {
@@ -81,20 +90,32 @@ export class ContextAgent {
           :{isError:true,code:'interrupted_call',submitted:invocation?.attempted?'unknown':false,receiptId:invocation?.receiptId,providerReceiptId:invocation?.providerReceiptId,message:invocation?'此前调用结果未进入历史；先查询此回执，不自动重新提交。':'没有持久提交记录，此调用未自动重试。',callId:call.callId};
         appendRecord(state,{kind:'tool_result',turnId:call.turnId,groupId:call.groupId,callId:call.callId,output:JSON.stringify(recovered)});
       }
-      record({kind:'run_event',event:'start',requestId,message,inputs});
+      record({kind:'run_event',event:'start',requestId,message,inputs,...(confirmation?{confirmation}: {})});
       for(const a of assets) state.assets[a.id]=a;
-      record({kind:'message',role:'user',groupId:turnId,content:message,attachments:assets.map(a=>({id:a.id,type:a.type,name:a.name,version:a.version}))});
+      const userRecord=record({kind:'message',role:'user',groupId:turnId,content:message,attachments:assets.map(a=>({id:a.id,type:a.type,name:a.name,version:a.version})),...(confirmation?{confirmation}: {})});
       await persist();
       emit({type:'user_recorded',turnId,assets});
+      const confirmationSource={kind:confirmation?'button':'text',messageId:userRecord.id,requestId};
+      if(confirmation){
+        let result;
+        try{
+          if(typeof this.tools.approveAndExecute!=='function')throw new Error('确认执行服务未装配');
+          result=await this.tools.approveAndExecute({proposalIds:confirmation.proposalIds},{state,signal,turnId,ownerId:state.ownerId,save:persist,maxMediaCalls:this.maxMediaCalls,requestId,confirmationSource});
+        }catch(error){result=errorResult(error);}
+        const observation=record({kind:'system_observation',name:'confirm_media',source:confirmationSource,output:JSON.stringify(result)});
+        await persist();emit({type:'system_observation',name:'confirm_media',recordId:observation.id,result,turnId});
+      }
       for (;steps<this.maxSteps;steps++) {
         signal.throwIfAborted();
-        const context=buildContext(state,{systemPrompt:this.systemPrompt,skillDirectory:(this.catalog.skills||[]).map(({slug,name,description})=>({slug,name,description})),toolDefinitions:this.tools.definitions,tokenBudget:this.contextTokenBudget,reservedTokens:6000,currentTurnId:turnId});
+        const contextOptions={systemPrompt:this.systemPrompt,skillDirectory:(this.catalog.skills||[]).map(({slug,name,description})=>({slug,name,description})),toolDefinitions:this.tools.definitions,tokenBudget:this.contextTokenBudget,reservedTokens:6000,currentTurnId:turnId};
+        if(accounting.summary.calls<this.memory.maxCallsPerTurn)await maintainMemory(state,{contextOptions,config:{...this.memory,maxCallsPerTurn:this.memory.maxCallsPerTurn-accounting.summary.calls},respond:input=>modelRespond(this.brain,input,[],{phase:'summary'}),save:persist,remainingCalls:()=>this.maxModelCalls-modelCalls,turnId,signal});
+        const context=buildContext(state,{...contextOptions,reservedTokens:contextOptions.reservedTokens+this.memory.safetyTokens});
         // Persist the exact request, not a reconstructed approximation of its model view.
         const raw=await modelRespond(this.brain,context.input,this.tools.definitions,{metrics:context.metrics});
         signal.throwIfAborted();
         const output=protocolOutput(raw),calls=output.filter(x=>x.type==='function_call'),groupId=randomUUID();
         if(calls.some(c=>state.records.some(r=>r.kind==='tool_call'&&r.callId===c.call_id))) throw Object.assign(new Error('模型重复使用已记录的调用 ID；不会再次提交'),{code:'duplicate_call_id'});
-        if(callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
+        if(calls.length<=1&&callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
         const text=output.filter(x=>x.type==='message').map(x=>contentText(x.content)).join('\n');
         for(const part of output) {
           if(part.type==='message') record({kind:'message',role:'assistant',groupId,content:contentText(part.content)});
@@ -103,12 +124,19 @@ export class ContextAgent {
         await persist();
         if(text) emit({type:calls.length?'assistant_progress':'assistant',text,turnId});
         if(!calls.length) {
-          const result={status:'completed',turnId,text,modelCalls,toolCalls:callsUsed};
+          const result={status:'completed',turnId,text,modelCalls,toolCalls:callsUsed,modelAccounting:accounting};
           record({kind:'run_event',event:'end',result});await persist();emit({type:'end',...result});return result;
         }
         callsUsed+=calls.length;
-        // Same-response calls contain no future references. Serial execution bounds resource use;
-        // only the next model response decides what depends on the returned results.
+        if(calls.length>1){
+          for(const call of calls){
+            const result={ok:false,status:'not_executed',submitted:false,error:{code:'single_tool_call_required',message:'每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。'}};
+            record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
+            emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+          }
+          await persist();if(callsUsed>=this.maxToolCalls)throw Object.assign(new Error('达到工具协议调用预算'),{code:'budget_exceeded'});continue;
+        }
+        // Exactly one call remains. Its real result precedes the next Agent decision.
         for(const call of calls) {
           let result,started=false;
           try {
@@ -116,18 +144,19 @@ export class ContextAgent {
             let args;try{args=JSON.parse(call.arguments);}catch{throw Object.assign(new Error('工具参数不是合法 JSON；此调用未执行，请修正参数'),{code:'invalid_arguments'});}
             if(!args||typeof args!=='object'||Array.isArray(args)) throw Object.assign(new Error('工具参数必须是 JSON 对象'),{code:'invalid_arguments'});
             started=true;
-            result=await this.tools.execute(call.name,args,{state,signal,callId:call.call_id,turnId,ownerId:state.ownerId,save:persist,maxMediaCalls:this.maxMediaCalls,modelRespond});
+            result=await this.tools.execute(call.name,args,{state,signal,callId:call.call_id,turnId,ownerId:state.ownerId,save:persist,maxMediaCalls:this.maxMediaCalls,modelRespond,fromModel:true,requestId,confirmationSource});
             if(result===undefined) throw new Error('工具未提供结果');
           } catch(error) {
             result=signal.aborted?{isError:true,code:'cancelled',submitted:started?'unknown':false,message:started?'运行已取消；已经开始的调用可能已提交，请查调用回执。':'运行已取消；此调用尚未开始。'}:errorResult(error);
           }
           record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
           await persist();emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+          if(result.status==='approval_required'&&result.proposalId){record({kind:'run_event',event:'proposal_displayed',proposalIds:[result.proposalId]});await persist();}
         }
       }
       throw Object.assign(new Error('达到本轮模型调用上限，未收到正常结束回答'),{code:'budget_exceeded'});
     } catch(error) {
-      const result={status:signal.aborted?'cancelled':error.code==='budget_exceeded'||error.code==='CONTEXT_BUDGET_EXCEEDED'?'budget_exceeded':'error',turnId,code:error.code||'run_error',message:error.message,modelCalls,toolCalls:callsUsed};
+      const result={status:signal.aborted?'cancelled':error.code==='budget_exceeded'||error.code==='CONTEXT_BUDGET_EXCEEDED'?'budget_exceeded':'error',turnId,code:error.code||'run_error',message:error.message,modelCalls,toolCalls:callsUsed,modelAccounting:accounting};
       record({kind:'run_event',event:'end',result});await persist();emit({type:'end',...result});return result;
     } finally {this.active.delete(state.id);}
   }

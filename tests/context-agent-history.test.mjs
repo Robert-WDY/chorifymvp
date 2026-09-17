@@ -27,7 +27,7 @@ test('context history stores original roles, text and detached record values wit
   assert.equal(state.records[0].content[0].text, '容量不知道，不要写功效。');
   assert.ok(record.id && record.at);
   assert.equal(state.engine, 'context-agent');
-  assert.deepEqual(Object.keys(state), ['engine', 'schemaVersion', 'id', 'ownerId', 'records', 'assets', 'invocations', 'approvals']);
+  assert.deepEqual(Object.keys(state), ['engine', 'schemaVersion', 'id', 'ownerId', 'records', 'assets', 'invocations', 'approvals', 'summaries']);
   assert.throws(() => message(state, 'override', { role: 'system' }), { code: 'INVALID_HISTORY_RECORD' });
   assert.throws(() => appendRecord(state, state.records[0]), { code: 'DUPLICATE_HISTORY_RECORD' });
 });
@@ -142,11 +142,11 @@ test('oversized tool feedback has an explicit source pointer and can be recovere
   const { result } = exchange(state, 'large-call', raw);
   const { input, metrics } = buildContext(state, { tokenBudget: 5000 });
   const projected = JSON.parse(input.find(item => item.type === 'function_call_output').output);
-  assert.equal(projected.contextProjection.recordId, result.id);
-  assert.equal(projected.contextProjection.truncated, true);
-  assert.equal(projected.readMore.tool, 'read_history');
-  const recovered = readHistory(state, projected.readMore.arguments);
-  assert.equal(recovered.records[0].output, raw.slice(projected.readMore.arguments.offset, projected.readMore.arguments.offset + 12000));
+  assert.equal(projected.rawResultRef.id, result.id);
+  assert.equal(projected.truncated, true);
+  assert.equal(projected.rawResultRef.tool, 'read_history');
+  const recovered = readHistory(state, projected.rawResultRef.arguments);
+  assert.equal(recovered.records[0].output, raw.slice(projected.rawResultRef.arguments.offset, projected.rawResultRef.arguments.offset + 12000));
   assert.deepEqual(metrics.projectedRecordIds, [result.id]);
   assert.equal(state.records.find(record => record.id === result.id).output, raw);
 });
@@ -218,7 +218,7 @@ test('trimmed Skill reads retain a precise pointer to their original method text
   const notice = input.find(item => typeof item.content === 'string' && item.content.includes('omittedSkillReads'));
   assert.ok(notice.content.includes(result.id));
   assert.ok(notice.content.includes('advertising-direction'));
-  assert.equal(readHistory(state, { messageId: result.id }).records[0].output, result.output);
+  let restored='',offset=0; do {const page=readHistory(state,{messageId:result.id,offset});restored+=page.records[0].output;offset=page.pagination.nextOffset;}while(offset!==null);assert.equal(restored,result.output);
 });
 
 test('runtime request traces stay available without duplicating original conversation search or crop notices', () => {

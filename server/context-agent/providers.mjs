@@ -4,6 +4,7 @@ import { ArkMedia } from '../media.mjs';
 export function createMediaProvider(config, transport) {
   const ark = new ArkMedia(config, transport);
   return {
+    executionIdentity:{provider:'ark',baseUrl:config?.baseUrl||'https://ark.cn-beijing.volces.com',imageModel:config?.imageModel||null,videoModel:config?.videoModel||null},
     ...(config?.key && config?.imageModel ? { image: ark.image.bind(ark) } : {}),
     ...(config?.key && config?.videoModel ? { video: ark.video.bind(ark), getVideo: ark.getVideo.bind(ark) } : {}),
   };

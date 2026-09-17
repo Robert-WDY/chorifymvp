@@ -1,4 +1,6 @@
 import { projectSkills } from './skills.mjs';
+import { resultView } from './result-view.mjs';
+import { currentSummary } from './history.mjs';
 
 /** Conservative UTF-8 estimate; this is a budget bound, not provider token accounting. */
 export function estimateTokens(value) {
@@ -13,7 +15,7 @@ function contextError(message, metrics) {
   throw error;
 }
 
-function completeGroups(records) {
+export function completeGroups(records) {
   const parents = new Map();
   const parent = id => {
     if (!parents.has(id)) parents.set(id, id);
@@ -48,7 +50,7 @@ function completeGroups(records) {
   return { groups: [...groups.values()], incomplete };
 }
 
-function projectRecord(record, toolResultChars = Infinity) {
+function projectRecord(record, toolResultChars = Infinity, tool) {
   if (record.kind === 'message') {
     let content = structuredClone(record.content);
     if (record.attachments?.length) {
@@ -58,13 +60,8 @@ function projectRecord(record, toolResultChars = Infinity) {
     return { role: record.role, content };
   }
   if (record.kind === 'tool_call') return { type: 'function_call', call_id: record.callId, name: record.name, arguments: record.arguments };
-  if (record.kind === 'tool_result') {
-    let output = record.output;
-    if (output.length > toolResultChars) {
-      output = JSON.stringify({ contextProjection: { truncated: true, recordId: record.id, totalCharacters: output.length, includedCharacters: toolResultChars, notice: 'Raw result excerpt only; omitted content has not been reviewed. Read the original record before relying on omitted fields.' }, excerpt: output.slice(0, toolResultChars), readMore: { tool: 'read_history', arguments: { messageId: record.id, offset: toolResultChars, limit: 12000 } } });
-    }
-    return { type: 'function_call_output', call_id: record.callId, output };
-  }
+  if (record.kind === 'tool_result') return {type:'function_call_output',call_id:record.callId,output:JSON.stringify(resultView(record,{tool,maxDataChars:toolResultChars}))};
+  if (record.kind === 'system_observation') return dataMessage(resultView(record,{tool:record.name,maxDataChars:toolResultChars}));
   // Runtime bookkeeping is retrievable history, not a new user instruction.
   return null;
 }
@@ -78,14 +75,17 @@ function dataMessage(data) {
 }
 
 /** Build a disposable model view. Never modifies persistent records or asset bodies. */
-export function buildContext(state, { systemPrompt = '', skillDirectory = [], tokenBudget = 24000, reservedTokens = 0, currentTurnId, toolDefinitions = [], includeAssetDirectory = true } = {}) {
+export function buildContext(state, { systemPrompt = '', skillDirectory = [], tokenBudget = 24000, reservedTokens = 0, currentTurnId, toolDefinitions = [], includeAssetDirectory = true, untrimmed=false } = {}) {
   if (!Number.isInteger(tokenBudget) || tokenBudget < 1 || !Number.isInteger(reservedTokens) || reservedTokens < 0) throw new TypeError('Context budgets must be nonnegative integers and tokenBudget must be positive.');
   if (typeof systemPrompt !== 'string') throw new TypeError('systemPrompt must be text.');
-  const { groups, incomplete } = completeGroups(state.records);
+  const summary=currentSummary(state);
+  const { groups, incomplete } = completeGroups(state.records.filter((r,seq)=>!summary||seq>summary.coveredToSeq));
   const usable = groups.filter(group => !incomplete.has(group.id) && group.records.some(record => record.kind !== 'run_event'));
   const latestUser = [...state.records].reverse().find(record => record.kind === 'message' && record.role === 'user' && (!currentTurnId || record.turnId === currentTurnId)) ?? [...state.records].reverse().find(record => record.kind === 'message' && record.role === 'user');
-  const latestFeedback = [...usable].reverse().find(group => group.records.some(record => record.kind === 'tool_result'));
+  const latestFeedback = [...usable].reverse().find(group => group.records.some(record => ['tool_result','system_observation'].includes(record.kind)));
   const mandatory = new Set(usable.filter(group => group.records.some(record => record.id === latestUser?.id)).map(group => group.id));
+  const latestText=JSON.stringify(latestUser?.content||'');
+  for(const group of usable)if(group.records.some(r=>r.kind!=='run_event'&&latestText.includes(r.id)))mandatory.add(group.id);
   if (latestFeedback) mandatory.add(latestFeedback.id);
   if (latestUser && !usable.some(group => group.records.some(record => record.id === latestUser.id))) contextError('The latest user message shares an incomplete tool group; repair the protocol history before building context.', { incompleteGroups: [...incomplete] });
 
@@ -116,13 +116,14 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     }).slice(0, 8).map(proposalId => ({ proposalId, name: state.approvals[proposalId].name }))
   })).filter(r => r.proposals.length);
   const prefix = [{ role: 'system', content: systemPrompt }];
+  if(summary)prefix.push(dataMessage({sessionSummary:summary,note:'Derived continuity aid, not original wording or authorization. Latest original corrections take precedence; read source IDs for exact edits or saved media parameters.'}));
   if (skillDirectory.length || assetDirectory.length || toolApprovals.length || capabilities || (includeAssetDirectory && allAssets.length)) prefix.push(dataMessage({
     skillDirectory: projectSkills(skillDirectory).slice(0, 20), assetDirectory,
     ...(includeAssetDirectory && allAssets.length > assetDirectory.length ? { assetWindow: { total: allAssets.length, shown: assetDirectory.length, readMore: 'list_assets: query or offset/limit; read_asset: exact ID' } } : {}),
     ...(capabilities ? { capabilities } : {}), ...(toolApprovals.length ? { toolApprovals, approvalWindow: 'Recent IDs only. read_approval retrieves exact parameters or pages older approvals; execute_approved submits the saved call.' } : {}) }));
   const projections = new Map(usable.map(group => [group.id, projectGroup(group)]));
   const groupForRecord = new Map(usable.flatMap(group => group.records.map(record => [record.id, group.id])));
-  const selected = new Set(mandatory);
+  const selected = new Set(untrimmed?usable.map(g=>g.id):mandatory);
   const compose = () => {
     const omitted = groups.filter(group => !selected.has(group.id) && group.records.some(record => record.kind !== 'run_event'));
     const allOmittedSkills = omitted.flatMap(group => group.records.filter(record => record.kind === 'tool_call' && record.name === 'read_skill').map(call => {
@@ -133,13 +134,15 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     }));
     const omittedSkills = [...new Map(allOmittedSkills.map(s => [JSON.stringify([s.slug, s.reference]), s])).values()].slice(-6);
     const notice = omitted.length ? [dataMessage({ historyWindow: { omittedGroups: omitted.length, incompleteGroups: incomplete.size, notice: 'Earlier records remain stored. Use search_history to locate original wording and read_history to recover it. Incomplete tool records do not prove execution succeeded.', firstRetainedRecordId: usable.find(group => selected.has(group.id))?.records[0]?.id ?? null, omittedSkillReads: omittedSkills } })] : [];
-    const history = state.records.filter(record => selected.has(groupForRecord.get(record.id))).map(record => projectRecord(record, projections.get(groupForRecord.get(record.id)).toolResultChars)).filter(Boolean);
+    const callNames = new Map(state.records.filter(r=>r.kind==='tool_call').map(r=>[r.callId,r.name]));
+    const history = state.records.filter(record => selected.has(groupForRecord.get(record.id))).map(record => projectRecord(record, projections.get(groupForRecord.get(record.id)).toolResultChars,callNames.get(record.callId))).filter(Boolean);
     // Short identities for retained originals; content is already present in history.
     // Only expose when the real tool can materialize an original message.
     const originals = registeredTools.includes('save_document') ? state.records.filter(record => record.kind === 'message' && record.role === 'assistant' && selected.has(groupForRecord.get(record.id))).slice(-8).map(record => ({ messageId: record.id, turnId: record.turnId, excerpt: (typeof record.content === 'string' ? record.content : JSON.stringify(record.content)).slice(0, 80) })) : [];
-    return [...prefix, ...(originals.length ? [dataMessage({ originalMessages: originals, note: 'Original chat messages, not saved documents. Read by messageId when needed; save_document can preserve an exact original with sourceMessageId.' })] : []), ...notice, ...history];
+    return [...prefix, ...(originals.length ? [dataMessage({ originalMessages: originals, note: 'Original chat messages, not saved documents. Do not reread complete text already present. Read exact IDs when needed; parentMessageId plus revised content saves a version atomically.' })] : []), ...notice, ...history];
   };
   let input = compose();
+  if(untrimmed)return {input,metrics:{estimatedInputTokens:estimateTokens(input),estimatedToolDefinitionTokens:estimateTokens(toolDefinitions),availableInputTokens:available}};
   // Only raw tool result bodies may be excerpted. User text, assistant text and
   // operation arguments (including change/preserve instructions) remain whole.
   if (estimateTokens(input) > available) {

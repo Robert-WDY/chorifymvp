@@ -11,7 +11,7 @@ import {createTools} from '../server/context-agent/tools.mjs';
 // These tests do not measure whether a live model chooses the right path.
 const say = text => [{type:'message', role:'assistant', content:[{type:'output_text', text}]}];
 const call = (id, args) => [{type:'function_call', call_id:id, name:'save_document', arguments:JSON.stringify(args)}];
-const feedback = input => JSON.parse(input.filter(x => x.type === 'function_call_output').at(-1).output);
+const feedback = input => JSON.parse(input.filter(x => x.type === 'function_call_output').at(-1).output).data;
 async function fixture(t) {
   const directory = await mkdtemp(join(tmpdir(), 'chorify-chat-boundary-'));
   t.after(() => rm(directory, {recursive:true, force:true}));

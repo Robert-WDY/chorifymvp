@@ -1,0 +1,23 @@
+{
+  "baseline": "a4220e12f89f0c4c060b5724aebfb5adef274160",
+  "verification": "actual baseline module loaded in fresh temp directories; no live SQLite modified",
+  "checks": [
+    {
+      "label": "button-and-receipt",
+      "currentFullImport": "exact equality",
+      "baselineImport": "exact compatibility snapshot equality",
+      "originalMessagesAndAssetsApprovalsReceipts": "preserved",
+      "observations": 1,
+      "summaries": 0
+    },
+    {
+      "label": "summary-and-original",
+      "currentFullImport": "exact equality",
+      "baselineImport": "exact compatibility snapshot equality",
+      "originalMessagesAndAssetsApprovalsReceipts": "preserved",
+      "observations": 0,
+      "summaries": 2
+    }
+  ],
+  "limits": "Compatibility copy turns observations into runtime evidence; old Agent does not consume the new observation/summary semantics. Keep full export and original SQLite to restore current code."
+}

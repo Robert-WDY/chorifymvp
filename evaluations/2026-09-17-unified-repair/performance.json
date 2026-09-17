@@ -1,0 +1,104 @@
+{
+  "verification": "one local synthetic sample; not production capacity or constant cost",
+  "node": "v24.19.0",
+  "platform": "win32",
+  "counts": {
+    "assets": 1000,
+    "longProposals": 200,
+    "messagesBeforeAppend": 1000
+  },
+  "initialSave": {
+    "elapsedMs": 117.71739999999998,
+    "before": {
+      "rss": 70987776,
+      "heapTotal": 18604032,
+      "heapUsed": 10948552,
+      "external": 2614817,
+      "arrayBuffers": 209391
+    },
+    "after": {
+      "rss": 95928320,
+      "heapTotal": 65003520,
+      "heapUsed": 35202104,
+      "external": 2549701,
+      "arrayBuffers": 144235
+    },
+    "id": "6163916d-e91b-4504-84c5-20cd41e728f3",
+    "records": 1000,
+    "appendedRecords": 1000,
+    "payloadBytesWritten": 19320460
+  },
+  "context": {
+    "elapsedMs": 134.9774,
+    "before": {
+      "rss": 111681536,
+      "heapTotal": 66314240,
+      "heapUsed": 37988792,
+      "external": 2557048,
+      "arrayBuffers": 151582
+    },
+    "after": {
+      "rss": 128663552,
+      "heapTotal": 73129984,
+      "heapUsed": 47132088,
+      "external": 2549285,
+      "arrayBuffers": 143819
+    },
+    "tokenBudget": 24000,
+    "reservedTokens": 6500,
+    "estimatedInputTokens": 13018,
+    "estimatedToolDefinitionTokens": 4112,
+    "totalRecords": 1000,
+    "retainedRecords": 5,
+    "retainedRecordIds": [
+      "905d1a6b-1233-47b9-8040-6b94823bfe4f",
+      "14603e6a-7f63-46a5-a184-373021c0eb42",
+      "35f47cf5-d2a0-4941-bcb7-3bc1d65925b1",
+      "76bb9795-1e99-4d03-bb9c-47641a05ffc3",
+      "6abf77ad-ae8c-4d4d-8d0b-795b5d2fb85c"
+    ],
+    "omittedRecords": 995,
+    "excludedRuntimeRecords": 0,
+    "incompleteGroupIds": [],
+    "projectedRecordIds": []
+  },
+  "incrementalSave": {
+    "elapsedMs": 15.92410000000001,
+    "before": {
+      "rss": 128663552,
+      "heapTotal": 73129984,
+      "heapUsed": 47137672,
+      "external": 2549285,
+      "arrayBuffers": 143819
+    },
+    "after": {
+      "rss": 129015808,
+      "heapTotal": 73129984,
+      "heapUsed": 52257840,
+      "external": 2549701,
+      "arrayBuffers": 144235
+    },
+    "id": "6163916d-e91b-4504-84c5-20cd41e728f3",
+    "records": 1001,
+    "appendedRecords": 1,
+    "payloadBytesWritten": 239
+  },
+  "load": {
+    "elapsedMs": 78.89730000000003,
+    "before": {
+      "rss": 129015808,
+      "heapTotal": 73129984,
+      "heapUsed": 52258352,
+      "external": 2549701,
+      "arrayBuffers": 144235
+    },
+    "after": {
+      "rss": 141664256,
+      "heapTotal": 107081728,
+      "heapUsed": 66580568,
+      "external": 2549493,
+      "arrayBuffers": 144027
+    }
+  },
+  "note": "payloadBytesWritten excludes SQLite indexes, journal/fsync and total physical disk writes; memory snapshots are not peak RSS. Summary model time/cost is unverified."
+}

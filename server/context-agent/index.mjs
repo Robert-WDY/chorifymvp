@@ -2,7 +2,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {createBrain} from '../adapters.mjs';
 import {loadAgentCatalog as loadCatalog} from './skills.mjs';
-import {assembleAgentTools} from './runtime.mjs';
+import {assembleAgentTools,assembleMemoryOptions} from './runtime.mjs';
 import {createMediaProvider} from './providers.mjs';
 import {createContextServer} from './http.mjs';
 
@@ -24,7 +24,7 @@ const tools=assembleAgentTools({catalog,media,visionEnabled,visionBrain:visionEn
   observationTokenBudget:integer('CONTEXT_AGENT_OBSERVATION_TOKENS',16000,1000,128000)});
 const directory=resolve(process.env.CONTEXT_AGENT_DATA_DIR||fileURLToPath(new URL('../../data/context-agent/',import.meta.url)));
 const port=integer('CONTEXT_AGENT_PORT',3212,1024,65535);
-const {server,active}=createContextServer({brain,tools,catalog,directory,modelEnabled,mode,agentOptions:{maxSteps:integer('CONTEXT_AGENT_MAX_STEPS',16,1,32),maxModelCalls:integer('CONTEXT_AGENT_MAX_MODEL_CALLS',16,1,64),maxToolCalls:integer('CONTEXT_AGENT_MAX_TOOL_CALLS',48,1,96),contextTokenBudget:integer('CONTEXT_AGENT_CONTEXT_TOKENS',24000,8000,128000),maxMediaCalls}});
+const {server,active}=createContextServer({brain,tools,catalog,directory,modelEnabled,mode,agentOptions:{memory:assembleMemoryOptions(process.env),maxSteps:integer('CONTEXT_AGENT_MAX_STEPS',16,1,32),maxModelCalls:integer('CONTEXT_AGENT_MAX_MODEL_CALLS',16,1,64),maxToolCalls:integer('CONTEXT_AGENT_MAX_TOOL_CALLS',48,1,96),contextTokenBudget:integer('CONTEXT_AGENT_CONTEXT_TOKENS',24000,8000,128000),maxMediaCalls}});
 server.listen(port,'127.0.0.1',()=>console.log(`Chorify context-agent: http://127.0.0.1:${port} | model=${modelEnabled?'enabled':'disabled'} | media=${mode}`));
 const stop=()=>{for(const controller of active.values())controller.abort();server.close(()=>process.exit(0));};
 process.once('SIGINT',stop);process.once('SIGTERM',stop);

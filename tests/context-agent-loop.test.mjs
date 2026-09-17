@@ -25,7 +25,7 @@ test('context loop: normal answer is one call with no understanding, planner or 
 
 test('context loop: independent calls return paired results before dependent next call',async()=>{
   const state=createSession();let step=0;const executed=[];
-  const brain={respond:async input=>{step++;if(step===1)return [say('先读两份原稿。'),call('a','read',{id:'a'}),call('b','read',{id:'b'})];if(step===2){assert.equal(input.filter(x=>x.type==='function_call_output').length,2);return [call('c','combine',{sources:['a','b']})];}return [say('已根据两份原稿完成。')];}};
+  const brain={respond:async input=>{step++;if(step===1)return [say('先读两份原稿。'),call('a','read',{id:'a'})];if(step===2)return [call('b','read',{id:'b'})];if(step===3){assert.equal(input.filter(x=>x.type==='function_call_output').length,2);return [call('c','combine',{sources:['a','b']})];}return [say('已根据两份原稿完成。')];}};
   const result=await run(brain,{tools:{definitions:[],execute:async(name,args)=>{executed.push([name,args]);return {content:args};}}}).run(state,'读两份原稿后整合');
   assert.equal(result.status,'completed');assert.deepEqual(executed.map(x=>x[0]),['read','read','combine']);
 });
@@ -52,9 +52,9 @@ test('context loop: total step and tool budgets cannot be bypassed by endless ca
 
 test('context loop: cancellation closes tool protocol without starting further side effects',async()=>{
   const controller=new AbortController();let executed=0;const state=createSession();
-  const result=await run({respond:async()=>[call('one','read',{}),call('two','read',{})]},{tools:{definitions:[],execute:async()=>{executed++;controller.abort();return {ok:true};}}}).run(state,'执行',()=>{},controller.signal);
-  assert.equal(result.status,'cancelled');assert.equal(executed,1);assert.equal(state.records.filter(r=>r.kind==='tool_result').length,2);
-  assert.equal(JSON.parse(state.records.filter(r=>r.kind==='tool_result').at(-1).output).submitted,false);
+  const result=await run({respond:async()=>[call('one','read',{})]},{tools:{definitions:[],execute:async()=>{executed++;controller.abort();return {ok:true};}}}).run(state,'执行',()=>{},controller.signal);
+  assert.equal(result.status,'cancelled');assert.equal(executed,1);assert.equal(state.records.filter(r=>r.kind==='tool_result').length,1);
+  assert.equal(state.records.filter(r=>r.event==='model_request').length,1);
 });
 
 test('context loop: durable request replay after restart does not call model or tools again',async()=>{
@@ -76,7 +76,7 @@ test('context loop: interrupted calls remain inspectable and are never automatic
 test('context recovery: provider receipt survives crash between submission and tool-result recording',async()=>{
   const state=createSession();appendRecord(state,{kind:'tool_call',name:'generate_video',callId:'paid-video',arguments:'{}',turnId:'old',groupId:'g'});
   state.invocations['receipt-old']={kind:'media',callId:'paid-video',turnId:'old',receiptId:'receipt-old',providerReceiptId:'vendor-original',attempted:true,status:'inflight'};
-  const result=await run({respond:async input=>{const feedback=input.find(x=>x.type==='function_call_output');assert.equal(JSON.parse(feedback.output).receiptId,'receipt-old');assert.equal(JSON.parse(feedback.output).submitted,'unknown');return [say('已有回执可供查询，不会重新生成。')];}}).run(state,'视频怎么样了');assert.equal(result.status,'completed');
+  const result=await run({respond:async input=>{const feedback=input.find(x=>x.type==='function_call_output');assert.equal(JSON.parse(feedback.output).receiptId,'receipt-old');assert.equal(JSON.parse(feedback.output).data.submitted,'unknown');return [say('已有回执可供查询，不会重新生成。')];}}).run(state,'视频怎么样了');assert.equal(result.status,'completed');
 });
 
 test('context model budget: visual observation shares the same total model budget and exact trace',async()=>{
@@ -123,9 +123,10 @@ test('context entry: actual HTTP roundtrip streams model response into durable n
 test('context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'context-approval-'));let step=0;
   const brain={respond:async input=>{
-    if(step++===0)return [call('prepare-one','generate_image',{prompt:'第一张白瓶',size:'2K'}),call('prepare-two','generate_image',{prompt:'第二张白瓶',size:'2K'})];
-    if(step===2)return [say('已准备两张独立图片的方案，请批准。')];
-    if(step===3){const message=[...input].reverse().find(m=>m.role==='user'&&typeof m.content==='string'&&m.content.startsWith('我批准'));const receipt=JSON.parse(message.content.split('\n').slice(1).join('\n'));return receipt.proposals.map((p,i)=>call('submit-'+i,'execute_approved',{proposalId:p.proposalId,approvalId:receipt.approvalId}));}
+    if(step++===0)return [call('prepare-one','generate_image',{prompt:'第一张白瓶',size:'2K'})];
+    if(step===2)return [call('prepare-two','generate_image',{prompt:'第二张白瓶',size:'2K'})];
+    if(step===3)return [say('已准备两张独立图片的方案，请批准。')];
+    assert.match(JSON.stringify(input),/system_observation/);
     return [say('两项模拟调用已返回；未实际生成图片。')];
   }};
   const app=createContextServer({directory,brain,tools:createTools(),modelEnabled:true,agentOptions:{maxMediaCalls:2}});

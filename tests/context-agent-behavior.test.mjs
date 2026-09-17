@@ -15,7 +15,7 @@ const corpus=await loadCorpus();
 const original=id=>corpus.cases.find(c=>c.id===id);
 const message=text=>[{type:'message',role:'assistant',content:[{type:'output_text',text}]}];
 const call=(name,args,id)=>({type:'function_call',name,arguments:JSON.stringify(args),call_id:id});
-const outputs=input=>input.filter(x=>x.type==='function_call_output').map(x=>({callId:x.call_id,...JSON.parse(x.output)}));
+const outputs=input=>input.filter(x=>x.type==='function_call_output').map(x=>({callId:x.call_id,...JSON.parse(x.output).data}));
 const body=input=>JSON.stringify(input);
 const setup=(extra={})=>({state:createSession(),...extra});
 const ctx=state=>({state,ownerId:state.ownerId,turnId:'setup',callId:'setup',save:async()=>{},maxMediaCalls:4,signal:new AbortController().signal});
@@ -83,7 +83,7 @@ test('context behavior scripted: local edit retains the exact source image and c
   const approval=await approveProposals(state,{proposalIds:[proposal.proposalId],ownerId:state.ownerId},async()=>{});
   const brain=brainFor((input,step)=>{
     if(step===0)return[call('read_asset',{id:'cup'},'read-cup')];
-    if(step===1){assert.equal(outputs(input).at(-1).asset.version,3);return[call('edit_image',{...args,proposalId:proposal.proposalId,approvalId:approval.approvalId},'edit-cup')];}
+    if(step===1){assert.equal(outputs(input).at(-1).asset.version,3);return[call('execute_approved',{proposalId:proposal.proposalId,approvalId:approval.approvalId},'edit-cup')];}
     const result=outputs(input).at(-1);assert.equal(result.status,'succeeded');assert.equal(result.assets[0].parentId,'cup');return message('模拟编辑已保存新版本；没有真实画面可供视觉验收。');
   });
   const result=await new ContextAgent({brain,tools,maxMediaCalls:1}).run(state,args.instruction);
@@ -97,8 +97,9 @@ test('context behavior scripted: second direction consumes stored original text 
   state.assets.directions=textAsset('directions',text);state.assets.product=imageAsset('product');
   let proposal;
   const brain=brainFor((input,step)=>{
-    if(step===0)return[call('read_asset',{id:'directions'},'read-directions'),call('read_asset',{id:'product'},'read-image')];
-    if(step===1){const results=outputs(input);assert.equal(results.find(x=>x.callId==='read-directions').asset.content,text);assert.equal(results.find(x=>x.callId==='read-image').observed,false);return[call('generate_image',{prompt:'沿用第二方向“海外旅行中的轻装日常”：米白台面，白瓶与旅行手账同框。',size:'1024x1024',referenceImages:['product'],sourceIds:['directions']},'prepare-selected')];}
+    if(step===0)return[call('read_asset',{id:'directions'},'read-directions')];
+    if(step===1)return[call('read_asset',{id:'product'},'read-image')];
+    if(step===2){const results=outputs(input);assert.equal(results.find(x=>x.callId==='read-directions').asset.content,text);assert.equal(results.find(x=>x.callId==='read-image').observed,false);return[call('generate_image',{prompt:'沿用第二方向“海外旅行中的轻装日常”：米白台面，白瓶与旅行手账同框。',size:'1024x1024',referenceImages:['product'],sourceIds:['directions']},'prepare-selected')];}
     proposal=outputs(input).at(-1);assert.equal(proposal.status,'approval_required');return message('已沿用第二方向准备图片方案；等待批准。');
   });
   const result=await new ContextAgent({brain,tools}).run(state,'用第二个方向做一张广告图，产品外观沿用原图，先给我确认。');
@@ -149,11 +150,13 @@ for(const order of [['a','b'],['b','a']])test(`context behavior scripted: groupe
   const {state}=setup();const tools=createTools();state.assets.a=textAsset('a','产品事实：白瓶');state.assets.b=textAsset('b','未知信息：容量');
   const brain=brainFor((input,step)=>{
     if(step===0)return order.map(id=>call('read_asset',{id},`read-${id}`));
-    const results=outputs(input);assert.equal(results.find(x=>x.callId==='read-a').asset.content,'产品事实：白瓶');assert.equal(results.find(x=>x.callId==='read-b').asset.content,'未知信息：容量');
+    if(step===1){for(const r of outputs(input))assert.equal(r.status,'not_executed');return [call('read_asset',{id:order[0]},'retry-'+order[0])];}
+    if(step===2)return [call('read_asset',{id:order[1]},'retry-'+order[1])];
+    const results=outputs(input);assert.equal(results.find(x=>x.callId==='retry-a').asset.content,'产品事实：白瓶');assert.equal(results.find(x=>x.callId==='retry-b').asset.content,'未知信息：容量');
     return message('已读取白瓶事实和容量未知项。');
   });
   const result=await new ContextAgent({brain,tools}).run(state,'同时读取产品事实与未知项，再总结。');assert.equal(result.status,'completed');
-  const calls=state.records.filter(r=>r.kind==='tool_call'),results=state.records.filter(r=>r.kind==='tool_result');assert.equal(calls.length,2);assert.equal(results.length,2);assert.deepEqual(new Set(results.map(r=>r.callId)),new Set(calls.map(r=>r.callId)));
+  const calls=state.records.filter(r=>r.kind==='tool_call'),results=state.records.filter(r=>r.kind==='tool_result');assert.equal(calls.length,4);assert.equal(results.length,4);assert.deepEqual(new Set(results.map(r=>r.callId)),new Set(calls.map(r=>r.callId)));
 });
 
 test('context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request',async()=>{
@@ -174,15 +177,13 @@ test('context behavior scripted: original EDIT_001 driver preserves all queries 
     if(step===0)return[call('generate_image',{prompt:'一只咖啡杯广告图',size:'1024x1024'},'first-plan')];
     if(step===1){firstProposal=results.at(-1);assert.equal(firstProposal.status,'approval_required');return message('方案：一只咖啡杯，1024x1024，一张图片；尚未生成，等待批准。');}
     if(step===2){
-      const approvalId=body(input).match(/approval_[a-f0-9-]+/)?.[0];
-      assert.ok(approvalId,'The trusted API approval ID must reach the next model request');
-      assert.ok(state.approvals[approvalId]);
+      const observation=input.filter(x=>typeof x.content==='string'&&x.content.startsWith('Context reference')).map(x=>JSON.parse(x.content.split('\n')[1])).find(x=>x.kind==='system_observation');
+      assert.ok(observation);assert.equal(observation.data.items[0].outcome,'succeeded');
       assert.ok(input.some(x=>x.role==='user'&&x.content===originalCase.conversation[1].user));
-      return[call('generate_image',{...firstProposal.args,proposalId:firstProposal.proposalId,approvalId},'first-submit')];
+      originalImage=observation.data.items[0].data.assets[0];assert.equal(originalImage.simulated,true);return message('模拟产物记录已保存，未生成真实图片。');
     }
-    if(step===3){originalImage=results.at(-1).assets[0];assert.equal(originalImage.simulated,true);return message('模拟产物记录已保存，未生成真实图片。');}
-    if(step===4)return[call('read_asset',{id:originalImage.id},'read-for-edit')];
-    if(step===5){assert.equal(results.at(-1).asset.id,originalImage.id);return[call('edit_image',{imageId:originalImage.id,instruction:originalCase.conversation[2].user,size:'1024x1024'},'edit-plan')];}
+    if(step===3)return[call('read_asset',{id:originalImage.id},'read-for-edit')];
+    if(step===4){assert.equal(results.at(-1).asset.id,originalImage.id);return[call('edit_image',{imageId:originalImage.id,instruction:originalCase.conversation[2].user,size:'1024x1024'},'edit-plan')];}
     assert.equal(results.at(-1).status,'approval_required');return message('编辑方案：把背景改成蓝色，杯子保持不变。新方案等待批准，尚未提交编辑。');
   });
   const agent=new ContextAgent({brain,tools,maxMediaCalls:2});

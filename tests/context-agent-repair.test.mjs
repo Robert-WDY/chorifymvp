@@ -51,7 +51,7 @@ test('repair: surrounding memory cannot reintroduce nested model requests or ret
   const result = readHistory(state, { messageId: source.id, surroundingRange: 20 });
   assert.deepEqual(result.records.map(v => v.id), [source.id, actual.id, observed.id, next.id]);
   assert.ok(!JSON.stringify(result).includes('DO_NOT_REINJECT'));
-  assert.deepEqual(readHistory(state, { messageId: trace.id }).records[0], trace);
+  let raw='',offset=0;do{const page=readHistory(state,{messageId:trace.id,offset});raw+=page.records[0].rawJsonExcerpt;offset=page.pagination.nextOffset;}while(offset!==null);assert.deepEqual(JSON.parse(raw),trace);
   assert.equal(JSON.stringify(state), before);
 });
 
@@ -218,7 +218,7 @@ test('repair scripted integration: model selects memory, archives original, save
   const original = message(f.state, '原脚本：保持红杯，只压缩旁白。', 'assistant');
   let step = 0, parent;
   const brain = { respond: async input => {
-    const results = input.filter(v => v.type === 'function_call_output').map(v => JSON.parse(v.output));
+    const results = input.filter(v => v.type === 'function_call_output').map(v => JSON.parse(v.output).data);
     switch (step++) {
       case 0: return call('search_history', { query: '原脚本' }, 'find');
       case 1: assert.equal(results.at(-1).matches[0].id, original.id); return call('read_history', { messageId: original.id }, 'read');
@@ -235,10 +235,8 @@ test('repair scripted integration: model selects memory, archives original, save
 test('repair scripted integration: free creation can propose independent pictures without photos; no approval means no submission', async () => {
   let submitted = 0, step = 0;
   const f = fixture({ mode: 'live', media: { image: async () => { submitted++; } } });
-  const brain = { respond: async () => step++ === 0 ? [
-    ...call('generate_image', { prompt: '虚构的紫色圆瓶，白底', size: '1024x1024' }, 'purple'),
-    ...call('generate_image', { prompt: '虚构的黄色方瓶，白底', size: '1024x1024' }, 'yellow'),
-  ] : say('已准备两张独立方案，等待批准。') };
+  const brain = { respond: async () => step++ === 0 ? call('generate_image', { prompt: '虚构的紫色圆瓶，白底', size: '1024x1024' }, 'purple')
+    : step===2 ? call('generate_image', { prompt: '虚构的黄色方瓶，白底', size: '1024x1024' }, 'yellow') : say('已准备两张独立方案，等待批准。') };
   const result = await new ContextAgent({ brain, tools: f.tools }).run(f.state, '自由设计两款瓶子广告图，各一张，不拼图');
   assert.equal(result.status, 'completed'); assert.equal(submitted, 0);
   assert.equal(Object.values(f.state.approvals).filter(v => v.kind === 'proposal').length, 2);

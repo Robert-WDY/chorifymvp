@@ -1,0 +1,301 @@
+{
+  "baseline": "a4220e12f89f0c4c060b5724aebfb5adef274160",
+  "branch": "feat/context-agent-20260916",
+  "entrypoint": "server/context-agent/index.mjs",
+  "node": "v24.19.0",
+  "model": "scripted offline substitutes only",
+  "media": "mock providers only; zero paid submissions",
+  "summaryDefaults": {
+    "enabled": true,
+    "triggerRatio": 0.75,
+    "targetRatio": 0.55,
+    "summaryMaxTokens": 1800,
+    "inputMaxTokens": 8000,
+    "maxCallsPerTurn": 2,
+    "reserveMainCalls": 2,
+    "safetyTokens": 500
+  },
+  "toolSchemaSha256": "89982d20180d3d2172bea710dd4d603a5814bcca73dcedf977a1868257c64e34",
+  "toolNames": [
+    "list_assets",
+    "read_approval",
+    "confirm_media",
+    "execute_approved",
+    "read_asset",
+    "search_history",
+    "read_history",
+    "read_skill",
+    "save_document",
+    "measure_text",
+    "generate_image",
+    "edit_image",
+    "generate_video",
+    "read_media_result"
+  ],
+  "files": [
+    {
+      "path": "evals/context-agent-corpus.mjs",
+      "sha256": "872ea605cadc1c57643d70015c605bb84b9e5273678cabf534f9e4ba79e6cbca"
+    },
+    {
+      "path": "evals/context-agent-driver.mjs",
+      "sha256": "e03be67888290fd855f4ac3ba8e6ac5659f7cc8ed5d600794988c15bb6f8b0ae"
+    },
+    {
+      "path": "evals/context-agent-evaluate.mjs",
+      "sha256": "55f46365df7f7a7c2d10c1c440c5f7ea88ffa06767322e0c8a6ad6830e9692be"
+    },
+    {
+      "path": "evals/context-agent-export.mjs",
+      "sha256": "65a487a6d3a6052a3dbb67624022f397f61d77e40522d380b1c39d37a25b23cf"
+    },
+    {
+      "path": "evals/context-agent-freeze.mjs",
+      "sha256": "0bbc98b56c3ce05ad68e26aaa45fd975c3a98d09852809b4c3c01084b00fc650"
+    },
+    {
+      "path": "evals/context-agent-memory-replay.mjs",
+      "sha256": "cc4f12d76fa4986d23921bf6c9b3d60762efbcde0c2e0aa6c9226c21328d31f7"
+    },
+    {
+      "path": "evals/context-agent-unified-audit.mjs",
+      "sha256": "e01d43974e688488987c2fb8b61d2892d0d8c88fa5d908bf7dfa5627c9c4aae6"
+    },
+    {
+      "path": "server/adapters.mjs",
+      "sha256": "215d32e2d2acbaa974a49177d3d42a507828a041303d19ca5b94f3b9a07eb4f3"
+    },
+    {
+      "path": "server/context-agent/README.md",
+      "sha256": "b416cfb76f907c4b9c10cac07fac8fce40810ac245e98c96bc3332c34063123e"
+    },
+    {
+      "path": "server/context-agent/confirmation.mjs",
+      "sha256": "029fad28ed448d314c509f55209fb7345e8fca286a57e84946405584e1252ad3"
+    },
+    {
+      "path": "server/context-agent/context.mjs",
+      "sha256": "1f7e35c586d2e4cac18f0a96e21b16e6d1086bee6e60c9d1737c0b697bf67974"
+    },
+    {
+      "path": "server/context-agent/history.mjs",
+      "sha256": "b76c8840a518318c9d0a2e10401b8d9f4b8ad94e032db9c6dd0ef9bdc21694ae"
+    },
+    {
+      "path": "server/context-agent/http.mjs",
+      "sha256": "5a3c3e36a2152abb634160edbe7d61b8c39a968dba828adea51a3775a494a298"
+    },
+    {
+      "path": "server/context-agent/index.mjs",
+      "sha256": "0d518e9dbc8b3f4ec1aff55032dbcb724327b01040c293fb319ec8c43e4e8d06"
+    },
+    {
+      "path": "server/context-agent/io-guard.mjs",
+      "sha256": "e4778827e010db0770174914f3aea7800de3dfc94ec28a382957e5aea0f8e57e"
+    },
+    {
+      "path": "server/context-agent/loop.mjs",
+      "sha256": "e405582228af49172d92b170fd020f770c8bc3504b45dfb0b38c90d2cc478555"
+    },
+    {
+      "path": "server/context-agent/memory.mjs",
+      "sha256": "8082b86fae3534e04e3bb587a8865ec8f004e8cbaa80706f290f6187f058a0d5"
+    },
+    {
+      "path": "server/context-agent/methods/v1/actor-realism-v2/method.md",
+      "sha256": "1b77bdb4e289ca8c0e39f6a353fc24a51b06fa39cf1dd9cb9d66775ebcb01279"
+    },
+    {
+      "path": "server/context-agent/methods/v1/actor-realism-v2/references.json",
+      "sha256": "145ae97f6955ca2cc440982064c2c45e6de67766ac518a73d4661c3b25826b4d"
+    },
+    {
+      "path": "server/context-agent/methods/v1/asset-lock-generator-lite-v2/method.md",
+      "sha256": "c7910ec4278fba6125f5b2c370da130cb5f95b1cd1702500f30014f15b255357"
+    },
+    {
+      "path": "server/context-agent/methods/v1/asset-lock-generator-lite-v2/references.json",
+      "sha256": "de079d095cc7405ed9d383d70c8bdddde522a7c43c189e7d357908cadfef91c4"
+    },
+    {
+      "path": "server/context-agent/methods/v1/cinematic-shot-designer-zh-v5/method.md",
+      "sha256": "1d08291cd8838082e203b027cb3b8e09b096bd8beb9150c1612a6556cd077ad0"
+    },
+    {
+      "path": "server/context-agent/methods/v1/cinematic-shot-designer-zh-v5/references.json",
+      "sha256": "91d2327762dbd6a338cb831b6ea613782f142628900d1792df14641295da8db2"
+    },
+    {
+      "path": "server/context-agent/methods/v1/cinematic-style-optimizer-v2/method.md",
+      "sha256": "8d61fc377a04266fac8f5fbd9174e9616c9013ab98cf501e5a3634d3a95f9962"
+    },
+    {
+      "path": "server/context-agent/methods/v1/cinematic-style-optimizer-v2/references.json",
+      "sha256": "53ddf61a8fc6b992d558cfc20464e2a18f6ca9e61b479a68c43ddaa4d12ae953"
+    },
+    {
+      "path": "server/context-agent/methods/v1/creative-cover-copy-v2/method.md",
+      "sha256": "2dcdf54a5da063bebc29d133c0ded22d7916f6925eba3a78ec2a255f6fff0cd0"
+    },
+    {
+      "path": "server/context-agent/methods/v1/creative-cover-copy-v2/references.json",
+      "sha256": "14f282ac5dccba37dd093b4301dcd9c48a5df506d917782b1df47caff2200125"
+    },
+    {
+      "path": "server/context-agent/methods/v1/creative-prompt-rewrite/method.md",
+      "sha256": "04462d67eb46a4fed7b175dab70f9ce412e65df06ee0d90455d5ebe1f1fe1902"
+    },
+    {
+      "path": "server/context-agent/methods/v1/creative-prompt-rewrite/references.json",
+      "sha256": "833c4e1164e3fea9c80bbe696632c4cab1d658846ff52c2ab75ce6bb5bfbfc31"
+    },
+    {
+      "path": "server/context-agent/methods/v1/direction-designer-zh-v1/method.md",
+      "sha256": "83695d02b043ef0d6fc05e5397bd008c79b7b7353958ca8acc739ca79a8d06b9"
+    },
+    {
+      "path": "server/context-agent/methods/v1/direction-designer-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/methods/v1/image-prompt-gallery-director-v2/method.md",
+      "sha256": "439221720ebddbee7a1a7aacc1576e9fd70e9eb146a88a9e689e64a0c8ec2687"
+    },
+    {
+      "path": "server/context-agent/methods/v1/image-prompt-gallery-director-v2/references.json",
+      "sha256": "bfe70d5313a10d28b3113c76991743f3b8a5be5f163109b752d8ce4e88a155bb"
+    },
+    {
+      "path": "server/context-agent/methods/v1/index.json",
+      "sha256": "1376b9535978b93154e67fa40041525b8562c1ad9becc374d3dc1c0f4ef0e525"
+    },
+    {
+      "path": "server/context-agent/methods/v1/marketing-brief-zh-v1/method.md",
+      "sha256": "b51a3800b05f9ea004bd3d0b9d68bb17361490686282fce17b31f7525a7e56ce"
+    },
+    {
+      "path": "server/context-agent/methods/v1/marketing-brief-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/methods/v1/product-understanding-zh-v1/method.md",
+      "sha256": "da413b76a9f8bf2bd0dcd34370850238ec8472e28f17b1009f4e34598f007beb"
+    },
+    {
+      "path": "server/context-agent/methods/v1/product-understanding-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/methods/v1/storyboard-one-shot-zh-v2/method.md",
+      "sha256": "a02cd8260f8a10ac030a86448b7fa6a0e2c97f6002d31fac5b8cc349dab085aa"
+    },
+    {
+      "path": "server/context-agent/methods/v1/storyboard-one-shot-zh-v2/references.json",
+      "sha256": "61e3f3196a0f20d5662e43ef599efc5d2f5eaa5b3a37849ea519f1ff22b30e3f"
+    },
+    {
+      "path": "server/context-agent/methods/v1/storyboard-one-shot-zh/method.md",
+      "sha256": "a02cd8260f8a10ac030a86448b7fa6a0e2c97f6002d31fac5b8cc349dab085aa"
+    },
+    {
+      "path": "server/context-agent/methods/v1/storyboard-one-shot-zh/references.json",
+      "sha256": "3e88386ae6bcf17ccb2f85d269aba18bc61041d07a49701772013bba8fbcc35f"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-decomposition-zh-v1/method.md",
+      "sha256": "1176c1752fb9f09ffb68989ff6a1b41c24020847967727e1a648a228eebeb94a"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-decomposition-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-prompt-safety-zh-v1/method.md",
+      "sha256": "254febf775f0433236ca7eda91e1f03716ea419647cdd05b18c697cd392934e3"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-prompt-safety-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-script-zh-v1/method.md",
+      "sha256": "0aa4d3b3302494f93aeda3bf4e9e15fbf3397c6e896df05b606a9590f97c4b26"
+    },
+    {
+      "path": "server/context-agent/methods/v1/video-script-zh-v1/references.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "server/context-agent/prompt.md",
+      "sha256": "b302196f9a055916495ab67a1691649773fdd2a628b5dd85b7b2029c0318a8b2"
+    },
+    {
+      "path": "server/context-agent/providers.mjs",
+      "sha256": "b171533c16d7ea709ec8c4f63932c8f8dcff7050d288be8fcd4ba9f51cfb7111"
+    },
+    {
+      "path": "server/context-agent/result-view.mjs",
+      "sha256": "7229e4c086937f2c285f0f505259a12b836bc466b815ca9c48d8ddd0ba4a8b8e"
+    },
+    {
+      "path": "server/context-agent/runtime.mjs",
+      "sha256": "9afb0fb995b3ce3aa2f3141f321a21e94af889fdc787e375f2d7ebe69fbd7ebe"
+    },
+    {
+      "path": "server/context-agent/skills.mjs",
+      "sha256": "2b786864f781eb8390c73668c32ba2422ac052b0ae693e962d1a17b320896d11"
+    },
+    {
+      "path": "server/context-agent/summary-prompt.md",
+      "sha256": "75bd5fa39342095777f4c4afb32238e2e5492644c6c5de08f720b36745c9ee1c"
+    },
+    {
+      "path": "server/context-agent/tools.mjs",
+      "sha256": "6e3f8a68c9b311fdb1a337df9dccc8b87c93fa48fd7bac24c48ca4b0f183106c"
+    },
+    {
+      "path": "server/context-agent/web/app.js",
+      "sha256": "e668736d3d30d07f5dfe50518c45996da1e6409a2e7e0d775712d7bd4853dfd8"
+    },
+    {
+      "path": "server/context-agent/web/index.html",
+      "sha256": "535809113b68ed839626ee86ffa3799dfd38bf74506ac01e396b6c7587ea3226"
+    },
+    {
+      "path": "server/context-agent/web/style.css",
+      "sha256": "a07dd21fd8bdcb57eee1b752215034fca8a0d59bd00c06cf0d28d60d266472f6"
+    },
+    {
+      "path": "tests/context-agent-behavior.test.mjs",
+      "sha256": "f1d2c4e3b5dce34aec8f2d87c35932bed0d8cd8b4b5c855815d2208a1ed40f48"
+    },
+    {
+      "path": "tests/context-agent-chat-boundary.test.mjs",
+      "sha256": "51cb4425c9ac78a75ac6ec2d691fd23b132340f71385deeca85649f1616e5b1f"
+    },
+    {
+      "path": "tests/context-agent-history.test.mjs",
+      "sha256": "a3336cb4bb0642dcf52815f2e55fce8ac0bee8870af9ddeae81464329b2db6d3"
+    },
+    {
+      "path": "tests/context-agent-loop.test.mjs",
+      "sha256": "1e63731d5b3dbb7049c6bdbe994c9604615a19090e2dd636ef5ca71d67d430df"
+    },
+    {
+      "path": "tests/context-agent-repair.test.mjs",
+      "sha256": "b7e025d46bacff9f5b2451a882d81a592845cd2c62eaf865b2e24393888c4469"
+    },
+    {
+      "path": "tests/context-agent-simplification.test.mjs",
+      "sha256": "e5e9ac7beb4cbc56e3920891ad0d04ef7a39dec8d0380ee7d935b8e9755fd028"
+    },
+    {
+      "path": "tests/context-agent-tools.test.mjs",
+      "sha256": "498508d1f3fae0d8ce3f97d7b722992c06f1f87d681624513ebac5bd6b337062"
+    },
+    {
+      "path": "tests/context-agent-unified.test.mjs",
+      "sha256": "698bc49961f26c82471b00c2ab2ccbb595ee911d5639230f13b43bec18e6e860"
+    }
+  ]
+}
