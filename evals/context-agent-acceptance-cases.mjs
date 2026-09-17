@@ -51,6 +51,60 @@ acceptanceCases.push(c('AC_MEMORY','记忆与摘要',[
  '回到青禾，帮我写一句广告文案。另外把这两家现在的价格、还等客户回复的事，以及青禾海报用什么底色整理一下，我核对下。'
  ],'必须先证明纠正原文已离开近期模型窗口且摘要实际覆盖纠正，再判断价格/撤销/未知及客户隔离；否则长记忆测试未覆盖。',['每次摘要输入输出与覆盖recordIds','最后实际模型输入中近期原文范围','纠正消息ID','最终事实及来源'],{requires:['summary_coverage_and_eviction']}));
 
+
+// Primary category describes the user journey; theme remains a cross-cutting review tag.
+export const acceptanceCategories={
+ new_text:'新对话文字回答query',
+ multi_text:'多轮对话文字回答query',
+ new_image:'新对话图片生成和分析',
+ multi_image:'多轮对话的图片生成和分析',
+ multi_image_reference:'多轮对话的图片引用',
+ new_text_image:'新对话文字回答加图片生成',
+ multi_text_image_reference:'多轮对话文字回答加图片生成加素材引用'
+};
+const imageBlock={requires:['real_image','vision','visual_review'],blockedReason:'此案例需要有效原图和真实视觉/媒体能力；当前simulation runner不具备，保持not_run。'};
+acceptanceCases.push(
+ c('AC_NEW_COPY','数量与范围',[
+ '青禾新出了桂花乌龙，无糖，20元一杯。帮我写条朋友圈，轻松一点，别太长。'
+ ],'新会话直接交付一条文字；不擅自增加图片任务或编造卖点。',['首轮完整模型输入输出','实际正文及全部工具调用'],{category:'new_text'}),
+ c('AC_NEW_ANALYSIS','事实边界',[
+ '霁白护手霜卖30元，白色软管，客户详细资料还没发。你觉得广告可以从哪些角度想？'
+ ],'以有限资料给出创意分析；建议不变成已验证产品功效。',['首轮实际模型输入输出','事实和创意建议对应关系'],{category:'new_text'}),
+ c('AC_NEW_IMAGE','媒体准备与确认',[
+ '帮我做一张咖啡店海报图，白色咖啡杯放在窗边，有下午的阳光，竖版，不要文字。'
+ ],'新会话理解生图请求并准备具体待批准方案；无需已有对话；未批准不能提交。',['首轮模型输入及工具反馈','proposal参数和提交记录'],{category:'new_image'}),
+ c('AC_NEW_IMAGE_ANALYSIS','事实边界',[
+ '帮我看看这张商品图，拿来做电商主图合适吗，哪里可以改？'
+ ],'对实际附件做视觉分析；明确观察依据，不以文件名推测画面。',['附件身份和实际视觉请求','视觉反馈与最终分析'],{category:'new_image',...imageBlock,fixtures:['product_a.png']}),
+ c('AC_IMAGE_REFERENCE','原稿选择',[
+ '这两张商品图你先帮我看看，哪张更适合做首页横幅？',
+ '还是用我传的第一张，把背景换成米白，商品别动，先给我看看方案。',
+ '就按这个来。',
+ '刚才改的那张背景再亮一点，商品保持原来的样子。'
+ ],'第一张指上传顺序，不是模型推荐顺序；后续编辑引用实际生成版本；无生成产物时不能假造父图。',['两张附件ID及顺序','视觉请求反馈','每轮imageId/referenceImages与父子关系','批准参数及真实产物'],{category:'multi_image_reference',...imageBlock,fixtures:['product_a.png','source_image.png']}),
+ c('AC_NEW_TEXT_IMAGE','数量与范围',[
+ '我们青禾茶铺上新桂花乌龙，无糖，20元一杯。帮我写条朋友圈，再配一张清爽一点的方形海报图。'
+ ],'同时交付文字并准备图片方案，不遗漏任一交付；首轮未批准不提交。',['完整文字交付','图片proposal参数及提交记录'],{category:'new_text_image'}),
+ c('AC_MULTI_MIXED','原稿选择',[
+ '这是我们新品的资料和两张商品图。先帮我看看，朋友圈怎么发比较好？',
+ '就走你刚才说的第一个方向，写条朋友圈，再用我传的第二张商品图配一张方形海报，先给我看方案。',
+ '文案里的价格改成22元，图按刚才的方案做。',
+ '文案用刚改的那版。图片还是用最开始上传的第二张，换成浅灰背景，再给我一套。'
+ ],'文字消费真实资料与选定方向；生成绑定第二张上传图；文字改价不串改冻结图片参数；最后回到上传原图而非生成图。',['资料全文及两个图片ID','每轮模型输入与文字正文','方案/批准/回执','原图与产物父子关系'],{category:'multi_text_image_reference',...imageBlock,fixtures:['product_brief.txt','product_a.png','source_image.png']})
+);
+const existingCategory={AC_MEDIA:'multi_image',AC_PRODUCT:'multi_image',AC_PROMPT_ONLY:'multi_image'};
+for(const item of acceptanceCases){
+ item.category??=existingCategory[item.id]||'multi_text';
+ item.sessionMode=item.category.startsWith('new_')?'new':'multi';
+}
+export function selectAcceptanceCases({categories=[],ids=[]}={}){
+ for(const name of categories)if(!Object.hasOwn(acceptanceCategories,name))throw new Error('Unknown acceptance category: '+name);
+ for(const id of ids)if(!acceptanceCases.some(c=>c.id===id))throw new Error('Unknown acceptance case: '+id);
+ const selected=acceptanceCases.filter(c=>(!categories.length||categories.includes(c.category))&&(!ids.length||ids.includes(c.id)));
+ if(!selected.length)throw new Error('No acceptance cases match the selected categories and IDs');
+ return selected;
+}
+
 export function withAcceptanceFault(tools,fault,round,log){
  return {...tools,execute:async(name,args,ctx)=>{
   if(fault&&fault.round===round&&name===fault.tool&&!log.length){
