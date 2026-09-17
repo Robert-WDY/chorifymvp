@@ -1,0 +1,140 @@
+{
+  "archived": {
+    "ok": true,
+    "asset": {
+      "id": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+      "type": "text",
+      "content": "原稿内容。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "history_original",
+      "sourceMessageId": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86",
+      "sourceRange": {
+        "start": 8,
+        "end": 13,
+        "unit": "utf16"
+      },
+      "version": 1,
+      "sourceIds": [],
+      "createdAt": "2026-09-17T06:16:51.531Z"
+    }
+  },
+  "revised": {
+    "ok": true,
+    "asset": {
+      "id": "doc_efbdb2ab-dca8-4962-915c-54902d370410",
+      "type": "text",
+      "content": "修订内容。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+      "sourceIds": [
+        "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956"
+      ],
+      "createdAt": "2026-09-17T06:16:51.531Z"
+    },
+    "parentEvidence": {
+      "id": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+      "version": 1,
+      "sourceMessageId": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86",
+      "sourceRange": {
+        "start": 8,
+        "end": 13,
+        "unit": "utf16"
+      },
+      "characters": 5,
+      "content": "原稿内容。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956"
+        }
+      }
+    }
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "89b5f5df-5f2d-42da-b578-5cb72fbc2eae",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "保存以下正文："
+          },
+          {
+            "type": "text",
+            "text": "原稿内容。"
+          },
+          {
+            "type": "output_text",
+            "text": "此句是操作说明。"
+          }
+        ],
+        "id": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86",
+        "at": "2026-09-17T06:16:51.530Z",
+        "turnId": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86",
+        "groupId": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86"
+      }
+    ],
+    "assets": {
+      "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956": {
+        "id": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+        "type": "text",
+        "content": "原稿内容。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "3eeebbb7-1b0d-4932-aad4-14e1332f8e86",
+        "sourceRange": {
+          "start": 8,
+          "end": 13,
+          "unit": "utf16"
+        },
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T06:16:51.531Z"
+      },
+      "doc_efbdb2ab-dca8-4962-915c-54902d370410": {
+        "id": "doc_efbdb2ab-dca8-4962-915c-54902d370410",
+        "type": "text",
+        "content": "修订内容。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 2,
+        "parentId": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+        "sourceIds": [
+          "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956"
+        ],
+        "createdAt": "2026-09-17T06:16:51.531Z"
+      }
+    },
+    "invocations": {
+      "document_3238824e4112e12c0fa9321a95cc67fa": {
+        "kind": "document",
+        "assetId": "doc_349ba5af-33b8-4e1f-8aaa-0f4ede46d956",
+        "digest": "ed97dd30898ba7d029fa4ebb4e8fe9910d907fd259966a9187e3f5c9d517a582",
+        "turnId": "turn",
+        "callId": "archive",
+        "createdAt": "2026-09-17T06:16:51.531Z"
+      },
+      "document_7d824ccd87763e59d549d729e4362531": {
+        "kind": "document",
+        "assetId": "doc_efbdb2ab-dca8-4962-915c-54902d370410",
+        "digest": "5eee59a650bfe2f7a35ae2a63b08dabfbe2c3832a46a0d179f93570306745198",
+        "turnId": "turn",
+        "callId": "revise",
+        "createdAt": "2026-09-17T06:16:51.531Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

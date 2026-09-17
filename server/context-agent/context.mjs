@@ -1,6 +1,7 @@
 import { projectSkills } from './skills.mjs';
 import { resultView } from './result-view.mjs';
 import { currentSummary } from './history.mjs';
+import {originalMessageText} from './document-source.mjs';
 
 /** Conservative UTF-8 estimate; this is a budget bound, not provider token accounting. */
 export function estimateTokens(value) {
@@ -160,7 +161,7 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     // Only expose when the real tool can materialize an original message.
     const originals=[];
     if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id))).slice(-8).reverse()){
-      const body=typeof record.content==='string'?record.content:JSON.stringify(record.content);
+      let body;try{body=originalMessageText(record.content);}catch{continue;}
       const row={messageId:record.id,role:record.role,characters:body.length,excerpt:body.slice(0,80),tail:body.length>80?body.slice(-40):undefined};
       if(estimateTokens([...originals,row])<=Math.min(600,available/8))originals.unshift(row);
     }

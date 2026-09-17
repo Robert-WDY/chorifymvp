@@ -1,0 +1,91 @@
+{
+  "archived": {
+    "ok": true,
+    "asset": {
+      "id": "doc_ccd6c79a-09d2-46df-bdc8-66c0794bc9cd",
+      "type": "text",
+      "content": "原稿内容。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "history_original",
+      "sourceMessageId": "66deae61-a5cb-4df9-8562-761ae948d843",
+      "sourceRange": {
+        "start": 8,
+        "end": 13,
+        "unit": "utf16"
+      },
+      "version": 1,
+      "sourceIds": [],
+      "createdAt": "2026-09-17T06:15:35.823Z"
+    }
+  },
+  "revised": {
+    "ok": false,
+    "error": {
+      "code": "HISTORY_NOT_FOUND",
+      "message": "当前会话没有可修订的完整文字原稿"
+    },
+    "submitted": false
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "1f5e5d73-fcee-4f13-a015-cecddeae9165",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "保存以下正文："
+          },
+          {
+            "type": "text",
+            "text": "原稿内容。"
+          },
+          {
+            "type": "output_text",
+            "text": "此句是操作说明。"
+          }
+        ],
+        "id": "66deae61-a5cb-4df9-8562-761ae948d843",
+        "at": "2026-09-17T06:15:35.822Z",
+        "turnId": "66deae61-a5cb-4df9-8562-761ae948d843",
+        "groupId": "66deae61-a5cb-4df9-8562-761ae948d843"
+      }
+    ],
+    "assets": {
+      "doc_ccd6c79a-09d2-46df-bdc8-66c0794bc9cd": {
+        "id": "doc_ccd6c79a-09d2-46df-bdc8-66c0794bc9cd",
+        "type": "text",
+        "content": "原稿内容。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "66deae61-a5cb-4df9-8562-761ae948d843",
+        "sourceRange": {
+          "start": 8,
+          "end": 13,
+          "unit": "utf16"
+        },
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T06:15:35.823Z"
+      }
+    },
+    "invocations": {
+      "document_01fc53b42d40e04cc9aaf99b89933b20": {
+        "kind": "document",
+        "assetId": "doc_ccd6c79a-09d2-46df-bdc8-66c0794bc9cd",
+        "digest": "65858006343bdca2a611326d81a7aeec55c82316c4a8dc32223bb982dbc95817",
+        "turnId": "turn",
+        "callId": "archive",
+        "createdAt": "2026-09-17T06:15:35.823Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

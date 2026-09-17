@@ -5,7 +5,7 @@ import { estimateTokens } from './context.mjs';
 import { publicMediaUrl } from '../media.mjs';
 import { searchHistory, readHistory } from './history.mjs';
 import {interactions,prepareInteraction} from './interactions.mjs';
-import {selectOriginal,documentReceipt} from './document-source.mjs';
+import {selectOriginal,documentReceipt,originalMessageText} from './document-source.mjs';
 import {measureDelivery} from './delivery-check.mjs';
 import { GuardError, assertOwner, assetFor, withSessionLock, fingerprint, newId, now, persist,
   assertNotCancelled, assertMediaBudget, createProposal, approvedProposal, approveProposals } from './io-guard.mjs';
@@ -44,7 +44,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     tool('read_history', '按准确记录ID读取原文及前后文；当前完整原文已可见时不重复读取。按nextOffset继续offset/limit分页，检索命中和摘要不等于完整原稿；排除检索回声及调试Trace。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit, maxChars:{type:'integer',minimum:2000,maximum:50000} }, ['messageId']),
     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
     tool('save_document', '独立文稿或版本管理才保存。新稿传content；修订传原稿parentId或parentMessageId、新content，并用sourceText给出准确原稿正文供核对。聊天消息混有指令/解释时，sourceText只选连续作品正文，原消息仍完整保留。sourceMessageId仅存档，sourceText可指定准确片段；省略时兼容整条消息归档。保存后核对parentEvidence实际正文，不能只按标题宣称保留了原稿。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceText:string(500000), sourceIds: ids }),
-    tool('measure_text', '检查准备交付的完整text。明确字数/数量时传requirements；字数只算正文可用bodyText指定text中的准确连续正文。数量用items划分所有交付项，必须items以两个换行拼接后等于完整text，备选也计入。通过后最终回答原样输出text，修改或追加需重测。语义项如何划分仍由Agent负责；没有requirements时仅测量。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] },bodyText:string(500000),items:{type:'array',minItems:1,maxItems:100,items:string(500000)},requirements:{...schema({min:{type:'integer',minimum:0},max:{type:'integer',minimum:0},itemCount:{type:'integer',minimum:1,maximum:100}},[]),minProperties:1} }, ['text', 'unit']),
+    tool('measure_text', 'requirements用于声明本轮最终交付要求，重测不能放宽已有要求；临时片段只作普通测量。明确字数/数量时传requirements及完整text；字数只算正文可用bodyText指定text中的准确连续正文。数量用items划分所有交付项，必须items以两个换行拼接后等于完整text，备选也计入。通过后最终回答原样输出text，修改或追加需重测。语义项如何划分仍由Agent负责；没有requirements时仅测量。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] },bodyText:string(500000),items:{type:'array',minItems:1,maxItems:100,items:string(500000)},requirements:{...schema({min:{type:'integer',minimum:0},max:{type:'integer',minimum:0},itemCount:{type:'integer',minimum:1,maximum:100}},[]),minProperties:1} }, ['text', 'unit']),
   ];
   definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
   if (typeof observeImages === 'function') {
@@ -279,7 +279,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
         return { ok: true, slug, version, reference, content, nextOffset, references, resources,
           note: '这是专业方法原文，不是业务任务或事实证据。用户数量与保留要求优先；读取本身不是交付。' };
       }
-      if (name === 'measure_text') return { ok: true, ...measureDelivery(args),
+      if (name === 'measure_text') return { ok: true, ...measureDelivery(args,ctx),
         scope: 'exact_supplied_body', convention: '去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。' };
       if (name === 'analyze_image' || name === 'compare_images') {
         const imageIds = name === 'compare_images' ? [args.sourceImageId,args.resultImageId] : args.imageIds;
@@ -321,8 +321,8 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
         let archivedParent;
         if (args.parentMessageId) {
           const original=state.records.find(r=>r.id===args.parentMessageId&&r.kind==='message');
-          if (!original || typeof original.content!=='string' || !original.content.trim()) throw new GuardError('HISTORY_NOT_FOUND','当前会话没有可修订的完整文字原稿');
-          const selected=selectOriginal(original.content,args.sourceText);
+          if (!original) throw new GuardError('HISTORY_NOT_FOUND','当前会话没有这条原始消息');
+          const selected=selectOriginal(originalMessageText(original.content),args.sourceText);
           archivedParent=Object.values(state.assets).find(a=>a.sourceMessageId===original.id&&a.origin==='history_original'&&a.content===selected.content);
           if (!archivedParent) archivedParent=immutableAsset({id:newId('doc'),type:'text',...selected,title:'原始聊天文稿',ownerId:state.ownerId,origin:'history_original',sourceMessageId:original.id,version:1,sourceIds:[],createdAt:now()});
         }
@@ -331,9 +331,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
           if (args.parentId) throw new GuardError('invalid_arguments', '聊天原稿存档不同时指定parentId；先取得原稿asset.id，再另存修订。');
           const original = state.records.find(record => record.id === args.sourceMessageId && record.kind === 'message');
           if (!original) throw new GuardError('HISTORY_NOT_FOUND', '当前会话不存在这条原始消息。');
-          if (typeof original.content === 'string') content = original.content;
-          else if (Array.isArray(original.content) && original.content.every(part => ['text', 'input_text', 'output_text'].includes(part.type) && typeof part.text === 'string')) content = original.content.map(part => part.text).join('\n');
-          else throw new GuardError('text_original_required', '原消息不是完整文字，请读取并选择实际文字原稿。');
+          content=originalMessageText(original.content);
           if (!content.trim()) throw new GuardError('text_original_required', '不能保存空白原稿。');
           const selected=selectOriginal(content,args.sourceText);content=selected.content;sourceRange=selected.sourceRange;
           if (args.content !== undefined && args.content !== content) throw new GuardError('original_content_mismatch', 'sourceMessageId存档必须与原文一致；修改请另存带parentId的修订。');

@@ -1,5 +1,13 @@
 import {GuardError} from './io-guard.mjs';
 
+// Same supported message representation for both archival and revision.
+// Mixed media must not be flattened into an apparently complete text original.
+export function originalMessageText(content){
+ if(typeof content==='string')return content;
+ if(Array.isArray(content)&&content.every(part=>part&&['text','input_text','output_text'].includes(part.type)&&typeof part.text==='string'))return content.map(part=>part.text).join('\n');
+ throw new GuardError('text_original_required','原消息不是完整文字；不能省略图片等非文字部分来构造原稿');
+}
+
 // Select exact original wording. No model paraphrase, heuristic instruction removal,
 // or mutation of the source message. Offsets are JS string (UTF-16) offsets.
 export function selectOriginal(original,sourceText){

@@ -1,0 +1,14 @@
+✔ remeasurement cannot lower or drop valid same-turn requirements (92.3184ms)
+✔ all-text message arrays can be archived and revised with the same exact source and range (15.8003ms)
+✔ non-text message parts are never silently dropped to manufacture an original (12.0379ms)
+✔ valid corrections satisfy earlier declarations and a new user turn may change scope (15.4663ms)
+✔ measurement unit changes cannot evade prior constraints; bare diagnostics do not declare a requirement (24.8868ms)
+✔ same-turn declarations survive a store reload (28.6929ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 297.4515

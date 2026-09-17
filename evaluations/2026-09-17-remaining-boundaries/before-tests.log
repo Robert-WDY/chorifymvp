@@ -1,0 +1,107 @@
+✖ remeasurement cannot lower or drop valid same-turn requirements (89.8564ms)
+✖ all-text message arrays can be archived and revised with the same exact source and range (14.2798ms)
+✖ non-text message parts are never silently dropped to manufacture an original (18.226ms)
+✔ valid corrections satisfy earlier declarations and a new user turn may change scope (24.29ms)
+✖ measurement unit changes cannot evade prior constraints; bare diagnostics do not declare a requirement (21.1134ms)
+✖ same-turn declarations and normalized originals survive a store reload (26.7405ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 1
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 305.1194
+
+✖ failing tests:
+
+test at tests\context-agent-remaining-boundaries.test.mjs:14:1
+✖ remeasurement cannot lower or drop valid same-turn requirements (89.8564ms)
+  AssertionError [ERR_ASSERTION]: lower-min
+  + actual - expected
+  
+  + 'completed'
+  - 'budget_exceeded'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-remaining-boundaries.test.mjs:26:37)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'budget_exceeded',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-remaining-boundaries.test.mjs:29:1
+✖ all-text message arrays can be archived and revised with the same exact source and range (14.2798ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-remaining-boundaries.test.mjs:35:40)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-remaining-boundaries.test.mjs:39:1
+✖ non-text message parts are never silently dropped to manufacture an original (18.226ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'HISTORY_NOT_FOUND'
+  - 'text_original_required'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-remaining-boundaries.test.mjs:42:249)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'HISTORY_NOT_FOUND',
+    expected: 'text_original_required',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-remaining-boundaries.test.mjs:54:1
+✖ measurement unit changes cannot evade prior constraints; bare diagnostics do not declare a requirement (21.1134ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'completed'
+  - 'budget_exceeded'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-remaining-boundaries.test.mjs:55:336)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'completed',
+    expected: 'budget_exceeded',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-remaining-boundaries.test.mjs:58:1
+✖ same-turn declarations and normalized originals survive a store reload (26.7405ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'passed' !== 'failed'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-remaining-boundaries.test.mjs:63:168)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'passed',
+    expected: 'failed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
