@@ -8,7 +8,7 @@ import {ContextAgent} from '../server/context-agent/loop.mjs';
 import {HistoryStore} from '../server/context-agent/history.mjs';
 import {assembleAgentTools,assembleMemoryOptions} from '../server/context-agent/runtime.mjs';
 import {loadAgentCatalog} from '../server/context-agent/skills.mjs';
-import {acceptanceCases,acceptanceCategories,selectAcceptanceCases,withAcceptanceFault} from './context-agent-acceptance-cases.mjs';
+import {acceptanceCategories,selectAcceptanceCases,withAcceptanceFault,canContinueAcceptance} from './context-agent-acceptance-cases.mjs';
 import {loadCorpus} from './context-agent-corpus.mjs';
 
 const args=process.argv.slice(2),envPath=args.find(x=>x.startsWith('--env='))?.slice(6);
@@ -75,7 +75,7 @@ if(categoryFilter.length&&!args.includes('--acceptance'))throw new Error('--cate
 if(args.includes('--acceptance'))cases.splice(0,cases.length,...selectAcceptanceCases({categories:categoryFilter}));
 const selected=args.find(x=>x.startsWith('--cases='))?.slice(8).split(',');
 if(selected){if(selected.some(id=>!cases.some(c=>c.id===id)))throw new Error('Unknown evaluation case');cases.splice(0,cases.length,...cases.filter(c=>selected.includes(c.id)));}
-if(!args.includes('--run')){console.log(JSON.stringify({provider:config.provider,model:config.model,keyConfigured:!!config.key,budget,cases:cases.map(c=>({id:c.id,turns:c.turns.length,theme:c.theme,category:c.category,categoryLabel:acceptanceCategories[c.category],blockedReason:c.blockedReason})),media:'simulation',vision:false,output:root},null,2));process.exit(0);}
+if(!args.includes('--run')){console.log(JSON.stringify({provider:config.provider,model:config.model,keyConfigured:!!config.key,budget,cases:cases.map(c=>({id:c.id,turns:c.turns.length,theme:c.theme,category:c.category,categoryLabel:acceptanceCategories[c.category],skill:c.skill,missingInputs:c.missingInputs,blockedReason:c.blockedReason})),media:'simulation',vision:false,output:root},null,2));process.exit(0);}
 if(config.model!=='deepseek-flash'||!config.key)throw new Error('Expected authorized configured deepseek-flash');
 await mkdir(dirname(root),{recursive:true});await mkdir(root,{recursive:false});
 const write=(path,value)=>writeFile(path,JSON.stringify(value,null,2)+'\n');
@@ -109,11 +109,11 @@ for(const c of cases){
   await write(join(root,c.id,'rounds.json'),rounds);
   await write(join(root,c.id,'session.json'),await store.exportSession(state.id,state.ownerId));
   console.log(JSON.stringify({case:c.id,round:i+1,status:result.status,modelCalls:result.modelCalls,text:result.text?.slice(0,100)}));
-  if(result.status!=='completed')break;
+  if(args.includes('--acceptance')?!canContinueAcceptance(result):result.status!=='completed')break;
  }
  await write(join(root,c.id,'rounds.json'),rounds);
  results.push({id:c.id,category:c.category,sessionId:state.id,turns:rounds.length,planned:c.turns.length,calls:calls-startCalls,summaries:Object.keys(state.summaries).length,acceptance:'requires_full_trace_review',faultCoverage:c.fault?(faultLog.length?'injected':'not_exercised'):null});
- await write(join(root,c.id,'review.json'),{status:'pending',reviewer:null,evidenceRequirements:c.evidence||[],expected:c.expected,coverageChecks:c.requires||[],earliestFailureStage:null,evidencePointers:[],reason:null});
+ await write(join(root,c.id,'review.json'),{status:'pending',reviewer:null,evidenceRequirements:c.evidence||[],expected:c.expected,coverageChecks:c.requires||[],skillExpectation:c.skill||null,missingInputs:c.missingInputs||[],expectedBehavior:c.expectedBehavior||null,earliestFailureStage:null,evidencePointers:[],reason:null});
  await write(join(root,'run.json'),{...metadata,calls,results,realMediaCalls:0,finishedAt:new Date().toISOString()});
 }
 await write(join(root,'run.json'),{...metadata,calls,results,realMediaCalls:0,finishedAt:new Date().toISOString()});
