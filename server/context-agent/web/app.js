@@ -4,6 +4,7 @@ let config,sessionId=localStorage.getItem(key),running=false,streaming=false,cur
 let pending=new Map(),questions=new Map(),cards=new Map(),seen=new Set(),selected=new Set(),rendered=new Set();
 const labels={agent:'Agent 决策',summary:'整理较早会话',image_observation:'观察图片',read_asset:'读取素材',read_history:'读取历史',search_history:'查找历史',read_skill:'读取专业方法',inspect_workspace:'查询工作区',request_user_input:'发布问题',generate_image:'准备图片方案',edit_image:'准备图片修改',generate_video:'准备视频方案',confirm_media:'确认并执行方案',execute_approved:'执行已批准方案',save_document:'保存文稿',analyze_image:'观察图片',compare_images:'比较原图与成品',read_media_result:'读取媒体回执'};
 const states={running:'进行中',succeeded:'已完成',failed:'失败',unknown:'结果未知',pending:'已提交，处理中',partial:'部分完成',prepared:'方案已准备',waiting_user:'等待回答',not_executed:'未执行',cancelled:'已取消'};
+labels.delivery_check='交付正文验收';
 const el=(tag,text,className)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;};
 async function checked(response){if(!response.ok){let body;try{body=await response.json();}catch{}const error=new Error(body?.error||'请求失败');error.status=response.status;throw error;}return response;}
 const get=path=>fetch(path).then(checked).then(r=>r.json());

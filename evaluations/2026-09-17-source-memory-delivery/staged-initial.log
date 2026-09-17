@@ -1,0 +1,78 @@
+✔ A exact source selection rejects wrong ID and excludes wrappers without deleting original history (36.4436ms)
+✔ A excerpts have distinct identity, reuse matching original, retain full-message archival compatibility (17.1874ms)
+✔ A original evidence and versions survive SQLite restart and repeated calls (29.5575ms)
+✔ B oversized summary gets smaller explicit byte target, shared envelope budget and actual asset evidence (4.2071ms)
+✔ B repeated oversize remains bounded, preserves source and does not retry same range without new information (1.3092ms)
+✔ B non-budget faults do not spend another summary call or change coverage (1.0068ms)
+✔ C full delivery covers all items and body counting cannot include the title (12.3094ms)
+✖ C measured draft changed by final extra option is withheld and repaired by same Agent within budget (14.3197ms)
+✖ C failed requirements cannot be finalized, even if exact draft is repeated or a later bare measurement succeeds (13.9545ms)
+✔ C remeasurement of fixed draft passes; constraints do not leak into another turn (25.1653ms)
+✖ C invalid measurement cannot silently remove declared constraints (11.4585ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 8
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 277.0677
+
+✖ failing tests:
+
+test at tests\context-agent-source-memory-delivery.test.mjs:91:1
+✖ C measured draft changed by final extra option is withheld and repaired by same Agent within budget (14.3197ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'error'
+  - 'completed'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-source-memory-delivery.test.mjs:99:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-source-memory-delivery.test.mjs:105:1
+✖ C failed requirements cannot be finalized, even if exact draft is repeated or a later bare measurement succeeds (13.9545ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'error'
+  - 'budget_exceeded'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-source-memory-delivery.test.mjs:111:32)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'budget_exceeded',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-source-memory-delivery.test.mjs:124:1
+✖ C invalid measurement cannot silently remove declared constraints (11.4585ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'error'
+  - 'budget_exceeded'
+  
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-source-memory-delivery.test.mjs:126:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'budget_exceeded',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

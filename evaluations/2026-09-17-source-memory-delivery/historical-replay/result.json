@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checks": [
+    "historical-missing-source-text-rejected",
+    "wrong-parent-and-intended-quote-rejected",
+    "correct-parent-body-bound",
+    "wrapper-excluded-original-retained",
+    "historical-summary-total-budget-compared"
+  ],
+  "realModelCalls": 0,
+  "realMediaCalls": 0,
+  "note": "This supplies the intended original explicitly. It does not prove the model autonomously chooses it or compresses accurately."
+}

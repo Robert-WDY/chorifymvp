@@ -223,7 +223,7 @@ test('repair scripted integration: model selects memory, archives original, save
       case 0: return call('search_history', { query: '原脚本' }, 'find');
       case 1: assert.equal(results.at(-1).matches[0].id, original.id); return call('read_history', { messageId: original.id }, 'read');
       case 2: assert.equal(results.at(-1).records[0].content, original.content); return call('save_document', { sourceMessageId: original.id }, 'archive');
-      case 3: parent = results.at(-1).asset; return call('save_document', { content: '15秒脚本：红杯保持，旁白压缩。', parentId: parent.id }, 'revise');
+      case 3: parent = results.at(-1).asset; return call('save_document', { content: '15秒脚本：红杯保持，旁白压缩。', parentId: parent.id, sourceText:parent.content }, 'revise');
       default: assert.equal(results.at(-1).asset.parentId, parent.id); assert.equal(results.at(-1).asset.version, 2); return say('已保存15秒修订，红杯保持。');
     }
   } };

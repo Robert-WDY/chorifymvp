@@ -1,0 +1,19 @@
+✔ A exact source selection rejects wrong ID and excludes wrappers without deleting original history (37.3458ms)
+✔ A excerpts have distinct identity, reuse matching original, retain full-message archival compatibility (18.0072ms)
+✔ A original evidence and versions survive SQLite restart and repeated calls (33.8123ms)
+✔ B oversized summary gets smaller explicit byte target, shared envelope budget and actual asset evidence (4.601ms)
+✔ B repeated oversize remains bounded, preserves source and does not retry same range without new information (1.6207ms)
+✔ B non-budget faults do not spend another summary call or change coverage (1.1365ms)
+✔ C full delivery covers all items and body counting cannot include the title (12.2837ms)
+✔ C measured draft changed by final extra option is withheld and repaired by same Agent within budget (17.2278ms)
+✔ C failed requirements cannot be finalized, even if exact draft is repeated or a later bare measurement succeeds (22.8267ms)
+✔ C remeasurement of fixed draft passes; constraints do not leak into another turn (40.1359ms)
+✔ C invalid measurement cannot silently remove declared constraints (11.874ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 309.1497

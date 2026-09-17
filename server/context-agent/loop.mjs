@@ -6,6 +6,7 @@ import {publicMediaUrl} from '../media.mjs';
 import {maintainMemory,memoryOptions} from './memory.mjs';
 import {interactions,validateAnswer,selectedAssets} from './interactions.mjs';
 import {appendPublicEvent,resultSummary,safeText} from './public-events.mjs';
+import {finalDeliveryCheck} from './delivery-check.mjs';
 
 const prompt = await readFile(new URL('./prompt.md', import.meta.url), 'utf8');
 const errorResult = (error, code = 'tool_error') => ({isError:true, code:error.code || code, message:error.message || String(error), submitted:false});
@@ -144,6 +145,13 @@ export class ContextAgent {
         if(calls.some(c=>state.records.some(r=>r.kind==='tool_call'&&r.callId===c.call_id))) throw Object.assign(new Error('模型重复使用已记录的调用 ID；不会再次提交'),{code:'duplicate_call_id'});
         if(calls.length<=1&&callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
         const text=output.filter(x=>x.type==='message').map(x=>contentText(x.content)).join('\n');
+        const deliveryFailure=!calls.length&&finalDeliveryCheck(state,turnId,text);
+        if(deliveryFailure){
+          record({kind:'system_observation',groupId,name:'delivery_check',source:{kind:'measurement',callId:deliveryFailure.measurementCallId},output:JSON.stringify(deliveryFailure)});
+          await publish({kind:'text_incomplete',streamId:lastAgentTraceId,note:'草稿未通过已声明要求，正在修正'});
+          await publish({kind:'activity',activityId:groupId,category:'check',name:'delivery_check',status:'failed',error:deliveryFailure.message});
+          continue;
+        }
         for(const part of output) {
           if(part.type==='message'){const m=record({kind:'message',role:'assistant',groupId,content:contentText(part.content)});await publish({kind:'message',messageId:m.id,streamId:lastAgentTraceId,role:'assistant',text:m.content});}
           else record({kind:'tool_call',groupId,callId:part.call_id,name:part.name,arguments:part.arguments});

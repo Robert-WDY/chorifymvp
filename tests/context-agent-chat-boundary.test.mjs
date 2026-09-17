@@ -54,7 +54,7 @@ test('versioned editing: one atomic chat revision, then one asset revision, pres
   const result = await new ContextAgent({tools, save:f.save, brain:{respond:async input => {
     if (step++ === 0) {
       assert.ok(input.some(m => m.role === 'assistant' && m.content === original.content));
-      return call('archive-and-revise', {parentMessageId:original.id, content:'桂花乌龙，双香慢饮。', title:'茶文案修订'});
+      return call('archive-and-revise', {parentMessageId:original.id, sourceText:original.content, content:'桂花乌龙，双香慢饮。', title:'茶文案修订'});
     }
     saved = feedback(input);
     assert.equal(saved.ok, true);
@@ -71,7 +71,7 @@ test('versioned editing: one atomic chat revision, then one asset revision, pres
   const next = await new ContextAgent({tools, save:f.save, brain:{respond:async input => {
     if (step++ === 0) {
       assert.equal(feedback(input).asset.content, child.content);
-      return call('asset-revise', {parentId:child.id, content:'双香桂花乌龙，悠然慢饮。'});
+      return call('asset-revise', {parentId:child.id, sourceText:child.content, content:'双香桂花乌龙，悠然慢饮。'});
     }
     saved = feedback(input);
     assert.equal(saved.ok, true);

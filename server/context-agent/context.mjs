@@ -8,6 +8,22 @@ export function estimateTokens(value) {
   return Math.ceil(Buffer.byteLength(text ?? '', 'utf8') / 2) + 4;
 }
 
+// Evidence comes from the actual registry, never from a summary's asset labels.
+// Bounded extracts identify objects; they do not stand in for an exact edit source.
+export function referencedAssetEvidence(state,referenceText,budget=1000){
+ const rows=[];
+ for(const asset of Object.values(state.assets||{})){
+  if(!referenceText.includes(asset.id)||(asset.ownerId&&asset.ownerId!==state.ownerId))continue;
+  const body=typeof asset.content==='string'?asset.content:null;
+  const row={id:asset.id,type:asset.type,version:asset.version,parentId:asset.parentId,sourceIds:asset.sourceIds,
+   sourceMessageId:asset.sourceMessageId,sourceRange:asset.sourceRange,
+   ...(body!==null?{characters:body.length,content:body.length<=600?body:body.slice(0,300)+'\n[中间省略]\n'+body.slice(-180),complete:body.length<=600}:{visualObservation:false}),
+   readMore:{tool:'read_asset',arguments:{id:asset.id}}};
+  if(rows.length>=8||estimateTokens([...rows,row])>budget)continue;rows.push(row);
+ }
+ return rows;
+}
+
 function contextError(message, metrics) {
   const error = new Error(message);
   error.code = 'CONTEXT_BUDGET_EXCEEDED';
@@ -120,7 +136,7 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     }).slice(0, 8).map(proposalId => ({ proposalId, name: state.approvals[proposalId].name }))
   })).filter(r => r.proposals.length);
   const prefix = [{ role: 'system', content: systemPrompt }];
-  if(summary)prefix.push(dataMessage({sessionSummary:summary,note:'Derived continuity aid, not original wording or authorization. Latest original corrections take precedence; read source IDs for exact edits or saved media parameters.'}));
+  if(summary)prefix.push(dataMessage({sessionSummary:summary,assetEvidence:referencedAssetEvidence(state,JSON.stringify(summary.sourceRefs)),note:'Derived continuity aid, not original wording or authorization. Asset evidence is the actual saved body/identity and takes precedence over assistant or summary labels. Latest original corrections take precedence; read source IDs for exact edits or saved media parameters.'}));
   if (skillDirectory.length || assetDirectory.length || toolApprovals.length || capabilities || (includeAssetDirectory && allAssets.length)) prefix.push(dataMessage({
     skillDirectory: projectSkills(skillDirectory).slice(0, 20), assetDirectory,
     ...(includeAssetDirectory && allAssets.length > assetDirectory.length ? { assetWindow: { total: allAssets.length, shown: assetDirectory.length, readMore: 'list_assets: query or offset/limit; read_asset: exact ID' } } : {}),
@@ -142,8 +158,14 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     const history = state.records.filter(record => selected.has(groupForRecord.get(record.id))).map(record => projectRecord(record, projections.get(groupForRecord.get(record.id)).toolResultChars,callNames.get(record.callId))).filter(Boolean);
     // Short identities for retained originals; content is already present in history.
     // Only expose when the real tool can materialize an original message.
-    const originals = registeredTools.includes('save_document') ? state.records.filter(record => record.kind === 'message' && record.role === 'assistant' && selected.has(groupForRecord.get(record.id))).slice(-8).map(record => ({ messageId: record.id, turnId: record.turnId, excerpt: (typeof record.content === 'string' ? record.content : JSON.stringify(record.content)).slice(0, 80) })) : [];
-    const head = [...prefix, ...(originals.length ? [dataMessage({ originalMessages: originals, note: 'Original chat messages, not saved documents. Do not reread complete text already present. Read exact IDs when needed; parentMessageId plus revised content saves a version atomically.' })] : []), ...notice];
+    const originals=[];
+    if(registeredTools.includes('save_document'))for(const record of state.records.filter(r=>r.kind==='message'&&selected.has(groupForRecord.get(r.id))).slice(-8).reverse()){
+      const body=typeof record.content==='string'?record.content:JSON.stringify(record.content);
+      const row={messageId:record.id,role:record.role,characters:body.length,excerpt:body.slice(0,80),tail:body.length>80?body.slice(-40):undefined};
+      if(estimateTokens([...originals,row])<=Math.min(600,available/8))originals.unshift(row);
+    }
+    const originalIndex=originals.length?[dataMessage({originalMessages:originals,note:'Chat identities, not saved works. Match actual body and ID. sourceText selects exact work within a message; read_history retrieves omitted identities/bodies.'})]:[];
+    const head=[...prefix,...(estimateTokens([...prefix,...originalIndex,...notice,...history])<=available?originalIndex:[]),...notice];
     // Only whole, accessible text attached to the current original message. Never
     // fetch files or promote attachment instructions into system authority.
     const inline = [], seen = new Set();

@@ -1,0 +1,125 @@
+{
+  "historicalCallId": "525522bc-89f8-4917-b9db-dcf0377d9183",
+  "missingQuote": {
+    "ok": false,
+    "error": {
+      "code": "source_text_required",
+      "message": "模型修订必须同时给出sourceText准确原稿正文和对应ID；根据当前原文或read_history/read_asset核对，不按长短标签猜父稿"
+    },
+    "submitted": false
+  },
+  "conflictingQuote": {
+    "ok": false,
+    "error": {
+      "code": "original_content_mismatch",
+      "message": "sourceText不是所选对象的连续原文；核对消息/资产ID与实际正文，不能用修改稿冒充原稿"
+    },
+    "submitted": false
+  },
+  "repaired": {
+    "ok": true,
+    "asset": {
+      "id": "doc_a2ec6d1f-f4ac-4196-bf25-b164ec8c3499",
+      "type": "text",
+      "content": "短标题：一杯桂花乌龙，等秋风来\n\n正文：\n\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。",
+      "title": "青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本二·店员口吻）",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_cc329468-27ba-473e-980f-8d5c35fcca2f",
+      "sourceIds": [
+        "doc_cc329468-27ba-473e-980f-8d5c35fcca2f"
+      ],
+      "createdAt": "2026-09-17T05:05:03.028Z"
+    },
+    "parentEvidence": {
+      "id": "doc_cc329468-27ba-473e-980f-8d5c35fcca2f",
+      "version": 1,
+      "sourceMessageId": "46a959b4-c317-4721-bfd2-b5b5ef088513",
+      "sourceRange": {
+        "start": 0,
+        "end": 215,
+        "unit": "utf16"
+      },
+      "characters": 215,
+      "content": "**短标题：** 一杯桂花乌龙，等秋风来\n\n**正文：**\n\n桂花乌龙冷泡茶，青禾茶铺上新了。\n\n冷水慢慢泡开，桂花的甜先落在鼻尖，乌龙的香跟着上来，清清爽爽，一点糖都没加。喝下去不腻，也不会在嘴里留一层黏。\n\n每杯18元，每天11点开门。要不要提前预约，这边还没定下来，确定了我第一时间说。\n\n路过的话，进来坐坐。\n\n（正文共约110字，仅一版文字，未生成图片。若预约规则后续确定，可在“确定了我第一时间说”处替换为具体说明。）",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_cc329468-27ba-473e-980f-8d5c35fcca2f"
+        }
+      }
+    }
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "7101a3e0-8a49-49f8-99c5-c016c1b10d93",
+    "ownerId": "local",
+    "records": [
+      {
+        "id": "46a959b4-c317-4721-bfd2-b5b5ef088513",
+        "kind": "message",
+        "role": "assistant",
+        "content": "**短标题：** 一杯桂花乌龙，等秋风来\n\n**正文：**\n\n桂花乌龙冷泡茶，青禾茶铺上新了。\n\n冷水慢慢泡开，桂花的甜先落在鼻尖，乌龙的香跟着上来，清清爽爽，一点糖都没加。喝下去不腻，也不会在嘴里留一层黏。\n\n每杯18元，每天11点开门。要不要提前预约，这边还没定下来，确定了我第一时间说。\n\n路过的话，进来坐坐。\n\n（正文共约110字，仅一版文字，未生成图片。若预约规则后续确定，可在“确定了我第一时间说”处替换为具体说明。）",
+        "at": "2026-09-17T05:05:03.026Z",
+        "turnId": "46a959b4-c317-4721-bfd2-b5b5ef088513",
+        "groupId": "46a959b4-c317-4721-bfd2-b5b5ef088513"
+      },
+      {
+        "id": "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+        "kind": "message",
+        "role": "assistant",
+        "content": "短标题：一杯桂花乌龙，等秋风来\n\n正文：\n\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。\n\n（正文52字。事实与前一版一致：无糖、18元/杯、11点营业、预约待定；语气改为店员口吻。仅在聊天里给你，未保存文稿、未生成图片。）",
+        "at": "2026-09-17T05:05:03.026Z",
+        "turnId": "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+        "groupId": "e9a24e91-496a-4734-ac3f-0126c38ed37c"
+      }
+    ],
+    "assets": {
+      "doc_cc329468-27ba-473e-980f-8d5c35fcca2f": {
+        "id": "doc_cc329468-27ba-473e-980f-8d5c35fcca2f",
+        "type": "text",
+        "content": "**短标题：** 一杯桂花乌龙，等秋风来\n\n**正文：**\n\n桂花乌龙冷泡茶，青禾茶铺上新了。\n\n冷水慢慢泡开，桂花的甜先落在鼻尖，乌龙的香跟着上来，清清爽爽，一点糖都没加。喝下去不腻，也不会在嘴里留一层黏。\n\n每杯18元，每天11点开门。要不要提前预约，这边还没定下来，确定了我第一时间说。\n\n路过的话，进来坐坐。\n\n（正文共约110字，仅一版文字，未生成图片。若预约规则后续确定，可在“确定了我第一时间说”处替换为具体说明。）",
+        "sourceRange": {
+          "start": 0,
+          "end": 215,
+          "unit": "utf16"
+        },
+        "title": "原始聊天文稿",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "46a959b4-c317-4721-bfd2-b5b5ef088513",
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T05:05:03.028Z"
+      },
+      "doc_a2ec6d1f-f4ac-4196-bf25-b164ec8c3499": {
+        "id": "doc_a2ec6d1f-f4ac-4196-bf25-b164ec8c3499",
+        "type": "text",
+        "content": "短标题：一杯桂花乌龙，等秋风来\n\n正文：\n\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。",
+        "title": "青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本二·店员口吻）",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 2,
+        "parentId": "doc_cc329468-27ba-473e-980f-8d5c35fcca2f",
+        "sourceIds": [
+          "doc_cc329468-27ba-473e-980f-8d5c35fcca2f"
+        ],
+        "createdAt": "2026-09-17T05:05:03.028Z"
+      }
+    },
+    "invocations": {
+      "document_2482101d86b8fb9532fcd3b83978b5a4": {
+        "kind": "document",
+        "assetId": "doc_a2ec6d1f-f4ac-4196-bf25-b164ec8c3499",
+        "digest": "b3791aa649ae52e68111fe6558e90f4e2792257404fc9e0ff0f35f134fa095a8",
+        "turnId": "offline-replay",
+        "callId": "matching",
+        "createdAt": "2026-09-17T05:05:03.028Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

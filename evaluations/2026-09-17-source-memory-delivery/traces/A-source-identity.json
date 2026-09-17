@@ -1,0 +1,162 @@
+{
+  "wrong": {
+    "ok": false,
+    "error": {
+      "code": "original_content_mismatch",
+      "message": "sourceText不是所选对象的连续原文；核对消息/资产ID与实际正文，不能用修改稿冒充原稿"
+    },
+    "submitted": false
+  },
+  "saved": {
+    "ok": true,
+    "asset": {
+      "id": "doc_8181626e-1a19-48ef-8c6a-27fb0f066c05",
+      "type": "text",
+      "content": "湖畔茶香，陪伴清晨。预约要求未知。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3",
+      "sourceIds": [
+        "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3"
+      ],
+      "createdAt": "2026-09-17T05:05:40.924Z"
+    },
+    "parentEvidence": {
+      "id": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3",
+      "version": 1,
+      "sourceMessageId": "08d938cd-7f2d-4f63-9204-48368f286442",
+      "sourceRange": {
+        "start": 9,
+        "end": 26,
+        "unit": "utf16"
+      },
+      "characters": 17,
+      "content": "湖畔茶香，陪伴午后。预约要求未知。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3"
+        }
+      }
+    }
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "6fa4643a-4bc9-4911-bdda-ad6a4bc48613",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "message",
+        "role": "user",
+        "content": "请保留下面原稿：\n湖畔茶香，陪伴午后。预约要求未知。\n以上仅存档。",
+        "id": "08d938cd-7f2d-4f63-9204-48368f286442",
+        "at": "2026-09-17T05:05:40.918Z",
+        "turnId": "08d938cd-7f2d-4f63-9204-48368f286442",
+        "groupId": "08d938cd-7f2d-4f63-9204-48368f286442"
+      },
+      {
+        "kind": "message",
+        "role": "assistant",
+        "content": "湖畔茶香。",
+        "id": "7f4cdea0-0168-4b01-b98d-60b1d921a572",
+        "at": "2026-09-17T05:05:40.919Z",
+        "turnId": "7f4cdea0-0168-4b01-b98d-60b1d921a572",
+        "groupId": "7f4cdea0-0168-4b01-b98d-60b1d921a572"
+      }
+    ],
+    "assets": {
+      "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3": {
+        "id": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3",
+        "type": "text",
+        "content": "湖畔茶香，陪伴午后。预约要求未知。",
+        "sourceRange": {
+          "start": 9,
+          "end": 26,
+          "unit": "utf16"
+        },
+        "title": "原始聊天文稿",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "08d938cd-7f2d-4f63-9204-48368f286442",
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T05:05:40.924Z"
+      },
+      "doc_8181626e-1a19-48ef-8c6a-27fb0f066c05": {
+        "id": "doc_8181626e-1a19-48ef-8c6a-27fb0f066c05",
+        "type": "text",
+        "content": "湖畔茶香，陪伴清晨。预约要求未知。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 2,
+        "parentId": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3",
+        "sourceIds": [
+          "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3"
+        ],
+        "createdAt": "2026-09-17T05:05:40.924Z"
+      }
+    },
+    "invocations": {
+      "document_a78e6f55947512b0cac0e41d67fab57d": {
+        "kind": "document",
+        "assetId": "doc_8181626e-1a19-48ef-8c6a-27fb0f066c05",
+        "digest": "79fc15e39a8ea0d96bd2ce5978d10984bd5698260e7a00dff950c65b4b1dc7ef",
+        "turnId": "turn",
+        "callId": "correct",
+        "createdAt": "2026-09-17T05:05:40.924Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  },
+  "projected": {
+    "kind": "tool_result",
+    "outcome": "succeeded",
+    "submission": "not_applicable",
+    "resultRefs": [
+      {
+        "id": "doc_8181626e-1a19-48ef-8c6a-27fb0f066c05",
+        "type": "text",
+        "version": 2,
+        "parentId": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3"
+      }
+    ],
+    "rawResultRef": {
+      "kind": "record",
+      "tool": "read_history",
+      "arguments": {
+        "offset": 0,
+        "limit": 12000
+      }
+    },
+    "parentEvidence": {
+      "id": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3",
+      "version": 1,
+      "sourceMessageId": "08d938cd-7f2d-4f63-9204-48368f286442",
+      "sourceRange": {
+        "start": 9,
+        "end": 26,
+        "unit": "utf16"
+      },
+      "characters": 17,
+      "content": "湖畔茶香，陪伴午后。预约要求未知。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_3a4ef32f-e6db-4d1d-be84-30db9ed5a4b3"
+        }
+      },
+      "contentTruncated": false
+    },
+    "truncated": true,
+    "data": {
+      "excerpt": "{\"ok\"",
+      "totalCharacters": 655,
+      "nextOffset": 5
+    }
+  }
+}

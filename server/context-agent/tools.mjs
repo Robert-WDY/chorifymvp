@@ -2,10 +2,11 @@ import Ajv from 'ajv';
 import { readAgentSkill } from './skills.mjs';
 import {approveAndExecute,proposalDisplay,unavailableProposal} from './confirmation.mjs';
 import { estimateTokens } from './context.mjs';
-import { countBody } from '../text-measure.mjs';
 import { publicMediaUrl } from '../media.mjs';
 import { searchHistory, readHistory } from './history.mjs';
 import {interactions,prepareInteraction} from './interactions.mjs';
+import {selectOriginal,documentReceipt} from './document-source.mjs';
+import {measureDelivery} from './delivery-check.mjs';
 import { GuardError, assertOwner, assetFor, withSessionLock, fingerprint, newId, now, persist,
   assertNotCancelled, assertMediaBudget, createProposal, approvedProposal, approveProposals } from './io-guard.mjs';
 export { approveProposals };
@@ -42,8 +43,8 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
     tool('search_history', '检索本会话原话及原始工具证据，排除检索回声和调试Trace；准确记录ID仍可定位任何原记录。', { query: {type:'string',maxLength:2000}, cursor:offset, order:{enum:['oldest','latest']}, maxChars:{type:'integer',minimum:2000,maximum:50000}, limit: { type: 'integer', minimum: 1, maximum: 50 }, before: string(80), after: string(80) }),
     tool('read_history', '按准确记录ID读取原文及前后文；当前完整原文已可见时不重复读取。按nextOffset继续offset/limit分页，检索命中和摘要不等于完整原稿；排除检索回声及调试Trace。', { messageId: id, surroundingRange: { type: 'integer', minimum: 0, maximum: 20 }, offset, limit, maxChars:{type:'integer',minimum:2000,maximum:50000} }, ['messageId']),
     tool('read_skill', '按需读取专业方法和参考原文；不创建任务、不自动安排流程。', { slug: string(100), reference: string(400), offset }, ['slug']),
-    tool('save_document', '需要独立文稿、版本管理或修改已有文稿资产时保存准确正文。简单聊天创作和改稿可直接回复，由对话历史保存。新稿传content；已有资产修订传content和原稿parentId。聊天稿需要保存修订时传parentMessageId和新content，一次原子保存原稿及修订；sourceMessageId仅原样存档。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceIds: ids }),
-    tool('measure_text', '按现有统一口径测量传入正文，不含未传入的标题或说明；不替代内容判断。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] } }, ['text', 'unit']),
+    tool('save_document', '独立文稿或版本管理才保存。新稿传content；修订传原稿parentId或parentMessageId、新content，并用sourceText给出准确原稿正文供核对。聊天消息混有指令/解释时，sourceText只选连续作品正文，原消息仍完整保留。sourceMessageId仅存档，sourceText可指定准确片段；省略时兼容整条消息归档。保存后核对parentEvidence实际正文，不能只按标题宣称保留了原稿。', { content: string(500000), title: string(500), parentId: id, sourceMessageId: id, parentMessageId: id, sourceText:string(500000), sourceIds: ids }),
+    tool('measure_text', '检查准备交付的完整text。明确字数/数量时传requirements；字数只算正文可用bodyText指定text中的准确连续正文。数量用items划分所有交付项，必须items以两个换行拼接后等于完整text，备选也计入。通过后最终回答原样输出text，修改或追加需重测。语义项如何划分仍由Agent负责；没有requirements时仅测量。', { text: { type: 'string', maxLength: 500000 }, unit: { enum: ['characters', 'non_punctuation_characters'] },bodyText:string(500000),items:{type:'array',minItems:1,maxItems:100,items:string(500000)},requirements:{...schema({min:{type:'integer',minimum:0},max:{type:'integer',minimum:0},itemCount:{type:'integer',minimum:1,maximum:100}},[]),minProperties:1} }, ['text', 'unit']),
   ];
   definitions.find(def => def.name === 'save_document').parameters.anyOf = [{ required: ['content'] }, { required: ['sourceMessageId'] }];
   if (typeof observeImages === 'function') {
@@ -278,7 +279,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
         return { ok: true, slug, version, reference, content, nextOffset, references, resources,
           note: '这是专业方法原文，不是业务任务或事实证据。用户数量与保留要求优先；读取本身不是交付。' };
       }
-      if (name === 'measure_text') return { ok: true, count: countBody(args.text, args.unit), unit: args.unit,
+      if (name === 'measure_text') return { ok: true, ...measureDelivery(args),
         scope: 'exact_supplied_body', convention: '去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。' };
       if (name === 'analyze_image' || name === 'compare_images') {
         const imageIds = name === 'compare_images' ? [args.sourceImageId,args.resultImageId] : args.imageIds;
@@ -312,17 +313,20 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
         const key = `document_${fingerprint([state.id, ctx.turnId, ctx.callId]).slice(0, 32)}`, digest = fingerprint(args);
         if (state.invocations[key]) {
           if (state.invocations[key].digest !== digest) throw new GuardError('call_identity_conflict', '同一次保存调用不能更换正文。');
-          return { ok: true, asset: clone(state.assets[state.invocations[key].assetId]) };
+          return documentReceipt(state,state.assets[state.invocations[key].assetId]);
         }
+        if(ctx.fromModel&&(args.parentId||args.parentMessageId)&&args.sourceText===undefined)throw new GuardError('source_text_required','模型修订必须同时给出sourceText准确原稿正文和对应ID；根据当前原文或read_history/read_asset核对，不按长短标签猜父稿');
         if (args.parentMessageId && (args.parentId || args.sourceMessageId || !args.content)) throw new GuardError('invalid_arguments','聊天修订只传parentMessageId和修改正文，不混用其他原稿入口');
+        if(args.sourceText!==undefined&&!args.parentMessageId&&!args.sourceMessageId&&!args.parentId)throw new GuardError('invalid_arguments','sourceText必须绑定原始消息或父资产');
         let archivedParent;
         if (args.parentMessageId) {
           const original=state.records.find(r=>r.id===args.parentMessageId&&r.kind==='message');
           if (!original || typeof original.content!=='string' || !original.content.trim()) throw new GuardError('HISTORY_NOT_FOUND','当前会话没有可修订的完整文字原稿');
-          archivedParent=Object.values(state.assets).find(a=>a.sourceMessageId===original.id&&a.origin==='history_original');
-          if (!archivedParent) archivedParent=immutableAsset({id:newId('doc'),type:'text',content:original.content,title:'原始聊天文稿',ownerId:state.ownerId,origin:'history_original',sourceMessageId:original.id,version:1,sourceIds:[],createdAt:now()});
+          const selected=selectOriginal(original.content,args.sourceText);
+          archivedParent=Object.values(state.assets).find(a=>a.sourceMessageId===original.id&&a.origin==='history_original'&&a.content===selected.content);
+          if (!archivedParent) archivedParent=immutableAsset({id:newId('doc'),type:'text',...selected,title:'原始聊天文稿',ownerId:state.ownerId,origin:'history_original',sourceMessageId:original.id,version:1,sourceIds:[],createdAt:now()});
         }
-        let content = args.content;
+        let content = args.content,sourceRange;
         if (args.sourceMessageId) {
           if (args.parentId) throw new GuardError('invalid_arguments', '聊天原稿存档不同时指定parentId；先取得原稿asset.id，再另存修订。');
           const original = state.records.find(record => record.id === args.sourceMessageId && record.kind === 'message');
@@ -331,25 +335,27 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
           else if (Array.isArray(original.content) && original.content.every(part => ['text', 'input_text', 'output_text'].includes(part.type) && typeof part.text === 'string')) content = original.content.map(part => part.text).join('\n');
           else throw new GuardError('text_original_required', '原消息不是完整文字，请读取并选择实际文字原稿。');
           if (!content.trim()) throw new GuardError('text_original_required', '不能保存空白原稿。');
+          const selected=selectOriginal(content,args.sourceText);content=selected.content;sourceRange=selected.sourceRange;
           if (args.content !== undefined && args.content !== content) throw new GuardError('original_content_mismatch', 'sourceMessageId存档必须与原文一致；修改请另存带parentId的修订。');
         }
         const parent = archivedParent || (args.parentId ? assetFor(state, args.parentId, 'text') : null);
+        if(args.parentId&&args.sourceText!==undefined&&selectOriginal(parent.content,args.sourceText).content!==parent.content)throw new GuardError('original_content_mismatch','已有资产修订需核对完整父稿正文；局部修改范围写在新正文中，不裁掉父版本');
         const sourceIds = [...new Set([...(args.sourceIds || []), ...(parent ? [parent.id] : [])])];
         for (const id of sourceIds) if (id !== archivedParent?.id) assetFor(state, id);
-        const existing = args.sourceMessageId && Object.values(state.assets).find(asset => asset.sourceMessageId === args.sourceMessageId && asset.origin === 'history_original');
+        const existing = args.sourceMessageId && Object.values(state.assets).find(asset => asset.sourceMessageId === args.sourceMessageId && asset.origin === 'history_original'&&asset.content===content);
         if (existing) {
           state.invocations[key] = { kind: 'document', assetId: existing.id, digest, turnId: ctx.turnId, callId: ctx.callId, createdAt: now() };
           try { await persist(state, ctx.save); } catch (error) { delete state.invocations[key]; throw error; }
-          return { ok: true, asset: clone(existing), reused: true };
+          return {...documentReceipt(state,existing),reused:true};
         }
         const asset = immutableAsset({ id: newId('doc'), type: 'text', content, title: args.title || '', ownerId: state.ownerId, origin: args.sourceMessageId ? 'history_original' : 'agent_output',
-          ...(args.sourceMessageId ? { sourceMessageId: args.sourceMessageId } : {}),
+          ...(args.sourceMessageId ? { sourceMessageId: args.sourceMessageId,...(sourceRange?{sourceRange}: {}) } : {}),
           version: parent ? parent.version + 1 : 1, ...(parent ? { parentId: parent.id } : {}), sourceIds, createdAt: now() });
         const newParent=archivedParent&&!state.assets[archivedParent.id];
         if(newParent)state.assets[archivedParent.id]=archivedParent;
         state.assets[asset.id] = asset; state.invocations[key] = { kind: 'document', assetId: asset.id, digest, turnId: ctx.turnId, callId: ctx.callId, createdAt: now() };
         try { await persist(state, ctx.save); } catch (error) { delete state.assets[asset.id]; if(newParent)delete state.assets[archivedParent.id]; delete state.invocations[key]; throw error; }
-        return { ok: true, asset: clone(asset) };
+        return documentReceipt(state,asset);
       });
       throw new GuardError('unknown_tool', '工具没有实现。');
     } catch (error) { return safeError(error, error.submitted ?? false); }

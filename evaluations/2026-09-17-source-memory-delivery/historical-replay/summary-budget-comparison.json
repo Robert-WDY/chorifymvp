@@ -1,0 +1,74 @@
+[
+  {
+    "historicalRound": 4,
+    "generatedEstimatedTokens": 1185,
+    "completeEstimatedTokens": 1344,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2464,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  },
+  {
+    "historicalRound": 5,
+    "generatedEstimatedTokens": 1558,
+    "completeEstimatedTokens": 1738,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2422,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  },
+  {
+    "historicalRound": 6,
+    "generatedEstimatedTokens": 1850,
+    "completeEstimatedTokens": 2030,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2422,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  },
+  {
+    "historicalRound": 7,
+    "generatedEstimatedTokens": 2134,
+    "completeEstimatedTokens": 2314,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2422,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  },
+  {
+    "historicalRound": 8,
+    "generatedEstimatedTokens": 2681,
+    "completeEstimatedTokens": 2861,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2422,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  },
+  {
+    "historicalRound": 9,
+    "generatedEstimatedTokens": 1858,
+    "completeEstimatedTokens": 2038,
+    "historicalLimit": 1800,
+    "newExplicitTarget": {
+      "summaryMaxTokens": 1800,
+      "sourceRefsMaxItems": 8,
+      "summaryTextMaxUtf8Bytes": 2422,
+      "unit": "UTF-8 bytes of JSON-escaped summaryText, not provider tokens"
+    }
+  }
+]

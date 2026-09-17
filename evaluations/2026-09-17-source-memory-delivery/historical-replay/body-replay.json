@@ -1,0 +1,110 @@
+{
+  "original": {
+    "turnId": "417dc1df-d3a2-4636-a550-57be26897f0a",
+    "kind": "message",
+    "role": "user",
+    "groupId": "417dc1df-d3a2-4636-a550-57be26897f0a",
+    "content": "记录以下原稿，叫“青禾初稿”，先别改，也别保存成独立资产；后面我会让你逐字找回：青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+    "attachments": [],
+    "id": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+    "at": "2026-09-17T04:06:22.424Z"
+  },
+  "body": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+  "revised": {
+    "ok": true,
+    "asset": {
+      "id": "doc_3d1ef592-c756-48e1-8e63-9a87f4e807b4",
+      "type": "text",
+      "content": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯20元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+      "title": "",
+      "ownerId": "local",
+      "origin": "agent_output",
+      "version": 2,
+      "parentId": "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf",
+      "sourceIds": [
+        "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf"
+      ],
+      "createdAt": "2026-09-17T05:05:03.032Z"
+    },
+    "parentEvidence": {
+      "id": "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf",
+      "version": 1,
+      "sourceMessageId": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+      "sourceRange": {
+        "start": 40,
+        "end": 110,
+        "unit": "utf16"
+      },
+      "characters": 70,
+      "content": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+      "readMore": {
+        "tool": "read_asset",
+        "arguments": {
+          "id": "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf"
+        }
+      }
+    }
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "cf335059-1f7e-4007-8731-8ad28ca9d640",
+    "ownerId": "local",
+    "records": [
+      {
+        "id": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+        "kind": "message",
+        "role": "user",
+        "content": "记录以下原稿，叫“青禾初稿”，先别改，也别保存成独立资产；后面我会让你逐字找回：青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+        "at": "2026-09-17T05:05:03.031Z",
+        "turnId": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+        "groupId": "cbf076f4-1775-4658-b8f7-91e65403f1e5"
+      }
+    ],
+    "assets": {
+      "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf": {
+        "id": "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf",
+        "type": "text",
+        "content": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯18元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+        "sourceRange": {
+          "start": 40,
+          "end": 110,
+          "unit": "utf16"
+        },
+        "title": "原始聊天文稿",
+        "ownerId": "local",
+        "origin": "history_original",
+        "sourceMessageId": "cbf076f4-1775-4658-b8f7-91e65403f1e5",
+        "version": 1,
+        "sourceIds": [],
+        "createdAt": "2026-09-17T05:05:03.032Z"
+      },
+      "doc_3d1ef592-c756-48e1-8e63-9a87f4e807b4": {
+        "id": "doc_3d1ef592-c756-48e1-8e63-9a87f4e807b4",
+        "type": "text",
+        "content": "青禾茶铺原稿：桂花落进午后的杯子，乌龙在冷泡里慢慢舒展。我们11点开门，无糖桂花乌龙每杯20元。预约规则仍待确认，暂不作到店直接参与的承诺。",
+        "title": "",
+        "ownerId": "local",
+        "origin": "agent_output",
+        "version": 2,
+        "parentId": "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf",
+        "sourceIds": [
+          "doc_a19023fb-1d7e-4c97-94b0-6ffa44de40cf"
+        ],
+        "createdAt": "2026-09-17T05:05:03.032Z"
+      }
+    },
+    "invocations": {
+      "document_cf625c4585b1ad7da68471625e332a96": {
+        "kind": "document",
+        "assetId": "doc_3d1ef592-c756-48e1-8e63-9a87f4e807b4",
+        "digest": "18d1e394b8f18c53304e36eabeeb533b2192ff304c0f2f2bd17776efddcd9c4a",
+        "turnId": "replay",
+        "callId": "body",
+        "createdAt": "2026-09-17T05:05:03.032Z"
+      }
+    },
+    "approvals": {},
+    "summaries": {}
+  }
+}

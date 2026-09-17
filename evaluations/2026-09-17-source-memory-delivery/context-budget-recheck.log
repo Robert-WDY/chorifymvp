@@ -1,0 +1,21 @@
+✔ context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes (0.5271ms)
+✔ context behavior scripted: identical query branches on actual finished feedback (4.971ms)
+✔ context behavior scripted: identical query branches on actual processing feedback (2.2216ms)
+✔ context behavior scripted: identical query branches on actual parameter_error feedback (1.2813ms)
+✔ context behavior scripted: one direction and known facts can be delivered as text without creating media (35.0955ms)
+✔ context behavior scripted: local edit retains the exact source image and creates a parent version after approval (19.7647ms)
+✔ context behavior scripted: second direction consumes stored original text and product image without regenerating directions (16.3886ms)
+✔ context behavior scripted: observation receives actual image identity plus material and unknown status (18.7004ms)
+✔ context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable (18.2287ms)
+✔ context behavior scripted: grouped independent reads return both call IDs for order a,b (12.9783ms)
+✔ context behavior scripted: grouped independent reads return both call IDs for order b,a (13.146ms)
+✔ context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request (12.6448ms)
+✔ context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting (17.0509ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.2654

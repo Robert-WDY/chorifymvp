@@ -7,6 +7,7 @@ export function resultSummary(result={}){
  const failed=view.outcome==='failed';
  return {status:view.outcome==='needs_confirmation'?'prepared':view.outcome,
   ...(result.status==='awaiting_user'?{note:'问题已成功发布；实际回答由问题卡记录'}:{}),
+  ...(result.deliveryCheck?{note:result.deliveryCheck.status==='passed'?'已声明要求的草稿检查通过；最终文本须保持一致':'测量已完成，草稿未满足已声明要求'}:{}),
   ...(failed||view.outcome==='unknown'?{error:safeText(result.error?.message||result.message||result.items?.find(i=>i.error)?.error.message),code:result.error?.code||result.code}:{}),
   ...(result.receiptId?{receiptId:result.receiptId}:{}),...(result.proposalId?{proposalId:result.proposalId}:{}),
   simulated:result.simulated===true,submission:view.submission,submitted:view.submission==='unknown'?'unknown':view.submission==='submitted',
