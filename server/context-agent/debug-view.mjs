@@ -7,11 +7,11 @@ const compact=r=>({id:r.id,seq:r.seq,turnId:r.turnId,at:r.at,kind:r.kind,event:r
 // Index only: full model inputs and tool bodies are fetched by record ID on demand.
 export function debugSnapshot(state,{running=false}={}) {
   const turns=new Map(), calls=new Map(), models=new Map();
-  const turn=id=>{if(!turns.has(id))turns.set(id,{id,query:'',status:'historical',models:[],tools:[],events:[]});return turns.get(id);};
+  const turn=id=>{if(!turns.has(id))turns.set(id,{id,query:'',conversation:[],status:'historical',models:[],tools:[],events:[]});return turns.get(id);};
   for(const [seq,original] of state.records.entries()){
     const r={...original,seq};
     const t=turn(r.turnId||'historical');
-    if(r.kind==='message'&&r.role==='user')t.query=r.content;
+    if(r.kind==='message'){const text=typeof r.content==='string'?r.content:(r.content||[]).map(p=>p.text||'').join('\n');t.conversation.push({id:r.id,role:r.role,preview:text.length>260?text.slice(0,260)+'…':text});if(r.role==='user')t.query=r.content;}
     if(r.event==='start')t.status='unfinished';
     if(r.event==='end'){t.status=r.result?.status;t.accounting=r.result?.modelAccounting;}
     if(r.event==='model_request'){
@@ -66,7 +66,7 @@ export async function debugDetail(state,id,readTrace) {
     const visit=value=>{if(typeof value==='string'){values.add(value);const decoded=parse(value);if(decoded!==value)visit(decoded);}else if(value&&typeof value==='object')for(const [key,item]of Object.entries(value)){values.add(key);visit(item);}};
     for(const block of blocks)visit(block.data);
     const references=Object.values(state.assets||{}).filter(a=>values.has(a.id)).map(a=>({id:a.id,type:a.type,name:a.name||a.title,version:a.version,parentId:a.parentId,sourceIds:a.sourceIds}));
-    return {...presentation,record,sources:(record.metrics?.retainedRecordIds||[]).map(id=>({id,label:labels[id]||'来源原文'})),response:response||null,references,blocks,tools:record.tools||[],note:'记录的是应用传入适配器的完整输入；供应商HTTP序列化与隐藏推理不在此记录中。分块仅供阅读，原始记录保留。'};
+    return {...presentation,record,sources:(record.metrics?.retainedRecordIds||[]).map(id=>({id,label:labels[id]||'来源原文',kind:state.records.find(r=>r.id===id)?.kind})),response:response||null,references,blocks,tools:record.tools||[],note:'记录的是应用传入适配器的完整输入；供应商HTTP序列化与隐藏推理不在此记录中。分块仅供阅读，原始记录保留。'};
   }
   if(record.kind==='tool_call')return {...presentation,record,arguments:parse(record.arguments),result:state.records.find(r=>r.kind==='tool_result'&&r.callId===record.callId)||null};
   return {...presentation,record,...(record.output!==undefined?{output:parse(record.output)}:{})};

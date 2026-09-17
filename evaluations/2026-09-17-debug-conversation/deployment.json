@@ -1,0 +1,13 @@
+{
+  "pageStatus": 200,
+  "checkedSessionIds": 100,
+  "sessionPageUnchanged": true,
+  "totalSessions": 117,
+  "multiTurnSample": {
+    "turns": 21,
+    "messages": 42,
+    "previewsMatchOriginal": true
+  },
+  "realCalls": 0,
+  "browserInteractionVerified": false
+}

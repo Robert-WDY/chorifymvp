@@ -1,0 +1,21 @@
+✔ input stage groups system instructions and hides later output and repeated tool blocks (4.3991ms)
+✔ multi-turn overview preserves earlier context and opens full original without merging rounds (14.4202ms)
+✔ HTTP journey demonstrates failed lookup, feedback delivery, new decision and later answer (225.0993ms)
+✔ later request mentioning a call ID does not prove failed feedback was delivered (0.6329ms)
+✔ summary attempt displays actual coverage and persistence, never hash as the explanation (0.3364ms)
+✔ omission and repeated calls are review signals, not automatic semantic failures (0.3916ms)
+✔ redesigned page leads with problems and module transitions; IDs stay in collapsed evidence (2.5343ms)
+✔ debug counts phases separately and joins results by IDs without inventing success (2.4907ms)
+✔ debug input blocks preserve original order, source boundaries and multimodal data (0.3755ms)
+✔ debug HTTP reads persisted full requests, tool results and policy without running models (323.7764ms)
+✔ debug page renders untrusted prompt as text and stale detail cannot replace another session (1.8536ms)
+✔ debug preserves model output rejected by protocol validation without executing it (29.0697ms)
+✔ debug asset index uses exact structured IDs, not substring guesses (0.2481ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 499.2282
