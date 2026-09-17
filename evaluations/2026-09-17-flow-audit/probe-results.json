@@ -1,0 +1,492 @@
+{
+  "baseline": "724ba940add4fe333a55d10f4e15f862106ba800",
+  "modelCalls": 0,
+  "networkCalls": 0,
+  "findings": [
+    {
+      "id": "P1_measurement_omitted",
+      "kind": "injected_model_loop",
+      "user": "只给一个方向，不要备选",
+      "result": {
+        "status": "completed",
+        "turnId": "e1a32349-2e46-49e5-a7ae-75ff1af44903",
+        "text": "方案一：白瓶。\n\n方案二：红瓶。",
+        "modelCalls": 1,
+        "toolCalls": 0,
+        "modelAccounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 1,
+            "usage": [],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      "explanation": "No declared measure_text receipt means no deterministic delivery gate. This is not proof a live model will omit it."
+    },
+    {
+      "id": "P2_wrong_declaration_cannot_correct",
+      "kind": "real_validation_functions",
+      "first": {
+        "ok": true,
+        "count": 80,
+        "unit": "characters",
+        "deliveryCheck": {
+          "status": "passed",
+          "issues": [],
+          "requirements": {
+            "min": 80,
+            "max": 120
+          },
+          "effectiveChecks": {
+            "text": [
+              {
+                "unit": "characters",
+                "bodyOnly": false,
+                "min": 80,
+                "max": 120,
+                "count": 80
+              }
+            ],
+            "itemCounts": []
+          },
+          "bodyOnly": false,
+          "textIdentity": "caa46ceaf92831183913df9fa12ee31fd5a669213e94c4e6257c2386d211314e",
+          "scope": "declared_constraints_on_exact_draft",
+          "semanticMeaningVerified": false
+        }
+      },
+      "corrected": {
+        "ok": true,
+        "count": 50,
+        "unit": "characters",
+        "deliveryCheck": {
+          "status": "failed",
+          "issues": [
+            "below_minimum"
+          ],
+          "requirements": {
+            "min": 40,
+            "max": 60
+          },
+          "effectiveChecks": {
+            "text": [
+              {
+                "unit": "characters",
+                "bodyOnly": false,
+                "min": 80,
+                "max": 60,
+                "count": 50
+              }
+            ],
+            "itemCounts": []
+          },
+          "bodyOnly": false,
+          "textIdentity": "957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d",
+          "scope": "declared_constraints_on_exact_draft",
+          "semanticMeaningVerified": false
+        }
+      },
+      "final": {
+        "ok": false,
+        "code": "delivery_check_failed",
+        "submitted": false,
+        "measurementCallId": "correction",
+        "issues": [
+          "below_minimum"
+        ],
+        "message": "最终正文尚未通过本轮已声明要求的验收。只修正文并用measure_text重新检查完整交付；重测不能放宽已有要求、改计数口径或漏掉备选。",
+        "requirements": {
+          "min": 40,
+          "max": 60
+        },
+        "effectiveChecks": {
+          "text": [
+            {
+              "unit": "characters",
+              "bodyOnly": false,
+              "min": 80,
+              "max": 60,
+              "count": 50
+            }
+          ],
+          "itemCounts": []
+        }
+      }
+    },
+    {
+      "id": "P3_different_deliverables_share_constraints",
+      "kind": "real_validation_functions",
+      "body": {
+        "ok": true,
+        "count": 7,
+        "unit": "characters",
+        "deliveryCheck": {
+          "status": "failed",
+          "issues": [
+            "item_count_mismatch"
+          ],
+          "requirements": {
+            "itemCount": 3
+          },
+          "effectiveChecks": {
+            "text": [],
+            "itemCounts": [
+              1,
+              3
+            ]
+          },
+          "bodyOnly": false,
+          "itemCount": 3,
+          "textIdentity": "df299af4f832f9bb95ef2cf7dede1f6d29475bd0a3a229af0c29a207b868e7b6",
+          "scope": "declared_constraints_on_exact_draft",
+          "semanticMeaningVerified": false
+        }
+      },
+      "explanation": "One title and three directions measured separately in one turn produce incompatible global itemCounts=[1,3]."
+    },
+    {
+      "id": "P4_saved_asset_vs_final_chat",
+      "kind": "injected_model_loop",
+      "result": {
+        "status": "budget_exceeded",
+        "turnId": "0d9d7176-6758-42ff-9e03-543728e36a8b",
+        "code": "budget_exceeded",
+        "message": "达到本轮模型调用上限，未收到正常结束回答",
+        "modelCalls": 4,
+        "toolCalls": 2,
+        "modelAccounting": {
+          "agent": {
+            "calls": 4,
+            "durationMs": 2,
+            "usage": [],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      "assets": [
+        {
+          "id": "doc_3c978b86-b41a-4bf0-8ada-f4b47e34c09f",
+          "type": "text",
+          "content": "桂花落进杯中，午后慢慢舒展。",
+          "title": "午后文案",
+          "ownerId": "local",
+          "origin": "agent_output",
+          "version": 1,
+          "sourceIds": [],
+          "createdAt": "2026-09-17T06:30:15.215Z"
+        }
+      ],
+      "failures": [
+        {
+          "ok": false,
+          "code": "delivery_check_failed",
+          "submitted": false,
+          "measurementCallId": "measure",
+          "issues": [
+            "final_text_changed_after_measurement"
+          ],
+          "message": "最终正文尚未通过本轮已声明要求的验收。只修正文并用measure_text重新检查完整交付；重测不能放宽已有要求、改计数口径或漏掉备选。",
+          "requirements": {
+            "min": 10,
+            "max": 30
+          },
+          "effectiveChecks": {
+            "text": [
+              {
+                "unit": "characters",
+                "bodyOnly": false,
+                "min": 10,
+                "max": 30,
+                "count": 14
+              }
+            ],
+            "itemCounts": []
+          }
+        },
+        {
+          "ok": false,
+          "code": "delivery_check_failed",
+          "submitted": false,
+          "measurementCallId": "measure",
+          "issues": [
+            "final_text_changed_after_measurement"
+          ],
+          "message": "最终正文尚未通过本轮已声明要求的验收。只修正文并用measure_text重新检查完整交付；重测不能放宽已有要求、改计数口径或漏掉备选。",
+          "requirements": {
+            "min": 10,
+            "max": 30
+          },
+          "effectiveChecks": {
+            "text": [
+              {
+                "unit": "characters",
+                "bodyOnly": false,
+                "min": 10,
+                "max": 30,
+                "count": 14
+              }
+            ],
+            "itemCounts": []
+          }
+        }
+      ],
+      "explanation": "Saved work passed measurement; final status sentence is compared with work hash and rejected."
+    },
+    {
+      "id": "P5_consistently_wrong_parent",
+      "kind": "real_tool_with_injected_choice",
+      "longMessageId": "6f23a681-dfd9-49dd-ae78-a9f52b44bf38",
+      "shortMessageId": "fc197a83-e256-4dc0-b9d8-fef231cede51",
+      "result": {
+        "ok": true,
+        "asset": {
+          "id": "doc_24349132-949e-4800-a7f6-eb78bf4cbaef",
+          "type": "text",
+          "content": "桂花入茶，午后慢饮。",
+          "title": "短版",
+          "ownerId": "local",
+          "origin": "agent_output",
+          "version": 2,
+          "parentId": "doc_8314a06c-0afd-4f75-bf83-ee7d75b49a99",
+          "sourceIds": [
+            "doc_8314a06c-0afd-4f75-bf83-ee7d75b49a99"
+          ],
+          "createdAt": "2026-09-17T06:30:15.230Z"
+        },
+        "parentEvidence": {
+          "id": "doc_8314a06c-0afd-4f75-bf83-ee7d75b49a99",
+          "version": 1,
+          "sourceMessageId": "fc197a83-e256-4dc0-b9d8-fef231cede51",
+          "sourceRange": {
+            "start": 0,
+            "end": 10,
+            "unit": "utf16"
+          },
+          "characters": 10,
+          "content": "桂花入茶，午后慢饮。",
+          "readMore": {
+            "tool": "read_asset",
+            "arguments": {
+              "id": "doc_8314a06c-0afd-4f75-bf83-ee7d75b49a99"
+            }
+          }
+        }
+      },
+      "explanation": "Exact sourceText guards ID/text agreement, not semantic selection of long vs short original."
+    },
+    {
+      "id": "P6_lineage_is_not_provider_context",
+      "kind": "injected_provider_no_network",
+      "prepared": {
+        "prompt": "商品广告图",
+        "size": "1024x1024",
+        "sourceIds": [
+          "facts",
+          "photo"
+        ]
+      },
+      "actualProviderInput": {
+        "prompt": "商品广告图",
+        "size": "1024x1024",
+        "referenceImages": []
+      },
+      "savedSources": [
+        "facts",
+        "photo"
+      ],
+      "explanation": "sourceIds are provenance only. Text must enter prompt; source photos must enter referenceImages/imageId."
+    },
+    {
+      "id": "P9_search_conjunction_not_semantic_retrieval",
+      "kind": "real_search_function",
+      "broad": {
+        "matches": [],
+        "totalMatches": 0,
+        "order": "latest",
+        "nextCursor": null
+      },
+      "exact": {
+        "matches": [
+          {
+            "seq": 0,
+            "messageId": "81230f87-73b9-4d09-8241-c7db0c6dfb48",
+            "id": "81230f87-73b9-4d09-8241-c7db0c6dfb48",
+            "kind": "message",
+            "role": "assistant",
+            "at": "2026-09-17T06:30:15.242Z",
+            "turnId": "81230f87-73b9-4d09-8241-c7db0c6dfb48",
+            "groupId": "81230f87-73b9-4d09-8241-c7db0c6dfb48",
+            "excerpt": "方向二：手的介入。选择后展开成15秒脚本。",
+            "offset": 0,
+            "length": 21
+          }
+        ],
+        "totalMatches": 1,
+        "order": "latest",
+        "nextCursor": null
+      },
+      "explanation": "The extra term 方案 excludes the existing direction. Empty search result does not mean absent source."
+    },
+    {
+      "id": "P7_full_original_arguments_exceed_next_context",
+      "kind": "injected_model_loop",
+      "originalCharacters": 4000,
+      "savedVersions": [
+        {
+          "id": "original",
+          "version": 1,
+          "characters": 4000
+        },
+        {
+          "id": "doc_712fb41d-8391-48c8-a65c-0a6b25afa894",
+          "version": 2,
+          "characters": 4001
+        }
+      ],
+      "result": {
+        "status": "budget_exceeded",
+        "turnId": "983a85b5-fbca-4c83-a7b6-8169fef0140d",
+        "code": "CONTEXT_BUDGET_EXCEEDED",
+        "message": "The latest user request, required tool feedback and prompt exceed the context budget. No user content was silently discarded.",
+        "modelCalls": 1,
+        "toolCalls": 1,
+        "modelAccounting": {
+          "agent": {
+            "calls": 1,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "image_observation": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          },
+          "summary": {
+            "calls": 0,
+            "durationMs": 0,
+            "usage": [],
+            "cost": null
+          }
+        }
+      },
+      "explanation": "Legal full sourceText + revised content arguments are protected whole. The next model input cannot fit even after tool result truncation. Injected model output does not test provider output length limits."
+    },
+    {
+      "id": "P8_summary_target_below_fixed_context_floor",
+      "kind": "actual_context_construction_no_model",
+      "fixedContextEstimate": 10969,
+      "targetEstimate": 9625,
+      "triggerEstimate": 13125,
+      "toolCount": 17,
+      "explanation": "Even zero history and no summary cannot reach targetRatio. Loop is bounded, but history compression cannot remove the fixed prompt/catalog/tool schemas."
+    }
+  ],
+  "parentEvidence": {
+    "requestRecordId": "c15c33ff-b1a3-424f-898f-f3994a9f3531",
+    "requestMetrics": {
+      "tokenBudget": 24000,
+      "reservedTokens": 6500,
+      "estimatedInputTokens": 6775,
+      "estimatedToolDefinitionTokens": 4112,
+      "totalRecords": 14,
+      "retainedRecords": 5,
+      "retainedRecordIds": [
+        "d71adb9b-a671-420f-b930-33e446496a12",
+        "46a959b4-c317-4721-bfd2-b5b5ef088513",
+        "ed8f80af-e12d-4836-8401-ac2e4623225f",
+        "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+        "cc99a551-927a-4148-bcb2-a61236018a1b"
+      ],
+      "omittedRecords": 0,
+      "excludedRuntimeRecords": 9,
+      "incompleteGroupIds": [],
+      "projectedRecordIds": []
+    },
+    "longFullBodyPresent": true,
+    "shortFullBodyPresent": true,
+    "longIdPresent": true,
+    "shortIdPresent": true,
+    "summaryPresent": false,
+    "wrongCall": {
+      "turnId": "f80f5f69-01dd-4316-a260-7c7afacd2e23",
+      "kind": "tool_call",
+      "groupId": "1100dd75-3f01-40f9-8b24-8530938c7090",
+      "callId": "call_00_CV4DSaGljF1uTyrTOM0I1407",
+      "name": "save_document",
+      "arguments": "{\"title\": \"青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本二·店员口吻）\", \"content\": \"短标题：一杯桂花乌龙，等秋风来\\n\\n正文：\\n\\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。\", \"parentMessageId\": \"e9a24e91-496a-4734-ac3f-0126c38ed37c\"}",
+      "id": "525522bc-89f8-4917-b9db-dcf0377d9183",
+      "at": "2026-09-17T04:04:46.181Z"
+    }
+  },
+  "composition": {
+    "unit": "conservative ceil(UTF8bytes/2)+4 estimate, not vendor tokens",
+    "systemCharacters": 2189,
+    "systemEstimate": 2891,
+    "toolCount": 17,
+    "toolsEstimate": 6446,
+    "messages": [
+      {
+        "role": "system",
+        "characters": 2212,
+        "estimate": 2916
+      },
+      {
+        "role": "user",
+        "characters": 2364,
+        "estimate": 1609
+      },
+      {
+        "role": "user",
+        "characters": 563,
+        "estimate": 319
+      },
+      {
+        "role": "user",
+        "characters": 25,
+        "estimate": 50
+      }
+    ],
+    "metrics": {
+      "tokenBudget": 24000,
+      "reservedTokens": 6500,
+      "estimatedInputTokens": 4884,
+      "estimatedToolDefinitionTokens": 6446,
+      "totalRecords": 1,
+      "retainedRecords": 1,
+      "retainedRecordIds": [
+        "5ca7f46d-b67b-43e1-9797-f246ac4350d0"
+      ],
+      "omittedRecords": 0,
+      "excludedRuntimeRecords": 0,
+      "incompleteGroupIds": [],
+      "projectedRecordIds": []
+    }
+  }
+}

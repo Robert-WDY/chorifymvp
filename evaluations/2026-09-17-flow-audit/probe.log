@@ -1,0 +1,233 @@
+{
+  "offlineProbes": [
+    "P1_measurement_omitted",
+    "P2_wrong_declaration_cannot_correct",
+    "P3_different_deliverables_share_constraints",
+    "P4_saved_asset_vs_final_chat",
+    "P5_consistently_wrong_parent",
+    "P6_lineage_is_not_provider_context",
+    "P9_search_conjunction_not_semantic_retrieval",
+    "P7_full_original_arguments_exceed_next_context",
+    "P8_summary_target_below_fixed_context_floor"
+  ],
+  "parentEvidence": {
+    "requestRecordId": "c15c33ff-b1a3-424f-898f-f3994a9f3531",
+    "requestMetrics": {
+      "tokenBudget": 24000,
+      "reservedTokens": 6500,
+      "estimatedInputTokens": 6775,
+      "estimatedToolDefinitionTokens": 4112,
+      "totalRecords": 14,
+      "retainedRecords": 5,
+      "retainedRecordIds": [
+        "d71adb9b-a671-420f-b930-33e446496a12",
+        "46a959b4-c317-4721-bfd2-b5b5ef088513",
+        "ed8f80af-e12d-4836-8401-ac2e4623225f",
+        "e9a24e91-496a-4734-ac3f-0126c38ed37c",
+        "cc99a551-927a-4148-bcb2-a61236018a1b"
+      ],
+      "omittedRecords": 0,
+      "excludedRuntimeRecords": 9,
+      "incompleteGroupIds": [],
+      "projectedRecordIds": []
+    },
+    "longFullBodyPresent": true,
+    "shortFullBodyPresent": true,
+    "longIdPresent": true,
+    "shortIdPresent": true,
+    "summaryPresent": false,
+    "wrongCall": {
+      "turnId": "f80f5f69-01dd-4316-a260-7c7afacd2e23",
+      "kind": "tool_call",
+      "groupId": "1100dd75-3f01-40f9-8b24-8530938c7090",
+      "callId": "call_00_CV4DSaGljF1uTyrTOM0I1407",
+      "name": "save_document",
+      "arguments": "{\"title\": \"青禾茶铺·桂花乌龙冷泡茶朋友圈文案（版本二·店员口吻）\", \"content\": \"短标题：一杯桂花乌龙，等秋风来\\n\\n正文：\\n\\n桂花乌龙冷泡茶上新啦，冷水慢慢泡开，花香茶香都清爽，没加糖。一杯18元，每天11点开门。要不要预约还没定，定了我马上说。\", \"parentMessageId\": \"e9a24e91-496a-4734-ac3f-0126c38ed37c\"}",
+      "id": "525522bc-89f8-4917-b9db-dcf0377d9183",
+      "at": "2026-09-17T04:04:46.181Z"
+    }
+  },
+  "composition": {
+    "unit": "conservative ceil(UTF8bytes/2)+4 estimate, not vendor tokens",
+    "systemCharacters": 2189,
+    "systemEstimate": 2891,
+    "toolCount": 17,
+    "toolsEstimate": 6446,
+    "messages": [
+      {
+        "role": "system",
+        "characters": 2212,
+        "estimate": 2916
+      },
+      {
+        "role": "user",
+        "characters": 2364,
+        "estimate": 1609
+      },
+      {
+        "role": "user",
+        "characters": 563,
+        "estimate": 319
+      },
+      {
+        "role": "user",
+        "characters": 25,
+        "estimate": 50
+      }
+    ],
+    "metrics": {
+      "tokenBudget": 24000,
+      "reservedTokens": 6500,
+      "estimatedInputTokens": 4884,
+      "estimatedToolDefinitionTokens": 6446,
+      "totalRecords": 1,
+      "retainedRecords": 1,
+      "retainedRecordIds": [
+        "5ca7f46d-b67b-43e1-9797-f246ac4350d0"
+      ],
+      "omittedRecords": 0,
+      "excludedRuntimeRecords": 0,
+      "incompleteGroupIds": [],
+      "projectedRecordIds": []
+    }
+  },
+  "historicalCases": [
+    {
+      "caseId": "CHAT_VERSION",
+      "turns": 5,
+      "transportCalls": 10,
+      "phases": {
+        "agent": 8,
+        "summary": 2
+      },
+      "summaryAttempts": 2,
+      "summaryFailures": 0,
+      "summaries": 2,
+      "assets": 4,
+      "proposals": 0
+    },
+    {
+      "caseId": "CONFIRM_LANGUAGE",
+      "turns": 8,
+      "transportCalls": 10,
+      "phases": {
+        "agent": 8,
+        "summary": 2
+      },
+      "summaryAttempts": 2,
+      "summaryFailures": 1,
+      "summaries": 1,
+      "assets": 0,
+      "proposals": 0
+    },
+    {
+      "caseId": "DIRECTION_SKILL",
+      "turns": 5,
+      "transportCalls": 10,
+      "phases": {
+        "agent": 7,
+        "summary": 3
+      },
+      "summaryAttempts": 3,
+      "summaryFailures": 2,
+      "summaries": 1,
+      "assets": 2,
+      "proposals": 0
+    },
+    {
+      "caseId": "ISOLATION",
+      "turns": 2,
+      "transportCalls": 5,
+      "phases": {
+        "agent": 5
+      },
+      "summaryAttempts": 0,
+      "summaryFailures": 0,
+      "summaries": 0,
+      "assets": 0,
+      "proposals": 0
+    },
+    {
+      "caseId": "LONG_MEMORY",
+      "turns": 12,
+      "transportCalls": 20,
+      "phases": {
+        "agent": 14,
+        "summary": 6
+      },
+      "summaryAttempts": 6,
+      "summaryFailures": 4,
+      "summaries": 2,
+      "assets": 2,
+      "proposals": 0
+    },
+    {
+      "caseId": "ORIGINAL_EDIT_001",
+      "turns": 2,
+      "transportCalls": 1,
+      "phases": {
+        "agent": 1
+      },
+      "summaryAttempts": 0,
+      "summaryFailures": 0,
+      "summaries": 0,
+      "assets": 0,
+      "proposals": 0
+    },
+    {
+      "caseId": "ORIGINAL_IMG_MULTI_001",
+      "turns": 2,
+      "transportCalls": 2,
+      "phases": {
+        "agent": 2
+      },
+      "summaryAttempts": 0,
+      "summaryFailures": 0,
+      "summaries": 0,
+      "assets": 0,
+      "proposals": 0
+    },
+    {
+      "caseId": "SWITCH_FACTS",
+      "turns": 4,
+      "transportCalls": 8,
+      "phases": {
+        "agent": 7,
+        "summary": 1
+      },
+      "summaryAttempts": 1,
+      "summaryFailures": 0,
+      "summaries": 1,
+      "assets": 0,
+      "proposals": 0
+    },
+    {
+      "caseId": "DIAG_BUTTON",
+      "turns": 3,
+      "transportCalls": 6,
+      "phases": {
+        "agent": 5,
+        "summary": 1
+      },
+      "summaryAttempts": 1,
+      "summaryFailures": 0,
+      "summaries": 1,
+      "assets": 1,
+      "proposals": 1
+    },
+    {
+      "caseId": "DIAG_SAVED_CONFIRM",
+      "turns": 7,
+      "transportCalls": 16,
+      "phases": {
+        "agent": 12,
+        "summary": 4
+      },
+      "summaryAttempts": 4,
+      "summaryFailures": 2,
+      "summaries": 2,
+      "assets": 2,
+      "proposals": 3
+    }
+  ]
+}
