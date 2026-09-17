@@ -1,0 +1,57 @@
+diff --git a/server/context-agent/tools.mjs b/server/context-agent/tools.mjs
+index 701e102..0e7e74d 100644
+--- a/server/context-agent/tools.mjs
++++ b/server/context-agent/tools.mjs
+@@ -63,7 +63,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+   measurement.parameters.properties.bodyText.description='text中唯一的连续正文，保留格式，排除标题/说明；可省略。';
+   documentSchema.properties.measurementCallId={...id,description:'仅绑定deliveryCheck.status=passed的验收回执，content必须等于该次完整text。普通计数不属于验收，不需要本字段；保存动作本身不要求先测字数。'};
+   measurement.description='requirements检查字数/项数，省略则仅计数。target默认完整reply，多份成果各用稳定id；文稿用document。已存稿可用assetId+assetVersion。items双换行拼接须覆盖text。重测沿用target；误声明用correction引用最新测量callId、本轮用户messageId、原话quote及reason。Agent仍负责语义划分。';
+-  definitions.find(d=>d.name==='save_document').description='需要独立文稿或版本才保存，不要求先测字数。新稿传content；已有资产修订用parentId+parentVersion，不重抄父稿，但先确认完整原文可用；聊天原稿用parentMessageId+sourceText准确作品片段。sourceMessageId仅存档。通过requirements验收的作品传measurementCallId，content等于该次完整text；普通计数没有验收凭证。核对回执parentEvidence实际父稿，不只信标题。';
++  definitions.find(d=>d.name==='save_document').description='独立文稿才保存。新稿传content；修订用parentId或parentMessageId，真实父版本自动绑定，不强制重抄原文。聊天消息只选部分作品时才传sourceText准确片段，省略则用整条原文。sourceMessageId仅存档。选哪个素材由Agent判断。已通过requirements的正文用measurementCallId绑定；普通计数无需凭证。';
+   if (typeof observeImages === 'function') {
+     definitions.push(tool('analyze_image', '仅观察明确选择的imageIds与materials，不自动加父图或同次上传资料。materials.sourceId只接受文字ID，图片放imageIds。必要产品事实和未知项通过materials传入；大段资料指定offset/limit。比较保持用compare_images。', { imageIds: { ...ids, minItems: 1 }, question: string(12000), materials }, ['imageIds','question']));
+     definitions.push(tool('compare_images', '读取明确指定的真实原图与成品双图，比较结构、颜色、位置和用户保持要求，报告差异与无法判断项。不自行扩展来源，不用文字替代原图；看不清、缺图或模拟产物不能声称通过，差异不能擅称为更好的创意。', { sourceImageId:id, resultImageId:id, question:string(12000), materials }, ['sourceImageId','resultImageId','question']));
+@@ -156,7 +156,6 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+       assertNotCancelled(signal);
+       const normalized = normalizedMedia(name, args, state);
+       const visualIds=name==='edit_image'?[normalized.imageId]:name==='generate_video'?[normalized.firstFrameId].filter(Boolean):normalized.referenceImages||[];
+-      if(ctx.fromModel&&(normalized.sourceIds||[]).some(id=>assetFor(state,id).type==='image'&&!visualIds.includes(id)))throw new GuardError('visual_source_not_bound','sourceIds只记录来源。选中的图片未作为视觉输入；请明确放入referenceImages、imageId或firstFrameId，不能仅登记来源后生成');
+       if (!args.proposalId && !args.approvalId) {
+         const previousIds=new Set(Object.keys(state.approvals));
+         const proposal = createProposal(state, { name, args: normalized, mode, callId, turnId,executionIdentity:media?.executionIdentity||null,sourceBindings:Object.fromEntries(sourcesFor(name,normalized).map(id=>[id,sourceIdentity(assetFor(state,id))])),replacesProposalId:args.replacesProposalId });
+@@ -342,7 +341,6 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         const imageIds = name === 'compare_images' ? [args.sourceImageId,args.resultImageId] : args.imageIds;
+         const candidates=new Set(imageIds.flatMap(id=>state.assets[id]?.sourceIds||[]).filter(id=>state.assets[id]?.type==='text'));
+         for(const message of state.records.filter(r=>r.kind==='message'&&r.role==='user'&&r.attachments?.some(a=>imageIds.includes(a.id))))for(const a of message.attachments)if(state.assets[a.id]?.type==='text')candidates.add(a.id);
+-        if(ctx.fromModel&&candidates.size&&(!Array.isArray(args.materials)||(!args.materials.length&&!args.contextNote?.trim())))return {ok:false,submitted:false,error:{code:'observation_context_required',message:'存在关联或同次上传的文字候选。请明确选择相关materials；若均无关，传materials:[]及contextNote说明，不自动套用其他商品资料。'},materialCandidates:[...candidates].map(id=>({id,name:state.assets[id].name||state.assets[id].title,version:state.assets[id].version,association:'candidate_not_verified'}))};
+         if (name === 'compare_images' && args.sourceImageId === args.resultImageId) throw new GuardError('distinct_images_required','比较需要两张不同的真实图片');
+         const images = imageIds.map(id => {
+           const asset = assetFor(state,id,'image');
+@@ -366,6 +364,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         const observation = await observeImages({images,question:args.question,materials:selectedMaterials,comparisons},ctx.signal,ctx);
+         if (!observation) throw new GuardError('empty_observation','观察没有返回内容');
+         return {ok:true,imageIds,question:args.question,materials:selectedMaterials,comparisons,estimatedInputTokens,observation,
++          materialCandidates:[...candidates].map(id=>({id,name:state.assets[id].name||state.assets[id].title,version:state.assets[id].version,association:'candidate_not_verified'})),
+           note:'观察仅覆盖明确选择的证据。Agent负责判断差异、未知项及用户要求是否满足；传入证据不代表验收通过。'};
+       }
+       if (name === 'save_document') return await withSessionLock(state, async () => {
+@@ -376,9 +375,7 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+           return documentReceipt(state,state.assets[state.invocations[key].assetId]);
+         }
+         if(args.parentVersion!==undefined&&(!args.parentId||assetFor(state,args.parentId,'text').version!==args.parentVersion))throw new GuardError('asset_version_mismatch','父版本不一致；回读准确对象后修订');
+-        if(ctx.fromModel&&(args.parentId||args.parentMessageId)&&args.sourceText===undefined&&!(args.parentId&&args.parentVersion!==undefined))throw new GuardError('source_text_required','已有资产修订须parentId+parentVersion；聊天修订须parentMessageId+sourceText准确片段。先确认原文可用，不按标签猜父稿');
+         if(args.edits&&(args.content!==undefined||args.sourceMessageId||(!args.parentId&&!args.parentMessageId)))throw new GuardError('invalid_edits','增量修改须绑定父稿，不能混用完整content或存档入口');
+-        if(args.edits&&args.parentId&&args.parentVersion===undefined)throw new GuardError('asset_version_mismatch','增量修改须指定准确parentVersion');
+         if (args.parentMessageId && (args.parentId || args.sourceMessageId || (!args.content&&!args.edits))) throw new GuardError('invalid_arguments','聊天修订只传parentMessageId和修改正文，不混用其他原稿入口');
+         if(args.sourceText!==undefined&&!args.parentMessageId&&!args.sourceMessageId&&!args.parentId)throw new GuardError('invalid_arguments','sourceText必须绑定原始消息或父资产');
+         let archivedParent;
+@@ -403,7 +400,8 @@ export function createTools({ catalog = { skills: [] }, media, observeImages, mo
+         if(args.edits)content=applyEdits(parent.content,args.edits).content;
+         if(args.edits&&!documentContentValidator(content))throw new GuardError('invalid_edits','修改后正文仍须符合原有非空及长度限制');
+         if(args.measurementCallId)checkedDocument(state,ctx.turnId,args.measurementCallId,content);
+-        if(args.parentId&&args.sourceText!==undefined&&selectOriginal(parent.content,args.sourceText).content!==parent.content)throw new GuardError('original_content_mismatch','已有资产修订需核对完整父稿正文；局部修改范围写在新正文中，不裁掉父版本');
++        // An asset ID already identifies its immutable full original. Optional
++        // legacy sourceText does not change or veto that selected parent.
+         const sourceIds = [...new Set([...(args.sourceIds || []), ...(parent ? [parent.id] : [])])];
+         for (const id of sourceIds) if (id !== archivedParent?.id) assetFor(state, id);
+         const existing = args.sourceMessageId && Object.values(state.assets).find(asset => asset.sourceMessageId === args.sourceMessageId && asset.origin === 'history_original'&&asset.content===content);

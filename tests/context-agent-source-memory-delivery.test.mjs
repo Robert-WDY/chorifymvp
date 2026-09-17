@@ -19,7 +19,8 @@ test('A exact source selection rejects wrong ID and excludes wrappers without de
  const state=createSession(),tools=createTools();
  const long=msg(state,'请保留下面原稿：\n湖畔茶香，陪伴午后。预约要求未知。\n以上仅存档。'),short=msg(state,'湖畔茶香。','assistant');
  const sourceText='湖畔茶香，陪伴午后。预约要求未知。',args={parentMessageId:short.id,sourceText,content:'湖畔茶香，陪伴清晨。预约要求未知。'};
- const missing=await tools.execute('save_document',{parentMessageId:short.id,content:args.content},{...ctx(state,'missing'),fromModel:true});assert.equal(missing.error.code,'source_text_required');
+ const selectionState=structuredClone(state);
+ const missing=await tools.execute('save_document',{parentMessageId:short.id,content:args.content},{...ctx(selectionState,'missing'),fromModel:true});assert.equal(missing.ok,true);assert.equal(missing.parentEvidence.content,short.content);
  const wrong=await tools.execute('save_document',args,ctx(state));assert.equal(wrong.error.code,'original_content_mismatch');assert.equal(Object.keys(state.assets).length,0);
  const saved=await tools.execute('save_document',{...args,parentMessageId:long.id},ctx(state,'correct'));
  assert.equal(saved.ok,true);assert.equal(saved.parentEvidence.content,sourceText);assert.equal(state.assets[saved.asset.parentId].content,sourceText);assert.equal(saved.parentEvidence.sourceMessageId,long.id);
@@ -36,7 +37,7 @@ test('A excerpts have distinct identity, reuse matching original, retain full-me
  assert.equal(new Set([full.asset.id,a.asset.id,b.asset.id]).size,3);assert.equal(full.asset.content,original.content);
  const again=await tools.execute('save_document',{sourceMessageId:original.id,sourceText:'第一段作品。'},ctx(state,'again'));assert.equal(again.asset.id,a.asset.id);
  const repeated=msg(state,'重复。重复。');assert.equal((await tools.execute('save_document',{sourceMessageId:repeated.id,sourceText:'重复。'},ctx(state,'repeat'))).error.code,'ambiguous_source_text');
- const partial=await tools.execute('save_document',{parentId:full.asset.id,sourceText:'第一段作品。',content:'新稿'},ctx(state,'partial'));assert.equal(partial.error.code,'original_content_mismatch');
+ const partial=await tools.execute('save_document',{parentId:full.asset.id,sourceText:'第一段作品。',content:'新稿'},ctx(state,'partial'));assert.equal(partial.ok,true);assert.equal(partial.parentEvidence.content,original.content);
  const before=Object.keys(state.assets);const failed=await tools.execute('save_document',{parentMessageId:original.id,sourceText:'第二段作品。',content:'新稿'},{...ctx(state,'failure'),save:async()=>{throw new Error('disk failure');}});assert.equal(failed.ok,false);assert.deepEqual(Object.keys(state.assets),before);
 });
 

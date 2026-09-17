@@ -1,0 +1,109 @@
+diff --git a/tests/context-agent-incremental-revision.test.mjs b/tests/context-agent-incremental-revision.test.mjs
+index d1b0a3a..cb854f4 100644
+--- a/tests/context-agent-incremental-revision.test.mjs
++++ b/tests/context-agent-incremental-revision.test.mjs
+@@ -76,7 +76,7 @@ test('versioned document edits preserve parent, bind measured reconstructed body
+ test('invalid and stale edits have no document or invocation side effects',async()=>{
+  const s=createSession(),tools=createTools();draft(s,'甲乙甲乙，价格20元。');const before=JSON.stringify(s);
+  for(const patch of [
+-  {parentVersion:2},{parentVersion:undefined},{edits:[{before:'甲乙',after:'丙'}]},
++  {parentVersion:2},{edits:[{before:'甲乙',after:'丙'}]},
+   {edits:[{before:'不在原稿',after:'丙'}]},{content:'全篇重写'},
+   {edits:[{before:s.assets.a.content,after:''}]},{edits:[{before:'20元',after:'20元'}]},
+   {edits:[{before:'甲乙甲乙',after:'丙'},{before:'乙甲',after:'丁'}]},
+diff --git a/tests/context-agent-selection-boundary.test.mjs b/tests/context-agent-selection-boundary.test.mjs
+new file mode 100644
+index 0000000..9ffba06
+--- /dev/null
++++ b/tests/context-agent-selection-boundary.test.mjs
+@@ -0,0 +1,36 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {createSession,appendRecord} from '../server/context-agent/history.mjs';
++import {createTools} from '../server/context-agent/tools.mjs';
++import {cases,blocks,reconstruct,check,makeInput} from '../evals/local-revision-compare.mjs';
++const context=s=>({state:s,ownerId:s.ownerId,turnId:'turn',callId:'call',fromModel:true,save:async()=>{}});
++test('material reference validates existence and type without vetoing an Agent semantic choice',async()=>{
++ const s=createSession(),tools=createTools();s.assets.a={id:'a',type:'text',title:'another product',content:'原价79元，容量未知。',version:7};s.assets.img={id:'img',type:'image',version:1};
++ appendRecord(s,{kind:'message',role:'user',turnId:'turn',content:'请改茶饮文稿。'});
++ assert.equal((await tools.execute('read_asset',{id:'missing'},context(s))).error.code,'asset_not_found');
++ assert.equal((await tools.execute('save_document',{parentId:'img',content:'正文'},context(s))).error.code,'asset_type_mismatch');
++ const r=await tools.execute('save_document',{parentId:'a',edits:[{before:'79元',after:'89元'}]},context(s));
++ assert.equal(r.ok,true);assert.equal(r.asset.parentId,'a');assert.equal(r.asset.version,8);assert.equal(r.parentEvidence.version,7);assert.equal(r.asset.content,'原价89元，容量未知。');
++ // Deliberately wrong meaning, valid reference: the runtime must not infer intent.
++});
++test('whole chat original can be revised without compulsory recitation',async()=>{
++ const s=createSession(),tools=createTools(),m=appendRecord(s,{kind:'message',role:'assistant',content:'原文79元。'});
++ const r=await tools.execute('save_document',{parentMessageId:m.id,edits:[{before:'79元',after:'89元'}]},context(s));
++ assert.equal(r.ok,true);assert.equal(r.parentEvidence.sourceMessageId,m.id);assert.equal(r.parentEvidence.content,m.content);assert.equal(r.asset.content,'原文89元。');
++});
++test('media reference checks enforce selected file types while provenance does not force visual selection',async()=>{
++ const s=createSession(),tools=createTools({observeImages:async()=>({text:'test observation'})});s.assets.text={id:'text',type:'text',content:'容量未知',version:1};s.assets.img={id:'img',type:'image',url:'https://example.com/a.png',version:1};
++ assert.equal((await tools.execute('analyze_image',{imageIds:['text'],question:'看图'},context(s))).error.code,'asset_type_mismatch');
++ assert.equal((await tools.execute('generate_image',{prompt:'静物',size:'1K',referenceImages:['text']},context(s))).error.code,'asset_type_mismatch');
++ assert.equal((await tools.execute('generate_image',{prompt:'静物',size:'1K',referenceImages:['missing']},context(s))).error.code,'asset_not_found');
++ const p=await tools.execute('generate_image',{prompt:'静物',size:'1K',sourceIds:['img']},context(s));assert.equal(p.ok,true);assert.deepEqual(p.inputEvidence.visualSources,[]);assert.equal(p.submitted,false);
++});
++test('comparison reconstruction keeps untouched blocks and rejects invalid outputs without semantic shortcuts',()=>{
++ const c=cases.find(c=>c.id==='two_places');const edits=c.edits;
++ const patched=reconstruct('edits',c.original,{edits});assert.equal(check(c,patched).exactExpected,true);
++ const p=blocks(c.original);const seg=reconstruct('segments',c.original,{segments:[{id:'s1',text:p[2].replace('18元','20元')},{id:'s3',text:p[6].replace('11点','12点')}]});assert.equal(seg,patched);
++ assert.throws(()=>reconstruct('segments',c.original,{segments:[{id:'s99',text:'x'}]}));
++ assert.throws(()=>reconstruct('edits',c.original,{edits:[{before:'not here',after:'x'}]}));
++ assert.throws(()=>reconstruct('whole',c.original,{content:patched,extra:'not allowed'}));
++ for(const method of ['whole','edits','segments'])for(const v of ['concise','explicit'])assert.equal(makeInput(c,method,v).length,2);
++});
+diff --git a/tests/context-agent-source-memory-delivery.test.mjs b/tests/context-agent-source-memory-delivery.test.mjs
+index c2c68b5..8e0d531 100644
+--- a/tests/context-agent-source-memory-delivery.test.mjs
++++ b/tests/context-agent-source-memory-delivery.test.mjs
+@@ -19,7 +19,8 @@ test('A exact source selection rejects wrong ID and excludes wrappers without de
+  const state=createSession(),tools=createTools();
+  const long=msg(state,'请保留下面原稿：\n湖畔茶香，陪伴午后。预约要求未知。\n以上仅存档。'),short=msg(state,'湖畔茶香。','assistant');
+  const sourceText='湖畔茶香，陪伴午后。预约要求未知。',args={parentMessageId:short.id,sourceText,content:'湖畔茶香，陪伴清晨。预约要求未知。'};
+- const missing=await tools.execute('save_document',{parentMessageId:short.id,content:args.content},{...ctx(state,'missing'),fromModel:true});assert.equal(missing.error.code,'source_text_required');
++ const selectionState=structuredClone(state);
++ const missing=await tools.execute('save_document',{parentMessageId:short.id,content:args.content},{...ctx(selectionState,'missing'),fromModel:true});assert.equal(missing.ok,true);assert.equal(missing.parentEvidence.content,short.content);
+  const wrong=await tools.execute('save_document',args,ctx(state));assert.equal(wrong.error.code,'original_content_mismatch');assert.equal(Object.keys(state.assets).length,0);
+  const saved=await tools.execute('save_document',{...args,parentMessageId:long.id},ctx(state,'correct'));
+  assert.equal(saved.ok,true);assert.equal(saved.parentEvidence.content,sourceText);assert.equal(state.assets[saved.asset.parentId].content,sourceText);assert.equal(saved.parentEvidence.sourceMessageId,long.id);
+@@ -36,7 +37,7 @@ test('A excerpts have distinct identity, reuse matching original, retain full-me
+  assert.equal(new Set([full.asset.id,a.asset.id,b.asset.id]).size,3);assert.equal(full.asset.content,original.content);
+  const again=await tools.execute('save_document',{sourceMessageId:original.id,sourceText:'第一段作品。'},ctx(state,'again'));assert.equal(again.asset.id,a.asset.id);
+  const repeated=msg(state,'重复。重复。');assert.equal((await tools.execute('save_document',{sourceMessageId:repeated.id,sourceText:'重复。'},ctx(state,'repeat'))).error.code,'ambiguous_source_text');
+- const partial=await tools.execute('save_document',{parentId:full.asset.id,sourceText:'第一段作品。',content:'新稿'},ctx(state,'partial'));assert.equal(partial.error.code,'original_content_mismatch');
++ const partial=await tools.execute('save_document',{parentId:full.asset.id,sourceText:'第一段作品。',content:'新稿'},ctx(state,'partial'));assert.equal(partial.ok,true);assert.equal(partial.parentEvidence.content,original.content);
+  const before=Object.keys(state.assets);const failed=await tools.execute('save_document',{parentMessageId:original.id,sourceText:'第二段作品。',content:'新稿'},{...ctx(state,'failure'),save:async()=>{throw new Error('disk failure');}});assert.equal(failed.ok,false);assert.deepEqual(Object.keys(state.assets),before);
+ });
+ 
+diff --git a/tests/context-agent-staged-closure.test.mjs b/tests/context-agent-staged-closure.test.mjs
+index 9061f5b..a440fa5 100644
+--- a/tests/context-agent-staged-closure.test.mjs
++++ b/tests/context-agent-staged-closure.test.mjs
+@@ -93,22 +93,22 @@ test('stage2 summary thresholds account for irreducible prompt/catalog/tool cost
+  assert.ok(threshold.target>threshold.floor);assert.ok(threshold.trigger>threshold.target);assert.ok(threshold.trigger<threshold.effective);
+  await evidence('stage2-thresholds',threshold);
+ });
+-test('stage3 observation asks for deliberate material selection, passes actual originals and never auto-adds another product',async()=>{
++test('stage3 observation respects Agent material selection, reports candidates and never auto-adds another product',async()=>{
+  const s=createSession();s.assets.img={id:'img',type:'image',version:1,url:'https://fixture.invalid/source.png'};
+  s.assets.facts={id:'facts',type:'text',version:1,content:'容量未知；价格20元。'};s.assets.other={id:'other',type:'text',version:1,content:'另一商品79元'};
+  appendRecord(s,{kind:'message',role:'user',content:'分析这件商品',attachments:[{id:'img'},{id:'facts'},{id:'other'}]});
+  let observed;const tools=createTools({observeImages:async args=>(observed=args,{text:'容量无法判断'})});
+  const args={imageIds:['img'],question:'商品有哪些可见特征？'};
+- const missing=await tools.execute('analyze_image',args,context(s,'missing'));assert.equal(missing.error.code,'observation_context_required');assert.equal(observed,undefined);
++ const missing=await tools.execute('analyze_image',args,context(s,'missing'));assert.equal(missing.ok,true);assert.deepEqual(observed.materials,[]);assert.deepEqual(missing.materialCandidates.map(a=>a.id),['facts','other']);
+  const result=await tools.execute('analyze_image',{...args,materials:[{sourceId:'facts',status:'unknown'}]},context(s,'observe'));
+  assert.equal(result.ok,true);assert.equal(observed.materials[0].content,s.assets.facts.content);assert.equal(observed.materials.length,1);
+  const empty=await tools.execute('analyze_image',{...args,materials:[],contextNote:'只比较背景，不涉及商品属性，两份资料均无关'},context(s,'explicit-empty'));assert.equal(empty.ok,true);assert.deepEqual(observed.materials,[]);
+  await evidence('stage3-observation',{missing,result});
+ });
+-test('stage3 visual lineage alone is rejected; explicit image binding appears in proposal input evidence',async()=>{
++test('stage3 visual lineage stays provenance; only explicit image binding appears as actual visual input',async()=>{
+  const s=createSession(),tools=createTools();s.assets.img={id:'img',type:'image',version:2,url:'https://fixture.invalid/source.png'};
+  const args={prompt:'保持原商品',size:'1024x1024',sourceIds:['img']};
+- const missing=await tools.execute('generate_image',args,context(s,'missing'));assert.equal(missing.error.code,'visual_source_not_bound');assert.equal(Object.keys(s.approvals).length,0);
++ const missing=await tools.execute('generate_image',args,context(s,'missing'));assert.equal(missing.ok,true);assert.deepEqual(missing.inputEvidence.visualSources,[]);assert.equal(missing.submitted,false);
+  const result=await tools.execute('generate_image',{...args,referenceImages:['img']},context(s,'valid'));assert.equal(result.submitted,false);assert.deepEqual(result.inputEvidence.visualSources,[{id:'img',version:2}]);
+  await evidence('stage3-generation',{missing,result});
+ });

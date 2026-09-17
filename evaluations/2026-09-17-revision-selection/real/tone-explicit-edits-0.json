@@ -1,0 +1,153 @@
+{
+  "id": "tone-explicit-edits-0",
+  "caseId": "tone",
+  "method": "edits",
+  "version": "explicit",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "89983b04-d16d-484d-b205-8f1ee9939993",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧。无糖，每杯18元。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧。无糖，每杯18元。\"}]}",
+  "content": "午后的一杯\n\n来杯桂花乌龙冷泡茶吧。无糖，每杯18元。\n\n每天11点营业。预约要求待确认。",
+  "check": {
+    "outsidePreserved": true,
+    "targetChanged": true,
+    "semanticReview": "human_required_for_tone_and_facts"
+  },
+  "usage": {
+    "input_tokens": 246,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 50,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 296
+  },
+  "transport": [
+    {
+      "item": "tone-explicit-edits-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:37.018Z",
+      "status": 200,
+      "response": {
+        "id": "9fa2f5b4-f5dd-43a8-8ba1-5053eb9c680e",
+        "object": "response",
+        "created_at": 1789633115,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633115,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "89983b04-d16d-484d-b205-8f1ee9939993",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧。无糖，每杯18元。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 246,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 50,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 296
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

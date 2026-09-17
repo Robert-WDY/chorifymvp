@@ -93,22 +93,22 @@ test('stage2 summary thresholds account for irreducible prompt/catalog/tool cost
  assert.ok(threshold.target>threshold.floor);assert.ok(threshold.trigger>threshold.target);assert.ok(threshold.trigger<threshold.effective);
  await evidence('stage2-thresholds',threshold);
 });
-test('stage3 observation asks for deliberate material selection, passes actual originals and never auto-adds another product',async()=>{
+test('stage3 observation respects Agent material selection, reports candidates and never auto-adds another product',async()=>{
  const s=createSession();s.assets.img={id:'img',type:'image',version:1,url:'https://fixture.invalid/source.png'};
  s.assets.facts={id:'facts',type:'text',version:1,content:'容量未知；价格20元。'};s.assets.other={id:'other',type:'text',version:1,content:'另一商品79元'};
  appendRecord(s,{kind:'message',role:'user',content:'分析这件商品',attachments:[{id:'img'},{id:'facts'},{id:'other'}]});
  let observed;const tools=createTools({observeImages:async args=>(observed=args,{text:'容量无法判断'})});
  const args={imageIds:['img'],question:'商品有哪些可见特征？'};
- const missing=await tools.execute('analyze_image',args,context(s,'missing'));assert.equal(missing.error.code,'observation_context_required');assert.equal(observed,undefined);
+ const missing=await tools.execute('analyze_image',args,context(s,'missing'));assert.equal(missing.ok,true);assert.deepEqual(observed.materials,[]);assert.deepEqual(missing.materialCandidates.map(a=>a.id),['facts','other']);
  const result=await tools.execute('analyze_image',{...args,materials:[{sourceId:'facts',status:'unknown'}]},context(s,'observe'));
  assert.equal(result.ok,true);assert.equal(observed.materials[0].content,s.assets.facts.content);assert.equal(observed.materials.length,1);
  const empty=await tools.execute('analyze_image',{...args,materials:[],contextNote:'只比较背景，不涉及商品属性，两份资料均无关'},context(s,'explicit-empty'));assert.equal(empty.ok,true);assert.deepEqual(observed.materials,[]);
  await evidence('stage3-observation',{missing,result});
 });
-test('stage3 visual lineage alone is rejected; explicit image binding appears in proposal input evidence',async()=>{
+test('stage3 visual lineage stays provenance; only explicit image binding appears as actual visual input',async()=>{
  const s=createSession(),tools=createTools();s.assets.img={id:'img',type:'image',version:2,url:'https://fixture.invalid/source.png'};
  const args={prompt:'保持原商品',size:'1024x1024',sourceIds:['img']};
- const missing=await tools.execute('generate_image',args,context(s,'missing'));assert.equal(missing.error.code,'visual_source_not_bound');assert.equal(Object.keys(s.approvals).length,0);
+ const missing=await tools.execute('generate_image',args,context(s,'missing'));assert.equal(missing.ok,true);assert.deepEqual(missing.inputEvidence.visualSources,[]);assert.equal(missing.submitted,false);
  const result=await tools.execute('generate_image',{...args,referenceImages:['img']},context(s,'valid'));assert.equal(result.submitted,false);assert.deepEqual(result.inputEvidence.visualSources,[{id:'img',version:2}]);
  await evidence('stage3-generation',{missing,result});
 });

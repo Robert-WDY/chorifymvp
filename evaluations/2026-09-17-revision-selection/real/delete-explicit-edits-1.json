@@ -1,0 +1,152 @@
+{
+  "id": "delete-explicit-edits-1",
+  "caseId": "delete",
+  "method": "edits",
+  "version": "explicit",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\\n\\n预约要求还没有确定。\",\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "b41cd604-ba64-4bcf-83e8-9f0e6b2ffc73",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"edits\":[{\"before\":\"桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\",\"after\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"edits\":[{\"before\":\"桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\",\"after\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}",
+  "content": "夏日冷泡计划\n\n桂花与乌龙慢慢相遇。售价18元。\n\n预约要求还没有确定。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 226,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 37,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 263
+  },
+  "transport": [
+    {
+      "item": "delete-explicit-edits-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\\n\\n预约要求还没有确定。\",\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:53.505Z",
+      "status": 200,
+      "response": {
+        "id": "f4a2c868-6dc5-4b89-945e-0404131b44ab",
+        "object": "response",
+        "created_at": 1789633131,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633132,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "b41cd604-ba64-4bcf-83e8-9f0e6b2ffc73",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"edits\":[{\"before\":\"桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\",\"after\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 226,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 37,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 263
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

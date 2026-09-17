@@ -1,0 +1,3 @@
+{"id":"older_long","calls":88,"status":"completed","children":[{"id":"doc_9332219b-6a2e-4a82-aca3-56df5062d3e9","parentId":"long","content":"青禾桂花乌龙，每杯20元。\n\n午后坐一会，慢饮一杯茶。预约要求待确认。"}]}
+{"id":"other_product","calls":92,"status":"completed","children":[{"id":"doc_10066a8b-9cf9-4091-83fb-5491a1ddfdef","parentId":"candle","content":"松岚蜡烛89元，燃烧时长待确认。"}]}
+{"id":"selected_short","calls":95,"status":"completed","children":[{"id":"doc_1868d40c-451e-47ef-b79f-6338dc136425","parentId":"short","content":"青禾18元，午后慢慢喝。"}]}

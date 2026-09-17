@@ -1,0 +1,152 @@
+{
+  "id": "repeated-concise-whole-0",
+  "caseId": "repeated",
+  "method": "whole",
+  "version": "concise",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"青禾：冷泡茶18元，每天11点开门。\\n\\n松岚：试香蜡烛18元，预约规则未知。\\n\\n两家分开发布。\",\"request\":\"松岚那款改成20元，青禾不变，别动其他字。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "d332c392-b7bc-40d2-a9b0-9652c9357184",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"content\":\"青禾：冷泡茶18元，每天11点开门。\\n\\n松岚：试香蜡烛20元，预约规则未知。\\n\\n两家分开发布。\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"content\":\"青禾：冷泡茶18元，每天11点开门。\\n\\n松岚：试香蜡烛20元，预约规则未知。\\n\\n两家分开发布。\"}",
+  "content": "青禾：冷泡茶18元，每天11点开门。\n\n松岚：试香蜡烛20元，预约规则未知。\n\n两家分开发布。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 143,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 42,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 185
+  },
+  "transport": [
+    {
+      "item": "repeated-concise-whole-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"青禾：冷泡茶18元，每天11点开门。\\n\\n松岚：试香蜡烛18元，预约规则未知。\\n\\n两家分开发布。\",\"request\":\"松岚那款改成20元，青禾不变，别动其他字。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:11.659Z",
+      "status": 200,
+      "response": {
+        "id": "89107e3c-896e-46e8-945d-c01f64394d8c",
+        "object": "response",
+        "created_at": 1789633089,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633090,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "d332c392-b7bc-40d2-a9b0-9652c9357184",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"content\":\"青禾：冷泡茶18元，每天11点开门。\\n\\n松岚：试香蜡烛20元，预约规则未知。\\n\\n两家分开发布。\"}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 143,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 42,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 185
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

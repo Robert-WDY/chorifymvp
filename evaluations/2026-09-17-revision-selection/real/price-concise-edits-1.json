@@ -1,0 +1,152 @@
+{
+  "id": "price-concise-edits-1",
+  "caseId": "price",
+  "method": "edits",
+  "version": "concise",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"桂花乌龙，无糖。\\n\\n每杯20元，11点营业。\\n\\n预约规则待确认。\",\"request\":\"价格改一下，18元，其他原样保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "e534309c-72ad-4f34-b942-601639c73473",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"edits\":[{\"before\":\"每杯20元\",\"after\":\"每杯18元\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"edits\":[{\"before\":\"每杯20元\",\"after\":\"每杯18元\"}]}",
+  "content": "桂花乌龙，无糖。\n\n每杯18元，11点营业。\n\n预约规则待确认。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 166,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 21,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 187
+  },
+  "transport": [
+    {
+      "item": "price-concise-edits-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"桂花乌龙，无糖。\\n\\n每杯20元，11点营业。\\n\\n预约规则待确认。\",\"request\":\"价格改一下，18元，其他原样保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:38.909Z",
+      "status": 200,
+      "response": {
+        "id": "4a650e29-0f8f-4270-9c83-5fc375dd2c9e",
+        "object": "response",
+        "created_at": 1789633117,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633117,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "e534309c-72ad-4f34-b942-601639c73473",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"edits\":[{\"before\":\"每杯20元\",\"after\":\"每杯18元\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 166,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 21,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 187
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

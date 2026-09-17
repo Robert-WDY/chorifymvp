@@ -1,0 +1,9 @@
+{
+  "codeSha": "d88964f3364604f15f9b16d779477c37ad473aae",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "reasoning": "none",
+  "media": false,
+  "vision": false,
+  "stage": "compare"
+}

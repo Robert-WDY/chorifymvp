@@ -1,0 +1,152 @@
+{
+  "id": "background-explicit-segments-1",
+  "caseId": "background",
+  "method": "segments",
+  "version": "explicit",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"透明矩形香水瓶，白色瓶盖。米白背景，柔和侧光。横版，无文字，无人物。\"}],\"request\":\"背景换浅蓝色吧，瓶型、瓶盖、光线和其他要求都不要动。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "ed329900-5ecd-4183-bde2-8f693a4dee83",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"segments\":[{\"id\":\"s0\",\"text\":\"透明矩形香水瓶，白色瓶盖。浅蓝色背景，柔和侧光。横版，无文字，无人物。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"segments\":[{\"id\":\"s0\",\"text\":\"透明矩形香水瓶，白色瓶盖。浅蓝色背景，柔和侧光。横版，无文字，无人物。\"}]}",
+  "content": "透明矩形香水瓶，白色瓶盖。浅蓝色背景，柔和侧光。横版，无文字，无人物。",
+  "check": {
+    "exactExpected": false,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 247,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 40,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 287
+  },
+  "transport": [
+    {
+      "item": "background-explicit-segments-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"透明矩形香水瓶，白色瓶盖。米白背景，柔和侧光。横版，无文字，无人物。\"}],\"request\":\"背景换浅蓝色吧，瓶型、瓶盖、光线和其他要求都不要动。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:44.591Z",
+      "status": 200,
+      "response": {
+        "id": "1da7b2ba-25f9-4d1b-9285-f3153001c4fc",
+        "object": "response",
+        "created_at": 1789633122,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633123,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "ed329900-5ecd-4183-bde2-8f693a4dee83",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"segments\":[{\"id\":\"s0\",\"text\":\"透明矩形香水瓶，白色瓶盖。浅蓝色背景，柔和侧光。横版，无文字，无人物。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 247,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 40,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 287
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

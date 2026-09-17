@@ -1,0 +1,2102 @@
+{
+  "validation": "human semantic review plus deterministic evidence audit, not a new model review",
+  "totals": {
+    "networkCalls": 95,
+    "inputTokens": 86964,
+    "outputTokens": 7827,
+    "totalTokens": 94791
+  },
+  "comparison": [
+    {
+      "method": "whole",
+      "version": "concise",
+      "n": 14,
+      "exactOrScopeChecks": 13,
+      "semanticAccepted": 14,
+      "totalTokens": 6347
+    },
+    {
+      "method": "whole",
+      "version": "explicit",
+      "n": 14,
+      "exactOrScopeChecks": 10,
+      "semanticAccepted": 12,
+      "totalTokens": 7106
+    },
+    {
+      "method": "edits",
+      "version": "concise",
+      "n": 14,
+      "exactOrScopeChecks": 12,
+      "semanticAccepted": 14,
+      "totalTokens": 4881
+    },
+    {
+      "method": "edits",
+      "version": "explicit",
+      "n": 14,
+      "exactOrScopeChecks": 13,
+      "semanticAccepted": 14,
+      "totalTokens": 5649
+    },
+    {
+      "method": "segments",
+      "version": "concise",
+      "n": 14,
+      "exactOrScopeChecks": 14,
+      "semanticAccepted": 14,
+      "totalTokens": 5484
+    },
+    {
+      "method": "segments",
+      "version": "explicit",
+      "n": 14,
+      "exactOrScopeChecks": 12,
+      "semanticAccepted": 14,
+      "totalTokens": 6241
+    }
+  ],
+  "rows": [
+    {
+      "id": "price-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 126,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 156
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 166,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 187
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 197,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 220
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 180,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 210
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 220,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 251,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 274
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 132,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 162
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 172,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 191
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 193,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 233
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 216
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 226,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 245
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 247,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 287
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "repeated-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 143,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 185
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 183,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 29,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 212
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 214,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 197,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 239
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 237,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 29,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 266
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 268,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 295
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 132,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 28,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 160
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 172,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 18,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 190
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 205,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 229
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 28,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 214
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 226,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 18,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 244
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 259,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 283
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 150,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 198
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 190,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 38,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 228
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 228,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 45,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 273
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 204,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 252
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 244,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 38,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 282
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 282,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 45,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 327
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1111,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 1008,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2119
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1151,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 36,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1187
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1223,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1289
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1165,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 1008,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2173
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1205,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 36,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1277,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1343
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "tone-concise-whole-0",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 152,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 41,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 193
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-concise-edits-0",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 192,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 242
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-concise-segments-0",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 225,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 32,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 257
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-explicit-whole-0",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": false,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 206,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 43,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 249
+      },
+      "semanticAccepted": false,
+      "reviewReason": "强调保持的全文输出两次原样返回，没有落实语气修改。"
+    },
+    {
+      "id": "tone-explicit-edits-0",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 246,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 296
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-explicit-segments-0",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 279,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 32,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 311
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "price-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 197,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 220
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 166,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 187
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 126,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 156
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 251,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 274
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 220,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 21,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "price-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "price",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 180,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 210
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 193,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 233
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "background-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 172,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 191
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 132,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 162
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 247,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 40,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 287
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 226,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 245
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "background-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "background",
+      "check": {
+        "exactExpected": false,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 216
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工复核：浅蓝色背景与用户要求等价，其余字符完全相同；原精确匹配误判保留。"
+    },
+    {
+      "id": "repeated-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 214,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 183,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 29,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 212
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 143,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 185
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 268,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 27,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 295
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 237,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 29,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 266
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "repeated-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "repeated",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 197,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 239
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 205,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 229
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 172,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 25,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 197
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 132,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 28,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 160
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 259,
+        "input_tokens_details": {
+          "cached_tokens": 125
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 283
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 226,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 37,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 263
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "delete-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "delete",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 186,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 28,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 214
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 228,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 45,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 273
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 190,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 38,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 228
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 150,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 198
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 282,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 45,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 327
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 244,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 38,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 282
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "two_places-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "two_places",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 204,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 252
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1223,
+        "input_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1289
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1151,
+        "input_tokens_details": {
+          "cached_tokens": 896
+        },
+        "output_tokens": 36,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1187
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1111,
+        "input_tokens_details": {
+          "cached_tokens": 896
+        },
+        "output_tokens": 1008,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2119
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1277,
+        "input_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "output_tokens": 66,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1343
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1205,
+        "input_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "output_tokens": 36,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1241
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "long-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "long",
+      "check": {
+        "exactExpected": true,
+        "semanticReview": "deterministic_requested_substitutions"
+      },
+      "usage": {
+        "input_tokens": 1165,
+        "input_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "output_tokens": 1008,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2173
+      },
+      "semanticAccepted": true,
+      "reviewReason": "精确完成用户指定替换，未变部分逐字一致。"
+    },
+    {
+      "id": "tone-concise-segments-1",
+      "method": "segments",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 225,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 32,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 257
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-concise-edits-1",
+      "method": "edits",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 192,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 242
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-concise-whole-1",
+      "method": "whole",
+      "version": "concise",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 152,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 42,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 194
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-explicit-segments-1",
+      "method": "segments",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 279,
+        "input_tokens_details": {
+          "cached_tokens": 128
+        },
+        "output_tokens": 33,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 312
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-explicit-edits-1",
+      "method": "edits",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": true,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 246,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 296
+      },
+      "semanticAccepted": true,
+      "reviewReason": "人工阅读正文：中段转为日常店员口吻，茶名、无糖与18元保留；未新增事实，标题末段不变。"
+    },
+    {
+      "id": "tone-explicit-whole-1",
+      "method": "whole",
+      "version": "explicit",
+      "caseId": "tone",
+      "check": {
+        "outsidePreserved": true,
+        "targetChanged": false,
+        "semanticReview": "human_required_for_tone_and_facts"
+      },
+      "usage": {
+        "input_tokens": 206,
+        "input_tokens_details": {
+          "cached_tokens": 0
+        },
+        "output_tokens": 43,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 249
+      },
+      "semanticAccepted": false,
+      "reviewReason": "强调保持的全文输出两次原样返回，没有落实语气修改。"
+    }
+  ],
+  "sourceRuns": [
+    {
+      "id": "older_long",
+      "savedCorrectParent": true,
+      "savedExpected": true,
+      "modelCalls": 4,
+      "initialMultipleCallRejection": true,
+      "replyReview": "人工核对最终回复与实际保存正文一致；前两组存在多调用整组拒绝后恢复，不计零错误路径。"
+    },
+    {
+      "id": "other_product",
+      "savedCorrectParent": true,
+      "savedExpected": true,
+      "modelCalls": 4,
+      "initialMultipleCallRejection": true,
+      "replyReview": "人工核对最终回复与实际保存正文一致；前两组存在多调用整组拒绝后恢复，不计零错误路径。"
+    },
+    {
+      "id": "selected_short",
+      "savedCorrectParent": true,
+      "savedExpected": true,
+      "modelCalls": 3,
+      "initialMultipleCallRejection": false,
+      "replyReview": "人工核对最终回复与实际保存正文一致；前两组存在多调用整组拒绝后恢复，不计零错误路径。"
+    }
+  ],
+  "historical": {
+    "reviewedSavedTurns": 9,
+    "substantiveConflicts": 1,
+    "presentationDifferences": 1,
+    "notes": "不同版本与样本，不是发生率估计；同一LONG_MEMORY两次一成一败，不能证明稳定复现，本轮不加回答拦截。",
+    "rows": [
+      {
+        "index": 0,
+        "file": "evaluations\\2026-09-17-staged-closure\\primary\\LONG_MEMORY\\session.json",
+        "turnId": "6d8fcfbf-d7b4-4675-b11f-34431bcf2926",
+        "classification": "substantive_saved_reply_conflict",
+        "reason": "保存18元却明确声称并展示20元。"
+      },
+      {
+        "index": 1,
+        "file": "evaluations\\2026-09-17-staged-closure\\retest\\CHAT_VERSION\\session.json",
+        "turnId": "ffa01ae8-342d-4bd2-a7c2-c73a12eed879",
+        "classification": "separate_lineage_issue",
+        "reason": "历史父稿选择有独立问题，回答与实际所保存正文并未反向，不能混入此项计数。"
+      },
+      {
+        "index": 2,
+        "file": "evaluations\\2026-09-17-staged-closure\\retest\\CHAT_VERSION\\session.json",
+        "turnId": "cc60a89f-1902-431f-856c-2895bbb6ed19",
+        "classification": "no_saved_reply_conflict",
+        "reason": "逐项对照所保存正文和最终说明，未发现实质冲突。"
+      },
+      {
+        "index": 3,
+        "file": "evaluations\\2026-09-17-staged-closure\\retest\\CHAT_VERSION\\session.json",
+        "turnId": "aec762ea-601e-4211-ae9e-3ae854b82435",
+        "classification": "no_saved_reply_conflict",
+        "reason": "逐项对照所保存正文和最终说明，未发现实质冲突。"
+      },
+      {
+        "index": 4,
+        "file": "evaluations\\2026-09-17-multiturn-real\\primary\\CHAT_VERSION\\session.json",
+        "turnId": "f80f5f69-01dd-4316-a260-7c7afacd2e23",
+        "classification": "separate_lineage_issue",
+        "reason": "历史父稿选择有独立问题，回答与实际所保存正文并未反向，不能混入此项计数。"
+      },
+      {
+        "index": 5,
+        "file": "evaluations\\2026-09-17-multiturn-real\\primary\\CHAT_VERSION\\session.json",
+        "turnId": "3a1ff0bb-f69b-4f53-9797-7f819683cd85",
+        "classification": "no_saved_reply_conflict",
+        "reason": "逐项对照所保存正文和最终说明，未发现实质冲突。"
+      },
+      {
+        "index": 6,
+        "file": "evaluations\\2026-09-17-multiturn-real\\primary\\CHAT_VERSION\\session.json",
+        "turnId": "6dd55471-97c8-44ab-82f5-80044b0ff4a8",
+        "classification": "no_saved_reply_conflict",
+        "reason": "逐项对照所保存正文和最终说明，未发现实质冲突。"
+      },
+      {
+        "index": 7,
+        "file": "evaluations\\2026-09-17-multiturn-real\\primary\\DIRECTION_SKILL\\session.json",
+        "turnId": "c81db1eb-86a2-4497-95df-2f382d43b40d",
+        "classification": "presentation_difference",
+        "reason": "脚本回复正文有强调格式和说明差异；核心脚本相同，未发现价格/行动承诺反向。"
+      },
+      {
+        "index": 8,
+        "file": "evaluations\\2026-09-17-multiturn-real\\primary\\LONG_MEMORY\\session.json",
+        "turnId": "67f6b42a-df4c-441b-b649-6d213118d76b",
+        "classification": "no_saved_reply_conflict",
+        "reason": "逐项对照所保存正文和最终说明，未发现实质冲突。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "id": "delete-explicit-segments-0",
+  "caseId": "delete",
+  "method": "segments",
+  "version": "explicit",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"夏日冷泡计划\"},{\"id\":\"s1\",\"text\":\"桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\"},{\"id\":\"s2\",\"text\":\"预约要求还没有确定。\"}],\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "4d7bbacf-fd93-448b-8c95-c3d5b4f84acd",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"segments\":[{\"id\":\"s1\",\"text\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}",
+  "content": "夏日冷泡计划\n\n桂花与乌龙慢慢相遇。售价18元。\n\n预约要求还没有确定。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 259,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 24,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 283
+  },
+  "transport": [
+    {
+      "item": "delete-explicit-segments-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"夏日冷泡计划\"},{\"id\":\"s1\",\"text\":\"桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\"},{\"id\":\"s2\",\"text\":\"预约要求还没有确定。\"}],\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:20.027Z",
+      "status": 200,
+      "response": {
+        "id": "f1ffccfb-e8c8-435d-bd90-2fe8c25b019d",
+        "object": "response",
+        "created_at": 1789633098,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633098,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "4d7bbacf-fd93-448b-8c95-c3d5b4f84acd",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"桂花与乌龙慢慢相遇。售价18元。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 259,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 24,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 283
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

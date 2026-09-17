@@ -1,0 +1,152 @@
+{
+  "id": "delete-explicit-whole-1",
+  "caseId": "delete",
+  "method": "whole",
+  "version": "explicit",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\\n\\n预约要求还没有确定。\",\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "d6af0056-c85b-4cd2-a675-f7193d0b668a",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"content\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。售价18元。\\n\\n预约要求还没有确定。\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"content\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。售价18元。\\n\\n预约要求还没有确定。\"}",
+  "content": "夏日冷泡计划\n\n桂花与乌龙慢慢相遇。售价18元。\n\n预约要求还没有确定。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 186,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 28,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 214
+  },
+  "transport": [
+    {
+      "item": "delete-explicit-whole-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。活动仅限周末。售价18元。\\n\\n预约要求还没有确定。\",\"request\":\"“活动仅限周末。”这句撤掉，其他逐字保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:54.302Z",
+      "status": 200,
+      "response": {
+        "id": "382673aa-a9b7-4fd7-98c6-84159170ad87",
+        "object": "response",
+        "created_at": 1789633132,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633133,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "d6af0056-c85b-4cd2-a675-f7193d0b668a",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"content\":\"夏日冷泡计划\\n\\n桂花与乌龙慢慢相遇。售价18元。\\n\\n预约要求还没有确定。\"}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 186,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 28,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 214
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "background-concise-edits-1",
+  "caseId": "background",
+  "method": "edits",
+  "version": "concise",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"透明矩形香水瓶，白色瓶盖。米白背景，柔和侧光。横版，无文字，无人物。\",\"request\":\"背景换浅蓝色吧，瓶型、瓶盖、光线和其他要求都不要动。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "3024a176-3973-488f-b055-7a311936971f",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"edits\":[{\"before\":\"米白背景\",\"after\":\"浅蓝色背景\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"edits\":[{\"before\":\"米白背景\",\"after\":\"浅蓝色背景\"}]}",
+  "content": "透明矩形香水瓶，白色瓶盖。浅蓝色背景，柔和侧光。横版，无文字，无人物。",
+  "check": {
+    "exactExpected": false,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 172,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 19,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 191
+  },
+  "transport": [
+    {
+      "item": "background-concise-edits-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"透明矩形香水瓶，白色瓶盖。米白背景，柔和侧光。横版，无文字，无人物。\",\"request\":\"背景换浅蓝色吧，瓶型、瓶盖、光线和其他要求都不要动。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:42.911Z",
+      "status": 200,
+      "response": {
+        "id": "d56c5224-ba62-4916-a794-45b657e76a58",
+        "object": "response",
+        "created_at": 1789633121,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633121,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "3024a176-3973-488f-b055-7a311936971f",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"edits\":[{\"before\":\"米白背景\",\"after\":\"浅蓝色背景\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 172,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 19,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 191
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

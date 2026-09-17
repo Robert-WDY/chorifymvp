@@ -1,0 +1,152 @@
+{
+  "id": "repeated-explicit-segments-1",
+  "caseId": "repeated",
+  "method": "segments",
+  "version": "explicit",
+  "repeat": 1,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"青禾：冷泡茶18元，每天11点开门。\"},{\"id\":\"s1\",\"text\":\"松岚：试香蜡烛18元，预约规则未知。\"},{\"id\":\"s2\",\"text\":\"两家分开发布。\"}],\"request\":\"松岚那款改成20元，青禾不变，别动其他字。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "da203ad7-a877-43e8-87fe-4352f1a229bd",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"松岚：试香蜡烛20元，预约规则未知。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"segments\":[{\"id\":\"s1\",\"text\":\"松岚：试香蜡烛20元，预约规则未知。\"}]}",
+  "content": "青禾：冷泡茶18元，每天11点开门。\n\n松岚：试香蜡烛20元，预约规则未知。\n\n两家分开发布。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 268,
+    "input_tokens_details": {
+      "cached_tokens": 128
+    },
+    "output_tokens": 27,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 295
+  },
+  "transport": [
+    {
+      "item": "repeated-explicit-segments-1",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"青禾：冷泡茶18元，每天11点开门。\"},{\"id\":\"s1\",\"text\":\"松岚：试香蜡烛18元，预约规则未知。\"},{\"id\":\"s2\",\"text\":\"两家分开发布。\"}],\"request\":\"松岚那款改成20元，青禾不变，别动其他字。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:49.207Z",
+      "status": 200,
+      "response": {
+        "id": "29fc860d-c671-4c51-8cea-f81de3a5a989",
+        "object": "response",
+        "created_at": 1789633127,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633127,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "da203ad7-a877-43e8-87fe-4352f1a229bd",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"松岚：试香蜡烛20元，预约规则未知。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 268,
+          "input_tokens_details": {
+            "cached_tokens": 128
+          },
+          "output_tokens": 27,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 295
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+✔ retained original identities cover early long text and mixed messages in exact history order (46.257ms)
+✔ patches resolve simultaneously against original and preserve every unmentioned byte (0.691ms)
+✔ revision read pairs actual current user request with original and preserves pagination (26.1206ms)
+✔ versioned document edits preserve parent, bind measured reconstructed body, and replay once (20.4554ms)
+✔ invalid and stale edits have no document or invocation side effects (17.7997ms)
+✔ reconstructed document and revision history envelope obey existing size limits (29.2423ms)
+✔ chat originals archive separately; mismatch gives actual identity and incremental child keeps correct lineage (15.8917ms)
+✔ failed persistence rolls back both archived original and incremental child (15.2245ms)
+✔ long original local edit reaches Agent feedback within unchanged context budget (24.7146ms)
+✔ image proposal changes only selected background; inherits sources and waits for new approval (20.0391ms)
+✔ video scalar revision and image editing proposal retain unrelated original parameters (18.2885ms)
+✔ incremental media rejects incomplete new proposals, invalid merged values and foreign identities (15.753ms)
+✔ stored document display and changes survive restart independently of an incorrect Agent reply (88.1834ms)
+✔ failed proposal replacement persistence does not withdraw its original (14.6439ms)
+✔ document card renders persisted text safely and deduplicates event replay in DOM harness (1.6478ms)
+✔ material reference validates existence and type without vetoing an Agent semantic choice (34.0309ms)
+✔ whole chat original can be revised without compulsory recitation (22.9381ms)
+✔ comparison reconstruction keeps untouched blocks and rejects invalid outputs without semantic shortcuts (0.782ms)
+✔ A exact source selection rejects wrong ID and excludes wrappers without deleting original history (44.4328ms)
+✔ A excerpts have distinct identity, reuse matching original, retain full-message archival compatibility (24.3449ms)
+✔ A original evidence and versions survive SQLite restart and repeated calls (42.7494ms)
+✔ B oversized summary gets smaller explicit byte target, shared envelope budget and actual asset evidence (3.2778ms)
+✔ B repeated oversize remains bounded, preserves source and does not retry same range without new information (1.2202ms)
+✔ B non-budget faults do not spend another summary call or change coverage (1.0824ms)
+✔ C full delivery covers all items and body counting cannot include the title (22.1104ms)
+✔ C measured draft changed by final extra option is withheld and repaired by same Agent within budget (21.0121ms)
+✔ C failed requirements cannot be finalized, even if exact draft is repeated or a later bare measurement succeeds (21.0092ms)
+✔ C remeasurement of fixed draft passes; constraints do not leak into another turn (35.4079ms)
+✔ C invalid measurement cannot silently remove declared constraints (19.4746ms)
+✔ stage1 separate reply parts do not inherit other objects counts; omitted part still rejected (51.9171ms)
+✔ stage1 explicit correction replaces mistaken constraints using current original, not historic or invented quotes (24.7411ms)
+✔ stage1 checked document can be saved and followed by normal status; changed or failed draft cannot use receipt (23.0601ms)
+✔ stage1 failed document/asset checks cannot be bypassed by a final status message (17.2452ms)
+✔ stage1 feedback distinguishes ordinary counting from checked saving and body selection from parent selection (16.7954ms)
+✔ stage1 measuring a saved version reads its actual body and rejects a different supplied text/version (16.1787ms)
+✔ stage2 long source revision uses exact version without copying source and reaches final feedback (19.2019ms)
+✔ stage2 summary thresholds account for irreducible prompt/catalog/tool cost (32.1276ms)
+✔ stage3 observation respects Agent material selection, reports candidates and never auto-adds another product (21.0656ms)
+✔ stage3 visual lineage stays provenance; only explicit image binding appears as actual visual input (17.3002ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 468.4459

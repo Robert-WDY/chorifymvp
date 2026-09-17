@@ -1,0 +1,152 @@
+{
+  "id": "price-explicit-segments-0",
+  "caseId": "price",
+  "method": "segments",
+  "version": "explicit",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"桂花乌龙，无糖。\"},{\"id\":\"s1\",\"text\":\"每杯20元，11点营业。\"},{\"id\":\"s2\",\"text\":\"预约规则待确认。\"}],\"request\":\"价格改一下，18元，其他原样保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "d7f95ac1-bb71-49c5-a8f5-3ef20f6bd296",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"每杯18元，11点营业。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"segments\":[{\"id\":\"s1\",\"text\":\"每杯18元，11点营业。\"}]}",
+  "content": "桂花乌龙，无糖。\n\n每杯18元，11点营业。\n\n预约规则待确认。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 251,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 23,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 274
+  },
+  "transport": [
+    {
+      "item": "price-explicit-segments-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n原文已按空行分段，段ID仅用于定位。返回JSON {\"segments\":[{\"id\":\"s0\",\"text\":\"该段修改后的完整正文\"}]}，只返回需要修改的段。段内其他文字也须保留；程序按原位置拼接，未返回段及段间换行保持原样。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"segments\":[{\"id\":\"s0\",\"text\":\"桂花乌龙，无糖。\"},{\"id\":\"s1\",\"text\":\"每杯20元，11点营业。\"},{\"id\":\"s2\",\"text\":\"预约规则待确认。\"}],\"request\":\"价格改一下，18元，其他原样保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:06.634Z",
+      "status": 200,
+      "response": {
+        "id": "55bf3a24-1c54-44f9-bbc8-9f482c071ca2",
+        "object": "response",
+        "created_at": 1789633084,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633085,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "d7f95ac1-bb71-49c5-a8f5-3ef20f6bd296",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"segments\":[{\"id\":\"s1\",\"text\":\"每杯18元，11点营业。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 251,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 23,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 274
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

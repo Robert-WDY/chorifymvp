@@ -1,0 +1,152 @@
+{
+  "id": "two_places-explicit-whole-0",
+  "caseId": "two_places",
+  "method": "whole",
+  "version": "explicit",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"开店说明\\n\\n每杯18元。原料产地未知，不作产地承诺。\\n\\n桌面用浅灰色背景，不增加摆件。\\n\\n每天11点营业。预约规则待确认。\",\"request\":\"两处：价格变20元，开门改12点。其他一句也别改。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "f596cfed-ad66-4271-8c7a-c4a6b383345e",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"content\":\"开店说明\\n\\n每杯20元。原料产地未知，不作产地承诺。\\n\\n桌面用浅灰色背景，不增加摆件。\\n\\n每天12点营业。预约规则待确认。\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"content\":\"开店说明\\n\\n每杯20元。原料产地未知，不作产地承诺。\\n\\n桌面用浅灰色背景，不增加摆件。\\n\\n每天12点营业。预约规则待确认。\"}",
+  "content": "开店说明\n\n每杯20元。原料产地未知，不作产地承诺。\n\n桌面用浅灰色背景，不增加摆件。\n\n每天12点营业。预约规则待确认。",
+  "check": {
+    "exactExpected": true,
+    "semanticReview": "deterministic_requested_substitutions"
+  },
+  "usage": {
+    "input_tokens": 204,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 48,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 252
+  },
+  "transport": [
+    {
+      "item": "two_places-explicit-whole-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "把原文当作不可随意重写的底稿。先根据用户原话确定需要变化的最小连续片段，再修改该片段；未点名部分逐字保持，包括空白、换行、数字、否定和未知项。不要顺手润色，不补事实，不把其他对象的相同词一起替换。输出前核对修改是否全部落实，且没有扩大范围。只输出规定JSON。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"开店说明\\n\\n每杯18元。原料产地未知，不作产地承诺。\\n\\n桌面用浅灰色背景，不增加摆件。\\n\\n每天11点营业。预约规则待确认。\",\"request\":\"两处：价格变20元，开门改12点。其他一句也别改。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:23.318Z",
+      "status": 200,
+      "response": {
+        "id": "92f3a5ce-2ea6-43b7-b434-5cc05efb2b69",
+        "object": "response",
+        "created_at": 1789633101,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633102,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "f596cfed-ad66-4271-8c7a-c4a6b383345e",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"content\":\"开店说明\\n\\n每杯20元。原料产地未知，不作产地承诺。\\n\\n桌面用浅灰色背景，不增加摆件。\\n\\n每天12点营业。预约规则待确认。\"}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 204,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 48,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 252
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

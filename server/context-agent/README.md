@@ -43,7 +43,9 @@ npm run start:context
 
 简单聊天创作、改稿可直接回复并保留原始对话，不强制存稿或重读当前完整原文。需要独立文稿、版本管理或修改已有资产时保存；聊天稿以 `parentMessageId` 和新正文一次保存原稿及修订。Skill 直接读取 `methods/v1` 专业正文，不使用旧节点执行协议。详见 [统一修复记录](../../FIXES.md)。
 
-局部修订使用已有工具的 `edits:[{before,after}]`：文稿绑定 `parentId+parentVersion`，聊天稿绑定 `parentMessageId+sourceText`，在该原稿上应用唯一、不重叠的准确片段替换，未涉及部分逐字保留。`after` 可为空以删除片段，合成正文仍满足原有非空及长度限制。完整重写的 `content` 入口保留，仅在用户要求整体改写时使用。读取原稿/方案可带 `forRevision:true`，返回当前轮真实修改原话；长稿仍显式分页，不把片段当全文。
+局部修订使用已有工具的 `edits:[{before,after}]`：文稿绑定 `parentId`，聊天稿绑定 `parentMessageId`，真实父版本自动取得；只取聊天中的作品片段时才提供 `sourceText`。不强制重抄原文或补版本声明；如果显式指定不存在的版本仍拒绝。在所选原稿上应用唯一、不重叠的准确片段替换，未涉及部分逐字保留。`after`可为空以删除片段，合成正文仍满足非空及长度限制。整篇重写保留`content`入口。读取时可带`forRevision:true`同收当前修改原话；长稿显式分页。
+
+素材语义选择由 Agent 负责：检索历史和目录、读取实际内容、决定用户指向哪个素材。程序核对引用存在、可访问和类型；不根据标题或用户语义拦截合法选材。同批文字资料仅作为观察候选提示，不强迫使用；sourceIds是来源登记，实际视觉输入由referenceImages/imageId/firstFrameId决定，回执如实区分。错误选材通过真实评测定位，不新增语义拦截。准确片段能否应用、存档是否复制原文、用户隔离、批准和幂等属于执行完整性，继续保留。对照证据见[选材与提示词实验](../../evaluations/2026-09-17-revision-selection/README.md)。
 
 已有媒体方案通过 `read_approval` 读取，使用同名准备工具和 `replacesProposalId` 加 `edits` 或需改参数做增量修订；未传参数继承，合成结果再通过完整 Schema。新方案重新展示批准，旧参数及来源保留；修改真实图片仍用 `edit_image`。保存文稿卡直接取持久资产正文，回执提供实际差异供 Agent 判断。程序不代替 Agent 判断父稿语义、改动范围或全部用户要求；详见 [增量修改证据](../../evaluations/2026-09-17-incremental-revision/README.md)。
 

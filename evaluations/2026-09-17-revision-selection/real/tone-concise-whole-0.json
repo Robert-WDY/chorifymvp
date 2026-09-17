@@ -1,0 +1,153 @@
+{
+  "id": "tone-concise-whole-0",
+  "caseId": "tone",
+  "method": "whole",
+  "version": "concise",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "f0532803-63a5-41a1-a224-6c1d70473841",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"content\":\"午后的一杯\\n\\n来尝尝我们的桂花乌龙冷泡茶吧，没加糖的，一杯18块。\\n\\n每天11点营业。预约要求待确认。\"}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"content\":\"午后的一杯\\n\\n来尝尝我们的桂花乌龙冷泡茶吧，没加糖的，一杯18块。\\n\\n每天11点营业。预约要求待确认。\"}",
+  "content": "午后的一杯\n\n来尝尝我们的桂花乌龙冷泡茶吧，没加糖的，一杯18块。\n\n每天11点营业。预约要求待确认。",
+  "check": {
+    "outsidePreserved": true,
+    "targetChanged": true,
+    "semanticReview": "human_required_for_tone_and_facts"
+  },
+  "usage": {
+    "input_tokens": 152,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 41,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 193
+  },
+  "transport": [
+    {
+      "item": "tone-concise-whole-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"content\":\"修改后的完整原文\"}。完整正文须保留未修改部分。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:34.193Z",
+      "status": 200,
+      "response": {
+        "id": "1f46fd03-8852-48cf-8f89-cb13d7d635fc",
+        "object": "response",
+        "created_at": 1789633112,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633112,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "f0532803-63a5-41a1-a224-6c1d70473841",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"content\":\"午后的一杯\\n\\n来尝尝我们的桂花乌龙冷泡茶吧，没加糖的，一杯18块。\\n\\n每天11点营业。预约要求待确认。\"}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 152,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 41,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 193
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}

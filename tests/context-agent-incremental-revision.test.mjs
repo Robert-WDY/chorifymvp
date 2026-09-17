@@ -76,7 +76,7 @@ test('versioned document edits preserve parent, bind measured reconstructed body
 test('invalid and stale edits have no document or invocation side effects',async()=>{
  const s=createSession(),tools=createTools();draft(s,'甲乙甲乙，价格20元。');const before=JSON.stringify(s);
  for(const patch of [
-  {parentVersion:2},{parentVersion:undefined},{edits:[{before:'甲乙',after:'丙'}]},
+  {parentVersion:2},{edits:[{before:'甲乙',after:'丙'}]},
   {edits:[{before:'不在原稿',after:'丙'}]},{content:'全篇重写'},
   {edits:[{before:s.assets.a.content,after:''}]},{edits:[{before:'20元',after:'20元'}]},
   {edits:[{before:'甲乙甲乙',after:'丙'},{before:'乙甲',after:'丁'}]},

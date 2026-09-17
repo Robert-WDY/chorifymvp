@@ -1,0 +1,14 @@
+{
+  "codeSha": "d88964f3364604f15f9b16d779477c37ad473aae",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "reasoning": "none",
+  "media": false,
+  "vision": false,
+  "stage": "sources",
+  "sourceHashes": {
+    "server/context-agent/prompt.md": "409430bbfd080641f0c836a00b262a69737a0e6014d0ce1abcab6b419eb7dc5c",
+    "server/context-agent/tools.mjs": "c32c92429e814851dbba2154773d573e0d69a0c697eab10cea9eb8d1bc074b19",
+    "evals/local-revision-compare.mjs": "d4890fceb9626e091de1685b5b2f9def68f0cac495260aa58ccb87c4a2982da7"
+  }
+}

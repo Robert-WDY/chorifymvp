@@ -1,0 +1,153 @@
+{
+  "id": "tone-concise-edits-0",
+  "caseId": "tone",
+  "method": "edits",
+  "version": "concise",
+  "repeat": 0,
+  "input": [
+    {
+      "role": "system",
+      "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+    },
+    {
+      "role": "user",
+      "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+    }
+  ],
+  "output": [
+    {
+      "type": "message",
+      "id": "65930e3e-9558-4fc3-b0ea-c7f8fe903316",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧，没糖的，一杯18元。\"}]}"
+        }
+      ],
+      "phase": "final_answer",
+      "role": "assistant"
+    }
+  ],
+  "rawText": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧，没糖的，一杯18元。\"}]}",
+  "content": "午后的一杯\n\n来杯桂花乌龙冷泡茶吧，没糖的，一杯18元。\n\n每天11点营业。预约要求待确认。",
+  "check": {
+    "outsidePreserved": true,
+    "targetChanged": true,
+    "semanticReview": "human_required_for_tone_and_facts"
+  },
+  "usage": {
+    "input_tokens": 192,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 50,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 242
+  },
+  "transport": [
+    {
+      "item": "tone-concise-edits-0",
+      "request": {
+        "model": "deepseek-flash",
+        "input": [
+          {
+            "role": "system",
+            "content": "根据用户要求局部修改原文。只改必要内容，其余文字、事实和格式保持原样。不要增加解释或备选。\n返回JSON {\"edits\":[{\"before\":\"准确连续原文\",\"after\":\"替换文字\"}]}。before必须在原文唯一命中，必要时带少量相邻原文定位；多处修改分列且不重叠。不要返回整篇。删除时after为空。所有before基于同一原稿。"
+          },
+          {
+            "role": "user",
+            "content": "{\"source\":\"test_original\",\"original\":\"午后的一杯\\n\\n本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\\n\\n每天11点营业。预约要求待确认。\",\"request\":\"中间那段太正式，改得像店员跟熟客聊天，别增加事实。标题和最后一段原样保留。\"}"
+          }
+        ],
+        "reasoning": {
+          "effort": "none"
+        },
+        "max_output_tokens": 6000,
+        "stream": false,
+        "text": {
+          "format": {
+            "type": "json_object"
+          }
+        }
+      },
+      "startedAt": "2026-09-17T08:18:34.861Z",
+      "status": 200,
+      "response": {
+        "id": "d2a21af1-0056-4ea0-abfa-ff1a0b0669b6",
+        "object": "response",
+        "created_at": 1789633113,
+        "status": "completed",
+        "background": false,
+        "completed_at": 1789633113,
+        "content_filters": null,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": null,
+        "max_output_tokens": 6000,
+        "max_tool_calls": null,
+        "model": "deepseek-flash",
+        "moderation": null,
+        "output": [
+          {
+            "type": "message",
+            "id": "65930e3e-9558-4fc3-b0ea-c7f8fe903316",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"edits\":[{\"before\":\"本店诚邀您品鉴桂花乌龙冷泡茶。无糖，每杯18元。\",\"after\":\"来杯桂花乌龙冷泡茶吧，没糖的，一杯18元。\"}]}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "effort": "none",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_object"
+          },
+          "verbosity": null
+        },
+        "tool_choice": "auto",
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 1,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 192,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 50,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 242
+        },
+        "user": null,
+        "metadata": {}
+      }
+    }
+  ]
+}
