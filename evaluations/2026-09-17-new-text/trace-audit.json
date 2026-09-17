@@ -1,0 +1,201 @@
+{
+  "kind": "evidence_integrity_not_semantic_score",
+  "cases": [
+    {
+      "id": "AC_NEW_COPY",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_NEW_ANALYSIS",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_REWRITE_PERFUME",
+      "requests": 3,
+      "responses": 3,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "9d5c7007-1ea5-41a2-937e-49070372857e",
+          "turnId": "0d4ef8f3-30b5-4e95-8f77-f1acffd4f012",
+          "callId": "call_00_Gc1aHJ2WQfdeGEgk9Ceb3136",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "fa2556de-6f16-40fc-a41f-6aee9433abb4",
+          "turnId": "0d4ef8f3-30b5-4e95-8f77-f1acffd4f012",
+          "callId": "call_01_2FnPWiMU2MpPEtaqwjDn2941",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 3
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_REWRITE_HEADPHONES",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_SAFETY_BICYCLE",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_SAFETY_NORMAL",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_BRIEF_VACUUM",
+      "requests": 2,
+      "responses": 2,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 2
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_COPY_BREAD",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_MISSING_PROMPT",
+      "requests": 5,
+      "responses": 5,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [
+        {
+          "recordId": "78749056-d73b-42ec-938a-bc44ef824ba3",
+          "turnId": "6a2fbb87-ad18-4d72-8784-60df144a1fc2",
+          "callId": "call_00_9pfD4UuWRmCmWRYBvY7s5670",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        },
+        {
+          "recordId": "17e2842f-0495-459d-bd8d-f05ab7ead822",
+          "turnId": "6a2fbb87-ad18-4d72-8784-60df144a1fc2",
+          "callId": "call_01_0EQQ3z9Fh9trf1TFJTFu2361",
+          "error": {
+            "code": "single_tool_call_required",
+            "message": "每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。"
+          },
+          "status": "not_executed"
+        }
+      ],
+      "phases": {
+        "agent": 5
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    },
+    {
+      "id": "AC_UNKNOWN_SALES",
+      "requests": 1,
+      "responses": 1,
+      "modelErrors": 0,
+      "unpaired": [],
+      "unexpandedTraceRefs": 0,
+      "toolErrors": [],
+      "phases": {
+        "agent": 1
+      },
+      "videoToolCalls": 0,
+      "invocations": [],
+      "summaryCount": 0
+    }
+  ],
+  "requestCount": 21,
+  "inputBlobCount": 53,
+  "missingPairs": 0,
+  "unexpandedTraceRefs": 0
+}

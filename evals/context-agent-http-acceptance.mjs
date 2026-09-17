@@ -7,6 +7,9 @@ import {HistoryStore} from '../server/context-agent/history.mjs';
 import {acceptanceCases,acceptanceCategories,canContinueAcceptance} from './context-agent-acceptance-cases.mjs';
 
 const args=process.argv.slice(2),value=(key,fallback)=>args.find(a=>a.startsWith(key+'='))?.slice(key.length+1)||fallback;
+const category=value('--category',null);
+if(category&&!Object.hasOwn(acceptanceCategories,category))throw new Error('Unknown acceptance category: '+category);
+const selectedCases=acceptanceCases.filter(c=>!category||c.category===category);
 const base=value('--url','http://127.0.0.1:3217'),url=new URL(base);
 if(!['127.0.0.1','localhost'].includes(url.hostname)||url.protocol!=='http:')throw new Error('Local HTTP target required');
 const out=resolve(value('--out',join('evaluation-runs','http-3217-'+new Date().toISOString().replace(/[:.]/g,'-'))));
@@ -14,19 +17,20 @@ const data=resolve(value('--data','data/isolated-local')),budget=Number(value('-
 if(!Number.isInteger(budget)||budget<16||budget>1024)throw new Error('Budget must be 16..1024');
 const config=await(await fetch(base+'/api/config')).json(),{csrf,...publicConfig}=config;
 if(config.engine!=='context-agent'||!config.modelEnabled||config.mediaMode!=='simulation')throw new Error('Expected enabled Context Agent with simulated media');
-if(!args.includes('--run')){console.log(JSON.stringify({base,data,out,budget,config:publicConfig,cases:acceptanceCases.length}));process.exit(0);}
+if(!args.includes('--run')){console.log(JSON.stringify({base,data,out,budget,config:publicConfig,category,cases:selectedCases.length}));process.exit(0);}
 await mkdir(out,{recursive:false});
 const write=(name,obj)=>writeFile(join(out,name),JSON.stringify(obj,null,2)+'\n');
 const store=new HistoryStore(data),results=[];let modelCalls=0;
 const sha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceHashes={};
 for(const file of ['server/context-agent/loop.mjs','server/context-agent/prompt.md','server/context-agent/tools.mjs','server/context-agent/context.mjs'])sourceHashes[file]=createHash('sha256').update(await readFile(file)).digest('hex');
 const manifest={startedAt:new Date().toISOString(),base,data,workingTreeSha:sha,sourceHashes,config:publicConfig,budget,entry:'live HTTP service; only newly created evaluation sessions exported',realVideo:false,realMedia:false,semanticReview:'pending',note:'Working tree revision observed at run start; service PID/startup identity recorded separately. No fault injection through live HTTP.'};
-await write('manifest.json',manifest);await write('cases.json',acceptanceCases);
+manifest.category=category;
+await write('manifest.json',manifest);await write('cases.json',selectedCases);
 const checkpoint=()=>write('run.json',{...manifest,modelCalls,results,updatedAt:new Date().toISOString()});
 const post=(path,body,signal)=>fetch(base+path,{method:'POST',headers:{'content-type':'application/json','x-context-token':csrf},body:JSON.stringify(body),signal});
 // Short single-turn probes first, then independent journeys, pressure case last.
 const order=Object.keys(acceptanceCategories);
-const cases=[...acceptanceCases].sort((a,b)=>a.id==='AC_MEMORY'?1:b.id==='AC_MEMORY'?-1:order.indexOf(a.category)-order.indexOf(b.category));
+const cases=[...selectedCases].sort((a,b)=>a.id==='AC_MEMORY'?1:b.id==='AC_MEMORY'?-1:order.indexOf(a.category)-order.indexOf(b.category));
 for(const c of cases){
  if(c.blockedReason){results.push({id:c.id,category:c.category,status:'not_run',reason:c.blockedReason});await checkpoint();continue;}
  if(modelCalls+config.limits.maxModelCalls>budget){results.push({id:c.id,category:c.category,status:'not_run',reason:'Insufficient remaining call budget for one bounded service turn'});await checkpoint();continue;}

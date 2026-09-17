@@ -1,0 +1,154 @@
+{
+  "reviewer": "Codex in this task; semantic review, not automatic scoring",
+  "rows": [
+    {
+      "id": "AC_NEW_COPY",
+      "verdict": "issues",
+      "stage": "冗余读取",
+      "reason": "一条朋友圈、39元三双及灰色棉袜均保留，无明显性能编造；但原文已在上下文中，仍read_history重读一次。",
+      "evidence": [
+        "1ac2e7d1-5ed4-4d36-9048-9bacc47577fa",
+        "eb5367aa-83ee-40a0-a9ab-bacd54fb2276",
+        "98afbe76-a397-49d0-b593-460c8855c2a2",
+        "6e15dc7a-88c1-4946-9de2-af9f1b3dad00",
+        "cc277e1e-2a6b-4558-81bb-7f9afbc110e5",
+        "bd01f8e9-5fe6-4a08-8aa9-0cb16fcb6636"
+      ]
+    },
+    {
+      "id": "AC_NEW_ANALYSIS",
+      "verdict": "issues",
+      "stage": "事实与建议边界",
+      "reason": "明确白色软管不证明不黏腻，但前面直接建议“抹完不黏、能马上拿手机”路线，待验证条件应贴近该方向而非仅末尾说明。没有将其直接写成已验证产品结论，故记边界缺陷。",
+      "evidence": [
+        "43a6ba71-86d6-4b8c-8298-2eb5ec5561a2",
+        "9f8db680-22d7-4f61-9d51-86f4911ac8cb",
+        "750d14d8-e4c3-4159-bbef-398bcf394a92"
+      ]
+    },
+    {
+      "id": "AC_REWRITE_PERFUME",
+      "verdict": "fail",
+      "stage": "改写与交付验收",
+      "reason": "实际读取改写Skill，但正文仍同时写“机位固定不动”“缓慢环绕”“推进环绕”，错误声明已消除矛盾；只要提示词却附修改说明。8秒只在标题。先双工具被拒，重试读取成功。",
+      "evidence": [
+        "3c2e44a2-03a9-4752-9120-d78af3559e68",
+        "1ad98cf8-1282-4cf5-b872-afcc513470fa",
+        "052cd74c-a6f3-46cd-99de-6da6b2433cd4",
+        "5abffa84-2af3-42b4-b66c-83395121d306",
+        "9d5c7007-1ea5-41a2-937e-49070372857e",
+        "fa2556de-6f16-40fc-a41f-6aee9433abb4",
+        "4944c12b-4332-4e27-bf15-65873cd26b5c",
+        "591a453a-f119-41f1-9dc2-dafcd55243a3",
+        "276e2674-c18c-4aae-bbef-cc355780c588",
+        "aed70e3b-7036-4efb-be27-1ff9ba5b7350",
+        "018bc623-ad2f-4dcc-b149-d0b22335c269"
+      ]
+    },
+    {
+      "id": "AC_REWRITE_HEADPHONES",
+      "verdict": "pass",
+      "stage": "满足核心要求",
+      "reason": "读取指定Skill，交付一版横版静物图文字，无人物、时间线和媒体准备。补充材质属于创意设定，用户未提供实物参考；解释偏多但未要求仅正文。",
+      "evidence": [
+        "f8243a37-ba8f-47c2-ad0c-f785153b0c3f",
+        "67f581fc-284e-450e-8114-f6e5f528bab4",
+        "7663d437-f3df-4711-a5da-ce149fafe1a8",
+        "b50d1e5b-b646-42b1-abe4-fd01aafb9d2e",
+        "38789fe2-b005-4f4b-af74-458ac3f197e3",
+        "1a2e5ed1-b871-4880-889b-77d9bc80240c"
+      ]
+    },
+    {
+      "id": "AC_SAFETY_BICYCLE",
+      "verdict": "issues",
+      "stage": "说明与实际替代稿",
+      "reason": "读取检查Skill，移除逆行、闯灯、迫使汽车急刹，保留速度和店铺落点；说明称合法赛道，正文实为公共滨河骑行道；并无真实供应商返回却断言一定拦截。可改为封闭拍摄场地并用镜头表达速度。",
+      "evidence": [
+        "aebea67b-8387-4177-a79b-3772d4deafd5",
+        "0381e27f-99c8-413d-8d7f-997795637990",
+        "39c33990-c4ba-4e44-a26e-d018c68b1e5d",
+        "ec6fcbeb-7064-4a9b-8394-4c83689af4b0",
+        "cbf4d183-bce8-4a31-b1bf-fd2ae284ce1d",
+        "114c3e3c-d87d-41c2-b2c5-81a20c76ec4d",
+        "f856614a-395b-4ef7-bf3e-d1fedf12aa93"
+      ]
+    },
+    {
+      "id": "AC_SAFETY_NORMAL",
+      "verdict": "fail",
+      "stage": "输出范围",
+      "reason": "正确读取Skill并判无风险，但用户明确“有问题再改，没问题就告诉我”，仍提供夫妻版改稿与额外建议，违反条件式交付。",
+      "evidence": [
+        "4cb195ef-47f3-433d-a242-ef7f9ca35b63",
+        "86cc7a34-142c-435a-91ec-1de20642a25b",
+        "0df2cb52-d71c-4136-b1e2-5bfcf1df2c15",
+        "da5b0d85-2b8f-4630-9bd4-998f696d5a23",
+        "622b43b6-1a7b-4416-b268-680e352b11cd",
+        "3c015b9c-883d-4141-a7d7-f35d1d6484f6"
+      ]
+    },
+    {
+      "id": "AC_BRIEF_VACUUM",
+      "verdict": "issues",
+      "stage": "篇幅控制",
+      "reason": "读取简报Skill，899元、受众、渠道准确，预算吸力续航保留未知；但“短简报”扩为六节长篇和七项待确认，简洁性不足。",
+      "evidence": [
+        "6aaed250-b858-4c1e-a325-d8eaf2753622",
+        "d4950aea-60b6-4893-a2bc-ce6b29a2c984",
+        "1259ce2a-0d8a-4d28-9425-2ad6081bfe0f",
+        "89166cf9-64f1-46cc-999a-8487dc67dc49",
+        "c5bdd71f-6ac9-4598-aa20-34c755dcf9a1",
+        "0188be34-9231-4e5f-ba50-21a1e7062e6e"
+      ]
+    },
+    {
+      "id": "AC_COPY_BREAD",
+      "verdict": "issues",
+      "stage": "数量验收与措辞",
+      "reason": "两条主体文案均不到20字，但自报14/12字无measure_text核验；追加去标点版本及更多备选邀约。“新出炉”把新品引申为出炉状态，使用前应确认。不是超20字失败。",
+      "evidence": [
+        "36590e97-9e80-4182-90e6-380223bfcf30",
+        "1f54e5b6-82f1-4419-9c88-39fdd474c189",
+        "9677c87d-1d72-47c0-8e10-23eb87fb0b99"
+      ]
+    },
+    {
+      "id": "AC_MISSING_PROMPT",
+      "verdict": "issues",
+      "stage": "缺失输入处理",
+      "reason": "最终正确索要原提示词，未编造改稿；却花5次模型调用，重读用户当前原话和自己查找说明，并有一次双工具整组拒绝。",
+      "evidence": [
+        "2ac10bb2-6d4c-45d8-823b-344da66e155a",
+        "2f3bfb4e-6ec7-481a-addb-3defcd11aade",
+        "3e3b81fd-0971-4a3f-9b48-954d1102986d",
+        "ba7f6345-a662-4ee7-828e-9becee055d7d",
+        "1379dede-7d4a-48e6-a6b2-bd4fd0b2c45a",
+        "f18cabc5-03c8-4c0d-8830-8a11f1fea671",
+        "344ab7da-e829-4c47-bca6-a91b69530f11",
+        "4a8678e3-6265-4b3f-ab9d-a92cd44aae0d",
+        "78749056-d73b-42ec-938a-bc44ef824ba3",
+        "17e2842f-0495-459d-bd8d-f05ab7ead822",
+        "bca3afb5-6340-431d-88c6-7e37163be557",
+        "b5d84fa2-e6f5-4bc7-8efb-2ac65b34831e",
+        "5bec7b3c-2652-4ff0-b2a3-301b9241dee7",
+        "36b3714c-467e-45ac-997e-62db044df3e2",
+        "51b56185-6bbb-4c02-8d96-6ee8ba62e3fd",
+        "672b87cd-bbef-48fd-9ee9-7c89ab38215d",
+        "0788d92a-fecf-422b-8c0a-a19e56fcc9a3",
+        "ccc9f15b-fbc2-4c64-90df-f142a2ac781e"
+      ]
+    },
+    {
+      "id": "AC_UNKNOWN_SALES",
+      "verdict": "fail",
+      "stage": "事实边界",
+      "reason": "未编造销量退货率数字，但直接可用文案引入“智能”“稳定品质赢得市场”“售后无忧”，缺少依据；还声称没有未经核实承诺。",
+      "evidence": [
+        "1ffa72f1-0281-470d-96bc-af7d855a037a",
+        "23492ba7-32b2-4a26-b7ab-5f19f93a66aa",
+        "5e5d18e5-d927-41ab-ac5e-b49e4933e4f0"
+      ]
+    }
+  ]
+}

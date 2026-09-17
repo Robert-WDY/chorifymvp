@@ -1,0 +1,59 @@
+{
+  "startedAt": "2026-09-17T09:45:58.715Z",
+  "base": "http://127.0.0.1:3217",
+  "data": "C:\\Users\\asus\\Desktop\\codex-workspace\\chorifymvp-git\\data\\isolated-local",
+  "workingTreeSha": "122df1e751535d5b2cfd592cbd6b5af6aed428cc",
+  "sourceHashes": {
+    "server/context-agent/loop.mjs": "2a5119c41fcf61add587bf104fd2b8c254c85d2845dc00a55b16c579ee14421f",
+    "server/context-agent/prompt.md": "409430bbfd080641f0c836a00b262a69737a0e6014d0ce1abcab6b419eb7dc5c",
+    "server/context-agent/tools.mjs": "4c7a3560d7ef0c1f7aaf5de8957da0a2177df9b339a6c49c7fc9c8c2973dadce",
+    "server/context-agent/context.mjs": "d9bcc4437cda67059ba37ef92d1251cc788ec412a855da810fc0292c6c85b116"
+  },
+  "config": {
+    "engine": "context-agent",
+    "modelEnabled": true,
+    "mediaMode": "simulation",
+    "model": "deepseek-flash",
+    "tools": [
+      "inspect_workspace",
+      "request_user_input",
+      "list_assets",
+      "read_approval",
+      "confirm_media",
+      "execute_approved",
+      "read_asset",
+      "search_history",
+      "read_history",
+      "read_skill",
+      "save_document",
+      "measure_text",
+      "generate_image",
+      "edit_image",
+      "generate_video",
+      "read_media_result"
+    ],
+    "limits": {
+      "maxSteps": 16,
+      "maxModelCalls": 16,
+      "maxToolCalls": 48,
+      "maxMediaCalls": 4
+    },
+    "summary": {
+      "enabled": true,
+      "triggerRatio": 0.75,
+      "targetRatio": 0.55,
+      "summaryMaxTokens": 1800,
+      "inputMaxTokens": 8000,
+      "maxCallsPerTurn": 2,
+      "reserveMainCalls": 2,
+      "safetyTokens": 500
+    }
+  },
+  "budget": 160,
+  "entry": "live HTTP service; only newly created evaluation sessions exported",
+  "realVideo": false,
+  "realMedia": false,
+  "semanticReview": "pending",
+  "note": "Working tree revision observed at run start; service PID/startup identity recorded separately. No fault injection through live HTTP.",
+  "category": "new_text"
+}
