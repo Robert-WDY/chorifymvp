@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {mkdtemp,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createContextServer} from '../../server/context-agent/http.mjs';
+import {createTools} from '../../server/context-agent/tools.mjs';
+import {HistoryStore} from '../../server/context-agent/history.mjs';
+const directory=await mkdtemp(join(tmpdir(),'chorify-simulation-'));
+const queue=[];const call=(name,args)=>({type:'function_call',call_id:crypto.randomUUID(),name,arguments:JSON.stringify(args)});
+const say=()=>({type:'message',role:'assistant',content:[{type:'output_text',text:'模拟步骤完成，未生成真实媒体。'}]});
+const app=createContextServer({directory,brain:{respond:async(input,definitions,signal,options)=>options?.json?[{type:"message",role:"assistant",content:[{type:"output_text",text:JSON.stringify({summaryText:"模拟记忆摘要，仅用于链路验证。",sourceRefs:[]})}]}]:[queue.shift()||say()]},tools:createTools({mode:'simulation'}),modelEnabled:true,agentOptions:{maxMediaCalls:3}});
+await new Promise(r=>app.server.listen(0,'127.0.0.1',r));
+const base='http://127.0.0.1:'+app.server.address().port;const events=[];
+try{
+ const config=await(await fetch(base+'/api/config')).json();const headers={'Content-Type':'application/json','x-context-token':config.csrf};
+ const session=await(await fetch(base+'/api/session',{method:'POST',headers,body:'{}'})).json();
+ const send=async(path,body)=>{const r=await fetch(base+path,{method:'POST',headers,body:JSON.stringify({sessionId:session.id,...body})});assert.equal(r.status,200);const e=(await r.text()).split('\n').filter(Boolean).map(JSON.parse);events.push({path,body,events:e});assert.equal(e.at(-1).status,'completed');return e;};
+ const turn=async(message,name,args)=>{queue.length=0;queue.push(call(name,args),say());return send('/api/chat',{message,requestId:crypto.randomUUID()});};
+ const state=()=>app.store.load(session.id,'local');
+ await turn('保存广告文案','save_document',{content:'背景米白，价格18元。',title:'原稿'});
+ const original=Object.values((await state()).assets).find(a=>a.type==='text');assert.ok(original);
+ await turn('只把18元改成20元','save_document',{parentId:original.id,edits:[{before:'18元',after:'20元'}],title:'修订'});
+ const revised=Object.values((await state()).assets).find(a=>a.parentId===original.id);assert.equal(revised.content,'背景米白，价格20元。');
+ const approve=async(name,args,message)=>{const before=Object.keys((await state()).invocations).length;const e=await turn(message,name,args);const ids=e.filter(x=>x.type==='tool_result').map(x=>x.result?.proposalId).filter(Boolean);assert.equal(ids.length,1);assert.equal(Object.keys((await state()).invocations).length,before);const body={proposalIds:ids,requestId:crypto.randomUUID()};await send('/api/approve',body);const n=Object.keys((await state()).invocations).length;const replay=await send('/api/approve',body);assert.equal(replay.at(-1).replayed,true);assert.equal(Object.keys((await state()).invocations).length,n);};
+ await approve('generate_image',{prompt:'白瓶米白背景',size:'1K'},'准备一张图');
+ const source=Object.values((await state()).assets).find(a=>a.type==='image');assert.ok(source?.simulated);
+ await approve('edit_image',{imageId:source.id,instruction:'仅背景改蓝色，瓶子保持不变',size:'1K'},'修改背景');
+ assert.ok(Object.values((await state()).assets).some(a=>a.parentId===source.id&&a.simulated));
+ await approve('generate_video',{prompt:'白瓶静物镜头',duration:5,ratio:'9:16',resolution:'720p'},'准备五秒视频');
+ const final=await state();assert.equal(Object.values(final.assets).filter(a=>a.simulated).length,3);
+ const restored=await new HistoryStore(directory).load(session.id,'local');assert.deepEqual(restored,final);
+ await writeFile(new URL('simulated-trace.json',import.meta.url),JSON.stringify({kind:'scripted-model-simulated-media',events,state:await app.store.exportSession(session.id,'local')},null,2));
+ console.log(JSON.stringify({passed:true,turns:5,approvals:3,replays:3,simulatedAssets:3,restartEqual:true,realCalls:0}));
+}finally{await new Promise(r=>app.server.close(r));}

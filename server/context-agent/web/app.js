@@ -80,7 +80,7 @@ function renderQuestions(){
 }
 function recovery(error){status((error.status===404?'原会话不存在。':error.status===403?'无权访问原会话。':'恢复会话失败：'+error.message)+' 已保留原会话标识，可重试或明确新建。');$('retry').hidden=false;}
 async function refresh(){
- if(!sessionId)return;$('history-export').href='/api/session/'+encodeURIComponent(sessionId)+'/export';const target=sessionId,s=await get('/api/session/'+encodeURIComponent(target));if(target!==sessionId)return;
+ if(!sessionId)return;if(traceSession&&traceSession!==sessionId){$('trace-list').replaceChildren();$('trace-count').textContent='';$('trace-more').hidden=true;traceSession=null;}$('history-export').href='/api/session/'+encodeURIComponent(sessionId)+'/export';const target=sessionId,s=await get('/api/session/'+encodeURIComponent(target));if(target!==sessionId)return;
  let events=[...s.events],next=s;while(next.hasMore){next=await get('/api/events/'+encodeURIComponent(target)+'?after='+next.cursor);events.push(...next.events);}cursor=next.cursor;
  $('messages').replaceChildren();cards.clear();seen.clear();const eventMessages=new Set(events.filter(e=>e.kind==='message').map(e=>e.messageId));for(const m of s.messages)if(!eventMessages.has(m.id))message(m.id,m.role,m.content);
  pending.clear();questions.clear();for(const e of events.sort((a,b)=>a.seq-b.seq))ingest(e);
@@ -93,6 +93,18 @@ async function refresh(){
 function schedulePoll(){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{if(streaming||!sessionId)return;try{const e=await get('/api/events/'+encodeURIComponent(sessionId)+'?after='+cursor);for(const item of e.events)ingest(item);cursor=e.cursor;if(e.running||e.hasMore)schedulePoll();else{running=false;await refresh();}}catch(error){recovery(error);}},700);}
 async function newSession(){if(running||submitting)return;const s=await(await post('/api/session',{})).json();sessionId=s.id;localStorage.setItem(key,sessionId);selected.clear();rendered.clear();cursor=-1;await refresh();await loadHistory();status('已开始新对话，旧对话保留在历史列表。');}
 let historyOffset=0;
+let traceOffset=0,traceSession,traceSource;
+async function loadTrace(reset=true){
+ if(!sessionId)return;
+ if(reset){traceOffset=0;traceSession=sessionId;traceSource=$('trace-source').value;$('trace-list').replaceChildren();}
+ const target=traceSession,source=traceSource,page=await get('/api/session/'+encodeURIComponent(target)+'/history?source='+encodeURIComponent(source)+'&offset='+traceOffset);
+ if(target!==sessionId||source!==$('trace-source').value)return;
+ for(const row of page.rows){const detail=el('details'),summary=el('summary',row.index+' · '+row.label),body=el('pre','展开后读取完整记录');detail.append(summary,body);let loaded=false;detail.ontoggle=async()=>{if(!detail.open||loaded)return;try{const result=await get('/api/session/'+encodeURIComponent(target)+'/history?source='+encodeURIComponent(source)+'&index='+row.index);body.textContent=JSON.stringify(result.record,null,2);loaded=true;}catch(error){body.textContent=error.message;}};$('trace-list').append(detail);}
+ traceOffset+=page.rows.length;$('trace-count').textContent=page.total+'条记录';$('trace-more').hidden=!page.hasMore;
+}
+$('trace-load').onclick=()=>loadTrace().catch(recovery);
+$('trace-more').onclick=()=>loadTrace(false).catch(recovery);
+$('trace-source').onchange=()=>loadTrace().catch(recovery);
 async function loadHistory(reset=true){
  if(reset)historyOffset=0;
  const page=await get('/api/sessions?query='+encodeURIComponent($('history-query').value||'')+'&offset='+historyOffset);

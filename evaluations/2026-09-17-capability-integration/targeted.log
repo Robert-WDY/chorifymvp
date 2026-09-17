@@ -1,0 +1,16 @@
+✔ vision uses independent configured provider and sends both actual image inputs (13.5912ms)
+✔ oversized professional method cannot block later summary coverage; original stays complete (4.7147ms)
+✔ method summary projection never truncates user originals or failed feedback (0.1418ms)
+✔ failed method reread does not replace successful body history pointer (0.698ms)
+✔ history detail sections keep original bodies, versions and old records; list is paged metadata (0.2903ms)
+✔ migration keeps original identities, bodies and versions but never replays old approvals (2.1982ms)
+✔ history search, paging and owner isolation survive persistent reload, with damage reported (31.0479ms)
+✔ one HTTP service lists and continues an imported conversation and exports its full old archive (188.8793ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 327.0513

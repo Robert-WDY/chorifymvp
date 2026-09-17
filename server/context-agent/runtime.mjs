@@ -1,6 +1,13 @@
 import { createTools } from './tools.mjs';
 import { createImageObserver } from './providers.mjs';
 import { memoryOptions } from './memory.mjs';
+import {createBrain} from '../adapters.mjs';
+
+export function createVisionBrain(env=process.env,transport=fetch){
+ const provider=env.CONTEXT_AGENT_VISION_PROVIDER;
+ if(!['doubao','deepseek'].includes(provider))throw new Error('视觉通道需要独立指定 CONTEXT_AGENT_VISION_PROVIDER');
+ return createBrain({...env,LLM_PROVIDER:provider,LLM_TEXT_STREAMING_SUPPORTED:'0',LLM_PARALLEL_TOOL_CALLS_SUPPORTED:'0',...(env.CONTEXT_AGENT_VISION_MODEL?{[provider==='doubao'?'DOUBAO_CHAT_MODEL':'DEEPSEEK_MODEL']:env.CONTEXT_AGENT_VISION_MODEL}:{})},transport);
+}
 
 export function assembleMemoryOptions(env={}) {
   const number=(key,fallback)=>env[key]===undefined?fallback:Number(env[key]);

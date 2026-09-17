@@ -64,3 +64,5 @@ node --test tests/future-source-binding.test.mjs
 本分支另有独立的 [上下文 Agent 入口](server/context-agent/README.md)，使用 `npm run start:context` 启动。上文 `npm start` 和 compiled 说明仍对应旧入口。新版要求 Node >=22.13；当前简化与离线验收见 [2026-09-17 验收报告](evaluations/2026-09-17-context-agent-loop-alignment/README.md)。
 
 [AGENTS.md](AGENTS.md) 是项目长期工作规范入口，补充且保留以上约定与历史报告。每轮修复必须填写四列“修复总结表”，追加到 [统一修复记录 FIXES.md](FIXES.md)，并在最终回复展示；不能只列修改文件或测试总数。
+
+2026-09-17能力整合：新增“查看详细历史与执行过程”，可按需查看现有记录与旧存档详情；视觉适配支持独立供应商配置，但账户预检403后按用户选择保持关闭，继续模拟验收。详见[本轮证据与未验收范围](evaluations/2026-09-17-capability-integration/README.md)。

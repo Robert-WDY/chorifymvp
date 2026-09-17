@@ -149,10 +149,12 @@ export function buildContext(state, { systemPrompt = '', skillDirectory = [], to
     const omitted = groups.filter(group => !selected.has(group.id) && group.records.some(record => record.kind !== 'run_event'));
     const allOmittedSkills = omitted.flatMap(group => group.records.filter(record => record.kind === 'tool_call' && record.name === 'read_skill').map(call => {
       const result = group.records.find(record => record.kind === 'tool_result' && record.callId === call.callId);
+      let outcome;try{outcome=JSON.parse(result?.output||'null');}catch{}
+      if(outcome?.ok!==true)return null;
       let argumentsValue;
       try { argumentsValue = JSON.parse(call.arguments); } catch { argumentsValue = {}; }
       return { callId: call.callId, slug: argumentsValue.slug, reference: argumentsValue.reference, recordId: result?.id ?? call.id, read: { tool: 'read_history', arguments: { messageId: result?.id ?? call.id, offset: 0, limit: 12000 } } };
-    }));
+    }).filter(Boolean));
     const omittedSkills = [...new Map(allOmittedSkills.map(s => [JSON.stringify([s.slug, s.reference]), s])).values()].slice(-6);
     const notice = omitted.length ? [dataMessage({ historyWindow: { omittedGroups: omitted.length, incompleteGroups: incomplete.size, notice: 'Earlier records remain stored. Use search_history to locate original wording and read_history to recover it. Incomplete tool records do not prove execution succeeded.', firstRetainedRecordId: usable.find(group => selected.has(group.id))?.records[0]?.id ?? null, omittedSkillReads: omittedSkills } })] : [];
     const callNames = new Map(state.records.filter(r=>r.kind==='tool_call').map(r=>[r.callId,r.name]));

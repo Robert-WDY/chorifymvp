@@ -1,6 +1,6 @@
 # Chorify 上下文 Agent
 
-这是独立的新入口。旧 `server/index.mjs`、compiled 执行器、旧会话和回归保持原样。新入口默认不调用真实模型，媒体默认 simulation。
+这是当前MVP的唯一日常执行入口。旧 `server/index.mjs` 与compiled执行器仅作为历史实现和回归参考；现有会话在本入口连续使用。通用代码默认不调用真实模型，媒体默认simulation；本机实际配置见下文。
 
 ## 当前统一入口
 

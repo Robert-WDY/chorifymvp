@@ -1,0 +1,22 @@
+✔ vision uses independent configured provider and sends both actual image inputs (33.4631ms)
+✖ oversized professional method cannot block later summary coverage; original stays complete (18.0906ms)
+✔ method summary projection never truncates user originals or failed feedback (0.2346ms)
+✔ failed method reread does not replace successful body history pointer (1.4315ms)
+✔ history detail sections keep original bodies, versions and old records; list is paged metadata (0.8127ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 311.4323
+
+✖ failing tests:
+
+test at tests\context-agent-capability-integration.test.mjs:15:1
+✖ oversized professional method cannot block later summary coverage; original stays complete (18.0906ms)
+  TypeError: Cannot read properties of undefined (reading 'coveredToSeq')
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-capability-integration.test.mjs:21:66)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

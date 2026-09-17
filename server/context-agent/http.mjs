@@ -2,6 +2,7 @@ import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
 import {resolve} from 'node:path';
+import {historyRows,historyPage} from './history-view.mjs';
 import {HistoryStore,appendRecord} from './history.mjs';
 import {ContextAgent} from './loop.mjs';
 import {publicEvents,resultSummary,safeText} from './public-events.mjs';
@@ -31,6 +32,15 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
         return json(res,200,{...page,sessions:page.sessions.map(s=>({...s,running:active.has(s.id)}))});
       }
       const exported=url.pathname.match(/^\/api\/session\/([^/]+)\/export$/);
+      const history=url.pathname.match(/^\/api\/session\/([^/]+)\/history$/);
+      if(req.method==='GET'&&history){
+        const state=await load(history[1]),source=url.searchParams.get('source')||'records';
+        let legacy;
+        if(source.startsWith('legacy')&&state.records.some(r=>r.event==='legacy_import'))legacy=JSON.parse(await readFile(resolve(directory,'..','legacy-archive',state.id+'.json'),'utf8'));
+        const rows=historyRows(state,source,legacy);
+        if(url.searchParams.has('index')){const index=Number(url.searchParams.get('index'));if(!Number.isInteger(index)||index<0||index>=rows.length)throw new Error('History index out of range');const row=rows[index];return json(res,200,{source,index,record:row.traceRef?await store.readTrace(state.id,ownerId,row.id):row});}
+        return json(res,200,{source,...historyPage(rows,Number(url.searchParams.get('offset')||0),Number(url.searchParams.get('limit')||30))});
+      }
       if(req.method==='GET'&&exported){
         const state=await store.exportSession(exported[1],ownerId);
         let legacyArchive;

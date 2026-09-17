@@ -1,0 +1,25 @@
+{
+  "model": "deepseek-flash",
+  "parallel_tool_calls": false,
+  "output": [
+    {
+      "type": "function_call",
+      "id": "439ff358-0d7b-42fb-a4b8-65b0304aa88e",
+      "status": "completed",
+      "arguments": "{}",
+      "call_id": "call_00_xY5gxLBknDyXkaghMx1Q3988",
+      "name": "check"
+    }
+  ],
+  "usage": {
+    "input_tokens": 256,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 20,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 276
+  }
+}

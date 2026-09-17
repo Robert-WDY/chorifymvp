@@ -2,7 +2,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {createBrain} from '../adapters.mjs';
 import {loadAgentCatalog as loadCatalog} from './skills.mjs';
-import {assembleAgentTools,assembleMemoryOptions} from './runtime.mjs';
+import {assembleAgentTools,assembleMemoryOptions,createVisionBrain} from './runtime.mjs';
 import {createMediaProvider} from './providers.mjs';
 import {createContextServer} from './http.mjs';
 
@@ -20,7 +20,7 @@ const catalog=await loadCatalog();
 const media=mediaEnabled?createMediaProvider({key:process.env.DOUBAO_API_KEY,baseUrl:process.env.DOUBAO_BASE_URL||'https://ark.cn-beijing.volces.com',imageModel:process.env.DOUBAO_IMAGE_MODEL,videoModel:process.env.DOUBAO_VIDEO_MODEL}):undefined;
 // Vision is a separately declared provider capability. Never assume a text model sees URL strings.
 const visionEnabled=modelEnabled&&process.env.CONTEXT_AGENT_VISION_ENABLED==='1';
-const tools=assembleAgentTools({catalog,media,visionEnabled,visionBrain:visionEnabled?createBrain():undefined,mode,
+const tools=assembleAgentTools({catalog,media,visionEnabled,visionBrain:visionEnabled?createVisionBrain():undefined,mode,
   observationTokenBudget:integer('CONTEXT_AGENT_OBSERVATION_TOKENS',16000,1000,128000)});
 const directory=resolve(process.env.CONTEXT_AGENT_DATA_DIR||fileURLToPath(new URL('../../data/isolated-local/',import.meta.url)));
 const port=integer('CONTEXT_AGENT_PORT',3217,1024,65535);

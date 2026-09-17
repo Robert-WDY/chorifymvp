@@ -5,6 +5,15 @@ import {appendRecord,currentSummary,summarySourceHash,validateSummary} from './h
 
 const prompt=await readFile(new URL('./summary-prompt.md',import.meta.url),'utf8');
 export const memoryDefaults=Object.freeze({enabled:true,triggerRatio:0.75,targetRatio:0.55,summaryMaxTokens:1800,inputMaxTokens:8000,maxCallsPerTurn:2,reserveMainCalls:2,safetyTokens:500});
+export function summaryRecords(records){
+ const calls=new Map(records.filter(r=>r.kind==='tool_call').map(r=>[r.callId,r]));
+ return records.map(record=>{
+  if(record.kind!=='tool_result'||calls.get(record.callId)?.name!=='read_skill')return record;
+  let body;try{body=JSON.parse(record.output);}catch{return record;}
+  if(!body.ok||typeof body.content!=='string')return record;
+  return {...record,output:JSON.stringify({ok:true,slug:body.slug,version:body.version,reference:body.reference,methodBodyOmitted:true,characters:body.content.length,sourceRecordId:record.id,note:'专业方法正文未纳入摘要输入，不是用户事实。只记录已读取的方法身份；精确内容按来源回读，不声称已总结其正文。',read:{tool:'read_history',arguments:{messageId:record.id,offset:0,limit:12000}}})};
+ });
+}
 export function memoryOptions(options={}){
   const o={...memoryDefaults,...options};
   if(typeof o.enabled!=='boolean'||!(o.targetRatio>0&&o.targetRatio<o.triggerRatio&&o.triggerRatio<1))throw new Error('Invalid summary thresholds');
@@ -65,7 +74,7 @@ export async function maintainMemory(state,{contextOptions,config,respond,save,r
         if(end>=protectFrom){closed=false;break;}
       }
       if(!closed)break;
-      const candidate=state.records.slice(from,end+1).filter(r=>r.kind!=='run_event');
+      const candidate=summaryRecords(state.records.slice(from,end+1).filter(r=>r.kind!=='run_event'));
       if(estimateTokens(payload(candidate))+200>inputBudget)break;
       source=candidate;to=end;cursor=end+1;
     }

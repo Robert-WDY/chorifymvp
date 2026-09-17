@@ -22,6 +22,9 @@ test('one HTTP service lists and continues an imported conversation and exports 
  await new Promise(r=>server.listen(0,'127.0.0.1',r));try{const base='http://127.0.0.1:'+server.address().port,config=await(await fetch(base+'/api/config')).json();const list=await(await fetch(base+'/api/sessions')).json();assert.equal(list.sessions[0].id,s.id);
  const response=await fetch(base+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json','x-context-token':config.csrf},body:JSON.stringify({sessionId:s.id,message:'继续'})});await response.text();assert.ok(JSON.stringify(observed).includes('原文18元'));
  const exported=await(await fetch(base+'/api/session/'+s.id+'/export')).json();assert.deepEqual(exported.legacyArchive,original);assert.equal(exported.id,s.id);assert.equal(exported.records.filter(r=>r.kind==='message').at(-1).content,'继续原来的对话。');assert.equal(exported.assets.b.parentId,'a');
+ const history=await(await fetch(base+'/api/session/'+s.id+'/history?limit=100')).json();const request=history.rows.find(r=>r.label.includes('model_request'));assert.ok(request);const detail=await(await fetch(base+'/api/session/'+s.id+'/history?index='+request.index)).json();assert.ok(detail.record.input);assert.equal(detail.record.traceRef,undefined);
+ const old=await(await fetch(base+'/api/session/'+s.id+'/history?source=legacyMessages&index=1')).json();assert.deepEqual(old.record,original.messages[1]);assert.equal((await fetch(base+'/api/session/'+s.id+'/history?index=-1')).status,400);
+
  assert.equal((await fetch(base+'/api/sessions',{headers:{Origin:'http://example.com'}})).status,403);
  }finally{await new Promise(r=>server.close(r));await rm(root,{recursive:true,force:true});}
 });
