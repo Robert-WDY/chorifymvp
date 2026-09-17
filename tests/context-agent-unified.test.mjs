@@ -64,16 +64,16 @@ test('baseline proposal presentation is recovered only from its matched real too
   assert.equal(result.outcome,'succeeded');
 });
 
-test('T01/T02 single-call feedback rejects every unexpected call before side effects and repairs next decision',async()=>{
+test('T01/T02 first failure preserves feedback and defers remaining calls without side effects',async()=>{
   const state=createSession();let executions=0,decisions=0;
   const tools={definitions:[],execute:async()=>{executions++;return {ok:false,error:{code:'source_mismatch',message:'资料属于另一商品'},submitted:false};}};
   const brain={respond:async input=>{
     if(decisions++===0)return [call('one','save_document',{}),call('two','generate_image',{})];
-    if(decisions===2){const results=input.filter(r=>r.type==='function_call_output').map(r=>JSON.parse(r.output));assert.equal(results.length,2);for(const r of results){assert.equal(r.outcome,'not_executed');assert.equal(r.submission,'not_submitted');}assert.equal(executions,0);return [call('read','read_asset',{})];}
+    if(decisions===2){const results=input.filter(r=>r.type==='function_call_output').map(r=>JSON.parse(r.output));assert.equal(results.length,2);assert.equal(results[0].outcome,'failed');assert.equal(results[1].outcome,'not_executed');for(const r of results)assert.equal(r.submission,'not_submitted');assert.equal(executions,1);return [call('read','read_asset',{})];}
     assert.equal(data(input).error.code,'source_mismatch');return say('资料不符，需要确认对应商品。');
   }};
   const result=await new ContextAgent({brain,tools}).run(state,'按真实资料制作');
-  assert.equal(result.status,'completed');assert.equal(executions,1);assert.equal(decisions,3);
+  assert.equal(result.status,'completed');assert.equal(executions,2);assert.equal(decisions,3);
   assert.deepEqual(state.records.filter(r=>r.kind==='tool_call').map(r=>r.callId),state.records.filter(r=>r.kind==='tool_result').map(r=>r.callId));
 });
 

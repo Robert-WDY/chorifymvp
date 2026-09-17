@@ -39,7 +39,7 @@
 
 编辑关系来自真实 `edit_image.imageId` / `save_document.parentId`，新文件记录父 ID 和版本；派生文件使用 `sourceIds`。图片生成的 `referenceImages` 是本会话图片 ID，创意文档可另用 `sourceIds`。原稿、未知项和原图不会因为上游文字存在而被自动替代。
 
-每次主 Agent 响应最多执行一个工具，真实反馈进入下一次决策。意外多调用在副作用前整组拒绝，各调用均返回 `not_executed`，重试计入现有预算。只有明确确认的冻结媒体批次可以在一个工具内部逐项提交；一项失败、未知、取消或预算不足就停止余项。原子保存仍是一次操作。供应商声明支持时可设置 `LLM_PARALLEL_TOOL_CALLS_SUPPORTED=1` 发送真实 Responses 协议的 `parallel_tool_calls:false`；本批未核验线上供应商支持，默认不发送此选项。
+主Agent默认一次一个工具；意外多调用按固定副作用类别顺序处理：独立读取、新媒体方案准备可连续执行，跨类别、写入之后、失败、未知或用户等待处暂停余项。每个call_id保留真实结果或not_executed，同一Agent消费反馈后重选；不推断语义依赖、不猜新ID、不新增任务图。批准与实际提交沿用冻结媒体门禁和幂等。LLM_PARALLEL_TOOL_CALLS_SUPPORTED=1可发送parallel_tool_calls:false；本机根据上轮DeepSeek探针已启用，本轮未新增真实调用，通用默认仍关闭。详见[多调用验收](../../evaluations/2026-09-17-multicall-tolerance/README.md)。
 
 媒体首次调用保存不可变方案，返回 `proposalId`。按钮按选中的 ID 直接进入共享 `approveAndExecute`，在首次模型调用前提交冻结参数；文字确认由同一个 Agent 选择 ID，通过仅接收 `proposalIds` 的 `confirm_media` 进入同一服务。授权绑定本轮真实用户消息；历史、引用、Skill 和摘要不能自己授予批准。否定、歧义或改参数应由 Agent 澄清/准备新方案，本批只验证程序边界，未验证真实模型的确认语义。`execute_approved` 留作已有批准的恢复入口；参数式兼容提交不向新 Agent 开放。
 

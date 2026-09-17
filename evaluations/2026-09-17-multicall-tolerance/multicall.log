@@ -1,0 +1,19 @@
+✔ independent reads execute in order once and expose complete paired results (46.6746ms)
+✔ read then prewritten edit waits for Agent feedback; original remains intact (24.6093ms)
+✔ independent image and video preparation preserves approval gates without submitting (21.1367ms)
+✔ JSON failure stops subsequent calls with paired feedback (17.5881ms)
+✔ Schema failure stops subsequent calls with paired feedback (17.4936ms)
+✔ missing-source failure stops subsequent calls with paired feedback (16.7848ms)
+✔ unknown-tool failure stops subsequent calls with paired feedback (17.0723ms)
+✔ two writes execute only first; further mutation waits for actual result (16.2766ms)
+✔ cancel during first read closes remaining call IDs without executing them (0.6751ms)
+✔ question pauses and pairs remaining calls before returning waiting_user (20.0065ms)
+✔ deferred edit is rebuilt after read feedback and saved once with the actual parent (19.9138ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 326.9658

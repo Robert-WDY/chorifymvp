@@ -1,0 +1,117 @@
+✔ context behavior: all original 23 cases, expected and fixed inputs retain their frozen hashes (0.5576ms)
+✔ context behavior scripted: identical query branches on actual finished feedback (5.1216ms)
+✔ context behavior scripted: identical query branches on actual processing feedback (2.4045ms)
+✔ context behavior scripted: identical query branches on actual parameter_error feedback (1.3921ms)
+✔ context behavior scripted: one direction and known facts can be delivered as text without creating media (45.6619ms)
+✔ context behavior scripted: local edit retains the exact source image and creates a parent version after approval (27.0824ms)
+✔ context behavior scripted: second direction consumes stored original text and product image without regenerating directions (22.7385ms)
+✔ context behavior scripted: observation receives actual image identity plus material and unknown status (26.4297ms)
+✔ context behavior scripted: across unrelated topics and a bounded model view the original version remains retrievable (24.7978ms)
+✖ context behavior scripted: grouped independent reads return both call IDs for order a,b (18.7101ms)
+✖ context behavior scripted: grouped independent reads return both call IDs for order b,a (19.3513ms)
+✔ context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request (20.152ms)
+✔ context behavior scripted: original EDIT_001 driver preserves all queries and exposes real approval receipt before submitting (25.3032ms)
+✔ context loop: normal answer is one call with no understanding, planner or final composer (4.2523ms)
+✔ context loop: independent calls return paired results before dependent next call (3.0361ms)
+✔ context loop: malformed arguments and actionable tool errors return to same model (1.4574ms)
+✔ context loop: truncated message never becomes successful delivery (1.2413ms)
+✔ context loop: total step and tool budgets cannot be bypassed by endless calls (1.0627ms)
+✔ context loop: cancellation closes tool protocol without starting further side effects (0.5154ms)
+✔ context loop: durable request replay after restart does not call model or tools again (48.9023ms)
+✔ context loop: interrupted calls remain inspectable and are never automatically executed (0.7927ms)
+✔ context recovery: provider receipt survives crash between submission and tool-result recording (0.5883ms)
+✔ context model budget: visual observation shares the same total model budget and exact trace (44.2605ms)
+✔ context loop: actual provider adapter wire preserves native call/result feedback (mock HTTP) (3.7284ms)
+✔ context entry: separate HTTP serves UI and uses only context sessions; CSRF and model opt-in enforced (99.3776ms)
+✔ context entry: actual HTTP roundtrip streams model response into durable new history (107.2408ms)
+✔ context HTTP approval: displayed group authorizes exactly two calls; replay cannot duplicate submissions (218.4385ms)
+✔ context architecture: new execution modules never import old business engine (4.3786ms)
+✔ baseline proposal presentation is recovered only from its matched real tool result (44.3968ms)
+✖ T01/T02 single-call feedback rejects every unexpected call before side effects and repairs next decision (4.2475ms)
+✔ T01 outcome projection preserves receipt, critical error, source and simulation under truncation (0.1991ms)
+✔ T05/T06/T07 automatic pre-trim summary is bounded, persisted and retains exact early originals after restart (124.6795ms)
+✔ T05 short conversation and reserved model quota never pay for summary (41.2198ms)
+✔ T08 summary invalid_reference preserves all originals and does not advance coverage (21.0488ms)
+✔ T08 summary timeout preserves all originals and does not advance coverage (19.802ms)
+✔ T08 summary oversize preserves all originals and does not advance coverage (19.7717ms)
+✔ T08 summary save preserves all originals and does not advance coverage (18.3158ms)
+✔ T09 stable early cursor and total neighbor budget keep exact original accessible (11.7559ms)
+✔ T11 current-user confirmation is IDs-only; forged authority and old-message source cannot approve (18.8817ms)
+✔ T11 negative/quoted/conditional/ambiguous confirmations permit clarification without side effects (scripted) (74.8837ms)
+✔ T12 frozen proposals reject changed source version, provider model and superseded old selection (27.6797ms)
+✔ T13/T14 batch failed stops unsubmitted members and repeated channels do not resubmit (46.5172ms)
+✔ T13/T14 batch unknown stops unsubmitted members and repeated channels do not resubmit (45.6042ms)
+✔ T13/T14 batch cancelled stops unsubmitted members and repeated channels do not resubmit (43.914ms)
+✔ T13/T14 batch budget stops unsubmitted members and repeated channels do not resubmit (42.7357ms)
+✔ T15/T16/T18 related hints do not consume materials; explicit comparison and frozen product image reach actual mock requests (15.5266ms)
+✔ T10/T19 button submits before any Agent call; reply failure still exposes durable assets and observations (154.5651ms)
+✔ T20 same budget meters summary, vision and main model; provider call policy only uses declared capability (22.356ms)
+✔ T05/T08 summaries preserve interleaved tool groups and respect one summary quota across the whole turn (19.7602ms)
+✔ T17 all active methods retain substantive professional concepts, examples and license references (42.792ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 47
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1001.3407
+
+✖ failing tests:
+
+test at tests\context-agent-behavior.test.mjs:149:42
+✖ context behavior scripted: grouped independent reads return both call IDs for order a,b (18.7101ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'error'
+  - 'completed'
+
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-behavior.test.mjs:158:92)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-behavior.test.mjs:149:42
+✖ context behavior scripted: grouped independent reads return both call IDs for order b,a (19.3513ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'error'
+  - 'completed'
+
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-behavior.test.mjs:158:92)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-unified.test.mjs:67:1
+✖ T01/T02 single-call feedback rejects every unexpected call before side effects and repairs next decision (4.2475ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'error'
+  - 'completed'
+
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-unified.test.mjs:76:10)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'error',
+    expected: 'completed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

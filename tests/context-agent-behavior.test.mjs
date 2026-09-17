@@ -150,13 +150,11 @@ for(const order of [['a','b'],['b','a']])test(`context behavior scripted: groupe
   const {state}=setup();const tools=createTools();state.assets.a=textAsset('a','产品事实：白瓶');state.assets.b=textAsset('b','未知信息：容量');
   const brain=brainFor((input,step)=>{
     if(step===0)return order.map(id=>call('read_asset',{id},`read-${id}`));
-    if(step===1){for(const r of outputs(input))assert.equal(r.status,'not_executed');return [call('read_asset',{id:order[0]},'retry-'+order[0])];}
-    if(step===2)return [call('read_asset',{id:order[1]},'retry-'+order[1])];
-    const results=outputs(input);assert.equal(results.find(x=>x.callId==='retry-a').asset.content,'产品事实：白瓶');assert.equal(results.find(x=>x.callId==='retry-b').asset.content,'未知信息：容量');
+    const results=outputs(input);assert.equal(results.find(x=>x.callId==='read-a').asset.content,'产品事实：白瓶');assert.equal(results.find(x=>x.callId==='read-b').asset.content,'未知信息：容量');
     return message('已读取白瓶事实和容量未知项。');
   });
   const result=await new ContextAgent({brain,tools}).run(state,'同时读取产品事实与未知项，再总结。');assert.equal(result.status,'completed');
-  const calls=state.records.filter(r=>r.kind==='tool_call'),results=state.records.filter(r=>r.kind==='tool_result');assert.equal(calls.length,4);assert.equal(results.length,4);assert.deepEqual(new Set(results.map(r=>r.callId)),new Set(calls.map(r=>r.callId)));
+  const calls=state.records.filter(r=>r.kind==='tool_call'),results=state.records.filter(r=>r.kind==='tool_result');assert.equal(calls.length,2);assert.equal(results.length,2);assert.deepEqual(new Set(results.map(r=>r.callId)),new Set(calls.map(r=>r.callId)));
 });
 
 test('context behavior scripted: actual wire rejection is visible and model can correct arguments without replacing the user request',async()=>{

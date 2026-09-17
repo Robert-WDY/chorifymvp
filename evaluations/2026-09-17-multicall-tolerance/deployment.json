@@ -1,0 +1,8 @@
+{
+  "parallelToolCallsFalseEnabled": true,
+  "count": 100,
+  "realCallsThisRound": 0,
+  "mediaMode": "simulation",
+  "sameSessionIds": true,
+  "port": 3217
+}

@@ -8,6 +8,15 @@ import {interactions,validateAnswer,selectedAssets} from './interactions.mjs';
 import {appendPublicEvent,resultSummary,safeText} from './public-events.mjs';
 import {finalDeliveryCheck} from './delivery-check.mjs';
 
+// A fixed effect boundary, not semantic dependency inference or a task graph.
+const batchReads = new Set(['list_assets','read_asset','read_skill','read_history','search_history','inspect_workspace','read_approval','analyze_image','compare_images','read_media_result']);
+function batchKind(call) {
+  if(batchReads.has(call.name))return 'read';
+  if(['generate_image','edit_image','generate_video'].includes(call.name)){
+    try{if(!JSON.parse(call.arguments).replacesProposalId)return 'prepare';}catch{}
+  }
+  return 'feedback';
+}
 const prompt = await readFile(new URL('./prompt.md', import.meta.url), 'utf8');
 const errorResult = (error, code = 'tool_error') => ({isError:true, code:error.code || code, message:error.message || String(error), submitted:false});
 const contentText = content => typeof content === 'string' ? content : (content || []).map(p => p.text || '').join('\n');
@@ -143,7 +152,7 @@ export class ContextAgent {
         signal.throwIfAborted();
         const output=raw,calls=output.filter(x=>x.type==='function_call'),groupId=randomUUID();
         if(calls.some(c=>state.records.some(r=>r.kind==='tool_call'&&r.callId===c.call_id))) throw Object.assign(new Error('模型重复使用已记录的调用 ID；不会再次提交'),{code:'duplicate_call_id'});
-        if(calls.length<=1&&callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
+        if(callsUsed+calls.length>this.maxToolCalls) throw Object.assign(new Error('达到本轮工具调用上限'),{code:'budget_exceeded'});
         const text=output.filter(x=>x.type==='message').map(x=>contentText(x.content)).join('\n');
         const deliveryFailure=!calls.length&&finalDeliveryCheck(state,turnId,text);
         if(deliveryFailure){
@@ -163,17 +172,20 @@ export class ContextAgent {
           record({kind:'run_event',event:'end',result});await publish({kind:'turn_end',status:result.status});emit({type:'end',...result});return result;
         }
         callsUsed+=calls.length;
-        if(calls.length>1){
-          for(const call of calls){
-            const result={ok:false,status:'not_executed',submitted:false,error:{code:'single_tool_call_required',message:'每次只选择一个工具。整组均未执行；请根据本次反馈重新选择下一步。'}};
-            record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
-            await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,...resultSummary(result),durationMs:0});
-            emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+        let deferred;
+        const kind=batchKind(calls[0]);
+        const deferCall=async(call,reason)=>{
+          const result={ok:false,status:'not_executed',submitted:false,error:{code:'feedback_required',message:reason}};
+          record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
+          await persist();
+          await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,...resultSummary(result),durationMs:0});
+          emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
+        };
+        for(const [index,call] of calls.entries()) {
+          if(index>0&&(deferred||kind==='feedback'||batchKind(call)!==kind)){
+            deferred||='前一步结果需要Agent消费后才能构造后续动作；本项未执行，不要重做成功项。';
+            await deferCall(call,deferred);continue;
           }
-          await persist();if(callsUsed>=this.maxToolCalls)throw Object.assign(new Error('达到工具协议调用预算'),{code:'budget_exceeded'});continue;
-        }
-        // Exactly one call remains. Its real result precedes the next Agent decision.
-        for(const call of calls) {
           const toolStartedAt=Date.now();await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,status:'running'});
           let result,started=false;
           try {
@@ -189,9 +201,12 @@ export class ContextAgent {
           record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});
           await persist();emit({type:'tool_result',callId:call.call_id,name:call.name,result,turnId});
           await publish({kind:'activity',activityId:call.call_id,category:'tool',name:call.name,...resultSummary(result),durationMs:Date.now()-toolStartedAt});
+          const outcome=resultSummary(result).status;
+          if(!['succeeded','prepared'].includes(outcome)||result.deliveryCheck?.status==='failed')deferred='前一步失败、待处理或结果未知；先检查实际结果，本项未执行。';
           if(call.name==='save_document'&&result.ok&&result.asset){const a=state.assets[result.asset.id];if(a)await publish({kind:'document',asset:{id:a.id,title:a.title,version:a.version,parentId:a.parentId,content:a.content},changed:result.changeEvidence?.changed});}
           if(result.status==='approval_required'&&result.proposalId){record({kind:'run_event',event:'proposal_published',proposalIds:[result.proposalId]});await publish({kind:'proposal',proposal:{proposalId:result.proposalId,turnId,name:result.name,args:result.args,status:'prepared'}});}
           if(call.name==='request_user_input'&&result.ok&&result.interaction){
+            for(const rest of calls.slice(index+1))await deferCall(rest,'等待用户真实回答；本项未执行。');
             await publish({kind:'interaction',interaction:{...result.interaction,answers:{},status:'pending'}});
             const waiting={status:'waiting_user',turnId,modelCalls,toolCalls:callsUsed,modelAccounting:accounting};
             record({kind:'run_event',event:'end',result:waiting});await publish({kind:'turn_end',status:'waiting_user'});emit({type:'end',...waiting});return waiting;
