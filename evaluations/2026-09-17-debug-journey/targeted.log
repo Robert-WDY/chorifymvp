@@ -1,0 +1,19 @@
+✔ HTTP journey demonstrates failed lookup, feedback delivery, new decision and later answer (193.7635ms)
+✔ later request mentioning a call ID does not prove failed feedback was delivered (0.5243ms)
+✔ summary attempt displays actual coverage and persistence, never hash as the explanation (0.3235ms)
+✔ omission and repeated calls are review signals, not automatic semantic failures (0.413ms)
+✔ redesigned page leads with problems and module transitions; IDs stay in collapsed evidence (2.4855ms)
+✔ debug counts phases separately and joins results by IDs without inventing success (2.3451ms)
+✔ debug input blocks preserve original order, source boundaries and multimodal data (0.3903ms)
+✔ debug HTTP reads persisted full requests, tool results and policy without running models (301.6197ms)
+✔ debug page renders untrusted prompt as text and stale detail cannot replace another session (1.8288ms)
+✔ debug preserves model output rejected by protocol validation without executing it (27.1026ms)
+✔ debug asset index uses exact structured IDs, not substring guesses (0.2117ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 463.6624

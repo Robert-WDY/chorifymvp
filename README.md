@@ -70,3 +70,5 @@ node --test tests/future-source-binding.test.mjs
 ## Debug 中间过程
 
 访问 http://127.0.0.1:3217/debug ，或点击聊天页顶部“Debug 中间过程”查看当前会话。支持轮次时间线、Agent/摘要/视觉调用统计、提示词分块、模型输出、系统执行规则、工具输入输出及来源回读。页面只读取现有Trace，不启动模型或工具；模型适配器输入与供应商HTTP报文有区别。验证范围见[Debug报告](evaluations/2026-09-17-debug-page/README.md)。
+
+Debug现已按问题与处理链组织：先看错误和待核查信号，再看上下文、Agent决策、系统处理、工具、反馈和回复。点击问题可核对下一次实际输入是否包含失败反馈；来源用原话与资料名显示，内部标识收进原始证据。详见[重新设计与证据](evaluations/2026-09-17-debug-journey/README.md)。

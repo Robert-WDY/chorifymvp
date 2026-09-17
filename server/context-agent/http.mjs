@@ -2,6 +2,7 @@ import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
 import {resolve} from 'node:path';
+import {debugJourney} from './debug-journey.mjs';
 import {debugSnapshot,debugDetail} from './debug-view.mjs';
 import {historyRows,historyPage} from './history-view.mjs';
 import {HistoryStore,appendRecord} from './history.mjs';
@@ -32,6 +33,8 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
         const page=await store.list(ownerId,{query:url.searchParams.get('query')||'',offset:Number(url.searchParams.get('offset')||0),limit:Number(url.searchParams.get('limit')||30)});
         return json(res,200,{...page,sessions:page.sessions.map(s=>({...s,running:active.has(s.id)}))});
       }
+      const journey=url.pathname.match(/^\/api\/debug\/([^/]+)\/turn\/([^/]+)$/);
+      if(req.method==='GET'&&journey){const state=await load(journey[1]);return json(res,200,await debugJourney(state,journey[2],id=>store.readTrace(state.id,ownerId,id),{running:active.has(state.id)}));}
       const debug=url.pathname.match(/^\/api\/debug\/([^/]+)(?:\/record\/([^/]+))?$/);
       if(req.method==='GET'&&debug){
         const state=await load(debug[1]);

@@ -1,0 +1,23 @@
+{
+  "pageStatus": 200,
+  "checkedSessionIds": 100,
+  "sessionPageUnchanged": true,
+  "totalSessions": 117,
+  "screenshot": {
+    "screenshotTurnFound": true,
+    "summaryNodes": 1,
+    "decisions": 1,
+    "issues": 1,
+    "rawHashHiddenInSummary": true,
+    "coverageMatchesOriginal": true,
+    "journeyLatencyMs": 122,
+    "bytes": 38986
+  },
+  "failureSample": {
+    "issueCount": 2,
+    "feedbackEdgesChecked": 2,
+    "feedbackMembershipMatchesOriginal": true
+  },
+  "realCalls": 0,
+  "browserVerified": false
+}

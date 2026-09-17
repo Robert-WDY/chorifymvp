@@ -1,3 +1,4 @@
+import {debugLabels,eventNames,toolNames} from './debug-labels.mjs';
 import {resultSummary} from './public-events.mjs';
 
 const parse=value=>{try{return JSON.parse(value);}catch{return value;}};
@@ -57,15 +58,16 @@ export function inputBlocks(input=[]) {
 export async function debugDetail(state,id,readTrace) {
   const found=state.records.find(r=>r.id===id);if(!found)throw new Error('Debug record not found');
   const resolve=async r=>r?.traceRef?await readTrace(r.id):r;
-  const record=await resolve(found);
+  const record=await resolve(found),labels=debugLabels(state);
+  const presentation={labels,title:toolNames[record.name]||eventNames[record.event||record.name]||labels[record.id]||'原始记录'};
   if(record.event==='model_request'){
     const response=await resolve(state.records.find(r=>r.traceId===record.traceId&&['model_response','model_error'].includes(r.event)));
     const blocks=inputBlocks(record.input),values=new Set();
     const visit=value=>{if(typeof value==='string'){values.add(value);const decoded=parse(value);if(decoded!==value)visit(decoded);}else if(value&&typeof value==='object')for(const [key,item]of Object.entries(value)){values.add(key);visit(item);}};
     for(const block of blocks)visit(block.data);
     const references=Object.values(state.assets||{}).filter(a=>values.has(a.id)).map(a=>({id:a.id,type:a.type,name:a.name||a.title,version:a.version,parentId:a.parentId,sourceIds:a.sourceIds}));
-    return {record,response:response||null,references,blocks,tools:record.tools||[],note:'记录的是应用传入适配器的完整输入；供应商HTTP序列化与隐藏推理不在此记录中。分块仅供阅读，原始记录保留。'};
+    return {...presentation,record,sources:(record.metrics?.retainedRecordIds||[]).map(id=>({id,label:labels[id]||'来源原文'})),response:response||null,references,blocks,tools:record.tools||[],note:'记录的是应用传入适配器的完整输入；供应商HTTP序列化与隐藏推理不在此记录中。分块仅供阅读，原始记录保留。'};
   }
-  if(record.kind==='tool_call')return {record,arguments:parse(record.arguments),result:state.records.find(r=>r.kind==='tool_result'&&r.callId===record.callId)||null};
-  return {record,...(record.output!==undefined?{output:parse(record.output)}:{})};
+  if(record.kind==='tool_call')return {...presentation,record,arguments:parse(record.arguments),result:state.records.find(r=>r.kind==='tool_result'&&r.callId===record.callId)||null};
+  return {...presentation,record,...(record.output!==undefined?{output:parse(record.output)}:{})};
 }
