@@ -87,9 +87,11 @@ export class ContextAgent {
       await persist();signal.throwIfAborted();modelCalls++;
       accounting[phase].calls++;
       await publish({kind:'activity',activityId:traceId,category:'model',name:phase,status:'running'});
+      let receivedOutput;
       try{
         const requestSignal=phase==='summary'?AbortSignal.any([signal,AbortSignal.timeout(30000)]):signal;
         const raw=await brain.respond(input,definitions,requestSignal,{singleToolCall:phase==='agent',json:phase==='summary',...(phase==='agent'?{onTextDelta:async delta=>{deltaBuffer+=delta;if(!streamStarted||deltaBuffer.length>=80)await flushDelta();}}:{}),...(phase==='summary'?{maxOutputTokens:Math.min(6000,this.memory.summaryMaxTokens)}:{})});
+        receivedOutput=raw;
         await flushDelta();
         if(phase==='agent'){
           protocolOutput(raw);
@@ -99,7 +101,7 @@ export class ContextAgent {
         if(usage)accounting[phase].usage.push(structuredClone(usage));
         if(brain.lastCall?.cost!==undefined){accounting[phase].cost||=[];accounting[phase].cost.push(structuredClone(brain.lastCall.cost));}
         record({kind:'run_event',event:'model_response',traceId,phase,output:structuredClone(raw),usage});await persist();await publish({kind:'activity',activityId:traceId,category:'model',name:phase,status:'succeeded',durationMs:Date.now()-startedAt});return raw;
-      }catch(error){await flushDelta();await publish({kind:'text_incomplete',streamId:traceId});record({kind:'run_event',event:'model_error',traceId,code:error.code||'model_error',message:error.message});await persist();await publish({kind:'activity',activityId:traceId,category:'model',name:phase,status:signal.aborted?'cancelled':'failed',error:safeText(error.message),durationMs:Date.now()-startedAt});throw error;}
+      }catch(error){await flushDelta();await publish({kind:'text_incomplete',streamId:traceId});record({kind:'run_event',event:'model_error',traceId,...(receivedOutput!==undefined?{output:structuredClone(receivedOutput)}:{}),code:error.code||'model_error',message:error.message});await persist();await publish({kind:'activity',activityId:traceId,category:'model',name:phase,status:signal.aborted?'cancelled':'failed',error:safeText(error.message),durationMs:Date.now()-startedAt});throw error;}
       finally{accounting[phase].durationMs+=Date.now()-startedAt;}
     };
     this.active.add(state.id);
@@ -174,6 +176,7 @@ export class ContextAgent {
         callsUsed+=calls.length;
         let deferred;
         const kind=batchKind(calls[0]);
+        record({kind:'run_event',event:'tool_batch_policy',groupId,agentTraceId:lastAgentTraceId,callIds:calls.map(c=>c.call_id),category:kind,rule:'同类读取或新方案顺序执行；跨类别、写入、失败或等待后返回反馈',semanticIndependenceVerified:false});
         const deferCall=async(call,reason)=>{
           const result={ok:false,status:'not_executed',submitted:false,error:{code:'feedback_required',message:reason}};
           record({kind:'tool_result',groupId,callId:call.call_id,output:JSON.stringify(result)});

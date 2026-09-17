@@ -2,6 +2,7 @@ import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {randomBytes} from 'node:crypto';
 import {resolve} from 'node:path';
+import {debugSnapshot,debugDetail} from './debug-view.mjs';
 import {historyRows,historyPage} from './history-view.mjs';
 import {HistoryStore,appendRecord} from './history.mjs';
 import {ContextAgent} from './loop.mjs';
@@ -30,6 +31,11 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
       if(req.method==='GET'&&url.pathname==='/api/sessions'){
         const page=await store.list(ownerId,{query:url.searchParams.get('query')||'',offset:Number(url.searchParams.get('offset')||0),limit:Number(url.searchParams.get('limit')||30)});
         return json(res,200,{...page,sessions:page.sessions.map(s=>({...s,running:active.has(s.id)}))});
+      }
+      const debug=url.pathname.match(/^\/api\/debug\/([^/]+)(?:\/record\/([^/]+))?$/);
+      if(req.method==='GET'&&debug){
+        const state=await load(debug[1]);
+        return json(res,200,debug[2]?await debugDetail(state,debug[2],id=>store.readTrace(state.id,ownerId,id)):debugSnapshot(state,{running:active.has(state.id)}));
       }
       const exported=url.pathname.match(/^\/api\/session\/([^/]+)\/export$/);
       const history=url.pathname.match(/^\/api\/session\/([^/]+)\/history$/);
@@ -102,7 +108,7 @@ export function createContextServer({brain,tools,catalog={skills:[]},directory,s
           return;
         }
       }
-      const files={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/style.css':['style.css','text/css']};
+      const files={'/debug':['debug.html','text/html'],'/debug.js':['debug.js','text/javascript'],'/debug.css':['debug.css','text/css'],'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/style.css':['style.css','text/css']};
       if(req.method==='GET'&&files[url.pathname]){
         const [file,type]=files[url.pathname];res.writeHead(200,{'Content-Type':type+'; charset=utf-8'});res.end(await readFile(new URL('./web/'+file,import.meta.url)));return;
       }

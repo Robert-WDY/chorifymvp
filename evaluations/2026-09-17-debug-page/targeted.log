@@ -1,0 +1,14 @@
+✔ debug counts phases separately and joins results by IDs without inventing success (2.3991ms)
+✔ debug input blocks preserve original order, source boundaries and multimodal data (0.345ms)
+✔ debug HTTP reads persisted full requests, tool results and policy without running models (250.2075ms)
+✔ debug page renders untrusted prompt as text and stale detail cannot replace another session (1.7161ms)
+✔ debug preserves model output rejected by protocol validation without executing it (27.8419ms)
+✔ debug asset index uses exact structured IDs, not substring guesses (0.2068ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 399.6127

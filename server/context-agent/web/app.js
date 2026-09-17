@@ -80,6 +80,7 @@ function renderQuestions(){
 }
 function recovery(error){status((error.status===404?'原会话不存在。':error.status===403?'无权访问原会话。':'恢复会话失败：'+error.message)+' 已保留原会话标识，可重试或明确新建。');$('retry').hidden=false;}
 async function refresh(){
+ $('debug-link').href='/debug?session='+encodeURIComponent(sessionId||'');
  if(!sessionId)return;if(traceSession&&traceSession!==sessionId){$('trace-list').replaceChildren();$('trace-count').textContent='';$('trace-more').hidden=true;traceSession=null;}$('history-export').href='/api/session/'+encodeURIComponent(sessionId)+'/export';const target=sessionId,s=await get('/api/session/'+encodeURIComponent(target));if(target!==sessionId)return;
  let events=[...s.events],next=s;while(next.hasMore){next=await get('/api/events/'+encodeURIComponent(target)+'?after='+next.cursor);events.push(...next.events);}cursor=next.cursor;
  $('messages').replaceChildren();cards.clear();seen.clear();const eventMessages=new Set(events.filter(e=>e.kind==='message').map(e=>e.messageId));for(const m of s.messages)if(!eventMessages.has(m.id))message(m.id,m.role,m.content);

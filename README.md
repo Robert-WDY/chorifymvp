@@ -66,3 +66,7 @@ node --test tests/future-source-binding.test.mjs
 [AGENTS.md](AGENTS.md) 是项目长期工作规范入口，补充且保留以上约定与历史报告。每轮修复必须填写四列“修复总结表”，追加到 [统一修复记录 FIXES.md](FIXES.md)，并在最终回复展示；不能只列修改文件或测试总数。
 
 2026-09-17能力整合：新增“查看详细历史与执行过程”，可按需查看现有记录与旧存档详情；视觉适配支持独立供应商配置，但账户预检403后按用户选择保持关闭，继续模拟验收。详见[本轮证据与未验收范围](evaluations/2026-09-17-capability-integration/README.md)。
+
+## Debug 中间过程
+
+访问 http://127.0.0.1:3217/debug ，或点击聊天页顶部“Debug 中间过程”查看当前会话。支持轮次时间线、Agent/摘要/视觉调用统计、提示词分块、模型输出、系统执行规则、工具输入输出及来源回读。页面只读取现有Trace，不启动模型或工具；模型适配器输入与供应商HTTP报文有区别。验证范围见[Debug报告](evaluations/2026-09-17-debug-page/README.md)。

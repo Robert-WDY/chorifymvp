@@ -1,0 +1,39 @@
+✔ debug counts phases separately and joins results by IDs without inventing success (2.245ms)
+✔ debug input blocks preserve original order, source boundaries and multimodal data (0.3424ms)
+✖ debug HTTP reads persisted full requests, tool results and policy without running models (210.0205ms)
+✖ debug page renders untrusted prompt as text and stale detail cannot replace another session (1.8764ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333.995
+
+✖ failing tests:
+
+test at tests\context-agent-debug.test.mjs:29:1
+✖ debug HTTP reads persisted full requests, tool results and policy without running models (210.0205ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  404 !== 403
+
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-debug.test.mjs:43:54)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 404,
+    expected: 403,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\context-agent-debug.test.mjs:48:1
+✖ debug page renders untrusted prompt as text and stale detail cannot replace another session (1.8764ms)
+  TypeError: release is not a function
+      at TestContext.<anonymous> (file:///C:/Users/asus/Desktop/codex-workspace/chorifymvp-git/tests/context-agent-debug.test.mjs:56:58)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

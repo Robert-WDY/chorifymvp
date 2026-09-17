@@ -1,0 +1,19 @@
+{
+  "sameSessions": true,
+  "requestCount": 39,
+  "toolCount": 0,
+  "countsMatchOriginalExport": true,
+  "modelInputMatchesOriginal": true,
+  "referenceDataSplit": true,
+  "indexLatencyMs": 11,
+  "indexBytes": 118621,
+  "pageStatus": 200,
+  "realCalls": 0,
+  "browserInteractionVerified": false,
+  "checkedSessionPage": 100,
+  "totalSessions": 117,
+  "toolSample": {
+    "toolCalls": 5,
+    "inputOutputMatchesOriginal": true
+  }
+}
