@@ -1,0 +1,50 @@
+{
+  "missing": {
+    "ok": false,
+    "submitted": false,
+    "error": {
+      "code": "observation_context_required",
+      "message": "存在关联或同次上传的文字候选。请明确选择相关materials；若均无关，传materials:[]及contextNote说明，不自动套用其他商品资料。"
+    },
+    "materialCandidates": [
+      {
+        "id": "facts",
+        "version": 1,
+        "association": "candidate_not_verified"
+      },
+      {
+        "id": "other",
+        "version": 1,
+        "association": "candidate_not_verified"
+      }
+    ]
+  },
+  "result": {
+    "ok": true,
+    "imageIds": [
+      "img"
+    ],
+    "question": "商品有哪些可见特征？",
+    "materials": [
+      {
+        "sourceId": "facts",
+        "version": 1,
+        "content": "容量未知；价格20元。",
+        "origin": "stored_asset",
+        "provenance": "stored_original",
+        "offset": 0,
+        "totalLength": 11,
+        "nextOffset": null,
+        "agentAnnotation": {
+          "status": "unknown"
+        }
+      }
+    ],
+    "comparisons": [],
+    "estimatedInputTokens": 3198,
+    "observation": {
+      "text": "容量无法判断"
+    },
+    "note": "观察仅覆盖明确选择的证据。Agent负责判断差异、未知项及用户要求是否满足；传入证据不代表验收通过。"
+  }
+}

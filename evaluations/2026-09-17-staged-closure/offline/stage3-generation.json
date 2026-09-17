@@ -1,0 +1,40 @@
+{
+  "missing": {
+    "ok": false,
+    "error": {
+      "code": "visual_source_not_bound",
+      "message": "sourceIds只记录来源。选中的图片未作为视觉输入；请明确放入referenceImages、imageId或firstFrameId，不能仅登记来源后生成"
+    },
+    "submitted": false
+  },
+  "result": {
+    "ok": true,
+    "status": "approval_required",
+    "submitted": false,
+    "proposalId": "proposal_762f1b16568d9780f95787ed7f899210",
+    "turnId": "turn",
+    "name": "generate_image",
+    "args": {
+      "prompt": "保持原商品",
+      "size": "1024x1024",
+      "sourceIds": [
+        "img"
+      ],
+      "referenceImages": [
+        "img"
+      ]
+    },
+    "simulated": true,
+    "inputEvidence": {
+      "visualSources": [
+        {
+          "id": "img",
+          "version": 2
+        }
+      ],
+      "textSources": [],
+      "textSourceMeaning": "provenance_only; necessary facts and constraints must be expressed in prompt/instruction"
+    },
+    "message": "具体方案已保存，尚未生成。请向用户展示同组全部方案；收到服务端批准后才可提交。"
+  }
+}

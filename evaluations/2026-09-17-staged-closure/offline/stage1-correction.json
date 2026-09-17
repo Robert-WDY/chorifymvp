@@ -1,0 +1,173 @@
+{
+  "fixed": {
+    "ok": true,
+    "count": 50,
+    "unit": "characters",
+    "deliveryCheck": {
+      "status": "passed",
+      "issues": [],
+      "requirements": {
+        "min": 40,
+        "max": 60
+      },
+      "target": {
+        "kind": "reply"
+      },
+      "correction": {
+        "callId": "unannounced",
+        "messageId": "f587418b-4b73-4084-b0ec-85b171bdcaa2",
+        "quote": "正文40到60字",
+        "reason": "之前误把下限理解为80，用户实际要求40到60"
+      },
+      "effectiveChecks": {
+        "text": [
+          {
+            "unit": "characters",
+            "bodyOnly": false,
+            "min": 40,
+            "max": 60,
+            "count": 50
+          }
+        ],
+        "itemCounts": []
+      },
+      "bodyOnly": false,
+      "textIdentity": "957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d",
+      "scope": "declared_constraints_on_exact_draft",
+      "semanticMeaningVerified": false
+    },
+    "scope": "exact_supplied_body",
+    "convention": "去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。"
+  },
+  "again": {
+    "ok": true,
+    "count": 50,
+    "unit": "characters",
+    "deliveryCheck": {
+      "status": "passed",
+      "issues": [],
+      "requirements": {
+        "min": 40,
+        "max": 60
+      },
+      "target": {
+        "kind": "reply"
+      },
+      "effectiveChecks": {
+        "text": [
+          {
+            "unit": "characters",
+            "bodyOnly": false,
+            "min": 40,
+            "max": 60,
+            "count": 50
+          }
+        ],
+        "itemCounts": []
+      },
+      "bodyOnly": false,
+      "textIdentity": "957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d",
+      "scope": "declared_constraints_on_exact_draft",
+      "semanticMeaningVerified": false
+    },
+    "scope": "exact_supplied_body",
+    "convention": "去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。"
+  },
+  "state": {
+    "engine": "context-agent",
+    "schemaVersion": 1,
+    "id": "0dd5cb7e-04a6-474e-b29a-4b7bd66837e4",
+    "ownerId": "local",
+    "records": [
+      {
+        "kind": "message",
+        "role": "user",
+        "turnId": "turn",
+        "content": "正文40到60字。",
+        "id": "f587418b-4b73-4084-b0ec-85b171bdcaa2",
+        "at": "2026-09-17T06:59:11.067Z",
+        "groupId": "f587418b-4b73-4084-b0ec-85b171bdcaa2"
+      },
+      {
+        "kind": "tool_call",
+        "turnId": "turn",
+        "callId": "wrong",
+        "name": "measure_text",
+        "arguments": "{\"text\":\"甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲\",\"unit\":\"characters\",\"requirements\":{\"min\":80,\"max\":120}}",
+        "id": "813c1b62-3305-4689-be4e-b876890adc83",
+        "at": "2026-09-17T06:59:11.067Z",
+        "groupId": "813c1b62-3305-4689-be4e-b876890adc83"
+      },
+      {
+        "kind": "tool_result",
+        "turnId": "turn",
+        "callId": "wrong",
+        "output": "{\"ok\":true,\"count\":80,\"unit\":\"characters\",\"deliveryCheck\":{\"status\":\"passed\",\"issues\":[],\"requirements\":{\"min\":80,\"max\":120},\"target\":{\"kind\":\"reply\"},\"effectiveChecks\":{\"text\":[{\"unit\":\"characters\",\"bodyOnly\":false,\"min\":80,\"max\":120,\"count\":80}],\"itemCounts\":[]},\"bodyOnly\":false,\"textIdentity\":\"caa46ceaf92831183913df9fa12ee31fd5a669213e94c4e6257c2386d211314e\",\"scope\":\"declared_constraints_on_exact_draft\",\"semanticMeaningVerified\":false},\"scope\":\"exact_supplied_body\",\"convention\":\"去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。\"}",
+        "id": "f120136f-c6f2-4da8-9dc8-3a6b861edb71",
+        "at": "2026-09-17T06:59:11.068Z",
+        "groupId": "f120136f-c6f2-4da8-9dc8-3a6b861edb71"
+      },
+      {
+        "kind": "tool_call",
+        "turnId": "turn",
+        "callId": "unannounced",
+        "name": "measure_text",
+        "arguments": "{\"text\":\"甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲\",\"unit\":\"characters\",\"requirements\":{\"min\":40,\"max\":60}}",
+        "id": "df433549-2f91-4f43-801a-4dd13fcca9cb",
+        "at": "2026-09-17T06:59:11.068Z",
+        "groupId": "df433549-2f91-4f43-801a-4dd13fcca9cb"
+      },
+      {
+        "kind": "tool_result",
+        "turnId": "turn",
+        "callId": "unannounced",
+        "output": "{\"ok\":true,\"count\":50,\"unit\":\"characters\",\"deliveryCheck\":{\"status\":\"failed\",\"issues\":[\"below_minimum\"],\"requirements\":{\"min\":40,\"max\":60},\"target\":{\"kind\":\"reply\"},\"effectiveChecks\":{\"text\":[{\"unit\":\"characters\",\"bodyOnly\":false,\"min\":80,\"max\":60,\"count\":50}],\"itemCounts\":[]},\"bodyOnly\":false,\"textIdentity\":\"957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d\",\"scope\":\"declared_constraints_on_exact_draft\",\"semanticMeaningVerified\":false},\"scope\":\"exact_supplied_body\",\"convention\":\"去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。\"}",
+        "id": "b3346f5b-1602-4f48-a3f1-b0800d44eb1a",
+        "at": "2026-09-17T06:59:11.068Z",
+        "groupId": "b3346f5b-1602-4f48-a3f1-b0800d44eb1a"
+      },
+      {
+        "kind": "tool_call",
+        "turnId": "turn",
+        "callId": "fixed",
+        "name": "measure_text",
+        "arguments": "{\"text\":\"甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲\",\"unit\":\"characters\",\"requirements\":{\"min\":40,\"max\":60},\"correction\":{\"callId\":\"unannounced\",\"messageId\":\"f587418b-4b73-4084-b0ec-85b171bdcaa2\",\"quote\":\"正文40到60字\",\"reason\":\"之前误把下限理解为80，用户实际要求40到60\"}}",
+        "id": "32e13ea3-5b06-4d0b-86d6-53066ccd7039",
+        "at": "2026-09-17T06:59:11.069Z",
+        "groupId": "32e13ea3-5b06-4d0b-86d6-53066ccd7039"
+      },
+      {
+        "kind": "tool_result",
+        "turnId": "turn",
+        "callId": "fixed",
+        "output": "{\"ok\":true,\"count\":50,\"unit\":\"characters\",\"deliveryCheck\":{\"status\":\"passed\",\"issues\":[],\"requirements\":{\"min\":40,\"max\":60},\"target\":{\"kind\":\"reply\"},\"correction\":{\"callId\":\"unannounced\",\"messageId\":\"f587418b-4b73-4084-b0ec-85b171bdcaa2\",\"quote\":\"正文40到60字\",\"reason\":\"之前误把下限理解为80，用户实际要求40到60\"},\"effectiveChecks\":{\"text\":[{\"unit\":\"characters\",\"bodyOnly\":false,\"min\":40,\"max\":60,\"count\":50}],\"itemCounts\":[]},\"bodyOnly\":false,\"textIdentity\":\"957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d\",\"scope\":\"declared_constraints_on_exact_draft\",\"semanticMeaningVerified\":false},\"scope\":\"exact_supplied_body\",\"convention\":\"去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。\"}",
+        "id": "b7c59427-75fa-4746-8db4-3d189cb03efe",
+        "at": "2026-09-17T06:59:11.070Z",
+        "groupId": "b7c59427-75fa-4746-8db4-3d189cb03efe"
+      },
+      {
+        "kind": "tool_call",
+        "turnId": "turn",
+        "callId": "again",
+        "name": "measure_text",
+        "arguments": "{\"text\":\"甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲甲\",\"unit\":\"characters\",\"requirements\":{\"min\":40,\"max\":60}}",
+        "id": "320ed1b0-8ded-4127-bccb-87027e2a5cf9",
+        "at": "2026-09-17T06:59:11.070Z",
+        "groupId": "320ed1b0-8ded-4127-bccb-87027e2a5cf9"
+      },
+      {
+        "kind": "tool_result",
+        "turnId": "turn",
+        "callId": "again",
+        "output": "{\"ok\":true,\"count\":50,\"unit\":\"characters\",\"deliveryCheck\":{\"status\":\"passed\",\"issues\":[],\"requirements\":{\"min\":40,\"max\":60},\"target\":{\"kind\":\"reply\"},\"effectiveChecks\":{\"text\":[{\"unit\":\"characters\",\"bodyOnly\":false,\"min\":40,\"max\":60,\"count\":50}],\"itemCounts\":[]},\"bodyOnly\":false,\"textIdentity\":\"957587e7a2372c2e94264e873ffbf1ce27146f998d6786c358f1950d349ff83d\",\"scope\":\"declared_constraints_on_exact_draft\",\"semanticMeaningVerified\":false},\"scope\":\"exact_supplied_body\",\"convention\":\"去除Markdown的*、`、#；non_punctuation_characters另排除标点、空白和分隔符。\"}",
+        "id": "b0ce4935-a170-44c4-a2ca-9dc6710e0fcb",
+        "at": "2026-09-17T06:59:11.070Z",
+        "groupId": "b0ce4935-a170-44c4-a2ca-9dc6710e0fcb"
+      }
+    ],
+    "assets": {},
+    "invocations": {},
+    "approvals": {},
+    "summaries": {}
+  }
+}

@@ -20,15 +20,25 @@ export function summaryBudget(state,options,envelope){
  return {summaryMaxTokens:options.summaryMaxTokens,sourceRefsMaxItems,summaryTextMaxUtf8Bytes:Math.max(0,available-sourceRefsMaxItems*(refBytes+1)),unit:'UTF-8 bytes of JSON-escaped summaryText, not provider tokens'};
 }
 
+export function memoryThresholds(state,contextOptions,options=memoryDefaults){
+ const effective=contextOptions.tokenBudget-contextOptions.reservedTokens-options.safetyTokens;
+ // Catalogs, tools and the system prompt cannot be compressed as conversation.
+ const fixed=buildContext({...state,records:[],summaries:{}},{...contextOptions,untrimmed:true}).metrics;
+ const floor=fixed.estimatedInputTokens+fixed.estimatedToolDefinitionTokens;
+ const historyCapacity=Math.max(0,effective-floor);
+ return {effective,floor,historyCapacity,trigger:floor+historyCapacity*options.triggerRatio,target:floor+historyCapacity*options.targetRatio};
+}
+
 /** No business tools and no authority changes: derived memory only. */
 export async function maintainMemory(state,{contextOptions,config,respond,save,remainingCalls,turnId,signal}){
   const options=memoryOptions(config);if(!options.enabled)return {calls:0};
   const view=()=>buildContext(state,{...contextOptions,untrimmed:true}).metrics;
-  const effective=contextOptions.tokenBudget-contextOptions.reservedTokens-options.safetyTokens;
+  const {effective,trigger,target,historyCapacity}=memoryThresholds(state,contextOptions,options);
+  if(!historyCapacity)return {calls:0};
   const pressure=()=>{const m=view();return m.estimatedInputTokens+m.estimatedToolDefinitionTokens;};
-  if(pressure()<effective*options.triggerRatio)return {calls:0};
+  if(pressure()<trigger)return {calls:0};
   let calls=0;
-  while(calls<options.maxCallsPerTurn&&remainingCalls()>options.reserveMainCalls&&pressure()>effective*options.targetRatio){
+  while(calls<options.maxCallsPerTurn&&remainingCalls()>options.reserveMainCalls&&pressure()>target){
     const prior=currentSummary(state),from=(prior?.coveredToSeq??-1)+1;
     const users=state.records.map((r,seq)=>({r,seq})).filter(({r})=>r.kind==='message'&&r.role==='user');
     let protectFrom=users.at(-2)?.seq??users.at(-1)?.seq??0;
